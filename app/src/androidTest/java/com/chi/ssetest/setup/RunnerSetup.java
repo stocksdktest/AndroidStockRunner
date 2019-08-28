@@ -13,21 +13,11 @@ import com.chi.ssetest.protos.SetupConfig;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mitake.core.AppInfo;
-import com.mitake.core.bean.log.ErrorInfo;
-import com.mitake.core.config.HttpChangeMode;
-import com.mitake.core.config.MitakeConfig;
 import com.mitake.core.config.SseSdk;
-import com.mitake.core.permission.MarketPermission;
-import com.mitake.core.request.RegisterRequest;
-import com.mitake.core.request.SearchRequest;
-import com.mitake.core.response.IResponseInfoCallback;
-import com.mitake.core.response.RegisterResponse;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
 
 public class RunnerSetup {
     public static final String RUNNER_CONFIG_ENV = "runner_config";
@@ -95,24 +85,6 @@ public class RunnerSetup {
             SDKSetup.setup(cfg, InstrumentationRegistry.getTargetContext());
         } catch (SDKSetup.SDKSetupException e) {
             throw new RunnerSetupException(e);
-        }
-
-        final CompletableFuture result = new CompletableFuture<Boolean>();
-        RegisterRequest registerRequest = new RegisterRequest();
-        registerRequest.send(new IResponseInfoCallback<RegisterResponse>() {
-            public void callback(RegisterResponse response) {
-                SearchRequest searchRequest = new SearchRequest();
-                searchRequest.dowmLoadCodes(null);
-                result.complete(Boolean.TRUE);
-            }
-            public void exception(ErrorInfo errorInfo) {
-                result.completeExceptionally(new Exception(errorInfo.toString()));
-            }
-        });
-        try {
-            result.get(5, TimeUnit.SECONDS);
-        } catch (Exception e) {
-              throw new RunnerSetupException(e);
         }
     }
 

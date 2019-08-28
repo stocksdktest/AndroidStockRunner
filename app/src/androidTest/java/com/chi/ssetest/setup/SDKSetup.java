@@ -4,16 +4,23 @@ import android.content.Context;
 import android.util.Log;
 
 import com.chi.ssetest.protos.SetupConfig;
+import com.mitake.core.bean.log.ErrorInfo;
 import com.mitake.core.config.HttpChangeMode;
 import com.mitake.core.config.MitakeConfig;
 import com.mitake.core.config.SseSdk;
 import com.mitake.core.network.Network;
 import com.mitake.core.permission.MarketPermission;
+import com.mitake.core.request.RegisterRequest;
+import com.mitake.core.request.SearchRequest;
+import com.mitake.core.response.IResponseInfoCallback;
+import com.mitake.core.response.RegisterResponse;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 public class SDKSetup {
     private static final Map<String, String> permSetupMethods = new HashMap<>();
@@ -63,6 +70,24 @@ public class SDKSetup {
                     marketPerm.addHkPermission(permStr);
                 }
             }
+        }
+
+        final CompletableFuture result = new CompletableFuture<Boolean>();
+        RegisterRequest registerRequest = new RegisterRequest();
+        registerRequest.send(new IResponseInfoCallback<RegisterResponse>() {
+            public void callback(RegisterResponse response) {
+                SearchRequest searchRequest = new SearchRequest();
+                searchRequest.dowmLoadCodes(null);
+                result.complete(Boolean.TRUE);
+            }
+            public void exception(ErrorInfo errorInfo) {
+                result.completeExceptionally(new Exception(errorInfo.toString()));
+            }
+        });
+        try {
+            result.get(5, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            throw new SDKSetupException(e);
         }
 
         for (Map.Entry<String, String> entry: cfg.getServerSitesMap().entrySet()) {
