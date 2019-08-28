@@ -8,10 +8,8 @@ import android.util.Log;
 
 import com.chi.ssetest.StockTestcaseName;
 import com.chi.ssetest.TestResultCollector;
-import com.chi.ssetest.TestResultFileCollector;
 import com.chi.ssetest.TestResultLogcatCollector;
 import com.chi.ssetest.protos.SetupConfig;
-import com.chi.ssetest.setup.Utils;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.mitake.core.AppInfo;
@@ -39,19 +37,19 @@ public class RunnerSetup {
     private Map<StockTestcaseName, SetupConfig.TestcaseConfig> testcaseConfigMap;
     private TestResultCollector collector;
 
-    public static synchronized RunnerSetup getInstance() throws SDKSetupException {
+    public static synchronized RunnerSetup getInstance() throws RunnerSetupException {
         if (instance == null) {
             Bundle bundle = InstrumentationRegistry.getArguments();
             Log.d("RunnerSetup", "bundle: " + bundle.toString());
             String confStr = bundle.getString(RUNNER_CONFIG_ENV);
             if (confStr == null) {
-                throw new SDKSetupException("runner_config is empty");
+                throw new RunnerSetupException("runner_config is empty");
             }
             try {
                 byte[] protoData = Utils.base64Decode(confStr);
                 instance = new RunnerSetup(SetupConfig.RunnerConfig.parseFrom(protoData), bundle);
             } catch (InvalidProtocolBufferException e) {
-                throw new SDKSetupException(e);
+                throw new RunnerSetupException(e);
             }
         }
         return instance;
@@ -69,12 +67,12 @@ public class RunnerSetup {
         return runnerConfig;
     }
 
-    private RunnerSetup(SetupConfig.RunnerConfig cfg, Bundle bundle) throws SDKSetupException {
+    private RunnerSetup(SetupConfig.RunnerConfig cfg, Bundle bundle) throws RunnerSetupException {
         Log.d("RunnerSetup", cfg.toString());
         try {
             this.collector = new TestResultLogcatCollector(cfg, bundle);
         } catch (IOException e) {
-            throw new SDKSetupException(e);
+            throw new RunnerSetupException(e);
         }
 
         sdkInit(cfg.getSdkConfig());
@@ -88,21 +86,15 @@ public class RunnerSetup {
         }
     }
 
-    private void sdkInit(SetupConfig.SDKConfig cfg) throws SDKSetupException {
+    private void sdkInit(SetupConfig.SDKConfig cfg) throws RunnerSetupException {
         AppInfo.packageName = "com.chi.ssetest";
         AppInfo.versionCode = "99";
-
         SseSdk.setDebug(true);
-        MitakeConfig config = new MitakeConfig();
-        config.setContext(InstrumentationRegistry.getTargetContext())
-                .setAppkey(cfg.getAppKey())
-                .setHttpChangeMode(HttpChangeMode.DEFAULT);
-        SseSdk.setConfig(config);
-        MarketPermission marketPermission = SseSdk.permission();
-        marketPermission.setLevel(Utils.toPermissionsStr(cfg.getSdkLevel()))
-                .setSseLevel(Utils.toPermissionsStr(cfg.getSdkLevel()));
-        for (SetupConfig.SDKPermissions perm : cfg.getHkPermsList()) {
-            marketPermission.addHkPermission(Utils.toPermissionsStr(perm));
+
+        try {
+            SDKSetup.setup(cfg, InstrumentationRegistry.getTargetContext());
+        } catch (SDKSetup.SDKSetupException e) {
+            throw new RunnerSetupException(e);
         }
 
         final CompletableFuture result = new CompletableFuture<Boolean>();
@@ -120,15 +112,15 @@ public class RunnerSetup {
         try {
             result.get(5, TimeUnit.SECONDS);
         } catch (Exception e) {
-              throw new SDKSetupException(e);
+              throw new RunnerSetupException(e);
         }
     }
 
-    public static class SDKSetupException extends Exception {
-        public SDKSetupException(String msg) {
+    public static class RunnerSetupException extends Exception {
+        public RunnerSetupException(String msg) {
             super(msg);
         }
-        public SDKSetupException(Throwable e) {
+        public RunnerSetupException(Throwable e) {
             super(e);
         }
     }

@@ -6,23 +6,40 @@ import android.util.Base64;
 import com.chi.ssetest.StockTestcase;
 import com.chi.ssetest.StockTestcaseName;
 import com.chi.ssetest.protos.SetupConfig;
+import com.mitake.core.util.MarketSiteType;
 import com.mitake.core.util.Permissions;
 
 import org.junit.runner.Description;
 
+import java.lang.reflect.Field;
+
 public class Utils {
-    public static String toPermissionsStr(SetupConfig.SDKPermissions perm) {
-        switch (perm) {
-            case LEVEL_1: return Permissions.LEVEL_1;
-            case LEVEL_2: return Permissions.LEVEL_2;
-            case HK10: return Permissions.HK10;
-            case HKA1: return Permissions.HKA1;
-            case HKD1: return Permissions.HKD1;
-            case SHHK1: return Permissions.SHHK1;
-            case SHHK5: return Permissions.SHHK5;
-            case SZHK1: return Permissions.SZHK1;
-            case SZHK5: return Permissions.SZHK5;
-            default: return Permissions.LEVEL_1;
+    public static boolean verifyPermStr(@Nullable String permStr) {
+        return verifyClassFields(permStr, Permissions.class);
+    }
+
+    public static boolean verifyMarketSiteTypeStr(@Nullable String siteTypeStr) {
+        return verifyClassFields(siteTypeStr, MarketSiteType.class);
+    }
+
+    public static boolean verifyClassFields(@Nullable String fieldValue, Class<?> cls) {
+        if (fieldValue == null || fieldValue.isEmpty()) {
+            return false;
+        }
+        Field[] fields = cls.getFields();
+        try {
+            for (Field field : fields) {
+                if (field.getType() != String.class) {
+                    continue;
+                }
+                String value = (String) field.get(null);
+                if (value.equals(fieldValue)) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (IllegalAccessException e) {
+            return false;
         }
     }
 
