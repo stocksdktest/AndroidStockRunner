@@ -83,7 +83,7 @@ public class ExampleInstrumentedTest {
         });
         try {
             JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
-            RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, resultObj);
+            RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
         } catch (Exception e) {
             throw new Exception(e);
         }

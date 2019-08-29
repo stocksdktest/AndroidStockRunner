@@ -11,7 +11,7 @@ public interface TestResultCollector {
     void beforeAllTests();
     void onTestStart(@NonNull Description description);
     void onTestSuccess(@NonNull Description description);
-    void onTestResult(@NonNull StockTestcaseName testcaseName, JSONObject result);
+    void onTestResult(@NonNull StockTestcaseName testcaseName, JSONObject param, JSONObject result);
     void onTestError(@NonNull Failure failure);
     void afterAllTests(Result result);
 }

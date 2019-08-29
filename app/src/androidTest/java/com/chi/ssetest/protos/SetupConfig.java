@@ -2923,24 +2923,33 @@ public final class SetupConfig {
         getTestcaseIDBytes();
 
     /**
-     * <code>int32 executionTimes = 2;</code>
-     */
-    int getExecutionTimes();
-
-    /**
-     * <code>bool continueWhenFailed = 3;</code>
+     * <code>bool continueWhenFailed = 2;</code>
      */
     boolean getContinueWhenFailed();
 
     /**
-     * <code>string paramStr = 4;</code>
+     * <code>int64 roundIntervalSec = 3;</code>
      */
-    java.lang.String getParamStr();
+    long getRoundIntervalSec();
+
     /**
-     * <code>string paramStr = 4;</code>
+     * <code>repeated string paramStrs = 4;</code>
+     */
+    java.util.List<java.lang.String>
+        getParamStrsList();
+    /**
+     * <code>repeated string paramStrs = 4;</code>
+     */
+    int getParamStrsCount();
+    /**
+     * <code>repeated string paramStrs = 4;</code>
+     */
+    java.lang.String getParamStrs(int index);
+    /**
+     * <code>repeated string paramStrs = 4;</code>
      */
     com.google.protobuf.ByteString
-        getParamStrBytes();
+        getParamStrsBytes(int index);
   }
   /**
    * Protobuf type {@code stock_testing.TestcaseConfig}
@@ -2956,7 +2965,7 @@ public final class SetupConfig {
     }
     private TestcaseConfig() {
       testcaseID_ = "";
-      paramStr_ = "";
+      paramStrs_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
 
     @java.lang.Override
@@ -2991,18 +3000,21 @@ public final class SetupConfig {
             }
             case 16: {
 
-              executionTimes_ = input.readInt32();
+              continueWhenFailed_ = input.readBool();
               break;
             }
             case 24: {
 
-              continueWhenFailed_ = input.readBool();
+              roundIntervalSec_ = input.readInt64();
               break;
             }
             case 34: {
               java.lang.String s = input.readStringRequireUtf8();
-
-              paramStr_ = s;
+              if (!((mutable_bitField0_ & 0x00000008) != 0)) {
+                paramStrs_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              paramStrs_.add(s);
               break;
             }
             default: {
@@ -3020,6 +3032,9 @@ public final class SetupConfig {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000008) != 0)) {
+          paramStrs_ = paramStrs_.getUnmodifiableView();
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -3037,6 +3052,7 @@ public final class SetupConfig {
               com.chi.ssetest.protos.SetupConfig.TestcaseConfig.class, com.chi.ssetest.protos.SetupConfig.TestcaseConfig.Builder.class);
     }
 
+    private int bitField0_;
     public static final int TESTCASEID_FIELD_NUMBER = 1;
     private volatile java.lang.Object testcaseID_;
     /**
@@ -3071,56 +3087,51 @@ public final class SetupConfig {
       }
     }
 
-    public static final int EXECUTIONTIMES_FIELD_NUMBER = 2;
-    private int executionTimes_;
-    /**
-     * <code>int32 executionTimes = 2;</code>
-     */
-    public int getExecutionTimes() {
-      return executionTimes_;
-    }
-
-    public static final int CONTINUEWHENFAILED_FIELD_NUMBER = 3;
+    public static final int CONTINUEWHENFAILED_FIELD_NUMBER = 2;
     private boolean continueWhenFailed_;
     /**
-     * <code>bool continueWhenFailed = 3;</code>
+     * <code>bool continueWhenFailed = 2;</code>
      */
     public boolean getContinueWhenFailed() {
       return continueWhenFailed_;
     }
 
-    public static final int PARAMSTR_FIELD_NUMBER = 4;
-    private volatile java.lang.Object paramStr_;
+    public static final int ROUNDINTERVALSEC_FIELD_NUMBER = 3;
+    private long roundIntervalSec_;
     /**
-     * <code>string paramStr = 4;</code>
+     * <code>int64 roundIntervalSec = 3;</code>
      */
-    public java.lang.String getParamStr() {
-      java.lang.Object ref = paramStr_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        paramStr_ = s;
-        return s;
-      }
+    public long getRoundIntervalSec() {
+      return roundIntervalSec_;
+    }
+
+    public static final int PARAMSTRS_FIELD_NUMBER = 4;
+    private com.google.protobuf.LazyStringList paramStrs_;
+    /**
+     * <code>repeated string paramStrs = 4;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getParamStrsList() {
+      return paramStrs_;
     }
     /**
-     * <code>string paramStr = 4;</code>
+     * <code>repeated string paramStrs = 4;</code>
+     */
+    public int getParamStrsCount() {
+      return paramStrs_.size();
+    }
+    /**
+     * <code>repeated string paramStrs = 4;</code>
+     */
+    public java.lang.String getParamStrs(int index) {
+      return paramStrs_.get(index);
+    }
+    /**
+     * <code>repeated string paramStrs = 4;</code>
      */
     public com.google.protobuf.ByteString
-        getParamStrBytes() {
-      java.lang.Object ref = paramStr_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        paramStr_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+        getParamStrsBytes(int index) {
+      return paramStrs_.getByteString(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -3140,14 +3151,14 @@ public final class SetupConfig {
       if (!getTestcaseIDBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, testcaseID_);
       }
-      if (executionTimes_ != 0) {
-        output.writeInt32(2, executionTimes_);
-      }
       if (continueWhenFailed_ != false) {
-        output.writeBool(3, continueWhenFailed_);
+        output.writeBool(2, continueWhenFailed_);
       }
-      if (!getParamStrBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, paramStr_);
+      if (roundIntervalSec_ != 0L) {
+        output.writeInt64(3, roundIntervalSec_);
+      }
+      for (int i = 0; i < paramStrs_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, paramStrs_.getRaw(i));
       }
       unknownFields.writeTo(output);
     }
@@ -3161,16 +3172,21 @@ public final class SetupConfig {
       if (!getTestcaseIDBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, testcaseID_);
       }
-      if (executionTimes_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, executionTimes_);
-      }
       if (continueWhenFailed_ != false) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(3, continueWhenFailed_);
+          .computeBoolSize(2, continueWhenFailed_);
       }
-      if (!getParamStrBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, paramStr_);
+      if (roundIntervalSec_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, roundIntervalSec_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < paramStrs_.size(); i++) {
+          dataSize += computeStringSizeNoTag(paramStrs_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getParamStrsList().size();
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3189,12 +3205,12 @@ public final class SetupConfig {
 
       if (!getTestcaseID()
           .equals(other.getTestcaseID())) return false;
-      if (getExecutionTimes()
-          != other.getExecutionTimes()) return false;
       if (getContinueWhenFailed()
           != other.getContinueWhenFailed()) return false;
-      if (!getParamStr()
-          .equals(other.getParamStr())) return false;
+      if (getRoundIntervalSec()
+          != other.getRoundIntervalSec()) return false;
+      if (!getParamStrsList()
+          .equals(other.getParamStrsList())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -3208,13 +3224,16 @@ public final class SetupConfig {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + TESTCASEID_FIELD_NUMBER;
       hash = (53 * hash) + getTestcaseID().hashCode();
-      hash = (37 * hash) + EXECUTIONTIMES_FIELD_NUMBER;
-      hash = (53 * hash) + getExecutionTimes();
       hash = (37 * hash) + CONTINUEWHENFAILED_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getContinueWhenFailed());
-      hash = (37 * hash) + PARAMSTR_FIELD_NUMBER;
-      hash = (53 * hash) + getParamStr().hashCode();
+      hash = (37 * hash) + ROUNDINTERVALSEC_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getRoundIntervalSec());
+      if (getParamStrsCount() > 0) {
+        hash = (37 * hash) + PARAMSTRS_FIELD_NUMBER;
+        hash = (53 * hash) + getParamStrsList().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -3350,12 +3369,12 @@ public final class SetupConfig {
         super.clear();
         testcaseID_ = "";
 
-        executionTimes_ = 0;
-
         continueWhenFailed_ = false;
 
-        paramStr_ = "";
+        roundIntervalSec_ = 0L;
 
+        paramStrs_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -3382,10 +3401,17 @@ public final class SetupConfig {
       @java.lang.Override
       public com.chi.ssetest.protos.SetupConfig.TestcaseConfig buildPartial() {
         com.chi.ssetest.protos.SetupConfig.TestcaseConfig result = new com.chi.ssetest.protos.SetupConfig.TestcaseConfig(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
         result.testcaseID_ = testcaseID_;
-        result.executionTimes_ = executionTimes_;
         result.continueWhenFailed_ = continueWhenFailed_;
-        result.paramStr_ = paramStr_;
+        result.roundIntervalSec_ = roundIntervalSec_;
+        if (((bitField0_ & 0x00000008) != 0)) {
+          paramStrs_ = paramStrs_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.paramStrs_ = paramStrs_;
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -3438,14 +3464,20 @@ public final class SetupConfig {
           testcaseID_ = other.testcaseID_;
           onChanged();
         }
-        if (other.getExecutionTimes() != 0) {
-          setExecutionTimes(other.getExecutionTimes());
-        }
         if (other.getContinueWhenFailed() != false) {
           setContinueWhenFailed(other.getContinueWhenFailed());
         }
-        if (!other.getParamStr().isEmpty()) {
-          paramStr_ = other.paramStr_;
+        if (other.getRoundIntervalSec() != 0L) {
+          setRoundIntervalSec(other.getRoundIntervalSec());
+        }
+        if (!other.paramStrs_.isEmpty()) {
+          if (paramStrs_.isEmpty()) {
+            paramStrs_ = other.paramStrs_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureParamStrsIsMutable();
+            paramStrs_.addAll(other.paramStrs_);
+          }
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -3476,6 +3508,7 @@ public final class SetupConfig {
         }
         return this;
       }
+      private int bitField0_;
 
       private java.lang.Object testcaseID_ = "";
       /**
@@ -3546,41 +3579,15 @@ public final class SetupConfig {
         return this;
       }
 
-      private int executionTimes_ ;
-      /**
-       * <code>int32 executionTimes = 2;</code>
-       */
-      public int getExecutionTimes() {
-        return executionTimes_;
-      }
-      /**
-       * <code>int32 executionTimes = 2;</code>
-       */
-      public Builder setExecutionTimes(int value) {
-        
-        executionTimes_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 executionTimes = 2;</code>
-       */
-      public Builder clearExecutionTimes() {
-        
-        executionTimes_ = 0;
-        onChanged();
-        return this;
-      }
-
       private boolean continueWhenFailed_ ;
       /**
-       * <code>bool continueWhenFailed = 3;</code>
+       * <code>bool continueWhenFailed = 2;</code>
        */
       public boolean getContinueWhenFailed() {
         return continueWhenFailed_;
       }
       /**
-       * <code>bool continueWhenFailed = 3;</code>
+       * <code>bool continueWhenFailed = 2;</code>
        */
       public Builder setContinueWhenFailed(boolean value) {
         
@@ -3589,7 +3596,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>bool continueWhenFailed = 3;</code>
+       * <code>bool continueWhenFailed = 2;</code>
        */
       public Builder clearContinueWhenFailed() {
         
@@ -3598,71 +3605,122 @@ public final class SetupConfig {
         return this;
       }
 
-      private java.lang.Object paramStr_ = "";
+      private long roundIntervalSec_ ;
       /**
-       * <code>string paramStr = 4;</code>
+       * <code>int64 roundIntervalSec = 3;</code>
        */
-      public java.lang.String getParamStr() {
-        java.lang.Object ref = paramStr_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          paramStr_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public long getRoundIntervalSec() {
+        return roundIntervalSec_;
       }
       /**
-       * <code>string paramStr = 4;</code>
+       * <code>int64 roundIntervalSec = 3;</code>
+       */
+      public Builder setRoundIntervalSec(long value) {
+        
+        roundIntervalSec_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 roundIntervalSec = 3;</code>
+       */
+      public Builder clearRoundIntervalSec() {
+        
+        roundIntervalSec_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList paramStrs_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureParamStrsIsMutable() {
+        if (!((bitField0_ & 0x00000008) != 0)) {
+          paramStrs_ = new com.google.protobuf.LazyStringArrayList(paramStrs_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+      /**
+       * <code>repeated string paramStrs = 4;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getParamStrsList() {
+        return paramStrs_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string paramStrs = 4;</code>
+       */
+      public int getParamStrsCount() {
+        return paramStrs_.size();
+      }
+      /**
+       * <code>repeated string paramStrs = 4;</code>
+       */
+      public java.lang.String getParamStrs(int index) {
+        return paramStrs_.get(index);
+      }
+      /**
+       * <code>repeated string paramStrs = 4;</code>
        */
       public com.google.protobuf.ByteString
-          getParamStrBytes() {
-        java.lang.Object ref = paramStr_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          paramStr_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+          getParamStrsBytes(int index) {
+        return paramStrs_.getByteString(index);
       }
       /**
-       * <code>string paramStr = 4;</code>
+       * <code>repeated string paramStrs = 4;</code>
        */
-      public Builder setParamStr(
+      public Builder setParamStrs(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureParamStrsIsMutable();
+        paramStrs_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string paramStrs = 4;</code>
+       */
+      public Builder addParamStrs(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  
-        paramStr_ = value;
+  ensureParamStrsIsMutable();
+        paramStrs_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>string paramStr = 4;</code>
+       * <code>repeated string paramStrs = 4;</code>
        */
-      public Builder clearParamStr() {
-        
-        paramStr_ = getDefaultInstance().getParamStr();
+      public Builder addAllParamStrs(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureParamStrsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, paramStrs_);
         onChanged();
         return this;
       }
       /**
-       * <code>string paramStr = 4;</code>
+       * <code>repeated string paramStrs = 4;</code>
        */
-      public Builder setParamStrBytes(
+      public Builder clearParamStrs() {
+        paramStrs_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string paramStrs = 4;</code>
+       */
+      public Builder addParamStrsBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
-        
-        paramStr_ = value;
+        ensureParamStrsIsMutable();
+        paramStrs_.add(value);
         onChanged();
         return this;
       }
@@ -5015,15 +5073,15 @@ public final class SetupConfig {
       "stock_testing.SDKConfig.ServerSitesEntry" +
       "\0223\n\nmarketPerm\030\003 \001(\0132\037.stock_testing.Mar" +
       "ketPermission\0322\n\020ServerSitesEntry\022\013\n\003key" +
-      "\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"j\n\016TestcaseCon" +
-      "fig\022\022\n\ntestcaseID\030\001 \001(\t\022\026\n\016executionTime" +
-      "s\030\002 \001(\005\022\032\n\022continueWhenFailed\030\003 \001(\010\022\020\n\010p" +
-      "aramStr\030\004 \001(\t\"\220\001\n\014RunnerConfig\022\r\n\005jobID\030" +
-      "\001 \001(\t\022\020\n\010runnerID\030\002 \001(\t\022+\n\tsdkConfig\030\003 \001" +
-      "(\0132\030.stock_testing.SDKConfig\0222\n\013casesCon" +
-      "fig\030\004 \003(\0132\035.stock_testing.TestcaseConfig" +
-      "B%\n\026com.chi.ssetest.protosB\013SetupConfigb" +
-      "\006proto3"
+      "\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"m\n\016TestcaseCon" +
+      "fig\022\022\n\ntestcaseID\030\001 \001(\t\022\032\n\022continueWhenF" +
+      "ailed\030\002 \001(\010\022\030\n\020roundIntervalSec\030\003 \001(\003\022\021\n" +
+      "\tparamStrs\030\004 \003(\t\"\220\001\n\014RunnerConfig\022\r\n\005job" +
+      "ID\030\001 \001(\t\022\020\n\010runnerID\030\002 \001(\t\022+\n\tsdkConfig\030" +
+      "\003 \001(\0132\030.stock_testing.SDKConfig\0222\n\013cases" +
+      "Config\030\004 \003(\0132\035.stock_testing.TestcaseCon" +
+      "figB%\n\026com.chi.ssetest.protosB\013SetupConf" +
+      "igb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5060,7 +5118,7 @@ public final class SetupConfig {
     internal_static_stock_testing_TestcaseConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_stock_testing_TestcaseConfig_descriptor,
-        new java.lang.String[] { "TestcaseID", "ExecutionTimes", "ContinueWhenFailed", "ParamStr", });
+        new java.lang.String[] { "TestcaseID", "ContinueWhenFailed", "RoundIntervalSec", "ParamStrs", });
     internal_static_stock_testing_RunnerConfig_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_stock_testing_RunnerConfig_fieldAccessorTable = new
