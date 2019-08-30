@@ -26,7 +26,6 @@ public class SDKSetup {
     private static final Map<String, String> permSetupMethods = new HashMap<>();
     static {
         permSetupMethods.put("getLevel",     "setLevel");
-        permSetupMethods.put("getSseLevel",  "setSseLevel");
         permSetupMethods.put("getCffLevel",  "setCffLevel");
         permSetupMethods.put("getDceLevel",  "setDceLevel");
         permSetupMethods.put("getCzceLevel", "setCzceLevel");
@@ -90,10 +89,15 @@ public class SDKSetup {
             throw new SDKSetupException(e);
         }
 
-        for (Map.Entry<String, String> entry: cfg.getServerSitesMap().entrySet()) {
+        for (Map.Entry<String, SetupConfig.Site> entry: cfg.getServerSitesMap().entrySet()) {
             String siteTypeStr = entry.getKey();
-            if (Utils.verifyMarketSiteTypeStr(siteTypeStr)) {
-                Network.getInstance().server.put(siteTypeStr, new String[]{ entry.getValue() });
+            SetupConfig.Site site = entry.getValue();
+            if (Utils.verifyMarketSiteTypeStr(siteTypeStr) && site.getIpsCount() > 0) {
+                String[] ips = new String[site.getIpsCount()];
+                for (int i = 0, n = site.getIpsCount(); i < n; i++) {
+                    ips[i] = site.getIps(i);
+                }
+                Network.getInstance().server.put(siteTypeStr, ips);
             } else {
                 Log.d("SDKSetup", "Invalid market site type: " + siteTypeStr);
 
