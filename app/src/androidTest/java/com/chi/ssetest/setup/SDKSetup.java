@@ -37,7 +37,7 @@ public class SDKSetup {
     public static MitakeConfig setup(SetupConfig.SDKConfig cfg, Context context) throws SDKSetupException {
         MitakeConfig config = new MitakeConfig();
         config.setContext(context)
-                .setAppkey(cfg.getAppKey())
+                .setAppkey(cfg.getAppKeyAndroid())
                 .setHttpChangeMode(HttpChangeMode.DEFAULT);
         SseSdk.setConfig(config);
 

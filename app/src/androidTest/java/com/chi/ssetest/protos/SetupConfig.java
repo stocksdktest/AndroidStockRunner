@@ -2324,21 +2324,31 @@ public final class SetupConfig {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string appKey = 1;</code>
+     * <code>string appKeyAndroid = 1;</code>
      */
-    java.lang.String getAppKey();
+    java.lang.String getAppKeyAndroid();
     /**
-     * <code>string appKey = 1;</code>
+     * <code>string appKeyAndroid = 1;</code>
      */
     com.google.protobuf.ByteString
-        getAppKeyBytes();
+        getAppKeyAndroidBytes();
 
     /**
-     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 2;</code>
+     * <code>string appKeyIOS = 2;</code>
+     */
+    java.lang.String getAppKeyIOS();
+    /**
+     * <code>string appKeyIOS = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getAppKeyIOSBytes();
+
+    /**
+     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
      */
     int getServerSitesCount();
     /**
-     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 2;</code>
+     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
      */
     boolean containsServerSites(
         java.lang.String key);
@@ -2349,34 +2359,34 @@ public final class SetupConfig {
     java.util.Map<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site>
     getServerSites();
     /**
-     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 2;</code>
+     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
      */
     java.util.Map<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site>
     getServerSitesMap();
     /**
-     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 2;</code>
+     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
      */
 
     com.chi.ssetest.protos.SetupConfig.Site getServerSitesOrDefault(
         java.lang.String key,
         com.chi.ssetest.protos.SetupConfig.Site defaultValue);
     /**
-     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 2;</code>
+     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
      */
 
     com.chi.ssetest.protos.SetupConfig.Site getServerSitesOrThrow(
         java.lang.String key);
 
     /**
-     * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+     * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
      */
     boolean hasMarketPerm();
     /**
-     * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+     * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
      */
     com.chi.ssetest.protos.SetupConfig.MarketPermission getMarketPerm();
     /**
-     * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+     * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
      */
     com.chi.ssetest.protos.SetupConfig.MarketPermissionOrBuilder getMarketPermOrBuilder();
   }
@@ -2393,7 +2403,8 @@ public final class SetupConfig {
       super(builder);
     }
     private SDKConfig() {
-      appKey_ = "";
+      appKeyAndroid_ = "";
+      appKeyIOS_ = "";
     }
 
     @java.lang.Override
@@ -2423,14 +2434,20 @@ public final class SetupConfig {
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              appKey_ = s;
+              appKeyAndroid_ = s;
               break;
             }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              appKeyIOS_ = s;
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) != 0)) {
                 serverSites_ = com.google.protobuf.MapField.newMapField(
                     ServerSitesDefaultEntryHolder.defaultEntry);
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000004;
               }
               com.google.protobuf.MapEntry<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site>
               serverSites__ = input.readMessage(
@@ -2439,7 +2456,7 @@ public final class SetupConfig {
                   serverSites__.getKey(), serverSites__.getValue());
               break;
             }
-            case 26: {
+            case 34: {
               com.chi.ssetest.protos.SetupConfig.MarketPermission.Builder subBuilder = null;
               if (marketPerm_ != null) {
                 subBuilder = marketPerm_.toBuilder();
@@ -2481,7 +2498,7 @@ public final class SetupConfig {
     protected com.google.protobuf.MapField internalGetMapField(
         int number) {
       switch (number) {
-        case 2:
+        case 3:
           return internalGetServerSites();
         default:
           throw new RuntimeException(
@@ -2497,41 +2514,75 @@ public final class SetupConfig {
     }
 
     private int bitField0_;
-    public static final int APPKEY_FIELD_NUMBER = 1;
-    private volatile java.lang.Object appKey_;
+    public static final int APPKEYANDROID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object appKeyAndroid_;
     /**
-     * <code>string appKey = 1;</code>
+     * <code>string appKeyAndroid = 1;</code>
      */
-    public java.lang.String getAppKey() {
-      java.lang.Object ref = appKey_;
+    public java.lang.String getAppKeyAndroid() {
+      java.lang.Object ref = appKeyAndroid_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        appKey_ = s;
+        appKeyAndroid_ = s;
         return s;
       }
     }
     /**
-     * <code>string appKey = 1;</code>
+     * <code>string appKeyAndroid = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getAppKeyBytes() {
-      java.lang.Object ref = appKey_;
+        getAppKeyAndroidBytes() {
+      java.lang.Object ref = appKeyAndroid_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        appKey_ = b;
+        appKeyAndroid_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int SERVERSITES_FIELD_NUMBER = 2;
+    public static final int APPKEYIOS_FIELD_NUMBER = 2;
+    private volatile java.lang.Object appKeyIOS_;
+    /**
+     * <code>string appKeyIOS = 2;</code>
+     */
+    public java.lang.String getAppKeyIOS() {
+      java.lang.Object ref = appKeyIOS_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        appKeyIOS_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string appKeyIOS = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAppKeyIOSBytes() {
+      java.lang.Object ref = appKeyIOS_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        appKeyIOS_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SERVERSITES_FIELD_NUMBER = 3;
     private static final class ServerSitesDefaultEntryHolder {
       static final com.google.protobuf.MapEntry<
           java.lang.String, com.chi.ssetest.protos.SetupConfig.Site> defaultEntry =
@@ -2558,7 +2609,7 @@ public final class SetupConfig {
       return internalGetServerSites().getMap().size();
     }
     /**
-     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 2;</code>
+     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
      */
 
     public boolean containsServerSites(
@@ -2574,14 +2625,14 @@ public final class SetupConfig {
       return getServerSitesMap();
     }
     /**
-     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 2;</code>
+     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
      */
 
     public java.util.Map<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site> getServerSitesMap() {
       return internalGetServerSites().getMap();
     }
     /**
-     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 2;</code>
+     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
      */
 
     public com.chi.ssetest.protos.SetupConfig.Site getServerSitesOrDefault(
@@ -2593,7 +2644,7 @@ public final class SetupConfig {
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
-     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 2;</code>
+     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
      */
 
     public com.chi.ssetest.protos.SetupConfig.Site getServerSitesOrThrow(
@@ -2607,22 +2658,22 @@ public final class SetupConfig {
       return map.get(key);
     }
 
-    public static final int MARKETPERM_FIELD_NUMBER = 3;
+    public static final int MARKETPERM_FIELD_NUMBER = 4;
     private com.chi.ssetest.protos.SetupConfig.MarketPermission marketPerm_;
     /**
-     * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+     * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
      */
     public boolean hasMarketPerm() {
       return marketPerm_ != null;
     }
     /**
-     * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+     * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
      */
     public com.chi.ssetest.protos.SetupConfig.MarketPermission getMarketPerm() {
       return marketPerm_ == null ? com.chi.ssetest.protos.SetupConfig.MarketPermission.getDefaultInstance() : marketPerm_;
     }
     /**
-     * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+     * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
      */
     public com.chi.ssetest.protos.SetupConfig.MarketPermissionOrBuilder getMarketPermOrBuilder() {
       return getMarketPerm();
@@ -2642,17 +2693,20 @@ public final class SetupConfig {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getAppKeyBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, appKey_);
+      if (!getAppKeyAndroidBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, appKeyAndroid_);
+      }
+      if (!getAppKeyIOSBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, appKeyIOS_);
       }
       com.google.protobuf.GeneratedMessageV3
         .serializeStringMapTo(
           output,
           internalGetServerSites(),
           ServerSitesDefaultEntryHolder.defaultEntry,
-          2);
+          3);
       if (marketPerm_ != null) {
-        output.writeMessage(3, getMarketPerm());
+        output.writeMessage(4, getMarketPerm());
       }
       unknownFields.writeTo(output);
     }
@@ -2663,8 +2717,11 @@ public final class SetupConfig {
       if (size != -1) return size;
 
       size = 0;
-      if (!getAppKeyBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, appKey_);
+      if (!getAppKeyAndroidBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, appKeyAndroid_);
+      }
+      if (!getAppKeyIOSBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, appKeyIOS_);
       }
       for (java.util.Map.Entry<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site> entry
            : internalGetServerSites().getMap().entrySet()) {
@@ -2674,11 +2731,11 @@ public final class SetupConfig {
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(2, serverSites__);
+            .computeMessageSize(3, serverSites__);
       }
       if (marketPerm_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getMarketPerm());
+          .computeMessageSize(4, getMarketPerm());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2695,8 +2752,10 @@ public final class SetupConfig {
       }
       com.chi.ssetest.protos.SetupConfig.SDKConfig other = (com.chi.ssetest.protos.SetupConfig.SDKConfig) obj;
 
-      if (!getAppKey()
-          .equals(other.getAppKey())) return false;
+      if (!getAppKeyAndroid()
+          .equals(other.getAppKeyAndroid())) return false;
+      if (!getAppKeyIOS()
+          .equals(other.getAppKeyIOS())) return false;
       if (!internalGetServerSites().equals(
           other.internalGetServerSites())) return false;
       if (hasMarketPerm() != other.hasMarketPerm()) return false;
@@ -2715,8 +2774,10 @@ public final class SetupConfig {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + APPKEY_FIELD_NUMBER;
-      hash = (53 * hash) + getAppKey().hashCode();
+      hash = (37 * hash) + APPKEYANDROID_FIELD_NUMBER;
+      hash = (53 * hash) + getAppKeyAndroid().hashCode();
+      hash = (37 * hash) + APPKEYIOS_FIELD_NUMBER;
+      hash = (53 * hash) + getAppKeyIOS().hashCode();
       if (!internalGetServerSites().getMap().isEmpty()) {
         hash = (37 * hash) + SERVERSITES_FIELD_NUMBER;
         hash = (53 * hash) + internalGetServerSites().hashCode();
@@ -2836,7 +2897,7 @@ public final class SetupConfig {
       protected com.google.protobuf.MapField internalGetMapField(
           int number) {
         switch (number) {
-          case 2:
+          case 3:
             return internalGetServerSites();
           default:
             throw new RuntimeException(
@@ -2847,7 +2908,7 @@ public final class SetupConfig {
       protected com.google.protobuf.MapField internalGetMutableMapField(
           int number) {
         switch (number) {
-          case 2:
+          case 3:
             return internalGetMutableServerSites();
           default:
             throw new RuntimeException(
@@ -2880,7 +2941,9 @@ public final class SetupConfig {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        appKey_ = "";
+        appKeyAndroid_ = "";
+
+        appKeyIOS_ = "";
 
         internalGetMutableServerSites().clear();
         if (marketPermBuilder_ == null) {
@@ -2917,7 +2980,8 @@ public final class SetupConfig {
         com.chi.ssetest.protos.SetupConfig.SDKConfig result = new com.chi.ssetest.protos.SetupConfig.SDKConfig(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
-        result.appKey_ = appKey_;
+        result.appKeyAndroid_ = appKeyAndroid_;
+        result.appKeyIOS_ = appKeyIOS_;
         result.serverSites_ = internalGetServerSites();
         result.serverSites_.makeImmutable();
         if (marketPermBuilder_ == null) {
@@ -2974,8 +3038,12 @@ public final class SetupConfig {
 
       public Builder mergeFrom(com.chi.ssetest.protos.SetupConfig.SDKConfig other) {
         if (other == com.chi.ssetest.protos.SetupConfig.SDKConfig.getDefaultInstance()) return this;
-        if (!other.getAppKey().isEmpty()) {
-          appKey_ = other.appKey_;
+        if (!other.getAppKeyAndroid().isEmpty()) {
+          appKeyAndroid_ = other.appKeyAndroid_;
+          onChanged();
+        }
+        if (!other.getAppKeyIOS().isEmpty()) {
+          appKeyIOS_ = other.appKeyIOS_;
           onChanged();
         }
         internalGetMutableServerSites().mergeFrom(
@@ -3013,71 +3081,140 @@ public final class SetupConfig {
       }
       private int bitField0_;
 
-      private java.lang.Object appKey_ = "";
+      private java.lang.Object appKeyAndroid_ = "";
       /**
-       * <code>string appKey = 1;</code>
+       * <code>string appKeyAndroid = 1;</code>
        */
-      public java.lang.String getAppKey() {
-        java.lang.Object ref = appKey_;
+      public java.lang.String getAppKeyAndroid() {
+        java.lang.Object ref = appKeyAndroid_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          appKey_ = s;
+          appKeyAndroid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string appKey = 1;</code>
+       * <code>string appKeyAndroid = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getAppKeyBytes() {
-        java.lang.Object ref = appKey_;
+          getAppKeyAndroidBytes() {
+        java.lang.Object ref = appKeyAndroid_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          appKey_ = b;
+          appKeyAndroid_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string appKey = 1;</code>
+       * <code>string appKeyAndroid = 1;</code>
        */
-      public Builder setAppKey(
+      public Builder setAppKeyAndroid(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        appKey_ = value;
+        appKeyAndroid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string appKey = 1;</code>
+       * <code>string appKeyAndroid = 1;</code>
        */
-      public Builder clearAppKey() {
+      public Builder clearAppKeyAndroid() {
         
-        appKey_ = getDefaultInstance().getAppKey();
+        appKeyAndroid_ = getDefaultInstance().getAppKeyAndroid();
         onChanged();
         return this;
       }
       /**
-       * <code>string appKey = 1;</code>
+       * <code>string appKeyAndroid = 1;</code>
        */
-      public Builder setAppKeyBytes(
+      public Builder setAppKeyAndroidBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        appKey_ = value;
+        appKeyAndroid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object appKeyIOS_ = "";
+      /**
+       * <code>string appKeyIOS = 2;</code>
+       */
+      public java.lang.String getAppKeyIOS() {
+        java.lang.Object ref = appKeyIOS_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          appKeyIOS_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string appKeyIOS = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAppKeyIOSBytes() {
+        java.lang.Object ref = appKeyIOS_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          appKeyIOS_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string appKeyIOS = 2;</code>
+       */
+      public Builder setAppKeyIOS(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        appKeyIOS_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string appKeyIOS = 2;</code>
+       */
+      public Builder clearAppKeyIOS() {
+        
+        appKeyIOS_ = getDefaultInstance().getAppKeyIOS();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string appKeyIOS = 2;</code>
+       */
+      public Builder setAppKeyIOSBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        appKeyIOS_ = value;
         onChanged();
         return this;
       }
@@ -3109,7 +3246,7 @@ public final class SetupConfig {
         return internalGetServerSites().getMap().size();
       }
       /**
-       * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 2;</code>
+       * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
        */
 
       public boolean containsServerSites(
@@ -3125,14 +3262,14 @@ public final class SetupConfig {
         return getServerSitesMap();
       }
       /**
-       * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 2;</code>
+       * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
        */
 
       public java.util.Map<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site> getServerSitesMap() {
         return internalGetServerSites().getMap();
       }
       /**
-       * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 2;</code>
+       * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
        */
 
       public com.chi.ssetest.protos.SetupConfig.Site getServerSitesOrDefault(
@@ -3144,7 +3281,7 @@ public final class SetupConfig {
         return map.containsKey(key) ? map.get(key) : defaultValue;
       }
       /**
-       * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 2;</code>
+       * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
        */
 
       public com.chi.ssetest.protos.SetupConfig.Site getServerSitesOrThrow(
@@ -3164,7 +3301,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 2;</code>
+       * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
        */
 
       public Builder removeServerSites(
@@ -3183,7 +3320,7 @@ public final class SetupConfig {
         return internalGetMutableServerSites().getMutableMap();
       }
       /**
-       * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 2;</code>
+       * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
        */
       public Builder putServerSites(
           java.lang.String key,
@@ -3195,7 +3332,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 2;</code>
+       * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
        */
 
       public Builder putAllServerSites(
@@ -3209,13 +3346,13 @@ public final class SetupConfig {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.chi.ssetest.protos.SetupConfig.MarketPermission, com.chi.ssetest.protos.SetupConfig.MarketPermission.Builder, com.chi.ssetest.protos.SetupConfig.MarketPermissionOrBuilder> marketPermBuilder_;
       /**
-       * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+       * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
        */
       public boolean hasMarketPerm() {
         return marketPermBuilder_ != null || marketPerm_ != null;
       }
       /**
-       * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+       * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
        */
       public com.chi.ssetest.protos.SetupConfig.MarketPermission getMarketPerm() {
         if (marketPermBuilder_ == null) {
@@ -3225,7 +3362,7 @@ public final class SetupConfig {
         }
       }
       /**
-       * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+       * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
        */
       public Builder setMarketPerm(com.chi.ssetest.protos.SetupConfig.MarketPermission value) {
         if (marketPermBuilder_ == null) {
@@ -3241,7 +3378,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+       * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
        */
       public Builder setMarketPerm(
           com.chi.ssetest.protos.SetupConfig.MarketPermission.Builder builderForValue) {
@@ -3255,7 +3392,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+       * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
        */
       public Builder mergeMarketPerm(com.chi.ssetest.protos.SetupConfig.MarketPermission value) {
         if (marketPermBuilder_ == null) {
@@ -3273,7 +3410,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+       * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
        */
       public Builder clearMarketPerm() {
         if (marketPermBuilder_ == null) {
@@ -3287,7 +3424,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+       * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
        */
       public com.chi.ssetest.protos.SetupConfig.MarketPermission.Builder getMarketPermBuilder() {
         
@@ -3295,7 +3432,7 @@ public final class SetupConfig {
         return getMarketPermFieldBuilder().getBuilder();
       }
       /**
-       * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+       * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
        */
       public com.chi.ssetest.protos.SetupConfig.MarketPermissionOrBuilder getMarketPermOrBuilder() {
         if (marketPermBuilder_ != null) {
@@ -3306,7 +3443,7 @@ public final class SetupConfig {
         }
       }
       /**
-       * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+       * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.chi.ssetest.protos.SetupConfig.MarketPermission, com.chi.ssetest.protos.SetupConfig.MarketPermission.Builder, com.chi.ssetest.protos.SetupConfig.MarketPermissionOrBuilder> 
@@ -5539,20 +5676,21 @@ public final class SetupConfig {
       "\001(\t\022\020\n\010DceLevel\030\003 \001(\t\022\021\n\tCzceLevel\030\004 \001(\t" +
       "\022\017\n\007FeLevel\030\005 \001(\t\022\017\n\007GILevel\030\006 \001(\t\022\021\n\tSh" +
       "feLevel\030\007 \001(\t\022\020\n\010IneLevel\030\010 \001(\t\022\017\n\007HKPer" +
-      "ms\030\t \003(\t\"\023\n\004Site\022\013\n\003ips\030\001 \003(\t\"\331\001\n\tSDKCon" +
-      "fig\022\016\n\006appKey\030\001 \001(\t\022>\n\013serverSites\030\002 \003(\013" +
-      "2).stock_testing.SDKConfig.ServerSitesEn" +
-      "try\0223\n\nmarketPerm\030\003 \001(\0132\037.stock_testing." +
-      "MarketPermission\032G\n\020ServerSitesEntry\022\013\n\003" +
-      "key\030\001 \001(\t\022\"\n\005value\030\002 \001(\0132\023.stock_testing" +
-      ".Site:\0028\001\"m\n\016TestcaseConfig\022\022\n\ntestcaseI" +
-      "D\030\001 \001(\t\022\032\n\022continueWhenFailed\030\002 \001(\010\022\030\n\020r" +
-      "oundIntervalSec\030\003 \001(\003\022\021\n\tparamStrs\030\004 \003(\t" +
-      "\"\220\001\n\014RunnerConfig\022\r\n\005jobID\030\001 \001(\t\022\020\n\010runn" +
-      "erID\030\002 \001(\t\022+\n\tsdkConfig\030\003 \001(\0132\030.stock_te" +
-      "sting.SDKConfig\0222\n\013casesConfig\030\004 \003(\0132\035.s" +
-      "tock_testing.TestcaseConfigB%\n\026com.chi.s" +
-      "setest.protosB\013SetupConfigb\006proto3"
+      "ms\030\t \003(\t\"\023\n\004Site\022\013\n\003ips\030\001 \003(\t\"\363\001\n\tSDKCon" +
+      "fig\022\025\n\rappKeyAndroid\030\001 \001(\t\022\021\n\tappKeyIOS\030" +
+      "\002 \001(\t\022>\n\013serverSites\030\003 \003(\0132).stock_testi" +
+      "ng.SDKConfig.ServerSitesEntry\0223\n\nmarketP" +
+      "erm\030\004 \001(\0132\037.stock_testing.MarketPermissi" +
+      "on\032G\n\020ServerSitesEntry\022\013\n\003key\030\001 \001(\t\022\"\n\005v" +
+      "alue\030\002 \001(\0132\023.stock_testing.Site:\0028\001\"m\n\016T" +
+      "estcaseConfig\022\022\n\ntestcaseID\030\001 \001(\t\022\032\n\022con" +
+      "tinueWhenFailed\030\002 \001(\010\022\030\n\020roundIntervalSe" +
+      "c\030\003 \001(\003\022\021\n\tparamStrs\030\004 \003(\t\"\220\001\n\014RunnerCon" +
+      "fig\022\r\n\005jobID\030\001 \001(\t\022\020\n\010runnerID\030\002 \001(\t\022+\n\t" +
+      "sdkConfig\030\003 \001(\0132\030.stock_testing.SDKConfi" +
+      "g\0222\n\013casesConfig\030\004 \003(\0132\035.stock_testing.T" +
+      "estcaseConfigB%\n\026com.chi.ssetest.protosB" +
+      "\013SetupConfigb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5583,7 +5721,7 @@ public final class SetupConfig {
     internal_static_stock_testing_SDKConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_stock_testing_SDKConfig_descriptor,
-        new java.lang.String[] { "AppKey", "ServerSites", "MarketPerm", });
+        new java.lang.String[] { "AppKeyAndroid", "AppKeyIOS", "ServerSites", "MarketPerm", });
     internal_static_stock_testing_SDKConfig_ServerSitesEntry_descriptor =
       internal_static_stock_testing_SDKConfig_descriptor.getNestedTypes().get(0);
     internal_static_stock_testing_SDKConfig_ServerSitesEntry_fieldAccessorTable = new
