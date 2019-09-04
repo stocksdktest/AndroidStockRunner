@@ -34,14 +34,14 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-@StockTestcase(StockTestcaseName.QUOTE_REQUEST_EXAMPLE)
-public class ExampleInstrumentedTest {
-    private static final StockTestcaseName testcaseName = StockTestcaseName.QUOTE_REQUEST_EXAMPLE;
+@StockTestcase(StockTestcaseName.QUOTETEST_1)
+public class QuoteTest_1 {
+    private static final StockTestcaseName testcaseName = StockTestcaseName.QUOTETEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
 
     @BeforeClass
     public static void setup() throws Exception {
-        Log.d("ExampleInstrumentedTest", "Setup");
+        Log.d("QuoteTest_1", "Setup");
         testcaseConfig = RunnerSetup.getInstance().getTestcaseConfig(testcaseName);
         if (testcaseConfig == null ) {
             throw new Exception(String.format("Testcase(%s) setup failed, config is empty", testcaseName));
@@ -53,35 +53,37 @@ public class ExampleInstrumentedTest {
 
     @Test(timeout = 5000)
     public void requestWork() throws Exception {
-        Log.d("ExampleInstrumentedTest", "requestWork");
+        Log.d("QuoteTest_1", "requestWork");
         // TODO get custom args from param
-        final String []quoteNumbers = rule.getParam().optString("QUOTE_NUMBERS", "").split(",");
+        final String []quoteNumbers = rule.getParam().optString("CODES", "").split(";");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
-
-        QuoteRequest request = new QuoteRequest();
-        request.send(quoteNumbers, new IResponseInfoCallback() {
-            @Override
-            public void callback(Response response) {
-                QuoteResponse quoteResponse = (QuoteResponse) response;
-                assertNotNull(quoteResponse.quoteItems);
-                JSONObject uploadObj = new JSONObject();
-                // TODO fill uploadObj with QuoteResponse value
-                try {
-                    uploadObj.put("fake_result", quoteNumbers);
-
-                } catch (JSONException e) {
-                    result.completeExceptionally(e);
+        for (int i=0;i<quoteNumbers.length;i++){
+            QuoteRequest request = new QuoteRequest();
+            String[] CODES=quoteNumbers[i].split(",");
+//            System.out.println(CODES+"++++++");
+            request.send(CODES, new IResponseInfoCallback() {
+                @Override
+                public void callback(Response response) {
+                    QuoteResponse quoteResponse = (QuoteResponse) response;
+                    assertNotNull(quoteResponse.quoteItems);
+                    JSONObject uploadObj = new JSONObject();
+                    // TODO fill uploadObj with QuoteResponse value
+                    try {
+                        uploadObj.put("fake_result", quoteNumbers);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
+                    }
+                    for (QuoteItem item : quoteResponse.quoteItems) {
+                        Log.d("StockUnittest", item.toString());
+                    }
+                    result.complete(uploadObj);
                 }
-                for (QuoteItem item : quoteResponse.quoteItems) {
-                    Log.d("StockUnittest", item.toString());
+                @Override
+                public void exception(ErrorInfo errorInfo) {
+                    result.completeExceptionally(new Exception(errorInfo.toString()));
                 }
-                result.complete(uploadObj);
-            }
-            @Override
-            public void exception(ErrorInfo errorInfo) {
-                result.completeExceptionally(new Exception(errorInfo.toString()));
-            }
-        });
+            });
+        }
         try {
             JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
             RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, resultObj);
