@@ -85,7 +85,7 @@ public class TestResultLogcatCollector implements TestResultCollector {
     }
 
     @Override
-    public void onTestResult(@NonNull StockTestcaseName testcaseName, JSONObject result) {
+    public void onTestResult(@NonNull StockTestcaseName testcaseName, JSONObject param, JSONObject result) {
         TestRecord.TestExecutionRecord.Builder builder = TestRecord.TestExecutionRecord.newBuilder()
                 .setJobID(jobID)
                 .setRunnerID(runnerID)

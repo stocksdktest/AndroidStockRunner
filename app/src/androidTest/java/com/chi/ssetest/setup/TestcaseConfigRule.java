@@ -11,15 +11,22 @@ import org.junit.rules.MethodRule;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TestcaseConfigRule implements MethodRule {
     private SetupConfig.TestcaseConfig config;
-    private JSONObject param;
+    private final List<JSONObject> params;
+    private long waitIntervalMillis;
+    private int curRound;
     public TestcaseConfigRule(SetupConfig.TestcaseConfig config) throws AssertionError {
         this.config = config;
-        if (config.getParamStr() != null) {
+        this.curRound = 0;
+        this.waitIntervalMillis = config.getRoundIntervalSec() * 1000;
+        this.params = new ArrayList<>();
+        for (int i = 0, n = config.getParamStrsCount(); i < n; i++) {
             try {
-                this.param = new JSONObject(config.getParamStr());
-                Log.d("RunnerSetup", this.param.toString());
+                params.add(new JSONObject(config.getParamStrs(i)));
             } catch (JSONException e) {
                 throw new AssertionError(e);
             }
@@ -27,7 +34,7 @@ public class TestcaseConfigRule implements MethodRule {
     }
 
     public JSONObject getParam() {
-        return param;
+        return params.get(curRound);
     }
 
     @Override
@@ -37,12 +44,14 @@ public class TestcaseConfigRule implements MethodRule {
                 private MultipleErrorCollector errorCollector = new MultipleErrorCollector();
                 @Override
                 public void evaluate() throws Throwable {
-                    for (int i = 0; i < config.getExecutionTimes(); i++) {
+                    while (curRound < params.size()) {
                         try {
                             base.evaluate();
                         } catch (Throwable e) {
                             errorCollector.addError(e);
                         }
+                        curRound++;
+                        Thread.sleep(waitIntervalMillis);
                     }
                     errorCollector.verify();
                 }
@@ -51,8 +60,10 @@ public class TestcaseConfigRule implements MethodRule {
             return new Statement() {
                 @Override
                 public void evaluate() throws Throwable {
-                    for (int i = 0; i < config.getExecutionTimes(); i++) {
+                    while (curRound < params.size()) {
                         base.evaluate();
+                        curRound++;
+                        Thread.sleep(waitIntervalMillis);
                     }
                 }
             };

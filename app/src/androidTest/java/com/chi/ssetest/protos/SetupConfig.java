@@ -29,100 +29,90 @@ public final class SetupConfig {
         getLevelBytes();
 
     /**
-     * <code>string SseLevel = 2;</code>
-     */
-    java.lang.String getSseLevel();
-    /**
-     * <code>string SseLevel = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getSseLevelBytes();
-
-    /**
-     * <code>string CffLevel = 3;</code>
+     * <code>string CffLevel = 2;</code>
      */
     java.lang.String getCffLevel();
     /**
-     * <code>string CffLevel = 3;</code>
+     * <code>string CffLevel = 2;</code>
      */
     com.google.protobuf.ByteString
         getCffLevelBytes();
 
     /**
-     * <code>string DceLevel = 4;</code>
+     * <code>string DceLevel = 3;</code>
      */
     java.lang.String getDceLevel();
     /**
-     * <code>string DceLevel = 4;</code>
+     * <code>string DceLevel = 3;</code>
      */
     com.google.protobuf.ByteString
         getDceLevelBytes();
 
     /**
-     * <code>string CzceLevel = 5;</code>
+     * <code>string CzceLevel = 4;</code>
      */
     java.lang.String getCzceLevel();
     /**
-     * <code>string CzceLevel = 5;</code>
+     * <code>string CzceLevel = 4;</code>
      */
     com.google.protobuf.ByteString
         getCzceLevelBytes();
 
     /**
-     * <code>string FeLevel = 6;</code>
+     * <code>string FeLevel = 5;</code>
      */
     java.lang.String getFeLevel();
     /**
-     * <code>string FeLevel = 6;</code>
+     * <code>string FeLevel = 5;</code>
      */
     com.google.protobuf.ByteString
         getFeLevelBytes();
 
     /**
-     * <code>string GILevel = 7;</code>
+     * <code>string GILevel = 6;</code>
      */
     java.lang.String getGILevel();
     /**
-     * <code>string GILevel = 7;</code>
+     * <code>string GILevel = 6;</code>
      */
     com.google.protobuf.ByteString
         getGILevelBytes();
 
     /**
-     * <code>string ShfeLevel = 8;</code>
+     * <code>string ShfeLevel = 7;</code>
      */
     java.lang.String getShfeLevel();
     /**
-     * <code>string ShfeLevel = 8;</code>
+     * <code>string ShfeLevel = 7;</code>
      */
     com.google.protobuf.ByteString
         getShfeLevelBytes();
 
     /**
-     * <code>string IneLevel = 9;</code>
+     * <code>string IneLevel = 8;</code>
      */
     java.lang.String getIneLevel();
     /**
-     * <code>string IneLevel = 9;</code>
+     * <code>string IneLevel = 8;</code>
      */
     com.google.protobuf.ByteString
         getIneLevelBytes();
 
     /**
-     * <code>repeated string HKPerms = 10;</code>
+     * <code>repeated string HKPerms = 9;</code>
      */
     java.util.List<java.lang.String>
         getHKPermsList();
     /**
-     * <code>repeated string HKPerms = 10;</code>
+     * <code>repeated string HKPerms = 9;</code>
      */
     int getHKPermsCount();
     /**
-     * <code>repeated string HKPerms = 10;</code>
+     * <code>repeated string HKPerms = 9;</code>
      */
     java.lang.String getHKPerms(int index);
     /**
-     * <code>repeated string HKPerms = 10;</code>
+     * <code>repeated string HKPerms = 9;</code>
      */
     com.google.protobuf.ByteString
         getHKPermsBytes(int index);
@@ -141,7 +131,6 @@ public final class SetupConfig {
     }
     private MarketPermission() {
       level_ = "";
-      sseLevel_ = "";
       cffLevel_ = "";
       dceLevel_ = "";
       czceLevel_ = "";
@@ -185,56 +174,50 @@ public final class SetupConfig {
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              sseLevel_ = s;
+              cffLevel_ = s;
               break;
             }
             case 26: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              cffLevel_ = s;
+              dceLevel_ = s;
               break;
             }
             case 34: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              dceLevel_ = s;
+              czceLevel_ = s;
               break;
             }
             case 42: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              czceLevel_ = s;
+              feLevel_ = s;
               break;
             }
             case 50: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              feLevel_ = s;
+              gILevel_ = s;
               break;
             }
             case 58: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              gILevel_ = s;
+              shfeLevel_ = s;
               break;
             }
             case 66: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              shfeLevel_ = s;
+              ineLevel_ = s;
               break;
             }
             case 74: {
               java.lang.String s = input.readStringRequireUtf8();
-
-              ineLevel_ = s;
-              break;
-            }
-            case 82: {
-              java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000200) != 0)) {
+              if (!((mutable_bitField0_ & 0x00000100) != 0)) {
                 hKPerms_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000200;
+                mutable_bitField0_ |= 0x00000100;
               }
               hKPerms_.add(s);
               break;
@@ -254,7 +237,7 @@ public final class SetupConfig {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000200) != 0)) {
+        if (((mutable_bitField0_ & 0x00000100) != 0)) {
           hKPerms_ = hKPerms_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
@@ -309,44 +292,10 @@ public final class SetupConfig {
       }
     }
 
-    public static final int SSELEVEL_FIELD_NUMBER = 2;
-    private volatile java.lang.Object sseLevel_;
-    /**
-     * <code>string SseLevel = 2;</code>
-     */
-    public java.lang.String getSseLevel() {
-      java.lang.Object ref = sseLevel_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        sseLevel_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string SseLevel = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getSseLevelBytes() {
-      java.lang.Object ref = sseLevel_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        sseLevel_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int CFFLEVEL_FIELD_NUMBER = 3;
+    public static final int CFFLEVEL_FIELD_NUMBER = 2;
     private volatile java.lang.Object cffLevel_;
     /**
-     * <code>string CffLevel = 3;</code>
+     * <code>string CffLevel = 2;</code>
      */
     public java.lang.String getCffLevel() {
       java.lang.Object ref = cffLevel_;
@@ -361,7 +310,7 @@ public final class SetupConfig {
       }
     }
     /**
-     * <code>string CffLevel = 3;</code>
+     * <code>string CffLevel = 2;</code>
      */
     public com.google.protobuf.ByteString
         getCffLevelBytes() {
@@ -377,10 +326,10 @@ public final class SetupConfig {
       }
     }
 
-    public static final int DCELEVEL_FIELD_NUMBER = 4;
+    public static final int DCELEVEL_FIELD_NUMBER = 3;
     private volatile java.lang.Object dceLevel_;
     /**
-     * <code>string DceLevel = 4;</code>
+     * <code>string DceLevel = 3;</code>
      */
     public java.lang.String getDceLevel() {
       java.lang.Object ref = dceLevel_;
@@ -395,7 +344,7 @@ public final class SetupConfig {
       }
     }
     /**
-     * <code>string DceLevel = 4;</code>
+     * <code>string DceLevel = 3;</code>
      */
     public com.google.protobuf.ByteString
         getDceLevelBytes() {
@@ -411,10 +360,10 @@ public final class SetupConfig {
       }
     }
 
-    public static final int CZCELEVEL_FIELD_NUMBER = 5;
+    public static final int CZCELEVEL_FIELD_NUMBER = 4;
     private volatile java.lang.Object czceLevel_;
     /**
-     * <code>string CzceLevel = 5;</code>
+     * <code>string CzceLevel = 4;</code>
      */
     public java.lang.String getCzceLevel() {
       java.lang.Object ref = czceLevel_;
@@ -429,7 +378,7 @@ public final class SetupConfig {
       }
     }
     /**
-     * <code>string CzceLevel = 5;</code>
+     * <code>string CzceLevel = 4;</code>
      */
     public com.google.protobuf.ByteString
         getCzceLevelBytes() {
@@ -445,10 +394,10 @@ public final class SetupConfig {
       }
     }
 
-    public static final int FELEVEL_FIELD_NUMBER = 6;
+    public static final int FELEVEL_FIELD_NUMBER = 5;
     private volatile java.lang.Object feLevel_;
     /**
-     * <code>string FeLevel = 6;</code>
+     * <code>string FeLevel = 5;</code>
      */
     public java.lang.String getFeLevel() {
       java.lang.Object ref = feLevel_;
@@ -463,7 +412,7 @@ public final class SetupConfig {
       }
     }
     /**
-     * <code>string FeLevel = 6;</code>
+     * <code>string FeLevel = 5;</code>
      */
     public com.google.protobuf.ByteString
         getFeLevelBytes() {
@@ -479,10 +428,10 @@ public final class SetupConfig {
       }
     }
 
-    public static final int GILEVEL_FIELD_NUMBER = 7;
+    public static final int GILEVEL_FIELD_NUMBER = 6;
     private volatile java.lang.Object gILevel_;
     /**
-     * <code>string GILevel = 7;</code>
+     * <code>string GILevel = 6;</code>
      */
     public java.lang.String getGILevel() {
       java.lang.Object ref = gILevel_;
@@ -497,7 +446,7 @@ public final class SetupConfig {
       }
     }
     /**
-     * <code>string GILevel = 7;</code>
+     * <code>string GILevel = 6;</code>
      */
     public com.google.protobuf.ByteString
         getGILevelBytes() {
@@ -513,10 +462,10 @@ public final class SetupConfig {
       }
     }
 
-    public static final int SHFELEVEL_FIELD_NUMBER = 8;
+    public static final int SHFELEVEL_FIELD_NUMBER = 7;
     private volatile java.lang.Object shfeLevel_;
     /**
-     * <code>string ShfeLevel = 8;</code>
+     * <code>string ShfeLevel = 7;</code>
      */
     public java.lang.String getShfeLevel() {
       java.lang.Object ref = shfeLevel_;
@@ -531,7 +480,7 @@ public final class SetupConfig {
       }
     }
     /**
-     * <code>string ShfeLevel = 8;</code>
+     * <code>string ShfeLevel = 7;</code>
      */
     public com.google.protobuf.ByteString
         getShfeLevelBytes() {
@@ -547,10 +496,10 @@ public final class SetupConfig {
       }
     }
 
-    public static final int INELEVEL_FIELD_NUMBER = 9;
+    public static final int INELEVEL_FIELD_NUMBER = 8;
     private volatile java.lang.Object ineLevel_;
     /**
-     * <code>string IneLevel = 9;</code>
+     * <code>string IneLevel = 8;</code>
      */
     public java.lang.String getIneLevel() {
       java.lang.Object ref = ineLevel_;
@@ -565,7 +514,7 @@ public final class SetupConfig {
       }
     }
     /**
-     * <code>string IneLevel = 9;</code>
+     * <code>string IneLevel = 8;</code>
      */
     public com.google.protobuf.ByteString
         getIneLevelBytes() {
@@ -581,29 +530,29 @@ public final class SetupConfig {
       }
     }
 
-    public static final int HKPERMS_FIELD_NUMBER = 10;
+    public static final int HKPERMS_FIELD_NUMBER = 9;
     private com.google.protobuf.LazyStringList hKPerms_;
     /**
-     * <code>repeated string HKPerms = 10;</code>
+     * <code>repeated string HKPerms = 9;</code>
      */
     public com.google.protobuf.ProtocolStringList
         getHKPermsList() {
       return hKPerms_;
     }
     /**
-     * <code>repeated string HKPerms = 10;</code>
+     * <code>repeated string HKPerms = 9;</code>
      */
     public int getHKPermsCount() {
       return hKPerms_.size();
     }
     /**
-     * <code>repeated string HKPerms = 10;</code>
+     * <code>repeated string HKPerms = 9;</code>
      */
     public java.lang.String getHKPerms(int index) {
       return hKPerms_.get(index);
     }
     /**
-     * <code>repeated string HKPerms = 10;</code>
+     * <code>repeated string HKPerms = 9;</code>
      */
     public com.google.protobuf.ByteString
         getHKPermsBytes(int index) {
@@ -627,32 +576,29 @@ public final class SetupConfig {
       if (!getLevelBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, level_);
       }
-      if (!getSseLevelBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, sseLevel_);
-      }
       if (!getCffLevelBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, cffLevel_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, cffLevel_);
       }
       if (!getDceLevelBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, dceLevel_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, dceLevel_);
       }
       if (!getCzceLevelBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, czceLevel_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, czceLevel_);
       }
       if (!getFeLevelBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, feLevel_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, feLevel_);
       }
       if (!getGILevelBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, gILevel_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, gILevel_);
       }
       if (!getShfeLevelBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, shfeLevel_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, shfeLevel_);
       }
       if (!getIneLevelBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 9, ineLevel_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, ineLevel_);
       }
       for (int i = 0; i < hKPerms_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 10, hKPerms_.getRaw(i));
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 9, hKPerms_.getRaw(i));
       }
       unknownFields.writeTo(output);
     }
@@ -666,29 +612,26 @@ public final class SetupConfig {
       if (!getLevelBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, level_);
       }
-      if (!getSseLevelBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, sseLevel_);
-      }
       if (!getCffLevelBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, cffLevel_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, cffLevel_);
       }
       if (!getDceLevelBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, dceLevel_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, dceLevel_);
       }
       if (!getCzceLevelBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, czceLevel_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, czceLevel_);
       }
       if (!getFeLevelBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, feLevel_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, feLevel_);
       }
       if (!getGILevelBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, gILevel_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, gILevel_);
       }
       if (!getShfeLevelBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, shfeLevel_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, shfeLevel_);
       }
       if (!getIneLevelBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, ineLevel_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, ineLevel_);
       }
       {
         int dataSize = 0;
@@ -715,8 +658,6 @@ public final class SetupConfig {
 
       if (!getLevel()
           .equals(other.getLevel())) return false;
-      if (!getSseLevel()
-          .equals(other.getSseLevel())) return false;
       if (!getCffLevel()
           .equals(other.getCffLevel())) return false;
       if (!getDceLevel()
@@ -746,8 +687,6 @@ public final class SetupConfig {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + LEVEL_FIELD_NUMBER;
       hash = (53 * hash) + getLevel().hashCode();
-      hash = (37 * hash) + SSELEVEL_FIELD_NUMBER;
-      hash = (53 * hash) + getSseLevel().hashCode();
       hash = (37 * hash) + CFFLEVEL_FIELD_NUMBER;
       hash = (53 * hash) + getCffLevel().hashCode();
       hash = (37 * hash) + DCELEVEL_FIELD_NUMBER;
@@ -901,8 +840,6 @@ public final class SetupConfig {
         super.clear();
         level_ = "";
 
-        sseLevel_ = "";
-
         cffLevel_ = "";
 
         dceLevel_ = "";
@@ -918,7 +855,7 @@ public final class SetupConfig {
         ineLevel_ = "";
 
         hKPerms_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
 
@@ -948,7 +885,6 @@ public final class SetupConfig {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         result.level_ = level_;
-        result.sseLevel_ = sseLevel_;
         result.cffLevel_ = cffLevel_;
         result.dceLevel_ = dceLevel_;
         result.czceLevel_ = czceLevel_;
@@ -956,9 +892,9 @@ public final class SetupConfig {
         result.gILevel_ = gILevel_;
         result.shfeLevel_ = shfeLevel_;
         result.ineLevel_ = ineLevel_;
-        if (((bitField0_ & 0x00000200) != 0)) {
+        if (((bitField0_ & 0x00000100) != 0)) {
           hKPerms_ = hKPerms_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000200);
+          bitField0_ = (bitField0_ & ~0x00000100);
         }
         result.hKPerms_ = hKPerms_;
         result.bitField0_ = to_bitField0_;
@@ -1014,10 +950,6 @@ public final class SetupConfig {
           level_ = other.level_;
           onChanged();
         }
-        if (!other.getSseLevel().isEmpty()) {
-          sseLevel_ = other.sseLevel_;
-          onChanged();
-        }
         if (!other.getCffLevel().isEmpty()) {
           cffLevel_ = other.cffLevel_;
           onChanged();
@@ -1049,7 +981,7 @@ public final class SetupConfig {
         if (!other.hKPerms_.isEmpty()) {
           if (hKPerms_.isEmpty()) {
             hKPerms_ = other.hKPerms_;
-            bitField0_ = (bitField0_ & ~0x00000200);
+            bitField0_ = (bitField0_ & ~0x00000100);
           } else {
             ensureHKPermsIsMutable();
             hKPerms_.addAll(other.hKPerms_);
@@ -1155,78 +1087,9 @@ public final class SetupConfig {
         return this;
       }
 
-      private java.lang.Object sseLevel_ = "";
-      /**
-       * <code>string SseLevel = 2;</code>
-       */
-      public java.lang.String getSseLevel() {
-        java.lang.Object ref = sseLevel_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          sseLevel_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string SseLevel = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getSseLevelBytes() {
-        java.lang.Object ref = sseLevel_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          sseLevel_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string SseLevel = 2;</code>
-       */
-      public Builder setSseLevel(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        sseLevel_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string SseLevel = 2;</code>
-       */
-      public Builder clearSseLevel() {
-        
-        sseLevel_ = getDefaultInstance().getSseLevel();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string SseLevel = 2;</code>
-       */
-      public Builder setSseLevelBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        sseLevel_ = value;
-        onChanged();
-        return this;
-      }
-
       private java.lang.Object cffLevel_ = "";
       /**
-       * <code>string CffLevel = 3;</code>
+       * <code>string CffLevel = 2;</code>
        */
       public java.lang.String getCffLevel() {
         java.lang.Object ref = cffLevel_;
@@ -1241,7 +1104,7 @@ public final class SetupConfig {
         }
       }
       /**
-       * <code>string CffLevel = 3;</code>
+       * <code>string CffLevel = 2;</code>
        */
       public com.google.protobuf.ByteString
           getCffLevelBytes() {
@@ -1257,7 +1120,7 @@ public final class SetupConfig {
         }
       }
       /**
-       * <code>string CffLevel = 3;</code>
+       * <code>string CffLevel = 2;</code>
        */
       public Builder setCffLevel(
           java.lang.String value) {
@@ -1270,7 +1133,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>string CffLevel = 3;</code>
+       * <code>string CffLevel = 2;</code>
        */
       public Builder clearCffLevel() {
         
@@ -1279,7 +1142,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>string CffLevel = 3;</code>
+       * <code>string CffLevel = 2;</code>
        */
       public Builder setCffLevelBytes(
           com.google.protobuf.ByteString value) {
@@ -1295,7 +1158,7 @@ public final class SetupConfig {
 
       private java.lang.Object dceLevel_ = "";
       /**
-       * <code>string DceLevel = 4;</code>
+       * <code>string DceLevel = 3;</code>
        */
       public java.lang.String getDceLevel() {
         java.lang.Object ref = dceLevel_;
@@ -1310,7 +1173,7 @@ public final class SetupConfig {
         }
       }
       /**
-       * <code>string DceLevel = 4;</code>
+       * <code>string DceLevel = 3;</code>
        */
       public com.google.protobuf.ByteString
           getDceLevelBytes() {
@@ -1326,7 +1189,7 @@ public final class SetupConfig {
         }
       }
       /**
-       * <code>string DceLevel = 4;</code>
+       * <code>string DceLevel = 3;</code>
        */
       public Builder setDceLevel(
           java.lang.String value) {
@@ -1339,7 +1202,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>string DceLevel = 4;</code>
+       * <code>string DceLevel = 3;</code>
        */
       public Builder clearDceLevel() {
         
@@ -1348,7 +1211,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>string DceLevel = 4;</code>
+       * <code>string DceLevel = 3;</code>
        */
       public Builder setDceLevelBytes(
           com.google.protobuf.ByteString value) {
@@ -1364,7 +1227,7 @@ public final class SetupConfig {
 
       private java.lang.Object czceLevel_ = "";
       /**
-       * <code>string CzceLevel = 5;</code>
+       * <code>string CzceLevel = 4;</code>
        */
       public java.lang.String getCzceLevel() {
         java.lang.Object ref = czceLevel_;
@@ -1379,7 +1242,7 @@ public final class SetupConfig {
         }
       }
       /**
-       * <code>string CzceLevel = 5;</code>
+       * <code>string CzceLevel = 4;</code>
        */
       public com.google.protobuf.ByteString
           getCzceLevelBytes() {
@@ -1395,7 +1258,7 @@ public final class SetupConfig {
         }
       }
       /**
-       * <code>string CzceLevel = 5;</code>
+       * <code>string CzceLevel = 4;</code>
        */
       public Builder setCzceLevel(
           java.lang.String value) {
@@ -1408,7 +1271,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>string CzceLevel = 5;</code>
+       * <code>string CzceLevel = 4;</code>
        */
       public Builder clearCzceLevel() {
         
@@ -1417,7 +1280,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>string CzceLevel = 5;</code>
+       * <code>string CzceLevel = 4;</code>
        */
       public Builder setCzceLevelBytes(
           com.google.protobuf.ByteString value) {
@@ -1433,7 +1296,7 @@ public final class SetupConfig {
 
       private java.lang.Object feLevel_ = "";
       /**
-       * <code>string FeLevel = 6;</code>
+       * <code>string FeLevel = 5;</code>
        */
       public java.lang.String getFeLevel() {
         java.lang.Object ref = feLevel_;
@@ -1448,7 +1311,7 @@ public final class SetupConfig {
         }
       }
       /**
-       * <code>string FeLevel = 6;</code>
+       * <code>string FeLevel = 5;</code>
        */
       public com.google.protobuf.ByteString
           getFeLevelBytes() {
@@ -1464,7 +1327,7 @@ public final class SetupConfig {
         }
       }
       /**
-       * <code>string FeLevel = 6;</code>
+       * <code>string FeLevel = 5;</code>
        */
       public Builder setFeLevel(
           java.lang.String value) {
@@ -1477,7 +1340,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>string FeLevel = 6;</code>
+       * <code>string FeLevel = 5;</code>
        */
       public Builder clearFeLevel() {
         
@@ -1486,7 +1349,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>string FeLevel = 6;</code>
+       * <code>string FeLevel = 5;</code>
        */
       public Builder setFeLevelBytes(
           com.google.protobuf.ByteString value) {
@@ -1502,7 +1365,7 @@ public final class SetupConfig {
 
       private java.lang.Object gILevel_ = "";
       /**
-       * <code>string GILevel = 7;</code>
+       * <code>string GILevel = 6;</code>
        */
       public java.lang.String getGILevel() {
         java.lang.Object ref = gILevel_;
@@ -1517,7 +1380,7 @@ public final class SetupConfig {
         }
       }
       /**
-       * <code>string GILevel = 7;</code>
+       * <code>string GILevel = 6;</code>
        */
       public com.google.protobuf.ByteString
           getGILevelBytes() {
@@ -1533,7 +1396,7 @@ public final class SetupConfig {
         }
       }
       /**
-       * <code>string GILevel = 7;</code>
+       * <code>string GILevel = 6;</code>
        */
       public Builder setGILevel(
           java.lang.String value) {
@@ -1546,7 +1409,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>string GILevel = 7;</code>
+       * <code>string GILevel = 6;</code>
        */
       public Builder clearGILevel() {
         
@@ -1555,7 +1418,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>string GILevel = 7;</code>
+       * <code>string GILevel = 6;</code>
        */
       public Builder setGILevelBytes(
           com.google.protobuf.ByteString value) {
@@ -1571,7 +1434,7 @@ public final class SetupConfig {
 
       private java.lang.Object shfeLevel_ = "";
       /**
-       * <code>string ShfeLevel = 8;</code>
+       * <code>string ShfeLevel = 7;</code>
        */
       public java.lang.String getShfeLevel() {
         java.lang.Object ref = shfeLevel_;
@@ -1586,7 +1449,7 @@ public final class SetupConfig {
         }
       }
       /**
-       * <code>string ShfeLevel = 8;</code>
+       * <code>string ShfeLevel = 7;</code>
        */
       public com.google.protobuf.ByteString
           getShfeLevelBytes() {
@@ -1602,7 +1465,7 @@ public final class SetupConfig {
         }
       }
       /**
-       * <code>string ShfeLevel = 8;</code>
+       * <code>string ShfeLevel = 7;</code>
        */
       public Builder setShfeLevel(
           java.lang.String value) {
@@ -1615,7 +1478,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>string ShfeLevel = 8;</code>
+       * <code>string ShfeLevel = 7;</code>
        */
       public Builder clearShfeLevel() {
         
@@ -1624,7 +1487,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>string ShfeLevel = 8;</code>
+       * <code>string ShfeLevel = 7;</code>
        */
       public Builder setShfeLevelBytes(
           com.google.protobuf.ByteString value) {
@@ -1640,7 +1503,7 @@ public final class SetupConfig {
 
       private java.lang.Object ineLevel_ = "";
       /**
-       * <code>string IneLevel = 9;</code>
+       * <code>string IneLevel = 8;</code>
        */
       public java.lang.String getIneLevel() {
         java.lang.Object ref = ineLevel_;
@@ -1655,7 +1518,7 @@ public final class SetupConfig {
         }
       }
       /**
-       * <code>string IneLevel = 9;</code>
+       * <code>string IneLevel = 8;</code>
        */
       public com.google.protobuf.ByteString
           getIneLevelBytes() {
@@ -1671,7 +1534,7 @@ public final class SetupConfig {
         }
       }
       /**
-       * <code>string IneLevel = 9;</code>
+       * <code>string IneLevel = 8;</code>
        */
       public Builder setIneLevel(
           java.lang.String value) {
@@ -1684,7 +1547,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>string IneLevel = 9;</code>
+       * <code>string IneLevel = 8;</code>
        */
       public Builder clearIneLevel() {
         
@@ -1693,7 +1556,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>string IneLevel = 9;</code>
+       * <code>string IneLevel = 8;</code>
        */
       public Builder setIneLevelBytes(
           com.google.protobuf.ByteString value) {
@@ -1709,39 +1572,39 @@ public final class SetupConfig {
 
       private com.google.protobuf.LazyStringList hKPerms_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureHKPermsIsMutable() {
-        if (!((bitField0_ & 0x00000200) != 0)) {
+        if (!((bitField0_ & 0x00000100) != 0)) {
           hKPerms_ = new com.google.protobuf.LazyStringArrayList(hKPerms_);
-          bitField0_ |= 0x00000200;
+          bitField0_ |= 0x00000100;
          }
       }
       /**
-       * <code>repeated string HKPerms = 10;</code>
+       * <code>repeated string HKPerms = 9;</code>
        */
       public com.google.protobuf.ProtocolStringList
           getHKPermsList() {
         return hKPerms_.getUnmodifiableView();
       }
       /**
-       * <code>repeated string HKPerms = 10;</code>
+       * <code>repeated string HKPerms = 9;</code>
        */
       public int getHKPermsCount() {
         return hKPerms_.size();
       }
       /**
-       * <code>repeated string HKPerms = 10;</code>
+       * <code>repeated string HKPerms = 9;</code>
        */
       public java.lang.String getHKPerms(int index) {
         return hKPerms_.get(index);
       }
       /**
-       * <code>repeated string HKPerms = 10;</code>
+       * <code>repeated string HKPerms = 9;</code>
        */
       public com.google.protobuf.ByteString
           getHKPermsBytes(int index) {
         return hKPerms_.getByteString(index);
       }
       /**
-       * <code>repeated string HKPerms = 10;</code>
+       * <code>repeated string HKPerms = 9;</code>
        */
       public Builder setHKPerms(
           int index, java.lang.String value) {
@@ -1754,7 +1617,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>repeated string HKPerms = 10;</code>
+       * <code>repeated string HKPerms = 9;</code>
        */
       public Builder addHKPerms(
           java.lang.String value) {
@@ -1767,7 +1630,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>repeated string HKPerms = 10;</code>
+       * <code>repeated string HKPerms = 9;</code>
        */
       public Builder addAllHKPerms(
           java.lang.Iterable<java.lang.String> values) {
@@ -1778,16 +1641,16 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>repeated string HKPerms = 10;</code>
+       * <code>repeated string HKPerms = 9;</code>
        */
       public Builder clearHKPerms() {
         hKPerms_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000100);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated string HKPerms = 10;</code>
+       * <code>repeated string HKPerms = 9;</code>
        */
       public Builder addHKPermsBytes(
           com.google.protobuf.ByteString value) {
@@ -1853,26 +1716,639 @@ public final class SetupConfig {
 
   }
 
+  public interface SiteOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:stock_testing.Site)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated string ips = 1;</code>
+     */
+    java.util.List<java.lang.String>
+        getIpsList();
+    /**
+     * <code>repeated string ips = 1;</code>
+     */
+    int getIpsCount();
+    /**
+     * <code>repeated string ips = 1;</code>
+     */
+    java.lang.String getIps(int index);
+    /**
+     * <code>repeated string ips = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getIpsBytes(int index);
+  }
+  /**
+   * Protobuf type {@code stock_testing.Site}
+   */
+  public  static final class Site extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:stock_testing.Site)
+      SiteOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use Site.newBuilder() to construct.
+    private Site(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private Site() {
+      ips_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Site(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                ips_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              ips_.add(s);
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+          ips_ = ips_.getUnmodifiableView();
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.chi.ssetest.protos.SetupConfig.internal_static_stock_testing_Site_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.chi.ssetest.protos.SetupConfig.internal_static_stock_testing_Site_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.chi.ssetest.protos.SetupConfig.Site.class, com.chi.ssetest.protos.SetupConfig.Site.Builder.class);
+    }
+
+    public static final int IPS_FIELD_NUMBER = 1;
+    private com.google.protobuf.LazyStringList ips_;
+    /**
+     * <code>repeated string ips = 1;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getIpsList() {
+      return ips_;
+    }
+    /**
+     * <code>repeated string ips = 1;</code>
+     */
+    public int getIpsCount() {
+      return ips_.size();
+    }
+    /**
+     * <code>repeated string ips = 1;</code>
+     */
+    public java.lang.String getIps(int index) {
+      return ips_.get(index);
+    }
+    /**
+     * <code>repeated string ips = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIpsBytes(int index) {
+      return ips_.getByteString(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < ips_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, ips_.getRaw(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      {
+        int dataSize = 0;
+        for (int i = 0; i < ips_.size(); i++) {
+          dataSize += computeStringSizeNoTag(ips_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getIpsList().size();
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.chi.ssetest.protos.SetupConfig.Site)) {
+        return super.equals(obj);
+      }
+      com.chi.ssetest.protos.SetupConfig.Site other = (com.chi.ssetest.protos.SetupConfig.Site) obj;
+
+      if (!getIpsList()
+          .equals(other.getIpsList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (getIpsCount() > 0) {
+        hash = (37 * hash) + IPS_FIELD_NUMBER;
+        hash = (53 * hash) + getIpsList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.chi.ssetest.protos.SetupConfig.Site parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.Site parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.Site parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.Site parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.Site parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.Site parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.Site parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.Site parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.Site parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.Site parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.Site parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.Site parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.chi.ssetest.protos.SetupConfig.Site prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code stock_testing.Site}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:stock_testing.Site)
+        com.chi.ssetest.protos.SetupConfig.SiteOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.chi.ssetest.protos.SetupConfig.internal_static_stock_testing_Site_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.chi.ssetest.protos.SetupConfig.internal_static_stock_testing_Site_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.chi.ssetest.protos.SetupConfig.Site.class, com.chi.ssetest.protos.SetupConfig.Site.Builder.class);
+      }
+
+      // Construct using com.chi.ssetest.protos.SetupConfig.Site.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        ips_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.chi.ssetest.protos.SetupConfig.internal_static_stock_testing_Site_descriptor;
+      }
+
+      @java.lang.Override
+      public com.chi.ssetest.protos.SetupConfig.Site getDefaultInstanceForType() {
+        return com.chi.ssetest.protos.SetupConfig.Site.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.chi.ssetest.protos.SetupConfig.Site build() {
+        com.chi.ssetest.protos.SetupConfig.Site result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.chi.ssetest.protos.SetupConfig.Site buildPartial() {
+        com.chi.ssetest.protos.SetupConfig.Site result = new com.chi.ssetest.protos.SetupConfig.Site(this);
+        int from_bitField0_ = bitField0_;
+        if (((bitField0_ & 0x00000001) != 0)) {
+          ips_ = ips_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.ips_ = ips_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.chi.ssetest.protos.SetupConfig.Site) {
+          return mergeFrom((com.chi.ssetest.protos.SetupConfig.Site)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.chi.ssetest.protos.SetupConfig.Site other) {
+        if (other == com.chi.ssetest.protos.SetupConfig.Site.getDefaultInstance()) return this;
+        if (!other.ips_.isEmpty()) {
+          if (ips_.isEmpty()) {
+            ips_ = other.ips_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureIpsIsMutable();
+            ips_.addAll(other.ips_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.chi.ssetest.protos.SetupConfig.Site parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.chi.ssetest.protos.SetupConfig.Site) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.google.protobuf.LazyStringList ips_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureIpsIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          ips_ = new com.google.protobuf.LazyStringArrayList(ips_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      /**
+       * <code>repeated string ips = 1;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getIpsList() {
+        return ips_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string ips = 1;</code>
+       */
+      public int getIpsCount() {
+        return ips_.size();
+      }
+      /**
+       * <code>repeated string ips = 1;</code>
+       */
+      public java.lang.String getIps(int index) {
+        return ips_.get(index);
+      }
+      /**
+       * <code>repeated string ips = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIpsBytes(int index) {
+        return ips_.getByteString(index);
+      }
+      /**
+       * <code>repeated string ips = 1;</code>
+       */
+      public Builder setIps(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureIpsIsMutable();
+        ips_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string ips = 1;</code>
+       */
+      public Builder addIps(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureIpsIsMutable();
+        ips_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string ips = 1;</code>
+       */
+      public Builder addAllIps(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureIpsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, ips_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string ips = 1;</code>
+       */
+      public Builder clearIps() {
+        ips_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string ips = 1;</code>
+       */
+      public Builder addIpsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureIpsIsMutable();
+        ips_.add(value);
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:stock_testing.Site)
+    }
+
+    // @@protoc_insertion_point(class_scope:stock_testing.Site)
+    private static final com.chi.ssetest.protos.SetupConfig.Site DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.chi.ssetest.protos.SetupConfig.Site();
+    }
+
+    public static com.chi.ssetest.protos.SetupConfig.Site getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<Site>
+        PARSER = new com.google.protobuf.AbstractParser<Site>() {
+      @java.lang.Override
+      public Site parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Site(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<Site> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Site> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.chi.ssetest.protos.SetupConfig.Site getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface SDKConfigOrBuilder extends
       // @@protoc_insertion_point(interface_extends:stock_testing.SDKConfig)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string appKey = 1;</code>
+     * <code>string appKeyAndroid = 1;</code>
      */
-    java.lang.String getAppKey();
+    java.lang.String getAppKeyAndroid();
     /**
-     * <code>string appKey = 1;</code>
+     * <code>string appKeyAndroid = 1;</code>
      */
     com.google.protobuf.ByteString
-        getAppKeyBytes();
+        getAppKeyAndroidBytes();
 
     /**
-     * <code>map&lt;string, string&gt; serverSites = 2;</code>
+     * <code>string appKeyIOS = 2;</code>
+     */
+    java.lang.String getAppKeyIOS();
+    /**
+     * <code>string appKeyIOS = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getAppKeyIOSBytes();
+
+    /**
+     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
      */
     int getServerSitesCount();
     /**
-     * <code>map&lt;string, string&gt; serverSites = 2;</code>
+     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
      */
     boolean containsServerSites(
         java.lang.String key);
@@ -1880,37 +2356,37 @@ public final class SetupConfig {
      * Use {@link #getServerSitesMap()} instead.
      */
     @java.lang.Deprecated
-    java.util.Map<java.lang.String, java.lang.String>
+    java.util.Map<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site>
     getServerSites();
     /**
-     * <code>map&lt;string, string&gt; serverSites = 2;</code>
+     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
      */
-    java.util.Map<java.lang.String, java.lang.String>
+    java.util.Map<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site>
     getServerSitesMap();
     /**
-     * <code>map&lt;string, string&gt; serverSites = 2;</code>
+     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
      */
 
-    java.lang.String getServerSitesOrDefault(
+    com.chi.ssetest.protos.SetupConfig.Site getServerSitesOrDefault(
         java.lang.String key,
-        java.lang.String defaultValue);
+        com.chi.ssetest.protos.SetupConfig.Site defaultValue);
     /**
-     * <code>map&lt;string, string&gt; serverSites = 2;</code>
+     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
      */
 
-    java.lang.String getServerSitesOrThrow(
+    com.chi.ssetest.protos.SetupConfig.Site getServerSitesOrThrow(
         java.lang.String key);
 
     /**
-     * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+     * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
      */
     boolean hasMarketPerm();
     /**
-     * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+     * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
      */
     com.chi.ssetest.protos.SetupConfig.MarketPermission getMarketPerm();
     /**
-     * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+     * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
      */
     com.chi.ssetest.protos.SetupConfig.MarketPermissionOrBuilder getMarketPermOrBuilder();
   }
@@ -1927,7 +2403,8 @@ public final class SetupConfig {
       super(builder);
     }
     private SDKConfig() {
-      appKey_ = "";
+      appKeyAndroid_ = "";
+      appKeyIOS_ = "";
     }
 
     @java.lang.Override
@@ -1957,23 +2434,29 @@ public final class SetupConfig {
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              appKey_ = s;
+              appKeyAndroid_ = s;
               break;
             }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              appKeyIOS_ = s;
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) != 0)) {
                 serverSites_ = com.google.protobuf.MapField.newMapField(
                     ServerSitesDefaultEntryHolder.defaultEntry);
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000004;
               }
-              com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+              com.google.protobuf.MapEntry<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site>
               serverSites__ = input.readMessage(
                   ServerSitesDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               serverSites_.getMutableMap().put(
                   serverSites__.getKey(), serverSites__.getValue());
               break;
             }
-            case 26: {
+            case 34: {
               com.chi.ssetest.protos.SetupConfig.MarketPermission.Builder subBuilder = null;
               if (marketPerm_ != null) {
                 subBuilder = marketPerm_.toBuilder();
@@ -2015,7 +2498,7 @@ public final class SetupConfig {
     protected com.google.protobuf.MapField internalGetMapField(
         int number) {
       switch (number) {
-        case 2:
+        case 3:
           return internalGetServerSites();
         default:
           throw new RuntimeException(
@@ -2031,55 +2514,89 @@ public final class SetupConfig {
     }
 
     private int bitField0_;
-    public static final int APPKEY_FIELD_NUMBER = 1;
-    private volatile java.lang.Object appKey_;
+    public static final int APPKEYANDROID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object appKeyAndroid_;
     /**
-     * <code>string appKey = 1;</code>
+     * <code>string appKeyAndroid = 1;</code>
      */
-    public java.lang.String getAppKey() {
-      java.lang.Object ref = appKey_;
+    public java.lang.String getAppKeyAndroid() {
+      java.lang.Object ref = appKeyAndroid_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        appKey_ = s;
+        appKeyAndroid_ = s;
         return s;
       }
     }
     /**
-     * <code>string appKey = 1;</code>
+     * <code>string appKeyAndroid = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getAppKeyBytes() {
-      java.lang.Object ref = appKey_;
+        getAppKeyAndroidBytes() {
+      java.lang.Object ref = appKeyAndroid_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        appKey_ = b;
+        appKeyAndroid_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int SERVERSITES_FIELD_NUMBER = 2;
+    public static final int APPKEYIOS_FIELD_NUMBER = 2;
+    private volatile java.lang.Object appKeyIOS_;
+    /**
+     * <code>string appKeyIOS = 2;</code>
+     */
+    public java.lang.String getAppKeyIOS() {
+      java.lang.Object ref = appKeyIOS_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        appKeyIOS_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string appKeyIOS = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAppKeyIOSBytes() {
+      java.lang.Object ref = appKeyIOS_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        appKeyIOS_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SERVERSITES_FIELD_NUMBER = 3;
     private static final class ServerSitesDefaultEntryHolder {
       static final com.google.protobuf.MapEntry<
-          java.lang.String, java.lang.String> defaultEntry =
+          java.lang.String, com.chi.ssetest.protos.SetupConfig.Site> defaultEntry =
               com.google.protobuf.MapEntry
-              .<java.lang.String, java.lang.String>newDefaultInstance(
+              .<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site>newDefaultInstance(
                   com.chi.ssetest.protos.SetupConfig.internal_static_stock_testing_SDKConfig_ServerSitesEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.STRING,
                   "",
-                  com.google.protobuf.WireFormat.FieldType.STRING,
-                  "");
+                  com.google.protobuf.WireFormat.FieldType.MESSAGE,
+                  com.chi.ssetest.protos.SetupConfig.Site.getDefaultInstance());
     }
     private com.google.protobuf.MapField<
-        java.lang.String, java.lang.String> serverSites_;
-    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+        java.lang.String, com.chi.ssetest.protos.SetupConfig.Site> serverSites_;
+    private com.google.protobuf.MapField<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site>
     internalGetServerSites() {
       if (serverSites_ == null) {
         return com.google.protobuf.MapField.emptyMapField(
@@ -2092,7 +2609,7 @@ public final class SetupConfig {
       return internalGetServerSites().getMap().size();
     }
     /**
-     * <code>map&lt;string, string&gt; serverSites = 2;</code>
+     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
      */
 
     public boolean containsServerSites(
@@ -2104,36 +2621,36 @@ public final class SetupConfig {
      * Use {@link #getServerSitesMap()} instead.
      */
     @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.String> getServerSites() {
+    public java.util.Map<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site> getServerSites() {
       return getServerSitesMap();
     }
     /**
-     * <code>map&lt;string, string&gt; serverSites = 2;</code>
+     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
      */
 
-    public java.util.Map<java.lang.String, java.lang.String> getServerSitesMap() {
+    public java.util.Map<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site> getServerSitesMap() {
       return internalGetServerSites().getMap();
     }
     /**
-     * <code>map&lt;string, string&gt; serverSites = 2;</code>
+     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
      */
 
-    public java.lang.String getServerSitesOrDefault(
+    public com.chi.ssetest.protos.SetupConfig.Site getServerSitesOrDefault(
         java.lang.String key,
-        java.lang.String defaultValue) {
+        com.chi.ssetest.protos.SetupConfig.Site defaultValue) {
       if (key == null) { throw new java.lang.NullPointerException(); }
-      java.util.Map<java.lang.String, java.lang.String> map =
+      java.util.Map<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site> map =
           internalGetServerSites().getMap();
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
-     * <code>map&lt;string, string&gt; serverSites = 2;</code>
+     * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
      */
 
-    public java.lang.String getServerSitesOrThrow(
+    public com.chi.ssetest.protos.SetupConfig.Site getServerSitesOrThrow(
         java.lang.String key) {
       if (key == null) { throw new java.lang.NullPointerException(); }
-      java.util.Map<java.lang.String, java.lang.String> map =
+      java.util.Map<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site> map =
           internalGetServerSites().getMap();
       if (!map.containsKey(key)) {
         throw new java.lang.IllegalArgumentException();
@@ -2141,22 +2658,22 @@ public final class SetupConfig {
       return map.get(key);
     }
 
-    public static final int MARKETPERM_FIELD_NUMBER = 3;
+    public static final int MARKETPERM_FIELD_NUMBER = 4;
     private com.chi.ssetest.protos.SetupConfig.MarketPermission marketPerm_;
     /**
-     * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+     * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
      */
     public boolean hasMarketPerm() {
       return marketPerm_ != null;
     }
     /**
-     * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+     * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
      */
     public com.chi.ssetest.protos.SetupConfig.MarketPermission getMarketPerm() {
       return marketPerm_ == null ? com.chi.ssetest.protos.SetupConfig.MarketPermission.getDefaultInstance() : marketPerm_;
     }
     /**
-     * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+     * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
      */
     public com.chi.ssetest.protos.SetupConfig.MarketPermissionOrBuilder getMarketPermOrBuilder() {
       return getMarketPerm();
@@ -2176,17 +2693,20 @@ public final class SetupConfig {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getAppKeyBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, appKey_);
+      if (!getAppKeyAndroidBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, appKeyAndroid_);
+      }
+      if (!getAppKeyIOSBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, appKeyIOS_);
       }
       com.google.protobuf.GeneratedMessageV3
         .serializeStringMapTo(
           output,
           internalGetServerSites(),
           ServerSitesDefaultEntryHolder.defaultEntry,
-          2);
+          3);
       if (marketPerm_ != null) {
-        output.writeMessage(3, getMarketPerm());
+        output.writeMessage(4, getMarketPerm());
       }
       unknownFields.writeTo(output);
     }
@@ -2197,22 +2717,25 @@ public final class SetupConfig {
       if (size != -1) return size;
 
       size = 0;
-      if (!getAppKeyBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, appKey_);
+      if (!getAppKeyAndroidBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, appKeyAndroid_);
       }
-      for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
+      if (!getAppKeyIOSBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, appKeyIOS_);
+      }
+      for (java.util.Map.Entry<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site> entry
            : internalGetServerSites().getMap().entrySet()) {
-        com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+        com.google.protobuf.MapEntry<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site>
         serverSites__ = ServerSitesDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(2, serverSites__);
+            .computeMessageSize(3, serverSites__);
       }
       if (marketPerm_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getMarketPerm());
+          .computeMessageSize(4, getMarketPerm());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2229,8 +2752,10 @@ public final class SetupConfig {
       }
       com.chi.ssetest.protos.SetupConfig.SDKConfig other = (com.chi.ssetest.protos.SetupConfig.SDKConfig) obj;
 
-      if (!getAppKey()
-          .equals(other.getAppKey())) return false;
+      if (!getAppKeyAndroid()
+          .equals(other.getAppKeyAndroid())) return false;
+      if (!getAppKeyIOS()
+          .equals(other.getAppKeyIOS())) return false;
       if (!internalGetServerSites().equals(
           other.internalGetServerSites())) return false;
       if (hasMarketPerm() != other.hasMarketPerm()) return false;
@@ -2249,8 +2774,10 @@ public final class SetupConfig {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + APPKEY_FIELD_NUMBER;
-      hash = (53 * hash) + getAppKey().hashCode();
+      hash = (37 * hash) + APPKEYANDROID_FIELD_NUMBER;
+      hash = (53 * hash) + getAppKeyAndroid().hashCode();
+      hash = (37 * hash) + APPKEYIOS_FIELD_NUMBER;
+      hash = (53 * hash) + getAppKeyIOS().hashCode();
       if (!internalGetServerSites().getMap().isEmpty()) {
         hash = (37 * hash) + SERVERSITES_FIELD_NUMBER;
         hash = (53 * hash) + internalGetServerSites().hashCode();
@@ -2370,7 +2897,7 @@ public final class SetupConfig {
       protected com.google.protobuf.MapField internalGetMapField(
           int number) {
         switch (number) {
-          case 2:
+          case 3:
             return internalGetServerSites();
           default:
             throw new RuntimeException(
@@ -2381,7 +2908,7 @@ public final class SetupConfig {
       protected com.google.protobuf.MapField internalGetMutableMapField(
           int number) {
         switch (number) {
-          case 2:
+          case 3:
             return internalGetMutableServerSites();
           default:
             throw new RuntimeException(
@@ -2414,7 +2941,9 @@ public final class SetupConfig {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        appKey_ = "";
+        appKeyAndroid_ = "";
+
+        appKeyIOS_ = "";
 
         internalGetMutableServerSites().clear();
         if (marketPermBuilder_ == null) {
@@ -2451,7 +2980,8 @@ public final class SetupConfig {
         com.chi.ssetest.protos.SetupConfig.SDKConfig result = new com.chi.ssetest.protos.SetupConfig.SDKConfig(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
-        result.appKey_ = appKey_;
+        result.appKeyAndroid_ = appKeyAndroid_;
+        result.appKeyIOS_ = appKeyIOS_;
         result.serverSites_ = internalGetServerSites();
         result.serverSites_.makeImmutable();
         if (marketPermBuilder_ == null) {
@@ -2508,8 +3038,12 @@ public final class SetupConfig {
 
       public Builder mergeFrom(com.chi.ssetest.protos.SetupConfig.SDKConfig other) {
         if (other == com.chi.ssetest.protos.SetupConfig.SDKConfig.getDefaultInstance()) return this;
-        if (!other.getAppKey().isEmpty()) {
-          appKey_ = other.appKey_;
+        if (!other.getAppKeyAndroid().isEmpty()) {
+          appKeyAndroid_ = other.appKeyAndroid_;
+          onChanged();
+        }
+        if (!other.getAppKeyIOS().isEmpty()) {
+          appKeyIOS_ = other.appKeyIOS_;
           onChanged();
         }
         internalGetMutableServerSites().mergeFrom(
@@ -2547,78 +3081,147 @@ public final class SetupConfig {
       }
       private int bitField0_;
 
-      private java.lang.Object appKey_ = "";
+      private java.lang.Object appKeyAndroid_ = "";
       /**
-       * <code>string appKey = 1;</code>
+       * <code>string appKeyAndroid = 1;</code>
        */
-      public java.lang.String getAppKey() {
-        java.lang.Object ref = appKey_;
+      public java.lang.String getAppKeyAndroid() {
+        java.lang.Object ref = appKeyAndroid_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          appKey_ = s;
+          appKeyAndroid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string appKey = 1;</code>
+       * <code>string appKeyAndroid = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getAppKeyBytes() {
-        java.lang.Object ref = appKey_;
+          getAppKeyAndroidBytes() {
+        java.lang.Object ref = appKeyAndroid_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          appKey_ = b;
+          appKeyAndroid_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string appKey = 1;</code>
+       * <code>string appKeyAndroid = 1;</code>
        */
-      public Builder setAppKey(
+      public Builder setAppKeyAndroid(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        appKey_ = value;
+        appKeyAndroid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string appKey = 1;</code>
+       * <code>string appKeyAndroid = 1;</code>
        */
-      public Builder clearAppKey() {
+      public Builder clearAppKeyAndroid() {
         
-        appKey_ = getDefaultInstance().getAppKey();
+        appKeyAndroid_ = getDefaultInstance().getAppKeyAndroid();
         onChanged();
         return this;
       }
       /**
-       * <code>string appKey = 1;</code>
+       * <code>string appKeyAndroid = 1;</code>
        */
-      public Builder setAppKeyBytes(
+      public Builder setAppKeyAndroidBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        appKey_ = value;
+        appKeyAndroid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object appKeyIOS_ = "";
+      /**
+       * <code>string appKeyIOS = 2;</code>
+       */
+      public java.lang.String getAppKeyIOS() {
+        java.lang.Object ref = appKeyIOS_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          appKeyIOS_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string appKeyIOS = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAppKeyIOSBytes() {
+        java.lang.Object ref = appKeyIOS_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          appKeyIOS_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string appKeyIOS = 2;</code>
+       */
+      public Builder setAppKeyIOS(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        appKeyIOS_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string appKeyIOS = 2;</code>
+       */
+      public Builder clearAppKeyIOS() {
+        
+        appKeyIOS_ = getDefaultInstance().getAppKeyIOS();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string appKeyIOS = 2;</code>
+       */
+      public Builder setAppKeyIOSBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        appKeyIOS_ = value;
         onChanged();
         return this;
       }
 
       private com.google.protobuf.MapField<
-          java.lang.String, java.lang.String> serverSites_;
-      private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+          java.lang.String, com.chi.ssetest.protos.SetupConfig.Site> serverSites_;
+      private com.google.protobuf.MapField<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site>
       internalGetServerSites() {
         if (serverSites_ == null) {
           return com.google.protobuf.MapField.emptyMapField(
@@ -2626,7 +3229,7 @@ public final class SetupConfig {
         }
         return serverSites_;
       }
-      private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+      private com.google.protobuf.MapField<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site>
       internalGetMutableServerSites() {
         onChanged();;
         if (serverSites_ == null) {
@@ -2643,7 +3246,7 @@ public final class SetupConfig {
         return internalGetServerSites().getMap().size();
       }
       /**
-       * <code>map&lt;string, string&gt; serverSites = 2;</code>
+       * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
        */
 
       public boolean containsServerSites(
@@ -2655,36 +3258,36 @@ public final class SetupConfig {
        * Use {@link #getServerSitesMap()} instead.
        */
       @java.lang.Deprecated
-      public java.util.Map<java.lang.String, java.lang.String> getServerSites() {
+      public java.util.Map<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site> getServerSites() {
         return getServerSitesMap();
       }
       /**
-       * <code>map&lt;string, string&gt; serverSites = 2;</code>
+       * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
        */
 
-      public java.util.Map<java.lang.String, java.lang.String> getServerSitesMap() {
+      public java.util.Map<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site> getServerSitesMap() {
         return internalGetServerSites().getMap();
       }
       /**
-       * <code>map&lt;string, string&gt; serverSites = 2;</code>
+       * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
        */
 
-      public java.lang.String getServerSitesOrDefault(
+      public com.chi.ssetest.protos.SetupConfig.Site getServerSitesOrDefault(
           java.lang.String key,
-          java.lang.String defaultValue) {
+          com.chi.ssetest.protos.SetupConfig.Site defaultValue) {
         if (key == null) { throw new java.lang.NullPointerException(); }
-        java.util.Map<java.lang.String, java.lang.String> map =
+        java.util.Map<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site> map =
             internalGetServerSites().getMap();
         return map.containsKey(key) ? map.get(key) : defaultValue;
       }
       /**
-       * <code>map&lt;string, string&gt; serverSites = 2;</code>
+       * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
        */
 
-      public java.lang.String getServerSitesOrThrow(
+      public com.chi.ssetest.protos.SetupConfig.Site getServerSitesOrThrow(
           java.lang.String key) {
         if (key == null) { throw new java.lang.NullPointerException(); }
-        java.util.Map<java.lang.String, java.lang.String> map =
+        java.util.Map<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site> map =
             internalGetServerSites().getMap();
         if (!map.containsKey(key)) {
           throw new java.lang.IllegalArgumentException();
@@ -2698,7 +3301,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>map&lt;string, string&gt; serverSites = 2;</code>
+       * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
        */
 
       public Builder removeServerSites(
@@ -2712,16 +3315,16 @@ public final class SetupConfig {
        * Use alternate mutation accessors instead.
        */
       @java.lang.Deprecated
-      public java.util.Map<java.lang.String, java.lang.String>
+      public java.util.Map<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site>
       getMutableServerSites() {
         return internalGetMutableServerSites().getMutableMap();
       }
       /**
-       * <code>map&lt;string, string&gt; serverSites = 2;</code>
+       * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
        */
       public Builder putServerSites(
           java.lang.String key,
-          java.lang.String value) {
+          com.chi.ssetest.protos.SetupConfig.Site value) {
         if (key == null) { throw new java.lang.NullPointerException(); }
         if (value == null) { throw new java.lang.NullPointerException(); }
         internalGetMutableServerSites().getMutableMap()
@@ -2729,11 +3332,11 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>map&lt;string, string&gt; serverSites = 2;</code>
+       * <code>map&lt;string, .stock_testing.Site&gt; serverSites = 3;</code>
        */
 
       public Builder putAllServerSites(
-          java.util.Map<java.lang.String, java.lang.String> values) {
+          java.util.Map<java.lang.String, com.chi.ssetest.protos.SetupConfig.Site> values) {
         internalGetMutableServerSites().getMutableMap()
             .putAll(values);
         return this;
@@ -2743,13 +3346,13 @@ public final class SetupConfig {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.chi.ssetest.protos.SetupConfig.MarketPermission, com.chi.ssetest.protos.SetupConfig.MarketPermission.Builder, com.chi.ssetest.protos.SetupConfig.MarketPermissionOrBuilder> marketPermBuilder_;
       /**
-       * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+       * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
        */
       public boolean hasMarketPerm() {
         return marketPermBuilder_ != null || marketPerm_ != null;
       }
       /**
-       * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+       * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
        */
       public com.chi.ssetest.protos.SetupConfig.MarketPermission getMarketPerm() {
         if (marketPermBuilder_ == null) {
@@ -2759,7 +3362,7 @@ public final class SetupConfig {
         }
       }
       /**
-       * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+       * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
        */
       public Builder setMarketPerm(com.chi.ssetest.protos.SetupConfig.MarketPermission value) {
         if (marketPermBuilder_ == null) {
@@ -2775,7 +3378,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+       * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
        */
       public Builder setMarketPerm(
           com.chi.ssetest.protos.SetupConfig.MarketPermission.Builder builderForValue) {
@@ -2789,7 +3392,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+       * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
        */
       public Builder mergeMarketPerm(com.chi.ssetest.protos.SetupConfig.MarketPermission value) {
         if (marketPermBuilder_ == null) {
@@ -2807,7 +3410,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+       * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
        */
       public Builder clearMarketPerm() {
         if (marketPermBuilder_ == null) {
@@ -2821,7 +3424,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+       * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
        */
       public com.chi.ssetest.protos.SetupConfig.MarketPermission.Builder getMarketPermBuilder() {
         
@@ -2829,7 +3432,7 @@ public final class SetupConfig {
         return getMarketPermFieldBuilder().getBuilder();
       }
       /**
-       * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+       * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
        */
       public com.chi.ssetest.protos.SetupConfig.MarketPermissionOrBuilder getMarketPermOrBuilder() {
         if (marketPermBuilder_ != null) {
@@ -2840,7 +3443,7 @@ public final class SetupConfig {
         }
       }
       /**
-       * <code>.stock_testing.MarketPermission marketPerm = 3;</code>
+       * <code>.stock_testing.MarketPermission marketPerm = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.chi.ssetest.protos.SetupConfig.MarketPermission, com.chi.ssetest.protos.SetupConfig.MarketPermission.Builder, com.chi.ssetest.protos.SetupConfig.MarketPermissionOrBuilder> 
@@ -2923,24 +3526,33 @@ public final class SetupConfig {
         getTestcaseIDBytes();
 
     /**
-     * <code>int32 executionTimes = 2;</code>
-     */
-    int getExecutionTimes();
-
-    /**
-     * <code>bool continueWhenFailed = 3;</code>
+     * <code>bool continueWhenFailed = 2;</code>
      */
     boolean getContinueWhenFailed();
 
     /**
-     * <code>string paramStr = 4;</code>
+     * <code>int64 roundIntervalSec = 3;</code>
      */
-    java.lang.String getParamStr();
+    long getRoundIntervalSec();
+
     /**
-     * <code>string paramStr = 4;</code>
+     * <code>repeated string paramStrs = 4;</code>
+     */
+    java.util.List<java.lang.String>
+        getParamStrsList();
+    /**
+     * <code>repeated string paramStrs = 4;</code>
+     */
+    int getParamStrsCount();
+    /**
+     * <code>repeated string paramStrs = 4;</code>
+     */
+    java.lang.String getParamStrs(int index);
+    /**
+     * <code>repeated string paramStrs = 4;</code>
      */
     com.google.protobuf.ByteString
-        getParamStrBytes();
+        getParamStrsBytes(int index);
   }
   /**
    * Protobuf type {@code stock_testing.TestcaseConfig}
@@ -2956,7 +3568,7 @@ public final class SetupConfig {
     }
     private TestcaseConfig() {
       testcaseID_ = "";
-      paramStr_ = "";
+      paramStrs_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
 
     @java.lang.Override
@@ -2991,18 +3603,21 @@ public final class SetupConfig {
             }
             case 16: {
 
-              executionTimes_ = input.readInt32();
+              continueWhenFailed_ = input.readBool();
               break;
             }
             case 24: {
 
-              continueWhenFailed_ = input.readBool();
+              roundIntervalSec_ = input.readInt64();
               break;
             }
             case 34: {
               java.lang.String s = input.readStringRequireUtf8();
-
-              paramStr_ = s;
+              if (!((mutable_bitField0_ & 0x00000008) != 0)) {
+                paramStrs_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              paramStrs_.add(s);
               break;
             }
             default: {
@@ -3020,6 +3635,9 @@ public final class SetupConfig {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000008) != 0)) {
+          paramStrs_ = paramStrs_.getUnmodifiableView();
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -3037,6 +3655,7 @@ public final class SetupConfig {
               com.chi.ssetest.protos.SetupConfig.TestcaseConfig.class, com.chi.ssetest.protos.SetupConfig.TestcaseConfig.Builder.class);
     }
 
+    private int bitField0_;
     public static final int TESTCASEID_FIELD_NUMBER = 1;
     private volatile java.lang.Object testcaseID_;
     /**
@@ -3071,56 +3690,51 @@ public final class SetupConfig {
       }
     }
 
-    public static final int EXECUTIONTIMES_FIELD_NUMBER = 2;
-    private int executionTimes_;
-    /**
-     * <code>int32 executionTimes = 2;</code>
-     */
-    public int getExecutionTimes() {
-      return executionTimes_;
-    }
-
-    public static final int CONTINUEWHENFAILED_FIELD_NUMBER = 3;
+    public static final int CONTINUEWHENFAILED_FIELD_NUMBER = 2;
     private boolean continueWhenFailed_;
     /**
-     * <code>bool continueWhenFailed = 3;</code>
+     * <code>bool continueWhenFailed = 2;</code>
      */
     public boolean getContinueWhenFailed() {
       return continueWhenFailed_;
     }
 
-    public static final int PARAMSTR_FIELD_NUMBER = 4;
-    private volatile java.lang.Object paramStr_;
+    public static final int ROUNDINTERVALSEC_FIELD_NUMBER = 3;
+    private long roundIntervalSec_;
     /**
-     * <code>string paramStr = 4;</code>
+     * <code>int64 roundIntervalSec = 3;</code>
      */
-    public java.lang.String getParamStr() {
-      java.lang.Object ref = paramStr_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        paramStr_ = s;
-        return s;
-      }
+    public long getRoundIntervalSec() {
+      return roundIntervalSec_;
+    }
+
+    public static final int PARAMSTRS_FIELD_NUMBER = 4;
+    private com.google.protobuf.LazyStringList paramStrs_;
+    /**
+     * <code>repeated string paramStrs = 4;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getParamStrsList() {
+      return paramStrs_;
     }
     /**
-     * <code>string paramStr = 4;</code>
+     * <code>repeated string paramStrs = 4;</code>
+     */
+    public int getParamStrsCount() {
+      return paramStrs_.size();
+    }
+    /**
+     * <code>repeated string paramStrs = 4;</code>
+     */
+    public java.lang.String getParamStrs(int index) {
+      return paramStrs_.get(index);
+    }
+    /**
+     * <code>repeated string paramStrs = 4;</code>
      */
     public com.google.protobuf.ByteString
-        getParamStrBytes() {
-      java.lang.Object ref = paramStr_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        paramStr_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+        getParamStrsBytes(int index) {
+      return paramStrs_.getByteString(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -3140,14 +3754,14 @@ public final class SetupConfig {
       if (!getTestcaseIDBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, testcaseID_);
       }
-      if (executionTimes_ != 0) {
-        output.writeInt32(2, executionTimes_);
-      }
       if (continueWhenFailed_ != false) {
-        output.writeBool(3, continueWhenFailed_);
+        output.writeBool(2, continueWhenFailed_);
       }
-      if (!getParamStrBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, paramStr_);
+      if (roundIntervalSec_ != 0L) {
+        output.writeInt64(3, roundIntervalSec_);
+      }
+      for (int i = 0; i < paramStrs_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, paramStrs_.getRaw(i));
       }
       unknownFields.writeTo(output);
     }
@@ -3161,16 +3775,21 @@ public final class SetupConfig {
       if (!getTestcaseIDBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, testcaseID_);
       }
-      if (executionTimes_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, executionTimes_);
-      }
       if (continueWhenFailed_ != false) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(3, continueWhenFailed_);
+          .computeBoolSize(2, continueWhenFailed_);
       }
-      if (!getParamStrBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, paramStr_);
+      if (roundIntervalSec_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, roundIntervalSec_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < paramStrs_.size(); i++) {
+          dataSize += computeStringSizeNoTag(paramStrs_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getParamStrsList().size();
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3189,12 +3808,12 @@ public final class SetupConfig {
 
       if (!getTestcaseID()
           .equals(other.getTestcaseID())) return false;
-      if (getExecutionTimes()
-          != other.getExecutionTimes()) return false;
       if (getContinueWhenFailed()
           != other.getContinueWhenFailed()) return false;
-      if (!getParamStr()
-          .equals(other.getParamStr())) return false;
+      if (getRoundIntervalSec()
+          != other.getRoundIntervalSec()) return false;
+      if (!getParamStrsList()
+          .equals(other.getParamStrsList())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -3208,13 +3827,16 @@ public final class SetupConfig {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + TESTCASEID_FIELD_NUMBER;
       hash = (53 * hash) + getTestcaseID().hashCode();
-      hash = (37 * hash) + EXECUTIONTIMES_FIELD_NUMBER;
-      hash = (53 * hash) + getExecutionTimes();
       hash = (37 * hash) + CONTINUEWHENFAILED_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getContinueWhenFailed());
-      hash = (37 * hash) + PARAMSTR_FIELD_NUMBER;
-      hash = (53 * hash) + getParamStr().hashCode();
+      hash = (37 * hash) + ROUNDINTERVALSEC_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getRoundIntervalSec());
+      if (getParamStrsCount() > 0) {
+        hash = (37 * hash) + PARAMSTRS_FIELD_NUMBER;
+        hash = (53 * hash) + getParamStrsList().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -3350,12 +3972,12 @@ public final class SetupConfig {
         super.clear();
         testcaseID_ = "";
 
-        executionTimes_ = 0;
-
         continueWhenFailed_ = false;
 
-        paramStr_ = "";
+        roundIntervalSec_ = 0L;
 
+        paramStrs_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -3382,10 +4004,17 @@ public final class SetupConfig {
       @java.lang.Override
       public com.chi.ssetest.protos.SetupConfig.TestcaseConfig buildPartial() {
         com.chi.ssetest.protos.SetupConfig.TestcaseConfig result = new com.chi.ssetest.protos.SetupConfig.TestcaseConfig(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
         result.testcaseID_ = testcaseID_;
-        result.executionTimes_ = executionTimes_;
         result.continueWhenFailed_ = continueWhenFailed_;
-        result.paramStr_ = paramStr_;
+        result.roundIntervalSec_ = roundIntervalSec_;
+        if (((bitField0_ & 0x00000008) != 0)) {
+          paramStrs_ = paramStrs_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.paramStrs_ = paramStrs_;
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -3438,14 +4067,20 @@ public final class SetupConfig {
           testcaseID_ = other.testcaseID_;
           onChanged();
         }
-        if (other.getExecutionTimes() != 0) {
-          setExecutionTimes(other.getExecutionTimes());
-        }
         if (other.getContinueWhenFailed() != false) {
           setContinueWhenFailed(other.getContinueWhenFailed());
         }
-        if (!other.getParamStr().isEmpty()) {
-          paramStr_ = other.paramStr_;
+        if (other.getRoundIntervalSec() != 0L) {
+          setRoundIntervalSec(other.getRoundIntervalSec());
+        }
+        if (!other.paramStrs_.isEmpty()) {
+          if (paramStrs_.isEmpty()) {
+            paramStrs_ = other.paramStrs_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureParamStrsIsMutable();
+            paramStrs_.addAll(other.paramStrs_);
+          }
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -3476,6 +4111,7 @@ public final class SetupConfig {
         }
         return this;
       }
+      private int bitField0_;
 
       private java.lang.Object testcaseID_ = "";
       /**
@@ -3546,41 +4182,15 @@ public final class SetupConfig {
         return this;
       }
 
-      private int executionTimes_ ;
-      /**
-       * <code>int32 executionTimes = 2;</code>
-       */
-      public int getExecutionTimes() {
-        return executionTimes_;
-      }
-      /**
-       * <code>int32 executionTimes = 2;</code>
-       */
-      public Builder setExecutionTimes(int value) {
-        
-        executionTimes_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 executionTimes = 2;</code>
-       */
-      public Builder clearExecutionTimes() {
-        
-        executionTimes_ = 0;
-        onChanged();
-        return this;
-      }
-
       private boolean continueWhenFailed_ ;
       /**
-       * <code>bool continueWhenFailed = 3;</code>
+       * <code>bool continueWhenFailed = 2;</code>
        */
       public boolean getContinueWhenFailed() {
         return continueWhenFailed_;
       }
       /**
-       * <code>bool continueWhenFailed = 3;</code>
+       * <code>bool continueWhenFailed = 2;</code>
        */
       public Builder setContinueWhenFailed(boolean value) {
         
@@ -3589,7 +4199,7 @@ public final class SetupConfig {
         return this;
       }
       /**
-       * <code>bool continueWhenFailed = 3;</code>
+       * <code>bool continueWhenFailed = 2;</code>
        */
       public Builder clearContinueWhenFailed() {
         
@@ -3598,71 +4208,122 @@ public final class SetupConfig {
         return this;
       }
 
-      private java.lang.Object paramStr_ = "";
+      private long roundIntervalSec_ ;
       /**
-       * <code>string paramStr = 4;</code>
+       * <code>int64 roundIntervalSec = 3;</code>
        */
-      public java.lang.String getParamStr() {
-        java.lang.Object ref = paramStr_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          paramStr_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public long getRoundIntervalSec() {
+        return roundIntervalSec_;
       }
       /**
-       * <code>string paramStr = 4;</code>
+       * <code>int64 roundIntervalSec = 3;</code>
+       */
+      public Builder setRoundIntervalSec(long value) {
+        
+        roundIntervalSec_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 roundIntervalSec = 3;</code>
+       */
+      public Builder clearRoundIntervalSec() {
+        
+        roundIntervalSec_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList paramStrs_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureParamStrsIsMutable() {
+        if (!((bitField0_ & 0x00000008) != 0)) {
+          paramStrs_ = new com.google.protobuf.LazyStringArrayList(paramStrs_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+      /**
+       * <code>repeated string paramStrs = 4;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getParamStrsList() {
+        return paramStrs_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string paramStrs = 4;</code>
+       */
+      public int getParamStrsCount() {
+        return paramStrs_.size();
+      }
+      /**
+       * <code>repeated string paramStrs = 4;</code>
+       */
+      public java.lang.String getParamStrs(int index) {
+        return paramStrs_.get(index);
+      }
+      /**
+       * <code>repeated string paramStrs = 4;</code>
        */
       public com.google.protobuf.ByteString
-          getParamStrBytes() {
-        java.lang.Object ref = paramStr_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          paramStr_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+          getParamStrsBytes(int index) {
+        return paramStrs_.getByteString(index);
       }
       /**
-       * <code>string paramStr = 4;</code>
+       * <code>repeated string paramStrs = 4;</code>
        */
-      public Builder setParamStr(
+      public Builder setParamStrs(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureParamStrsIsMutable();
+        paramStrs_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string paramStrs = 4;</code>
+       */
+      public Builder addParamStrs(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  
-        paramStr_ = value;
+  ensureParamStrsIsMutable();
+        paramStrs_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>string paramStr = 4;</code>
+       * <code>repeated string paramStrs = 4;</code>
        */
-      public Builder clearParamStr() {
-        
-        paramStr_ = getDefaultInstance().getParamStr();
+      public Builder addAllParamStrs(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureParamStrsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, paramStrs_);
         onChanged();
         return this;
       }
       /**
-       * <code>string paramStr = 4;</code>
+       * <code>repeated string paramStrs = 4;</code>
        */
-      public Builder setParamStrBytes(
+      public Builder clearParamStrs() {
+        paramStrs_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string paramStrs = 4;</code>
+       */
+      public Builder addParamStrsBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
-        
-        paramStr_ = value;
+        ensureParamStrsIsMutable();
+        paramStrs_.add(value);
         onChanged();
         return this;
       }
@@ -4977,6 +5638,11 @@ public final class SetupConfig {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_stock_testing_MarketPermission_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_stock_testing_Site_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_stock_testing_Site_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_stock_testing_SDKConfig_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -5005,25 +5671,26 @@ public final class SetupConfig {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014config.proto\022\rstock_testing\"\302\001\n\020Market" +
-      "Permission\022\r\n\005Level\030\001 \001(\t\022\020\n\010SseLevel\030\002 " +
-      "\001(\t\022\020\n\010CffLevel\030\003 \001(\t\022\020\n\010DceLevel\030\004 \001(\t\022" +
-      "\021\n\tCzceLevel\030\005 \001(\t\022\017\n\007FeLevel\030\006 \001(\t\022\017\n\007G" +
-      "ILevel\030\007 \001(\t\022\021\n\tShfeLevel\030\010 \001(\t\022\020\n\010IneLe" +
-      "vel\030\t \001(\t\022\017\n\007HKPerms\030\n \003(\t\"\304\001\n\tSDKConfig" +
-      "\022\016\n\006appKey\030\001 \001(\t\022>\n\013serverSites\030\002 \003(\0132)." +
-      "stock_testing.SDKConfig.ServerSitesEntry" +
-      "\0223\n\nmarketPerm\030\003 \001(\0132\037.stock_testing.Mar" +
-      "ketPermission\0322\n\020ServerSitesEntry\022\013\n\003key" +
-      "\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"j\n\016TestcaseCon" +
-      "fig\022\022\n\ntestcaseID\030\001 \001(\t\022\026\n\016executionTime" +
-      "s\030\002 \001(\005\022\032\n\022continueWhenFailed\030\003 \001(\010\022\020\n\010p" +
-      "aramStr\030\004 \001(\t\"\220\001\n\014RunnerConfig\022\r\n\005jobID\030" +
-      "\001 \001(\t\022\020\n\010runnerID\030\002 \001(\t\022+\n\tsdkConfig\030\003 \001" +
-      "(\0132\030.stock_testing.SDKConfig\0222\n\013casesCon" +
-      "fig\030\004 \003(\0132\035.stock_testing.TestcaseConfig" +
-      "B%\n\026com.chi.ssetest.protosB\013SetupConfigb" +
-      "\006proto3"
+      "\n\014config.proto\022\rstock_testing\"\260\001\n\020Market" +
+      "Permission\022\r\n\005Level\030\001 \001(\t\022\020\n\010CffLevel\030\002 " +
+      "\001(\t\022\020\n\010DceLevel\030\003 \001(\t\022\021\n\tCzceLevel\030\004 \001(\t" +
+      "\022\017\n\007FeLevel\030\005 \001(\t\022\017\n\007GILevel\030\006 \001(\t\022\021\n\tSh" +
+      "feLevel\030\007 \001(\t\022\020\n\010IneLevel\030\010 \001(\t\022\017\n\007HKPer" +
+      "ms\030\t \003(\t\"\023\n\004Site\022\013\n\003ips\030\001 \003(\t\"\363\001\n\tSDKCon" +
+      "fig\022\025\n\rappKeyAndroid\030\001 \001(\t\022\021\n\tappKeyIOS\030" +
+      "\002 \001(\t\022>\n\013serverSites\030\003 \003(\0132).stock_testi" +
+      "ng.SDKConfig.ServerSitesEntry\0223\n\nmarketP" +
+      "erm\030\004 \001(\0132\037.stock_testing.MarketPermissi" +
+      "on\032G\n\020ServerSitesEntry\022\013\n\003key\030\001 \001(\t\022\"\n\005v" +
+      "alue\030\002 \001(\0132\023.stock_testing.Site:\0028\001\"m\n\016T" +
+      "estcaseConfig\022\022\n\ntestcaseID\030\001 \001(\t\022\032\n\022con" +
+      "tinueWhenFailed\030\002 \001(\010\022\030\n\020roundIntervalSe" +
+      "c\030\003 \001(\003\022\021\n\tparamStrs\030\004 \003(\t\"\220\001\n\014RunnerCon" +
+      "fig\022\r\n\005jobID\030\001 \001(\t\022\020\n\010runnerID\030\002 \001(\t\022+\n\t" +
+      "sdkConfig\030\003 \001(\0132\030.stock_testing.SDKConfi" +
+      "g\0222\n\013casesConfig\030\004 \003(\0132\035.stock_testing.T" +
+      "estcaseConfigB%\n\026com.chi.ssetest.protosB" +
+      "\013SetupConfigb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5042,13 +5709,19 @@ public final class SetupConfig {
     internal_static_stock_testing_MarketPermission_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_stock_testing_MarketPermission_descriptor,
-        new java.lang.String[] { "Level", "SseLevel", "CffLevel", "DceLevel", "CzceLevel", "FeLevel", "GILevel", "ShfeLevel", "IneLevel", "HKPerms", });
-    internal_static_stock_testing_SDKConfig_descriptor =
+        new java.lang.String[] { "Level", "CffLevel", "DceLevel", "CzceLevel", "FeLevel", "GILevel", "ShfeLevel", "IneLevel", "HKPerms", });
+    internal_static_stock_testing_Site_descriptor =
       getDescriptor().getMessageTypes().get(1);
+    internal_static_stock_testing_Site_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_stock_testing_Site_descriptor,
+        new java.lang.String[] { "Ips", });
+    internal_static_stock_testing_SDKConfig_descriptor =
+      getDescriptor().getMessageTypes().get(2);
     internal_static_stock_testing_SDKConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_stock_testing_SDKConfig_descriptor,
-        new java.lang.String[] { "AppKey", "ServerSites", "MarketPerm", });
+        new java.lang.String[] { "AppKeyAndroid", "AppKeyIOS", "ServerSites", "MarketPerm", });
     internal_static_stock_testing_SDKConfig_ServerSitesEntry_descriptor =
       internal_static_stock_testing_SDKConfig_descriptor.getNestedTypes().get(0);
     internal_static_stock_testing_SDKConfig_ServerSitesEntry_fieldAccessorTable = new
@@ -5056,13 +5729,13 @@ public final class SetupConfig {
         internal_static_stock_testing_SDKConfig_ServerSitesEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_stock_testing_TestcaseConfig_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_stock_testing_TestcaseConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_stock_testing_TestcaseConfig_descriptor,
-        new java.lang.String[] { "TestcaseID", "ExecutionTimes", "ContinueWhenFailed", "ParamStr", });
+        new java.lang.String[] { "TestcaseID", "ContinueWhenFailed", "RoundIntervalSec", "ParamStrs", });
     internal_static_stock_testing_RunnerConfig_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_stock_testing_RunnerConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_stock_testing_RunnerConfig_descriptor,
