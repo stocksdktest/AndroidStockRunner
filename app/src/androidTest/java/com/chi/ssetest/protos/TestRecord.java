@@ -74,24 +74,19 @@ public final class TestRecord {
     long getEndTime();
 
     /**
-     * <code>string resultStr = 8;</code>
+     * <code>bytes paramData = 8;</code>
      */
-    java.lang.String getResultStr();
-    /**
-     * <code>string resultStr = 8;</code>
-     */
-    com.google.protobuf.ByteString
-        getResultStrBytes();
+    com.google.protobuf.ByteString getParamData();
 
     /**
-     * <code>string exceptionStr = 9;</code>
+     * <code>bytes resultData = 9;</code>
      */
-    java.lang.String getExceptionStr();
+    com.google.protobuf.ByteString getResultData();
+
     /**
-     * <code>string exceptionStr = 9;</code>
+     * <code>bytes exceptionData = 10;</code>
      */
-    com.google.protobuf.ByteString
-        getExceptionStrBytes();
+    com.google.protobuf.ByteString getExceptionData();
   }
   /**
    * Protobuf type {@code stock_testing.TestExecutionRecord}
@@ -110,8 +105,9 @@ public final class TestRecord {
       runnerID_ = "";
       testcaseID_ = "";
       recordID_ = "";
-      resultStr_ = "";
-      exceptionStr_ = "";
+      paramData_ = com.google.protobuf.ByteString.EMPTY;
+      resultData_ = com.google.protobuf.ByteString.EMPTY;
+      exceptionData_ = com.google.protobuf.ByteString.EMPTY;
     }
 
     @java.lang.Override
@@ -178,15 +174,18 @@ public final class TestRecord {
               break;
             }
             case 66: {
-              java.lang.String s = input.readStringRequireUtf8();
 
-              resultStr_ = s;
+              paramData_ = input.readBytes();
               break;
             }
             case 74: {
-              java.lang.String s = input.readStringRequireUtf8();
 
-              exceptionStr_ = s;
+              resultData_ = input.readBytes();
+              break;
+            }
+            case 82: {
+
+              exceptionData_ = input.readBytes();
               break;
             }
             default: {
@@ -384,72 +383,31 @@ public final class TestRecord {
       return endTime_;
     }
 
-    public static final int RESULTSTR_FIELD_NUMBER = 8;
-    private volatile java.lang.Object resultStr_;
+    public static final int PARAMDATA_FIELD_NUMBER = 8;
+    private com.google.protobuf.ByteString paramData_;
     /**
-     * <code>string resultStr = 8;</code>
+     * <code>bytes paramData = 8;</code>
      */
-    public java.lang.String getResultStr() {
-      java.lang.Object ref = resultStr_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        resultStr_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string resultStr = 8;</code>
-     */
-    public com.google.protobuf.ByteString
-        getResultStrBytes() {
-      java.lang.Object ref = resultStr_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        resultStr_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.google.protobuf.ByteString getParamData() {
+      return paramData_;
     }
 
-    public static final int EXCEPTIONSTR_FIELD_NUMBER = 9;
-    private volatile java.lang.Object exceptionStr_;
+    public static final int RESULTDATA_FIELD_NUMBER = 9;
+    private com.google.protobuf.ByteString resultData_;
     /**
-     * <code>string exceptionStr = 9;</code>
+     * <code>bytes resultData = 9;</code>
      */
-    public java.lang.String getExceptionStr() {
-      java.lang.Object ref = exceptionStr_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        exceptionStr_ = s;
-        return s;
-      }
+    public com.google.protobuf.ByteString getResultData() {
+      return resultData_;
     }
+
+    public static final int EXCEPTIONDATA_FIELD_NUMBER = 10;
+    private com.google.protobuf.ByteString exceptionData_;
     /**
-     * <code>string exceptionStr = 9;</code>
+     * <code>bytes exceptionData = 10;</code>
      */
-    public com.google.protobuf.ByteString
-        getExceptionStrBytes() {
-      java.lang.Object ref = exceptionStr_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        exceptionStr_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.google.protobuf.ByteString getExceptionData() {
+      return exceptionData_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -487,11 +445,14 @@ public final class TestRecord {
       if (endTime_ != 0L) {
         output.writeInt64(7, endTime_);
       }
-      if (!getResultStrBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, resultStr_);
+      if (!paramData_.isEmpty()) {
+        output.writeBytes(8, paramData_);
       }
-      if (!getExceptionStrBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 9, exceptionStr_);
+      if (!resultData_.isEmpty()) {
+        output.writeBytes(9, resultData_);
+      }
+      if (!exceptionData_.isEmpty()) {
+        output.writeBytes(10, exceptionData_);
       }
       unknownFields.writeTo(output);
     }
@@ -526,11 +487,17 @@ public final class TestRecord {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(7, endTime_);
       }
-      if (!getResultStrBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, resultStr_);
+      if (!paramData_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(8, paramData_);
       }
-      if (!getExceptionStrBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, exceptionStr_);
+      if (!resultData_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(9, resultData_);
+      }
+      if (!exceptionData_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(10, exceptionData_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -561,10 +528,12 @@ public final class TestRecord {
           != other.getStartTime()) return false;
       if (getEndTime()
           != other.getEndTime()) return false;
-      if (!getResultStr()
-          .equals(other.getResultStr())) return false;
-      if (!getExceptionStr()
-          .equals(other.getExceptionStr())) return false;
+      if (!getParamData()
+          .equals(other.getParamData())) return false;
+      if (!getResultData()
+          .equals(other.getResultData())) return false;
+      if (!getExceptionData()
+          .equals(other.getExceptionData())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -593,10 +562,12 @@ public final class TestRecord {
       hash = (37 * hash) + ENDTIME_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getEndTime());
-      hash = (37 * hash) + RESULTSTR_FIELD_NUMBER;
-      hash = (53 * hash) + getResultStr().hashCode();
-      hash = (37 * hash) + EXCEPTIONSTR_FIELD_NUMBER;
-      hash = (53 * hash) + getExceptionStr().hashCode();
+      hash = (37 * hash) + PARAMDATA_FIELD_NUMBER;
+      hash = (53 * hash) + getParamData().hashCode();
+      hash = (37 * hash) + RESULTDATA_FIELD_NUMBER;
+      hash = (53 * hash) + getResultData().hashCode();
+      hash = (37 * hash) + EXCEPTIONDATA_FIELD_NUMBER;
+      hash = (53 * hash) + getExceptionData().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -744,9 +715,11 @@ public final class TestRecord {
 
         endTime_ = 0L;
 
-        resultStr_ = "";
+        paramData_ = com.google.protobuf.ByteString.EMPTY;
 
-        exceptionStr_ = "";
+        resultData_ = com.google.protobuf.ByteString.EMPTY;
+
+        exceptionData_ = com.google.protobuf.ByteString.EMPTY;
 
         return this;
       }
@@ -781,8 +754,9 @@ public final class TestRecord {
         result.isPass_ = isPass_;
         result.startTime_ = startTime_;
         result.endTime_ = endTime_;
-        result.resultStr_ = resultStr_;
-        result.exceptionStr_ = exceptionStr_;
+        result.paramData_ = paramData_;
+        result.resultData_ = resultData_;
+        result.exceptionData_ = exceptionData_;
         onBuilt();
         return result;
       }
@@ -856,13 +830,14 @@ public final class TestRecord {
         if (other.getEndTime() != 0L) {
           setEndTime(other.getEndTime());
         }
-        if (!other.getResultStr().isEmpty()) {
-          resultStr_ = other.resultStr_;
-          onChanged();
+        if (other.getParamData() != com.google.protobuf.ByteString.EMPTY) {
+          setParamData(other.getParamData());
         }
-        if (!other.getExceptionStr().isEmpty()) {
-          exceptionStr_ = other.exceptionStr_;
-          onChanged();
+        if (other.getResultData() != com.google.protobuf.ByteString.EMPTY) {
+          setResultData(other.getResultData());
+        }
+        if (other.getExceptionData() != com.google.protobuf.ByteString.EMPTY) {
+          setExceptionData(other.getExceptionData());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1247,140 +1222,89 @@ public final class TestRecord {
         return this;
       }
 
-      private java.lang.Object resultStr_ = "";
+      private com.google.protobuf.ByteString paramData_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>string resultStr = 8;</code>
+       * <code>bytes paramData = 8;</code>
        */
-      public java.lang.String getResultStr() {
-        java.lang.Object ref = resultStr_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          resultStr_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public com.google.protobuf.ByteString getParamData() {
+        return paramData_;
       }
       /**
-       * <code>string resultStr = 8;</code>
+       * <code>bytes paramData = 8;</code>
        */
-      public com.google.protobuf.ByteString
-          getResultStrBytes() {
-        java.lang.Object ref = resultStr_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          resultStr_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string resultStr = 8;</code>
-       */
-      public Builder setResultStr(
-          java.lang.String value) {
+      public Builder setParamData(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        resultStr_ = value;
+        paramData_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string resultStr = 8;</code>
+       * <code>bytes paramData = 8;</code>
        */
-      public Builder clearResultStr() {
+      public Builder clearParamData() {
         
-        resultStr_ = getDefaultInstance().getResultStr();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string resultStr = 8;</code>
-       */
-      public Builder setResultStrBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        resultStr_ = value;
+        paramData_ = getDefaultInstance().getParamData();
         onChanged();
         return this;
       }
 
-      private java.lang.Object exceptionStr_ = "";
+      private com.google.protobuf.ByteString resultData_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>string exceptionStr = 9;</code>
+       * <code>bytes resultData = 9;</code>
        */
-      public java.lang.String getExceptionStr() {
-        java.lang.Object ref = exceptionStr_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          exceptionStr_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public com.google.protobuf.ByteString getResultData() {
+        return resultData_;
       }
       /**
-       * <code>string exceptionStr = 9;</code>
+       * <code>bytes resultData = 9;</code>
        */
-      public com.google.protobuf.ByteString
-          getExceptionStrBytes() {
-        java.lang.Object ref = exceptionStr_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          exceptionStr_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string exceptionStr = 9;</code>
-       */
-      public Builder setExceptionStr(
-          java.lang.String value) {
+      public Builder setResultData(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        exceptionStr_ = value;
+        resultData_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string exceptionStr = 9;</code>
+       * <code>bytes resultData = 9;</code>
        */
-      public Builder clearExceptionStr() {
+      public Builder clearResultData() {
         
-        exceptionStr_ = getDefaultInstance().getExceptionStr();
+        resultData_ = getDefaultInstance().getResultData();
         onChanged();
         return this;
       }
+
+      private com.google.protobuf.ByteString exceptionData_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>string exceptionStr = 9;</code>
+       * <code>bytes exceptionData = 10;</code>
        */
-      public Builder setExceptionStrBytes(
-          com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString getExceptionData() {
+        return exceptionData_;
+      }
+      /**
+       * <code>bytes exceptionData = 10;</code>
+       */
+      public Builder setExceptionData(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  checkByteStringIsUtf8(value);
+  
+        exceptionData_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bytes exceptionData = 10;</code>
+       */
+      public Builder clearExceptionData() {
         
-        exceptionStr_ = value;
+        exceptionData_ = getDefaultInstance().getExceptionData();
         onChanged();
         return this;
       }
@@ -1437,11 +1361,889 @@ public final class TestRecord {
 
   }
 
+  public interface RunnerExecutionRecordOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:stock_testing.RunnerExecutionRecord)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string jobID = 1;</code>
+     */
+    java.lang.String getJobID();
+    /**
+     * <code>string jobID = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getJobIDBytes();
+
+    /**
+     * <code>string runnerID = 2;</code>
+     */
+    java.lang.String getRunnerID();
+    /**
+     * <code>string runnerID = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getRunnerIDBytes();
+
+    /**
+     * <code>int32 runCount = 3;</code>
+     */
+    int getRunCount();
+
+    /**
+     * <code>int32 failureCount = 4;</code>
+     */
+    int getFailureCount();
+
+    /**
+     * <code>int64 runTime = 5;</code>
+     */
+    long getRunTime();
+  }
+  /**
+   * Protobuf type {@code stock_testing.RunnerExecutionRecord}
+   */
+  public  static final class RunnerExecutionRecord extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:stock_testing.RunnerExecutionRecord)
+      RunnerExecutionRecordOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use RunnerExecutionRecord.newBuilder() to construct.
+    private RunnerExecutionRecord(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private RunnerExecutionRecord() {
+      jobID_ = "";
+      runnerID_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RunnerExecutionRecord(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              jobID_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              runnerID_ = s;
+              break;
+            }
+            case 24: {
+
+              runCount_ = input.readInt32();
+              break;
+            }
+            case 32: {
+
+              failureCount_ = input.readInt32();
+              break;
+            }
+            case 40: {
+
+              runTime_ = input.readInt64();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.chi.ssetest.protos.TestRecord.internal_static_stock_testing_RunnerExecutionRecord_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.chi.ssetest.protos.TestRecord.internal_static_stock_testing_RunnerExecutionRecord_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord.class, com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord.Builder.class);
+    }
+
+    public static final int JOBID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object jobID_;
+    /**
+     * <code>string jobID = 1;</code>
+     */
+    public java.lang.String getJobID() {
+      java.lang.Object ref = jobID_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        jobID_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string jobID = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getJobIDBytes() {
+      java.lang.Object ref = jobID_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        jobID_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int RUNNERID_FIELD_NUMBER = 2;
+    private volatile java.lang.Object runnerID_;
+    /**
+     * <code>string runnerID = 2;</code>
+     */
+    public java.lang.String getRunnerID() {
+      java.lang.Object ref = runnerID_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        runnerID_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string runnerID = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getRunnerIDBytes() {
+      java.lang.Object ref = runnerID_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        runnerID_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int RUNCOUNT_FIELD_NUMBER = 3;
+    private int runCount_;
+    /**
+     * <code>int32 runCount = 3;</code>
+     */
+    public int getRunCount() {
+      return runCount_;
+    }
+
+    public static final int FAILURECOUNT_FIELD_NUMBER = 4;
+    private int failureCount_;
+    /**
+     * <code>int32 failureCount = 4;</code>
+     */
+    public int getFailureCount() {
+      return failureCount_;
+    }
+
+    public static final int RUNTIME_FIELD_NUMBER = 5;
+    private long runTime_;
+    /**
+     * <code>int64 runTime = 5;</code>
+     */
+    public long getRunTime() {
+      return runTime_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getJobIDBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, jobID_);
+      }
+      if (!getRunnerIDBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, runnerID_);
+      }
+      if (runCount_ != 0) {
+        output.writeInt32(3, runCount_);
+      }
+      if (failureCount_ != 0) {
+        output.writeInt32(4, failureCount_);
+      }
+      if (runTime_ != 0L) {
+        output.writeInt64(5, runTime_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getJobIDBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, jobID_);
+      }
+      if (!getRunnerIDBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, runnerID_);
+      }
+      if (runCount_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, runCount_);
+      }
+      if (failureCount_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, failureCount_);
+      }
+      if (runTime_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, runTime_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord)) {
+        return super.equals(obj);
+      }
+      com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord other = (com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord) obj;
+
+      if (!getJobID()
+          .equals(other.getJobID())) return false;
+      if (!getRunnerID()
+          .equals(other.getRunnerID())) return false;
+      if (getRunCount()
+          != other.getRunCount()) return false;
+      if (getFailureCount()
+          != other.getFailureCount()) return false;
+      if (getRunTime()
+          != other.getRunTime()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + JOBID_FIELD_NUMBER;
+      hash = (53 * hash) + getJobID().hashCode();
+      hash = (37 * hash) + RUNNERID_FIELD_NUMBER;
+      hash = (53 * hash) + getRunnerID().hashCode();
+      hash = (37 * hash) + RUNCOUNT_FIELD_NUMBER;
+      hash = (53 * hash) + getRunCount();
+      hash = (37 * hash) + FAILURECOUNT_FIELD_NUMBER;
+      hash = (53 * hash) + getFailureCount();
+      hash = (37 * hash) + RUNTIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getRunTime());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code stock_testing.RunnerExecutionRecord}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:stock_testing.RunnerExecutionRecord)
+        com.chi.ssetest.protos.TestRecord.RunnerExecutionRecordOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.chi.ssetest.protos.TestRecord.internal_static_stock_testing_RunnerExecutionRecord_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.chi.ssetest.protos.TestRecord.internal_static_stock_testing_RunnerExecutionRecord_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord.class, com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord.Builder.class);
+      }
+
+      // Construct using com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        jobID_ = "";
+
+        runnerID_ = "";
+
+        runCount_ = 0;
+
+        failureCount_ = 0;
+
+        runTime_ = 0L;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.chi.ssetest.protos.TestRecord.internal_static_stock_testing_RunnerExecutionRecord_descriptor;
+      }
+
+      @java.lang.Override
+      public com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord getDefaultInstanceForType() {
+        return com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord build() {
+        com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord buildPartial() {
+        com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord result = new com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord(this);
+        result.jobID_ = jobID_;
+        result.runnerID_ = runnerID_;
+        result.runCount_ = runCount_;
+        result.failureCount_ = failureCount_;
+        result.runTime_ = runTime_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord) {
+          return mergeFrom((com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord other) {
+        if (other == com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord.getDefaultInstance()) return this;
+        if (!other.getJobID().isEmpty()) {
+          jobID_ = other.jobID_;
+          onChanged();
+        }
+        if (!other.getRunnerID().isEmpty()) {
+          runnerID_ = other.runnerID_;
+          onChanged();
+        }
+        if (other.getRunCount() != 0) {
+          setRunCount(other.getRunCount());
+        }
+        if (other.getFailureCount() != 0) {
+          setFailureCount(other.getFailureCount());
+        }
+        if (other.getRunTime() != 0L) {
+          setRunTime(other.getRunTime());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object jobID_ = "";
+      /**
+       * <code>string jobID = 1;</code>
+       */
+      public java.lang.String getJobID() {
+        java.lang.Object ref = jobID_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          jobID_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string jobID = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getJobIDBytes() {
+        java.lang.Object ref = jobID_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          jobID_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string jobID = 1;</code>
+       */
+      public Builder setJobID(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        jobID_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string jobID = 1;</code>
+       */
+      public Builder clearJobID() {
+        
+        jobID_ = getDefaultInstance().getJobID();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string jobID = 1;</code>
+       */
+      public Builder setJobIDBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        jobID_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object runnerID_ = "";
+      /**
+       * <code>string runnerID = 2;</code>
+       */
+      public java.lang.String getRunnerID() {
+        java.lang.Object ref = runnerID_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          runnerID_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string runnerID = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getRunnerIDBytes() {
+        java.lang.Object ref = runnerID_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          runnerID_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string runnerID = 2;</code>
+       */
+      public Builder setRunnerID(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        runnerID_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string runnerID = 2;</code>
+       */
+      public Builder clearRunnerID() {
+        
+        runnerID_ = getDefaultInstance().getRunnerID();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string runnerID = 2;</code>
+       */
+      public Builder setRunnerIDBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        runnerID_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int runCount_ ;
+      /**
+       * <code>int32 runCount = 3;</code>
+       */
+      public int getRunCount() {
+        return runCount_;
+      }
+      /**
+       * <code>int32 runCount = 3;</code>
+       */
+      public Builder setRunCount(int value) {
+        
+        runCount_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 runCount = 3;</code>
+       */
+      public Builder clearRunCount() {
+        
+        runCount_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int failureCount_ ;
+      /**
+       * <code>int32 failureCount = 4;</code>
+       */
+      public int getFailureCount() {
+        return failureCount_;
+      }
+      /**
+       * <code>int32 failureCount = 4;</code>
+       */
+      public Builder setFailureCount(int value) {
+        
+        failureCount_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 failureCount = 4;</code>
+       */
+      public Builder clearFailureCount() {
+        
+        failureCount_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private long runTime_ ;
+      /**
+       * <code>int64 runTime = 5;</code>
+       */
+      public long getRunTime() {
+        return runTime_;
+      }
+      /**
+       * <code>int64 runTime = 5;</code>
+       */
+      public Builder setRunTime(long value) {
+        
+        runTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 runTime = 5;</code>
+       */
+      public Builder clearRunTime() {
+        
+        runTime_ = 0L;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:stock_testing.RunnerExecutionRecord)
+    }
+
+    // @@protoc_insertion_point(class_scope:stock_testing.RunnerExecutionRecord)
+    private static final com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord();
+    }
+
+    public static com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<RunnerExecutionRecord>
+        PARSER = new com.google.protobuf.AbstractParser<RunnerExecutionRecord>() {
+      @java.lang.Override
+      public RunnerExecutionRecord parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RunnerExecutionRecord(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<RunnerExecutionRecord> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RunnerExecutionRecord> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.chi.ssetest.protos.TestRecord.RunnerExecutionRecord getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_stock_testing_TestExecutionRecord_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_stock_testing_TestExecutionRecord_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_stock_testing_RunnerExecutionRecord_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_stock_testing_RunnerExecutionRecord_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1451,13 +2253,16 @@ public final class TestRecord {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014record.proto\022\rstock_testing\"\271\001\n\023TestEx" +
+      "\n\014record.proto\022\rstock_testing\"\316\001\n\023TestEx" +
       "ecutionRecord\022\r\n\005jobID\030\001 \001(\t\022\020\n\010runnerID" +
       "\030\002 \001(\t\022\022\n\ntestcaseID\030\003 \001(\t\022\020\n\010recordID\030\004" +
       " \001(\t\022\016\n\006isPass\030\005 \001(\010\022\021\n\tstartTime\030\006 \001(\003\022" +
-      "\017\n\007endTime\030\007 \001(\003\022\021\n\tresultStr\030\010 \001(\t\022\024\n\014e" +
-      "xceptionStr\030\t \001(\tB$\n\026com.chi.ssetest.pro" +
-      "tosB\nTestRecordb\006proto3"
+      "\017\n\007endTime\030\007 \001(\003\022\021\n\tparamData\030\010 \001(\014\022\022\n\nr" +
+      "esultData\030\t \001(\014\022\025\n\rexceptionData\030\n \001(\014\"q" +
+      "\n\025RunnerExecutionRecord\022\r\n\005jobID\030\001 \001(\t\022\020" +
+      "\n\010runnerID\030\002 \001(\t\022\020\n\010runCount\030\003 \001(\005\022\024\n\014fa" +
+      "ilureCount\030\004 \001(\005\022\017\n\007runTime\030\005 \001(\003B$\n\026com" +
+      ".chi.ssetest.protosB\nTestRecordb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1476,7 +2281,13 @@ public final class TestRecord {
     internal_static_stock_testing_TestExecutionRecord_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_stock_testing_TestExecutionRecord_descriptor,
-        new java.lang.String[] { "JobID", "RunnerID", "TestcaseID", "RecordID", "IsPass", "StartTime", "EndTime", "ResultStr", "ExceptionStr", });
+        new java.lang.String[] { "JobID", "RunnerID", "TestcaseID", "RecordID", "IsPass", "StartTime", "EndTime", "ParamData", "ResultData", "ExceptionData", });
+    internal_static_stock_testing_RunnerExecutionRecord_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_stock_testing_RunnerExecutionRecord_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_stock_testing_RunnerExecutionRecord_descriptor,
+        new java.lang.String[] { "JobID", "RunnerID", "RunCount", "FailureCount", "RunTime", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

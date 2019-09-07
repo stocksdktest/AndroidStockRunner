@@ -1,17 +1,21 @@
 package com.chi.ssetest.setup;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Base64;
 
 import com.chi.ssetest.StockTestcase;
 import com.chi.ssetest.StockTestcaseName;
 import com.chi.ssetest.protos.SetupConfig;
+import com.google.protobuf.ByteString;
 import com.mitake.core.util.MarketSiteType;
 import com.mitake.core.util.Permissions;
 
+import org.json.JSONObject;
 import org.junit.runner.Description;
 
 import java.lang.reflect.Field;
+import java.nio.charset.Charset;
 
 public class Utils {
     public static boolean verifyPermStr(@Nullable String permStr) {
@@ -44,11 +48,15 @@ public class Utils {
     }
 
     public static byte[] base64Decode(String serialStr) {
-        return Base64.decode(serialStr, Base64.NO_WRAP | Base64.URL_SAFE);
+        return Base64.decode(serialStr, Base64.NO_WRAP);
     }
 
     public static String base64Encode(byte []data) {
-        return Base64.encodeToString(data, Base64.NO_WRAP | Base64.URL_SAFE);
+        return Base64.encodeToString(data, Base64.NO_WRAP);
+    }
+
+    public static ByteString jsonToBytes(@NonNull JSONObject obj) {
+        return ByteString.copyFrom(obj.toString(), Charset.forName("utf8"));
     }
 
     public static @Nullable StockTestcaseName getTestcaseNameFromDesc(Description description) {
