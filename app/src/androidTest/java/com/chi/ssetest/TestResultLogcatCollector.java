@@ -8,7 +8,9 @@ import android.util.Log;
 import com.chi.ssetest.protos.SetupConfig;
 import com.chi.ssetest.protos.TestRecord;
 import com.chi.ssetest.setup.Utils;
+import com.google.protobuf.ByteString;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.runner.Description;
 import org.junit.runner.Result;
@@ -18,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -28,6 +31,8 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 public class TestResultLogcatCollector implements TestResultCollector {
+    // logcat line limit is 4096
+    public static final int LOGCAT_LINE_LIMIT = 3900;
     private String jobID;
     private String runnerID;
     private Map<StockTestcaseName, Long> testStartTimeMap;
@@ -38,8 +43,23 @@ public class TestResultLogcatCollector implements TestResultCollector {
         testStartTimeMap = new HashMap<>();
     }
 
-    private void logger(String tag, byte[] data) {
-        Log.w("TestResult." + tag, Utils.base64Encode(data));
+    private void logger(String tag, String recordID, byte[] data) {
+        String dataStr = Utils.base64Encode(data);
+        String logTag = "TestResult." + tag;
+        Log.d("TestResult.", "sum len: " + dataStr.length());
+        if (dataStr.length() <= LOGCAT_LINE_LIMIT) {
+            Log.w(logTag, dataStr);
+            return;
+        }
+        int dataLen = dataStr.length(), chunkOffset = 0, logChunkIdx = dataLen / LOGCAT_LINE_LIMIT;
+        do {
+            int endIndex = chunkOffset + LOGCAT_LINE_LIMIT > dataLen ? dataLen : chunkOffset + LOGCAT_LINE_LIMIT;
+            String chunkTag = String.format("Chunk.%s.%s:", recordID, logChunkIdx);
+            Log.w(logTag, chunkTag + dataStr.substring(chunkOffset, endIndex));
+            Log.d("TestResult.", "len: " + dataStr.substring(chunkOffset, endIndex).length());
+            chunkOffset += LOGCAT_LINE_LIMIT;
+            logChunkIdx -= 1;
+        } while (chunkOffset < dataLen);
     }
 
     private StockTestcaseName getClassAnnotationValue(@NonNull Description description) {
@@ -73,29 +93,32 @@ public class TestResultLogcatCollector implements TestResultCollector {
         if (testcaseName == null) {
             return;
         }
+        String recordID = UUID.randomUUID().toString();
         TestRecord.TestExecutionRecord.Builder builder = TestRecord.TestExecutionRecord.newBuilder()
                 .setJobID(jobID)
                 .setRunnerID(runnerID)
                 .setTestcaseID(testcaseName.val())
-                .setRecordID(UUID.randomUUID().toString())
+                .setRecordID(recordID)
                 .setIsPass(true)
                 .setStartTime(testStartTimeMap.get(testcaseName))
                 .setEndTime(System.currentTimeMillis());
-        logger(TestRecord.TestExecutionRecord.class.getSimpleName(), builder.build().toByteArray());
+        logger("TestExecutionRecord", recordID, builder.build().toByteArray());
     }
 
     @Override
     public void onTestResult(@NonNull StockTestcaseName testcaseName, JSONObject param, JSONObject result) {
+        String recordID = UUID.randomUUID().toString();
         TestRecord.TestExecutionRecord.Builder builder = TestRecord.TestExecutionRecord.newBuilder()
                 .setJobID(jobID)
                 .setRunnerID(runnerID)
                 .setTestcaseID(testcaseName.val())
-                .setRecordID(UUID.randomUUID().toString())
+                .setRecordID(recordID)
                 .setIsPass(true)
                 .setStartTime(testStartTimeMap.get(testcaseName))
                 .setEndTime(System.currentTimeMillis())
-                .setResultStr(result.toString());
-        logger(TestRecord.TestExecutionRecord.class.getSimpleName(), builder.build().toByteArray());
+                .setParamData(Utils.jsonToBytes(param))
+                .setResultData(Utils.jsonToBytes(result));
+        logger("TestExecutionRecord", recordID, builder.build().toByteArray());
     }
 
     @Override
@@ -104,20 +127,24 @@ public class TestResultLogcatCollector implements TestResultCollector {
         if (testcaseName == null) {
             return;
         }
+        String recordID = UUID.randomUUID().toString();
         TestRecord.TestExecutionRecord.Builder builder = TestRecord.TestExecutionRecord.newBuilder()
                 .setJobID(jobID)
                 .setRunnerID(runnerID)
                 .setTestcaseID(testcaseName.val())
-                .setRecordID(UUID.randomUUID().toString())
+                .setRecordID(recordID)
                 .setIsPass(false)
                 .setStartTime(testStartTimeMap.get(testcaseName))
                 .setEndTime(System.currentTimeMillis());
-        if (failure.getException() != null) {
-            StringWriter errors = new StringWriter();
-            failure.getException().printStackTrace(new PrintWriter(errors));
-            builder.setExceptionStr(errors.toString());
+        try {
+            JSONObject obj = new JSONObject();
+            obj.put("trace", failure.getTrace());
+            obj.put("message", failure.getMessage());
+            builder.setExceptionData(Utils.jsonToBytes(obj));
+        } catch (JSONException e) {
+            // pass
         }
-        logger(TestRecord.TestExecutionRecord.class.getSimpleName(), builder.build().toByteArray());
+        logger("TestExecutionRecord", recordID, builder.build().toByteArray());
     }
 
     @Override

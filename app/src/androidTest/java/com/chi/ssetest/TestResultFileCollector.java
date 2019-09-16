@@ -110,8 +110,7 @@ public class TestResultFileCollector implements TestResultCollector {
                 .setRecordID(UUID.randomUUID().toString())
                 .setIsPass(true)
                 .setStartTime(testStartTimeMap.get(testcaseName))
-                .setEndTime(System.currentTimeMillis())
-                .setResultStr(result.toString());
+                .setEndTime(System.currentTimeMillis());
         fileLogger.log(Level.ALL, Utils.base64Encode(builder.build().toByteArray()));
     }
 
@@ -132,7 +131,6 @@ public class TestResultFileCollector implements TestResultCollector {
         if (failure.getException() != null) {
             StringWriter errors = new StringWriter();
             failure.getException().printStackTrace(new PrintWriter(errors));
-            builder.setExceptionStr(errors.toString());
         }
         fileLogger.log(Level.ALL, Utils.base64Encode(builder.build().toByteArray()));
     }

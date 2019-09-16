@@ -17,7 +17,6 @@ import com.mitake.core.response.Response;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -63,7 +62,11 @@ public class ExampleInstrumentedTest {
             @Override
             public void callback(Response response) {
                 QuoteResponse quoteResponse = (QuoteResponse) response;
-                assertNotNull(quoteResponse.quoteItems);
+                try {
+                    assertNotNull(quoteResponse.quoteItems);
+                } catch (AssertionError e) {
+                    result.completeExceptionally(e);
+                }
                 JSONObject uploadObj = new JSONObject();
                 // TODO fill uploadObj with QuoteResponse value
                 try {
