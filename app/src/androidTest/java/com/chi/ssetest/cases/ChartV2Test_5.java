@@ -18,6 +18,7 @@ import com.mitake.core.response.IResponseInfoCallback;
 import com.mitake.core.response.QuoteResponse;
 import com.mitake.core.response.Response;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.BeforeClass;
@@ -25,7 +26,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertNotNull;
@@ -58,40 +62,67 @@ public class ChartV2Test_5 {
     public void requestWork() throws Exception {
         Log.d("ChartV2Test_5", "requestWork");
         // TODO get custom args from param
-        final String []quoteNumbers = rule.getParam().getString("CODES").split(",");
-        final String []Types = rule.getParam().getString("Chart_Types").split(",");
-        final String []PointAddTypes = rule.getParam().getString("PointAddTypes").split(",");
+        final String quoteNumbers = rule.getParam().getString("CODES");
+        final String Types = rule.getParam().getString("Chart_Types");
+        final String PointAddTypes = rule.getParam().getString("PointAddTypes");
 
 //        ChartType
         final CompletableFuture result = new CompletableFuture<JSONObject>();
-
-        for (int i=0;i<quoteNumbers.length;i++){
-            final int a=i;
+//        for (int i=0;i<quoteNumbers.length;i++){
+//            final int a=i;
             QuoteDetailRequest quoteDetailRequest=new QuoteDetailRequest();
-
-            quoteDetailRequest.send(quoteNumbers[i], new IResponseInfoCallback() {
+            quoteDetailRequest.send(quoteNumbers, new IResponseInfoCallback() {
                 @Override
                 public void callback(Response response) {
-                    int b=a;
                     QuoteResponse quoteResponse=(QuoteResponse) response;
                     QuoteItem quoteItem=quoteResponse.quoteItems.get(0);
                     ChartRequestV2 request = new ChartRequestV2();
-                    request.send(quoteItem,Types[b], Integer.parseInt(PointAddTypes[b]), new IResponseInfoCallback() {
+                    request.send(quoteItem,Types, Integer.parseInt(PointAddTypes), new IResponseInfoCallback() {
                         @Override
                         public void callback(Response response) {
                             ChartResponse chartResponse = (ChartResponse) response;
                             assertNotNull(chartResponse.historyItems);
+                            CopyOnWriteArrayList<OHLCItem> list=chartResponse.historyItems;
                             JSONObject uploadObj = new JSONObject();
+                            List<JSONObject> items = new ArrayList<>();
                             // TODO fill uploadObj with QuoteResponse value
+                            for (int k=0;k<list.size();k++) {
+                                try {
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    //存储到JSON
+                                    uploadObj_1.put("code", quoteNumbers);
+                                    uploadObj_1.put("datetime",list.get(k).datetime);
+                                    uploadObj_1.put("closePrice",list.get(k).closePrice);
+                                    uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
+                                    uploadObj_1.put("averagePrice",list.get(k).averagePrice);
+                                    uploadObj_1.put("md",list.get(k).getMd());
+                                    uploadObj_1.put("openInterest",list.get(k).openInterest);
+                                    uploadObj_1.put("iopv",list.get(k).iopv);
+                                    uploadObj_1.put("iopvPre",list.get(k).iopvPre);
+                                    items.add(uploadObj_1);//添加到数组
+                                } catch (JSONException e) {
+                                    result.completeExceptionally(e);
+                                }
+//                        Log.d("StockUnittest", quoteNumbers[a]+list.get(k).datetime);
+                            }
                             try {
-                                uploadObj.put("fake_result", quoteNumbers);
-//                    uploadObj.put
+                                //把数组存储到JSON
+                                uploadObj.put("items", new JSONArray(items));
                             } catch (JSONException e) {
-                                result.completeExceptionally(e);
+                                e.printStackTrace();
                             }
-                            for (OHLCItem item : chartResponse.historyItems) {
-                                Log.d("StockUnittest", quoteNumbers[a]+item.datetime);
+                            //解析输出JSON
+                            try {
+                                JSONArray jsonArray = uploadObj.getJSONArray("items");
+                                for (int i=0;i<jsonArray.length();i++){
+                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                    Log.d("data", String.valueOf(jsonObject));
+//                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
+                            //返回JSON结果
                             result.complete(uploadObj);
                         }
                         @Override
@@ -108,10 +139,10 @@ public class ChartV2Test_5 {
             });
             try {
                 JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
-                RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, resultObj);
+                RunnerSetup.getInstance().getCollector().onTestResult(testcaseName,rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);
             }
-        }
+//        }
     }
 }

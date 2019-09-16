@@ -15,6 +15,7 @@ import com.mitake.core.response.AHQuoteListResponse;
 import com.mitake.core.response.IResponseInfoCallback;
 import com.mitake.core.response.Response;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.BeforeClass;
@@ -22,6 +23,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -55,26 +58,56 @@ public class AHListTest_2 {
     public void requestWork() throws Exception {
         Log.d("AHListTest_2", "requestWork");
         // TODO get custom args from param
-        final String []Params = rule.getParam().optString("param", "").split(";");
+        final String Params = rule.getParam().optString("param", "");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 
-        for (int i=0;i<Params.length;i++){
+//        for (int i=0;i<Params.length;i++){
             AHQuoteListRequest request = new AHQuoteListRequest();
-            request.sendV2(Params[i], new IResponseInfoCallback() {
+            request.sendV2(Params, new IResponseInfoCallback() {
                 @Override
                 public void callback(Response response) {
                     AHQuoteListResponse ahQuoteListResponse = (AHQuoteListResponse) response;
                     assertNotNull(ahQuoteListResponse.mAHQuoteItems);
+                    List<AHQuoteItem> list=ahQuoteListResponse.mAHQuoteItems;
                     JSONObject uploadObj = new JSONObject();
+                    List<JSONObject> items =new ArrayList<>();
                     // TODO fill uploadObj with QuoteResponse value
-                    try {
-                        uploadObj.put("fake_result", Params);
-//                    uploadObj.put
-                    } catch (JSONException e) {
-                        result.completeExceptionally(e);
+                    for (int k=0;k<list.size();k++){
+                        try {
+                            JSONObject uploadObj_1 = new JSONObject();
+                            uploadObj_1.put("params", Params);
+                            uploadObj_1.put("name", list.get(k).name);
+                            uploadObj_1.put("codeA", list.get(k).codeA);
+                            uploadObj_1.put("lastPriceA", list.get(k).lastPriceA);
+                            uploadObj_1.put("preClosePriceA", list.get(k).preClosePriceA);
+                            uploadObj_1.put("datetimeA", list.get(k).datetimeA);
+                            uploadObj_1.put("codeH", list.get(k).codeH);
+                            uploadObj_1.put("lastPriceH", list.get(k).lastPriceH);
+                            uploadObj_1.put("preClosePriceH", list.get(k).preClosePriceH);
+                            uploadObj_1.put("datetimeH", list.get(k).datetimeH);
+                            uploadObj_1.put("premiumAH", list.get(k).premiumAH);
+                            uploadObj_1.put("changeRateA", list.get(k).changeRateA);
+                            uploadObj_1.put("changeRateH", list.get(k).changeRateH);
+                            items.add(uploadObj_1);
+                        } catch (JSONException e) {
+                            result.completeExceptionally(e);
+                        }
+                        try {
+                            uploadObj.put("items",new JSONArray(items));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-                    for (AHQuoteItem item : ahQuoteListResponse.mAHQuoteItems) {
-                        Log.d("StockUnittest", item.toString());
+                    //解析输出JSON
+                    try {
+                        JSONArray jsonArray = uploadObj.getJSONArray("items");
+                        for (int i=0;i<jsonArray.length();i++){
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            Log.d("data", String.valueOf(jsonObject));
+//                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                     result.complete(uploadObj);
                 }
@@ -85,10 +118,10 @@ public class AHListTest_2 {
             });
             try {
                 JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
-                RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, resultObj);
+                RunnerSetup.getInstance().getCollector().onTestResult(testcaseName,rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);
             }
-        }
+//        }
     }
 }

@@ -15,6 +15,7 @@ import com.mitake.core.response.IResponseInfoCallback;
 import com.mitake.core.response.L2TickDetailResponseV2;
 import com.mitake.core.response.Response;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.BeforeClass;
@@ -22,6 +23,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -39,6 +42,8 @@ public class L2TickDetailV2Test_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.L2TICKDETAILV2TEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
     final CompletableFuture result = new CompletableFuture<JSONObject>();
+    private static JSONObject uploadObj = new JSONObject();
+    private static List<JSONObject> items=new ArrayList<>();
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("L2TickDetailV2Test_1", "Setup");
@@ -62,7 +67,7 @@ public class L2TickDetailV2Test_1 {
             L2TickDEtailjk(quoteNumbers[i],Pages[i],SubTypes[i]);
             try {
                 JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
-                RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, resultObj);
+                RunnerSetup.getInstance().getCollector().onTestResult(testcaseName,rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);
             }
@@ -70,24 +75,30 @@ public class L2TickDetailV2Test_1 {
     }
     private void L2TickDEtailjk(final String id, String page, final String subtype) {
         L2TickDetailRequestV2 request = new L2TickDetailRequestV2();
-
         request.send(id,page,subtype, new IResponseInfoCallback() {
             @Override
             public void callback(Response response) {
                 L2TickDetailResponseV2 l2TickDetailResponseV2 = (L2TickDetailResponseV2) response;
-                assertNotNull(l2TickDetailResponseV2.tickDetailItems);
+                List<TickDetailItem> list =l2TickDetailResponseV2.tickDetailItems;
                 if (l2TickDetailResponseV2.tickDetailItems!=null){
-                    JSONObject uploadObj = new JSONObject();
-                    // TODO fill uploadObj with QuoteResponse value
-                    try {
-                        uploadObj.put("fake_result", id);
-                    } catch (JSONException e) {
-                        result.completeExceptionally(e);
+                    assertNotNull(l2TickDetailResponseV2.tickDetailItems);
+                    for (int k=0;k<list.size();k++){
+                        try {
+                            JSONObject uploadObj_1 = new JSONObject();
+                            uploadObj.put("code", id);
+                            uploadObj_1.put("type", list.get(k).getTransactionStatus());
+                            uploadObj_1.put("time", list.get(k).getTransactionTime());
+                            uploadObj_1.put("tradeVolume", list.get(k).getSingleVolume());
+                            uploadObj_1.put("tradePrice", list.get(k).getTransactionPrice());
+                            items.add(uploadObj_1);
+                            System.out.println(uploadObj_1.toString());
+                        } catch (JSONException e) {
+                            result.completeExceptionally(e);
+                        }
                     }
-
-                    for (TickDetailItem item : l2TickDetailResponseV2.tickDetailItems) {
-                        Log.d("StockUnittest", item.getTransactionTime()+"++++"+l2TickDetailResponseV2.tickDetailItems.size());
-                    }
+//                    for (TickDetailItem item : l2TickDetailResponseV2.tickDetailItems) {
+//                        Log.d("StockUnittest", item.getTransactionTime()+"++++"+l2TickDetailResponseV2.tickDetailItems.size());
+//                    }
 
                     if (l2TickDetailResponseV2.tickDetailItems.size()==100){
                         String[] st=l2TickDetailResponseV2.headerParams.split(",");
@@ -97,9 +108,24 @@ public class L2TickDetailV2Test_1 {
                         }else {
                             String page2=st[0]+",100,1";
                             L2TickDEtailjk(id,page2,subtype);
-
                         }
                     }else {
+                        try {
+                            uploadObj.put("items",new JSONArray(items));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        //解析输出JSON
+                        try {
+                            JSONArray jsonArray = uploadObj.getJSONArray("items");
+                            for (int i=0;i<jsonArray.length();i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                Log.d("data", String.valueOf(jsonObject));
+//                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         result.complete(uploadObj);
                     }
                 }
