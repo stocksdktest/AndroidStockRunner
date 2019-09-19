@@ -81,7 +81,11 @@ public class CateSortingTest_1 {
             request.send(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<CateSortingResponse>() {
                 @Override
                 public void callback(CateSortingResponse cateSortingResponse) {
-                    assertNotNull(cateSortingResponse.list);
+                    try {
+                        assertNotNull(cateSortingResponse.list);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     ArrayList<QuoteItem> list=cateSortingResponse.list;
                     List<JSONObject> items=new ArrayList<>();
                     JSONObject uploadObj = new JSONObject();

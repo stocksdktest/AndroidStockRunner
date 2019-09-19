@@ -78,7 +78,11 @@ public class HolidayTest_1 {
             request.send(new IResponseInfoCallback<HolidayResponse>() {
                 @Override
                 public void callback(HolidayResponse holidayResponse) {
-                    assertNotNull(holidayResponse.info);
+                    try {
+                        assertNotNull(holidayResponse.info);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value
                     try {

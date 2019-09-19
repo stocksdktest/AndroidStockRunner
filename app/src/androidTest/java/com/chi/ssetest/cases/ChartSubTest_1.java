@@ -71,45 +71,53 @@ public class ChartSubTest_1 {
                     final ChartSubRequest request = new ChartSubRequest();
                     request.send(quoteItem,quoteNumbers1,Integer.parseInt(quoteNumbers2),new IResponseInfoCallback<ChartSubResponse>() {
                         public void callback(ChartSubResponse chartSubResponse) {
-                            assertNotNull(chartSubResponse.line);
+                            try {
+                                assertNotNull(chartSubResponse.line);
+                            } catch (AssertionError e) {
+                                result.completeExceptionally(e);
+                            }
                             String[][] list=chartSubResponse.line;
                             JSONObject uploadObj = new JSONObject();
                             try {
                                 uploadObj.put("code",chartSubResponse.code);
                                 uploadObj.put("data",chartSubResponse.date);
                                 List<JSONObject> line=new ArrayList<>();
-                                for (int i=0;i<list.length;i++){
-                                    for (int k=0;k<list[i].length;k++){
-                                        JSONObject uploadObj_1 = new JSONObject();
-                                        if (quoteNumbers2.equals("1")){
-                                            uploadObj_1.put("time",list[i][0]);
-                                            uploadObj_1.put("ddx",list[i][1]);
-                                        }else if (quoteNumbers2.equals("2")){
-                                            uploadObj_1.put("time",list[i][0]);
-                                            uploadObj_1.put("ddy",list[i][1]);
-                                        }else if (quoteNumbers2.equals("3")){
-                                            uploadObj_1.put("time",list[i][0]);
-                                            uploadObj_1.put("ddz",list[i][1]);
-                                        }else if (quoteNumbers2.equals("4")){
-                                            uploadObj_1.put("time",list[i][0]);
-                                            uploadObj_1.put("bbd",list[i][1]);
-                                        }else if (quoteNumbers2.equals("5")){
-                                            uploadObj_1.put("time",list[i][0]);
-                                            uploadObj_1.put("ratioBS",list[i][1]);
-                                        }else if (quoteNumbers2.equals("6")){
-                                            uploadObj_1.put("time",list[i][0]);
-                                            uploadObj_1.put("largeMoneyInflow",list[i][1]);
-                                            uploadObj_1.put("bigMoneyInflow",list[i][2]);
-                                            uploadObj_1.put("midMoneyInflow",list[i][3]);
-                                            uploadObj_1.put("smallMoneyInflow",list[i][4]);
-                                        }else if (quoteNumbers2.equals("7")){
-                                            uploadObj_1.put("time",list[i][0]);
-                                            uploadObj_1.put("bigNetVolume",list[i][1]);
+                                if (list!=null){
+                                    for (int i=0;i<list.length;i++){
+                                        for (int k=0;k<list[i].length;k++){
+                                            JSONObject uploadObj_1 = new JSONObject();
+                                            if (quoteNumbers2.equals("1")){
+                                                uploadObj_1.put("time",list[i][0]);
+                                                uploadObj_1.put("ddx",list[i][1]);
+                                            }else if (quoteNumbers2.equals("2")){
+                                                uploadObj_1.put("time",list[i][0]);
+                                                uploadObj_1.put("ddy",list[i][1]);
+                                            }else if (quoteNumbers2.equals("3")){
+                                                uploadObj_1.put("time",list[i][0]);
+                                                uploadObj_1.put("ddz",list[i][1]);
+                                            }else if (quoteNumbers2.equals("4")){
+                                                uploadObj_1.put("time",list[i][0]);
+                                                uploadObj_1.put("bbd",list[i][1]);
+                                            }else if (quoteNumbers2.equals("5")){
+                                                uploadObj_1.put("time",list[i][0]);
+                                                uploadObj_1.put("ratioBS",list[i][1]);
+                                            }else if (quoteNumbers2.equals("6")){
+                                                uploadObj_1.put("time",list[i][0]);
+                                                uploadObj_1.put("largeMoneyInflow",list[i][1]);
+                                                uploadObj_1.put("bigMoneyInflow",list[i][2]);
+                                                uploadObj_1.put("midMoneyInflow",list[i][3]);
+                                                uploadObj_1.put("smallMoneyInflow",list[i][4]);
+                                            }else if (quoteNumbers2.equals("7")){
+                                                uploadObj_1.put("time",list[i][0]);
+                                                uploadObj_1.put("bigNetVolume",list[i][1]);
+                                            }
+                                            line.add(uploadObj_1);
                                         }
-                                        line.add(uploadObj_1);
                                     }
+                                    uploadObj.put("line",new JSONArray(line));
+                                }else {
+                                    uploadObj.put("line",list);
                                 }
-                                uploadObj.put("line",new JSONArray(line));
                             } catch (JSONException e) {
                                 result.completeExceptionally(e);
                             }

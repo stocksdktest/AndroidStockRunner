@@ -75,7 +75,11 @@ public class BankuaisortingTest_2 {
             request.sendV2(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<BankuaisortingResponse>() {
                 @Override
                 public void callback(BankuaisortingResponse bankuaisortingResponse) {
-                    assertNotNull(bankuaisortingResponse.list);
+                    try {
+                        assertNotNull(bankuaisortingResponse.list);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     List<Bankuaisorting> list=bankuaisortingResponse.list;
                     JSONObject uploadObj = new JSONObject();
                     List<JSONObject> items=new ArrayList<>();

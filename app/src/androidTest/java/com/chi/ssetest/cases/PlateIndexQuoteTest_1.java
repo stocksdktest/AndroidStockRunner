@@ -70,8 +70,12 @@ public class PlateIndexQuoteTest_1 {
             request.send(quoteNumbers, new IResponseInfoCallback<PlateIndexResponse>() {
                 @Override
                 public void callback(PlateIndexResponse plateIndexResponse) {
+                    try {
+                        assertNotNull(plateIndexResponse.indexItems);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     List<PlateIndexItem> list=plateIndexResponse.indexItems;
-                    assertNotNull(plateIndexResponse.indexItems);
                     if (list!=null){
                         for (int k=0;k<list.size();k++){
                             JSONObject uploadObj_1 = new JSONObject();
@@ -83,7 +87,7 @@ public class PlateIndexQuoteTest_1 {
                                 uploadObj_1.put("averageChg", list.get(k).averageChg);
                                 uploadObj_1.put("turnoverRate", list.get(k).turnoverRate);
                                 List<JSONObject> ratioUpDown=new ArrayList<>();
-                                if (ratioUpDown!=null&&ratioUpDown.size()>0){
+                                if (list.get(k).ratioUpDown!=null&&list.get(k).ratioUpDown.length>0){
                                     JSONObject uploadObj_2 = new JSONObject();
                                     uploadObj_2.put("up",list.get(k).ratioUpDown[0]);
                                     uploadObj_2.put("down",list.get(k).ratioUpDown[1]);

@@ -35,7 +35,7 @@ import static org.junit.Assert.assertNotNull;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-//AH股联动
+//AH股联动 方法一
 @RunWith(AndroidJUnit4.class)
 @StockTestcase(StockTestcaseName.AHQUOTETEST_1)
 public class AHQuoteTest_1 {
@@ -67,7 +67,11 @@ public class AHQuoteTest_1 {
                 @Override
                 public void callback(Response response) {
                     AHQuoteResponse ahQuoteResponse = (AHQuoteResponse) response;
-                    assertNotNull(ahQuoteResponse);
+                    try {
+                        assertNotNull(ahQuoteResponse);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value
                     try {
@@ -80,9 +84,6 @@ public class AHQuoteTest_1 {
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-//                for (QuoteItem item : quoteResponse.quoteItems) {
-//                    Log.d("StockUnittest", ahQuoteResponse.code);
-//                }
                     Log.d("data",uploadObj.toString());
                     result.complete(uploadObj);
                 }

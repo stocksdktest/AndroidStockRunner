@@ -39,7 +39,7 @@ import static org.junit.Assert.assertNotNull;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-//证券行情列表 方法二
+//AH股列表 方法一
 @RunWith(AndroidJUnit4.class)
 @StockTestcase(StockTestcaseName.AHLISTTEST_1)
 public class AHListTest_1 {
@@ -71,7 +71,11 @@ public class AHListTest_1 {
                 @Override
                 public void callback(Response response) {
                     AHQuoteListResponse ahQuoteListResponse = (AHQuoteListResponse) response;
-                    assertNotNull(ahQuoteListResponse.mAHQuoteItems);
+                    try {
+                        assertNotNull(ahQuoteListResponse.mAHQuoteItems);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     List<AHQuoteItem> list=ahQuoteListResponse.mAHQuoteItems;
                     JSONObject uploadObj = new JSONObject();
                     List<JSONObject> items =new ArrayList<>();
@@ -79,7 +83,6 @@ public class AHListTest_1 {
                     for (int k=0;k<list.size();k++){
                         try {
                             JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("params", Params);
                             uploadObj_1.put("name", list.get(k).name);
                             uploadObj_1.put("codeA", list.get(k).codeA);
                             uploadObj_1.put("lastPriceA", list.get(k).lastPriceA);
@@ -102,20 +105,7 @@ public class AHListTest_1 {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    //解析输出JSON
-                    try {
-                        JSONArray jsonArray = uploadObj.getJSONArray("items");
-                        for (int i=0;i<jsonArray.length();i++){
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            Log.d("data", String.valueOf(jsonObject));
-//                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-//                    for (AHQuoteItem item : ahQuoteListResponse.mAHQuoteItems) {
-//                        Log.d("StockUnittest", item.toString());
-//                    }
+                    Log.d("data", String.valueOf(uploadObj));
                     result.complete(uploadObj);
                 }
                 @Override

@@ -81,7 +81,11 @@ public class HKMarInfoTest_1 {
             request.send(new IResponseInfoCallback<HKMarInfoResponse>() {
                 @Override
                 public void callback(HKMarInfoResponse hkMarInfoResponse) {
-                    assertNotNull(hkMarInfoResponse);
+                    try {
+                        assertNotNull(hkMarInfoResponse);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value
                     try {

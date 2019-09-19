@@ -78,7 +78,11 @@ public class MorePriceTest_2 {
             request.send(quoteNumbers,new IResponseInfoCallback<MorePriceResponse>() {
                 @Override
                 public void callback(MorePriceResponse morePriceResponse) {
-                    assertNotNull(morePriceResponse.strs);
+                    try {
+                        assertNotNull(morePriceResponse.strs);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     List<JSONObject> items=new ArrayList<>();
                     JSONObject uploadObj = new JSONObject();
                     if (morePriceResponse.strs!=null&&morePriceResponse.strs.length>0){

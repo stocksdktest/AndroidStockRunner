@@ -70,7 +70,11 @@ public class HistoryChartTest_1 {
             request.send(quoteNumbers,quoteNumbers1, new IResponseInfoCallback<OHLCResponse>() {
                 @Override
                 public void callback(OHLCResponse ohlcResponse) {
-                    assertNotNull(ohlcResponse.historyItems);
+                    try {
+                        assertNotNull(ohlcResponse.historyItems);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     CopyOnWriteArrayList<OHLCItem> list=ohlcResponse.historyItems;
                     JSONObject uploadObj = new JSONObject();
                     List<JSONObject> items = new ArrayList<>();

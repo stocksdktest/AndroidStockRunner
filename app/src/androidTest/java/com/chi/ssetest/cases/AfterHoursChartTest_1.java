@@ -72,7 +72,11 @@ public class AfterHoursChartTest_1 {
             request.send(quoteNumbers,new IResponseInfoCallback<AfterHoursChartResponse>() {
                 @Override
                 public void callback(AfterHoursChartResponse afterHoursChartResponse) {
-                    assertNotNull(afterHoursChartResponse.historyItems);
+                    try {
+                        assertNotNull(afterHoursChartResponse.historyItems);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     List<JSONObject> items=new ArrayList<>();
                     JSONObject uploadObj = new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value

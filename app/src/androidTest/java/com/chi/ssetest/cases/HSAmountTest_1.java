@@ -78,7 +78,11 @@ public class HSAmountTest_1 {
             request.send(new IResponseInfoCallback<HSAmountResponse>() {
                 @Override
                 public void callback(HSAmountResponse hsAmountResponse) {
-                    assertNotNull(hsAmountResponse.mHSAmountItem);
+                    try {
+                        assertNotNull(hsAmountResponse.mHSAmountItem);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     HSAmountItem list = hsAmountResponse.mHSAmountItem;
                     // TODO fill uploadObj with QuoteResponse value

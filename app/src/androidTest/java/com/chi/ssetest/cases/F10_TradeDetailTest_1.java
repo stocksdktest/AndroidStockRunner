@@ -82,20 +82,24 @@ public class F10_TradeDetailTest_1 {
             request.sendV2(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<TradeDetailResponse>() {
                 @Override
                 public void callback(TradeDetailResponse tradeDetailResponse) {
-                    assertNotNull(tradeDetailResponse.info);
+                    try {
+                        assertNotNull(tradeDetailResponse.info);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     TradeDetail list =  tradeDetailResponse.info;
-                        try {
-                            uploadObj.put("payVolumeStock",list.payVolumeStock);
-                            uploadObj.put("amountFinance",list.amountFinance);
-                            uploadObj.put("payAmountFinance",list.payAmountFinance);
-                            uploadObj.put("buyAmountFinance",list.buyAmountFinance);
-                            uploadObj.put("sellVolumeStock",list.sellVolumeStock);
-                            uploadObj.put("amountStock",list.amountStock);
-                            uploadObj.put("tradingDay",list.tradingDay);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
-                        }
+                    try {
+                        uploadObj.put("payVolumeStock",list.payVolumeStock);
+                        uploadObj.put("amountFinance",list.amountFinance);
+                        uploadObj.put("payAmountFinance",list.payAmountFinance);
+                        uploadObj.put("buyAmountFinance",list.buyAmountFinance);
+                        uploadObj.put("sellVolumeStock",list.sellVolumeStock);
+                        uploadObj.put("amountStock",list.amountStock);
+                        uploadObj.put("tradingDay",list.tradingDay);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
+                    }
                     Log.d("data", String.valueOf(uploadObj));
                     result.complete(uploadObj);
                 }

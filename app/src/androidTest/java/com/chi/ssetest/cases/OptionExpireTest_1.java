@@ -67,7 +67,11 @@ public class OptionExpireTest_1 {
             request.send(quoteNumbers,new IResponseInfoCallback<OptionExpireResponse>() {
                 @Override
                 public void callback(OptionExpireResponse optionExpireResponse) {
-                    assertNotNull(optionExpireResponse.list);
+                    try {
+                        assertNotNull(optionExpireResponse.list);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     try {
                         uploadObj.put("stockID", quoteNumbers);

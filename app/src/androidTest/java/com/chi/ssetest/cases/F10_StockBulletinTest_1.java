@@ -92,7 +92,11 @@ public class F10_StockBulletinTest_1 {
             request.sendV2(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<StockBulletinResponse>() {
                 @Override
                 public void callback(StockBulletinResponse stockBulletinResponse) {
-                    assertNotNull(stockBulletinResponse.info);
+                    try {
+                        assertNotNull(stockBulletinResponse.info);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     StockBulletinDetailItem list = stockBulletinResponse.info;
                     try {

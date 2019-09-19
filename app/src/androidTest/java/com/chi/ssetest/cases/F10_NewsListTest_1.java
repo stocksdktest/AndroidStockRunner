@@ -108,7 +108,11 @@ public class F10_NewsListTest_1 {
             request.send(quoteNumbers,Integer.parseInt(quoteNumbers1),newsID,quoteNumbers3,new IResponseInfoCallback<NewsListResponse>() {
                 @Override
                 public void callback(NewsListResponse newsListResponse) {
-                    assertNotNull(newsListResponse.list);
+                    try {
+                        assertNotNull(newsListResponse.list);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     List<JSONObject> items=new ArrayList<>();
                     if (newsListResponse.list!=null){

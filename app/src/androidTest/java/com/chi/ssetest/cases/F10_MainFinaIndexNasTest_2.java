@@ -98,7 +98,11 @@ public class F10_MainFinaIndexNasTest_2 {
             request.sendV2(quoteNumbers,dataSourceType,cueryContent,new IResponseInfoCallback<MainFinaIndexNasResponse>() {
                 @Override
                 public void callback(MainFinaIndexNasResponse mainFinaIndexNasResponse) {
-//                    assertNotNull(mainFinaIndexNasResponse.mMainFinaIndexHasList);
+                    try {
+                        assertNotNull(mainFinaIndexNasResponse.mMainFinaIndexHasList);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     List<JSONObject> items=new ArrayList<>();
                     if (mainFinaIndexNasResponse.mMainFinaIndexHasList!=null){

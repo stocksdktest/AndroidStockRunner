@@ -80,7 +80,11 @@ public class DRLinkQuoteTest_1 {
             request.send(quoteNumbers,new IResponseInfoCallback<DRLinkQuoteResponse>() {
                 @Override
                 public void callback(DRLinkQuoteResponse drLinkQuoteResponse) {
-                    assertNotNull(drLinkQuoteResponse.drLinkQuoteitem);
+                    try {
+                        assertNotNull(drLinkQuoteResponse.drLinkQuoteitem);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     DRLinkQuoteitem list =  drLinkQuoteResponse.drLinkQuoteitem;
                     // TODO fill uploadObj with QuoteResponse value
@@ -90,7 +94,7 @@ public class DRLinkQuoteTest_1 {
                         uploadObj.put("lastPrice", list.lastPrice);
                         uploadObj.put("preClosePrice", list.preClosePrice);
                         uploadObj.put("change",list.change);
-                        uploadObj.put("changeRate", list.upDownFlag+list.changeRate);
+                        uploadObj.put("changeRate", list.changeRate);
                         uploadObj.put("subType", list.subType);
                         uploadObj.put("dateTime", list.dateTime);
                         uploadObj.put("premium", list.premium);

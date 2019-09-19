@@ -83,7 +83,11 @@ public class F10_CompanyInfoTest_1 {
             request.sendV2(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<F10V2Response>() {
                 @Override
                 public void callback(F10V2Response f10V2Response) {
-                    assertNotNull(f10V2Response.info);
+                    try {
+                        assertNotNull(f10V2Response.info);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value
                     F10V2Response mCompanyInfoResponse = (F10V2Response) f10V2Response;

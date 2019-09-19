@@ -94,7 +94,11 @@ public class F10_StockReportTest_1 {
             request.sendV2(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<StockReportResponse>() {
                 @Override
                 public void callback(StockReportResponse stockReportResponse) {
-//                    assertNotNull(stockReportResponse.info);
+                    try {
+                        assertNotNull(stockReportResponse.info);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     StockReportDetailItem list = stockReportResponse.info;
                     if (list!=null){

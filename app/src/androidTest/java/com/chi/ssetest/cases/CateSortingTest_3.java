@@ -99,7 +99,11 @@ public class CateSortingTest_3 {
             request.sendV4(quoteNumbers,quoteNumbers1,quoteCustom,addvalueCustom,new IResponseInfoCallback<CateSortingResponse>() {
                 @Override
                 public void callback(CateSortingResponse cateSortingResponse) {
-                    assertNotNull(cateSortingResponse.list);
+                    try {
+                        assertNotNull(cateSortingResponse.list);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     ArrayList<QuoteItem> list=cateSortingResponse.list;
                     List<JSONObject> items=new ArrayList<>();
                     JSONObject uploadObj = new JSONObject();

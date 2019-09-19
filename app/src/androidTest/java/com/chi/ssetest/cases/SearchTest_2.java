@@ -87,7 +87,11 @@ public class SearchTest_2 {
             request.send(quoteNumbers, Integer.parseInt(quoteNumbers1),new IResponseInfoCallback<SearchResponse>() {
                 @Override
                 public void callback(SearchResponse searchResponse) {
-                    assertNotNull(searchResponse.results);
+                    try {
+                        assertNotNull(searchResponse.results);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     ArrayList<SearchResultItem> list=searchResponse.results;
                     List<JSONObject> items=new ArrayList<>();
                     JSONObject uploadObj = new JSONObject();

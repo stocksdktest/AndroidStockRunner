@@ -73,7 +73,11 @@ public class QuoteDetailTest_3 {
         request.sendFutures(quoteNumbers,field, new IResponseInfoCallback<QuoteResponse>() {
             @Override
             public void callback(QuoteResponse quoteResponse) {
-                assertNotNull(quoteResponse.quoteItems);
+                try {
+                    assertNotNull(quoteResponse.quoteItems);
+                } catch (AssertionError e) {
+                    result.completeExceptionally(e);
+                }
                 QuoteItem list=quoteResponse.quoteItems.get(0);
                 JSONObject uploadObj = new JSONObject();
                 // TODO fill uploadObj with QuoteResponse value

@@ -89,7 +89,11 @@ public class ChartSubTest_2 {
                     final ChartSubRequest request = new ChartSubRequest();
                     request.send(quoteItem,quoteNumbers1,Integer.parseInt(quoteNumbers2),Integer.parseInt(quoteNumbers3),quoteNumbers4,new IResponseInfoCallback<ChartSubResponse>() {
                         public void callback(ChartSubResponse chartSubResponse) {
-                            assertNotNull(chartSubResponse.line);
+                            try {
+                                assertNotNull(chartSubResponse.line);
+                            } catch (AssertionError e) {
+                                result.completeExceptionally(e);
+                            }
                             String[][] list=chartSubResponse.line;
                             JSONObject uploadObj = new JSONObject();
                             try {

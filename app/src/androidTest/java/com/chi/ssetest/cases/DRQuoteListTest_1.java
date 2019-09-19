@@ -34,6 +34,7 @@ import com.mitake.core.response.MorePriceResponse;
 import com.mitake.core.response.QuoteResponse;
 import com.mitake.core.response.Response;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -42,6 +43,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -80,31 +83,38 @@ public class DRQuoteListTest_1 {
             request.send(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<DRQuoteListResponse>() {
                 @Override
                 public void callback(DRQuoteListResponse drQuoteListResponse) {
-                    assertNotNull(drQuoteListResponse.mDRQuoteItems);
+                    try {
+                        assertNotNull(drQuoteListResponse.mDRQuoteItems);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
-                    // TODO fill uploadObj with QuoteResponse value
-                    for (DRQuoteItem item : drQuoteListResponse.mDRQuoteItems) {
-                        try {
-                            uploadObj.put("code", item.code);
-                            uploadObj.put("code", item.name);
-                            uploadObj.put("lastPrice", item.lastPrice);
-                            uploadObj.put("preClosePrice", item.preClosePrice);
-                            uploadObj.put("change",item.change);
-                            uploadObj.put("changeRate", item.upDownFlag+item.changeRate);
-                            uploadObj.put("subType", item.subType);
-                            uploadObj.put("dateTime", item.dateTime);
-                            uploadObj.put("premium", item.premium);
-                            uploadObj.put("baseCode",item.baseCode);
-                            uploadObj.put("baseName",item.baseName);
-                            uploadObj.put("baseLastPrice",item.baseLastPrice);
-                            uploadObj.put("basePreClosePrice",item.basePreClosePrice);
-                            uploadObj.put("baseChange",item.baseChange);
-                            uploadObj.put("baseChangeRate",item.baseUpDownFlag+item.baseChangeRate);
-                            uploadObj.put("baseSubtype",item.baseSubtype);
-                            uploadObj.put("baseDateTime",item.baseDateTime);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
+                    List<JSONObject> items =new ArrayList<>();
+                    try {
+                        for (DRQuoteItem item : drQuoteListResponse.mDRQuoteItems) {
+                            JSONObject uploadObj_1 = new JSONObject();
+                            uploadObj_1.put("code", item.code);
+                            uploadObj_1.put("code", item.name);
+                            uploadObj_1.put("lastPrice", item.lastPrice);
+                            uploadObj_1.put("preClosePrice", item.preClosePrice);
+                            uploadObj_1.put("change",item.change);
+                            uploadObj_1.put("changeRate", item.changeRate);
+                            uploadObj_1.put("subType", item.subType);
+                            uploadObj_1.put("dateTime", item.dateTime);
+                            uploadObj_1.put("premium", item.premium);
+                            uploadObj_1.put("baseCode",item.baseCode);
+                            uploadObj_1.put("baseName",item.baseName);
+                            uploadObj_1.put("baseLastPrice",item.baseLastPrice);
+                            uploadObj_1.put("basePreClosePrice",item.basePreClosePrice);
+                            uploadObj_1.put("baseChange",item.baseChange);
+                            uploadObj_1.put("baseChangeRate",item.baseChangeRate);
+                            uploadObj_1.put("baseSubtype",item.baseSubtype);
+                            uploadObj_1.put("baseDateTime",item.baseDateTime);
+                            items.add(uploadObj_1);
                         }
+                        uploadObj.put("items",new JSONArray(items));
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
                     Log.d("data", String.valueOf(uploadObj));
                     result.complete(uploadObj);

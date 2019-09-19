@@ -91,15 +91,19 @@ public class F10_FininfoimageTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_FininfoimageTest_1", "requestWork");
         // TODO get custom args from param
-        final String []quoteNumbers = rule.getParam().optString("FininfoimageID").split(",");
-        final String []quoteNumbers1 = rule.getParam().optString("src").split(",");
+        final String quoteNumbers = rule.getParam().optString("FininfoimageID");
+        final String quoteNumbers1 = rule.getParam().optString("src");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
-        for (int i=0;i<quoteNumbers.length;i++){
+//        for (int i=0;i<quoteNumbers.length;i++){
             FinInfoImageRequest request = new FinInfoImageRequest();
-            request.sendV2(quoteNumbers[i],quoteNumbers1[i],new IResponseInfoCallback<FinInfoImageResponse>() {
+            request.sendV2(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<FinInfoImageResponse>() {
                 @Override
                 public void callback(FinInfoImageResponse finInfoImageResponse) {
-                    assertNotNull(finInfoImageResponse.imageData);
+                    try {
+                        assertNotNull(finInfoImageResponse.imageData);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     List<JSONObject> items=new ArrayList<>();
                     if (finInfoImageResponse.imageData!=null){
@@ -138,6 +142,6 @@ public class F10_FininfoimageTest_1 {
             } catch (Exception e) {
                 throw new Exception(e);
             }
-        }
+//        }
     }
 }

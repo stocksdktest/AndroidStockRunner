@@ -75,7 +75,11 @@ public class BidChartTest_2 {
                     request.send(quoteItem,new IResponseInfoCallback<BidChartResponse>() {
                         @Override
                         public void callback(BidChartResponse bidChartResponse) {
-                            assertNotNull(bidChartResponse.bidItems);
+                            try {
+                                assertNotNull(bidChartResponse.bidItems);
+                            } catch (AssertionError e) {
+                                result.completeExceptionally(e);
+                            }
                             List<JSONObject> items=new ArrayList<>();
                             JSONObject uploadObj = new JSONObject();
                             try {

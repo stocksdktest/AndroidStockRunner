@@ -70,7 +70,11 @@ public class SubNewBondStockRankingTest_1 {
             request.send(quoteNumbers, new IResponseInfoCallback<SubNewStockRankingResponse>() {
                 @Override
                 public void callback(SubNewStockRankingResponse subNewStockRankingResponse) {
-                    assertNotNull(subNewStockRankingResponse.list);
+                    try {
+                        assertNotNull(subNewStockRankingResponse.list);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     ArrayList<SubNewStockRankingModel> list=subNewStockRankingResponse.list;
                     List<JSONObject> items=new ArrayList<>();
                     JSONObject uploadObj = new JSONObject();

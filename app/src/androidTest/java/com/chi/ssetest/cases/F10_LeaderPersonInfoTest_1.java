@@ -36,6 +36,7 @@ import com.mitake.core.response.MorePriceResponse;
 import com.mitake.core.response.QuoteResponse;
 import com.mitake.core.response.Response;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -44,6 +45,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -84,23 +86,37 @@ public class F10_LeaderPersonInfoTest_1 {
             request.sendV2(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<F10V2Response>() {
                 @Override
                 public void callback(F10V2Response f10V2Response) {
-                    assertNotNull(f10V2Response.info);
-                    JSONObject uploadObj = new JSONObject();
-                     HashMap<String, Object>  list = f10V2Response.info;
                     try {
-                         if (quoteNumbers1.equals("g")){
-                             uploadObj.put("POSITIONNAME",list.get("POSITIONNAME"));
-                             uploadObj.put("LEADERNAME",list.get("LEADERNAME"));
-                             uploadObj.put("AGE",list.get("AGE"));
-                             uploadObj.put("GENDER",list.get("GENDER"));
-                             uploadObj.put("EDUCATION",list.get("EDUCATION"));
-                         }
-                         if (quoteNumbers1.equals("d")){
-                             uploadObj.put("DUTY",list.get("DUTY"));
-                             uploadObj.put("LEADERNAME",list.get("LEADERNAME"));
-                             uploadObj.put("DUTYTYPE",list.get("DUTYTYPE"));
-                             uploadObj.put("BEGINDATE",list.get("BEGINDATE"));
-                         }
+                        assertNotNull(f10V2Response.infos);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
+                    JSONObject uploadObj = new JSONObject();
+                    List<HashMap<String, Object>>  infos = (List<HashMap<String, Object>>) f10V2Response.infos;
+                    List<JSONObject> list =new ArrayList<>();
+                    try {
+                        if (infos!=null){
+                            for (int i=0;i<infos.size();i++){
+                                JSONObject uploadObj_1 = new JSONObject();
+                                if (quoteNumbers1.equals("g")){
+                                    uploadObj_1.put("POSITIONNAME",infos.get(i).get("POSITIONNAME"));
+                                    uploadObj_1.put("LEADERNAME",infos.get(i).get("LEADERNAME"));
+                                    uploadObj_1.put("AGE",infos.get(i).get("AGE"));
+                                    uploadObj_1.put("GENDER",infos.get(i).get("GENDER"));
+                                    uploadObj_1.put("EDUCATION",infos.get(i).get("EDUCATION"));
+                                }
+                                if (quoteNumbers1.equals("d")){
+                                    uploadObj_1.put("DUTY",infos.get(i).get("DUTY"));
+                                    uploadObj_1.put("LEADERNAME",infos.get(i).get("LEADERNAME"));
+                                    uploadObj_1.put("DUTYTYPE",infos.get(i).get("DUTYTYPE"));
+                                    uploadObj_1.put("BEGINDATE",infos.get(i).get("BEGINDATE"));
+                                }
+                                list.add(uploadObj_1);
+                            }
+                            uploadObj.put("list",new JSONArray(list));
+                        }else {
+                            uploadObj.put("list",infos);
+                        }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

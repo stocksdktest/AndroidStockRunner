@@ -81,7 +81,11 @@ public class MarketUpDownTest_1 {
             request.send(new IResponseInfoCallback<MarketUpDownResponse>() {
                 @Override
                 public void callback(MarketUpDownResponse marketUpDownResponse) {
-                    assertNotNull(marketUpDownResponse.upDownItem);
+                    try {
+                        assertNotNull(marketUpDownResponse.upDownItem);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     MarketUpDownItem upDownItem = marketUpDownResponse.upDownItem;
                     try {

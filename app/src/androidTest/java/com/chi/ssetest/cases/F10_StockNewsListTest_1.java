@@ -105,7 +105,11 @@ public class F10_StockNewsListTest_1 {
             request.sendV2(quoteNumbers,Integer.parseInt(quoteNumbers1),newsID,quoteNumbers3,new IResponseInfoCallback<StockNewsListResponse>() {
                 @Override
                 public void callback(StockNewsListResponse stockNewsListResponse) {
-                    assertNotNull(stockNewsListResponse.list);
+                    try {
+                        assertNotNull(stockNewsListResponse.list);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     List<JSONObject> items=new ArrayList<>();
                     if (stockNewsListResponse.list!=null){

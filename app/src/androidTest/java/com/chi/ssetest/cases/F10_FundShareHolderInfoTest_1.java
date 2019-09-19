@@ -94,7 +94,11 @@ public class F10_FundShareHolderInfoTest_1 {
             request.sendV2(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<FundShareHolderInfoResponse>() {
                 @Override
                 public void callback(FundShareHolderInfoResponse fundShareHolderInfoResponse) {
-//                    assertNotNull(fundShareHolderInfoResponse.info);
+                    try {
+                        assertNotNull(fundShareHolderInfoResponse.info);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     FundShareHolderInfo list = fundShareHolderInfoResponse.info;
                     if (list!=null){

@@ -82,7 +82,11 @@ public class F10_ImportantnoticeTest_1 {
             request.sendV2(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<ImportantnoticeResponse>() {
                 @Override
                 public void callback(ImportantnoticeResponse importantnoticeResponse) {
-                    assertNotNull(importantnoticeResponse.list);
+                    try {
+                        assertNotNull(importantnoticeResponse.list);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     List<JSONObject> items=new ArrayList<>();
                     for (Importantnotice item : importantnoticeResponse.list) {

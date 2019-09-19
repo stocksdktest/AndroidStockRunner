@@ -68,7 +68,11 @@ public class BrokerInfoTest_1 {
             request.send(quoteNumbers,new IResponseInfoCallback<BrokerInfoResponse>() {
                 @Override
                 public void callback(BrokerInfoResponse brokerInfoResponse) {
-                    assertNotNull(brokerInfoResponse.list);
+                    try {
+                        assertNotNull(brokerInfoResponse.list);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     ArrayList<BrokerInfoItem> list=brokerInfoResponse.list;
                     List<JSONObject> items=new ArrayList<>();
                     JSONObject uploadObj = new JSONObject();

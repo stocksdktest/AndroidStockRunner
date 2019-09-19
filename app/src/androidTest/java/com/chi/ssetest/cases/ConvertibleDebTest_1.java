@@ -69,7 +69,11 @@ public class ConvertibleDebTest_1 {
             request.send(quoteNumbers,new IResponseInfoCallback<ConvertibleBoundResponse>() {
                 @Override
                 public void callback(ConvertibleBoundResponse convertibleBoundResponse) {
-                    assertNotNull(convertibleBoundResponse.items);
+                    try {
+                        assertNotNull(convertibleBoundResponse.items);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value
                     for (ConvertibleBoundItem item :convertibleBoundResponse.items) {

@@ -101,7 +101,11 @@ public class F10_MainFinaDataNassTest_2 {
             request.sendV2(quoteNumbers,dataSourceType,cueryContent,new IResponseInfoCallback<MainFinaDataNasResponse>() {
                 @Override
                 public void callback(MainFinaDataNasResponse mainFinaDataNasResponse) {
-//                    assertNotNull(mainFinaDataNasResponse.mMainFinaDataNasList);
+                    try {
+                        assertNotNull(mainFinaDataNasResponse.mMainFinaDataNasList);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     List<JSONObject> items=new ArrayList<>();
                     if (mainFinaDataNasResponse.mMainFinaDataNasList!=null){

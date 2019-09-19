@@ -86,7 +86,11 @@ public class SearchTest_1 {
             request.dowmLoadCodes(quoteNumbers,new IResponseInfoCallback<SearchResponse>() {
                 @Override
                 public void callback(SearchResponse searchResponse) {
-                    assertNotNull(searchResponse.results);
+                    try {
+                        assertNotNull(searchResponse.results);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     ArrayList<SearchResultItem> list=searchResponse.results;
                     List<JSONObject> items=new ArrayList<>();
                     JSONObject uploadObj = new JSONObject();

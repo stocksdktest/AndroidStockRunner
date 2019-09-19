@@ -81,7 +81,11 @@ public class ChartV2Test_4 {
                         @Override
                         public void callback(Response response) {
                             ChartResponse chartResponse = (ChartResponse) response;
-                            assertNotNull(chartResponse.historyItems);
+                            try {
+                                assertNotNull(chartResponse.historyItems);
+                            } catch (AssertionError e) {
+                                result.completeExceptionally(e);
+                            }
                             CopyOnWriteArrayList<OHLCItem> list=chartResponse.historyItems;
                             JSONObject uploadObj = new JSONObject();
                             List<JSONObject> items = new ArrayList<>();

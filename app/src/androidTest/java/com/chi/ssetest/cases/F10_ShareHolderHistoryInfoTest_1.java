@@ -94,7 +94,11 @@ public class F10_ShareHolderHistoryInfoTest_1 {
             request.sendV2(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<ShareHolderHistoryInfoResponse>() {
                 @Override
                 public void callback(ShareHolderHistoryInfoResponse shareHolderHistoryInfoResponse) {
-                    assertNotNull(shareHolderHistoryInfoResponse.list);
+                    try {
+                        assertNotNull(shareHolderHistoryInfoResponse.list);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     List<JSONObject> items=new ArrayList<>();
                     if (shareHolderHistoryInfoResponse.list!=null){

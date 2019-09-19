@@ -91,7 +91,11 @@ public class QuoteDetailTest_2 {
         request.send(quoteNumbers,count,ints1,ints2, new IResponseInfoCallback<QuoteResponse>() {
             @Override
             public void callback(QuoteResponse quoteResponse) {
-                assertNotNull(quoteResponse.quoteItems);
+                try {
+                    assertNotNull(quoteResponse.quoteItems);
+                } catch (AssertionError e) {
+                    result.completeExceptionally(e);
+                }
                 QuoteItem list=quoteResponse.quoteItems.get(0);
                 JSONObject uploadObj = new JSONObject();
                 // TODO fill uploadObj with QuoteResponse value

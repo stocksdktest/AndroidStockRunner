@@ -81,7 +81,11 @@ public class TradeQuoteTest_1 {
             request.send(quoteNumbers,new IResponseInfoCallback<TradeQuoteResponse>() {
                 @Override
                 public void callback(TradeQuoteResponse tradeQuoteResponse) {
-                    assertNotNull(tradeQuoteResponse.tradeQuoteItems);
+                    try {
+                        assertNotNull(tradeQuoteResponse.tradeQuoteItems);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     for (TradeQuoteItem item :tradeQuoteResponse.tradeQuoteItems) {
                         try {

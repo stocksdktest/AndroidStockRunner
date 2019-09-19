@@ -41,6 +41,7 @@ import com.mitake.core.response.Bankuaisorting;
 import com.mitake.core.response.BankuaisortingResponse;
 import com.mitake.core.response.CatequoteResponse;
 import com.mitake.core.response.DataResponse;
+import com.mitake.core.response.DatesResponse;
 import com.mitake.core.response.IResponseInfoCallback;
 import com.mitake.core.response.ImportantnoticeResponse;
 import com.mitake.core.response.MainFinaIndexNasResponse;
@@ -52,6 +53,7 @@ import com.mitake.core.response.StockNewsResponse;
 import com.mitake.core.response.StockShareInfoResponse;
 import com.mitake.core.response.TopLiquidShareHolderResponse;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -60,6 +62,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -75,9 +79,7 @@ import static org.junit.Assert.*;
 public class F10_CalendarTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.F10_CALENDARTEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
-
     @BeforeClass
-
     public static void setup() throws Exception {
         Log.d("F10_CalendarTest_1", "Setup");
         testcaseConfig = RunnerSetup.getInstance().getTestcaseConfig(testcaseName);
@@ -85,37 +87,45 @@ public class F10_CalendarTest_1 {
             throw new Exception(String.format("Testcase(%s) setup failed, config is empty", testcaseName));
         }
     }
-
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
-
     @Test(timeout = 5000)
     public void requestWork() throws Exception {
         Log.d("F10_CalendarTest_1", "requestWork");
         // TODO get custom args from param
-        final String []quoteNumbers = rule.getParam().optString("src").split(",");
+        final String quoteNumbers = rule.getParam().optString("src");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
-        for (int i=0;i<quoteNumbers.length;i++){
+//        for (int i=0;i<quoteNumbers.length;i++){
             CalendarRequest request = new CalendarRequest();
-            request.sendV2(quoteNumbers[i],new IResponseInfoCallback<DataResponse>() {
+            request.sendV2(quoteNumbers,new IResponseInfoCallback() {
                 @Override
-                public void callback(DataResponse dataResponse) {
-                    assertNotNull(dataResponse.data);
-                    JSONObject uploadObj = new JSONObject();
-                    // TODO fill uploadObj with QuoteResponse value
-                    NewShareDates list = (NewShareDates) dataResponse.data;
+                public void callback(Response response) {
+                    DatesResponse dataResponse = (DatesResponse) response;
                     try {
-                        uploadObj.put("ABSTRACT_",list.getSg());
-//                        uploadObj.put("INIPUBDATE_",list.INIPUBDATE_);
-//                        uploadObj.put("MEDIANAME_",list.MEDIANAME_);
-//                        uploadObj.put("ABSTRACTFORMAT_",list.ABSTRACTFORMAT_);
+                        assertNotNull(dataResponse.infos);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
+                    JSONObject uploadObj = new JSONObject();
+                    List<JSONObject> newShareDates=new ArrayList<>();
+                    ArrayList<NewShareDates> list = dataResponse.infos;
+                    try {
+                        for (int i=0;i<list.size();i++){
+                            JSONObject uploadObj_1 = new JSONObject();
+                            uploadObj_1.put("sg",list.get(i).getSg());
+                            uploadObj_1.put("zq",list.get(i).getZq());
+                            uploadObj_1.put("ss",list.get(i).getSs());
+                            uploadObj_1.put("jjfx",list.get(i).getJjfx());
+                            uploadObj_1.put("wss",list.get(i).getWss());
+                            uploadObj_1.put("normalDay",list.get(i).getNormalDay());
+                            uploadObj_1.put("isHoliday",list.get(i).isHoliday());
+                            newShareDates.add(uploadObj_1);
+                        }
+                        uploadObj.put("newShareDates",new JSONArray(newShareDates));
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    // for (TopLiquidShareHolder item : topLiquidShareHolderResponse.list) {
-                    Log.d("tag", list.getSg() + ", " + list.getZq());
-                    // }
-
+                    Log.d("data", String.valueOf(uploadObj));
                     result.complete(uploadObj);
                 }
                 @Override
@@ -129,6 +139,6 @@ public class F10_CalendarTest_1 {
             } catch (Exception e) {
                 throw new Exception(e);
             }
-        }
+//        }
     }
 }

@@ -70,7 +70,11 @@ public class OptionTQuoteTest_1 {
             request.send(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<OptionTQuoteResponse>() {
                 @Override
                 public void callback(OptionTQuoteResponse optionTQuoteResponse) {
-                    assertNotNull(optionTQuoteResponse.list);
+                    try {
+                        assertNotNull(optionTQuoteResponse.list);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     ArrayList<QuoteItem> list=optionTQuoteResponse.list;
                     List<JSONObject> items=new ArrayList<>();
                     JSONObject uploadObj = new JSONObject();

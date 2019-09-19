@@ -91,7 +91,11 @@ public class F10_StockShareChangeInfoTest_1 {
             request.sendV2(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<StockShareChangeInfoResponse>() {
                 @Override
                 public void callback(StockShareChangeInfoResponse stockShareChangeInfoResponse) {
-                    assertNotNull(stockShareChangeInfoResponse.list);
+                    try {
+                        assertNotNull(stockShareChangeInfoResponse.list);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     List<JSONObject> items=new ArrayList<>();
                     if (stockShareChangeInfoResponse.list!=null){

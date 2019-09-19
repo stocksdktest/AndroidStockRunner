@@ -86,7 +86,7 @@ public class SearchTest_3 {
 //        CateType
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
-        String[] searchCode;
+        final String[] searchCode;
         if (quoteNumbers1.equals("null")){
             searchCode=null;
         }else {
@@ -96,7 +96,11 @@ public class SearchTest_3 {
             request.send(quoteNumbers,searchCode,Integer.parseInt(quoteNumbers2),new IResponseInfoCallback<SearchResponse>() {
                 @Override
                 public void callback(SearchResponse searchResponse) {
-                    assertNotNull(searchResponse.results);
+                    try {
+                        assertNotNull(searchResponse.results);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     ArrayList<SearchResultItem> list=searchResponse.results;
                     List<JSONObject> items=new ArrayList<>();
                     JSONObject uploadObj = new JSONObject();

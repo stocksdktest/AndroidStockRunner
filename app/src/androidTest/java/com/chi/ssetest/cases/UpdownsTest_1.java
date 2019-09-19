@@ -66,7 +66,11 @@ public class UpdownsTest_1 {
             request.send(quoteNumbers,new IResponseInfoCallback<UpdownsResponse>() {
                 @Override
                 public void callback(UpdownsResponse updownsResponse) {
-                    assertNotNull(updownsResponse.mUpdownsItem);
+                    try {
+                        assertNotNull(updownsResponse.mUpdownsItem);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     UpdownsItem list = updownsResponse.mUpdownsItem;
                     // TODO fill uploadObj with QuoteResponse value

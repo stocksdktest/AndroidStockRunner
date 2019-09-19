@@ -79,7 +79,11 @@ public class F10_NewIndexTest_1 {
             request.sendV2(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<NewIndexResponse>() {
                 @Override
                 public void callback(NewIndexResponse newIndexResponse) {
-                    assertNotNull(newIndexResponse.info);
+                    try {
+                        assertNotNull(newIndexResponse.info);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value
                     NewIndex list = newIndexResponse.info;

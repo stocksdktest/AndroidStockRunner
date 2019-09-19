@@ -84,7 +84,11 @@ public class OfferQuoteTest_1 {
             request.send(quoteNumbers,new IResponseInfoCallback<OfferQuoteResponse>() {
                 @Override
                 public void callback(OfferQuoteResponse offerQuoteResponse) {
-                    assertNotNull(offerQuoteResponse.offerQuoteList);
+                    try {
+                        assertNotNull(offerQuoteResponse.offerQuoteList);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     List<OfferQuoteBean> list=offerQuoteResponse.offerQuoteList;
                     List<JSONObject> items=new ArrayList<>();
                     JSONObject uploadObj = new JSONObject();

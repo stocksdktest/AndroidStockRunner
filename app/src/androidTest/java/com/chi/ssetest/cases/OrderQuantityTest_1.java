@@ -72,7 +72,11 @@ public class OrderQuantityTest_1 {
             request.send(quoteNumbers,new IResponseInfoCallback<OrderQuantityResponse>() {
                 @Override
                 public void callback(OrderQuantityResponse orderQuantityResponse) {
-                    assertNotNull(orderQuantityResponse.list);
+                    try {
+                        assertNotNull(orderQuantityResponse.list);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     try {
                        List<JSONObject> buylist=new ArrayList<>();

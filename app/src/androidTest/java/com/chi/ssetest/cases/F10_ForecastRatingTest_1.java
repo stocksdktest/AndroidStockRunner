@@ -85,7 +85,11 @@ public class F10_ForecastRatingTest_1 {
             request.sendV2(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<ForecastRatingResponse>() {
                 @Override
                 public void callback(ForecastRatingResponse forecastRatingResponse) {
-                    assertNotNull(forecastRatingResponse.info);
+                    try {
+                        assertNotNull(forecastRatingResponse.info);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     ForecastRating list = forecastRatingResponse.info;
                     try {

@@ -96,88 +96,90 @@ public class OHLCV3Test_4 {
                         @Override
                         public void callback(Response response) {
                             OHLCResponse ohlcResponse = (OHLCResponse) response;
+                            try {
+                                assertNotNull(ohlcResponse.historyItems);
+                            } catch (AssertionError e) {
+                                result.completeExceptionally(e);
+                            }
                             CopyOnWriteArrayList<OHLCItem> list =ohlcResponse.historyItems;
                             CopyOnWriteArrayList<FQItem> list2=ohlcResponse.fq;
                             List<JSONObject> items=new ArrayList<>();
                             List<JSONObject> items_1=new ArrayList<>();
                             JSONObject uploadObj = new JSONObject();
-                            if(list!=null){
-                                assertNotNull(ohlcResponse.historyItems);
-                                for (int k=0;k<list.size();k++){
-                                    try {
-                                        JSONObject uploadObj_1 = new JSONObject();
-                                        uploadObj_1.put("code",CODES);
-                                        uploadObj_1.put("datetime",list.get(k).datetime);
-                                        uploadObj_1.put("openPrice",list.get(k).openPrice);
-                                        uploadObj_1.put("highPrice",list.get(k).highPrice);
-                                        uploadObj_1.put("lowPrice",list.get(k).lowPrice);
-                                        uploadObj_1.put("closePrice",list.get(k).closePrice);
-                                        uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
-                                        uploadObj_1.put("averagePrice",list.get(k).averagePrice);//ios需要判断是否存在字段
-                                        uploadObj_1.put("reference_price",list.get(k).reference_price);
-                                        uploadObj_1.put("transaction_price",list.get(k).transaction_price);
-                                        uploadObj_1.put("openInterest",list.get(k).openInterest);//ios需要判断是否存在字段
-                                        uploadObj_1.put("fp_volume",list.get(k).fp_volume);
-                                        uploadObj_1.put("fp_amount",list.get(k).fp_amount);
-                                        items.add(uploadObj_1);
-                                    } catch (JSONException e) {
-                                        result.completeExceptionally(e);
-                                    }
+                            for (int k=0;k<list.size();k++){
+                                try {
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("code",CODES);
+                                    uploadObj_1.put("datetime",list.get(k).datetime);
+                                    uploadObj_1.put("openPrice",list.get(k).openPrice);
+                                    uploadObj_1.put("highPrice",list.get(k).highPrice);
+                                    uploadObj_1.put("lowPrice",list.get(k).lowPrice);
+                                    uploadObj_1.put("closePrice",list.get(k).closePrice);
+                                    uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
+                                    uploadObj_1.put("averagePrice",list.get(k).averagePrice);//ios需要判断是否存在字段
+                                    uploadObj_1.put("reference_price",list.get(k).reference_price);
+                                    uploadObj_1.put("transaction_price",list.get(k).transaction_price);
+                                    uploadObj_1.put("openInterest",list.get(k).openInterest);//ios需要判断是否存在字段
+                                    uploadObj_1.put("fp_volume",list.get(k).fp_volume);
+                                    uploadObj_1.put("fp_amount",list.get(k).fp_amount);
+                                    items.add(uploadObj_1);
+                                } catch (JSONException e) {
+                                    result.completeExceptionally(e);
                                 }
-                                if (list2!=null){
-                                    for (int j=0;j<list2.size();j++){
-                                        try {
-                                            JSONObject uploadObj_2 = new JSONObject();
-                                            uploadObj_2.put("code",CODES);
-                                            uploadObj_2.put("dateTime",list2.get(j).dateTime);
-                                            uploadObj_2.put("increasePrice",list2.get(j).increasePrice);
-                                            uploadObj_2.put("allotmentPrice",list2.get(j).allotmentPrice);
-                                            uploadObj_2.put("bonusAmount",list2.get(j).bonusAmount);
-                                            uploadObj_2.put("bonusProportion",list2.get(j).bonusProportion);
-                                            uploadObj_2.put("increaseProportion",list2.get(j).increaseProportion);
-                                            uploadObj_2.put("increaseVolume",list2.get(j).increaseVolume);
-                                            uploadObj_2.put("allotmentProportion",list2.get(j).allotmentProportion);
-                                            items_1.add(uploadObj_2);
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
+                            }
+                            if (list2!=null){
+                                for (int j=0;j<list2.size();j++){
                                     try {
-                                        uploadObj.put("items_1",new JSONArray(items_1));
+                                        JSONObject uploadObj_2 = new JSONObject();
+                                        uploadObj_2.put("code",CODES);
+                                        uploadObj_2.put("dateTime",list2.get(j).dateTime);
+                                        uploadObj_2.put("increasePrice",list2.get(j).increasePrice);
+                                        uploadObj_2.put("allotmentPrice",list2.get(j).allotmentPrice);
+                                        uploadObj_2.put("bonusAmount",list2.get(j).bonusAmount);
+                                        uploadObj_2.put("bonusProportion",list2.get(j).bonusProportion);
+                                        uploadObj_2.put("increaseProportion",list2.get(j).increaseProportion);
+                                        uploadObj_2.put("increaseVolume",list2.get(j).increaseVolume);
+                                        uploadObj_2.put("allotmentProportion",list2.get(j).allotmentProportion);
+                                        items_1.add(uploadObj_2);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
-                                    try {
-                                        JSONArray jsonArray_1 = uploadObj.getJSONArray("items_1");
-                                        for (int i=0;i<jsonArray_1.length();i++){
-                                            JSONObject jsonObject = jsonArray_1.getJSONObject(i);
-                                            Log.d("data_2", String.valueOf(jsonObject));
-                                            //                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
-                                        }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }else {
-                                    Log.d("Fqitem","null");
                                 }
                                 try {
-                                    uploadObj.put("items",new JSONArray(items));
+                                    uploadObj.put("items_1",new JSONArray(items_1));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                //解析输出JSON
                                 try {
-                                    JSONArray jsonArray = uploadObj.getJSONArray("items");
-                                    for (int i=0;i<jsonArray.length();i++){
-                                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                        Log.d("data_1", String.valueOf(jsonObject));
+                                    JSONArray jsonArray_1 = uploadObj.getJSONArray("items_1");
+                                    for (int i=0;i<jsonArray_1.length();i++){
+                                        JSONObject jsonObject = jsonArray_1.getJSONObject(i);
+                                        Log.d("data_2", String.valueOf(jsonObject));
                                         //                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                result.complete(uploadObj);
+                            }else {
+                                Log.d("Fqitem","null");
                             }
+                            try {
+                                uploadObj.put("items",new JSONArray(items));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            //解析输出JSON
+                            try {
+                                JSONArray jsonArray = uploadObj.getJSONArray("items");
+                                for (int i=0;i<jsonArray.length();i++){
+                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                    Log.d("data_1", String.valueOf(jsonObject));
+                                    //                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            result.complete(uploadObj);
                         }
 
                         @Override

@@ -94,7 +94,11 @@ public class F10_TopShareHolderTest_1 {
             request.sendV2(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<TopShareHolderResponse>() {
                 @Override
                 public void callback(TopShareHolderResponse topShareHolderResponse) {
-                    assertNotNull(topShareHolderResponse.list);
+                    try {
+                        assertNotNull(topShareHolderResponse.list);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     List<JSONObject> items=new ArrayList<>();
                     if (topShareHolderResponse.list!=null){

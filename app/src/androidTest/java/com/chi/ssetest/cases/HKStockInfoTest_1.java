@@ -74,7 +74,11 @@ public class HKStockInfoTest_1 {
             request.send(quoteNumbers,quoteNumbers1, new IResponseInfoCallback<HKStockInfoResponse>() {
                 @Override
                 public void callback(HKStockInfoResponse hkStockInfoResponse) {
-                    assertNotNull(hkStockInfoResponse.info);
+                    try {
+                        assertNotNull(hkStockInfoResponse.info);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     HKOthersInfo list=hkStockInfoResponse.info;
                     JSONObject uploadObj = new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value

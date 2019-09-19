@@ -67,7 +67,11 @@ public class QuoteTest_1 {
                 @Override
                 public void callback(Response response) {
                     QuoteResponse quoteResponse = (QuoteResponse) response;
-                    assertNotNull(quoteResponse.quoteItems);
+                    try {
+                        assertNotNull(quoteResponse.quoteItems);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     List<JSONObject> items = new ArrayList<>();
                     JSONObject uploadObj = new JSONObject();
                     for (int i=0;i<quoteResponse.quoteItems.size();i++){

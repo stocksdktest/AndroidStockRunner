@@ -85,12 +85,16 @@ public class F10_StockShareInfoTest_1 {
             request.sendV2(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<StockShareInfoResponse>() {
                 @Override
                 public void callback(StockShareInfoResponse stockShareInfoResponse) {
-                    assertNotNull(stockShareInfoResponse.info);
+                    try {
+                        assertNotNull(stockShareInfoResponse.info);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value
                     StockShareInfo list = stockShareInfoResponse.info;
-                    if (list!=null){
-                        try {
+                    try {
+                        if (list!=null){
                             uploadObj.put("totalShareUL",list.totalShareUL);
                             uploadObj.put("HRatio",list.HRatio);
                             uploadObj.put("ARatio",list.ARatio);
@@ -104,15 +108,9 @@ public class F10_StockShareInfoTest_1 {
                             uploadObj.put("LRatio",list.LRatio);
                             uploadObj.put("ULRatio",list.ULRatio);
                             uploadObj.put("HTotalShare",list.HTotalShare);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
                         }
-                    }else {
-                        try {
-                            uploadObj.put("list",list);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
                     Log.d("data", String.valueOf(uploadObj));
                     result.complete(uploadObj);

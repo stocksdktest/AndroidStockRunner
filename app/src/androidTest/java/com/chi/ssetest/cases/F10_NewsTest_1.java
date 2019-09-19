@@ -94,7 +94,11 @@ public class F10_NewsTest_1 {
             request.sendV2(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<NewsResponse>() {
                 @Override
                 public void callback(NewsResponse newsResponse) {
-                    assertNotNull(newsResponse.info);
+                    try {
+                        assertNotNull(newsResponse.info);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     NewsDetailItem list = newsResponse.info;
                     try {

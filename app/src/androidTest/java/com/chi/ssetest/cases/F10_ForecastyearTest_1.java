@@ -82,7 +82,11 @@ public class F10_ForecastyearTest_1 {
             request.sendV2(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<ForecastyearResponse>() {
                 @Override
                 public void callback(ForecastyearResponse forecastyearResponse) {
-                    assertNotNull(forecastyearResponse.info);
+                    try {
+                        assertNotNull(forecastyearResponse.info);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value
                     Forecastyear list =  forecastyearResponse.info;

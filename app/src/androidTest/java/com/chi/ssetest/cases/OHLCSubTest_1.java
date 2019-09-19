@@ -71,7 +71,11 @@ public class OHLCSubTest_1 {
             request.sendV2(quoteNumbers, new IResponseInfoCallback<OHLCSubResponseV2>() {
                 @Override
                 public void callback(OHLCSubResponseV2 ohlcSubResponse) {
-                    assertNotNull(ohlcSubResponse.fq);
+                    try {
+                        assertNotNull(ohlcSubResponse.fq);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     CopyOnWriteArrayList<FQItem> list=ohlcSubResponse.fq;
                     JSONObject uploadObj = new JSONObject();
                     try {

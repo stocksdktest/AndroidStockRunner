@@ -85,7 +85,11 @@ public class F10_CoreBusinessTest_1 {
             request.sendV2(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<CoreBusinessResponse>() {
                 @Override
                 public void callback(CoreBusinessResponse coreBusinessResponse) {
-                    assertNotNull(coreBusinessResponse.list);
+                    try {
+                        assertNotNull(coreBusinessResponse.list);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     List<JSONObject> items=new ArrayList<>();
                     for (CoreBusiness item : coreBusinessResponse.list) {

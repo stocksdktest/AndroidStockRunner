@@ -67,7 +67,7 @@ public class CompoundUpDownTest_1 {
             throw new Exception(String.format("Testcase(%s) setup failed, config is empty", testcaseName));
         }
     }
-    //CompoundUpDownRequest.DateType
+//    CompoundUpDownRequest.DateType
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
     @Test(timeout = 5000)
@@ -90,46 +90,38 @@ public class CompoundUpDownTest_1 {
             request.send(quoteNumbers,time, Integer.parseInt(quoteNumbers2),new IResponseInfoCallback<CompoundUpDownResponse>() {
                 @Override
                 public void callback(CompoundUpDownResponse compoundUpDownResponse) {
-                    assertNotNull(compoundUpDownResponse.compoundUpDownList);
+                    try {
+                        assertNotNull(compoundUpDownResponse.compoundUpDownList);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     List<CompoundUpDownBean> list=compoundUpDownResponse.compoundUpDownList;
                     List<JSONObject> items=new ArrayList<>();
                     JSONObject uploadObj = new JSONObject();
-                    for (int i=0;i<list.size();i++){
-                        JSONObject uploadObj_1 = new JSONObject();
-                        try {
-                            uploadObj_1.put("dateTime",list.get(i).dateTime);
-                            uploadObj_1.put("riseCount",list.get(i).riseCount);
-                            uploadObj_1.put("fallCount",list.get(i).fallCount);
-                            uploadObj_1.put("flatCount",list.get(i).flatCount);
-                            uploadObj_1.put("stopCount",list.get(i).stopCount);
-                            uploadObj_1.put("riseLimitCount",list.get(i).riseLimitCount);
-                            uploadObj_1.put("fallLimitCount",list.get(i).fallLimitCount);
-                            uploadObj_1.put("riseFallRange",list.get(i).riseFallRange);
-                            uploadObj_1.put("oneRiseLimitCount",list.get(i).oneRiseLimitCount);
-                            uploadObj_1.put("natureRiseLimitCount",list.get(i).natureRiseLimitCount);
-                            items.add(uploadObj_1);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
-                        }
-                    }
                     try {
-                        //把数组存储到JSON
-                        uploadObj.put("items", new JSONArray(items));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    //解析输出JSON
-                    try {
-                        JSONArray jsonArray = uploadObj.getJSONArray("items");
-                        for (int i=0;i<jsonArray.length();i++){
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            Log.d("data", String.valueOf(jsonObject));
-//                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
+                        if (list!=null){
+                            for (int i=0;i<list.size();i++){
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("dateTime",list.get(i).dateTime);
+                                uploadObj_1.put("riseCount",list.get(i).riseCount);
+                                uploadObj_1.put("fallCount",list.get(i).fallCount);
+                                uploadObj_1.put("flatCount",list.get(i).flatCount);
+                                uploadObj_1.put("stopCount",list.get(i).stopCount);
+                                uploadObj_1.put("riseLimitCount",list.get(i).riseLimitCount);
+                                uploadObj_1.put("fallLimitCount",list.get(i).fallLimitCount);
+                                uploadObj_1.put("riseFallRange",list.get(i).riseFallRange);
+                                uploadObj_1.put("oneRiseLimitCount",list.get(i).oneRiseLimitCount);
+                                uploadObj_1.put("natureRiseLimitCount",list.get(i).natureRiseLimitCount);
+                                items.add(uploadObj_1);
+                            }
+                            uploadObj.put("compoundUpDownList", new JSONArray(items));
+                        }else {
+                            uploadObj.put("compoundUpDownList", list);
                         }
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        result.completeExceptionally(e);
                     }
-                    //返回JSON结果
+                    Log.d("data", String.valueOf(uploadObj));
                     result.complete(uploadObj);
                 }
                 @Override

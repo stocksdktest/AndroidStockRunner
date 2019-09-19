@@ -71,7 +71,11 @@ public class AddValueTest_2 {
             request.send(quoteNumbers,quoteNumbers2,quoteNumbers1, new IResponseInfoCallback<AddValueResponse>() {
                 @Override
                 public void callback(AddValueResponse addValueResponse) {
-                    assertNotNull(addValueResponse.list);
+                    try {
+                        assertNotNull(addValueResponse.list);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     List<JSONObject> items=new ArrayList<>();
                     JSONObject uploadObj = new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value
@@ -107,12 +111,12 @@ public class AddValueTest_2 {
                             if (item.fundsInflows!=null&&item.fundsInflows.length>0){
                                 for (int j=0;j<item.fundsInflows.length;j++){
                                     JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("sellSingleVolumes"+j,item.fundsInflows[j]);
+                                    uploadObj_2.put("fundsInflows"+j,item.fundsInflows[j]);
                                     fundsInflows.add(uploadObj_2);
                                 }
-                                uploadObj.put("sellSingleVolumes",new JSONArray(fundsInflows));
+                                uploadObj.put("fundsInflows",new JSONArray(fundsInflows));
                             }else {
-                                uploadObj.put("sellSingleVolumes",item.fundsInflows);
+                                uploadObj.put("fundsInflows",item.fundsInflows);
                             }
                             List<JSONObject> fundsOutflows=new ArrayList<>();
                             if (item.fundsOutflows!=null&&item.fundsOutflows.length>0){

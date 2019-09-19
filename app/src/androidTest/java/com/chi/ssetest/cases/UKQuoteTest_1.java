@@ -81,7 +81,11 @@ public class UKQuoteTest_1 {
             request.send(quoteNumbers,new IResponseInfoCallback<UKQuoteResponse>() {
                 @Override
                 public void callback(UKQuoteResponse ukQuoteResponse) {
-                    assertNotNull(ukQuoteResponse.ukQuoteItems);
+                    try {
+                        assertNotNull(ukQuoteResponse.ukQuoteItems);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     List<JSONObject> items=new ArrayList<>();
                     JSONObject uploadObj = new JSONObject();
                     for (UKQuoteItem item : ukQuoteResponse.ukQuoteItems) {

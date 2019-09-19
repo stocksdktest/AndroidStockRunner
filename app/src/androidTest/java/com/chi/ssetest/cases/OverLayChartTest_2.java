@@ -95,7 +95,11 @@ public class OverLayChartTest_2 {
                 request.send(quoteNumbers,quoteNumbers1,quoteNumbers2,Integer.parseInt(quoteNumbers3),new IResponseInfoCallback<ChartResponse>() {
                     @Override
                     public void callback(ChartResponse chartResponse) {
-                        assertNotNull(chartResponse.historyItems);
+                        try {
+                            assertNotNull(chartResponse.historyItems);
+                        } catch (AssertionError e) {
+                            result.completeExceptionally(e);
+                        }
                         CopyOnWriteArrayList<OHLCItem> list=chartResponse.historyItems;
                         CopyOnWriteArrayList<OHLCItem> list2=chartResponse.overLayChartResponse.historyItems;
                         List<JSONObject> items=new ArrayList<>();
