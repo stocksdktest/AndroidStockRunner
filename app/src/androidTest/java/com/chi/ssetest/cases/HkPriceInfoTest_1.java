@@ -46,6 +46,7 @@ import org.junit.runner.RunWith;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -82,53 +83,29 @@ public class HkPriceInfoTest_1 {
             request.send(new IResponseInfoCallback<HkPriceInfoResponse>() {
                 @Override
                 public void callback(HkPriceInfoResponse hkPriceInfoResponse) {
-                    assertNotNull(hkPriceInfoResponse.hkPriceInfo);
-                    JSONObject uploadObj = new JSONObject();
-                    List<JSONObject> items=new ArrayList<>();
-                    Map<String, List<HkPriceInfoItem>> list =  hkPriceInfoResponse.hkPriceInfo;
-                    if (list!=null){
-                        for (int i=0;i<list.size();i++){
-                            JSONObject uploadObj_1 = new JSONObject();
-                            List<JSONObject> hkPrice=new ArrayList<>();
-                            if (list.get(i)!=null){
-                                for (int k=0;k<list.get(i).size();k++){
-                                    JSONObject uploadObj_2 = new JSONObject();
-                                    try {
-                                        uploadObj_2.put("lowLimit",list.get(i).get(k).lowLimit);
-                                        uploadObj_2.put("lowLimit",list.get(i).get(k).upLimit);
-                                        uploadObj_2.put("lowLimit",list.get(i).get(k).priceDifference);
-                                        hkPrice.add(uploadObj_2);
-                                    } catch (JSONException e) {
-                                        result.completeExceptionally(e);
-                                    }
-                                }
-                            }else {
-                                try {
-                                    uploadObj_1.put("",list.get(i));
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                            try {
-                                uploadObj_1.put("hkPrice",new JSONArray(hkPrice));
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            items.add(uploadObj_1);
-                        }
-                        try {
-                            uploadObj.put("items",new JSONArray(items));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }else {
-                        try {
-                            uploadObj.put("items",list);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    try {
+                        assertNotNull(hkPriceInfoResponse.hkPriceInfo);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
                     }
-
+                    JSONObject uploadObj = new JSONObject();
+                    List<JSONObject> HkPriceInfoItem=new ArrayList<>();
+                    Map<String, List<HkPriceInfoItem>> list=hkPriceInfoResponse.hkPriceInfo;
+                    Set<String> key=list.keySet();
+                    try {
+                        for (String str : key) {
+                            for (int i=0;i<list.get(str).size();i++){
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("upLimit",list.get(str).get(i).upLimit);
+                                uploadObj_1.put("lowLimit",list.get(str).get(i).lowLimit);
+                                uploadObj_1.put("priceDifference",list.get(str).get(i).priceDifference);
+                                HkPriceInfoItem.add(uploadObj_1);
+                            }
+                        }
+                        uploadObj.put("HkPriceInfoItem",new JSONArray(HkPriceInfoItem));
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
+                    }
                     Log.d("data", String.valueOf(uploadObj));
                     result.complete(uploadObj);
                 }

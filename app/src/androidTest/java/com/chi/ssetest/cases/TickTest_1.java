@@ -63,75 +63,91 @@ public class TickTest_1 {
     public void requestWork() throws Exception {
         Log.d("TickTest_1", "requestWork");
         // TODO get custom args from param
-        final String[] quoteNumbers = rule.getParam().optString("CODES", "").split(",");
-        final String[] Pages = rule.getParam().optString("PAGES", "").split(";");
-        final String[] SubTypes = rule.getParam().optString("SUBTYPES", "").split(",");
-        for (int i=0;i<quoteNumbers.length;i++){
-            tickjk(quoteNumbers[i],Pages[i],SubTypes[i]);
-            try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
-                RunnerSetup.getInstance().getCollector().onTestResult(testcaseName,rule.getParam(), resultObj);
-            } catch (Exception e) {
-                throw new Exception(e);
-            }
+        final String quoteNumbers = rule.getParam().optString("CODES", "");
+        final String Pages = rule.getParam().optString("PAGES", "");
+        final String SubTypes = rule.getParam().optString("SUBTYPES", "");
+
+        tickjk(quoteNumbers,Pages,SubTypes);
+        try {
+            JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+            RunnerSetup.getInstance().getCollector().onTestResult(testcaseName,rule.getParam(), resultObj);
+        } catch (Exception e) {
+            throw new Exception(e);
         }
     }
-
-    private void tickjk(final String id, String page, final String subtype) {
+    private void tickjk(final String id, final String page, final String subtype) {
         TickRequest request = new TickRequest();
         request.send(id,page,subtype, new IResponseInfoCallback() {
             @Override
             public void callback(Response response) {
                 TickResponse tickResponse = (TickResponse) response;
+                String[] str1=page.split(",");
+                if (str1[2].equals("-1")){
+                    try {
+                        assertNotNull(tickResponse.tickItems);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
+                }
                 List<TickItem> list=tickResponse.tickItems;
-                if (tickResponse.tickItems!=null){
-                    assertNotNull(tickResponse.tickItems);
-                    for (int k=0;k<list.size();k++){
-                        try {
+//                System.out.println(list.size()+"++++++++++++");
+                if (list!=null){
+                    try {
+                        for (int k=0;k<list.size();k++){
                             JSONObject uploadObj_1=new JSONObject();
-                            uploadObj_1.put("code", id);
+//                            uploadObj_1.put("code", id);
                             uploadObj_1.put("type", list.get(k).getTransactionStatus());
                             uploadObj_1.put("time", list.get(k).getTransactionTime());
                             uploadObj_1.put("tradeVolume", list.get(k).getSingleVolume());
                             uploadObj_1.put("tradePrice", list.get(k).getTransactionPrice());
                             items.add(uploadObj_1);
-                            System.out.println(uploadObj_1.toString());
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
                         }
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
-//                    for (TickItem item : tickResponse.tickItems) {
-//                        Log.d("StockUnittest", item.getTransactionTime()+"++++"+tickResponse.tickItems.size());
-//                    }
-                    if (tickResponse.tickItems.size()==100){
-                        String[] st=tickResponse.headerParams.split(",");
-                        if (Double.parseDouble(st[0])>Double.parseDouble(st[1])){
-                            String page1=st[1]+",100,1";
-                            tickjk(id,page1,subtype);
-                        }else {
-                            String page2=st[0]+",100,1";
-                            tickjk(id,page2,subtype);
-                        }
-                    }else {
-                        try {
-                            uploadObj.put("items",new JSONArray(items));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        //解析输出JSON
-                        try {
-                            JSONArray jsonArray = uploadObj.getJSONArray("items");
-                            for (int i=0;i<jsonArray.length();i++){
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                Log.d("data", String.valueOf(jsonObject));
-//                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        result.complete(uploadObj);
-                    }
-                }
+
+                   if (list.size()==100){
+                       String[] st=tickResponse.headerParams.split(",");
+                       if (Double.parseDouble(st[0])>Double.parseDouble(st[1])){
+                           String page1=st[1]+",100,1";
+                           tickjk(id,page1,subtype);
+                       }else {
+                           String page2=st[0]+",100,1";
+                           tickjk(id,page2,subtype);
+                       }
+                   }else {
+                       try {
+                           uploadObj.put("items",new JSONArray(items));
+                           JSONArray jsonArray = uploadObj.getJSONArray("items");
+//                           System.out.println(jsonArray.getJSONObject(jsonArray.length()-1));
+                           for (int i=0;i<jsonArray.length();i++){
+                               JSONObject jsonObject = jsonArray.getJSONObject(i);
+//                               System.out.println(jsonObject);
+                               Log.d("data", String.valueOf(jsonObject));
+                           }
+                       } catch (JSONException e) {
+                           result.completeExceptionally(e);
+                       }
+//                       Log.d("data", String.valueOf(uploadObj));
+                       result.complete(uploadObj);
+                   }
+               }else {
+                   try {
+                       uploadObj.put("items",new JSONArray(items));
+                       JSONArray jsonArray = uploadObj.getJSONArray("items");
+//                       System.out.println(jsonArray.getJSONObject(jsonArray.length()-1));
+//                       System.out.println(jsonArray.length()+"__________________");
+                       for (int i=0;i<jsonArray.length();i++){
+                           JSONObject jsonObject = jsonArray.getJSONObject(i);
+//                           System.out.println(jsonObject);
+                           Log.d("data", String.valueOf(jsonObject));
+                       }
+                   } catch (JSONException e) {
+                       result.completeExceptionally(e);
+                   }
+//                    Log.d("data", String.valueOf(uploadObj));
+                   result.complete(uploadObj);
+               }
             }
             @Override
             public void exception(ErrorInfo errorInfo) {

@@ -59,31 +59,37 @@ public class L2TickDetailV2Test_1 {
     public void requestWork() throws Exception {
         Log.d("L2TickDetailV2Test_1", "requestWork");
         // TODO get custom args from param
-        final String []quoteNumbers = rule.getParam().optString("CODES", "").split(",");
-        final String []Pages = rule.getParam().optString("PAGES", "").split(";");
-        final String []SubTypes = rule.getParam().optString("SUBTYPES", "").split(",");
+        final String quoteNumbers = rule.getParam().optString("CODES", "");
+        final String Pages = rule.getParam().optString("PAGES", "");
+        final String SubTypes = rule.getParam().optString("SUBTYPES", "");
 
-        for (int i=0;i<quoteNumbers.length;i++){
-            L2TickDEtailjk(quoteNumbers[i],Pages[i],SubTypes[i]);
-            try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
-                RunnerSetup.getInstance().getCollector().onTestResult(testcaseName,rule.getParam(), resultObj);
-            } catch (Exception e) {
-                throw new Exception(e);
-            }
+        L2TickDEtailjk(quoteNumbers,Pages,SubTypes);
+        try {
+            JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+            RunnerSetup.getInstance().getCollector().onTestResult(testcaseName,rule.getParam(), resultObj);
+        } catch (Exception e) {
+            throw new Exception(e);
         }
     }
-    private void L2TickDEtailjk(final String id, String page, final String subtype) {
+    private void L2TickDEtailjk(final String id, final String page, final String subtype) {
         L2TickDetailRequestV2 request = new L2TickDetailRequestV2();
         request.send(id,page,subtype, new IResponseInfoCallback() {
             @Override
             public void callback(Response response) {
                 L2TickDetailResponseV2 l2TickDetailResponseV2 = (L2TickDetailResponseV2) response;
                 List<TickDetailItem> list =l2TickDetailResponseV2.tickDetailItems;
-                if (l2TickDetailResponseV2.tickDetailItems!=null){
-                    assertNotNull(l2TickDetailResponseV2.tickDetailItems);
-                    for (int k=0;k<list.size();k++){
-                        try {
+                String[] str1=page.split(",");
+                if (str1[2].equals("-1")){
+                    try {
+                        assertNotNull(l2TickDetailResponseV2.tickDetailItems);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
+                }
+//                System.out.println(list.size()+"++++++++++++");
+                if (list!=null){
+                    try {
+                        for (int k=0;k<list.size();k++){
                             JSONObject uploadObj_1 = new JSONObject();
                             uploadObj.put("code", id);
                             uploadObj_1.put("type", list.get(k).getTransactionStatus());
@@ -91,16 +97,11 @@ public class L2TickDetailV2Test_1 {
                             uploadObj_1.put("tradeVolume", list.get(k).getSingleVolume());
                             uploadObj_1.put("tradePrice", list.get(k).getTransactionPrice());
                             items.add(uploadObj_1);
-                            System.out.println(uploadObj_1.toString());
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
                         }
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
-//                    for (TickDetailItem item : l2TickDetailResponseV2.tickDetailItems) {
-//                        Log.d("StockUnittest", item.getTransactionTime()+"++++"+l2TickDetailResponseV2.tickDetailItems.size());
-//                    }
-
-                    if (l2TickDetailResponseV2.tickDetailItems.size()==100){
+                    if (list.size()==100){
                         String[] st=l2TickDetailResponseV2.headerParams.split(",");
                         if (Double.parseDouble(st[0])>Double.parseDouble(st[1])){
                             String page1=st[1]+",100,1";
@@ -112,22 +113,34 @@ public class L2TickDetailV2Test_1 {
                     }else {
                         try {
                             uploadObj.put("items",new JSONArray(items));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        //解析输出JSON
-                        try {
                             JSONArray jsonArray = uploadObj.getJSONArray("items");
+//                            System.out.println(jsonArray.getJSONObject(jsonArray.length()-1));
+//                            System.out.println(jsonArray.length()+"++++++++++++");
                             for (int i=0;i<jsonArray.length();i++){
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 Log.d("data", String.valueOf(jsonObject));
-//                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            result.completeExceptionally(e);
                         }
+//                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     }
+                }else {
+                    try {
+                        uploadObj.put("items",new JSONArray(items));
+                        JSONArray jsonArray = uploadObj.getJSONArray("items");
+//                        System.out.println(jsonArray.getJSONObject(jsonArray.length()-1));
+//                        System.out.println(jsonArray.length()+"++++++++++++");
+                        for (int i=0;i<jsonArray.length();i++){
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            Log.d("data", String.valueOf(jsonObject));
+                        }
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
+                    }
+//                    Log.d("data", String.valueOf(uploadObj));
+                    result.complete(uploadObj);
                 }
             }
             @Override

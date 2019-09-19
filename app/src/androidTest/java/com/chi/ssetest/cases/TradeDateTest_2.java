@@ -78,33 +78,25 @@ public class TradeDateTest_2 {
             request.send(quoteNumbers,date, new IResponseInfoCallback<TradeDateResponseV2>() {
                 @Override
                 public void callback(TradeDateResponseV2 tradeDateResponse) {
-                    assertNotNull(tradeDateResponse.tradeDatesMap);
+                    try {
+                        assertNotNull(tradeDateResponse.tradeDatesMap);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     HashMap<String,ArrayList<TradeDate>> tradeDatesMap = tradeDateResponse.tradeDatesMap;
                     JSONObject uploadObj = new JSONObject();
-                    if (tradeDatesMap.get("TradeDate")!=null&&tradeDatesMap.get("TradeDate").size()>0){
-                        List<JSONObject> tradeDate=new ArrayList<>();
-                        for (int i=0;i<tradeDatesMap.get("TradeDate").size();i++){
+                    try {
+                        List<JSONObject> tradeDates=new ArrayList<>();
+                        for (int i=0;i<tradeDatesMap.get(quoteNumbers).size();i++){
                             JSONObject uploadObj_1 = new JSONObject();
-                            try {
-                                uploadObj_1.put("date",tradeDatesMap.get("TradeDate").get(i).date);
-                                uploadObj_1.put("isTrade",tradeDatesMap.get("TradeDate").get(i).isTrade);
-                                uploadObj_1.put("description",tradeDatesMap.get("TradeDate").get(i).description);
-                                tradeDate.add(uploadObj_1);
-                            } catch (JSONException e) {
-                                result.completeExceptionally(e);
-                            }
+                            uploadObj_1.put("date",tradeDatesMap.get(quoteNumbers).get(i).date);
+                            uploadObj_1.put("isTrade",tradeDatesMap.get(quoteNumbers).get(i).isTrade);
+                            uploadObj_1.put("description",tradeDatesMap.get(quoteNumbers).get(i).description);
+                            tradeDates.add(uploadObj_1);
                         }
-                        try {
-                            uploadObj.put("tradeDate",new JSONArray(tradeDate));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }else {
-                        try {
-                            uploadObj.put("tradeDate",tradeDatesMap.get("tradeDates"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        uploadObj.put("tradeDates",new JSONArray(tradeDates));
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
                     Log.d("data", String.valueOf(uploadObj));
                     result.complete(uploadObj);

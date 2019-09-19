@@ -61,31 +61,36 @@ public class L2TickV2Test_1 {
     public void requestWork() throws Exception {
         Log.d("L2TickV2Test_1", "requestWork");
         // TODO get custom args from param
-        final String []quoteNumbers = rule.getParam().optString("CODES", "").split(",");
-        final String []Pages = rule.getParam().optString("PAGES", "").split(";");
-        final String []SubTypes = rule.getParam().optString("SUBTYPES", "").split(",");
+        final String quoteNumbers = rule.getParam().optString("CODES", "");
+        final String Pages = rule.getParam().optString("PAGES", "");
+        final String SubTypes = rule.getParam().optString("SUBTYPES", "");
 
-        for (int i=0;i<quoteNumbers.length;i++){
-            L2Tickjk(quoteNumbers[i],Pages[i],SubTypes[i]);
-            try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
-                RunnerSetup.getInstance().getCollector().onTestResult(testcaseName,rule.getParam(), resultObj);
-            } catch (Exception e) {
-                throw new Exception(e);
-            }
+        L2Tickjk(quoteNumbers,Pages,SubTypes);
+        try {
+            JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+            RunnerSetup.getInstance().getCollector().onTestResult(testcaseName,rule.getParam(), resultObj);
+        } catch (Exception e) {
+            throw new Exception(e);
         }
     }
-    private void L2Tickjk(final String id, String page, final String subtype) {
+    private void L2Tickjk(final String id, final String page, final String subtype) {
         L2TickRequestV2 request = new L2TickRequestV2();
         request.send(id,page,subtype, new IResponseInfoCallback() {
             @Override
             public void callback(Response response) {
                 L2TickResponseV2 l2TickResponseV2 = (L2TickResponseV2) response;
                 List<TickItem> list=l2TickResponseV2.tickItems;
-                assertNotNull(l2TickResponseV2.tickItems);
-                if (l2TickResponseV2.tickItems!=null){
-                    for (int k=0;k<list.size();k++){
-                        try {
+                String[] str1=page.split(",");
+                if (str1[2].equals("-1")){
+                    try {
+                        assertNotNull(l2TickResponseV2.tickItems);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
+                }
+                if (list!=null){
+                    try {
+                        for (int k=0;k<list.size();k++){
                             JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("code", id);
                             uploadObj_1.put("type", list.get(k).getTransactionStatus());
@@ -93,15 +98,11 @@ public class L2TickV2Test_1 {
                             uploadObj_1.put("tradeVolume", list.get(k).getSingleVolume());
                             uploadObj_1.put("tradePrice", list.get(k).getTransactionPrice());
                             items.add(uploadObj_1);
-                            System.out.println(uploadObj_1.toString());
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
                         }
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
-//                    for (TickItem item : l2TickResponseV2.tickItems) {
-//                        Log.d("StockUnittest", item.getTransactionTime()+"++++"+l2TickResponseV2.tickItems.size());
-//                    }
-                    if (l2TickResponseV2.tickItems.size()==100){
+                    if (list.size()==100){
                         String[] st=l2TickResponseV2.headerParams.split(",");
                         if (Double.parseDouble(st[0])>Double.parseDouble(st[1])){
                             String page1=st[1]+",100,1";
@@ -113,22 +114,32 @@ public class L2TickV2Test_1 {
                     }else {
                         try {
                             uploadObj.put("items",new JSONArray(items));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        //解析输出JSON
-                        try {
                             JSONArray jsonArray = uploadObj.getJSONArray("items");
+//                            System.out.println(jsonArray.getJSONObject(jsonArray.length()-1));
                             for (int i=0;i<jsonArray.length();i++){
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 Log.d("data", String.valueOf(jsonObject));
-//                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            result.completeExceptionally(e);
                         }
+//                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     }
+                }else {
+                    try {
+                        uploadObj.put("items",new JSONArray(items));
+                        JSONArray jsonArray = uploadObj.getJSONArray("items");
+//                        System.out.println(jsonArray.getJSONObject(jsonArray.length()-1));
+                        for (int i=0;i<jsonArray.length();i++){
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                Log.d("data", String.valueOf(jsonObject));
+                        }
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
+                    }
+//                    Log.d("data", String.valueOf(uploadObj));
+                    result.complete(uploadObj);
                 }
             }
             @Override
