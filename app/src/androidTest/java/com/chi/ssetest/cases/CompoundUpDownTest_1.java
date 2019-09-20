@@ -96,8 +96,6 @@ public class CompoundUpDownTest_1 {
                         result.completeExceptionally(e);
                     }
                     List<CompoundUpDownBean> list=compoundUpDownResponse.compoundUpDownList;
-                    List<JSONObject> items=new ArrayList<>();
-                    JSONObject uploadObj = new JSONObject();
                     try {
                         if (list!=null){
                             for (int i=0;i<list.size();i++){
@@ -109,20 +107,23 @@ public class CompoundUpDownTest_1 {
                                 uploadObj_1.put("stopCount",list.get(i).stopCount);
                                 uploadObj_1.put("riseLimitCount",list.get(i).riseLimitCount);
                                 uploadObj_1.put("fallLimitCount",list.get(i).fallLimitCount);
-                                uploadObj_1.put("riseFallRange",list.get(i).riseFallRange);
+                                List<JSONObject> riseFallRange=new ArrayList<>();
+                                for (int k=0;k<list.get(i).riseFallRange.length;k++){
+                                    JSONObject uploadObj_2 = new JSONObject();
+                                    uploadObj_2.put(String.valueOf((-10+k))+"%",list.get(i).riseFallRange[k]);
+                                    riseFallRange.add(uploadObj_2);
+                                }
+
+                                uploadObj_1.put("riseFallRange",new JSONArray(riseFallRange));
                                 uploadObj_1.put("oneRiseLimitCount",list.get(i).oneRiseLimitCount);
                                 uploadObj_1.put("natureRiseLimitCount",list.get(i).natureRiseLimitCount);
-                                items.add(uploadObj_1);
+                                Log.d("data", String.valueOf(uploadObj_1));
+                                result.complete(uploadObj_1);
                             }
-                            uploadObj.put("compoundUpDownList", new JSONArray(items));
-                        }else {
-                            uploadObj.put("compoundUpDownList", list);
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

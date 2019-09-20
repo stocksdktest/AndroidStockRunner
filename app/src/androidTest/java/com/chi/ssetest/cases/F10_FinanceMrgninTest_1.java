@@ -128,17 +128,13 @@ public class F10_FinanceMrgninTest_1 {
                                 uploadObj_1.put("MRGNROESELL",infos.get(i).get("MRGNROESELL"));
                                 uploadObj_1.put("FINMRGHBAL",infos.get(i).get("FINMRGHBAL"));
                                 uploadObj_1.put("FINMRGNBAL",infos.get(i).get("FINMRGNBAL"));
-                                items.add(uploadObj_1);
+                                Log.d("data", String.valueOf(uploadObj_1));
+                                result.complete(uploadObj_1);
                             }
-                            uploadObj.put("items",new JSONArray(items));
-                        }else {
-                            uploadObj.put("items",infos);
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

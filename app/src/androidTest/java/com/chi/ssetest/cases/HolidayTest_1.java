@@ -33,6 +33,7 @@ import com.mitake.core.response.MorePriceResponse;
 import com.mitake.core.response.QuoteResponse;
 import com.mitake.core.response.Response;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -42,6 +43,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -84,9 +86,14 @@ public class HolidayTest_1 {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    // TODO fill uploadObj with QuoteResponse value
+                    List<JSONObject> dayList=new ArrayList<>();
                     try {
-                        uploadObj.put("day", holidayResponse.info);
+                        for (int i=0;i<holidayResponse.info.size();i++){
+                            JSONObject uploadObj_1 = new JSONObject();
+                            uploadObj_1.put("date", holidayResponse.info.get(i));
+                            dayList.add(uploadObj_1);
+                        }
+                        uploadObj.put("dayList",new JSONArray(dayList));
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

@@ -68,62 +68,41 @@ public class HistoryChartTest_2 {
         final String quoteNumbers1 = rule.getParam().optString("date");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
-            QuoteDetailRequest quoteDetailRequest=new QuoteDetailRequest();
-            quoteDetailRequest.send(quoteNumbers, new IResponseInfoCallback() {
+        QuoteDetailRequest quoteDetailRequest=new QuoteDetailRequest();
+        quoteDetailRequest.send(quoteNumbers, new IResponseInfoCallback() {
+            @Override
+            public void callback(Response response) {
+                QuoteResponse quoteResponse=(QuoteResponse) response;
+                QuoteItem quoteItem=quoteResponse.quoteItems.get(0);
+                HistoryChartRequest request = new HistoryChartRequest();
+                request.send(quoteItem,quoteNumbers1, new IResponseInfoCallback<OHLCResponse>() {
                 @Override
-                public void callback(Response response) {
-                    QuoteResponse quoteResponse=(QuoteResponse) response;
-                    QuoteItem quoteItem=quoteResponse.quoteItems.get(0);
-                    HistoryChartRequest request = new HistoryChartRequest();
-                    request.send(quoteItem,quoteNumbers1, new IResponseInfoCallback<OHLCResponse>() {
-                    @Override
-                   public void callback(OHLCResponse ohlcResponse) {
+               public void callback(OHLCResponse ohlcResponse) {
+                    try {
+                        assertNotNull(ohlcResponse.historyItems);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
+                    CopyOnWriteArrayList<OHLCItem> list=ohlcResponse.historyItems;
+                    JSONObject uploadObj = new JSONObject();
+                    List<JSONObject> items = new ArrayList<>();
+                    for (int k=0;k<list.size();k++) {
                         try {
-                            assertNotNull(ohlcResponse.historyItems);
-                        } catch (AssertionError e) {
+                            JSONObject uploadObj_1 = new JSONObject();
+                            uploadObj_1.put("datetime",list.get(k).datetime);
+                            uploadObj_1.put("closePrice",list.get(k).closePrice);
+                            uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
+                            uploadObj_1.put("averagePrice",list.get(k).averagePrice);
+                            uploadObj_1.put("md",list.get(k).getMd());
+                            uploadObj_1.put("openInterest",list.get(k).openInterest);
+                            uploadObj_1.put("iopv",list.get(k).iopv);
+                            uploadObj_1.put("iopvPre",list.get(k).iopvPre);
+                            Log.d("data", String.valueOf(uploadObj_1));
+                            result.complete(uploadObj_1);
+                        } catch (JSONException e) {
                             result.completeExceptionally(e);
                         }
-                        CopyOnWriteArrayList<OHLCItem> list=ohlcResponse.historyItems;
-                        JSONObject uploadObj = new JSONObject();
-                        List<JSONObject> items = new ArrayList<>();
-                        for (int k=0;k<list.size();k++) {
-                            try {
-                                JSONObject uploadObj_1 = new JSONObject();
-                                //存储到JSON
-                                uploadObj_1.put("code", quoteNumbers);
-                                uploadObj_1.put("datetime",list.get(k).datetime);
-                                uploadObj_1.put("closePrice",list.get(k).closePrice);
-                                uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
-                                uploadObj_1.put("averagePrice",list.get(k).averagePrice);
-                                uploadObj_1.put("md",list.get(k).getMd());
-                                uploadObj_1.put("openInterest",list.get(k).openInterest);
-                                uploadObj_1.put("iopv",list.get(k).iopv);
-                                uploadObj_1.put("iopvPre",list.get(k).iopvPre);
-                                items.add(uploadObj_1);//添加到数组
-                            } catch (JSONException e) {
-                                result.completeExceptionally(e);
-                            }
-//                        Log.d("StockUnittest", quoteNumbers[a]+list.get(k).datetime);
-                        }
-                        try {
-                            //把数组存储到JSON
-                            uploadObj.put("items", new JSONArray(items));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        //解析输出JSON
-                        try {
-                            JSONArray jsonArray = uploadObj.getJSONArray("items");
-                            for (int i=0;i<jsonArray.length();i++){
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                Log.d("data", String.valueOf(jsonObject));
-//                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        //返回JSON结果
-                        result.complete(uploadObj);
+                    }
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

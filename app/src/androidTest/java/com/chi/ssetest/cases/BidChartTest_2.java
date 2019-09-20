@@ -80,10 +80,7 @@ public class BidChartTest_2 {
                             } catch (AssertionError e) {
                                 result.completeExceptionally(e);
                             }
-                            List<JSONObject> items=new ArrayList<>();
-                            JSONObject uploadObj = new JSONObject();
                             try {
-                                uploadObj.put("mainTime",bidChartResponse.mainTime);
                                 for (BidItem item : bidChartResponse.bidItems) {
                                     JSONObject uploadObj_1 = new JSONObject();
                                     uploadObj_1.put("closePrice",item.closePrice);
@@ -93,14 +90,12 @@ public class BidChartTest_2 {
                                     uploadObj_1.put("sell2",item.sell2);
                                     uploadObj_1.put("buy1",item.buy1);
                                     uploadObj_1.put("buy2",item.buy2);
-                                    items.add(uploadObj_1);
+                                    Log.d("data", String.valueOf(uploadObj_1));
+                                    result.complete(uploadObj_1);
                                 }
-                                uploadObj.put("items",new JSONArray(items));
                             } catch (JSONException e) {
                                 result.completeExceptionally(e);
                             }
-                            Log.d("data", String.valueOf(uploadObj));
-                            result.complete(uploadObj);
                         }
                         @Override
                         public void exception(ErrorInfo errorInfo) {

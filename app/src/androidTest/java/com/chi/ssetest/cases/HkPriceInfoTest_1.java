@@ -102,7 +102,7 @@ public class HkPriceInfoTest_1 {
                                 HkPriceInfoItem.add(uploadObj_1);
                             }
                         }
-                        uploadObj.put("HkPriceInfoItem",new JSONArray(HkPriceInfoItem));
+                        uploadObj.put("hkPriceDiffs",new JSONArray(HkPriceInfoItem));
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

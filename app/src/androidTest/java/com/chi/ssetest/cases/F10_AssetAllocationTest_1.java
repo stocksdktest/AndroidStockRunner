@@ -92,9 +92,7 @@ public class F10_AssetAllocationTest_1 {
                     } catch (AssertionError e) {
                         result.completeExceptionally(e);
                     }
-                    JSONObject uploadObj = new JSONObject();
                     List<HashMap<String,Object>> list = f10V2Response.infos;
-                    List<JSONObject> items=new ArrayList<>();
                     try {
                         if (list!=null){
                             for (int i=0;i< list.size();i++){
@@ -105,17 +103,13 @@ public class F10_AssetAllocationTest_1 {
                                 uploadObj_1.put("STKINVE",list.get(i).get("STKINVE"));
                                 uploadObj_1.put("TOTASSET",list.get(i).get("TOTASSET"));
                                 uploadObj_1.put("TOTASSETYOY",list.get(i).get("TOTASSETYOY"));
-                                items.add(uploadObj_1);
+                                Log.d("data", String.valueOf(uploadObj_1));
+                                result.complete(uploadObj_1);
                             }
-                            uploadObj.put("list",new JSONArray(items));
-                        }else {
-                            uploadObj.put("list",list);
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

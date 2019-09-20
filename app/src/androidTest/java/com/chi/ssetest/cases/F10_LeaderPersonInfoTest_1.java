@@ -111,17 +111,13 @@ public class F10_LeaderPersonInfoTest_1 {
                                     uploadObj_1.put("DUTYTYPE",infos.get(i).get("DUTYTYPE"));
                                     uploadObj_1.put("BEGINDATE",infos.get(i).get("BEGINDATE"));
                                 }
-                                list.add(uploadObj_1);
+                                Log.d("data", String.valueOf(uploadObj_1));
+                                result.complete(uploadObj_1);
                             }
-                            uploadObj.put("list",new JSONArray(list));
-                        }else {
-                            uploadObj.put("list",infos);
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

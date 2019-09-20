@@ -83,7 +83,6 @@ public class ChartV2Test_1 {
                         try {
                             JSONObject uploadObj_1 = new JSONObject();
                             //存储到JSON
-                            uploadObj_1.put("code", quoteNumbers);
                             uploadObj_1.put("datetime",list.get(k).datetime);
                             uploadObj_1.put("closePrice",list.get(k).closePrice);
                             uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
@@ -92,31 +91,12 @@ public class ChartV2Test_1 {
                             uploadObj_1.put("openInterest",list.get(k).openInterest);
                             uploadObj_1.put("iopv",list.get(k).iopv);
                             uploadObj_1.put("iopvPre",list.get(k).iopvPre);
-                            items.add(uploadObj_1);//添加到数组
+                            Log.d("data", String.valueOf(uploadObj_1));
+                            result.complete(uploadObj_1);
                         } catch (JSONException e) {
                             result.completeExceptionally(e);
                         }
-//                        Log.d("StockUnittest", quoteNumbers[a]+list.get(k).datetime);
                     }
-                    try {
-                        //把数组存储到JSON
-                        uploadObj.put("items", new JSONArray(items));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    //解析输出JSON
-                    try {
-                        JSONArray jsonArray = uploadObj.getJSONArray("items");
-                        for (int i=0;i<jsonArray.length();i++){
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            Log.d("data", String.valueOf(jsonObject));
-//                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    //返回JSON结果
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

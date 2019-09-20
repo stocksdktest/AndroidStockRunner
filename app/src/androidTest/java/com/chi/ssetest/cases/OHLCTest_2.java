@@ -86,10 +86,6 @@ public class OHLCTest_2 {
                                 result.completeExceptionally(e);
                             }
                             CopyOnWriteArrayList<OHLCItem> list =ohlcResponse.historyItems;
-                            CopyOnWriteArrayList<FQItem> list2=ohlcResponse.fq;
-                            List<JSONObject> items=new ArrayList<>();
-                            List<JSONObject> items_1=new ArrayList<>();
-                            JSONObject uploadObj = new JSONObject();
                             for (int k=0;k<list.size();k++){
                                 try {
                                     JSONObject uploadObj_1 = new JSONObject();
@@ -106,7 +102,7 @@ public class OHLCTest_2 {
                                     uploadObj_1.put("fp_volume",list.get(k).fp_volume);
                                     uploadObj_1.put("fp_amount",list.get(k).fp_amount);
                                     Log.d("data", String.valueOf(uploadObj_1));
-                                    result.complete(uploadObj);
+                                    result.complete(uploadObj_1);
                                 } catch (JSONException e) {
                                     result.completeExceptionally(e);
                                 }

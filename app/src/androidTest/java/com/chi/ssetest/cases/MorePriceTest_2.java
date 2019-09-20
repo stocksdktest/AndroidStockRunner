@@ -83,55 +83,26 @@ public class MorePriceTest_2 {
                     } catch (AssertionError e) {
                         result.completeExceptionally(e);
                     }
-                    List<JSONObject> items=new ArrayList<>();
-                    JSONObject uploadObj = new JSONObject();
                     if (morePriceResponse.strs!=null&&morePriceResponse.strs.length>0){
                         for (int i=0;i<morePriceResponse.strs.length;i++){
                             JSONObject uploadObj_1 = new JSONObject();
                             try {
-                                uploadObj_1.put("code", quoteNumbers);
-                                List<JSONObject> list=new ArrayList<>();
-                                if (morePriceResponse.strs[i]!=null&&morePriceResponse.strs[i].length>0){
-                                    JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("price",morePriceResponse.strs[i][0]);
-                                    uploadObj_2.put("volume",morePriceResponse.strs[i][1]);
-                                    uploadObj_2.put("buyVolume",morePriceResponse.strs[i][2]);
-                                    uploadObj_2.put("sellVolume",morePriceResponse.strs[i][3]);
-                                    uploadObj_2.put("unknownVolume",morePriceResponse.strs[i][4]);
-                                    uploadObj_2.put("tradeCount",morePriceResponse.strs[i][5]);
-                                    uploadObj_2.put("buyCount",morePriceResponse.strs[i][6]);
-                                    uploadObj_2.put("sellCount",morePriceResponse.strs[i][7]);
-                                    uploadObj_2.put("unknownCount",morePriceResponse.strs[i][8]);
-                                    list.add(uploadObj_2);
-                                    uploadObj_1.put("list",new JSONArray(list));
-                                }else {
-                                    uploadObj_1.put("list",morePriceResponse.strs);
-                                }
-                                items.add(uploadObj_1);
+                                uploadObj_1.put("price",morePriceResponse.strs[i][0]);
+                                uploadObj_1.put("volume",morePriceResponse.strs[i][1]);
+                                uploadObj_1.put("buyVolume",morePriceResponse.strs[i][2]);
+                                uploadObj_1.put("sellVolume",morePriceResponse.strs[i][3]);
+                                uploadObj_1.put("unknownVolume",morePriceResponse.strs[i][4]);
+                                uploadObj_1.put("tradeCount",morePriceResponse.strs[i][5]);
+                                uploadObj_1.put("buyCount",morePriceResponse.strs[i][6]);
+                                uploadObj_1.put("sellCount",morePriceResponse.strs[i][7]);
+                                uploadObj_1.put("unknownCount",morePriceResponse.strs[i][8]);
+                                Log.d("data", String.valueOf(uploadObj_1));
+                                result.complete(uploadObj_1);
                             } catch (JSONException e) {
                                 result.completeExceptionally(e);
                             }
                         }
-                        try {
-                            //把数组存储到JSON
-                            uploadObj.put("items", new JSONArray(items));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        //解析输出JSON
-                        try {
-                            JSONArray jsonArray = uploadObj.getJSONArray("items");
-                            for (int i=0;i<jsonArray.length();i++){
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                Log.d("data", String.valueOf(jsonObject));
-//                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
                     }
-                    //返回JSON结果
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

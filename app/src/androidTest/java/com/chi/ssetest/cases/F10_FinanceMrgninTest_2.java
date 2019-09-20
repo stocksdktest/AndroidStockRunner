@@ -109,7 +109,7 @@ public class F10_FinanceMrgninTest_2 {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    List<JSONObject> items=new ArrayList<>();
+                    List<JSONObject> list =new ArrayList<>();
                     List<HashMap<String,Object>> infos = f10V2Response.infos;
                     try {
                         if (infos!=null){
@@ -122,17 +122,17 @@ public class F10_FinanceMrgninTest_2 {
                                 uploadObj_1.put("MRGGBALSUM",infos.get(i).get("MRGGBALSUM"));
                                 uploadObj_1.put("FINMRGHBALSUM",infos.get(i).get("FINMRGHBALSUM"));
                                 uploadObj_1.put("FINMRGNBALSUM",infos.get(i).get("FINMRGNBALSUM"));
-                                items.add(uploadObj_1);
+                                list.add(uploadObj_1);
                             }
-                            uploadObj.put("items",new JSONArray(items));
+                            uploadObj.put("list",new JSONArray(list));
                         }else {
-                            uploadObj.put("items",infos);
+                            uploadObj.put("list",infos);
                         }
+                        Log.d("data", String.valueOf(uploadObj));
+                        result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

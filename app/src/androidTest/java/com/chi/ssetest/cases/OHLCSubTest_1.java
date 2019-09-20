@@ -79,7 +79,6 @@ public class OHLCSubTest_1 {
                     CopyOnWriteArrayList<FQItem> list=ohlcSubResponse.fq;
                     JSONObject uploadObj = new JSONObject();
                     try {
-                        uploadObj.put("stockCode",ohlcSubResponse.stockCode);
                         List<JSONObject> fqlist=new ArrayList<>();
                         for (int i=0;i<list.size();i++) {
                             JSONObject uploadObj_1 = new JSONObject();

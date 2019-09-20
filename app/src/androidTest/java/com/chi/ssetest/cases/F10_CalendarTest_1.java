@@ -118,15 +118,12 @@ public class F10_CalendarTest_1 {
                             uploadObj_1.put("jjfx",list.get(i).getJjfx());
                             uploadObj_1.put("wss",list.get(i).getWss());
                             uploadObj_1.put("normalDay",list.get(i).getNormalDay());
-                            uploadObj_1.put("isHoliday",list.get(i).isHoliday());
-                            newShareDates.add(uploadObj_1);
+                            Log.d("data", String.valueOf(uploadObj_1));
+                            result.complete(uploadObj_1);
                         }
-                        uploadObj.put("newShareDates",new JSONArray(newShareDates));
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

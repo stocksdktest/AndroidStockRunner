@@ -110,10 +110,7 @@ public class SearchTest_5 {
                         result.completeExceptionally(e);
                     }
                     ArrayList<SearchResultItem> list=searchResponse.results;
-                    List<JSONObject> items=new ArrayList<>();
-                    JSONObject uploadObj = new JSONObject();
                     try {
-                        uploadObj.put("keyword",searchResponse.keyword);
                         for (int i=0;i<list.size();i++){
                             JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("stockID",list.get(i).stockID);
@@ -124,29 +121,12 @@ public class SearchTest_5 {
                             uploadObj_1.put("stockType",list.get(i).stockType);
                             uploadObj_1.put("hkType",list.get(i).hkType);
                             uploadObj_1.put("st",list.get(i).st);
-                            items.add(uploadObj_1);
+                            Log.d("data", String.valueOf(uploadObj_1));
+                            result.complete(uploadObj_1);
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    try {
-                        //把数组存储到JSON
-                        uploadObj.put("items", new JSONArray(items));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    //解析输出JSON
-                    try {
-                        JSONArray jsonArray = uploadObj.getJSONArray("items");
-                        for (int i=0;i<jsonArray.length();i++){
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            Log.d("data", String.valueOf(jsonObject));
-//                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

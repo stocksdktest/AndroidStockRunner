@@ -97,7 +97,7 @@ public class TradeQuoteTest_1 {
                             if (item.buyPrices!=null&&item.buyPrices.size()>0){
                                 for (int j=0;j<item.buyPrices.size();j++){
                                     JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("buyprice"+j,item.buyPrices.get(j));
+                                    uploadObj_1.put("buyprice"+(j+1),item.buyPrices.get(j));
                                     buyPrices.add(uploadObj_1);
                                 }
                                 uploadObj.put("buyPrices",new JSONArray(buyPrices));
@@ -109,7 +109,7 @@ public class TradeQuoteTest_1 {
                             if (item.buyVolumes!=null&&item.buyVolumes.size()>0){
                                 for (int j=0;j<item.buyVolumes.size();j++){
                                     JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("buyVolumes"+j,item.buyVolumes.get(j));
+                                    uploadObj_1.put("buyVolumes"+(j+1),item.buyVolumes.get(j));
                                     buyVolumes.add(uploadObj_1);
                                 }
                                 uploadObj.put("buyVolumes",new JSONArray(buyVolumes));
@@ -120,7 +120,7 @@ public class TradeQuoteTest_1 {
                             if (item.sellPrices!=null&&item.sellPrices.size()>0){
                                 for (int j=0;j<item.sellPrices.size();j++){
                                     JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("sellPrices"+j,item.sellPrices.get(j));
+                                    uploadObj_1.put("sellPrices"+(j+1),item.sellPrices.get(j));
                                     sellPrices.add(uploadObj_1);
                                 }
                                 uploadObj.put("sellPrices",new JSONArray(sellPrices));
@@ -131,7 +131,7 @@ public class TradeQuoteTest_1 {
                             if (item.sellVolumes!=null&&item.sellVolumes.size()>0){
                                 for (int j=0;j<item.sellVolumes.size();j++){
                                     JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("sellVolumes"+j,item.sellVolumes.get(j));
+                                    uploadObj_1.put("sellVolumes"+(j+1),item.sellVolumes.get(j));
                                     sellVolumes.add(uploadObj_1);
                                 }
                                 uploadObj.put("sellVolumes",new JSONArray(sellVolumes));

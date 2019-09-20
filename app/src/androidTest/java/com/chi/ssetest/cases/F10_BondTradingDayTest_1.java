@@ -109,14 +109,12 @@ public class F10_BondTradingDayTest_1 {
                             uploadObj_1.put("jjsg",list.get(i).get("jjsg"));
                             uploadObj_1.put("dss",list.get(i).get("dss"));
                             uploadObj_1.put("NORMALDAY",list.get(i).get("NORMALDAY"));
-                            items.add(uploadObj_1);
+                            Log.d("data", String.valueOf(uploadObj_1));
+                            result.complete(uploadObj_1);
                         }
-                        uploadObj.put("items",new JSONArray(items));
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

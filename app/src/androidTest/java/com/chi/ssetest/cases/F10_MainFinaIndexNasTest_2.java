@@ -138,39 +138,13 @@ public class F10_MainFinaIndexNasTest_2 {
                                 uploadObj_1.put("ROEYOY_",item.ROEYOY_);
                                 uploadObj_1.put("NetAssetYOY",item.NetAssetYOY);
                                 uploadObj_1.put("TotalAssetYOY",item.TotalAssetYOY);
-                                items.add(uploadObj_1);
+                                Log.d("data", String.valueOf(uploadObj_1));
+                                result.complete(uploadObj_1);
                             } catch (JSONException e) {
                                 result.completeExceptionally(e);
                             }
                         }
-                        try {
-                            //把数组存储到JSON
-                            uploadObj.put("items", new JSONArray(items));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }else {
-                        try {
-                            uploadObj.put("items", mainFinaIndexNasResponse.mMainFinaIndexHasList);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
                     }
-
-//                    //解析输出JSON
-//                    try {
-//                        JSONArray jsonArray = uploadObj.getJSONArray("items");
-//                        for (int i=0;i<jsonArray.length();i++){
-//                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                            Log.d("data", String.valueOf(jsonObject));
-////                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
-//                        }
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-                    Log.d("data", String.valueOf(uploadObj));
-                    //返回JSON结果
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {
