@@ -14,6 +14,7 @@ import com.mitake.core.QuoteItem;
 import com.mitake.core.bean.DRLinkQuoteitem;
 import com.mitake.core.bean.MorePriceItem;
 import com.mitake.core.bean.log.ErrorInfo;
+import com.mitake.core.keys.quote.DRSortType;
 import com.mitake.core.request.AddValueRequest;
 import com.mitake.core.request.BankuaisortingRequest;
 import com.mitake.core.request.CategoryType;
@@ -74,7 +75,7 @@ public class DRLinkQuoteTest_1 {
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("code");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
-        //CategoryType
+//        DRSortType
 //        for (int i=0;i<quoteNumbers.length;i++){
             DRLinkQuoteRequest request = new DRLinkQuoteRequest();
             request.send(quoteNumbers,new IResponseInfoCallback<DRLinkQuoteResponse>() {

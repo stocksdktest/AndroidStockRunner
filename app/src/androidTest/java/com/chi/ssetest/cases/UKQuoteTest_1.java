@@ -86,8 +86,6 @@ public class UKQuoteTest_1 {
                     } catch (AssertionError e) {
                         result.completeExceptionally(e);
                     }
-                    List<JSONObject> items=new ArrayList<>();
-                    JSONObject uploadObj = new JSONObject();
                     for (UKQuoteItem item : ukQuoteResponse.ukQuoteItems) {
                         JSONObject uploadObj_1 = new JSONObject();
                         try {
@@ -126,28 +124,12 @@ public class UKQuoteTest_1 {
                             uploadObj_1.put("subtypes",item.subtypes);
                             uploadObj_1.put("subjectClosingReferencePrice",item.subjectClosingReferencePrice);
                             uploadObj_1.put("premium",item.premium);
-                            items.add(uploadObj_1);
+                            Log.d("data", String.valueOf(uploadObj_1));
+                            result.complete(uploadObj_1);
                         } catch (JSONException e) {
                             result.completeExceptionally(e);
                         }
                     }
-                    try {
-                        uploadObj.put("items",new JSONArray(items));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    //解析输出JSON
-                    try {
-                        JSONArray jsonArray = uploadObj.getJSONArray("items");
-                        for (int i=0;i<jsonArray.length();i++){
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            Log.d("data", String.valueOf(jsonObject));
-//                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

@@ -88,8 +88,6 @@ public class DRQuoteListTest_1 {
                     } catch (AssertionError e) {
                         result.completeExceptionally(e);
                     }
-                    JSONObject uploadObj = new JSONObject();
-                    List<JSONObject> items =new ArrayList<>();
                     try {
                         for (DRQuoteItem item : drQuoteListResponse.mDRQuoteItems) {
                             JSONObject uploadObj_1 = new JSONObject();
@@ -110,14 +108,12 @@ public class DRQuoteListTest_1 {
                             uploadObj_1.put("baseChangeRate",item.baseChangeRate);
                             uploadObj_1.put("baseSubtype",item.baseSubtype);
                             uploadObj_1.put("baseDateTime",item.baseDateTime);
-                            items.add(uploadObj_1);
+                            Log.d("data", String.valueOf(uploadObj_1));
+                            result.complete(uploadObj_1);
                         }
-                        uploadObj.put("items",new JSONArray(items));
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

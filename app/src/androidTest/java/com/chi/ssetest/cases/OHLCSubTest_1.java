@@ -91,11 +91,9 @@ public class OHLCSubTest_1 {
                             uploadObj_1.put("increaseProportion", list.get(i).increaseProportion);
                             uploadObj_1.put("increaseVolume", list.get(i).increaseVolume);
                             uploadObj_1.put("allotmentProportion", list.get(i).allotmentProportion);
-                            uploadObj_1.put("dateTime", list.get(i).dateTime);
-                            uploadObj_1.put("dateTime", list.get(i).dateTime);
                             fqlist.add(uploadObj_1);
                         }
-                        uploadObj.put("fq",new JSONArray(fqlist));
+                        uploadObj.put("fqItem",new JSONArray(fqlist));
                     } catch (JSONException e) {
                     result.completeExceptionally(e);
                     }

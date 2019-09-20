@@ -86,21 +86,21 @@ public class L2TickDetailV2Test_1 {
                         result.completeExceptionally(e);
                     }
                 }
-//                System.out.println(list.size()+"++++++++++++");
                 if (list!=null){
                     try {
                         for (int k=0;k<list.size();k++){
                             JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj.put("code", id);
                             uploadObj_1.put("type", list.get(k).getTransactionStatus());
                             uploadObj_1.put("time", list.get(k).getTransactionTime());
                             uploadObj_1.put("tradeVolume", list.get(k).getSingleVolume());
                             uploadObj_1.put("tradePrice", list.get(k).getTransactionPrice());
-                            items.add(uploadObj_1);
+                            Log.d("data", String.valueOf(uploadObj_1));
+                            result.complete(uploadObj_1);
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
+                    System.out.println(list.size()+"++++");
                     if (list.size()==100){
                         String[] st=l2TickDetailResponseV2.headerParams.split(",");
                         if (Double.parseDouble(st[0])>Double.parseDouble(st[1])){
@@ -110,37 +110,7 @@ public class L2TickDetailV2Test_1 {
                             String page2=st[0]+",100,1";
                             L2TickDEtailjk(id,page2,subtype);
                         }
-                    }else {
-                        try {
-                            uploadObj.put("items",new JSONArray(items));
-                            JSONArray jsonArray = uploadObj.getJSONArray("items");
-//                            System.out.println(jsonArray.getJSONObject(jsonArray.length()-1));
-//                            System.out.println(jsonArray.length()+"++++++++++++");
-                            for (int i=0;i<jsonArray.length();i++){
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                Log.d("data", String.valueOf(jsonObject));
-                            }
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
-                        }
-//                        Log.d("data", String.valueOf(uploadObj));
-                        result.complete(uploadObj);
                     }
-                }else {
-                    try {
-                        uploadObj.put("items",new JSONArray(items));
-                        JSONArray jsonArray = uploadObj.getJSONArray("items");
-//                        System.out.println(jsonArray.getJSONObject(jsonArray.length()-1));
-//                        System.out.println(jsonArray.length()+"++++++++++++");
-                        for (int i=0;i<jsonArray.length();i++){
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            Log.d("data", String.valueOf(jsonObject));
-                        }
-                    } catch (JSONException e) {
-                        result.completeExceptionally(e);
-                    }
-//                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
             }
             @Override

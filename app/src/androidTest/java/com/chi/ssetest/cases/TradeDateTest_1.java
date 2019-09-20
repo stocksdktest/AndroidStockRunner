@@ -8,6 +8,7 @@ import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.StockTestcase;
 import com.chi.ssetest.StockTestcaseName;
 import com.chi.ssetest.setup.TestcaseConfigRule;
+import com.mitake.core.TradeDate;
 import com.mitake.core.model.TradeDateModel;
 import com.mitake.core.request.TradeDateRequest;
 import com.mitake.core.response.IResponseCallback;
@@ -15,6 +16,7 @@ import com.mitake.core.response.Response;
 import com.mitake.core.response.TradeDateResponse;
 import com.mitake.core.response.TradeDateResponseV2;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.BeforeClass;
@@ -23,6 +25,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
@@ -56,17 +59,21 @@ public class TradeDateTest_1 {
         final String quoteNumbers = rule.getParam().optString("markets");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
-           final TradeDateRequest request = new TradeDateRequest();
+            final TradeDateRequest request = new TradeDateRequest();
             request.downLoad(quoteNumbers, new IResponseCallback() {
 
                 @Override
                 public void callback(Response response) {
-                    assertNotNull(response);
+                    try {
+                        assertNotNull(response);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
                     JSONObject uploadObj = new JSONObject();
                     try {
                         uploadObj.put("status",response.status);
                         uploadObj.put("message",response.message);
-                        uploadObj.put("extra",response.extra);
+                        uploadObj.put("tradeDates",response.extra);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
