@@ -53,7 +53,6 @@ public class AddValueTest_1 {
             throw new Exception(String.format("Testcase(%s) setup failed, config is empty", testcaseName));
         }
     }
-
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
 
