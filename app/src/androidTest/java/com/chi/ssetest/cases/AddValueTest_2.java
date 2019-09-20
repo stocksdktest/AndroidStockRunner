@@ -44,9 +44,7 @@ import static org.junit.Assert.*;
 public class AddValueTest_2 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.ADDVALUETEST_2;
     private static SetupConfig.TestcaseConfig testcaseConfig;
-
     @BeforeClass
-
     public static void setup() throws Exception {
         Log.d(" AddValueTest_2", "Setup");
         testcaseConfig = RunnerSetup.getInstance().getTestcaseConfig(testcaseName);
