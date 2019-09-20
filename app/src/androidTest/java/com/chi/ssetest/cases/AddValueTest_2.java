@@ -54,7 +54,6 @@ public class AddValueTest_2 {
     }
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
-
     @Test(timeout = 5000)
     public void requestWork() throws Exception {
         Log.d("AddValueTest_2", "requestWork");
