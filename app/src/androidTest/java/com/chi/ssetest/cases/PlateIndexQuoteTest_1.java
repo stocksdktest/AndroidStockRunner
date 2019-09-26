@@ -37,7 +37,7 @@ import static org.junit.Assert.assertNotNull;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-//行情快照 方法一
+//板块指数 方法一
 @RunWith(AndroidJUnit4.class)
 @StockTestcase(StockTestcaseName.PLATEINDEXQUOTETEST_1)
 public class PlateIndexQuoteTest_1 {

@@ -106,19 +106,13 @@ public class F10_StockPortfolioTest_1 {
                                 uploadObj_1.put("HOLDVOL",list.get(i).get("HOLDVOL"));
                                 uploadObj_1.put("ACCTFORNAV",list.get(i).get("ACCTFORNAV"));
                                 uploadObj_1.put("HOLDVALUE",list.get(i).get("HOLDVALUE"));
-                                items.add(uploadObj_1);
+                                Log.d("data", String.valueOf(uploadObj_1));
+                                result.complete(uploadObj_1);
                             }
-                            uploadObj.put("items",new JSONArray(items));
-                        }else {
-                            uploadObj.put("items",list);
-
                         }
-
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

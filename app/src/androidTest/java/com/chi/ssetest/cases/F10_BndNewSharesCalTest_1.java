@@ -94,11 +94,10 @@ public class F10_BndNewSharesCalTest_1 {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
+                    List<JSONObject> items=new ArrayList<>();
                     HashMap<String,Object> info = f10V2Response.info;
                     try {
-//                        uploadObj.put("sglist",info.get("sglist"));
-//                        uploadObj.put("jjsglist",info.get("jjsglist"));
-//                        uploadObj.put("dsslist",info.get("dsslist"));
+                        JSONObject uploadObj_2 = new JSONObject();
                         List<JSONObject> sglist=new ArrayList<>();
                         List<HashMap<String,Object>> list1= (List<HashMap<String,Object>>) info.get("sglist");
                         if (list1!=null){
@@ -113,9 +112,9 @@ public class F10_BndNewSharesCalTest_1 {
                                 uploadObj_1.put("TRADINGCODE",list1.get(i).get("TRADINGCODE"));
                                 sglist.add(uploadObj_1);
                             }
-                            uploadObj.put("sglist",new JSONArray(sglist));
+                            uploadObj_2.put("sglist",new JSONArray(sglist));
                         }else {
-                            uploadObj.put("sglist",list1);
+                            uploadObj_2.put("sglist",list1);
                         }
 
                         List<JSONObject> jjsglist=new ArrayList<>();
@@ -132,9 +131,9 @@ public class F10_BndNewSharesCalTest_1 {
                                 uploadObj_1.put("TRADINGCODE",list2.get(i).get("TRADINGCODE"));
                                 jjsglist.add(uploadObj_1);
                             }
-                            uploadObj.put("jjsglist",new JSONArray(jjsglist));
+                            uploadObj_2.put("jjsglist",new JSONArray(jjsglist));
                         }else {
-                            uploadObj.put("jjsglist",list2);
+                            uploadObj_2.put("jjsglist",list2);
                         }
                         List<JSONObject> dsslist=new ArrayList<>();
                         List<HashMap<String,Object>> list= (List<HashMap<String,Object>>) info.get("dsslist");
@@ -147,10 +146,12 @@ public class F10_BndNewSharesCalTest_1 {
                                 uploadObj_1.put("SECUABBR",list.get(i).get("SECUABBR"));
                                 dsslist.add(uploadObj_1);
                             }
-                            uploadObj.put("dsslist",new JSONArray(dsslist));
+                            uploadObj_2.put("dsslist",new JSONArray(dsslist));
                         }else {
-                            uploadObj.put("dsslist",list);
+                            uploadObj_2.put("dsslist",list);
                         }
+                        items.add(uploadObj_2);
+                        uploadObj.put("items",new JSONArray(items));
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

@@ -98,10 +98,12 @@ public class OverLayChartTest_1 {
                     List<JSONObject> items=new ArrayList<>();
                     JSONObject uploadObj = new JSONObject();
                     try {
+                        List<JSONObject> dayList=new ArrayList<>();
                         if (quoteNumbers2.equals("ChartTypeOneDay")){
-                            uploadObj.put("dayList",chartResponse.dayList.get(0));
+                            JSONObject uploadObj_1 = new JSONObject();
+                            uploadObj_1.put("day",chartResponse.dayList.get(0));
+                            dayList.add(uploadObj_1);
                         }else {
-                            List<JSONObject> dayList=new ArrayList<>();
                             for (int k=0;k<chartResponse.dayList.size();k++){
                                 JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("day",chartResponse.dayList.get(k));
@@ -113,17 +115,13 @@ public class OverLayChartTest_1 {
                         for (int k=0;k<chartResponse.historyItems.size();k++) {
                             JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("datetime",list.get(k).datetime);
-                            uploadObj_1.put("openPrice",list.get(k).openPrice);
-                            uploadObj_1.put("highPrice",list.get(k).highPrice);
-                            uploadObj_1.put("lowPrice",list.get(k).lowPrice);
                             uploadObj_1.put("closePrice",list.get(k).closePrice);
                             uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
-                            uploadObj_1.put("averagePrice",list.get(k).averagePrice);//ios需要判断是否存在字段
-                            uploadObj_1.put("reference_price",list.get(k).reference_price);
-                            uploadObj_1.put("transaction_price",list.get(k).transaction_price);
-                            uploadObj_1.put("openInterest",list.get(k).openInterest);//ios需要判断是否存在字段
-                            uploadObj_1.put("fp_volume",list.get(k).fp_volume);
-                            uploadObj_1.put("fp_amount",list.get(k).fp_amount);
+                            uploadObj_1.put("averagePrice",list.get(k).averagePrice);
+                            uploadObj_1.put("md",list.get(k).getMd());
+                            uploadObj_1.put("iopv",list.get(k).iopv);
+                            uploadObj_1.put("iopvPre",list.get(k).iopvPre);
+                            uploadObj_1.put("openInterest",list.get(k).openInterest);
                             OHLCItem.add(uploadObj_1);
                         }
                         uploadObj.put("OHLCItem",new JSONArray(OHLCItem));
@@ -132,17 +130,13 @@ public class OverLayChartTest_1 {
                         for (int k=0;k<list2.size();k++){
                             JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("datetime",list2.get(k).datetime);
-                            uploadObj_1.put("openPrice",list2.get(k).openPrice);
-                            uploadObj_1.put("highPrice",list2.get(k).highPrice);
-                            uploadObj_1.put("lowPrice",list2.get(k).lowPrice);
                             uploadObj_1.put("closePrice",list2.get(k).closePrice);
                             uploadObj_1.put("tradeVolume",list2.get(k).tradeVolume);
-                            uploadObj_1.put("averagePrice",list2.get(k).averagePrice);//ios需要判断是否存在字段
-                            uploadObj_1.put("reference_price",list2.get(k).reference_price);
-                            uploadObj_1.put("transaction_price",list2.get(k).transaction_price);
-                            uploadObj_1.put("openInterest",list2.get(k).openInterest);//ios需要判断是否存在字段
-                            uploadObj_1.put("fp_volume",list2.get(k).fp_volume);
-                            uploadObj_1.put("fp_amount",list2.get(k).fp_amount);
+                            uploadObj_1.put("averagePrice",list2.get(k).averagePrice);
+                            uploadObj_1.put("md",list2.get(k).getMd());
+                            uploadObj_1.put("iopv",list2.get(k).iopv);
+                            uploadObj_1.put("iopvPre",list2.get(k).iopvPre);
+                            uploadObj_1.put("openInterest",list2.get(k).openInterest);
                             overLayChart.add(uploadObj_1);
                         }
                         uploadObj.put("overLayChart",new JSONArray(overLayChart));

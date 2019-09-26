@@ -80,10 +80,10 @@ public class ConvertibleDebTest_1 {
                         try {
                             uploadObj.put("code",item.code);
                             uploadObj.put("name",item.name);
-                            uploadObj.put("market",item.market);
-                            uploadObj.put("subtype",item.subtype);
+//                            uploadObj.put("market",item.market);
+//                            uploadObj.put("subtype",item.subtype);
                             uploadObj.put("lastPrice",item.lastPrice);
-                            uploadObj.put("preClosePrice",item.preClosePrice);
+//                            uploadObj.put("preClosePrice",item.preClosePrice);
                             uploadObj.put("premium",item.premium);
 //                            uploadObj.put("upDownFlag",item.upDownFlag);
                             uploadObj.put("changeRate",item.upDownFlag+item.changeRate);

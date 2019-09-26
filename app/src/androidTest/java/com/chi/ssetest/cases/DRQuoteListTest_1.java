@@ -92,7 +92,7 @@ public class DRQuoteListTest_1 {
                         for (DRQuoteItem item : drQuoteListResponse.mDRQuoteItems) {
                             JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("code", item.code);
-                            uploadObj_1.put("code", item.name);
+                            uploadObj_1.put("name", item.name);
                             uploadObj_1.put("lastPrice", item.lastPrice);
                             uploadObj_1.put("preClosePrice", item.preClosePrice);
                             uploadObj_1.put("change",item.change);

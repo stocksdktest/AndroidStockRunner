@@ -115,27 +115,13 @@ public class F10_StockShareChangeInfoTest_1 {
                                     uploadObj_1.put("changeamt",item.changeamt);
                                     uploadObj_1.put("changedire",item.changedire);
                                 }
-                                items.add(uploadObj_1);
+                                Log.d("data", String.valueOf(uploadObj_1));
+                                result.complete(uploadObj_1);
                             } catch (JSONException e) {
                                 result.completeExceptionally(e);
                             }
                         }
-                        try {
-                            //把数组存储到JSON
-                            uploadObj.put("items", new JSONArray(items));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }else {
-                        try {
-                            //把数组存储到JSON
-                            uploadObj.put("items", stockShareChangeInfoResponse.list);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

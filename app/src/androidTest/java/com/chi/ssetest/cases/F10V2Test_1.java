@@ -115,21 +115,17 @@ public class F10V2Test_1 {
                         switch (quoteNumbers2){
                             //重要指标
                             case F10Type.D_IMPORTANTINDEX:
-                                List<JSONObject> IMPORTANTINDEX=new ArrayList<>();
-                                JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("REPORTTITLE",info.get("REPORTTITLE"));
-                                uploadObj_1.put("EPSBASIC",info.get("EPSBASIC"));
-                                uploadObj_1.put("NAPS",info.get("NAPS"));
-                                uploadObj_1.put("NPCUT",info.get("NPCUT"));
-                                uploadObj_1.put("TOTALSHARE",info.get("TOTALSHARE"));
-                                uploadObj_1.put("CIRCSKAMT",info.get("CIRCSKAMT"));
-                                uploadObj_1.put("BIZINCO",info.get("BIZINCO"));
-                                uploadObj_1.put("OPERINYOYB",info.get("OPERINYOYB"));
-                                uploadObj_1.put("NETPROFITYOYB",info.get("NETPROFITYOYB"));
-                                uploadObj_1.put("DISTRIBUTION",info.get("DISTRIBUTION"));
-                                uploadObj_1.put("EXRIGHT",info.get("EXRIGHT"));
-                                IMPORTANTINDEX.add(uploadObj_1);
-                                uploadObj.put("IMPORTANTINDEX",new JSONArray(IMPORTANTINDEX));
+                                uploadObj.put("REPORTTITLE",info.get("REPORTTITLE"));
+                                uploadObj.put("EPSBASIC",info.get("EPSBASIC"));
+                                uploadObj.put("NAPS",info.get("NAPS"));
+                                uploadObj.put("NPCUT",info.get("NPCUT"));
+                                uploadObj.put("TOTALSHARE",info.get("TOTALSHARE"));
+                                uploadObj.put("CIRCSKAMT",info.get("CIRCSKAMT"));
+                                uploadObj.put("BIZINCO",info.get("BIZINCO"));
+                                uploadObj.put("OPERINYOYB",info.get("OPERINYOYB"));
+                                uploadObj.put("NETPROFITYOYB",info.get("NETPROFITYOYB"));
+                                uploadObj.put("DISTRIBUTION",info.get("DISTRIBUTION"));
+                                uploadObj.put("EXRIGHT",info.get("EXRIGHT"));
                                 break;
                                 //主营构成
                             case F10Type.D_BUSINESSINFO:
@@ -142,7 +138,7 @@ public class F10V2Test_1 {
                                     uploadObj_2.put("PUBLISHDATE",infos.get(i).get("PUBLISHDATE"));
                                     BUSINESSINFO.add(uploadObj_2);
                                 }
-                                uploadObj.put("BUSINESSINFO",new JSONArray(BUSINESSINFO));
+                                uploadObj.put("list",new JSONArray(BUSINESSINFO));
                                 break;
                                 //龙虎榜-买入前5营业部
                             case F10Type.D_CHARTS5BUYS:
@@ -156,7 +152,7 @@ public class F10V2Test_1 {
                                     uploadObj_2.put("CHGDESC",infos.get(i).get("CHGDESC"));
                                     CHARTS5BUYS.add(uploadObj_2);
                                 }
-                                uploadObj.put("CHARTS5BUYS",new JSONArray(CHARTS5BUYS));
+                                uploadObj.put("list",new JSONArray(CHARTS5BUYS));
                                 break;
                                 //龙虎榜-卖出前5营业部
                             case F10Type.D_CHARTS5SELLS:
@@ -170,13 +166,11 @@ public class F10V2Test_1 {
                                     uploadObj_2.put("CHGDESC",infos.get(i).get("CHGDESC"));
                                     CHARTS5SELLS.add(uploadObj_2);
                                 }
-                                uploadObj.put("CHARTS5SELLS",new JSONArray(CHARTS5SELLS));
+                                uploadObj.put("list",new JSONArray(CHARTS5SELLS));
                                 break;
                                 //机构观点-机构评级
                             case F10Type.D_EXPTSKINVRATING:
-                                List<JSONObject> EXPTSKINVRATING=new ArrayList<>();
-                                JSONObject uploadObj_2 = new JSONObject();
-                                uploadObj_2.put("STDRATING",info.get("STDRATING"));
+                                uploadObj.put("STDRATING",info.get("STDRATING"));
                                 List<HashMap<String,Object>> items= (List<HashMap<String,Object>>) info.get("list");
                                 if (items!=null){
                                     List<JSONObject> list=new ArrayList<>();
@@ -189,54 +183,44 @@ public class F10V2Test_1 {
                                         uploadObj_3.put("PRICECAP",items.get(i).get("PRICECAP"));
                                         list.add(uploadObj_3);
                                     }
-                                    uploadObj_2.put("list",new JSONArray(list));
+                                    uploadObj.put("list",new JSONArray(list));
                                 }else {
-                                    uploadObj_2.put("list",items);
+                                    uploadObj.put("list",items);
                                 }
-                                EXPTSKINVRATING.add(uploadObj_2);
-                                uploadObj.put("EXPTSKINVRATING",new JSONArray(EXPTSKINVRATING));
                                 break;
                                 //机构观点-一致预测
                             case F10Type.D_EXPTSKSTATN:
-                                List<JSONObject> EXPTSKSTATN=new ArrayList<>();
-                                JSONObject uploadObj_3 = new JSONObject();
-                                uploadObj_3.put("TMBIZINCOME",info.get("TMBIZINCOME"));
-                                uploadObj_3.put("NMBIZINCOME",info.get("NMBIZINCOME"));
-                                uploadObj_3.put("YANMBIZINCOME",info.get("YANMBIZINCOME"));
-                                uploadObj_3.put("MAINBIZINCOMEYOY1",info.get("MAINBIZINCOMEYOY1"));
-                                uploadObj_3.put("MAINBIZINCOMEYOY2",info.get("MAINBIZINCOMEYOY2"));
-                                uploadObj_3.put("MAINBIZINCOMEYOY3",info.get("MAINBIZINCOMEYOY3"));
-                                uploadObj_3.put("TNETPROFIT",info.get("TNETPROFIT"));
-                                uploadObj_3.put("NNETPROFIT",info.get("NNETPROFIT"));
-                                uploadObj_3.put("YANNETPROFIT",info.get("YANNETPROFIT"));
-                                uploadObj_3.put("NETPROFITYOY1",info.get("NETPROFITYOY1"));
-                                uploadObj_3.put("NETPROFITYOY2",info.get("NETPROFITYOY2"));
-                                uploadObj_3.put("NETPROFITYOY3",info.get("NETPROFITYOY3"));
-                                uploadObj_3.put("TEPS",info.get("TEPS"));
-                                uploadObj_3.put("NEPS",info.get("NEPS"));
-                                uploadObj_3.put("YANEPS",info.get("YANEPS"));
-                                uploadObj_3.put("TENDDATE",info.get("TENDDATE"));
-                                uploadObj_3.put("NENDDATE",info.get("NENDDATE"));
-                                uploadObj_3.put("YANENDDATE",info.get("YANENDDATE"));
-                                EXPTSKSTATN.add(uploadObj_3);
-                                uploadObj.put("EXPTSKSTATN",new JSONArray(EXPTSKSTATN));
+                                uploadObj.put("TMBIZINCOME",info.get("TMBIZINCOME"));
+                                uploadObj.put("NMBIZINCOME",info.get("NMBIZINCOME"));
+                                uploadObj.put("YANMBIZINCOME",info.get("YANMBIZINCOME"));
+                                uploadObj.put("MAINBIZINCOMEYOY1",info.get("MAINBIZINCOMEYOY1"));
+                                uploadObj.put("MAINBIZINCOMEYOY2",info.get("MAINBIZINCOMEYOY2"));
+                                uploadObj.put("MAINBIZINCOMEYOY3",info.get("MAINBIZINCOMEYOY3"));
+                                uploadObj.put("TNETPROFIT",info.get("TNETPROFIT"));
+                                uploadObj.put("NNETPROFIT",info.get("NNETPROFIT"));
+                                uploadObj.put("YANNETPROFIT",info.get("YANNETPROFIT"));
+                                uploadObj.put("NETPROFITYOY1",info.get("NETPROFITYOY1"));
+                                uploadObj.put("NETPROFITYOY2",info.get("NETPROFITYOY2"));
+                                uploadObj.put("NETPROFITYOY3",info.get("NETPROFITYOY3"));
+                                uploadObj.put("TEPS",info.get("TEPS"));
+                                uploadObj.put("NEPS",info.get("NEPS"));
+                                uploadObj.put("YANEPS",info.get("YANEPS"));
+                                uploadObj.put("TENDDATE",info.get("TENDDATE"));
+                                uploadObj.put("NENDDATE",info.get("NENDDATE"));
+                                uploadObj.put("YANENDDATE",info.get("YANENDDATE"));
                                 break;
                                 //公司简介
                             case F10Type.D_COMPANYINFO:
-                                List<JSONObject> COMPANYINFO=new ArrayList<>();
-                                JSONObject uploadObj_4 = new JSONObject();
-                                uploadObj_4.put("LISTDATE",info.get("LISTDATE"));
-                                uploadObj_4.put("LISTOPRICE",info.get("LISTOPRICE"));
-                                uploadObj_4.put("FCLEVEL2NAME",info.get("FCLEVEL2NAME"));
-                                uploadObj_4.put("COMPNAME",info.get("COMPNAME"));
-                                uploadObj_4.put("CHAIRMAN",info.get("CHAIRMAN"));
-                                uploadObj_4.put("BSECRETARY",info.get("BSECRETARY"));
-                                uploadObj_4.put("BSECRETARYMAIL",info.get("BSECRETARYMAIL"));
-                                uploadObj_4.put("REGADDR",info.get("REGADDR"));
-                                uploadObj_4.put("ISSPRICE",info.get("ISSPRICE"));
-                                uploadObj_4.put("SWLEVEL2NAME",info.get("SWLEVEL2NAME"));
-                                COMPANYINFO.add(uploadObj_4);
-                                uploadObj.put("COMPANYINFO",new JSONArray(COMPANYINFO));
+                                uploadObj.put("LISTDATE",info.get("LISTDATE"));
+                                uploadObj.put("LISTOPRICE",info.get("LISTOPRICE"));
+                                uploadObj.put("FCLEVEL2NAME",info.get("FCLEVEL2NAME"));
+                                uploadObj.put("COMPNAME",info.get("COMPNAME"));
+                                uploadObj.put("CHAIRMAN",info.get("CHAIRMAN"));
+                                uploadObj.put("BSECRETARY",info.get("BSECRETARY"));
+                                uploadObj.put("BSECRETARYMAIL",info.get("BSECRETARYMAIL"));
+                                uploadObj.put("REGADDR",info.get("REGADDR"));
+                                uploadObj.put("ISSPRICE",info.get("ISSPRICE"));
+                                uploadObj.put("SWLEVEL2NAME",info.get("SWLEVEL2NAME"));
                                 break;
                                 //分红扩股
                             case F10Type.D_SHAREBONUS:
@@ -249,7 +233,7 @@ public class F10V2Test_1 {
                                     uploadObj_5.put("XDRDATE",infos.get(i).get("XDRDATE"));
                                     SHAREBONUS.add(uploadObj_5);
                                 }
-                                uploadObj.put("CHARTS5SELLS",new JSONArray(SHAREBONUS));
+                                uploadObj.put("list",new JSONArray(SHAREBONUS));
                                 break;
                                 //公司高管
                             case F10Type.D_COMPANYMANAGER:
@@ -264,7 +248,7 @@ public class F10V2Test_1 {
                                     uploadObj_5.put("MEMO",infos.get(i).get("MEMO"));
                                     COMPANYMANAGER.add(uploadObj_5);
                                 }
-                                uploadObj.put("COMPANYMANAGER",new JSONArray(COMPANYMANAGER));
+                                uploadObj.put("list",new JSONArray(COMPANYMANAGER));
                                 break;
                                 //十大流通股东
                             case F10Type.D_OTSHOLDER10:
@@ -279,7 +263,7 @@ public class F10V2Test_1 {
                                     uploadObj_5.put("SHHOLDERCODE",infos.get(i).get("SHHOLDERCODE"));
                                     OTSHOLDER10.add(uploadObj_5);
                                 }
-                                uploadObj.put("OTSHOLDER10",new JSONArray(OTSHOLDER10));
+                                uploadObj.put("list",new JSONArray(OTSHOLDER10));
                                 break;//十大股东
                             case F10Type.D_SHAREHOLDER10:
                                 List<JSONObject> SHAREHOLDER10=new ArrayList<>();
@@ -293,21 +277,17 @@ public class F10V2Test_1 {
                                     uploadObj_5.put("SHHOLDERCODE",infos.get(i).get("SHHOLDERCODE"));
                                     SHAREHOLDER10.add(uploadObj_5);
                                 }
-                                uploadObj.put("SHAREHOLDER10",new JSONArray(SHAREHOLDER10));
+                                uploadObj.put("list",new JSONArray(SHAREHOLDER10));
                                 break;
                                 //股本信息
                             case F10Type.D_SHAREINFO:
-                                List<JSONObject> SHAREINFO=new ArrayList<>();
-                                JSONObject uploadObj_5 = new JSONObject();
-                                uploadObj_5.put("TOTALSHARE",info.get("TOTALSHARE"));
-                                uploadObj_5.put("CIRCSKAMT",info.get("CIRCSKAMT"));
-                                uploadObj_5.put("RELANAME",info.get("RELANAME"));
-                                uploadObj_5.put("SHHOLDERNAME",info.get("SHHOLDERNAME"));
-                                uploadObj_5.put("HOLDERRTO",info.get("HOLDERRTO"));
-                                uploadObj_5.put("TOTALSHRTO",info.get("TOTALSHRTO"));
-                                uploadObj_5.put("TOTALSHAMT",info.get("TOTALSHAMT"));
-                                SHAREINFO.add(uploadObj_5);
-                                uploadObj.put("SHAREINFO",new JSONArray(SHAREINFO));
+                                uploadObj.put("TOTALSHARE",info.get("TOTALSHARE"));
+                                uploadObj.put("CIRCSKAMT",info.get("CIRCSKAMT"));
+                                uploadObj.put("RELANAME",info.get("RELANAME"));
+                                uploadObj.put("SHHOLDERNAME",info.get("SHHOLDERNAME"));
+                                uploadObj.put("HOLDERRTO",info.get("HOLDERRTO"));
+                                uploadObj.put("TOTALSHRTO",info.get("TOTALSHRTO"));
+                                uploadObj.put("TOTALSHAMT",info.get("TOTALSHAMT"));
                                 break;
                                 //股东户数
                             case F10Type.D_SHAREHOLDERNUM:
@@ -320,7 +300,7 @@ public class F10V2Test_1 {
                                     uploadObj_6.put("MOM",infos.get(i).get("MOM"));
                                     SHAREHOLDERNUM.add(uploadObj_6);
                                 }
-                                uploadObj.put("SHAREHOLDERNUM",new JSONArray(SHAREHOLDERNUM));
+                                uploadObj.put("list",new JSONArray(SHAREHOLDERNUM));
                                 break;
                                 //主要指标
                             case F10Type.D_PROFINMAININDEX:
@@ -343,7 +323,7 @@ public class F10V2Test_1 {
                                     uploadObj_6.put("OPNCFPS",infos.get(i).get("OPNCFPS"));
                                     PROFINMAININDEX.add(uploadObj_6);
                                 }
-                                uploadObj.put("PROFINMAININDEX",new JSONArray(PROFINMAININDEX));
+                                uploadObj.put("list",new JSONArray(PROFINMAININDEX));
                                 break;
                                 //利润表
                             case F10Type.D_PROINCSTATEMENTNEW:
@@ -363,7 +343,7 @@ public class F10V2Test_1 {
                                     uploadObj_6.put("PARENETP",infos.get(i).get("PARENETP"));
                                     PROINCSTATEMENTNEW.add(uploadObj_6);
                                 }
-                                uploadObj.put("PROINCSTATEMENTNEW",new JSONArray(PROINCSTATEMENTNEW));
+                                uploadObj.put("list",new JSONArray(PROINCSTATEMENTNEW));
                                 break;
                                 //资产负债表
                             case F10Type.D_PROBALSHEETNEW:
@@ -392,7 +372,7 @@ public class F10V2Test_1 {
                                     uploadObj_6.put("GOODWILL",infos.get(i).get("GOODWILL"));
                                     PROBALSHEETNEW.add(uploadObj_6);
                                 }
-                                uploadObj.put("PROBALSHEETNEW",new JSONArray(PROBALSHEETNEW));
+                                uploadObj.put("list",new JSONArray(PROBALSHEETNEW));
                                 break;
                                 //现金流量表
                             case F10Type.D_PROCFSTATEMENTNEW:
@@ -412,7 +392,7 @@ public class F10V2Test_1 {
                                     uploadObj_6.put("CASHNETR",infos.get(i).get("CASHNETR"));
                                     PROCFSTATEMENTNEW.add(uploadObj_6);
                                 }
-                                uploadObj.put("PROCFSTATEMENTNEW",new JSONArray(PROCFSTATEMENTNEW));
+                                uploadObj.put("list",new JSONArray(PROCFSTATEMENTNEW));
                                 break;
                                 //股东深度挖掘数据
                             case F10Type.IINVHOLDCHG:
@@ -428,7 +408,7 @@ public class F10V2Test_1 {
                                     uploadObj_6.put("HOLDQTYSUMCHG",infos.get(i).get("HOLDQTYSUMCHG"));
                                     IINVHOLDCHG.add(uploadObj_6);
                                 }
-                                uploadObj.put("IINVHOLDCHG",new JSONArray(IINVHOLDCHG));
+                                uploadObj.put("list",new JSONArray(IINVHOLDCHG));
                                 break;
                                 //沪深股api----大事提醒---按时间
                             case F10Type.IMPORT_NOTICE_DATA:
@@ -438,11 +418,11 @@ public class F10V2Test_1 {
                                     uploadObj_6.put("REPTITLE",infos.get(i).get("REPTITLE"));
                                     uploadObj_6.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
                                     uploadObj_6.put("TEXT",infos.get(i).get("TEXT"));
-                                    uploadObj_6.put("ID",infos.get(i).get("ID"));
-                                    uploadObj_6.put("ISPDF",infos.get(i).get("ISPDF"));
+//                                    uploadObj_6.put("ID",infos.get(i).get("ID"));
+//                                    uploadObj_6.put("ISPDF",infos.get(i).get("ISPDF"));
                                     IMPORT_NOTICE_DATA.add(uploadObj_6);
                                 }
-                                uploadObj.put("IMPORT_NOTICE_DATA",new JSONArray(IMPORT_NOTICE_DATA));
+                                uploadObj.put("list",new JSONArray(IMPORT_NOTICE_DATA));
                                 break;
                                 //沪深股api----大事提醒---按标题
                             case F10Type.IMPORT_NOTICE_TITLE:
@@ -452,18 +432,14 @@ public class F10V2Test_1 {
                                     uploadObj_6.put("REPTITLE",infos.get(i).get("REPTITLE"));
                                     uploadObj_6.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
                                     uploadObj_6.put("TEXT",infos.get(i).get("TEXT"));
-                                    uploadObj_6.put("ID",infos.get(i).get("ID"));
-                                    uploadObj_6.put("ISPDF",infos.get(i).get("ISPDF"));
+//                                    uploadObj_6.put("ID",infos.get(i).get("ID"));
+//                                    uploadObj_6.put("ISPDF",infos.get(i).get("ISPDF"));
                                     IMPORT_NOTICE_TITLE.add(uploadObj_6);
                                 }
-                                uploadObj.put("IMPORT_NOTICE_TITLE",new JSONArray(IMPORT_NOTICE_TITLE));
+                                uploadObj.put("list",new JSONArray(IMPORT_NOTICE_TITLE));
                                 break;
                                 //董秘问答
                             case F10Type.NEWS_INTEARACTIVE:
-                                List<JSONObject> NEWS_INTEARACTIVE=new ArrayList<>();
-                                JSONObject uploadObj_6 = new JSONObject();
-                                uploadObj_6.put("Page",info.get("Page"));
-                                uploadObj_6.put("PageNumber",info.get("PageNumber"));
                                 List<HashMap<String,Object>> items1= (List<HashMap<String,Object>>) info.get("List");
                                 if (items1!=null){
                                     List<JSONObject> list=new ArrayList<>();
@@ -479,19 +455,13 @@ public class F10V2Test_1 {
                                         uploadObj_7.put("INTERACTIVEID",items1.get(i).get("INTERACTIVEID"));
                                         list.add(uploadObj_7);
                                     }
-                                    uploadObj_6.put("list",new JSONArray(list));
+                                    uploadObj.put("list",new JSONArray(list));
                                 }else {
-                                    uploadObj_6.put("list",items1);
+                                    uploadObj.put("list",items1);
                                 }
-                                NEWS_INTEARACTIVE.add(uploadObj_6);
-                                uploadObj.put("NEWS_INTEARACTIVE",new JSONArray(NEWS_INTEARACTIVE));
                                 break;
                                 //大事提醒-业绩预告
                             case F10Type.EXPT_PERFORMANCE:
-                                List<JSONObject> EXPT_PERFORMANCE=new ArrayList<>();
-                                JSONObject uploadObj_8 = new JSONObject();
-                                uploadObj_8.put("Page",info.get("Page"));
-                                uploadObj_8.put("PageNumber",info.get("PageNumber"));
                                 List<HashMap<String,Object>> items2= (List<HashMap<String,Object>>) info.get("List");
                                 if (items2!=null){
                                     List<JSONObject> list=new ArrayList<>();
@@ -503,19 +473,13 @@ public class F10V2Test_1 {
                                         uploadObj_7.put("RETAMAXPROFITSINC",items2.get(i).get("RETAMAXPROFITSINC"));
                                         list.add(uploadObj_7);
                                     }
-                                    uploadObj_8.put("list",new JSONArray(list));
+                                    uploadObj.put("list",new JSONArray(list));
                                 }else {
-                                    uploadObj_8.put("list",items2);
+                                    uploadObj.put("list",items2);
                                 }
-                                EXPT_PERFORMANCE.add(uploadObj_8);
-                                uploadObj.put("EXPT_PERFORMANCE",new JSONArray(EXPT_PERFORMANCE));
                                 break;
                                 //沪深股api----大事提醒—业绩公告
                             case F10Type.PROINDIC_DATA:
-                                List<JSONObject> PROINDIC_DATA=new ArrayList<>();
-                                JSONObject uploadObj_9 = new JSONObject();
-                                uploadObj_9.put("Page",info.get("Page"));
-                                uploadObj_9.put("PageNumber",info.get("PageNumber"));
                                 List<HashMap<String,Object>> items3= (List<HashMap<String,Object>>) info.get("List");
                                 if (items3!=null){
                                     List<JSONObject> list=new ArrayList<>();
@@ -528,12 +492,10 @@ public class F10V2Test_1 {
                                         uploadObj_7.put("NPGRT",items3.get(i).get("NPGRT"));
                                         list.add(uploadObj_7);
                                     }
-                                    uploadObj_9.put("list",new JSONArray(list));
+                                    uploadObj.put("list",new JSONArray(list));
                                 }else {
-                                    uploadObj_9.put("list",items3);
+                                    uploadObj.put("list",items3);
                                 }
-                                PROINDIC_DATA.add(uploadObj_9);
-                                uploadObj.put("PROINDIC_DATA",new JSONArray(PROINDIC_DATA));
                                 break;
                         }
                     } catch (JSONException e) {

@@ -119,27 +119,13 @@ public class F10_TopLiquidShareHolderTest_1 {
                                     uploadObj_1.put("SHCODE_",item.SHCODE_);
                                     uploadObj_1.put("HOLDASHAREUR_",item.HOLDASHAREUR_);
                                 }
-                                items.add(uploadObj_1);
+                                Log.d("data", String.valueOf(uploadObj_1));
+                                result.complete(uploadObj_1);
                             } catch (JSONException e) {
                                 result.completeExceptionally(e);
                             }
                         }
-                        try {
-                            //把数组存储到JSON
-                            uploadObj.put("items", new JSONArray(items));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }else {
-                        try {
-                            //把数组存储到JSON
-                            uploadObj.put("items", topLiquidShareHolderResponse.list);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

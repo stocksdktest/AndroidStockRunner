@@ -99,25 +99,18 @@ public class F10_FndNavIndexTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     ArrayList<FundValueInfoItem> list = fundValueResponse.info.list;
                     try {
-                        uploadObj.put("UnitNAV_",fundValueResponse.info.UnitNAV_);
-                        uploadObj.put("ENDDATE_",fundValueResponse.info.ENDDATE_);
-                        List<JSONObject> fundValueInfoItem=new ArrayList<>();
                         if (list!=null){
                             for (int i=0;i<list.size();i++){
                                 JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("NAVDATE",list.get(i).NAVDATE);
-                                uploadObj_1.put("UNITNAV",list.get(i).UNITNAV);
-                                fundValueInfoItem.add(uploadObj_1);
+                                uploadObj_1.put("ENDDATE_",list.get(i).NAVDATE);
+                                uploadObj_1.put("UNITNAV_",list.get(i).UNITNAV);
+                                Log.d("data", String.valueOf(uploadObj_1));
+                                result.complete(uploadObj_1);
                             }
-                            uploadObj.put("fundValueInfoItem",new JSONArray(fundValueInfoItem));
-                        }else {
-                            uploadObj.put("fundValueInfoItem",fundValueResponse.info.list);
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

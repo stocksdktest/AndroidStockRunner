@@ -100,7 +100,6 @@ public class F10_BndBuyBacksTest_1 {
                         uploadObj.put("CONVERTRATE",list.get("CONVERTRATE"));
                         uploadObj.put("CONVERTPRC",list.get("CONVERTPRC"));
                         uploadObj.put("REPAYDATE",list.get("REPAYDATE"));
-                        uploadObj.put("PUBLISHDATE",list.get("PUBLISHDATE"));
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

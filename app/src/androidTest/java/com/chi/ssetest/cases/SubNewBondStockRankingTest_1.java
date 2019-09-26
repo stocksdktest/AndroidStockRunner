@@ -76,8 +76,6 @@ public class SubNewBondStockRankingTest_1 {
                         result.completeExceptionally(e);
                     }
                     ArrayList<SubNewStockRankingModel> list=subNewStockRankingResponse.list;
-                    List<JSONObject> items=new ArrayList<>();
-                    JSONObject uploadObj = new JSONObject();
                     for (int i=0;i<list.size();i++) {
                         JSONObject uploadObj_1 = new JSONObject();
                         try {
@@ -87,33 +85,16 @@ public class SubNewBondStockRankingTest_1 {
                             uploadObj_1.put("originalPrice",list.get(i).getOriginalPrice());
                             uploadObj_1.put("lastestPrice",list.get(i).getLastestPrice());
                             uploadObj_1.put("originalData",list.get(i).getOriginalData());
-                            uploadObj_1.put("continuousLimitedDays",list.get(i).getContinuousLimitedDays());//无值
+//                            uploadObj_1.put("continuousLimitedDays",list.get(i).getContinuousLimitedDays());//无值
                             uploadObj_1.put("rate",list.get(i).getRate());
                             uploadObj_1.put("allRate",list.get(i).getAllRate());
                             uploadObj_1.put("preClosePrice",list.get(i).getPreClosePrice());
-                            items.add(uploadObj_1);
+                            Log.d("data", String.valueOf(uploadObj_1));
+                            result.complete(uploadObj_1);
                         } catch (JSONException e) {
                             result.completeExceptionally(e);
                         }
                     }
-                    try {
-                        //把数组存储到JSON
-                        uploadObj.put("items", new JSONArray(items));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    //解析输出JSON
-                    try {
-                        JSONArray jsonArray = uploadObj.getJSONArray("items");
-                        for (int i=0;i<jsonArray.length();i++){
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            Log.d("data", String.valueOf(jsonObject));
-//                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

@@ -110,17 +110,6 @@ public class F10_NewShareListTest_1 {
                     for (NewShareList item : newShareListResponse.infos) {
                         try {
                             uploadObj.put("title",item.getTitle());
-                            List<JSONObject> subTitles=new ArrayList<>();
-                            if (item.getSubTitles()!=null){
-                                for (int i=0;i<item.getSubTitles().length;i++){
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("subTitle"+i,item.getSubTitles()[i]);
-                                    subTitles.add(uploadObj_1);
-                                }
-                                uploadObj.put("subTitles",new JSONArray(subTitles));
-                            }else {
-                                uploadObj.put("subTitles",item.getSubTitles());
-                            }
                             List<JSONObject> dataList=new ArrayList<>();
                             if(item.getDataList()!=null){
                                 for (int i=0;i<item.getDataList().size();i++){

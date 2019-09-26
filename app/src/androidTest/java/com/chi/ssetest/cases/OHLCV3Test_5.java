@@ -95,14 +95,9 @@ public class OHLCV3Test_5 {
                                 result.completeExceptionally(e);
                             }
                             CopyOnWriteArrayList<OHLCItem> list =ohlcResponse.historyItems;
-                            CopyOnWriteArrayList<FQItem> list2=ohlcResponse.fq;
-                            List<JSONObject> items=new ArrayList<>();
-                            List<JSONObject> items_1=new ArrayList<>();
-                            JSONObject uploadObj = new JSONObject();
                             for (int k=0;k<list.size();k++){
                                 try {
                                     JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("code",CODES);
                                     uploadObj_1.put("datetime",list.get(k).datetime);
                                     uploadObj_1.put("openPrice",list.get(k).openPrice);
                                     uploadObj_1.put("highPrice",list.get(k).highPrice);
@@ -115,64 +110,12 @@ public class OHLCV3Test_5 {
                                     uploadObj_1.put("openInterest",list.get(k).openInterest);//ios需要判断是否存在字段
                                     uploadObj_1.put("fp_volume",list.get(k).fp_volume);
                                     uploadObj_1.put("fp_amount",list.get(k).fp_amount);
-                                    items.add(uploadObj_1);
+                                    Log.d("data", String.valueOf(uploadObj_1));
+                                    result.complete(uploadObj_1);
                                 } catch (JSONException e) {
                                     result.completeExceptionally(e);
                                 }
                             }
-                            if (list2!=null){
-                                for (int j=0;j<list2.size();j++){
-                                    try {
-                                        JSONObject uploadObj_2 = new JSONObject();
-                                        uploadObj_2.put("code",CODES);
-                                        uploadObj_2.put("dateTime",list2.get(j).dateTime);
-                                        uploadObj_2.put("increasePrice",list2.get(j).increasePrice);
-                                        uploadObj_2.put("allotmentPrice",list2.get(j).allotmentPrice);
-                                        uploadObj_2.put("bonusAmount",list2.get(j).bonusAmount);
-                                        uploadObj_2.put("bonusProportion",list2.get(j).bonusProportion);
-                                        uploadObj_2.put("increaseProportion",list2.get(j).increaseProportion);
-                                        uploadObj_2.put("increaseVolume",list2.get(j).increaseVolume);
-                                        uploadObj_2.put("allotmentProportion",list2.get(j).allotmentProportion);
-                                        items_1.add(uploadObj_2);
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                                try {
-                                    uploadObj.put("items_1",new JSONArray(items_1));
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                try {
-                                    JSONArray jsonArray_1 = uploadObj.getJSONArray("items_1");
-                                    for (int i=0;i<jsonArray_1.length();i++){
-                                        JSONObject jsonObject = jsonArray_1.getJSONObject(i);
-                                        Log.d("data_2", String.valueOf(jsonObject));
-                                        //                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }else {
-                                Log.d("Fqitem","null");
-                            }
-                            try {
-                                uploadObj.put("items",new JSONArray(items));
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            //解析输出JSON
-                            try {
-                                JSONArray jsonArray = uploadObj.getJSONArray("items");
-                                for (int i=0;i<jsonArray.length();i++){
-                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                    Log.d("data_1", String.valueOf(jsonObject));
-                                    //                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            result.complete(uploadObj);
                         }
 
                         @Override
@@ -180,28 +123,6 @@ public class OHLCV3Test_5 {
                             result.completeExceptionally(new Exception(s));
                         }
                     });
-//                    request.send(quoteItem,Types[b],Integer.parseInt(FqTypes[b]),Dates[b], Integer.parseInt(Numbers[b]), new IResponseInfoCallback() {
-//                        @Override
-//                        public void callback(Response response) {
-//                            OHLCResponse ohlcResponse = (OHLCResponse) response;
-//                            assertNotNull(ohlcResponse.historyItems);
-//                            JSONObject uploadObj = new JSONObject();
-//                            // TODO fill uploadObj with QuoteResponse value
-//                            try {
-//                                uploadObj.put("fake_result",CODES);
-//                            } catch (JSONException e) {
-//                                result.completeExceptionally(e);
-//                            }
-//                            for (OHLCItem item : ohlcResponse.historyItems) {
-//                                Log.d("StockUnittest", CODES[b]+item.datetime);
-//                            }
-//                            result.complete(uploadObj);
-//                        }
-//                        @Override
-//                        public void exception(ErrorInfo errorInfo) {
-//                            result.completeExceptionally(new Exception(errorInfo.toString()));
-//                        }
-//                    });
                 }
 
                 @Override

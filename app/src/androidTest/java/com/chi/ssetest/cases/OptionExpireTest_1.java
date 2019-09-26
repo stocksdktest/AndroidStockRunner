@@ -72,25 +72,18 @@ public class OptionExpireTest_1 {
                     } catch (AssertionError e) {
                         result.completeExceptionally(e);
                     }
-                    JSONObject uploadObj = new JSONObject();
                     try {
-                        uploadObj.put("stockID", quoteNumbers);
-                        List<JSONObject> item=new ArrayList<>();
                         if (optionExpireResponse.list!=null&&optionExpireResponse.list.length>0){
                             for (int i=0;i<optionExpireResponse.list.length;i++){
                                 JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("data",optionExpireResponse.list[i]);
-                                item.add(uploadObj_1);
+                                uploadObj_1.put("date",optionExpireResponse.list[i]);
+                                Log.d("data", String.valueOf(uploadObj_1));
+                                result.complete(uploadObj_1);
                             }
-                            uploadObj.put("list",new JSONArray(item));
-                        }else {
-                            uploadObj.put("list",optionExpireResponse.list);
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

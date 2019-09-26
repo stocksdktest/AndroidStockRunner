@@ -46,8 +46,6 @@ public class TickTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.TICKTEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
     final CompletableFuture result = new CompletableFuture<JSONObject>();
-    private static JSONObject uploadObj = new JSONObject();
-    private static List<JSONObject> items=new ArrayList<>();
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("TickTest_1", "Setup");
@@ -90,7 +88,6 @@ public class TickTest_1 {
                     }
                 }
                 List<TickItem> list=tickResponse.tickItems;
-//                System.out.println(list.size()+"++++++++++++");
                 if (list!=null){
                     try {
                         for (int k=0;k<list.size();k++){
@@ -100,7 +97,8 @@ public class TickTest_1 {
                             uploadObj_1.put("time", list.get(k).getTransactionTime());
                             uploadObj_1.put("tradeVolume", list.get(k).getSingleVolume());
                             uploadObj_1.put("tradePrice", list.get(k).getTransactionPrice());
-                            items.add(uploadObj_1);
+                            Log.d("data", String.valueOf(uploadObj_1));
+                            result.complete(uploadObj_1);
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
@@ -115,38 +113,7 @@ public class TickTest_1 {
                            String page2=st[0]+",100,1";
                            tickjk(id,page2,subtype);
                        }
-                   }else {
-                       try {
-                           uploadObj.put("items",new JSONArray(items));
-                           JSONArray jsonArray = uploadObj.getJSONArray("items");
-//                           System.out.println(jsonArray.getJSONObject(jsonArray.length()-1));
-                           for (int i=0;i<jsonArray.length();i++){
-                               JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                               System.out.println(jsonObject);
-                               Log.d("data", String.valueOf(jsonObject));
-                           }
-                       } catch (JSONException e) {
-                           result.completeExceptionally(e);
-                       }
-//                       Log.d("data", String.valueOf(uploadObj));
-                       result.complete(uploadObj);
                    }
-               }else {
-                   try {
-                       uploadObj.put("items",new JSONArray(items));
-                       JSONArray jsonArray = uploadObj.getJSONArray("items");
-//                       System.out.println(jsonArray.getJSONObject(jsonArray.length()-1));
-//                       System.out.println(jsonArray.length()+"__________________");
-                       for (int i=0;i<jsonArray.length();i++){
-                           JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                           System.out.println(jsonObject);
-                           Log.d("data", String.valueOf(jsonObject));
-                       }
-                   } catch (JSONException e) {
-                       result.completeExceptionally(e);
-                   }
-//                    Log.d("data", String.valueOf(uploadObj));
-                   result.complete(uploadObj);
                }
             }
             @Override

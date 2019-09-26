@@ -100,9 +100,7 @@ public class F10_BlockTradeTest_1 {
                     } catch (AssertionError e) {
                         result.completeExceptionally(e);
                     }
-                    JSONObject uploadObj = new JSONObject();
                     List<HashMap<String,Object>> infos = f10V2Response.infos;
-                    List<JSONObject> items=new ArrayList<>();
                     try {
                         for (int i=0;i<infos.size();i++){
                             JSONObject uploadObj_1 = new JSONObject();
@@ -113,14 +111,12 @@ public class F10_BlockTradeTest_1 {
                             uploadObj_1.put("PRC",infos.get(i).get("PRC"));
                             uploadObj_1.put("BUYERNAME",infos.get(i).get("BUYERNAME"));
                             uploadObj_1.put("SELLERNAME",infos.get(i).get("SELLERNAME"));
-                            items.add(uploadObj_1);
+                            Log.d("data", String.valueOf(uploadObj_1));
+                            result.complete(uploadObj_1);
                         }
-                        uploadObj.put("items",new JSONArray(items));
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

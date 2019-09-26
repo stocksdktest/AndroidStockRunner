@@ -91,7 +91,7 @@ public class DRLinkQuoteTest_1 {
                     // TODO fill uploadObj with QuoteResponse value
                     try {
                         uploadObj.put("code", list.code);
-                        uploadObj.put("code", list.name);
+                        uploadObj.put("name", list.name);
                         uploadObj.put("lastPrice", list.lastPrice);
                         uploadObj.put("preClosePrice", list.preClosePrice);
                         uploadObj.put("change",list.change);

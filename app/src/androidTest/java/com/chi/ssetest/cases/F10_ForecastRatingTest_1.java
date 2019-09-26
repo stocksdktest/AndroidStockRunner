@@ -105,12 +105,12 @@ public class F10_ForecastRatingTest_1 {
                             uploadObj_1.put("LAST_INVRATINGDESC_",list.list.get(i).LAST_INVRATINGDESC_);
                             item.add(uploadObj_1);
                         }
-                        uploadObj.put("item",new JSONArray(item));
+                        uploadObj.put("list",new JSONArray(item));
+                        Log.d("data", String.valueOf(uploadObj));
+                        result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {
