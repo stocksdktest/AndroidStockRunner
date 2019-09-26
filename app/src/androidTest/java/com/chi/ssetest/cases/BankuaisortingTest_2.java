@@ -81,8 +81,6 @@ public class BankuaisortingTest_2 {
                         result.completeExceptionally(e);
                     }
                     List<Bankuaisorting> list=bankuaisortingResponse.list;
-                    JSONObject uploadObj = new JSONObject();
-                    List<JSONObject> items=new ArrayList<>();
                     for (int i=0;i<list.size();i++){
                         JSONObject uploadObj_1 = new JSONObject();
                         try {

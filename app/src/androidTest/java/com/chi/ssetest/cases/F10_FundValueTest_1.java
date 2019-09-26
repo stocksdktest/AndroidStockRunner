@@ -118,15 +118,13 @@ public class F10_FundValueTest_1 {
                                 uploadObj_1.put("UNITNAV",list.get(i).get("UNITNAV"));
                                 uploadObj_1.put("NAVDATE",list.get(i).get("NAVDATE"));
                                 uploadObj_1.put("GROWRATE",list.get(i).get("GROWRATE"));
-                                items.add(uploadObj_1);
+                                Log.d("data", String.valueOf(uploadObj_1));
+                                result.complete(uploadObj_1);
                             }
-                            uploadObj.put("items",new JSONArray(items));
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

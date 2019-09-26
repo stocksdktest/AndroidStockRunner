@@ -104,17 +104,13 @@ public class F10_IndustryPortfolioTest_1 {
                                 uploadObj_1.put("INDUSTRYNAME",list.get(i).get("INDUSTRYNAME"));
                                 uploadObj_1.put("FAIRVALUE",list.get(i).get("FAIRVALUE"));
                                 uploadObj_1.put("NAVRATIO",list.get(i).get("NAVRATIO"));
-                                items.add(uploadObj_1);
+                                Log.d("data", String.valueOf(uploadObj_1));
+                                result.complete(uploadObj_1);
                             }
-                            uploadObj.put("items",new JSONArray(items));
-                        }else {
-                            uploadObj.put("items",list);
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

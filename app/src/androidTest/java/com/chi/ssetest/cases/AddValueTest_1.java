@@ -45,9 +45,7 @@ import static org.junit.Assert.*;
 public class AddValueTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.ADDVALUETEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
-
     @BeforeClass
-
     public static void setup() throws Exception {
         Log.d(" AddValueTest_1", "Setup");
         testcaseConfig = RunnerSetup.getInstance().getTestcaseConfig(testcaseName);
@@ -55,10 +53,8 @@ public class AddValueTest_1 {
             throw new Exception(String.format("Testcase(%s) setup failed, config is empty", testcaseName));
         }
     }
-
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
-
     @Test(timeout = 5000)
     public void requestWork() throws Exception {
         Log.d("AddValueTest_1", "requestWork");
@@ -112,7 +108,7 @@ public class AddValueTest_1 {
                             if (item.fundsInflows!=null&&item.fundsInflows.length>0){
                                 for (int j=0;j<item.fundsInflows.length;j++){
                                     JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("fundsInflows"+j,item.fundsInflows[j]);
+                                    uploadObj_2.put("fundsInflows"+(j+1),item.fundsInflows[j]);
                                     fundsInflows.add(uploadObj_2);
                                 }
                                 uploadObj.put("fundsInflows",new JSONArray(fundsInflows));
@@ -123,7 +119,7 @@ public class AddValueTest_1 {
                             if (item.fundsOutflows!=null&&item.fundsOutflows.length>0){
                                 for (int j=0;j<item.fundsOutflows.length;j++){
                                     JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("fundsOutflows"+j,item.fundsOutflows[j]);
+                                    uploadObj_2.put("fundsOutflows"+(j+1),item.fundsOutflows[j]);
                                     fundsOutflows.add(uploadObj_2);
                                 }
                                 uploadObj.put("fundsOutflows",new JSONArray(fundsOutflows));
@@ -154,7 +150,7 @@ public class AddValueTest_1 {
                             if (item.othersFundsInflows!=null&&item.othersFundsInflows.length>0){
                                 for (int j=0;j<item.othersFundsInflows.length;j++){
                                     JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("othersFundsInflows"+j,item.othersFundsInflows[j]);
+                                    uploadObj_2.put("othersFundsInflows"+(j+1),item.othersFundsInflows[j]);
                                     othersFundsInflows.add(uploadObj_2);
                                 }
                                 uploadObj.put("othersFundsInflows",new JSONArray(othersFundsInflows));
@@ -165,7 +161,7 @@ public class AddValueTest_1 {
                             if (item.othersFundsOutflows!=null&&item.othersFundsOutflows.length>0){
                                 for (int j=0;j<item.othersFundsOutflows.length;j++){
                                     JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("othersFundsOutflows"+j,item.othersFundsOutflows[j]);
+                                    uploadObj_2.put("othersFundsOutflows"+(j+1),item.othersFundsOutflows[j]);
                                     othersFundsOutflows.add(uploadObj_2);
                                 }
                                 uploadObj.put("othersFundsOutflows",new JSONArray(othersFundsOutflows));
@@ -173,17 +169,7 @@ public class AddValueTest_1 {
                                 uploadObj.put("othersFundsOutflows",item.othersFundsOutflows);
                             }
                             uploadObj_1.put("fiveMinutesChangeRate",item.fiveMinutesChangeRate);
-                            List<JSONObject> dates=new ArrayList<>();
-                            if (item.dates!=null&&item.dates.length>0){
-                                for (int j=0;j<item.dates.length;j++){
-                                    JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("dates"+j,item.dates[j]);
-                                    dates.add(uploadObj_2);
-                                }
-                                uploadObj.put("dates",new JSONArray(dates));
-                            }else {
-                                uploadObj.put("dates",item.dates);
-                            }
+
                             uploadObj_1.put("largeOrderNumB",item.largeOrderNumB);
                             uploadObj_1.put("largeOrderNumS",item.largeOrderNumS);
                             uploadObj_1.put("bigOrderNumB",item.bigOrderNumB);
@@ -198,29 +184,12 @@ public class AddValueTest_1 {
                             uploadObj_1.put("ratioMainforceMoneyNetInflow5",item.ratioMainforceMoneyNetInflow5);
                             uploadObj_1.put("ratioMainforceMoneyNetInflow10",item.ratioMainforceMoneyNetInflow10);
                             uploadObj_1.put("ratioMainforceMoneyNetInflow20",item.ratioMainforceMoneyNetInflow20);
-                            items.add(uploadObj_1);
+                            Log.d("data", String.valueOf(uploadObj_1));
+                            result.complete(uploadObj_1);
                         } catch (JSONException e) {
                             result.completeExceptionally(e);
                         }
                     }
-                    try {
-                        //把数组存储到JSON
-                        uploadObj.put("items", new JSONArray(items));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    //解析输出JSON
-                    try {
-                        JSONArray jsonArray = uploadObj.getJSONArray("items");
-                        for (int i=0;i<jsonArray.length();i++){
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            Log.d("data", String.valueOf(jsonObject));
-//                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    result.complete(uploadObj);
                 }
 
                 @Override

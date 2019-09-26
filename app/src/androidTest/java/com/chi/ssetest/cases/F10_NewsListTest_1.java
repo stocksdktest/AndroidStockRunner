@@ -124,27 +124,15 @@ public class F10_NewsListTest_1 {
                                 uploadObj_1.put("REPORTTITLE_", item.REPORTTITLE_);
                                 uploadObj_1.put("MEDIANAME_", item.MEDIANAME_);
                                 uploadObj_1.put("ABSTRACTFORMAT_", item.ABSTRACTFORMAT_);
-                                uploadObj_1.put("OVERPAGE_", item.OVERPAGE_);
-                                uploadObj_1.put("COUNT_", item.COUNT_);
-                                items.add(uploadObj_1);
+//                                uploadObj_1.put("OVERPAGE_", item.OVERPAGE_);
+//                                uploadObj_1.put("COUNT_", item.COUNT_);
+                                Log.d("data", String.valueOf(uploadObj_1));
+                                result.complete(uploadObj_1);
                             } catch (JSONException e) {
                                 result.completeExceptionally(e);
                             }
                         }
-                        try {
-                            uploadObj.put("items",new JSONArray(items));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }else {
-                        try {
-                            uploadObj.put("items",newsListResponse.list);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

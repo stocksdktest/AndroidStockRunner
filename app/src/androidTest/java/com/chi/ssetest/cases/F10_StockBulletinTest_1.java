@@ -100,7 +100,7 @@ public class F10_StockBulletinTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     StockBulletinDetailItem list = stockBulletinResponse.info;
                     try {
-                        uploadObj.put("totalSharPUBDATE_eUL",list.PUBDATE_);
+                        uploadObj.put("PUBDATE_",list.PUBDATE_);
                         uploadObj.put("ID_",list.ID_);
                         uploadObj.put("title",list.title);
                         uploadObj.put("Content",list.Content);

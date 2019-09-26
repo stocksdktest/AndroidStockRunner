@@ -79,8 +79,6 @@ public class ChartSubTest_1 {
                             String[][] list=chartSubResponse.line;
                             JSONObject uploadObj = new JSONObject();
                             try {
-                                uploadObj.put("code",chartSubResponse.code);
-                                uploadObj.put("data",chartSubResponse.date);
                                 List<JSONObject> line=new ArrayList<>();
                                 if (list!=null){
                                     for (int i=0;i<list.length;i++){

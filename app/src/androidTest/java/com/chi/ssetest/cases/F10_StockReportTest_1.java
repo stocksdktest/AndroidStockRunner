@@ -109,7 +109,7 @@ public class F10_StockReportTest_1 {
                             uploadObj.put("dataSource",list.dataSource);
                             uploadObj.put("ABSTRACT_",list.ABSTRACT_);
                             uploadObj.put("ABSTRACTFORMAT_",list.ABSTRACTFORMAT_);
-                            uploadObj.put("ComName",list.ComName);
+//                            uploadObj.put("ComName",list.ComName);
                             uploadObj.put("PURL_",list.PURL_);
                         } catch (JSONException e) {
                             result.completeExceptionally(e);

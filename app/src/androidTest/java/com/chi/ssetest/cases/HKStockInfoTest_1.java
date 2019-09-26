@@ -83,18 +83,18 @@ public class HKStockInfoTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value
                     try {
-                        uploadObj.put("",list.vcmDataTimestamp);
-                        uploadObj.put("",list.vcmStartTime);
-                        uploadObj.put("",list.vcmEndTime);
-                        uploadObj.put("",list.vcmReffPrice);
-                        uploadObj.put("",list.vcmLowerPrice);
-                        uploadObj.put("",list.vcmUpperPrice);
-                        uploadObj.put("",list.casDataTimestamp);
-                        uploadObj.put("",list.casOrdImbDirection);
-                        uploadObj.put("",list.casOrdImbQty);
-                        uploadObj.put("",list.casReffPrice);
-                        uploadObj.put("",list.casLowerPrice);
-                        uploadObj.put("",list.casUpperPrice);
+                        uploadObj.put("vcmDataTimestamp",list.vcmDataTimestamp);
+                        uploadObj.put("vcmStartTime",list.vcmStartTime);
+                        uploadObj.put("vcmEndTime",list.vcmEndTime);
+                        uploadObj.put("vcmReffPrice",list.vcmReffPrice);
+                        uploadObj.put("vcmLowerPrice",list.vcmLowerPrice);
+                        uploadObj.put("vcmUpperPrice",list.vcmUpperPrice);
+                        uploadObj.put("casDataTimestamp",list.casDataTimestamp);
+                        uploadObj.put("casOrdImbDirection",list.casOrdImbDirection);
+                        uploadObj.put("casOrdImbQty",list.casOrdImbQty);
+                        uploadObj.put("casReffPrice",list.casReffPrice);
+                        uploadObj.put("casLowerPrice",list.casLowerPrice);
+                        uploadObj.put("casUpperPrice",list.casUpperPrice);
                         List<JSONObject> HKOtherItem=new ArrayList<>();
                         if (list.list!=null&&list.list.size()>0){
                             for (int k=0;k<list.list.size();k++){

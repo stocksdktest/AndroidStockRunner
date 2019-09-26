@@ -113,6 +113,8 @@ public class F10_FinanceMrgninTest_1 {
                     List<HashMap<String,Object>> infos = f10V2Response.infos;
                     try {
                         if (infos!=null){
+                            uploadObj.put("pageNumber",f10V2Response.pageNumber);
+                            uploadObj.put("page",f10V2Response.page);
                             for (int i=0;i<infos.size();i++){
                                 JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
@@ -130,15 +132,15 @@ public class F10_FinanceMrgninTest_1 {
                                 uploadObj_1.put("FINMRGNBAL",infos.get(i).get("FINMRGNBAL"));
                                 items.add(uploadObj_1);
                             }
-                            uploadObj.put("items",new JSONArray(items));
+                            uploadObj.put("list",new JSONArray(items));
                         }else {
-                            uploadObj.put("items",infos);
+                            uploadObj.put("list",infos);
                         }
+                        Log.d("data", String.valueOf(uploadObj));
+                        result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {
