@@ -100,12 +100,11 @@ public class ChartSubTest_2 {
                                 List<JSONObject> line=new ArrayList<>();
                                 String[] kname=quoteNumbers4.split(",");
                                 for (int i=0;i<list.length;i++){
-                                    for (int k=0;k<list[i].length;k++){
-                                        JSONObject uploadObj_1 = new JSONObject();
+                                    for (int k=1;k<list[i].length;k++){
                                         uploadObj_1.put(kname[k],list[i][k]);
-                                        Log.d("data", String.valueOf(uploadObj_1));
-                                        result.complete(uploadObj_1);
                                     }
+                                    Log.d("data", String.valueOf(uploadObj_1));
+                                    result.complete(uploadObj_1);
                                 }
                             } catch (JSONException e) {
                                 result.completeExceptionally(e);
