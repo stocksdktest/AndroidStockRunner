@@ -10,6 +10,7 @@ trigger:
 steps:
 - name: test
   image: mingc/android-build-box:1.12.0
+  privileged: true
   volumes:
   - name: build-result
     path: /drone/src/app/build
