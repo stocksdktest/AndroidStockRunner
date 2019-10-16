@@ -13,6 +13,10 @@ steps:
   volumes:
   - name: build-result
     path: /drone/src/app/build
+  - name: build-deps-jar
+    path: /drone/src/app/libs
+  - name: build-deps-jni
+    path: /drone/src/app/jniLibs
   commands:
   - cd /drone/src && ./gradlew build assembleAndroidTest
   - test -f /drone/src/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
@@ -33,3 +37,9 @@ steps:
 volumes:
 - name: build-result
   temp: {}
+- name: build-deps-jar
+  host:
+    path: /root/AndroidTestRunner/app/libs
+- name: build-deps-jni
+  host:
+    path: /root/AndroidTestRunner/app/jniLibs
