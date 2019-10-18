@@ -10,8 +10,12 @@ trigger:
 steps:
 - name: test
   image: mingc/android-build-box:1.12.0
-  privileged: true
+  mem_limit: 800000000
+  environment:
+    GRADLE_HOME: /root/.gradle
   volumes:
+  - name: build-cache
+    path: /root/.gradle/caches
   - name: build-result
     path: /drone/src/app/build
   - name: build-deps-jar
@@ -19,7 +23,7 @@ steps:
   - name: build-deps-jni
     path: /drone/src/app/jniLibs
   commands:
-  - cd /drone/src && ./gradlew build assembleAndroidTest -Papk_version=${DRONE_TAG}
+  - cd /drone/src && ./gradlew --build-cache build assembleAndroidTest -Papk_version=${DRONE_TAG}
   - test -f /drone/src/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
   - test -f /drone/src/app/build/outputs/apk/debug/app-debug.apk
 - name: publish
@@ -38,6 +42,9 @@ steps:
 volumes:
 - name: build-result
   temp: {}
+- name: build-cache
+  host:
+    path: /root/AndroidTestRunner/build-cache
 - name: build-deps-jar
   host:
     path: /root/AndroidTestRunner/app/libs
