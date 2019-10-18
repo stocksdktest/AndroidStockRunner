@@ -1,11 +1,5 @@
 apply plugin: 'com.android.application'
 
-def cmd = 'date +%Y%m%d_%H%M'
-def getGitVersion() {
-    return 'git rev-parse --short HEAD'.execute().text.trim()
-}
-def version = cmd.execute().text.trim() + "_" + getGitVersion()
-
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -13,7 +7,7 @@ android {
         minSdkVersion 23
         targetSdkVersion 28
         versionCode 1
-        versionName version
+        versionName "${apk_version}"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

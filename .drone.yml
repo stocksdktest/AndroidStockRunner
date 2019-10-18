@@ -19,7 +19,7 @@ steps:
   - name: build-deps-jni
     path: /drone/src/app/jniLibs
   commands:
-  - cd /drone/src && ./gradlew build assembleAndroidTest
+  - cd /drone/src && ./gradlew build assembleAndroidTest -Papk_version=${DRONE_TAG}
   - test -f /drone/src/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
   - test -f /drone/src/app/build/outputs/apk/debug/app-debug.apk
 - name: publish
