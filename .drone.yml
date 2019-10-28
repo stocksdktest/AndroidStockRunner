@@ -37,7 +37,7 @@ steps:
     files:
     - /tmp/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
     - /tmp/build/outputs/apk/debug/app-debug.apk
-    title: 0.0.1
+    title: Drone CI release
 
 volumes:
 - name: build-result
