@@ -71,6 +71,7 @@ public class ExampleInstrumentedTest {
                 // TODO fill uploadObj with QuoteResponse value
                 try {
                     uploadObj.put("fake_result", quoteNumbers);
+
                 } catch (JSONException e) {
                     result.completeExceptionally(e);
                 }
