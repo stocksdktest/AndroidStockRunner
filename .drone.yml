@@ -32,6 +32,8 @@ steps:
   - name: build-result
     path: /tmp/build
   settings:
+    checksum: md5
+    overwrite: true
     api_key:
       from_secret: release-token
     files:
