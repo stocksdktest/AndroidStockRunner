@@ -36,7 +36,6 @@ dependencies {
     implementation(name: 'MStock_UTILITY', ext: 'aar')
     implementation(name: 'MStock_FTEN', ext: 'aar')
     implementation(name: 'MStock_NEWSHARE', ext: 'aar')
-    implementation(name: 'logger-1.15', ext: 'aar')
 
     implementation files('libs/MStock.jar')
     implementation files('libs/MMqtt.jar')
