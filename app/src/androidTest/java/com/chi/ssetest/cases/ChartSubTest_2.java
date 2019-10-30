@@ -48,27 +48,31 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
-/**走势副图2
+/**
+ * 走势副图2
  * Example local unit test, which will execute on the development machine (host).
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-@StockTestcase(StockTestcaseName. CHARTSUBTEST_2)
+@StockTestcase(StockTestcaseName.CHARTSUBTEST_2)
 public class ChartSubTest_2 {
-    private static final StockTestcaseName testcaseName = StockTestcaseName. CHARTSUBTEST_2;
+    private static final StockTestcaseName testcaseName = StockTestcaseName.CHARTSUBTEST_2;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+
     @BeforeClass
     //ChartType
     public static void setup() throws Exception {
         Log.d("   ChartSubSampleTest_2", "Setup");
         testcaseConfig = RunnerSetup.getInstance().getTestcaseConfig(testcaseName);
-        if (testcaseConfig == null ) {
+        if (testcaseConfig == null) {
             throw new Exception(String.format("Testcase(%s) setup failed, config is empty", testcaseName));
         }
     }
+
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
+
     @Test(timeout = 5000)
     public void requestWork() throws Exception {
         Log.d("  ChartSubSampleTest_2", "requestWork");
@@ -80,54 +84,65 @@ public class ChartSubTest_2 {
         final String quoteNumbers4 = rule.getParam().optString("select");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i = 0; i < quoteNumbers.length; i++) {
-            QuoteDetailRequest quoteDetailRequest=new QuoteDetailRequest();
-            quoteDetailRequest.send(quoteNumbers, new IResponseInfoCallback() {
-                @Override
-                public void callback(Response response) {
-                    QuoteResponse quoteResponse=(QuoteResponse) response;
-                    QuoteItem quoteItem=quoteResponse.quoteItems.get(0);
-                    final ChartSubRequest request = new ChartSubRequest();
-                    request.send(quoteItem,quoteNumbers1,Integer.parseInt(quoteNumbers2),Integer.parseInt(quoteNumbers3),quoteNumbers4,new IResponseInfoCallback<ChartSubResponse>() {
-                        public void callback(ChartSubResponse chartSubResponse) {
-                            try {
-                                assertNotNull(chartSubResponse.line);
-                            } catch (AssertionError e) {
-                                result.completeExceptionally(e);
-                            }
-                            String[][] list=chartSubResponse.line;
-                            JSONObject uploadObj = new JSONObject();
-                            try {
-                                List<JSONObject> line=new ArrayList<>();
-                                String[] kname=quoteNumbers4.split(",");
-                                for (int i=0;i<list.length;i++){
-                                    for (int k=0;k<list[i].length;k++){
+        QuoteDetailRequest quoteDetailRequest = new QuoteDetailRequest();
+        quoteDetailRequest.send(quoteNumbers, new IResponseInfoCallback() {
+            @Override
+            public void callback(Response response) {
+                QuoteResponse quoteResponse = (QuoteResponse) response;
+                QuoteItem quoteItem = quoteResponse.quoteItems.get(0);
+                final ChartSubRequest request = new ChartSubRequest();
+                final JSONObject resultJsonObject = new JSONObject();
+                request.send(quoteItem, quoteNumbers1, Integer.parseInt(quoteNumbers2), Integer.parseInt(quoteNumbers3), quoteNumbers4, new IResponseInfoCallback<ChartSubResponse>() {
+                    public void callback(ChartSubResponse chartSubResponse) {
+                        try {
+                            assertNotNull(chartSubResponse.line);
+                        } catch (AssertionError e) {
+                            result.completeExceptionally(e);
+                        }
+                        String[][] list = chartSubResponse.line;
+                        JSONObject uploadObj = new JSONObject();
+                        try {
+                            List<JSONObject> line = new ArrayList<>();
+                            String[] kname = quoteNumbers4.split(",");
+                            for (int i = 0; i < list.length; i++) {
+                                if (list[i].length > 0) {
+                                    String keyTime = list[i][0];
+                                    JSONObject subItem = new JSONObject();
+                                    for (int k = 0; k < list[i].length; k++) {
                                         JSONObject uploadObj_1 = new JSONObject();
-                                        uploadObj_1.put(kname[k],list[i][k]);
+                                        uploadObj_1.put(kname[k], list[i][k]);
                                         Log.d("data", String.valueOf(uploadObj_1));
-                                        result.complete(uploadObj_1);
+//                                        result.complete(uploadObj_1);
+                                        subItem.put(kname[k], list[i][k]);
                                     }
+                                    resultJsonObject.put(keyTime,subItem);
                                 }
-                            } catch (JSONException e) {
-                                result.completeExceptionally(e);
                             }
+                            result.complete(resultJsonObject);
+                        } catch (JSONException e) {
+                            result.completeExceptionally(e);
                         }
-                        @Override
-                        public void exception(ErrorInfo errorInfo) {
-                            result.completeExceptionally(new Exception(errorInfo.toString()));
-                        }
-                    });
-                }
-                @Override
-                public void exception(ErrorInfo errorInfo) {
-                    result.completeExceptionally(new Exception(errorInfo.toString()));
-                }
-            });
-            try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
-                RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(),resultObj);
-            } catch (Exception e) {
-                throw new Exception(e);
+                    }
+
+                    @Override
+                    public void exception(ErrorInfo errorInfo) {
+                        result.completeExceptionally(new Exception(errorInfo.toString()));
+                    }
+                });
             }
+
+            @Override
+            public void exception(ErrorInfo errorInfo) {
+                result.completeExceptionally(new Exception(errorInfo.toString()));
+            }
+        });
+        try {
+            JSONObject resultObj = (JSONObject) result.get(5000, TimeUnit.MILLISECONDS);
+            Log.d("data", "log test in " + String.valueOf(resultObj));
+            RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
 //        }
     }
 }

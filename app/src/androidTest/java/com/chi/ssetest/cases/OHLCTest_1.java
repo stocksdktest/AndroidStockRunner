@@ -78,6 +78,7 @@ public class OHLCTest_1 {
         final String quoteNumbers1 = rule.getParam().optString("type");
       //  OHLChartType
         final CompletableFuture result = new CompletableFuture<JSONObject>();
+
 //        for (int i = 0; i < quoteNumbers.length; i++) {
             QuoteDetailRequest quoteDetailRequest = new QuoteDetailRequest();
             quoteDetailRequest.send(quoteNumbers, new IResponseInfoCallback() {
@@ -96,8 +97,10 @@ public class OHLCTest_1 {
                                 result.completeExceptionally(e);
                             }
                             CopyOnWriteArrayList<OHLCItem> list =ohlcResponse.historyItems;
-                            for (int k=0;k<list.size();k++){
-                                try {
+                            JSONObject resultJsonObject = new JSONObject();
+//                            Log.d("result size", String.valueOf(list.size()));
+                            try{
+                                for (int k=0;k<list.size();k++){
                                     JSONObject uploadObj_1 = new JSONObject();
                                     uploadObj_1.put("datetime",list.get(k).datetime);
                                     uploadObj_1.put("openPrice",list.get(k).openPrice);
@@ -112,10 +115,11 @@ public class OHLCTest_1 {
                                     uploadObj_1.put("fp_volume",list.get(k).fp_volume);
                                     uploadObj_1.put("fp_amount",list.get(k).fp_amount);
                                     Log.d("data", String.valueOf(uploadObj_1));
-                                    result.complete(uploadObj_1);
-                                } catch (JSONException e) {
-                                    result.completeExceptionally(e);
+                                    resultJsonObject.put(list.get(k).datetime,uploadObj_1);
                                 }
+                                result.complete(resultJsonObject);
+                            } catch (JSONException e) {
+                                result.completeExceptionally(e);
                             }
                         }
                         @Override
@@ -131,6 +135,7 @@ public class OHLCTest_1 {
              });
             try {
                 JSONObject resultObj = (JSONObject) result.get(5000, TimeUnit.MILLISECONDS);
+//                Log.d("data", "log test in "+String.valueOf(resultObj));
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);
