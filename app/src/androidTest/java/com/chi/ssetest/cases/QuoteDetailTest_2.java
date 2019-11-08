@@ -136,12 +136,10 @@ public class QuoteDetailTest_2 {
                     uploadObj.put("pb", list.pb);
                     uploadObj.put("capitalization", list.capitalization);
                     uploadObj.put("circulatingShares", list.circulatingShares);
-                    List<JSONObject> buyPrices=new ArrayList<>();
+                    List<String> buyPrices=new ArrayList<>();
                     if (list.buyPrices!=null&&list.buyPrices.size()>0){
                         for (int j=0;j<list.buyPrices.size();j++){
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("buyprices"+(j+1),list.buyPrices.get(j));
-                            buyPrices.add(uploadObj_1);
+                            buyPrices.add(list.buyPrices.get(j));
                         }
                         uploadObj.put("bidpx1", list.buyPrices.get(0));
                         uploadObj.put("buyPrices",new JSONArray(buyPrices));
@@ -150,24 +148,20 @@ public class QuoteDetailTest_2 {
                         uploadObj.put("buyPrices",list.buyPrices);
                     }
 
-                    List<JSONObject> buySingleVolumes=new ArrayList<>();
+                    List<String> buySingleVolumes=new ArrayList<>();
                     if (list.buySingleVolumes!=null&&list.buySingleVolumes.size()>0){
                         for (int j=0;j<list.buySingleVolumes.size();j++){
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("buySingleVolumes"+(j+1),list.buySingleVolumes.get(j));
-                            buySingleVolumes.add(uploadObj_1);
+                            buySingleVolumes.add(list.buySingleVolumes.get(j));
                         }
                         uploadObj.put("buySingleVolumes",new JSONArray(buySingleVolumes));
                     }else {
                         uploadObj.put("buySingleVolumes",list.buySingleVolumes);
                     }
 
-                    List<JSONObject> buyVolumes=new ArrayList<>();
+                    List<String> buyVolumes=new ArrayList<>();
                     if (list.buyVolumes!=null&&list.buyVolumes.size()>0){
                         for (int j=0;j<list.buyVolumes.size();j++){
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("buyVolumes"+(j+1),list.buyVolumes.get(j));
-                            buyVolumes.add(uploadObj_1);
+                            buyVolumes.add(list.buyVolumes.get(j));
                         }
                         uploadObj.put("bidvol1", list.buyVolumes.get(0));
                         uploadObj.put("buyVolumes",new JSONArray(buyVolumes));
@@ -176,12 +170,10 @@ public class QuoteDetailTest_2 {
                         uploadObj.put("buyVolumes",list.buyVolumes);
                     }
 
-                    List<JSONObject> sellPrices=new ArrayList<>();
+                    List<String> sellPrices=new ArrayList<>();
                     if (list.sellPrices!=null&&list.sellPrices.size()>0){
                         for (int j=0;j<list.sellPrices.size();j++){
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("sellPrices"+(j+1),list.sellPrices.get(j));
-                            sellPrices.add(uploadObj_1);
+                            sellPrices.add(list.sellPrices.get(j));
                         }
                         uploadObj.put("askpx1", list.sellPrices.get(0));
                         uploadObj.put("sellPrices",new JSONArray(sellPrices));
@@ -190,24 +182,20 @@ public class QuoteDetailTest_2 {
                         uploadObj.put("sellPrices",list.sellPrices);
                     }
 
-                    List<JSONObject> sellSingleVolumes=new ArrayList<>();
+                    List<String> sellSingleVolumes=new ArrayList<>();
                     if (list.sellSingleVolumes!=null&&list.sellSingleVolumes.size()>0){
                         for (int j=0;j<list.sellSingleVolumes.size();j++){
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("sellSingleVolumes"+(j+1),list.sellSingleVolumes.get(j));
-                            sellSingleVolumes.add(uploadObj_1);
+                            sellSingleVolumes.add(list.sellSingleVolumes.get(j));
                         }
                         uploadObj.put("sellSingleVolumes",new JSONArray(sellSingleVolumes));
                     }else {
                         uploadObj.put("sellSingleVolumes",list.sellSingleVolumes);
                     }
 
-                    List<JSONObject> sellVolumes=new ArrayList<>();
+                    List<String> sellVolumes=new ArrayList<>();
                     if (list.sellVolumes!=null&&list.sellVolumes.size()>0){
                         for (int j=0;j<list.sellVolumes.size();j++){
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("sellVolumes"+(j+1),list.sellVolumes.get(j));
-                            sellVolumes.add(uploadObj_1);
+                            sellVolumes.add(list.sellVolumes.get(j));
                         }
                         uploadObj.put("askvol1", list.sellVolumes.get(0));
                         uploadObj.put("sellVolumes",new JSONArray(sellVolumes));
@@ -219,7 +207,7 @@ public class QuoteDetailTest_2 {
                     uploadObj.put("amplitudeRate", list.amplitudeRate);
                     uploadObj.put("receipts", list.receipts);
                     //ios无
-                    List<JSONObject> tradeTick=new ArrayList<>();
+
                     if (list.tradeTick!=null&&list.tradeTick.length>0){
                         for (int j=0;j<10;j++){
                             JSONObject uploadObj_1 = new JSONObject();
@@ -227,9 +215,8 @@ public class QuoteDetailTest_2 {
                             uploadObj_1.put("time",list.tradeTick[j][1]);
                             uploadObj_1.put("tradeVolume",list.tradeTick[j][2]);
                             uploadObj_1.put("tradePrice",list.tradeTick[j][3]);
-                            tradeTick.add(uploadObj_1);
+                            uploadObj.put(list.tradeTick[j][1],uploadObj_1);
                         }
-                        uploadObj.put("tradeTick",new JSONArray(tradeTick));
                     }else {
                         uploadObj.put("tradeTick",list.tradeTick);
                     }

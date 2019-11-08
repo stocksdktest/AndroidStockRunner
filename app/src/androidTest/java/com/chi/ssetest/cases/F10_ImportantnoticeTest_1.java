@@ -88,18 +88,19 @@ public class F10_ImportantnoticeTest_1 {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    List<JSONObject> items=new ArrayList<>();
-                    for (Importantnotice item : importantnoticeResponse.list) {
-                        JSONObject uploadObj_1 = new JSONObject();
-                        try {
+                    try {
+                        for (Importantnotice item : importantnoticeResponse.list) {
+                            JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("PUBDATE_",item.PUBDATE_);
                             uploadObj_1.put("diviScheme",item.diviScheme);
                             Log.d("data", String.valueOf(uploadObj_1));
-                            result.complete(uploadObj_1);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
+                            uploadObj.put(item.PUBDATE_,uploadObj_1);
                         }
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
+
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

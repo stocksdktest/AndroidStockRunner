@@ -74,19 +74,19 @@ public class BrokerInfoTest_1 {
                         result.completeExceptionally(e);
                     }
                     ArrayList<BrokerInfoItem> list=brokerInfoResponse.list;
-                    List<JSONObject> items=new ArrayList<>();
                     JSONObject uploadObj = new JSONObject();
-                    for (int i=0;i<list.size();i++) {
-                        JSONObject uploadObj_1 = new JSONObject();
-                        try {
+                    try {
+                        for (int i=0;i<list.size();i++) {
+                            JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("corp",list.get(i).corp);
                             uploadObj_1.put("corporation",list.get(i).corporation);
                             uploadObj_1.put("state",list.get(i).state);
                             Log.d("data", String.valueOf(uploadObj_1));
-                            result.complete(uploadObj_1);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
+                            uploadObj.put(list.get(i).corp+list.get(i).state,uploadObj_1);
                         }
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
                 }
                 @Override

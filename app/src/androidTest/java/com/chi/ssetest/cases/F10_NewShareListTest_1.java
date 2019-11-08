@@ -133,18 +133,16 @@ public class F10_NewShareListTest_1 {
                                     uploadObj_1.put("capplySharePlan",item.getDataList().get(i).getCapplySharePlan());
                                     uploadObj_1.put("issuePricePlan",item.getDataList().get(i).getIssuePricePlan());
                                     uploadObj_1.put("keyCode",item.getDataList().get(i).getKeyCode());
-                                    dataList.add(uploadObj_1);
+                                    uploadObj.put(item.getDataList().get(i).getApplyCode(),uploadObj_1);
                                 }
-                                uploadObj.put("dateList",new JSONArray(dataList));
-                            }else {
-                                uploadObj.put("dateList",item.getDataList());
+
                             }
+                            Log.d("data", String.valueOf(uploadObj));
+                            result.complete(uploadObj);
                         } catch (JSONException e) {
                             result.completeExceptionally(e);
                         }
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

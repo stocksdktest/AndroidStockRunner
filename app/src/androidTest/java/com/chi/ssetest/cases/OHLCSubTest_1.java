@@ -79,7 +79,6 @@ public class OHLCSubTest_1 {
                     CopyOnWriteArrayList<FQItem> list=ohlcSubResponse.fq;
                     JSONObject uploadObj = new JSONObject();
                     try {
-                        List<JSONObject> fqlist=new ArrayList<>();
                         for (int i=0;i<list.size();i++) {
                             JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("dateTime", list.get(i).dateTime);
@@ -90,14 +89,13 @@ public class OHLCSubTest_1 {
                             uploadObj_1.put("increaseProportion", list.get(i).increaseProportion);
                             uploadObj_1.put("increaseVolume", list.get(i).increaseVolume);
                             uploadObj_1.put("allotmentProportion", list.get(i).allotmentProportion);
-                            fqlist.add(uploadObj_1);
+                            Log.d("data", String.valueOf(uploadObj_1));
+                            uploadObj.put( list.get(i).dateTime,uploadObj_1);
                         }
-                        uploadObj.put("fqItem",new JSONArray(fqlist));
+                        result.complete(uploadObj);
                     } catch (JSONException e) {
                     result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

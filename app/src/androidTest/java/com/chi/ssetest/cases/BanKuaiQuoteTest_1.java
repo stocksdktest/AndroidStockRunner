@@ -92,9 +92,10 @@ public class BanKuaiQuoteTest_1 {
                         result.completeExceptionally(e);
                     }
                     List<Bankuaisorting> list=bankuaisortingResponse.list;
-                    for (int i=0;i<list.size();i++){
-                        JSONObject uploadObj_1 = new JSONObject();
-                        try {
+                    JSONObject uploadObj = new JSONObject();
+                    try {
+                        for (int i=0;i<list.size();i++){
+                            JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("ID",list.get(i).ns);
                             uploadObj_1.put("name",list.get(i).n);
                             uploadObj_1.put("weightedChange",list.get(i).qzf);
@@ -139,10 +140,11 @@ public class BanKuaiQuoteTest_1 {
                             uploadObj_1.put("limitUpCount",list.get(i).limitUpCount);//ios无
                             uploadObj_1.put("limitDownCount",list.get(i).limitDownCount);//ios无
                             Log.d("data", String.valueOf(uploadObj_1));
-                            result.complete(uploadObj_1);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
+                            uploadObj.put(list.get(i).ns,uploadObj_1);
                         }
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
                 }
                 @Override

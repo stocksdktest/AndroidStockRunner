@@ -8,37 +8,15 @@ import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.StockTestcase;
 import com.chi.ssetest.StockTestcaseName;
 import com.chi.ssetest.setup.TestcaseConfigRule;
-import com.mitake.core.AddValueModel;
-import com.mitake.core.CateType;
 import com.mitake.core.OHLCItem;
-import com.mitake.core.QuoteItem;
-import com.mitake.core.bean.MorePriceItem;
 import com.mitake.core.bean.log.ErrorInfo;
-import com.mitake.core.request.AddValueRequest;
-import com.mitake.core.request.BankuaisortingRequest;
-import com.mitake.core.request.CategoryType;
-import com.mitake.core.request.CatequoteRequest;
-import com.mitake.core.request.ChartType;
-import com.mitake.core.request.MorePriceRequest;
 import com.mitake.core.request.OverLayChartRequest;
-import com.mitake.core.request.PointAddType;
-import com.mitake.core.request.QuoteRequest;
-import com.mitake.core.request.offer.OfferQuoteSort;
-import com.mitake.core.response.AddValueResponse;
-import com.mitake.core.response.BankuaiRankingResponse;
-import com.mitake.core.response.Bankuaisorting;
-import com.mitake.core.response.BankuaisortingResponse;
-import com.mitake.core.response.CatequoteResponse;
 import com.mitake.core.response.ChartResponse;
 import com.mitake.core.response.IResponseInfoCallback;
-import com.mitake.core.response.MorePriceResponse;
-import com.mitake.core.response.QuoteResponse;
-import com.mitake.core.response.Response;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -95,23 +73,20 @@ public class OverLayChartTest_1 {
                     }
                     CopyOnWriteArrayList<OHLCItem> list=chartResponse.historyItems;
                     CopyOnWriteArrayList<OHLCItem> list2=chartResponse.overLayChartResponse.historyItems;
-                    List<JSONObject> items=new ArrayList<>();
                     JSONObject uploadObj = new JSONObject();
+                    JSONObject uploadObj_2 = new JSONObject();
+                    JSONObject uploadObj_3 = new JSONObject();
                     try {
-                        List<JSONObject> dayList=new ArrayList<>();
+                        List<String> dayList=new ArrayList<>();
                         if (quoteNumbers2.equals("ChartTypeOneDay")){
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("day",chartResponse.dayList.get(0));
-                            dayList.add(uploadObj_1);
+                            dayList.add(chartResponse.dayList.get(0));
                         }else {
                             for (int k=0;k<chartResponse.dayList.size();k++){
-                                JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("day",chartResponse.dayList.get(k));
-                                dayList.add(uploadObj_1);
+                                dayList.add(chartResponse.dayList.get(k));
                             }
-                            uploadObj.put("dayList",new JSONArray(dayList));
                         }
-                        List<JSONObject> OHLCItem=new ArrayList<>();
+                        uploadObj.put("dayList",new JSONArray(dayList));
+
                         for (int k=0;k<chartResponse.historyItems.size();k++) {
                             JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("datetime",list.get(k).datetime);
@@ -122,11 +97,10 @@ public class OverLayChartTest_1 {
                             uploadObj_1.put("iopv",list.get(k).iopv);
                             uploadObj_1.put("iopvPre",list.get(k).iopvPre);
                             uploadObj_1.put("openInterest",list.get(k).openInterest);
-                            OHLCItem.add(uploadObj_1);
+                            uploadObj_2.put(list.get(k).datetime,uploadObj_1);
                         }
-                        uploadObj.put("OHLCItem",new JSONArray(OHLCItem));
+                        uploadObj.put("OHLCItem",uploadObj_2);
 
-                        List<JSONObject> overLayChart=new ArrayList<>();
                         for (int k=0;k<list2.size();k++){
                             JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("datetime",list2.get(k).datetime);
@@ -137,9 +111,9 @@ public class OverLayChartTest_1 {
                             uploadObj_1.put("iopv",list2.get(k).iopv);
                             uploadObj_1.put("iopvPre",list2.get(k).iopvPre);
                             uploadObj_1.put("openInterest",list2.get(k).openInterest);
-                            overLayChart.add(uploadObj_1);
+                            uploadObj_3.put(list2.get(k).datetime,uploadObj_1);
                         }
-                        uploadObj.put("overLayChart",new JSONArray(overLayChart));
+                        uploadObj.put("overLayChart",uploadObj_3);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

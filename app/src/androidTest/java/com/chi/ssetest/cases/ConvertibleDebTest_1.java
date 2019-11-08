@@ -76,24 +76,26 @@ public class ConvertibleDebTest_1 {
                     }
                     JSONObject uploadObj = new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value
-                    for (ConvertibleBoundItem item :convertibleBoundResponse.items) {
-                        try {
-                            uploadObj.put("code",item.code);
-                            uploadObj.put("name",item.name);
-//                            uploadObj.put("market",item.market);
-//                            uploadObj.put("subtype",item.subtype);
-                            uploadObj.put("lastPrice",item.lastPrice);
-//                            uploadObj.put("preClosePrice",item.preClosePrice);
-                            uploadObj.put("premium",item.premium);
-//                            uploadObj.put("upDownFlag",item.upDownFlag);
-                            uploadObj.put("changeRate",item.upDownFlag+item.changeRate);
-                            uploadObj.put("change",item.change);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
+                    try {
+                        for (ConvertibleBoundItem item :convertibleBoundResponse.items) {
+                            JSONObject uploadObj_1 = new JSONObject();
+                            uploadObj_1.put("code",item.code);
+                            uploadObj_1.put("name",item.name);
+//                            uploadObj_1.put("market",item.market);
+//                            uploadObj_1.put("subtype",item.subtype);
+                            uploadObj_1.put("lastPrice",item.lastPrice);
+//                            uploadObj_1.put("preClosePrice",item.preClosePrice);
+                            uploadObj_1.put("premium",item.premium);
+//                            uploadObj_1.put("upDownFlag",item.upDownFlag);
+                            uploadObj_1.put("changeRate",item.upDownFlag+item.changeRate);
+                            uploadObj_1.put("change",item.change);
+                            Log.d("data", String.valueOf(uploadObj_1));
+                            uploadObj.put(item.code,uploadObj_1);
                         }
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

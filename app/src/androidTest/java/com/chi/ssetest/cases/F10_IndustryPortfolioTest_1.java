@@ -97,7 +97,6 @@ public class F10_IndustryPortfolioTest_1 {
                     List<HashMap<String,Object>> list = f10V2Response.infos;
                     try {
                         if (list!=null){
-                            List<JSONObject> items=new ArrayList<>();
                             for (int i=0;i<list.size();i++){
                                 JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("ENDDATE",list.get(i).get("ENDDATE"));
@@ -105,8 +104,9 @@ public class F10_IndustryPortfolioTest_1 {
                                 uploadObj_1.put("FAIRVALUE",list.get(i).get("FAIRVALUE"));
                                 uploadObj_1.put("NAVRATIO",list.get(i).get("NAVRATIO"));
                                 Log.d("data", String.valueOf(uploadObj_1));
-                                result.complete(uploadObj_1);
+                                uploadObj.put((String) list.get(i).get("ENDDATE"),uploadObj_1);
                             }
+                            result.complete(uploadObj);
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

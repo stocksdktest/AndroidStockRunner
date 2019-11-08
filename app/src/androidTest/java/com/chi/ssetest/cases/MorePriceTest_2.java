@@ -84,9 +84,10 @@ public class MorePriceTest_2 {
                         result.completeExceptionally(e);
                     }
                     if (morePriceResponse.strs!=null&&morePriceResponse.strs.length>0){
-                        for (int i=0;i<morePriceResponse.strs.length;i++){
-                            JSONObject uploadObj_1 = new JSONObject();
-                            try {
+                        try {
+                            JSONObject uploadObj = new JSONObject();
+                            for (int i=0;i<morePriceResponse.strs.length;i++){
+                                JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("price",morePriceResponse.strs[i][0]);
                                 uploadObj_1.put("volume",morePriceResponse.strs[i][1]);
                                 uploadObj_1.put("buyVolume",morePriceResponse.strs[i][2]);
@@ -97,10 +98,11 @@ public class MorePriceTest_2 {
                                 uploadObj_1.put("sellCount",morePriceResponse.strs[i][7]);
                                 uploadObj_1.put("unknownCount",morePriceResponse.strs[i][8]);
                                 Log.d("data", String.valueOf(uploadObj_1));
-                                result.complete(uploadObj_1);
-                            } catch (JSONException e) {
-                                result.completeExceptionally(e);
+                                uploadObj.put(String.valueOf(i),uploadObj_1);
                             }
+                            result.complete(uploadObj);
+                        } catch (JSONException e) {
+                            result.completeExceptionally(e);
                         }
                     }
                 }

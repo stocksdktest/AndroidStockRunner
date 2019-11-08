@@ -95,8 +95,9 @@ public class OHLCV3Test_5 {
                                 result.completeExceptionally(e);
                             }
                             CopyOnWriteArrayList<OHLCItem> list =ohlcResponse.historyItems;
-                            for (int k=0;k<list.size();k++){
-                                try {
+                            JSONObject uploadObj = new JSONObject();
+                            try {
+                                for (int k=0;k<list.size();k++){
                                     JSONObject uploadObj_1 = new JSONObject();
                                     uploadObj_1.put("datetime",list.get(k).datetime);
                                     uploadObj_1.put("openPrice",list.get(k).openPrice);
@@ -111,10 +112,11 @@ public class OHLCV3Test_5 {
                                     uploadObj_1.put("fp_volume",list.get(k).fp_volume);
                                     uploadObj_1.put("fp_amount",list.get(k).fp_amount);
                                     Log.d("data", String.valueOf(uploadObj_1));
-                                    result.complete(uploadObj_1);
-                                } catch (JSONException e) {
-                                    result.completeExceptionally(e);
+                                    uploadObj.put(list.get(k).datetime,uploadObj_1);
                                 }
+                                result.complete(uploadObj);
+                            } catch (JSONException e) {
+                                result.completeExceptionally(e);
                             }
                         }
 

@@ -107,11 +107,10 @@ public class F10_MainFinaDataNassTest_2 {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    List<JSONObject> items=new ArrayList<>();
                     if (mainFinaDataNasResponse.mMainFinaDataNasList!=null){
-                        for (MainFinaDataNas item : mainFinaDataNasResponse.mMainFinaDataNasList) {
-                            JSONObject uploadObj_1 = new JSONObject();
-                            try {
+                        try {
+                            for (MainFinaDataNas item : mainFinaDataNasResponse.mMainFinaDataNasList) {
+                                JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("REPORTTITLE_",item.REPORTTITLE_);
                                 uploadObj_1.put("BasicEPS",item.BasicEPS);
                                 uploadObj_1.put("RESERVEPS_",item.RESERVEPS_);
@@ -133,10 +132,11 @@ public class F10_MainFinaDataNassTest_2 {
                                 uploadObj_1.put("ENDDATE",item.ENDDATE);
                                 uploadObj_1.put("MOM",item.MOM);
                                 Log.d("data", String.valueOf(uploadObj_1));
-                                result.complete(uploadObj_1);
-                            } catch (JSONException e) {
-                                result.completeExceptionally(e);
+                                uploadObj.put(item.ENDDATE,uploadObj_1);
                             }
+                            result.complete(uploadObj);
+                        } catch (JSONException e) {
+                            result.completeExceptionally(e);
                         }
                     }
                 }

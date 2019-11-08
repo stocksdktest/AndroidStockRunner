@@ -80,10 +80,9 @@ public class ChartV2Test_3 {
                     }
                     CopyOnWriteArrayList<OHLCItem> list=chartResponse.historyItems;
                     JSONObject uploadObj = new JSONObject();
-                    List<JSONObject> items = new ArrayList<>();
                     // TODO fill uploadObj with QuoteResponse value
-                    for (int k=0;k<list.size();k++) {
-                        try {
+                    try {
+                        for (int k=0;k<list.size();k++) {
                             JSONObject uploadObj_1 = new JSONObject();
                             //存储到JSON
                             uploadObj_1.put("datetime",list.get(k).datetime);
@@ -95,10 +94,11 @@ public class ChartV2Test_3 {
                             uploadObj_1.put("iopv",list.get(k).iopv);
                             uploadObj_1.put("iopvPre",list.get(k).iopvPre);
                             Log.d("data", String.valueOf(uploadObj_1));
-                            result.complete(uploadObj_1);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
+                            uploadObj.put(list.get(k).datetime,uploadObj_1);
                         }
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
                 }
                 @Override

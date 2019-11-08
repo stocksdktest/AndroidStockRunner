@@ -93,6 +93,7 @@ public class F10_AssetAllocationTest_1 {
                         result.completeExceptionally(e);
                     }
                     List<HashMap<String,Object>> list = f10V2Response.infos;
+                    JSONObject uploadObj = new JSONObject();
                     try {
                         if (list!=null){
                             for (int i=0;i< list.size();i++){
@@ -104,8 +105,9 @@ public class F10_AssetAllocationTest_1 {
                                 uploadObj_1.put("TOTASSET",list.get(i).get("TOTASSET"));
                                 uploadObj_1.put("TOTASSETYOY",list.get(i).get("TOTASSETYOY"));
                                 Log.d("data", String.valueOf(uploadObj_1));
-                                result.complete(uploadObj_1);
+                                uploadObj.put(String.valueOf(i),uploadObj_1);
                             }
+                            result.complete(uploadObj);
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

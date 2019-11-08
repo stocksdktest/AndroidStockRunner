@@ -129,43 +129,33 @@ public class F10V2Test_4 {
                     try {
                         if (quoteNumbers3.equals("/newsinteractive")){
                             //董秘问答
-                            List<JSONObject> NEWS_INTEARACTIVE=new ArrayList<>();
-                            JSONObject uploadObj_6 = new JSONObject();
-                            uploadObj_6.put("Page",info.get("Page"));
-                            uploadObj_6.put("PageNumber",info.get("PageNumber"));
+                            uploadObj.put("Page",info.get("Page"));
+                            uploadObj.put("PageNumber",info.get("PageNumber"));
                             List<HashMap<String,Object>> items1= (List<HashMap<String,Object>>) info.get("List");
                             if (items1!=null){
-                                List<JSONObject> list=new ArrayList<>();
                                 for (int i=0;i<items1.size();i++){
-                                    JSONObject uploadObj_7 = new JSONObject();
-                                    uploadObj_7.put("TRADING",items1.get(i).get("TRADING"));
-                                    uploadObj_7.put("SESNAME",items1.get(i).get("SESNAME"));
-                                    uploadObj_7.put("PROBLEM",items1.get(i).get("PROBLEM"));
-                                    uploadObj_7.put("QUESTIONTIME",items1.get(i).get("QUESTIONTIME"));
-                                    uploadObj_7.put("REPLY",items1.get(i).get("REPLY"));
-                                    uploadObj_7.put("ANSWERTIME",items1.get(i).get("ANSWERTIME"));
-                                    uploadObj_7.put("NEWSSOURCE",items1.get(i).get("NEWSSOURCE"));
-                                    uploadObj_7.put("INTERACTIVEID",items1.get(i).get("INTERACTIVEID"));
-                                    list.add(uploadObj_7);
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("TRADING",items1.get(i).get("TRADING"));
+                                    uploadObj_1.put("SESNAME",items1.get(i).get("SESNAME"));
+                                    uploadObj_1.put("PROBLEM",items1.get(i).get("PROBLEM"));
+                                    uploadObj_1.put("QUESTIONTIME",items1.get(i).get("QUESTIONTIME"));
+                                    uploadObj_1.put("REPLY",items1.get(i).get("REPLY"));
+                                    uploadObj_1.put("ANSWERTIME",items1.get(i).get("ANSWERTIME"));
+                                    uploadObj_1.put("NEWSSOURCE",items1.get(i).get("NEWSSOURCE"));
+                                    uploadObj_1.put("INTERACTIVEID",items1.get(i).get("INTERACTIVEID"));
+                                    uploadObj.put((String) items1.get(i).get("TRADING"),uploadObj_1);
                                 }
-                                uploadObj_6.put("list",new JSONArray(list));
-                            }else {
-                                uploadObj_6.put("list",items1);
                             }
-                            NEWS_INTEARACTIVE.add(uploadObj_6);
-                            uploadObj.put("NEWS_INTEARACTIVE",new JSONArray(NEWS_INTEARACTIVE));
                         }else {
-                            List<JSONObject> IMPORT_NOTICE_TITLE=new ArrayList<>();
                             for (int i=0;i<infos.size();i++){
-                                JSONObject uploadObj_6 = new JSONObject();
-                                uploadObj_6.put("REPTITLE",infos.get(i).get("REPTITLE"));
-                                uploadObj_6.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
-                                uploadObj_6.put("TEXT",infos.get(i).get("TEXT"));
-                                uploadObj_6.put("ID",infos.get(i).get("ID"));
-                                uploadObj_6.put("ISPDF",infos.get(i).get("ISPDF"));
-                                IMPORT_NOTICE_TITLE.add(uploadObj_6);
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("REPTITLE",infos.get(i).get("REPTITLE"));
+                                uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
+                                uploadObj_1.put("TEXT",infos.get(i).get("TEXT"));
+                                uploadObj_1.put("ID",infos.get(i).get("ID"));
+                                uploadObj_1.put("ISPDF",infos.get(i).get("ISPDF"));
+                                uploadObj.put((String) infos.get(i).get("TRADEDATE"),uploadObj_1);
                             }
-                            uploadObj.put("IMPORT_NOTICE_TITLE",new JSONArray(IMPORT_NOTICE_TITLE));
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

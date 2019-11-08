@@ -102,9 +102,9 @@ public class F10_ShareHolderHistoryInfoTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     List<JSONObject> items=new ArrayList<>();
                     if (shareHolderHistoryInfoResponse.list!=null){
-                        for (ShareHolderHistoryInfo item : shareHolderHistoryInfoResponse.list) {
-                            JSONObject uploadObj_1 = new JSONObject();
-                            try {
+                        try {
+                            for (ShareHolderHistoryInfo item : shareHolderHistoryInfoResponse.list) {
+                                JSONObject uploadObj_1 = new JSONObject();
                                 if (quoteNumbers1.equals("g")){
                                     uploadObj_1.put("AVGSHAREM_", item.AVGSHAREM_);
                                     uploadObj_1.put("CLOSINGPRICE_", item.CLOSINGPRICE_);
@@ -120,11 +120,13 @@ public class F10_ShareHolderHistoryInfoTest_1 {
                                     uploadObj_1.put("ENDDATE_", item.ENDDATE_);
                                 }
                                 Log.d("data", String.valueOf(uploadObj_1));
-                                result.complete(uploadObj_1);
-                            } catch (JSONException e) {
-                                result.completeExceptionally(e);
+                                uploadObj.put(item.ENDDATE_,uploadObj_1);
                             }
+                            result.complete(uploadObj);
+                        } catch (JSONException e) {
+                            result.completeExceptionally(e);
                         }
+
                     }
                 }
                 @Override

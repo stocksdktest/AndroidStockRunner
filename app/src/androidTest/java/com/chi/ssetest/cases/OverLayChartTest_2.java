@@ -102,23 +102,18 @@ public class OverLayChartTest_2 {
                         }
                         CopyOnWriteArrayList<OHLCItem> list=chartResponse.historyItems;
                         CopyOnWriteArrayList<OHLCItem> list2=chartResponse.overLayChartResponse.historyItems;
-                        List<JSONObject> items=new ArrayList<>();
                         JSONObject uploadObj = new JSONObject();
                         try {
-                            List<JSONObject> dayList=new ArrayList<>();
+                            List<String> dayList=new ArrayList<>();
                             if (quoteNumbers2.equals("ChartTypeOneDay")){
-                                JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("day",chartResponse.dayList.get(0));
-                                dayList.add(uploadObj_1);
+                                dayList.add(chartResponse.dayList.get(0));
                             }else {
                                 for (int k=0;k<chartResponse.dayList.size();k++){
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("day",chartResponse.dayList.get(k));
-                                    dayList.add(uploadObj_1);
+                                    dayList.add(chartResponse.dayList.get(k));
                                 }
-                                uploadObj.put("dayList",new JSONArray(dayList));
                             }
-                            List<JSONObject> OHLCItem=new ArrayList<>();
+                            uploadObj.put("dayList",new JSONArray(dayList));
+
                             for (int k=0;k<chartResponse.historyItems.size();k++) {
                                 JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("datetime",list.get(k).datetime);
@@ -129,11 +124,9 @@ public class OverLayChartTest_2 {
                                 uploadObj_1.put("iopv",list.get(k).iopv);
                                 uploadObj_1.put("iopvPre",list.get(k).iopvPre);
                                 uploadObj_1.put("openInterest",list.get(k).openInterest);
-                                OHLCItem.add(uploadObj_1);
+                                uploadObj.put(list.get(k).datetime,uploadObj_1);
                             }
-                            uploadObj.put("OHLCItem",new JSONArray(OHLCItem));
 
-                            List<JSONObject> overLayChart=new ArrayList<>();
                             for (int k=0;k<list2.size();k++){
                                 JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("datetime",list2.get(k).datetime);
@@ -144,9 +137,8 @@ public class OverLayChartTest_2 {
                                 uploadObj_1.put("iopv",list2.get(k).iopv);
                                 uploadObj_1.put("iopvPre",list2.get(k).iopvPre);
                                 uploadObj_1.put("openInterest",list2.get(k).openInterest);
-                                overLayChart.add(uploadObj_1);
+                                uploadObj.put(list2.get(k).datetime,uploadObj_1);
                             }
-                            uploadObj.put("overLayChart",new JSONArray(overLayChart));
                         } catch (JSONException e) {
                             result.completeExceptionally(e);
                         }

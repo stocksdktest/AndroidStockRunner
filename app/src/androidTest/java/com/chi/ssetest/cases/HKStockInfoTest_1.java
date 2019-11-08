@@ -95,7 +95,7 @@ public class HKStockInfoTest_1 {
                         uploadObj.put("casReffPrice",list.casReffPrice);
                         uploadObj.put("casLowerPrice",list.casLowerPrice);
                         uploadObj.put("casUpperPrice",list.casUpperPrice);
-                        List<JSONObject> HKOtherItem=new ArrayList<>();
+
                         if (list.list!=null&&list.list.size()>0){
                             for (int k=0;k<list.list.size();k++){
                                 JSONObject uploadObj_1 = new JSONObject();
@@ -105,11 +105,8 @@ public class HKStockInfoTest_1 {
                                 uploadObj_1.put("BrokerID",list.list.get(k).BrokerID);
                                 uploadObj_1.put("Side",list.list.get(k).Side);
                                 uploadObj_1.put("DataTimestamp",list.list.get(k).DataTimestamp);
-                                HKOtherItem.add(uploadObj_1);
+                                uploadObj.put(list.list.get(k).OrderId,uploadObj_1);
                             }
-                            uploadObj.put("HKOtherItem",new JSONArray(HKOtherItem));
-                        }else {
-                            uploadObj.put("HKOtherItem",list.list);
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

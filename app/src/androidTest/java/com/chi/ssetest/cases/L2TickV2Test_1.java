@@ -45,7 +45,7 @@ public class L2TickV2Test_1 {
     private static SetupConfig.TestcaseConfig testcaseConfig;
     final CompletableFuture result = new CompletableFuture<JSONObject>();
     private static JSONObject uploadObj = new JSONObject();
-    private static List<JSONObject> items=new ArrayList<>();
+
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("L2TickV2Test_1", "Setup");
@@ -96,8 +96,8 @@ public class L2TickV2Test_1 {
                             uploadObj_1.put("time", list.get(k).getTransactionTime());
                             uploadObj_1.put("tradeVolume", list.get(k).getSingleVolume());
                             uploadObj_1.put("tradePrice", list.get(k).getTransactionPrice());
-                            Log.d("data", String.valueOf(uploadObj_1));
-                            result.complete(uploadObj_1);
+//                            Log.d("onet", String.valueOf(uploadObj_1));
+                            uploadObj.put( list.get(k).getTransactionTime(),uploadObj_1);
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
@@ -111,7 +111,11 @@ public class L2TickV2Test_1 {
                             String page2=st[0]+",100,1";
                             L2Tickjk(id,page2,subtype);
                         }
+                    }else {
+                        text(uploadObj);
                     }
+                }else {
+                    text(uploadObj);
                 }
             }
             @Override
@@ -119,5 +123,15 @@ public class L2TickV2Test_1 {
                 result.completeExceptionally(new Exception(errorInfo.toString()));
             }
         });
+    }
+    private void text(JSONObject uploadObj){
+//        String st= String.valueOf(uploadObj);
+//        String[] st1=st.split("\\}");
+//        System.out.println(st1.length+"++++++++++++++===");
+//        for (int i=0;i<st1.length;i++){
+//            System.out.println(st1[i]);
+//        }
+//        Log.d("data", String.valueOf(uploadObj));
+        result.complete(uploadObj);
     }
 }
