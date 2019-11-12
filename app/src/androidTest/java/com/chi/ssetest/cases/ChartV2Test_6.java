@@ -107,8 +107,8 @@ public class ChartV2Test_6 {
                                     uploadObj_1.put("iopvPre",list.get(k).iopvPre);
                                     uploadObj.put(list.get(k).datetime,uploadObj_1);
                                 }
-                                if (null!=chartResponse.afterHoursChartResponse.historyItems){
-                                    if (Boolean.parseBoolean(isNeedAfterHours)){
+                                if (Boolean.parseBoolean(isNeedAfterHours)){
+                                    if (null!=chartResponse.afterHoursChartResponse.historyItems){
                                         CopyOnWriteArrayList<OHLCItem> list1=chartResponse.afterHoursChartResponse.historyItems;
                                         for (int i=0;i<list1.size();i++){
                                             JSONObject uploadObj_1 = new JSONObject();
@@ -120,9 +120,9 @@ public class ChartV2Test_6 {
                                             uploadObj.put(list1.get(i).datetime,uploadObj_1);
                                         }
                                     }
-                                    Log.d("data", String.valueOf(uploadObj));
-                                    result.complete(uploadObj);
                                 }
+                                Log.d("data", String.valueOf(uploadObj));
+                                result.complete(uploadObj);
                             } catch (JSONException e) {
                                 result.completeExceptionally(e);
                             }

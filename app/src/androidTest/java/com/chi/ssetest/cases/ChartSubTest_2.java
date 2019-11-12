@@ -99,13 +99,13 @@ public class ChartSubTest_2 {
                             try {
                                 String[] kname=quoteNumbers4.split(",");
                                 for (int i=0;i<list.length;i++){
+                                    JSONObject uploadObj_1 = new JSONObject();
                                     for (int k=1;k<list[i].length;k++){
-                                        JSONObject uploadObj_1 = new JSONObject();
                                         uploadObj_1.put(kname[k],list[i][k]);
-                                        Log.d("data", String.valueOf(uploadObj_1));
-                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
+                                    uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                 }
+                                Log.d("data", String.valueOf(uploadObj));
                                 result.complete(uploadObj);
                             } catch (JSONException e) {
                                 result.completeExceptionally(e);

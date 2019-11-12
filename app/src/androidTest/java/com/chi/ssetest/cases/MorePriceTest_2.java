@@ -98,7 +98,7 @@ public class MorePriceTest_2 {
                                 uploadObj_1.put("sellCount",morePriceResponse.strs[i][7]);
                                 uploadObj_1.put("unknownCount",morePriceResponse.strs[i][8]);
                                 Log.d("data", String.valueOf(uploadObj_1));
-                                uploadObj.put(String.valueOf(i),uploadObj_1);
+                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
                             result.complete(uploadObj);
                         } catch (JSONException e) {

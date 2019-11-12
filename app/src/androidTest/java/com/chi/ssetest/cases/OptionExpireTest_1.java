@@ -65,16 +65,16 @@ public class OptionExpireTest_1 {
                         result.completeExceptionally(e);
                     }
                     try {
+                        JSONObject uploadObj = new JSONObject();
                         if (optionExpireResponse.list!=null&&optionExpireResponse.list.length>0){
-                            JSONObject uploadObj = new JSONObject();
                             List<String> list=new ArrayList<>();
                             for (int i=0;i<optionExpireResponse.list.length;i++){
                                 list.add(optionExpireResponse.list[i]);
                             }
                             uploadObj.put("list",new JSONArray(list));
                             Log.d("data", String.valueOf(uploadObj));
-                            result.complete(uploadObj);
                         }
+                        result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
