@@ -117,90 +117,80 @@ public class F10V2Test_3 {
                         switch (quoteNumbers3){
                             //重要指标
                             case F10Type.D_IMPORTANTINDEX:
-                                List<JSONObject> IMPORTANTINDEX=new ArrayList<>();
-                                JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("REPORTTITLE",info.get("REPORTTITLE"));
-                                uploadObj_1.put("EPSBASIC",info.get("EPSBASIC"));
-                                uploadObj_1.put("NAPS",info.get("NAPS"));
-                                uploadObj_1.put("NPCUT",info.get("NPCUT"));
-                                uploadObj_1.put("TOTALSHARE",info.get("TOTALSHARE"));
-                                uploadObj_1.put("CIRCSKAMT",info.get("CIRCSKAMT"));
-                                uploadObj_1.put("BIZINCO",info.get("BIZINCO"));
-                                uploadObj_1.put("OPERINYOYB",info.get("OPERINYOYB"));
-                                uploadObj_1.put("NETPROFITYOYB",info.get("NETPROFITYOYB"));
-                                uploadObj_1.put("DISTRIBUTION",info.get("DISTRIBUTION"));
-                                uploadObj_1.put("EXRIGHT",info.get("EXRIGHT"));
-                                IMPORTANTINDEX.add(uploadObj_1);
-                                uploadObj.put("IMPORTANTINDEX",new JSONArray(IMPORTANTINDEX));
+                                uploadObj.put("REPORTTITLE",info.get("REPORTTITLE"));
+                                uploadObj.put("EPSBASIC",info.get("EPSBASIC"));
+                                uploadObj.put("NAPS",info.get("NAPS"));
+                                uploadObj.put("NPCUT",info.get("NPCUT"));
+                                uploadObj.put("TOTALSHARE",info.get("TOTALSHARE"));
+                                uploadObj.put("CIRCSKAMT",info.get("CIRCSKAMT"));
+                                uploadObj.put("BIZINCO",info.get("BIZINCO"));
+                                uploadObj.put("OPERINYOYB",info.get("OPERINYOYB"));
+                                uploadObj.put("NETPROFITYOYB",info.get("NETPROFITYOYB"));
+                                uploadObj.put("DISTRIBUTION",info.get("DISTRIBUTION"));
+                                uploadObj.put("EXRIGHT",info.get("EXRIGHT"));
                                 break;
                             //利润表
                             case F10Type.D_PROINCSTATEMENTNEW:
-                                List<JSONObject> PROINCSTATEMENTNEW=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_6 = new JSONObject();
-                                    uploadObj_6.put("REPORTTITLE",infos.get(i).get("REPORTTITLE"));
-                                    uploadObj_6.put("BIZINCO",infos.get(i).get("BIZINCO"));
-                                    uploadObj_6.put("BIZCOST",infos.get(i).get("BIZCOST"));
-                                    uploadObj_6.put("MANAEXPE",infos.get(i).get("MANAEXPE"));
-                                    uploadObj_6.put("SALESEXPE",infos.get(i).get("SALESEXPE"));
-                                    uploadObj_6.put("FINEXPE",infos.get(i).get("FINEXPE"));
-                                    uploadObj_6.put("PERPROFIT",infos.get(i).get("PERPROFIT"));
-                                    uploadObj_6.put("INVEINCO",infos.get(i).get("INVEINCO"));
-                                    uploadObj_6.put("NONOPERINCOMEN",infos.get(i).get("NONOPERINCOMEN"));
-                                    uploadObj_6.put("TOTPROFIT",infos.get(i).get("TOTPROFIT"));
-                                    uploadObj_6.put("PARENETP",infos.get(i).get("PARENETP"));
-                                    PROINCSTATEMENTNEW.add(uploadObj_6);
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("REPORTTITLE",infos.get(i).get("REPORTTITLE"));
+                                    uploadObj_1.put("BIZINCO",infos.get(i).get("BIZINCO"));
+                                    uploadObj_1.put("BIZCOST",infos.get(i).get("BIZCOST"));
+                                    uploadObj_1.put("MANAEXPE",infos.get(i).get("MANAEXPE"));
+                                    uploadObj_1.put("SALESEXPE",infos.get(i).get("SALESEXPE"));
+                                    uploadObj_1.put("FINEXPE",infos.get(i).get("FINEXPE"));
+                                    uploadObj_1.put("PERPROFIT",infos.get(i).get("PERPROFIT"));
+                                    uploadObj_1.put("INVEINCO",infos.get(i).get("INVEINCO"));
+                                    uploadObj_1.put("NONOPERINCOMEN",infos.get(i).get("NONOPERINCOMEN"));
+                                    uploadObj_1.put("TOTPROFIT",infos.get(i).get("TOTPROFIT"));
+                                    uploadObj_1.put("PARENETP",infos.get(i).get("PARENETP"));
+                                    uploadObj.put((String) infos.get(i).get("REPORTTITLE"),uploadObj_1);
                                 }
-                                uploadObj.put("PROINCSTATEMENTNEW",new JSONArray(PROINCSTATEMENTNEW));
                                 break;
                             //资产负债表
                             case F10Type.D_PROBALSHEETNEW:
-                                List<JSONObject> PROBALSHEETNEW=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_6 = new JSONObject();
-                                    uploadObj_6.put("REPORTTITLE",infos.get(i).get("REPORTTITLE"));
-                                    uploadObj_6.put("TOTLIABSHAREQUI",infos.get(i).get("TOTLIABSHAREQUI"));
-                                    uploadObj_6.put("TOTCURRASSET",infos.get(i).get("TOTCURRASSET"));
-                                    uploadObj_6.put("CURFDS",infos.get(i).get("CURFDS"));
-                                    uploadObj_6.put("TRADFINASSET",infos.get(i).get("TRADFINASSET"));
-                                    uploadObj_6.put("INVE",infos.get(i).get("INVE"));
-                                    uploadObj_6.put("ACCORECE",infos.get(i).get("ACCORECE"));
-                                    uploadObj_6.put("OTHERRECE",infos.get(i).get("OTHERRECE"));
-                                    uploadObj_6.put("FIXEDASSENET",infos.get(i).get("FIXEDASSENET"));
-                                    uploadObj_6.put("AVAISELLASSE",infos.get(i).get("AVAISELLASSE"));
-                                    uploadObj_6.put("INTAASSET",infos.get(i).get("INTAASSET"));
-                                    uploadObj_6.put("SHORTTERMBORR",infos.get(i).get("SHORTTERMBORR"));
-                                    uploadObj_6.put("ADVAPAYM",infos.get(i).get("ADVAPAYM"));
-                                    uploadObj_6.put("ACCOPAYA",infos.get(i).get("ACCOPAYA"));
-                                    uploadObj_6.put("TOTALCURRLIAB",infos.get(i).get("TOTALCURRLIAB"));
-                                    uploadObj_6.put("SUNEVENNONCLIAB",infos.get(i).get("SUNEVENNONCLIAB"));
-                                    uploadObj_6.put("TOTLIAB",infos.get(i).get("TOTLIAB"));
-                                    uploadObj_6.put("PARESHARRIGH",infos.get(i).get("PARESHARRIGH"));
-                                    uploadObj_6.put("CAPISURP",infos.get(i).get("CAPISURP"));
-                                    uploadObj_6.put("GOODWILL",infos.get(i).get("GOODWILL"));
-                                    PROBALSHEETNEW.add(uploadObj_6);
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("REPORTTITLE",infos.get(i).get("REPORTTITLE"));
+                                    uploadObj_1.put("TOTLIABSHAREQUI",infos.get(i).get("TOTLIABSHAREQUI"));
+                                    uploadObj_1.put("TOTCURRASSET",infos.get(i).get("TOTCURRASSET"));
+                                    uploadObj_1.put("CURFDS",infos.get(i).get("CURFDS"));
+                                    uploadObj_1.put("TRADFINASSET",infos.get(i).get("TRADFINASSET"));
+                                    uploadObj_1.put("INVE",infos.get(i).get("INVE"));
+                                    uploadObj_1.put("ACCORECE",infos.get(i).get("ACCORECE"));
+                                    uploadObj_1.put("OTHERRECE",infos.get(i).get("OTHERRECE"));
+                                    uploadObj_1.put("FIXEDASSENET",infos.get(i).get("FIXEDASSENET"));
+                                    uploadObj_1.put("AVAISELLASSE",infos.get(i).get("AVAISELLASSE"));
+                                    uploadObj_1.put("INTAASSET",infos.get(i).get("INTAASSET"));
+                                    uploadObj_1.put("SHORTTERMBORR",infos.get(i).get("SHORTTERMBORR"));
+                                    uploadObj_1.put("ADVAPAYM",infos.get(i).get("ADVAPAYM"));
+                                    uploadObj_1.put("ACCOPAYA",infos.get(i).get("ACCOPAYA"));
+                                    uploadObj_1.put("TOTALCURRLIAB",infos.get(i).get("TOTALCURRLIAB"));
+                                    uploadObj_1.put("SUNEVENNONCLIAB",infos.get(i).get("SUNEVENNONCLIAB"));
+                                    uploadObj_1.put("TOTLIAB",infos.get(i).get("TOTLIAB"));
+                                    uploadObj_1.put("PARESHARRIGH",infos.get(i).get("PARESHARRIGH"));
+                                    uploadObj_1.put("CAPISURP",infos.get(i).get("CAPISURP"));
+                                    uploadObj_1.put("GOODWILL",infos.get(i).get("GOODWILL"));
+                                    uploadObj.put((String) infos.get(i).get("REPORTTITLE"),uploadObj_1);
                                 }
-                                uploadObj.put("PROBALSHEETNEW",new JSONArray(PROBALSHEETNEW));
                                 break;
                             //现金流量表
                             case F10Type.D_PROCFSTATEMENTNEW:
-                                List<JSONObject> PROCFSTATEMENTNEW=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_6 = new JSONObject();
-                                    uploadObj_6.put("REPORTTITLE",infos.get(i).get("REPORTTITLE"));
-                                    uploadObj_6.put("BIZCASHINFL",infos.get(i).get("BIZCASHINFL"));
-                                    uploadObj_6.put("BIZCASHOUTF",infos.get(i).get("BIZCASHOUTF"));
-                                    uploadObj_6.put("MANANETR",infos.get(i).get("MANANETR"));
-                                    uploadObj_6.put("INVCASHINFL",infos.get(i).get("INVCASHINFL"));
-                                    uploadObj_6.put("INVCASHOUTF",infos.get(i).get("INVCASHOUTF"));
-                                    uploadObj_6.put("INVNETCASHFLOW",infos.get(i).get("INVNETCASHFLOW"));
-                                    uploadObj_6.put("FINCASHINFL",infos.get(i).get("FINCASHINFL"));
-                                    uploadObj_6.put("FINCASHOUTF",infos.get(i).get("FINCASHOUTF"));
-                                    uploadObj_6.put("FINNETCFLOW",infos.get(i).get("FINNETCFLOW"));
-                                    uploadObj_6.put("CASHNETR",infos.get(i).get("CASHNETR"));
-                                    PROCFSTATEMENTNEW.add(uploadObj_6);
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("REPORTTITLE",infos.get(i).get("REPORTTITLE"));
+                                    uploadObj_1.put("BIZCASHINFL",infos.get(i).get("BIZCASHINFL"));
+                                    uploadObj_1.put("BIZCASHOUTF",infos.get(i).get("BIZCASHOUTF"));
+                                    uploadObj_1.put("MANANETR",infos.get(i).get("MANANETR"));
+                                    uploadObj_1.put("INVCASHINFL",infos.get(i).get("INVCASHINFL"));
+                                    uploadObj_1.put("INVCASHOUTF",infos.get(i).get("INVCASHOUTF"));
+                                    uploadObj_1.put("INVNETCASHFLOW",infos.get(i).get("INVNETCASHFLOW"));
+                                    uploadObj_1.put("FINCASHINFL",infos.get(i).get("FINCASHINFL"));
+                                    uploadObj_1.put("FINCASHOUTF",infos.get(i).get("FINCASHOUTF"));
+                                    uploadObj_1.put("FINNETCFLOW",infos.get(i).get("FINNETCFLOW"));
+                                    uploadObj_1.put("CASHNETR",infos.get(i).get("CASHNETR"));
+                                    uploadObj.put((String) infos.get(i).get("REPORTTITLE"),uploadObj_1);
                                 }
-                                uploadObj.put("PROCFSTATEMENTNEW",new JSONArray(PROCFSTATEMENTNEW));
                                 break;
                         }
                     } catch (JSONException e) {

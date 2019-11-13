@@ -93,7 +93,6 @@ public class F10_LeaderPersonInfoTest_1 {
                     }
                     JSONObject uploadObj = new JSONObject();
                     List<HashMap<String, Object>>  infos = (List<HashMap<String, Object>>) f10V2Response.infos;
-                    List<JSONObject> list =new ArrayList<>();
                     try {
                         if (infos!=null){
                             for (int i=0;i<infos.size();i++){
@@ -112,8 +111,9 @@ public class F10_LeaderPersonInfoTest_1 {
                                     uploadObj_1.put("BEGINDATE",infos.get(i).get("BEGINDATE"));
                                 }
                                 Log.d("data", String.valueOf(uploadObj_1));
-                                result.complete(uploadObj_1);
+                                uploadObj.put((String) infos.get(i).get("LEADERNAME"),uploadObj_1);
                             }
+                            result.complete(uploadObj);
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

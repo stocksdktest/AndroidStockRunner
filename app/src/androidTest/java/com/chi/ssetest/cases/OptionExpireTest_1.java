@@ -8,22 +8,14 @@ import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.StockTestcase;
 import com.chi.ssetest.StockTestcaseName;
 import com.chi.ssetest.setup.TestcaseConfigRule;
-import com.mitake.core.AddValueModel;
-import com.mitake.core.QuoteItem;
 import com.mitake.core.bean.log.ErrorInfo;
-import com.mitake.core.request.AddValueRequest;
 import com.mitake.core.request.OptionExpireRequest;
-import com.mitake.core.request.QuoteRequest;
-import com.mitake.core.response.AddValueResponse;
 import com.mitake.core.response.IResponseInfoCallback;
 import com.mitake.core.response.OptionExpireResponse;
-import com.mitake.core.response.QuoteResponse;
-import com.mitake.core.response.Response;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -73,14 +65,16 @@ public class OptionExpireTest_1 {
                         result.completeExceptionally(e);
                     }
                     try {
+                        JSONObject uploadObj = new JSONObject();
                         if (optionExpireResponse.list!=null&&optionExpireResponse.list.length>0){
+                            List<String> list=new ArrayList<>();
                             for (int i=0;i<optionExpireResponse.list.length;i++){
-                                JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("date",optionExpireResponse.list[i]);
-                                Log.d("data", String.valueOf(uploadObj_1));
-                                result.complete(uploadObj_1);
+                                list.add(optionExpireResponse.list[i]);
                             }
+                            uploadObj.put("list",new JSONArray(list));
+                            Log.d("data", String.valueOf(uploadObj));
                         }
+                        result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

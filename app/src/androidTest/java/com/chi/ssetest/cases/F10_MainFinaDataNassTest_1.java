@@ -91,14 +91,13 @@ public class F10_MainFinaDataNassTest_1 {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    List<JSONObject> items=new ArrayList<>();
                     if (mainFinaDataNasResponse.mMainFinaDataNasList!=null){
-                        for (MainFinaDataNas item : mainFinaDataNasResponse.mMainFinaDataNasList) {
-                            JSONObject uploadObj_1 = new JSONObject();
-                            try {
+                        try {
+                            for (MainFinaDataNas item : mainFinaDataNasResponse.mMainFinaDataNasList) {
+                                JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("REPORTTITLE_",item.REPORTTITLE_);
                                 uploadObj_1.put("BasicEPS",item.BasicEPS);
-                                uploadObj_1.put("RESERVEPS_",item.RESERVEPS_);
+//                                uploadObj_1.put("RESERVEPS_",item.RESERVEPS_);
                                 uploadObj_1.put("BVPS_",item.BVPS_);
                                 uploadObj_1.put("NETCASHFLOWOPERPS_",item.NETCASHFLOWOPERPS_);
                                 uploadObj_1.put("WEIGHTEDROE_",item.WEIGHTEDROE_);
@@ -114,13 +113,14 @@ public class F10_MainFinaDataNassTest_1 {
                                 uploadObj_1.put("NetCashFlowFina",item.NetCashFlowFina);
                                 uploadObj_1.put("CashEquiNetIncr",item.CashEquiNetIncr);
                                 uploadObj_1.put("EPSBASIC",item.EPSBASIC);
-                                uploadObj_1.put("ENDDATE",item.ENDDATE);
-                                uploadObj_1.put("MOM",item.MOM);
+//                                uploadObj_1.put("ENDDATE",item.ENDDATE);
+//                                uploadObj_1.put("MOM",item.MOM);
                                 Log.d("data", String.valueOf(uploadObj_1));
-                                result.complete(uploadObj_1);
-                            } catch (JSONException e) {
-                                result.completeExceptionally(e);
+                                uploadObj.put(item.REPORTTITLE_,uploadObj_1);
                             }
+                            result.complete(uploadObj);
+                        } catch (JSONException e) {
+                            result.completeExceptionally(e);
                         }
                     }
                 }

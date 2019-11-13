@@ -106,30 +106,20 @@ public class F10_FundShareHolderInfoTest_1 {
                             uploadObj.put("COUNT_",list.COUNT_);
                             uploadObj.put("ENDDATE_",list.ENDDATE_);
                             if (list.list!=null){
-                                List<JSONObject> item=new ArrayList<>();
                                 for (int i=0;i<list.list.size();i++){
                                     JSONObject uploadObj_1 = new JSONObject();
                                     uploadObj_1.put("CHINAMEABBR_",list.list.get(i).CHINAMEABBR_);
                                     uploadObj_1.put("PCTTOTALESHARE_",list.list.get(i).PCTTOTALESHARE_);
                                     uploadObj_1.put("HOLDINGVOL_",list.list.get(i).HOLDINGVOL_);
-                                    item.add(uploadObj_1);
+                                    uploadObj.put(list.list.get(i).CHINAMEABBR_,uploadObj_1);
                                 }
-                                uploadObj.put("list",new JSONArray(item));
-                            }else {
-                                uploadObj.put("list",list.list);
                             }
+                            Log.d("data", String.valueOf(uploadObj));
+                            result.complete(uploadObj);
                         } catch (JSONException e) {
                             result.completeExceptionally(e);
                         }
-                    }else {
-                        try {
-                            uploadObj.put("data",fundShareHolderInfoResponse.info);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

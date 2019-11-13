@@ -91,10 +91,9 @@ public class F10_CoreBusinessTest_1 {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    List<JSONObject> items=new ArrayList<>();
-                    for (CoreBusiness item : coreBusinessResponse.list) {
-                        JSONObject uploadObj_1 = new JSONObject();
-                        try {
+                    try {
+                        for (CoreBusiness item : coreBusinessResponse.list) {
+                            JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("BUSSINESSNATURE_",item.BUSSINESSNATURE_);
                             uploadObj_1.put("OperCost",item.OperCost);
                             uploadObj_1.put("OPERREVENUETOTOR_",item.OPERREVENUETOTOR_);
@@ -102,10 +101,11 @@ public class F10_CoreBusinessTest_1 {
                             uploadObj_1.put("OperRevenue",item.OperRevenue);
                             uploadObj_1.put("ENDDATE_",item.ENDDATE_);
                             Log.d("data", String.valueOf(uploadObj_1));
-                            result.complete(uploadObj_1);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
+                            uploadObj.put(item.ENDDATE_,uploadObj_1);
                         }
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
                 }
                 @Override

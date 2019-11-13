@@ -89,7 +89,6 @@ public class HkPriceInfoTest_1 {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    List<JSONObject> HkPriceInfoItem=new ArrayList<>();
                     Map<String, List<HkPriceInfoItem>> list=hkPriceInfoResponse.hkPriceInfo;
                     Set<String> key=list.keySet();
                     try {
@@ -99,15 +98,14 @@ public class HkPriceInfoTest_1 {
                                 uploadObj_1.put("upLimit",list.get(str).get(i).upLimit);
                                 uploadObj_1.put("lowLimit",list.get(str).get(i).lowLimit);
                                 uploadObj_1.put("priceDifference",list.get(str).get(i).priceDifference);
-                                HkPriceInfoItem.add(uploadObj_1);
+                                uploadObj.put(String.valueOf(i),uploadObj_1);
+                                Log.d("data", String.valueOf(uploadObj_1));
                             }
                         }
-                        uploadObj.put("hkPriceDiffs",new JSONArray(HkPriceInfoItem));
+                        result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

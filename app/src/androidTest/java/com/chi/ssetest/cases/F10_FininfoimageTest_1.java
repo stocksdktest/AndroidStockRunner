@@ -104,18 +104,18 @@ public class F10_FininfoimageTest_1 {
                     } catch (AssertionError e) {
                         result.completeExceptionally(e);
                     }
-                    JSONObject uploadObj = new JSONObject();
-                    List<JSONObject> items=new ArrayList<>();
                     if (finInfoImageResponse.imageData!=null){
-                        for (int i=0;i<finInfoImageResponse.imageData.length;i++){
-                            JSONObject uploadObj_1 = new JSONObject();
-                            try {
-                                uploadObj_1.put("image",finInfoImageResponse.imageData[i]);
-                                Log.d("data", String.valueOf(uploadObj_1));
-                                result.complete(uploadObj_1);
-                            } catch (JSONException e) {
-                                result.completeExceptionally(e);
+                        try {
+                            JSONObject uploadObj = new JSONObject();
+                            List<String> images=new ArrayList<>();
+                            for (int i=0;i<finInfoImageResponse.imageData.length;i++){
+                                images.add(String.valueOf(finInfoImageResponse.imageData[i]));
                             }
+                            uploadObj.put("images",new JSONArray(images));
+                            Log.d("data", String.valueOf(uploadObj));
+                            result.complete(uploadObj);
+                        } catch (JSONException e) {
+                            result.completeExceptionally(e);
                         }
                     }
                 }

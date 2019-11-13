@@ -73,9 +73,10 @@ public class AHListTest_2 {
                         result.completeExceptionally(e);
                     }
                     List<AHQuoteItem> list=ahQuoteListResponse.mAHQuoteItems;
+                    JSONObject uploadObj=new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value
-                    for (int k=0;k<list.size();k++){
-                        try {
+                    try {
+                        for (int k=0;k<list.size();k++){
                             JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("name", list.get(k).name);
                             uploadObj_1.put("codeA", list.get(k).codeA);
@@ -90,11 +91,13 @@ public class AHListTest_2 {
                             uploadObj_1.put("changeRateA", list.get(k).changeRateA);
                             uploadObj_1.put("changeRateH", list.get(k).changeRateH);
                             Log.d("data", String.valueOf(uploadObj_1));
-                            result.complete(uploadObj_1);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
+                            uploadObj.put(list.get(k).datetimeA,uploadObj_1);
                         }
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
+
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

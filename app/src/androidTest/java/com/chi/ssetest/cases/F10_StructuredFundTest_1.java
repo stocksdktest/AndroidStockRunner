@@ -127,7 +127,6 @@ public class F10_StructuredFundTest_1 {
                                 break;
                             //"/fndclassstockpre"
                             case StructuredFundRequest.STOCKPRE:
-                                List<JSONObject> fndclassstockpre=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
                                     JSONObject uploadObj_2 = new JSONObject();
                                     uploadObj_2.put("SKCODE",infos.get(i).get("SKCODE"));
@@ -135,9 +134,8 @@ public class F10_StructuredFundTest_1 {
                                     uploadObj_2.put("NAVRTO",infos.get(i).get("NAVRTO"));
                                     uploadObj_2.put("ACCSTKRTO",infos.get(i).get("ACCSTKRTO"));
                                     uploadObj_2.put("ACCCIRCRTO",infos.get(i).get("ACCCIRCRTO"));
-                                    fndclassstockpre.add(uploadObj_2);
+                                    uploadObj.put((String) infos.get(i).get("SKCODE"),uploadObj_2);
                                 }
-                                uploadObj.put("list",new JSONArray(fndclassstockpre));
                                 break;
                             //"/fndclassforcast"
                             case StructuredFundRequest.FORCAST:
@@ -175,7 +173,6 @@ public class F10_StructuredFundTest_1 {
                             case StructuredFundRequest.MASTERRATE:
                                 uploadObj.put("subamt",info.get("subamt"));
                                 List<HashMap<String,Object>> masterRateinfos =( List<HashMap<String,Object>>)info.get("subcost");
-                                List<JSONObject> subcost=new ArrayList<>();
                                 if (masterRateinfos!=null){
                                     for (int k=0;k<masterRateinfos.size();k++){
                                         JSONObject uploadObj_1 = new JSONObject();
@@ -184,11 +181,8 @@ public class F10_StructuredFundTest_1 {
                                         uploadObj_1.put("APPAMTRESH",masterRateinfos.get(k).get("APPAMTRESH"));
                                         uploadObj_1.put("APPMAXAMT",masterRateinfos.get(k).get("APPMAXAMT"));
                                         uploadObj_1.put("SUBMIXAMT",masterRateinfos.get(k).get("SUBMIXAMT"));
-                                        subcost.add(uploadObj_1);
+                                        uploadObj.put(String.valueOf((k+1)),uploadObj_1);
                                     }
-                                    uploadObj.put("subcost",new JSONArray(subcost));
-                                }else {
-                                    uploadObj.put("subcost",info.get("subcost"));
                                 }
                                 break;
                         }

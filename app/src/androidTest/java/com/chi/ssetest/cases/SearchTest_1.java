@@ -93,6 +93,7 @@ public class SearchTest_1 {
                     }
                     ArrayList<SearchResultItem> list=searchResponse.results;
                     try {
+                        JSONObject uploadObj = new JSONObject();
                         for (int i=0;i<list.size();i++){
                             JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("stockID",list.get(i).stockID);
@@ -104,8 +105,9 @@ public class SearchTest_1 {
 //                            uploadObj_1.put("hkType",list.get(i).hkType);
                             uploadObj_1.put("st",list.get(i).st);
                             Log.d("data", String.valueOf(uploadObj_1));
-                            result.complete(uploadObj_1);
+                            uploadObj.put(list.get(i).stockID,uploadObj_1);
                         }
+                        result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

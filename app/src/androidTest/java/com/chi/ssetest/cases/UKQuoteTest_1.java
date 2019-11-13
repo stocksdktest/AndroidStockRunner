@@ -86,9 +86,10 @@ public class UKQuoteTest_1 {
                     } catch (AssertionError e) {
                         result.completeExceptionally(e);
                     }
-                    for (UKQuoteItem item : ukQuoteResponse.ukQuoteItems) {
-                        JSONObject uploadObj_1 = new JSONObject();
-                        try {
+                    try {
+                        JSONObject uploadObj = new JSONObject();
+                        for (UKQuoteItem item : ukQuoteResponse.ukQuoteItems) {
+                            JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("code",item.code);
                             uploadObj_1.put("name",item.name);
                             uploadObj_1.put("subtype",item.subtype);
@@ -125,10 +126,11 @@ public class UKQuoteTest_1 {
                             uploadObj_1.put("subjectClosingReferencePrice",item.subjectClosingReferencePrice);
                             uploadObj_1.put("premium",item.premium);
                             Log.d("data", String.valueOf(uploadObj_1));
-                            result.complete(uploadObj_1);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
+                            uploadObj.put(item.datetime,uploadObj_1);
                         }
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
                 }
                 @Override

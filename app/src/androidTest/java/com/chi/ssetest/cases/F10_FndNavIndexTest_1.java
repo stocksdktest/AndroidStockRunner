@@ -105,8 +105,9 @@ public class F10_FndNavIndexTest_1 {
                                 uploadObj_1.put("ENDDATE_",list.get(i).NAVDATE);
                                 uploadObj_1.put("UNITNAV_",list.get(i).UNITNAV);
                                 Log.d("data", String.valueOf(uploadObj_1));
-                                result.complete(uploadObj_1);
+                                uploadObj.put(list.get(i).NAVDATE,uploadObj_1);
                             }
+                            result.complete(uploadObj);
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

@@ -107,7 +107,6 @@ public class F10_CalendarTest_1 {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    List<JSONObject> newShareDates=new ArrayList<>();
                     ArrayList<NewShareDates> list = dataResponse.infos;
                     try {
                         for (int i=0;i<list.size();i++){
@@ -119,8 +118,9 @@ public class F10_CalendarTest_1 {
                             uploadObj_1.put("wss",list.get(i).getWss());
                             uploadObj_1.put("normalDay",list.get(i).getNormalDay());
                             Log.d("data", String.valueOf(uploadObj_1));
-                            result.complete(uploadObj_1);
+                            uploadObj.put(list.get(i).getNormalDay(),uploadObj_1);
                         }
+                        result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

@@ -92,12 +92,11 @@ public class AfterHoursChartTest_2 {
                             } catch (AssertionError e) {
                                 result.completeExceptionally(e);
                             }
-                            List<JSONObject> items=new ArrayList<>();
                             JSONObject uploadObj = new JSONObject();
                             // TODO fill uploadObj with QuoteResponse value
-                            for (OHLCItem item : afterHoursChartResponse.historyItems) {
-                                JSONObject uploadObj_1 = new JSONObject();
-                                try {
+                            try {
+                                for (OHLCItem item : afterHoursChartResponse.historyItems) {
+                                    JSONObject uploadObj_1 = new JSONObject();
                                     uploadObj_1.put("datetime",item.datetime);
                                     uploadObj_1.put("closePrice",item.closePrice);
                                     uploadObj_1.put("tradeVolume",item.tradeVolume);
@@ -109,11 +108,13 @@ public class AfterHoursChartTest_2 {
                                     uploadObj_1.put("fp_volume",item.fp_volume);//接口没值
                                     uploadObj_1.put("fp_amount",item.fp_amount);//接口没值
                                     Log.d("data", String.valueOf(uploadObj_1));
-                                    result.complete(uploadObj_1);
-                                } catch (JSONException e) {
-                                    result.completeExceptionally(e);
+                                    uploadObj.put(item.datetime,uploadObj_1);
                                 }
+                                result.complete(uploadObj);
+                            } catch (JSONException e) {
+                                result.completeExceptionally(e);
                             }
+
                         }
                         @Override
                         public void exception(ErrorInfo errorInfo) {

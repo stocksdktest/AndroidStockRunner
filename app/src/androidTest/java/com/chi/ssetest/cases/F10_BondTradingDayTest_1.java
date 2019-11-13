@@ -102,7 +102,6 @@ public class F10_BondTradingDayTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     List<HashMap<String,Object>> list = f10V2Response.infos;
                     try {
-                        List<JSONObject> items=new ArrayList<>();
                         for (int i=0;i<list.size();i++){
                             JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("sg",list.get(i).get("sg"));
@@ -110,8 +109,9 @@ public class F10_BondTradingDayTest_1 {
                             uploadObj_1.put("dss",list.get(i).get("dss"));
                             uploadObj_1.put("NORMALDAY",list.get(i).get("NORMALDAY"));
                             Log.d("data", String.valueOf(uploadObj_1));
-                            result.complete(uploadObj_1);
+                            uploadObj.put((String) list.get(i).get("NORMALDAY"),uploadObj_1);
                         }
+                        result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

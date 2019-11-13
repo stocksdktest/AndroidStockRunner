@@ -129,63 +129,53 @@ public class F10V2Test_1 {
                                 break;
                                 //主营构成
                             case F10Type.D_BUSINESSINFO:
-                                List<JSONObject> BUSINESSINFO=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("CLASSNAME",infos.get(i).get("CLASSNAME"));
-                                    uploadObj_2.put("TCOREBIZINCOME",infos.get(i).get("TCOREBIZINCOME"));
-                                    uploadObj_2.put("TYPESTYLE",infos.get(i).get("TYPESTYLE"));
-                                    uploadObj_2.put("PUBLISHDATE",infos.get(i).get("PUBLISHDATE"));
-                                    BUSINESSINFO.add(uploadObj_2);
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("CLASSNAME",infos.get(i).get("CLASSNAME"));
+                                    uploadObj_1.put("TCOREBIZINCOME",infos.get(i).get("TCOREBIZINCOME"));
+                                    uploadObj_1.put("TYPESTYLE",infos.get(i).get("TYPESTYLE"));
+                                    uploadObj_1.put("PUBLISHDATE",infos.get(i).get("PUBLISHDATE"));
+                                    uploadObj.put((String) infos.get(i).get("PUBLISHDATE"),uploadObj_1);
                                 }
-                                uploadObj.put("list",new JSONArray(BUSINESSINFO));
                                 break;
                                 //龙虎榜-买入前5营业部
                             case F10Type.D_CHARTS5BUYS:
-                                List<JSONObject> CHARTS5BUYS=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("BIZSUNITNAME",infos.get(i).get("BIZSUNITNAME"));
-                                    uploadObj_2.put("BUYAMT",infos.get(i).get("BUYAMT"));
-                                    uploadObj_2.put("SALEAMT",infos.get(i).get("SALEAMT"));
-                                    uploadObj_2.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
-                                    uploadObj_2.put("CHGDESC",infos.get(i).get("CHGDESC"));
-                                    CHARTS5BUYS.add(uploadObj_2);
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("BIZSUNITNAME",infos.get(i).get("BIZSUNITNAME"));
+                                    uploadObj_1.put("BUYAMT",infos.get(i).get("BUYAMT"));
+                                    uploadObj_1.put("SALEAMT",infos.get(i).get("SALEAMT"));
+                                    uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
+                                    uploadObj_1.put("CHGDESC",infos.get(i).get("CHGDESC"));
+                                    uploadObj.put((String) infos.get(i).get("TRADEDATE"),uploadObj_1);
                                 }
-                                uploadObj.put("list",new JSONArray(CHARTS5BUYS));
                                 break;
                                 //龙虎榜-卖出前5营业部
                             case F10Type.D_CHARTS5SELLS:
-                                List<JSONObject> CHARTS5SELLS=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("BIZSUNITNAME",infos.get(i).get("BIZSUNITNAME"));
-                                    uploadObj_2.put("BUYAMT",infos.get(i).get("BUYAMT"));
-                                    uploadObj_2.put("SALEAMT",infos.get(i).get("SALEAMT"));
-                                    uploadObj_2.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
-                                    uploadObj_2.put("CHGDESC",infos.get(i).get("CHGDESC"));
-                                    CHARTS5SELLS.add(uploadObj_2);
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("BIZSUNITNAME",infos.get(i).get("BIZSUNITNAME"));
+                                    uploadObj_1.put("BUYAMT",infos.get(i).get("BUYAMT"));
+                                    uploadObj_1.put("SALEAMT",infos.get(i).get("SALEAMT"));
+                                    uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
+                                    uploadObj_1.put("CHGDESC",infos.get(i).get("CHGDESC"));
+                                    uploadObj.put((String) infos.get(i).get("TRADEDATE"),uploadObj_1);
                                 }
-                                uploadObj.put("list",new JSONArray(CHARTS5SELLS));
                                 break;
                                 //机构观点-机构评级
                             case F10Type.D_EXPTSKINVRATING:
                                 uploadObj.put("STDRATING",info.get("STDRATING"));
                                 List<HashMap<String,Object>> items= (List<HashMap<String,Object>>) info.get("list");
                                 if (items!=null){
-                                    List<JSONObject> list=new ArrayList<>();
                                     for (int i=0;i<items.size();i++){
-                                        JSONObject uploadObj_3 = new JSONObject();
-                                        uploadObj_3.put("COMPNAME",items.get(i).get("COMPNAME"));
-                                        uploadObj_3.put("RATING",items.get(i).get("RATING"));
-                                        uploadObj_3.put("RADJUSTDIR",items.get(i).get("RADJUSTDIR"));
-                                        uploadObj_3.put("DATE",items.get(i).get("DATE"));
-                                        uploadObj_3.put("PRICECAP",items.get(i).get("PRICECAP"));
-                                        list.add(uploadObj_3);
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("COMPNAME",items.get(i).get("COMPNAME"));
+                                        uploadObj_1.put("RATING",items.get(i).get("RATING"));
+                                        uploadObj_1.put("RADJUSTDIR",items.get(i).get("RADJUSTDIR"));
+                                        uploadObj_1.put("DATE",items.get(i).get("DATE"));
+                                        uploadObj_1.put("PRICECAP",items.get(i).get("PRICECAP"));
+                                        uploadObj.put((String) items.get(i).get("DATE"),uploadObj_1);
                                     }
-                                    uploadObj.put("list",new JSONArray(list));
-                                }else {
-                                    uploadObj.put("list",items);
                                 }
                                 break;
                                 //机构观点-一致预测
@@ -224,60 +214,52 @@ public class F10V2Test_1 {
                                 break;
                                 //分红扩股
                             case F10Type.D_SHAREBONUS:
-                                List<JSONObject> SHAREBONUS=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_5 = new JSONObject();
-                                    uploadObj_5.put("DATETYPENAME",infos.get(i).get("DATETYPENAME"));
-                                    uploadObj_5.put("PRETAXCASHMAXDVCNY",infos.get(i).get("PRETAXCASHMAXDVCNY"));
-                                    uploadObj_5.put("EQURECORDDATE",infos.get(i).get("EQURECORDDATE"));
-                                    uploadObj_5.put("XDRDATE",infos.get(i).get("XDRDATE"));
-                                    SHAREBONUS.add(uploadObj_5);
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("DATETYPENAME",infos.get(i).get("DATETYPENAME"));
+                                    uploadObj_1.put("PRETAXCASHMAXDVCNY",infos.get(i).get("PRETAXCASHMAXDVCNY"));
+                                    uploadObj_1.put("EQURECORDDATE",infos.get(i).get("EQURECORDDATE"));
+                                    uploadObj_1.put("XDRDATE",infos.get(i).get("XDRDATE"));
+                                    uploadObj.put((String) infos.get(i).get("DATETYPENAME"),uploadObj_1);
                                 }
-                                uploadObj.put("list",new JSONArray(SHAREBONUS));
                                 break;
                                 //公司高管
                             case F10Type.D_COMPANYMANAGER:
-                                List<JSONObject> COMPANYMANAGER=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_5 = new JSONObject();
-                                    uploadObj_5.put("CNAME",infos.get(i).get("CNAME"));
-                                    uploadObj_5.put("DUTY",infos.get(i).get("DUTY"));
-                                    uploadObj_5.put("HOLDAFAMT",infos.get(i).get("HOLDAFAMT"));
-                                    uploadObj_5.put("REMBEFTAX",infos.get(i).get("REMBEFTAX"));
-                                    uploadObj_5.put("BEGINEND",infos.get(i).get("BEGINEND"));
-                                    uploadObj_5.put("MEMO",infos.get(i).get("MEMO"));
-                                    COMPANYMANAGER.add(uploadObj_5);
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("CNAME",infos.get(i).get("CNAME"));
+                                    uploadObj_1.put("DUTY",infos.get(i).get("DUTY"));
+                                    uploadObj_1.put("HOLDAFAMT",infos.get(i).get("HOLDAFAMT"));
+                                    uploadObj_1.put("REMBEFTAX",infos.get(i).get("REMBEFTAX"));
+                                    uploadObj_1.put("BEGINEND",infos.get(i).get("BEGINEND"));
+                                    uploadObj_1.put("MEMO",infos.get(i).get("MEMO"));
+                                    uploadObj.put((String) infos.get(i).get("CNAME"),uploadObj_1);
                                 }
-                                uploadObj.put("list",new JSONArray(COMPANYMANAGER));
                                 break;
                                 //十大流通股东
                             case F10Type.D_OTSHOLDER10:
-                                List<JSONObject> OTSHOLDER10=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_5 = new JSONObject();
-                                    uploadObj_5.put("ENDDATE",infos.get(i).get("ENDDATE"));
-                                    uploadObj_5.put("SHHOLDERNAME",infos.get(i).get("SHHOLDERNAME"));
-                                    uploadObj_5.put("HOLDERAMT",infos.get(i).get("HOLDERAMT"));
-                                    uploadObj_5.put("PCTOFFLOTSHARES",infos.get(i).get("PCTOFFLOTSHARES"));
-                                    uploadObj_5.put("HOLDERSUMCHG",infos.get(i).get("HOLDERSUMCHG"));
-                                    uploadObj_5.put("SHHOLDERCODE",infos.get(i).get("SHHOLDERCODE"));
-                                    OTSHOLDER10.add(uploadObj_5);
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("ENDDATE",infos.get(i).get("ENDDATE"));
+                                    uploadObj_1.put("SHHOLDERNAME",infos.get(i).get("SHHOLDERNAME"));
+                                    uploadObj_1.put("HOLDERAMT",infos.get(i).get("HOLDERAMT"));
+                                    uploadObj_1.put("PCTOFFLOTSHARES",infos.get(i).get("PCTOFFLOTSHARES"));
+                                    uploadObj_1.put("HOLDERSUMCHG",infos.get(i).get("HOLDERSUMCHG"));
+                                    uploadObj_1.put("SHHOLDERCODE",infos.get(i).get("SHHOLDERCODE"));
+                                    uploadObj.put((String) infos.get(i).get("ENDDATE"),uploadObj_1);
                                 }
-                                uploadObj.put("list",new JSONArray(OTSHOLDER10));
                                 break;//十大股东
                             case F10Type.D_SHAREHOLDER10:
-                                List<JSONObject> SHAREHOLDER10=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_5 = new JSONObject();
-                                    uploadObj_5.put("ENDDATE",infos.get(i).get("ENDDATE"));
-                                    uploadObj_5.put("SHHOLDERNAME",infos.get(i).get("SHHOLDERNAME"));
-                                    uploadObj_5.put("HOLDERAMT",infos.get(i).get("HOLDERAMT"));
-                                    uploadObj_5.put("HOLDERRTO",infos.get(i).get("HOLDERRTO"));
-                                    uploadObj_5.put("CURCHG",infos.get(i).get("CURCHG"));
-                                    uploadObj_5.put("SHHOLDERCODE",infos.get(i).get("SHHOLDERCODE"));
-                                    SHAREHOLDER10.add(uploadObj_5);
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("ENDDATE",infos.get(i).get("ENDDATE"));
+                                    uploadObj_1.put("SHHOLDERNAME",infos.get(i).get("SHHOLDERNAME"));
+                                    uploadObj_1.put("HOLDERAMT",infos.get(i).get("HOLDERAMT"));
+                                    uploadObj_1.put("HOLDERRTO",infos.get(i).get("HOLDERRTO"));
+                                    uploadObj_1.put("CURCHG",infos.get(i).get("CURCHG"));
+                                    uploadObj_1.put("SHHOLDERCODE",infos.get(i).get("SHHOLDERCODE"));
+                                    uploadObj.put((String) infos.get(i).get("ENDDATE"),uploadObj_1);
                                 }
-                                uploadObj.put("list",new JSONArray(SHAREHOLDER10));
                                 break;
                                 //股本信息
                             case F10Type.D_SHAREINFO:
@@ -291,210 +273,181 @@ public class F10V2Test_1 {
                                 break;
                                 //股东户数
                             case F10Type.D_SHAREHOLDERNUM:
-                                List<JSONObject> SHAREHOLDERNUM=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_6 = new JSONObject();
-                                    uploadObj_6.put("ENDDATE",infos.get(i).get("ENDDATE"));
-                                    uploadObj_6.put("TOTALSHAMT",infos.get(i).get("TOTALSHAMT"));
-                                    uploadObj_6.put("KAVGSH",infos.get(i).get("KAVGSH"));
-                                    uploadObj_6.put("MOM",infos.get(i).get("MOM"));
-                                    SHAREHOLDERNUM.add(uploadObj_6);
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("ENDDATE",infos.get(i).get("ENDDATE"));
+                                    uploadObj_1.put("TOTALSHAMT",infos.get(i).get("TOTALSHAMT"));
+                                    uploadObj_1.put("KAVGSH",infos.get(i).get("KAVGSH"));
+                                    uploadObj_1.put("MOM",infos.get(i).get("MOM"));
+                                    uploadObj.put((String) infos.get(i).get("ENDDATE"),uploadObj_1);
                                 }
-                                uploadObj.put("list",new JSONArray(SHAREHOLDERNUM));
                                 break;
                                 //主要指标
                             case F10Type.D_PROFINMAININDEX:
-                                List<JSONObject> PROFINMAININDEX=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_6 = new JSONObject();
-                                    uploadObj_6.put("REPORTTITLE",infos.get(i).get("REPORTTITLE"));
-                                    uploadObj_6.put("EPSBASIC",infos.get(i).get("EPSBASIC"));
-                                    uploadObj_6.put("EPSDILUTED",infos.get(i).get("EPSDILUTED"));
-                                    uploadObj_6.put("NAPS",infos.get(i).get("NAPS"));
-                                    uploadObj_6.put("UPPS",infos.get(i).get("UPPS"));
-                                    uploadObj_6.put("CRPS",infos.get(i).get("CRPS"));
-                                    uploadObj_6.put("SGPMARGIN",infos.get(i).get("SGPMARGIN"));
-                                    uploadObj_6.put("OPPRORT",infos.get(i).get("OPPRORT"));
-                                    uploadObj_6.put("SNPMARGIN",infos.get(i).get("SNPMARGIN"));
-                                    uploadObj_6.put("ROEWEIGHTED",infos.get(i).get("ROEWEIGHTED"));
-                                    uploadObj_6.put("ROEDILUTED",infos.get(i).get("ROEDILUTED"));
-                                    uploadObj_6.put("CURRENTRT",infos.get(i).get("CURRENTRT"));
-                                    uploadObj_6.put("QUICKRT",infos.get(i).get("QUICKRT"));
-                                    uploadObj_6.put("OPNCFPS",infos.get(i).get("OPNCFPS"));
-                                    PROFINMAININDEX.add(uploadObj_6);
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("REPORTTITLE",infos.get(i).get("REPORTTITLE"));
+                                    uploadObj_1.put("EPSBASIC",infos.get(i).get("EPSBASIC"));
+                                    uploadObj_1.put("EPSDILUTED",infos.get(i).get("EPSDILUTED"));
+                                    uploadObj_1.put("NAPS",infos.get(i).get("NAPS"));
+                                    uploadObj_1.put("UPPS",infos.get(i).get("UPPS"));
+                                    uploadObj_1.put("CRPS",infos.get(i).get("CRPS"));
+                                    uploadObj_1.put("SGPMARGIN",infos.get(i).get("SGPMARGIN"));
+                                    uploadObj_1.put("OPPRORT",infos.get(i).get("OPPRORT"));
+                                    uploadObj_1.put("SNPMARGIN",infos.get(i).get("SNPMARGIN"));
+                                    uploadObj_1.put("ROEWEIGHTED",infos.get(i).get("ROEWEIGHTED"));
+                                    uploadObj_1.put("ROEDILUTED",infos.get(i).get("ROEDILUTED"));
+                                    uploadObj_1.put("CURRENTRT",infos.get(i).get("CURRENTRT"));
+                                    uploadObj_1.put("QUICKRT",infos.get(i).get("QUICKRT"));
+                                    uploadObj_1.put("OPNCFPS",infos.get(i).get("OPNCFPS"));
+                                    uploadObj.put((String) infos.get(i).get("REPORTTITLE"),uploadObj_1);
                                 }
-                                uploadObj.put("list",new JSONArray(PROFINMAININDEX));
                                 break;
                                 //利润表
                             case F10Type.D_PROINCSTATEMENTNEW:
-                                List<JSONObject> PROINCSTATEMENTNEW=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_6 = new JSONObject();
-                                    uploadObj_6.put("REPORTTITLE",infos.get(i).get("REPORTTITLE"));
-                                    uploadObj_6.put("BIZINCO",infos.get(i).get("BIZINCO"));
-                                    uploadObj_6.put("BIZCOST",infos.get(i).get("BIZCOST"));
-                                    uploadObj_6.put("MANAEXPE",infos.get(i).get("MANAEXPE"));
-                                    uploadObj_6.put("SALESEXPE",infos.get(i).get("SALESEXPE"));
-                                    uploadObj_6.put("FINEXPE",infos.get(i).get("FINEXPE"));
-                                    uploadObj_6.put("PERPROFIT",infos.get(i).get("PERPROFIT"));
-                                    uploadObj_6.put("INVEINCO",infos.get(i).get("INVEINCO"));
-                                    uploadObj_6.put("NONOPERINCOMEN",infos.get(i).get("NONOPERINCOMEN"));
-                                    uploadObj_6.put("TOTPROFIT",infos.get(i).get("TOTPROFIT"));
-                                    uploadObj_6.put("PARENETP",infos.get(i).get("PARENETP"));
-                                    PROINCSTATEMENTNEW.add(uploadObj_6);
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("REPORTTITLE",infos.get(i).get("REPORTTITLE"));
+                                    uploadObj_1.put("BIZINCO",infos.get(i).get("BIZINCO"));
+                                    uploadObj_1.put("BIZCOST",infos.get(i).get("BIZCOST"));
+                                    uploadObj_1.put("MANAEXPE",infos.get(i).get("MANAEXPE"));
+                                    uploadObj_1.put("SALESEXPE",infos.get(i).get("SALESEXPE"));
+                                    uploadObj_1.put("FINEXPE",infos.get(i).get("FINEXPE"));
+                                    uploadObj_1.put("PERPROFIT",infos.get(i).get("PERPROFIT"));
+                                    uploadObj_1.put("INVEINCO",infos.get(i).get("INVEINCO"));
+                                    uploadObj_1.put("NONOPERINCOMEN",infos.get(i).get("NONOPERINCOMEN"));
+                                    uploadObj_1.put("TOTPROFIT",infos.get(i).get("TOTPROFIT"));
+                                    uploadObj_1.put("PARENETP",infos.get(i).get("PARENETP"));
+                                    uploadObj.put((String) infos.get(i).get("REPORTTITLE"),uploadObj_1);
                                 }
-                                uploadObj.put("list",new JSONArray(PROINCSTATEMENTNEW));
                                 break;
                                 //资产负债表
                             case F10Type.D_PROBALSHEETNEW:
-                                List<JSONObject> PROBALSHEETNEW=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_6 = new JSONObject();
-                                    uploadObj_6.put("REPORTTITLE",infos.get(i).get("REPORTTITLE"));
-                                    uploadObj_6.put("TOTLIABSHAREQUI",infos.get(i).get("TOTLIABSHAREQUI"));
-                                    uploadObj_6.put("TOTCURRASSET",infos.get(i).get("TOTCURRASSET"));
-                                    uploadObj_6.put("CURFDS",infos.get(i).get("CURFDS"));
-                                    uploadObj_6.put("TRADFINASSET",infos.get(i).get("TRADFINASSET"));
-                                    uploadObj_6.put("INVE",infos.get(i).get("INVE"));
-                                    uploadObj_6.put("ACCORECE",infos.get(i).get("ACCORECE"));
-                                    uploadObj_6.put("OTHERRECE",infos.get(i).get("OTHERRECE"));
-                                    uploadObj_6.put("FIXEDASSENET",infos.get(i).get("FIXEDASSENET"));
-                                    uploadObj_6.put("AVAISELLASSE",infos.get(i).get("AVAISELLASSE"));
-                                    uploadObj_6.put("INTAASSET",infos.get(i).get("INTAASSET"));
-                                    uploadObj_6.put("SHORTTERMBORR",infos.get(i).get("SHORTTERMBORR"));
-                                    uploadObj_6.put("ADVAPAYM",infos.get(i).get("ADVAPAYM"));
-                                    uploadObj_6.put("ACCOPAYA",infos.get(i).get("ACCOPAYA"));
-                                    uploadObj_6.put("TOTALCURRLIAB",infos.get(i).get("TOTALCURRLIAB"));
-                                    uploadObj_6.put("SUNEVENNONCLIAB",infos.get(i).get("SUNEVENNONCLIAB"));
-                                    uploadObj_6.put("TOTLIAB",infos.get(i).get("TOTLIAB"));
-                                    uploadObj_6.put("PARESHARRIGH",infos.get(i).get("PARESHARRIGH"));
-                                    uploadObj_6.put("CAPISURP",infos.get(i).get("CAPISURP"));
-                                    uploadObj_6.put("GOODWILL",infos.get(i).get("GOODWILL"));
-                                    PROBALSHEETNEW.add(uploadObj_6);
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("REPORTTITLE",infos.get(i).get("REPORTTITLE"));
+                                    uploadObj_1.put("TOTLIABSHAREQUI",infos.get(i).get("TOTLIABSHAREQUI"));
+                                    uploadObj_1.put("TOTCURRASSET",infos.get(i).get("TOTCURRASSET"));
+                                    uploadObj_1.put("CURFDS",infos.get(i).get("CURFDS"));
+                                    uploadObj_1.put("TRADFINASSET",infos.get(i).get("TRADFINASSET"));
+                                    uploadObj_1.put("INVE",infos.get(i).get("INVE"));
+                                    uploadObj_1.put("ACCORECE",infos.get(i).get("ACCORECE"));
+                                    uploadObj_1.put("OTHERRECE",infos.get(i).get("OTHERRECE"));
+                                    uploadObj_1.put("FIXEDASSENET",infos.get(i).get("FIXEDASSENET"));
+                                    uploadObj_1.put("AVAISELLASSE",infos.get(i).get("AVAISELLASSE"));
+                                    uploadObj_1.put("INTAASSET",infos.get(i).get("INTAASSET"));
+                                    uploadObj_1.put("SHORTTERMBORR",infos.get(i).get("SHORTTERMBORR"));
+                                    uploadObj_1.put("ADVAPAYM",infos.get(i).get("ADVAPAYM"));
+                                    uploadObj_1.put("ACCOPAYA",infos.get(i).get("ACCOPAYA"));
+                                    uploadObj_1.put("TOTALCURRLIAB",infos.get(i).get("TOTALCURRLIAB"));
+                                    uploadObj_1.put("SUNEVENNONCLIAB",infos.get(i).get("SUNEVENNONCLIAB"));
+                                    uploadObj_1.put("TOTLIAB",infos.get(i).get("TOTLIAB"));
+                                    uploadObj_1.put("PARESHARRIGH",infos.get(i).get("PARESHARRIGH"));
+                                    uploadObj_1.put("CAPISURP",infos.get(i).get("CAPISURP"));
+                                    uploadObj_1.put("GOODWILL",infos.get(i).get("GOODWILL"));
+                                    uploadObj.put((String) infos.get(i).get("REPORTTITLE"),uploadObj_1);
                                 }
-                                uploadObj.put("list",new JSONArray(PROBALSHEETNEW));
                                 break;
                                 //现金流量表
                             case F10Type.D_PROCFSTATEMENTNEW:
-                                List<JSONObject> PROCFSTATEMENTNEW=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_6 = new JSONObject();
-                                    uploadObj_6.put("REPORTTITLE",infos.get(i).get("REPORTTITLE"));
-                                    uploadObj_6.put("BIZCASHINFL",infos.get(i).get("BIZCASHINFL"));
-                                    uploadObj_6.put("BIZCASHOUTF",infos.get(i).get("BIZCASHOUTF"));
-                                    uploadObj_6.put("MANANETR",infos.get(i).get("MANANETR"));
-                                    uploadObj_6.put("INVCASHINFL",infos.get(i).get("INVCASHINFL"));
-                                    uploadObj_6.put("INVCASHOUTF",infos.get(i).get("INVCASHOUTF"));
-                                    uploadObj_6.put("INVNETCASHFLOW",infos.get(i).get("INVNETCASHFLOW"));
-                                    uploadObj_6.put("FINCASHINFL",infos.get(i).get("FINCASHINFL"));
-                                    uploadObj_6.put("FINCASHOUTF",infos.get(i).get("FINCASHOUTF"));
-                                    uploadObj_6.put("FINNETCFLOW",infos.get(i).get("FINNETCFLOW"));
-                                    uploadObj_6.put("CASHNETR",infos.get(i).get("CASHNETR"));
-                                    PROCFSTATEMENTNEW.add(uploadObj_6);
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("REPORTTITLE",infos.get(i).get("REPORTTITLE"));
+                                    uploadObj_1.put("BIZCASHINFL",infos.get(i).get("BIZCASHINFL"));
+                                    uploadObj_1.put("BIZCASHOUTF",infos.get(i).get("BIZCASHOUTF"));
+                                    uploadObj_1.put("MANANETR",infos.get(i).get("MANANETR"));
+                                    uploadObj_1.put("INVCASHINFL",infos.get(i).get("INVCASHINFL"));
+                                    uploadObj_1.put("INVCASHOUTF",infos.get(i).get("INVCASHOUTF"));
+                                    uploadObj_1.put("INVNETCASHFLOW",infos.get(i).get("INVNETCASHFLOW"));
+                                    uploadObj_1.put("FINCASHINFL",infos.get(i).get("FINCASHINFL"));
+                                    uploadObj_1.put("FINCASHOUTF",infos.get(i).get("FINCASHOUTF"));
+                                    uploadObj_1.put("FINNETCFLOW",infos.get(i).get("FINNETCFLOW"));
+                                    uploadObj_1.put("CASHNETR",infos.get(i).get("CASHNETR"));
+                                    uploadObj.put((String) infos.get(i).get("REPORTTITLE"),uploadObj_1);
                                 }
-                                uploadObj.put("list",new JSONArray(PROCFSTATEMENTNEW));
                                 break;
                                 //股东深度挖掘数据
                             case F10Type.IINVHOLDCHG:
-                                List<JSONObject> IINVHOLDCHG=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_6 = new JSONObject();
-                                    uploadObj_6.put("REPORTDATE",infos.get(i).get("REPORTDATE"));
-                                    uploadObj_6.put("TRADING",infos.get(i).get("TRADING"));
-                                    uploadObj_6.put("SESNAME",infos.get(i).get("SESNAME"));
-                                    uploadObj_6.put("SETYPENAME",infos.get(i).get("SETYPENAME"));
-                                    uploadObj_6.put("HOLDQTY",infos.get(i).get("HOLDQTY"));
-                                    uploadObj_6.put("HOLDAMT",infos.get(i).get("HOLDAMT"));
-                                    uploadObj_6.put("HOLDQTYSUMCHG",infos.get(i).get("HOLDQTYSUMCHG"));
-                                    IINVHOLDCHG.add(uploadObj_6);
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("REPORTDATE",infos.get(i).get("REPORTDATE"));
+                                    uploadObj_1.put("TRADING",infos.get(i).get("TRADING"));
+                                    uploadObj_1.put("SESNAME",infos.get(i).get("SESNAME"));
+                                    uploadObj_1.put("SETYPENAME",infos.get(i).get("SETYPENAME"));
+                                    uploadObj_1.put("HOLDQTY",infos.get(i).get("HOLDQTY"));
+                                    uploadObj_1.put("HOLDAMT",infos.get(i).get("HOLDAMT"));
+                                    uploadObj_1.put("HOLDQTYSUMCHG",infos.get(i).get("HOLDQTYSUMCHG"));
+                                    uploadObj.put((String) infos.get(i).get("REPORTDATE"),uploadObj_1);
                                 }
-                                uploadObj.put("list",new JSONArray(IINVHOLDCHG));
                                 break;
                                 //沪深股api----大事提醒---按时间
                             case F10Type.IMPORT_NOTICE_DATA:
-                                List<JSONObject> IMPORT_NOTICE_DATA=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_6 = new JSONObject();
-                                    uploadObj_6.put("REPTITLE",infos.get(i).get("REPTITLE"));
-                                    uploadObj_6.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
-                                    uploadObj_6.put("TEXT",infos.get(i).get("TEXT"));
-//                                    uploadObj_6.put("ID",infos.get(i).get("ID"));
-//                                    uploadObj_6.put("ISPDF",infos.get(i).get("ISPDF"));
-                                    IMPORT_NOTICE_DATA.add(uploadObj_6);
-                                }
-                                uploadObj.put("list",new JSONArray(IMPORT_NOTICE_DATA));
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("REPTITLE",infos.get(i).get("REPTITLE"));
+                                    uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
+                                    uploadObj_1.put("TEXT",infos.get(i).get("TEXT"));
+//                                    uploadObj_1.put("ID",infos.get(i).get("ID"));
+//                                    uploadObj_1.put("ISPDF",infos.get(i).get("ISPDF"));
+                                    uploadObj.put((String) infos.get(i).get("TRADEDATE"),uploadObj_1);                                }
                                 break;
                                 //沪深股api----大事提醒---按标题
                             case F10Type.IMPORT_NOTICE_TITLE:
-                                List<JSONObject> IMPORT_NOTICE_TITLE=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_6 = new JSONObject();
-                                    uploadObj_6.put("REPTITLE",infos.get(i).get("REPTITLE"));
-                                    uploadObj_6.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
-                                    uploadObj_6.put("TEXT",infos.get(i).get("TEXT"));
-//                                    uploadObj_6.put("ID",infos.get(i).get("ID"));
-//                                    uploadObj_6.put("ISPDF",infos.get(i).get("ISPDF"));
-                                    IMPORT_NOTICE_TITLE.add(uploadObj_6);
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("REPTITLE",infos.get(i).get("REPTITLE"));
+                                    uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
+                                    uploadObj_1.put("TEXT",infos.get(i).get("TEXT"));
+//                                    uploadObj_1.put("ID",infos.get(i).get("ID"));
+//                                    uploadObj_1.put("ISPDF",infos.get(i).get("ISPDF"));
+                                    uploadObj.put((String) infos.get(i).get("TRADEDATE"),uploadObj_1);
                                 }
-                                uploadObj.put("list",new JSONArray(IMPORT_NOTICE_TITLE));
                                 break;
                                 //董秘问答
                             case F10Type.NEWS_INTEARACTIVE:
                                 List<HashMap<String,Object>> items1= (List<HashMap<String,Object>>) info.get("List");
                                 if (items1!=null){
-                                    List<JSONObject> list=new ArrayList<>();
                                     for (int i=0;i<items1.size();i++){
-                                        JSONObject uploadObj_7 = new JSONObject();
-                                        uploadObj_7.put("TRADING",items1.get(i).get("TRADING"));
-                                        uploadObj_7.put("SESNAME",items1.get(i).get("SESNAME"));
-                                        uploadObj_7.put("PROBLEM",items1.get(i).get("PROBLEM"));
-                                        uploadObj_7.put("QUESTIONTIME",items1.get(i).get("QUESTIONTIME"));
-                                        uploadObj_7.put("REPLY",items1.get(i).get("REPLY"));
-                                        uploadObj_7.put("ANSWERTIME",items1.get(i).get("ANSWERTIME"));
-                                        uploadObj_7.put("NEWSSOURCE",items1.get(i).get("NEWSSOURCE"));
-                                        uploadObj_7.put("INTERACTIVEID",items1.get(i).get("INTERACTIVEID"));
-                                        list.add(uploadObj_7);
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("TRADING",items1.get(i).get("TRADING"));
+                                        uploadObj_1.put("SESNAME",items1.get(i).get("SESNAME"));
+                                        uploadObj_1.put("PROBLEM",items1.get(i).get("PROBLEM"));
+                                        uploadObj_1.put("QUESTIONTIME",items1.get(i).get("QUESTIONTIME"));
+                                        uploadObj_1.put("REPLY",items1.get(i).get("REPLY"));
+                                        uploadObj_1.put("ANSWERTIME",items1.get(i).get("ANSWERTIME"));
+                                        uploadObj_1.put("NEWSSOURCE",items1.get(i).get("NEWSSOURCE"));
+                                        uploadObj_1.put("INTERACTIVEID",items1.get(i).get("INTERACTIVEID"));
+                                        uploadObj.put((String) items1.get(i).get("TRADING"),uploadObj_1);
                                     }
-                                    uploadObj.put("list",new JSONArray(list));
-                                }else {
-                                    uploadObj.put("list",items1);
                                 }
                                 break;
                                 //大事提醒-业绩预告
                             case F10Type.EXPT_PERFORMANCE:
                                 List<HashMap<String,Object>> items2= (List<HashMap<String,Object>>) info.get("List");
                                 if (items2!=null){
-                                    List<JSONObject> list=new ArrayList<>();
                                     for (int i=0;i<items2.size();i++){
-                                        JSONObject uploadObj_7 = new JSONObject();
-                                        uploadObj_7.put("SESNAME",items2.get(i).get("SESNAME"));
-                                        uploadObj_7.put("PUBLISHDATE",items2.get(i).get("PUBLISHDATE"));
-                                        uploadObj_7.put("RETAMAXPROFITSMK",items2.get(i).get("RETAMAXPROFITSMK"));
-                                        uploadObj_7.put("RETAMAXPROFITSINC",items2.get(i).get("RETAMAXPROFITSINC"));
-                                        list.add(uploadObj_7);
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("SESNAME",items2.get(i).get("SESNAME"));
+                                        uploadObj_1.put("PUBLISHDATE",items2.get(i).get("PUBLISHDATE"));
+                                        uploadObj_1.put("RETAMAXPROFITSMK",items2.get(i).get("RETAMAXPROFITSMK"));
+                                        uploadObj_1.put("RETAMAXPROFITSINC",items2.get(i).get("RETAMAXPROFITSINC"));
+                                        uploadObj.put((String) items2.get(i).get("PUBLISHDATE"),uploadObj_1);
                                     }
-                                    uploadObj.put("list",new JSONArray(list));
-                                }else {
-                                    uploadObj.put("list",items2);
                                 }
                                 break;
                                 //沪深股api----大事提醒—业绩公告
                             case F10Type.PROINDIC_DATA:
                                 List<HashMap<String,Object>> items3= (List<HashMap<String,Object>>) info.get("List");
                                 if (items3!=null){
-                                    List<JSONObject> list=new ArrayList<>();
                                     for (int i=0;i<items3.size();i++){
-                                        JSONObject uploadObj_7 = new JSONObject();
-                                        uploadObj_7.put("SESNAME",items3.get(i).get("SESNAME"));
-                                        uploadObj_7.put("PUBLISHDATE",items3.get(i).get("PUBLISHDATE"));
-                                        uploadObj_7.put("EPSBASIC",items3.get(i).get("EPSBASIC"));
-                                        uploadObj_7.put("TAGRT",items3.get(i).get("TAGRT"));
-                                        uploadObj_7.put("NPGRT",items3.get(i).get("NPGRT"));
-                                        list.add(uploadObj_7);
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("SESNAME",items3.get(i).get("SESNAME"));
+                                        uploadObj_1.put("PUBLISHDATE",items3.get(i).get("PUBLISHDATE"));
+                                        uploadObj_1.put("EPSBASIC",items3.get(i).get("EPSBASIC"));
+                                        uploadObj_1.put("TAGRT",items3.get(i).get("TAGRT"));
+                                        uploadObj_1.put("NPGRT",items3.get(i).get("NPGRT"));
+                                        uploadObj.put((String) items3.get(i).get("PUBLISHDATE"),uploadObj_1);
                                     }
-                                    uploadObj.put("list",new JSONArray(list));
-                                }else {
-                                    uploadObj.put("list",items3);
                                 }
                                 break;
                         }

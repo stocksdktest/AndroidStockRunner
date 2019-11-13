@@ -77,23 +77,21 @@ public class PlateIndexQuoteTest_1 {
                     }
                     List<PlateIndexItem> list=plateIndexResponse.indexItems;
                     if (list!=null){
-                        for (int k=0;k<list.size();k++){
-                            JSONObject uploadObj_1 = new JSONObject();
-                            try {
+                        try {
+                            JSONObject uploadObj = new JSONObject();
+                            for (int k=0;k<list.size();k++){
+                                JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("blockID", list.get(k).blockID);
                                 uploadObj_1.put("dateTime", list.get(k).dateTime);
                                 uploadObj_1.put("blockIndex", list.get(k).blockIndex);
                                 uploadObj_1.put("blockChg", list.get(k).blockChg);
                                 uploadObj_1.put("averageChg", list.get(k).averageChg);
                                 uploadObj_1.put("turnoverRate", list.get(k).turnoverRate);
-                                List<JSONObject> ratioUpDown=new ArrayList<>();
+
                                 if (list.get(k).ratioUpDown!=null&&list.get(k).ratioUpDown.length>0){
-                                    JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("up",list.get(k).ratioUpDown[0]);
-                                    uploadObj_2.put("down",list.get(k).ratioUpDown[1]);
-                                    uploadObj_2.put("same",list.get(k).ratioUpDown[2]);
-                                    ratioUpDown.add(uploadObj_2);
-                                    uploadObj_1.put("ratioUpDown",new JSONArray(ratioUpDown));
+                                    uploadObj_1.put("up",list.get(k).ratioUpDown[0]);
+                                    uploadObj_1.put("down",list.get(k).ratioUpDown[1]);
+                                    uploadObj_1.put("same",list.get(k).ratioUpDown[2]);
                                 }else {
                                     uploadObj_1.put("ratioUpDown",list.get(k).ratioUpDown);
                                 }
@@ -149,29 +147,13 @@ public class PlateIndexQuoteTest_1 {
                                 uploadObj_1.put("preCloseBlockIndex", list.get(k).preCloseBlockIndex);
                                 uploadObj_1.put("upsDowns", list.get(k).upsDowns);
                                 uploadObj_1.put("amplitude", list.get(k).amplitude);
-                                items.add(uploadObj_1);
-                            } catch (JSONException e) {
-                                result.completeExceptionally(e);
+                                uploadObj.put(list.get(k).dateTime,uploadObj_1);
+                                Log.d("data", String.valueOf(uploadObj_1));
                             }
-                        }
-                        try {
-                            //把数组存储到JSON
-                            uploadObj.put("items", new JSONArray(items));
+                            result.complete(uploadObj);
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            result.completeExceptionally(e);
                         }
-                        //解析输出JSON
-                        try {
-                            JSONArray jsonArray = uploadObj.getJSONArray("items");
-                            for (int i=0;i<jsonArray.length();i++){
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                Log.d("data", String.valueOf(jsonObject));
-//                            System.out.println(jsonObject.optString("code")+","+jsonObject.optString("datetime"));
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        result.complete(uploadObj);
                     }
                 }
 

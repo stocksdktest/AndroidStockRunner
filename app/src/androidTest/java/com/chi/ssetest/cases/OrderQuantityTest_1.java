@@ -8,23 +8,14 @@ import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.StockTestcase;
 import com.chi.ssetest.StockTestcaseName;
 import com.chi.ssetest.setup.TestcaseConfigRule;
-import com.mitake.core.AddValueModel;
-import com.mitake.core.OrderQuantityItem;
-import com.mitake.core.QuoteItem;
 import com.mitake.core.bean.log.ErrorInfo;
-import com.mitake.core.request.AddValueRequest;
 import com.mitake.core.request.OrderQuantityRequest;
-import com.mitake.core.request.QuoteRequest;
-import com.mitake.core.response.AddValueResponse;
 import com.mitake.core.response.IResponseInfoCallback;
 import com.mitake.core.response.OrderQuantityResponse;
-import com.mitake.core.response.QuoteResponse;
-import com.mitake.core.response.Response;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -79,27 +70,30 @@ public class OrderQuantityTest_1 {
                     }
                     JSONObject uploadObj = new JSONObject();
                     try {
-                       List<JSONObject> buylist=new ArrayList<>();
-                       if (orderQuantityResponse.buyList!=null&&orderQuantityResponse.buyList.size()>0){
-                           for (int k=0;k<orderQuantityResponse.buyList.size();k++){
-                               JSONObject uploadObj_1 = new JSONObject();
+                        List<JSONObject> buylist=new ArrayList<>();
+                        if (orderQuantityResponse.buyList!=null&&orderQuantityResponse.buyList.size()>0){
+                            for (int k=0;k<orderQuantityResponse.buyList.size();k++){
+                                JSONObject uploadObj_1 = new JSONObject();
 //                               uploadObj_1.put("ID",orderQuantityResponse.buyList.get(k).ID_);
-                               uploadObj_1.put("QUANTITY",orderQuantityResponse.buyList.get(k).QUANTITY_);
-                               buylist.add(uploadObj_1);
-                           }
-                           uploadObj.put("buylist",new JSONArray(buylist));
-                       }else {
-                           uploadObj.put("buylist",orderQuantityResponse.buyList);
-                       }
+                                uploadObj_1.put("QUANTITY",orderQuantityResponse.buyList.get(k).QUANTITY_);
+                                buylist.add(uploadObj_1);
+                            }
+                            uploadObj.put("buylist",new JSONArray(buylist));
+                        }else {
+                            uploadObj.put("buylist",orderQuantityResponse.buyList);
+                        }
 
                         List<JSONObject> selllist=new ArrayList<>();
                         if (orderQuantityResponse.sellList!=null&&orderQuantityResponse.sellList.size()>0){
 //                            for (int k=0;k<orderQuantityResponse.sellList.size();k++){
                             for (int k=orderQuantityResponse.sellList.size()-1;k>=0;k--){
-                                JSONObject uploadObj_1 = new JSONObject();
-//                                uploadObj_1.put("ID",orderQuantityResponse.sellList.get(k).ID_);
-                                uploadObj_1.put("QUANTITY",orderQuantityResponse.sellList.get(k).QUANTITY_);
-                                selllist.add(uploadObj_1);
+
+                                if (orderQuantityResponse.sellList.get(k).QUANTITY_.size()!=0){
+                                    JSONObject uploadObj_1 = new JSONObject();
+//                                    uploadObj_1.put("ID",orderQuantityResponse.sellList.get(k).ID_);
+                                    uploadObj_1.put("QUANTITY",orderQuantityResponse.sellList.get(k).QUANTITY_);
+                                    selllist.add(uploadObj_1);
+                                }
                             }
                             uploadObj.put("selllist",new JSONArray(selllist));
                         }else {
@@ -109,7 +103,6 @@ public class OrderQuantityTest_1 {
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-
                     Log.d("data", String.valueOf(uploadObj));
                     result.complete(uploadObj);
                 }
