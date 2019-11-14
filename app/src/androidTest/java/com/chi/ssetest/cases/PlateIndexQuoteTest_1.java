@@ -37,7 +37,7 @@ import static org.junit.Assert.assertNotNull;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-//板块指数 方法一
+//板块指数 方法一(已废弃)
 @RunWith(AndroidJUnit4.class)
 @StockTestcase(StockTestcaseName.PLATEINDEXQUOTETEST_1)
 public class PlateIndexQuoteTest_1 {
@@ -66,102 +66,102 @@ public class PlateIndexQuoteTest_1 {
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 
 //        for (int i=0;i<quoteNumbers.length;i++){
-            PlateIndexQuoteRequest request = new PlateIndexQuoteRequest();
-            request.send(quoteNumbers, new IResponseInfoCallback<PlateIndexResponse>() {
-                @Override
-                public void callback(PlateIndexResponse plateIndexResponse) {
-                    try {
-                        assertNotNull(plateIndexResponse.indexItems);
-                    } catch (AssertionError e) {
-                        result.completeExceptionally(e);
-                    }
-                    List<PlateIndexItem> list=plateIndexResponse.indexItems;
-                    if (list!=null){
-                        try {
-                            JSONObject uploadObj = new JSONObject();
-                            for (int k=0;k<list.size();k++){
-                                JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("blockID", list.get(k).blockID);
-                                uploadObj_1.put("dateTime", list.get(k).dateTime);
-                                uploadObj_1.put("blockIndex", list.get(k).blockIndex);
-                                uploadObj_1.put("blockChg", list.get(k).blockChg);
-                                uploadObj_1.put("averageChg", list.get(k).averageChg);
-                                uploadObj_1.put("turnoverRate", list.get(k).turnoverRate);
-
-                                if (list.get(k).ratioUpDown!=null&&list.get(k).ratioUpDown.length>0){
-                                    uploadObj_1.put("up",list.get(k).ratioUpDown[0]);
-                                    uploadObj_1.put("down",list.get(k).ratioUpDown[1]);
-                                    uploadObj_1.put("same",list.get(k).ratioUpDown[2]);
-                                }else {
-                                    uploadObj_1.put("ratioUpDown",list.get(k).ratioUpDown);
-                                }
-                                //涨跌标识 + 涨跌幅
-                                uploadObj_1.put("indexChg", list.get(k).upDownFlag+list.get(k).indexChg);
-                                uploadObj_1.put("indexChg5", list.get(k).indexChg5);
-                                uploadObj_1.put("indexChg10", list.get(k).indexChg10);
-                                uploadObj_1.put("largeMoneyNetInflow", list.get(k).largeMoneyNetInflow);
-                                uploadObj_1.put("bigMoneyNetInflow", list.get(k).bigMoneyNetInflow);
-                                uploadObj_1.put("midMoneyNetInflow", list.get(k).midMoneyNetInflow);
-                                uploadObj_1.put("smallMoneyNetInflow", list.get(k).smallMoneyNetInflow);
-                                uploadObj_1.put("mainforceMoneyInflow", list.get(k).mainforceMoneyInflow);
-                                uploadObj_1.put("mainforceMoneyOutflow", list.get(k).mainforceMoneyOutflow);
-                                uploadObj_1.put("mainforceMoneyNetInflow5", list.get(k).mainforceMoneyNetInflow5);
-                                uploadObj_1.put("mainforceMoneyNetInflow10", list.get(k).mainforceMoneyNetInflow10);
-                                uploadObj_1.put("mainforceMoneyNetInflow", list.get(k).mainforceMoneyNetInflow);
-                                uploadObj_1.put("largeVolumeB", list.get(k).largeVolumeB);
-                                uploadObj_1.put("largeVolumeS", list.get(k).largeVolumeS);
-                                uploadObj_1.put("largeMoneyB", list.get(k).largeMoneyB);
-                                uploadObj_1.put("largeMoneyS", list.get(k).largeMoneyS);
-                                uploadObj_1.put("bigVolumeB", list.get(k).bigVolumeB);
-                                uploadObj_1.put("bigVolumeS", list.get(k).bigVolumeS);
-                                uploadObj_1.put("bigMoneyB", list.get(k).bigMoneyB);
-                                uploadObj_1.put("bigMoneyS", list.get(k).bigMoneyS);
-                                uploadObj_1.put("midVolumeB", list.get(k).midVolumeB);
-                                uploadObj_1.put("midVolumeS", list.get(k).midVolumeS);
-                                uploadObj_1.put("midMoneyB", list.get(k).midMoneyB);
-                                uploadObj_1.put("midMoneyS", list.get(k).midMoneyS);
-                                uploadObj_1.put("smallVolumeB", list.get(k).smallVolumeB);
-                                uploadObj_1.put("smallVolumeS", list.get(k).smallVolumeS);
-                                uploadObj_1.put("smallMoneyB", list.get(k).smallMoneyB);
-                                uploadObj_1.put("smallMoneyS", list.get(k).smallMoneyS);
-                                uploadObj_1.put("totalTrdMoney", list.get(k).totalTrdMoney);
-                                uploadObj_1.put("blockFAMC", list.get(k).blockFAMC);
-                                uploadObj_1.put("totalMarketValue", list.get(k).totalMarketValue);
-                                uploadObj_1.put("mainforceMoneyNetInflow20", list.get(k).mainforceMoneyNetInflow20);
-                                uploadObj_1.put("ratioMainforceMoneyNetInflow5", list.get(k).ratioMainforceMoneyNetInflow5);
-                                uploadObj_1.put("ratioMainforceMoneyNetInflow10", list.get(k).ratioMainforceMoneyNetInflow10);
-                                uploadObj_1.put("ratioMainforceMoneyNetInflow20", list.get(k).ratioMainforceMoneyNetInflow20);
-                                uploadObj_1.put("totalTrdVolume", list.get(k).totalTrdVolume);
-                                uploadObj_1.put("openBlockIndex", list.get(k).openBlockIndex);
-                                uploadObj_1.put("highBlockIndex", list.get(k).highBlockIndex);
-                                uploadObj_1.put("lowBlockIndex", list.get(k).lowBlockIndex);
-//                                uploadObj_1.put("closeBlockIndex", list.get(k).closeBlockIndex);//ios可能没有需要ios验证
-                                uploadObj_1.put("committee", list.get(k).committee);
-                                uploadObj_1.put("deviation", list.get(k).deviation);
-                                uploadObj_1.put("buyNum", list.get(k).buyNum);
-                                uploadObj_1.put("sellNum", list.get(k).sellNum);
-                                uploadObj_1.put("ttm", list.get(k).ttm);
-                                uploadObj_1.put("lyr", list.get(k).lyr);
-                                uploadObj_1.put("marketRate", list.get(k).marketRate);
-                                uploadObj_1.put("blockName", list.get(k).blockName);
-                                uploadObj_1.put("preCloseBlockIndex", list.get(k).preCloseBlockIndex);
-                                uploadObj_1.put("upsDowns", list.get(k).upsDowns);
-                                uploadObj_1.put("amplitude", list.get(k).amplitude);
-                                uploadObj.put(list.get(k).dateTime,uploadObj_1);
-                                Log.d("data", String.valueOf(uploadObj_1));
-                            }
-                            result.complete(uploadObj);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
-                        }
-                    }
-                }
-
-                @Override
-                public void exception(ErrorInfo errorInfo) {
-                    result.completeExceptionally(new Exception(errorInfo.toString()));
-                }
-            });
+//            PlateIndexQuoteRequest request = new PlateIndexQuoteRequest();
+//            request.send(quoteNumbers, new IResponseInfoCallback<PlateIndexResponse>() {
+//                @Override
+//                public void callback(PlateIndexResponse plateIndexResponse) {
+//                    try {
+//                        assertNotNull(plateIndexResponse.indexItems);
+//                    } catch (AssertionError e) {
+//                        result.completeExceptionally(e);
+//                    }
+//                    List<PlateIndexItem> list=plateIndexResponse.indexItems;
+//                    if (list!=null){
+//                        try {
+//                            JSONObject uploadObj = new JSONObject();
+//                            for (int k=0;k<list.size();k++){
+//                                JSONObject uploadObj_1 = new JSONObject();
+//                                uploadObj_1.put("blockID", list.get(k).blockID);
+//                                uploadObj_1.put("dateTime", list.get(k).dateTime);
+//                                uploadObj_1.put("blockIndex", list.get(k).blockIndex);
+//                                uploadObj_1.put("blockChg", list.get(k).blockChg);
+//                                uploadObj_1.put("averageChg", list.get(k).averageChg);
+//                                uploadObj_1.put("turnoverRate", list.get(k).turnoverRate);
+//
+//                                if (list.get(k).ratioUpDown!=null&&list.get(k).ratioUpDown.length>0){
+//                                    uploadObj_1.put("up",list.get(k).ratioUpDown[0]);
+//                                    uploadObj_1.put("down",list.get(k).ratioUpDown[1]);
+//                                    uploadObj_1.put("same",list.get(k).ratioUpDown[2]);
+//                                }else {
+//                                    uploadObj_1.put("ratioUpDown",list.get(k).ratioUpDown);
+//                                }
+//                                //涨跌标识 + 涨跌幅
+//                                uploadObj_1.put("indexChg", list.get(k).upDownFlag+list.get(k).indexChg);
+//                                uploadObj_1.put("indexChg5", list.get(k).indexChg5);
+//                                uploadObj_1.put("indexChg10", list.get(k).indexChg10);
+//                                uploadObj_1.put("largeMoneyNetInflow", list.get(k).largeMoneyNetInflow);
+//                                uploadObj_1.put("bigMoneyNetInflow", list.get(k).bigMoneyNetInflow);
+//                                uploadObj_1.put("midMoneyNetInflow", list.get(k).midMoneyNetInflow);
+//                                uploadObj_1.put("smallMoneyNetInflow", list.get(k).smallMoneyNetInflow);
+//                                uploadObj_1.put("mainforceMoneyInflow", list.get(k).mainforceMoneyInflow);
+//                                uploadObj_1.put("mainforceMoneyOutflow", list.get(k).mainforceMoneyOutflow);
+//                                uploadObj_1.put("mainforceMoneyNetInflow5", list.get(k).mainforceMoneyNetInflow5);
+//                                uploadObj_1.put("mainforceMoneyNetInflow10", list.get(k).mainforceMoneyNetInflow10);
+//                                uploadObj_1.put("mainforceMoneyNetInflow", list.get(k).mainforceMoneyNetInflow);
+//                                uploadObj_1.put("largeVolumeB", list.get(k).largeVolumeB);
+//                                uploadObj_1.put("largeVolumeS", list.get(k).largeVolumeS);
+//                                uploadObj_1.put("largeMoneyB", list.get(k).largeMoneyB);
+//                                uploadObj_1.put("largeMoneyS", list.get(k).largeMoneyS);
+//                                uploadObj_1.put("bigVolumeB", list.get(k).bigVolumeB);
+//                                uploadObj_1.put("bigVolumeS", list.get(k).bigVolumeS);
+//                                uploadObj_1.put("bigMoneyB", list.get(k).bigMoneyB);
+//                                uploadObj_1.put("bigMoneyS", list.get(k).bigMoneyS);
+//                                uploadObj_1.put("midVolumeB", list.get(k).midVolumeB);
+//                                uploadObj_1.put("midVolumeS", list.get(k).midVolumeS);
+//                                uploadObj_1.put("midMoneyB", list.get(k).midMoneyB);
+//                                uploadObj_1.put("midMoneyS", list.get(k).midMoneyS);
+//                                uploadObj_1.put("smallVolumeB", list.get(k).smallVolumeB);
+//                                uploadObj_1.put("smallVolumeS", list.get(k).smallVolumeS);
+//                                uploadObj_1.put("smallMoneyB", list.get(k).smallMoneyB);
+//                                uploadObj_1.put("smallMoneyS", list.get(k).smallMoneyS);
+//                                uploadObj_1.put("totalTrdMoney", list.get(k).totalTrdMoney);
+//                                uploadObj_1.put("blockFAMC", list.get(k).blockFAMC);
+//                                uploadObj_1.put("totalMarketValue", list.get(k).totalMarketValue);
+//                                uploadObj_1.put("mainforceMoneyNetInflow20", list.get(k).mainforceMoneyNetInflow20);
+//                                uploadObj_1.put("ratioMainforceMoneyNetInflow5", list.get(k).ratioMainforceMoneyNetInflow5);
+//                                uploadObj_1.put("ratioMainforceMoneyNetInflow10", list.get(k).ratioMainforceMoneyNetInflow10);
+//                                uploadObj_1.put("ratioMainforceMoneyNetInflow20", list.get(k).ratioMainforceMoneyNetInflow20);
+//                                uploadObj_1.put("totalTrdVolume", list.get(k).totalTrdVolume);
+//                                uploadObj_1.put("openBlockIndex", list.get(k).openBlockIndex);
+//                                uploadObj_1.put("highBlockIndex", list.get(k).highBlockIndex);
+//                                uploadObj_1.put("lowBlockIndex", list.get(k).lowBlockIndex);
+////                                uploadObj_1.put("closeBlockIndex", list.get(k).closeBlockIndex);//ios可能没有需要ios验证
+//                                uploadObj_1.put("committee", list.get(k).committee);
+//                                uploadObj_1.put("deviation", list.get(k).deviation);
+//                                uploadObj_1.put("buyNum", list.get(k).buyNum);
+//                                uploadObj_1.put("sellNum", list.get(k).sellNum);
+//                                uploadObj_1.put("ttm", list.get(k).ttm);
+//                                uploadObj_1.put("lyr", list.get(k).lyr);
+//                                uploadObj_1.put("marketRate", list.get(k).marketRate);
+//                                uploadObj_1.put("blockName", list.get(k).blockName);
+//                                uploadObj_1.put("preCloseBlockIndex", list.get(k).preCloseBlockIndex);
+//                                uploadObj_1.put("upsDowns", list.get(k).upsDowns);
+//                                uploadObj_1.put("amplitude", list.get(k).amplitude);
+//                                uploadObj.put(list.get(k).dateTime,uploadObj_1);
+//                                Log.d("data", String.valueOf(uploadObj_1));
+//                            }
+//                            result.complete(uploadObj);
+//                        } catch (JSONException e) {
+//                            result.completeExceptionally(e);
+//                        }
+//                    }
+//                }
+//
+//                @Override
+//                public void exception(ErrorInfo errorInfo) {
+//                    result.completeExceptionally(new Exception(errorInfo.toString()));
+//                }
+//            });
 //        }
         try {
             JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);

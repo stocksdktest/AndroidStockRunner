@@ -13,6 +13,7 @@ import com.mitake.core.bean.log.ErrorInfo;
 import com.mitake.core.request.ChartRequestV2;
 import com.mitake.core.request.PointAddType;
 import com.mitake.core.response.ChartResponse;
+import com.mitake.core.response.IResponseCallback;
 import com.mitake.core.response.IResponseInfoCallback;
 import com.mitake.core.response.Response;
 
@@ -63,13 +64,14 @@ public class ChartV2Test_3 {
         final String quoteNumbers = rule.getParam().getString("CODES");
         final String Types = rule.getParam().getString("Chart_Types");
         final String PointAddTypes = rule.getParam().getString("PointAddTypes");
+        final String subtypes = rule.getParam().getString("subtype");
 //        ChartType
 //        PointAddType
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
 //            final int a=i;
             ChartRequestV2 request = new ChartRequestV2();
-            request.send(quoteNumbers,Types,PointAddTypes, new IResponseInfoCallback() {
+            request.send(quoteNumbers, Types, Integer.parseInt(PointAddTypes), subtypes, new IResponseInfoCallback() {
                 @Override
                 public void callback(Response response) {
                     ChartResponse chartResponse = (ChartResponse) response;
@@ -101,6 +103,7 @@ public class ChartV2Test_3 {
                         result.completeExceptionally(e);
                     }
                 }
+
                 @Override
                 public void exception(ErrorInfo errorInfo) {
                     result.completeExceptionally(new Exception(errorInfo.toString()));
