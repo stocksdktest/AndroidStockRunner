@@ -345,10 +345,10 @@ public class QuoteDetailTest_1 {
                         uploadObj.put("limitPriceLowerLimit", list.limitPriceLowerLimit);
                         uploadObj.put("longName", list.longName);
                         //板块指数
-                        uploadObj.put("blockChg", list.blockChg);
-                        uploadObj.put("averageChg", list.averageChg);
-                        uploadObj.put("indexChg5", list.indexChg5);
-                        uploadObj.put("indexChg10", list.indexChg10);
+//                        uploadObj.put("blockChg", list.blockChg);
+//                        uploadObj.put("averageChg", list.averageChg);
+//                        uploadObj.put("indexChg5", list.indexChg5);
+//                        uploadObj.put("indexChg10", list.indexChg10);
                         //买卖队列
                        if (quoteResponse.OrderQuantityBuyList!=null) {
                            ArrayList<OrderQuantityItem> orderQuantityItem1 = quoteResponse.OrderQuantityBuyList;

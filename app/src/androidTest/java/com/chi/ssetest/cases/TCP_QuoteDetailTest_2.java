@@ -400,10 +400,10 @@ public class TCP_QuoteDetailTest_2 {
                             uploadObj.put("limitPriceLowerLimit", item.limitPriceLowerLimit);
                             uploadObj.put("longName", item.longName);
                             //板块指数
-                            uploadObj.put("blockChg", item.blockChg);
-                            uploadObj.put("averageChg", item.averageChg);
-                            uploadObj.put("indexChg5", item.indexChg5);
-                            uploadObj.put("indexChg10", item.indexChg10);
+//                            uploadObj.put("blockChg", item.blockChg);
+//                            uploadObj.put("averageChg", item.averageChg);
+//                            uploadObj.put("indexChg5", item.indexChg5);
+//                            uploadObj.put("indexChg10", item.indexChg10);
                             //买卖队列
                             if (buyItems!=null) {
                                 ArrayList<OrderQuantityItem> orderQuantityItem1 = buyItems;

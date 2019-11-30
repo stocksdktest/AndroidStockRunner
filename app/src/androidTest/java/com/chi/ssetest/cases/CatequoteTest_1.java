@@ -194,10 +194,10 @@ public class CatequoteTest_1 {
                             uploadObj_1.put("limitPriceLowerLimit", list.get(i).limitPriceLowerLimit);
                             uploadObj_1.put("longName", list.get(i).longName);
                             //板块指数
-                            uploadObj_1.put("blockChg", list.get(i).blockChg);
-                            uploadObj_1.put("averageChg", list.get(i).averageChg);
-                            uploadObj_1.put("indexChg5", list.get(i).indexChg5);
-                            uploadObj_1.put("indexChg10", list.get(i).indexChg10);
+//                            uploadObj_1.put("blockChg", list.get(i).blockChg);
+//                            uploadObj_1.put("averageChg", list.get(i).averageChg);
+//                            uploadObj_1.put("indexChg5", list.get(i).indexChg5);
+//                            uploadObj_1.put("indexChg10", list.get(i).indexChg10);
                             Log.d("data", String.valueOf(uploadObj_1));
                             uploadObj.put(list.get(i).datetime,uploadObj_1);
                         }
