@@ -31,7 +31,7 @@ import static org.junit.Assert.assertNotNull;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
- *增值指标2
+ *增值指标 3
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
@@ -79,6 +79,7 @@ public class AddValueTest_3 {
                     JSONObject uploadObj = new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value
                     try {
+                        int i=0;
                         for (AddValueModel item : addValueResponse.list) {
                             JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("code",item.code);
@@ -182,8 +183,10 @@ public class AddValueTest_3 {
                             uploadObj_1.put("ratioMainforceMoneyNetInflow10",item.ratioMainforceMoneyNetInflow10);
                             uploadObj_1.put("ratioMainforceMoneyNetInflow20",item.ratioMainforceMoneyNetInflow20);
                             Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(item.date+item.time,uploadObj_1);
+                            uploadObj.put(String.valueOf((i+1)),uploadObj_1);
+                            i++;
                         }
+//                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

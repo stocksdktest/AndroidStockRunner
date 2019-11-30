@@ -45,6 +45,7 @@ public enum StockTestcaseName {
     MARKETUPDOWNTEST_1("MARKETUPDOWN_1"),//沪深当日涨跌统计数据
     MOREPRICETEST_1("MOREPRICE_1"),//分价
     MOREPRICETEST_2("MOREPRICE_2"),//分价
+    MOREVOLUMETEST_1("MOREVOLUMETEST_1"),//分量
     OFFERQUOTETEST_1("OFFERQUOTE_1"),//要约收购接口请求
     OFFERQUOTETEST_2("OFFERQUOTE_2"),//要约收购接口请求
     OHLCSUBTEST_1("OHLCSUB_1"),//复权信息接口  K线复权接口
@@ -144,7 +145,15 @@ public enum StockTestcaseName {
     F10V2TEST_1("F10V2TEST_1"),//財汇沪深盘后接口
     F10V2TEST_2("F10V2TEST_2"),//財汇沪深盘后接口
     F10V2TEST_3("F10V2TEST_3"),//財汇沪深盘后接口
-    F10V2TEST_4("F10V2TEST_4");//財汇沪深盘后接口
+    F10V2TEST_4("F10V2TEST_4"),//財汇沪深盘后接口
+    //TCP
+    TCP_CHARTV2TEST_1("TCP_CHARTV2TEST_1"),//走势数据TCP
+    TCP_CHARTV2TEST_2("TCP_CHARTV2TEST_2"),//走势数据TCP
+    QUOTEDETAILTCPTEST_1("QUOTEDETAILTCPTEST_1"),//行情快照TCP
+    QUOTEDETAILTCPTEST_2("QUOTEDETAILTCPTEST_2"),//行情快照TCP
+    TCP_TICKTEST_1("TCP_TICKTEST_1"),//分笔TCP
+    TCP_TRADETEST_1("TCP_TRADETEST_1");//交易行情
+
 
     private String stringVal;
     StockTestcaseName(String numVal) {

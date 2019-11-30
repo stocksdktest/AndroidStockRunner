@@ -36,7 +36,7 @@ import static org.junit.Assert.*;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
- *增值指标2
+ *增值指标 2(不返回增值指标数据，已废弃）
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
