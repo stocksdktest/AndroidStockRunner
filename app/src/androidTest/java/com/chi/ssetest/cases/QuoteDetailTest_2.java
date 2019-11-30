@@ -212,13 +212,13 @@ public class QuoteDetailTest_2 {
                     //ios无
 
                     if (list.tradeTick!=null&&list.tradeTick.length>0){
-                        for (int j=0;j<10;j++){
+                        for (int j=0;j<list.tradeTick.length;j++){
                             JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("type",list.tradeTick[j][0]);
                             uploadObj_1.put("time",list.tradeTick[j][1]);
                             uploadObj_1.put("tradeVolume",list.tradeTick[j][2]);
                             uploadObj_1.put("tradePrice",list.tradeTick[j][3]);
-                            uploadObj.put(list.tradeTick[j][1],uploadObj_1);
+                            uploadObj.put(String.valueOf(j+1),uploadObj_1);
                         }
                     }else {
                         uploadObj.put("tradeTick",list.tradeTick);
@@ -396,7 +396,7 @@ public class QuoteDetailTest_2 {
                             uploadObj_1.put("QUANTITY",orderQuantityItem2.get(k).QUANTITY_);
                             selllist.add(uploadObj_1);
                         }
-                        uploadObj.put("buylist",new JSONArray(selllist));
+                        uploadObj.put("selllist",new JSONArray(selllist));
                     }
                     //经纪席位
                     if (quoteResponse.BrokerInfoListBuy!=null){
@@ -525,7 +525,7 @@ public class QuoteDetailTest_2 {
                             uploadObj_1.put("ratioMainforceMoneyNetInflow5", item.ratioMainforceMoneyNetInflow5);
                             uploadObj_1.put("ratioMainforceMoneyNetInflow10", item.ratioMainforceMoneyNetInflow10);
                             uploadObj_1.put("ratioMainforceMoneyNetInflow20", item.ratioMainforceMoneyNetInflow20);
-                            uploadObj.put("addValue" + item.date + item.time, uploadObj_1);
+                            uploadObj.put("addValue", uploadObj_1);
                         }
                     }
                 } catch (JSONException e) {
