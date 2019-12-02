@@ -326,10 +326,10 @@ public class QuoteTest_1 {
                             uploadObj_1.put("limitPriceLowerLimit", list.limitPriceLowerLimit);
                             uploadObj_1.put("longName", list.longName);
                             //板块指数
-//                            uploadObj_1.put("blockChg", list.blockChg);
-//                            uploadObj_1.put("averageChg", list.averageChg);
-//                            uploadObj_1.put("indexChg5", list.indexChg5);
-//                            uploadObj_1.put("indexChg10", list.indexChg10);
+                            uploadObj_1.put("blockChg", list.blockChg);
+                            uploadObj_1.put("averageChg", list.averageChg);
+                            uploadObj_1.put("indexChg5", list.indexChg5);
+                            uploadObj_1.put("indexChg10", list.indexChg10);
                             //增值指标
                             if (quoteResponse.addValueModel!=null){
                                 ArrayList<AddValueModel> addValueModels=quoteResponse.addValueModel;
