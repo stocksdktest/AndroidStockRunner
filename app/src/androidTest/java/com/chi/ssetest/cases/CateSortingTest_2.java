@@ -105,16 +105,14 @@ public class CateSortingTest_2 {
                         result.completeExceptionally(e);
                     }
                     ArrayList<QuoteItem> list=cateSortingResponse.list;
-                    List<JSONObject> items=new ArrayList<>();
                     JSONObject uploadObj = new JSONObject();
-                    for (int i=0;i<list.size();i++){
-                        JSONObject uploadObj_1 = new JSONObject();
-                        try {
+                    try {
+                        for (int i=0;i<list.size();i++){
+                            JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("status", list.get(i).status);
                             uploadObj_1.put("id", list.get(i).id);
                             uploadObj_1.put("name", list.get(i).name);
                             uploadObj_1.put("datetime", list.get(i).datetime);
-                            uploadObj_1.put("pinyin", list.get(i).pinyin);//ios无
                             uploadObj_1.put("market", list.get(i).market);
                             uploadObj_1.put("subtype", list.get(i).subtype);
                             uploadObj_1.put("lastPrice", list.get(i).lastPrice);
@@ -126,7 +124,6 @@ public class CateSortingTest_2 {
                             uploadObj_1.put("volume", list.get(i).volume);
                             uploadObj_1.put("nowVolume", list.get(i).nowVolume);
                             uploadObj_1.put("turnoverRate", list.get(i).turnoverRate);
-                            uploadObj_1.put("upDownLimitType", list.get(i).upDownLimitType);//ios注意
                             uploadObj_1.put("limitUP", list.get(i).limitUP);
                             uploadObj_1.put("limitDown", list.get(i).limitDown);
                             uploadObj_1.put("averageValue", list.get(i).averageValue);//ios无
@@ -138,7 +135,6 @@ public class CateSortingTest_2 {
                             uploadObj_1.put("buyVolume", list.get(i).buyVolume);
                             uploadObj_1.put("sellVolume", list.get(i).sellVolume);
                             uploadObj_1.put("totalValue", list.get(i).totalValue);
-                            uploadObj_1.put("HKTotalValue", list.get(i).HKTotalValue);
                             uploadObj_1.put("flowValue", list.get(i).flowValue);
                             uploadObj_1.put("netAsset", list.get(i).netAsset);
                             uploadObj_1.put("pe", list.get(i).pe);
@@ -146,12 +142,10 @@ public class CateSortingTest_2 {
                             uploadObj_1.put("pb", list.get(i).pb);
                             uploadObj_1.put("capitalization", list.get(i).capitalization);
                             uploadObj_1.put("circulatingShares", list.get(i).circulatingShares);
-                            List<JSONObject> buyPrices=new ArrayList<>();
+                            List<String> buyPrices=new ArrayList<>();
                             if (list.get(i).buyPrices!=null&&list.get(i).buyPrices.size()>0){
                                 for (int j=0;j<list.get(i).buyPrices.size();j++){
-                                    JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("buyPrices"+(j+1),list.get(i).buyPrices.get(j));
-                                    buyPrices.add(uploadObj_2);
+                                    buyPrices.add(list.get(i).buyPrices.get(j));
                                 }
                                 uploadObj_1.put("bidpx1", list.get(i).buyPrices.get(0));
                                 uploadObj_1.put("buyPrices",new JSONArray(buyPrices));
@@ -160,24 +154,20 @@ public class CateSortingTest_2 {
                                 uploadObj_1.put("buyPrices",list.get(i).buyPrices);
                             }
 
-                            List<JSONObject> buySingleVolumes=new ArrayList<>();
+                            List<String> buySingleVolumes=new ArrayList<>();
                             if (list.get(i).buySingleVolumes!=null&&list.get(i).buySingleVolumes.size()>0){
                                 for (int j=0;j<list.get(i).buySingleVolumes.size();j++){
-                                    JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("buySingleVolumes"+(j+1),list.get(i).buySingleVolumes.get(j));
-                                    buySingleVolumes.add(uploadObj_2);
+                                    buySingleVolumes.add(list.get(i).buySingleVolumes.get(j));
                                 }
                                 uploadObj_1.put("buySingleVolumes",new JSONArray(buySingleVolumes));
                             }else {
                                 uploadObj_1.put("buySingleVolumes",list.get(i).buySingleVolumes);
                             }
 
-                            List<JSONObject> buyVolumes=new ArrayList<>();
+                            List<String> buyVolumes=new ArrayList<>();
                             if (list.get(i).buyVolumes!=null&&list.get(i).buyVolumes.size()>0){
                                 for (int j=0;j<list.get(i).buyVolumes.size();j++){
-                                    JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("buyVolumes"+(j+1),list.get(i).buyVolumes.get(j));
-                                    buyVolumes.add(uploadObj_2);
+                                    buyVolumes.add(list.get(i).buyVolumes.get(j));
                                 }
                                 uploadObj_1.put("bidvol1", list.get(i).buyVolumes.get(0));
                                 uploadObj_1.put("buyVolumes",new JSONArray(buyVolumes));
@@ -186,12 +176,10 @@ public class CateSortingTest_2 {
                                 uploadObj_1.put("buyVolumes",list.get(i).buyVolumes);
                             }
 
-                            List<JSONObject> sellPrices=new ArrayList<>();
+                            List<String> sellPrices=new ArrayList<>();
                             if (list.get(i).sellPrices!=null&&list.get(i).sellPrices.size()>0){
                                 for (int j=0;j<list.get(i).sellPrices.size();j++){
-                                    JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("sellPrices"+(j+1),list.get(i).sellPrices.get(j));
-                                    sellPrices.add(uploadObj_2);
+                                    sellPrices.add(list.get(i).sellPrices.get(j));
                                 }
                                 uploadObj_1.put("askpx1", list.get(i).sellPrices.get(0));
                                 uploadObj_1.put("sellPrices",new JSONArray(sellPrices));
@@ -200,24 +188,20 @@ public class CateSortingTest_2 {
                                 uploadObj_1.put("sellPrices",list.get(i).sellPrices);
                             }
 
-                            List<JSONObject> sellSingleVolumes=new ArrayList<>();
+                            List<String> sellSingleVolumes=new ArrayList<>();
                             if (list.get(i).sellSingleVolumes!=null&&list.get(i).sellSingleVolumes.size()>0){
                                 for (int j=0;j<list.get(i).sellSingleVolumes.size();j++){
-                                    JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("sellSingleVolumes"+(j+1),list.get(i).sellSingleVolumes.get(j));
-                                    sellSingleVolumes.add(uploadObj_2);
+                                    sellSingleVolumes.add(list.get(i).sellSingleVolumes.get(j));
                                 }
                                 uploadObj_1.put("sellSingleVolumes",new JSONArray(sellSingleVolumes));
                             }else {
                                 uploadObj_1.put("sellSingleVolumes",list.get(i).sellSingleVolumes);
                             }
 
-                            List<JSONObject> sellVolumes=new ArrayList<>();
+                            List<String> sellVolumes=new ArrayList<>();
                             if (list.get(i).sellVolumes!=null&&list.get(i).sellVolumes.size()>0){
                                 for (int j=0;j<list.get(i).sellVolumes.size();j++){
-                                    JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("sellVolumes"+(j+1),list.get(i).sellVolumes.get(j));
-                                    sellVolumes.add(uploadObj_2);
+                                    sellVolumes.add(list.get(i).sellVolumes.get(j));
                                 }
                                 uploadObj_1.put("askvol1", list.get(i).sellVolumes.get(0));
                                 uploadObj_1.put("sellVolumes",new JSONArray(sellVolumes));
@@ -228,23 +212,6 @@ public class CateSortingTest_2 {
 
                             uploadObj_1.put("amplitudeRate", list.get(i).amplitudeRate);
                             uploadObj_1.put("receipts", list.get(i).receipts);
-                            //ios无
-                            List<JSONObject> tradeTick=new ArrayList<>();
-                            if (list.get(i).tradeTick!=null&&list.get(i).tradeTick.length>0){
-                                for (int j=0;j<list.get(i).tradeTick.length;j++){
-                                    for (int k=0;k<list.get(i).tradeTick[j].length;k++){
-                                        JSONObject uploadObj_2 = new JSONObject();
-                                        uploadObj_2.put("type",list.get(i).tradeTick[j][0]);
-                                        uploadObj_2.put("time",list.get(i).tradeTick[j][1]);
-                                        uploadObj_2.put("tradeVolume",list.get(i).tradeTick[j][2]);
-                                        uploadObj_2.put("tradePrice",list.get(i).tradeTick[j][3]);
-                                        tradeTick.add(uploadObj_2);
-                                    }
-                                }
-                                uploadObj_1.put("tradeTick",new JSONArray(tradeTick));
-                            }else {
-                                uploadObj_1.put("tradeTick",list.get(i).tradeTick);
-                            }
 
                             uploadObj_1.put("upCount", list.get(i).upCount);
                             uploadObj_1.put("sameCount", list.get(i).sameCount);
@@ -263,17 +230,13 @@ public class CateSortingTest_2 {
                             uploadObj_1.put("expDate", list.get(i).expDate);
                             uploadObj_1.put("version", list.get(i).version);
                             uploadObj_1.put("presetPrice", list.get(i).presetPrice);
-                            uploadObj_1.put("setPrice", list.get(i).setPrice);
                             uploadObj_1.put("stockClose", list.get(i).stockClose);
                             uploadObj_1.put("stockLast", list.get(i).stockLast);
                             uploadObj_1.put("isLimit", list.get(i).isLimit);
-                            uploadObj_1.put("marginUnit", list.get(i).marginUnit);
-                            uploadObj_1.put("roundLot", list.get(i).roundLot);
                             uploadObj_1.put("inValue", list.get(i).inValue);
                             uploadObj_1.put("timeValue", list.get(i).timeValue);
                             uploadObj_1.put("preInterest", list.get(i).preInterest);
                             uploadObj_1.put("openInterest", list.get(i).openInterest);
-                            uploadObj_1.put("tradePhase", list.get(i).tradePhase);
                             uploadObj_1.put("remainDate", list.get(i).remainDate);
                             uploadObj_1.put("leverageRatio", list.get(i).leverageRatio);
                             uploadObj_1.put("premiumRate", list.get(i).premiumRate);
@@ -289,7 +252,7 @@ public class CateSortingTest_2 {
                             uploadObj_1.put("exerciseWay", list.get(i).exerciseWay);
                             uploadObj_1.put("orderRatio", list.get(i).orderRatio);
                             uploadObj_1.put("hk_paramStatus", list.get(i).hk_paramStatus);//ios无
-                            uploadObj_1.put("fundTyp", list.get(i).fundType);
+                            uploadObj_1.put("fundType", list.get(i).fundType);
                             uploadObj_1.put("sumBuy", list.get(i).sumBuy);
                             uploadObj_1.put("sumSell", list.get(i).sumSell);
                             uploadObj_1.put("averageBuy", list.get(i).averageBuy);
@@ -316,7 +279,6 @@ public class CateSortingTest_2 {
                             uploadObj_1.put("add_option_avg_price", list.get(i).add_option_avg_price);
                             uploadObj_1.put("add_option_avg_pb", list.get(i).add_option_avg_pb);
                             uploadObj_1.put("add_option_avg_close", list.get(i).add_option_avg_close);
-                            uploadObj_1.put("pe2_unit", list.get(i).pe2_unit);//ios无
                             uploadObj_1.put("hk_volum_for_every_hand", list.get(i).hk_volum_for_every_hand);
                             //ios无
                             uploadObj_1.put("buy_cancel_count", list.get(i).buy_cancel_count);
@@ -362,10 +324,8 @@ public class CateSortingTest_2 {
                             uploadObj_1.put("change2", list.get(i).change2);
                             uploadObj_1.put("earningsPerShare", list.get(i).earningsPerShare);
                             uploadObj_1.put("earningsPerShareReportingPeriod", list.get(i).earningsPerShareReportingPeriod);
-                            uploadObj_1.put("masukura", list.get(i).masukura);
                             //
                             uploadObj_1.put("hkTExchangeFlag", list.get(i).hkTExchangeFlag);//注意ios
-                            uploadObj_1.put("zgConvertCodes", list.get(i).zgConvertCodes); //ios无
                             uploadObj_1.put("vote", list.get(i).vote);//注意ios
                             uploadObj_1.put("upf", list.get(i).upf);//注意ios
                             uploadObj_1.put("DRCurrentShare", list.get(i).DRCurrentShare);
@@ -398,11 +358,128 @@ public class CateSortingTest_2 {
                             uploadObj_1.put("limitPriceUpperLimit", list.get(i).limitPriceUpperLimit);
                             uploadObj_1.put("limitPriceLowerLimit", list.get(i).limitPriceLowerLimit);
                             uploadObj_1.put("longName", list.get(i).longName);
+                            //板块指数
+                            uploadObj_1.put("blockChg", list.get(i).blockChg);
+                            uploadObj_1.put("averageChg", list.get(i).averageChg);
+                            uploadObj_1.put("indexChg5", list.get(i).indexChg5);
+                            uploadObj_1.put("indexChg10", list.get(i).indexChg10);
+                            //增值指标
+                            if (cateSortingResponse.addValueModel!=null){
+                                ArrayList<AddValueModel> addValueModels=cateSortingResponse.addValueModel;
+                                for (AddValueModel item : addValueModels) {
+                                    if (item.code.equals(list.get(i).id)){
+                                        JSONObject uploadObj_2 = new JSONObject();
+                                        uploadObj_2.put("code",item.code);
+                                        uploadObj_2.put("date",item.date);
+                                        uploadObj_2.put("time",item.time);
+                                        uploadObj_2.put("ultraLargeBuyVolume",item.ultraLargeBuyVolume);
+                                        uploadObj_2.put("ultraLargeSellVolume",item.ultraLargeSellVolume);
+                                        uploadObj_2.put("ultraLargeBuyAmount",item.ultraLargeBuyAmount);
+                                        uploadObj_2.put("ultraLargeSellAmount",item.ultraLargeSellAmount);
+                                        uploadObj_2.put("largeBuyVolume",item.largeBuyVolume);
+                                        uploadObj_2.put("largeSellVolume",item.largeSellVolume);
+                                        uploadObj_2.put("largeBuyAmount",item.largeBuyAmount);
+                                        uploadObj_2.put("largeSellAmount",item.largeSellAmount);
+                                        uploadObj_2.put("mediumBuyVolume",item.mediumBuyVolume);
+                                        uploadObj_2.put("mediumSellVolume",item.mediumSellVolume);
+                                        uploadObj_2.put("mediumBuyAmount",item.mediumBuyAmount);
+                                        uploadObj_2.put("mediumSellAmount",item.mediumSellAmount);
+                                        uploadObj_2.put("smallBuyVolume",item.smallBuyVolume);
+                                        uploadObj_2.put("smallSellVolume",item.smallSellVolume);
+                                        uploadObj_2.put("smallBuyAmount",item.smallBuyAmount);
+                                        uploadObj_2.put("smallSellAmount",item.smallSellAmount);
+                                        uploadObj_2.put("ultraLargeNetInflow",item.ultraLargeNetInflow);
+                                        uploadObj_2.put("largeNetInflow",item.largeNetInflow);
+                                        uploadObj_2.put("netCapitalInflow",item.netCapitalInflow);
+                                        uploadObj_2.put("mediumNetInflow",item.mediumNetInflow);
+                                        uploadObj_2.put("smallNetInflow",item.smallNetInflow);
+
+                                        List<String> fundsInflows=new ArrayList<>();
+                                        if (item.fundsInflows!=null&&item.fundsInflows.length>0){
+                                            for (int j=0;j<item.fundsInflows.length;j++){
+                                                fundsInflows.add(item.fundsInflows[j]);
+                                            }
+                                            uploadObj_2.put("fundsInflows",new JSONArray(fundsInflows));
+                                        }else {
+                                            uploadObj_2.put("fundsInflows",item.fundsInflows);
+                                        }
+
+                                        List<String> fundsOutflows=new ArrayList<>();
+                                        if (item.fundsOutflows!=null&&item.fundsOutflows.length>0){
+                                            for (int j=0;j<item.fundsOutflows.length;j++){
+                                                fundsOutflows.add(item.fundsOutflows[j]);
+                                            }
+                                            uploadObj_2.put("fundsOutflows",new JSONArray(fundsOutflows));
+                                        }else {
+                                            uploadObj_2.put("fundsOutflows",item.fundsOutflows);
+                                        }
+
+                                        uploadObj_2.put("ultraLargeDiffer",item.ultraLargeDiffer);
+                                        uploadObj_2.put("largeDiffer",item.largeDiffer);
+                                        uploadObj_2.put("mediumDiffer",item.mediumDiffer);
+                                        uploadObj_2.put("smallDiffer",item.smallDiffer);
+                                        uploadObj_2.put("largeBuyDealCount",item.largeBuyDealCount);
+                                        uploadObj_2.put("largeSellDealCount",item.largeSellDealCount);
+                                        uploadObj_2.put("dealCountMovingAverage",item.dealCountMovingAverage);
+                                        uploadObj_2.put("buyCount",item.buyCount);
+                                        uploadObj_2.put("sellCount",item.sellCount);
+                                        uploadObj_2.put("BBD",item.BBD);
+                                        uploadObj_2.put("BBD5",item.BBD5);
+                                        uploadObj_2.put("BBD10",item.BBD10);
+                                        uploadObj_2.put("DDX",item.DDX);
+                                        uploadObj_2.put("DDX5",item.DDX5);
+                                        uploadObj_2.put("DDX10",item.DDX10);
+                                        uploadObj_2.put("DDY",item.DDY);
+                                        uploadObj_2.put("DDY5",item.DDY5);
+                                        uploadObj_2.put("DDY10",item.DDY10);
+                                        uploadObj_2.put("DDZ",item.DDZ);
+                                        uploadObj_2.put("RatioBS",item.RatioBS);
+
+                                        List<String> othersFundsInflows=new ArrayList<>();
+                                        if (item.othersFundsInflows!=null&&item.othersFundsInflows.length>0){
+                                            for (int j=0;j<item.othersFundsInflows.length;j++){
+                                                othersFundsInflows.add(item.othersFundsInflows[j]);
+                                            }
+                                            uploadObj_2.put("othersFundsInflows",new JSONArray(othersFundsInflows));
+                                        }else {
+                                            uploadObj_2.put("othersFundsInflows",item.othersFundsInflows);
+                                        }
+
+                                        List<String> othersFundsOutflows=new ArrayList<>();
+                                        if (item.othersFundsOutflows!=null&&item.othersFundsOutflows.length>0){
+                                            for (int j=0;j<item.othersFundsOutflows.length;j++){
+                                                othersFundsOutflows.add(item.othersFundsOutflows[j]);
+                                            }
+                                            uploadObj_2.put("othersFundsOutflows",new JSONArray(othersFundsOutflows));
+                                        }else {
+                                            uploadObj_2.put("othersFundsOutflows",item.othersFundsOutflows);
+                                        }
+
+                                        uploadObj_2.put("fiveMinutesChangeRate",item.fiveMinutesChangeRate);
+                                        uploadObj_2.put("largeOrderNumB",item.largeOrderNumB);
+                                        uploadObj_2.put("largeOrderNumS",item.largeOrderNumS);
+                                        uploadObj_2.put("bigOrderNumB",item.bigOrderNumB);
+                                        uploadObj_2.put("bigOrderNumS",item.bigOrderNumS);
+                                        uploadObj_2.put("midOrderNumB",item.midOrderNumB);
+                                        uploadObj_2.put("midOrderNumS",item.midOrderNumS);
+                                        uploadObj_2.put("smallOrderNumB",item.smallOrderNumB);
+                                        uploadObj_2.put("smallOrderNumS",item.smallOrderNumS);
+                                        uploadObj_2.put("mainforceMoneyNetInflow5",item.mainforceMoneyNetInflow5);
+                                        uploadObj_2.put("mainforceMoneyNetInflow10",item.mainforceMoneyNetInflow10);
+                                        uploadObj_2.put("mainforceMoneyNetInflow20",item.mainforceMoneyNetInflow20);
+                                        uploadObj_2.put("ratioMainforceMoneyNetInflow5",item.ratioMainforceMoneyNetInflow5);
+                                        uploadObj_2.put("ratioMainforceMoneyNetInflow10",item.ratioMainforceMoneyNetInflow10);
+                                        uploadObj_2.put("ratioMainforceMoneyNetInflow20",item.ratioMainforceMoneyNetInflow20);
+                                        uploadObj_1.put("addValue",uploadObj_2);
+                                    }
+                                }
+                            }
                             Log.d("data", String.valueOf(uploadObj_1));
-                            result.complete(uploadObj_1);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
+                            uploadObj.put(list.get(i).id,uploadObj_1);
                         }
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
                 }
                 @Override

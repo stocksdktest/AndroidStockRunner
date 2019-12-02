@@ -99,27 +99,23 @@ public class F10_BndshareIPODetaiTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     HashMap<String,Object> info = f10V2Response.info;
                     try {
-                        if (info!=null){
-                            uploadObj.put("APPLYCODE",info.get("APPLYCODE"));
-                            uploadObj.put("TRADINGCODE",info.get("TRADINGCODE"));
-                            uploadObj.put("STOCKTRADINGCODE",info.get("STOCKTRADINGCODE"));
-                            uploadObj.put("STOCKSECUABBR",info.get("STOCKSECUABBR"));
-                            uploadObj.put("ISSUEPRICE",info.get("ISSUEPRICE"));
-                            uploadObj.put("CONVERTPRICE",info.get("CONVERTPRICE"));
-                            uploadObj.put("PREFERREDPLACINGCODE",info.get("PREFERREDPLACINGCODE"));
-                            uploadObj.put("PREFERREDPLACINGNAME",info.get("PREFERREDPLACINGNAME"));
-                            uploadObj.put("ISSUERRATING",info.get("ISSUERRATING"));
-                            uploadObj.put("ISSUEVAL",info.get("ISSUEVAL"));
-                            uploadObj.put("INTERESTTERM",info.get("INTERESTTERM"));
-                            uploadObj.put("CAPPLYVOL",info.get("CAPPLYVOL"));
-                            uploadObj.put("BOOKSTARTDATEON",info.get("BOOKSTARTDATEON"));
-                            uploadObj.put("SUCCRESULTNOTICEDATE",info.get("SUCCRESULTNOTICEDATE"));
-                            uploadObj.put("LISTINGDATE",info.get("LISTINGDATE"));
-                            uploadObj.put("ALLOTRATEON",info.get("ALLOTRATEON"));
-                            uploadObj.put("SECUABBR",info.get("SECUABBR"));
-                        }else {
-                            uploadObj.put("info",info);
-                        }
+                        uploadObj.put("APPLYCODE",info.get("APPLYCODE"));
+                        uploadObj.put("TRADINGCODE",info.get("TRADINGCODE"));
+                        uploadObj.put("STOCKTRADINGCODE",info.get("STOCKTRADINGCODE"));
+                        uploadObj.put("STOCKSECUABBR",info.get("STOCKSECUABBR"));
+                        uploadObj.put("ISSUEPRICE",info.get("ISSUEPRICE"));
+                        uploadObj.put("CONVERTPRICE",info.get("CONVERTPRICE"));
+                        uploadObj.put("PREFERREDPLACINGCODE",info.get("PREFERREDPLACINGCODE"));
+                        uploadObj.put("PREFERREDPLACINGNAME",info.get("PREFERREDPLACINGNAME"));
+                        uploadObj.put("ISSUERRATING",info.get("ISSUERRATING"));
+                        uploadObj.put("ISSUEVAL",info.get("ISSUEVAL"));
+                        uploadObj.put("INTERESTTERM",info.get("INTERESTTERM"));
+                        uploadObj.put("CAPPLYVOL",info.get("CAPPLYVOL"));
+                        uploadObj.put("BOOKSTARTDATEON",info.get("BOOKSTARTDATEON"));
+                        uploadObj.put("SUCCRESULTNOTICEDATE",info.get("SUCCRESULTNOTICEDATE"));
+                        uploadObj.put("LISTINGDATE",info.get("LISTINGDATE"));
+                        uploadObj.put("ALLOTRATEON",info.get("ALLOTRATEON"));
+                        uploadObj.put("SECUABBR",info.get("SECUABBR"));
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

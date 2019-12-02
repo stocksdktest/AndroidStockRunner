@@ -102,9 +102,9 @@ public class F10_TopShareHolderTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     List<JSONObject> items=new ArrayList<>();
                     if (topShareHolderResponse.list!=null){
-                        for (TopShareHolder item : topShareHolderResponse.list) {
-                            JSONObject uploadObj_1 = new JSONObject();
-                            try {
+                        try {
+                            for (TopShareHolder item : topShareHolderResponse.list) {
+                                JSONObject uploadObj_1 = new JSONObject();
                                 if (quoteNumbers1.equals("g")){
                                     uploadObj_1.put("SHNO_",item.SHNO_);
                                     uploadObj_1.put("SHNAME_",item.SHNAME_);
@@ -123,11 +123,13 @@ public class F10_TopShareHolderTest_1 {
                                     uploadObj_1.put("HOLDASHAREUR_",item.HOLDASHAREUR_);
                                 }
                                 Log.d("data", String.valueOf(uploadObj_1));
-                                result.complete(uploadObj_1);
-                            } catch (JSONException e) {
-                                result.completeExceptionally(e);
+                                uploadObj.put(item.ENDDATE_,uploadObj_1);
                             }
+                            result.complete(uploadObj);
+                        } catch (JSONException e) {
+                            result.completeExceptionally(e);
                         }
+
                     }
                 }
                 @Override

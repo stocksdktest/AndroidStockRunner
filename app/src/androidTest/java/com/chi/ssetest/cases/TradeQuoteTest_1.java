@@ -8,35 +8,15 @@ import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.StockTestcase;
 import com.chi.ssetest.StockTestcaseName;
 import com.chi.ssetest.setup.TestcaseConfigRule;
-import com.mitake.core.AddValueModel;
-import com.mitake.core.CateType;
-import com.mitake.core.QuoteItem;
 import com.mitake.core.TradeQuoteItem;
-import com.mitake.core.bean.MorePriceItem;
 import com.mitake.core.bean.log.ErrorInfo;
-import com.mitake.core.request.AddValueRequest;
-import com.mitake.core.request.BankuaisortingRequest;
-import com.mitake.core.request.CategoryType;
-import com.mitake.core.request.CatequoteRequest;
-import com.mitake.core.request.MorePriceRequest;
-import com.mitake.core.request.QuoteRequest;
 import com.mitake.core.request.TradeQuoteRequest;
-import com.mitake.core.request.offer.OfferQuoteSort;
-import com.mitake.core.response.AddValueResponse;
-import com.mitake.core.response.BankuaiRankingResponse;
-import com.mitake.core.response.Bankuaisorting;
-import com.mitake.core.response.BankuaisortingResponse;
-import com.mitake.core.response.CatequoteResponse;
 import com.mitake.core.response.IResponseInfoCallback;
-import com.mitake.core.response.MorePriceResponse;
-import com.mitake.core.response.QuoteResponse;
-import com.mitake.core.response.Response;
 import com.mitake.core.response.TradeQuoteResponse;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -86,53 +66,45 @@ public class TradeQuoteTest_1 {
                     } catch (AssertionError e) {
                         result.completeExceptionally(e);
                     }
-                    JSONObject uploadObj = new JSONObject();
-                    for (TradeQuoteItem item :tradeQuoteResponse.tradeQuoteItems) {
-                        try {
+                    JSONObject uploadObj_1 = new JSONObject();
+                    try {
+                        for (TradeQuoteItem item :tradeQuoteResponse.tradeQuoteItems) {
+                            JSONObject uploadObj = new JSONObject();
                             uploadObj.put("id", item.id);
                             uploadObj.put("name", item.name);
-                            uploadObj.put("market",item.market);
                             uploadObj.put("subtype",item.subtype);
-                            List<JSONObject> buyPrices=new ArrayList<>();
+                            List<String> buyPrices=new ArrayList<>();
                             if (item.buyPrices!=null&&item.buyPrices.size()>0){
                                 for (int j=0;j<item.buyPrices.size();j++){
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("buyprice"+(j+1),item.buyPrices.get(j));
-                                    buyPrices.add(uploadObj_1);
+                                    buyPrices.add(item.buyPrices.get(j));
                                 }
                                 uploadObj.put("buyPrices",new JSONArray(buyPrices));
                             }else {
                                 uploadObj.put("buyPrices",item.buyPrices);
                             }
 
-                            List<JSONObject> buyVolumes=new ArrayList<>();
+                            List<String> buyVolumes=new ArrayList<>();
                             if (item.buyVolumes!=null&&item.buyVolumes.size()>0){
                                 for (int j=0;j<item.buyVolumes.size();j++){
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("buyVolumes"+(j+1),item.buyVolumes.get(j));
-                                    buyVolumes.add(uploadObj_1);
+                                    buyVolumes.add(item.buyVolumes.get(j));
                                 }
                                 uploadObj.put("buyVolumes",new JSONArray(buyVolumes));
                             }else {
                                 uploadObj.put("buyVolumes",item.buyVolumes);
                             }
-                            List<JSONObject> sellPrices=new ArrayList<>();
+                            List<String> sellPrices=new ArrayList<>();
                             if (item.sellPrices!=null&&item.sellPrices.size()>0){
                                 for (int j=0;j<item.sellPrices.size();j++){
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("sellPrices"+(j+1),item.sellPrices.get(j));
-                                    sellPrices.add(uploadObj_1);
+                                    sellPrices.add(item.sellPrices.get(j));
                                 }
                                 uploadObj.put("sellPrices",new JSONArray(sellPrices));
                             }else {
                                 uploadObj.put("sellPrices",item.sellPrices);
                             }
-                            List<JSONObject> sellVolumes=new ArrayList<>();
+                            List<String> sellVolumes=new ArrayList<>();
                             if (item.sellVolumes!=null&&item.sellVolumes.size()>0){
                                 for (int j=0;j<item.sellVolumes.size();j++){
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("sellVolumes"+(j+1),item.sellVolumes.get(j));
-                                    sellVolumes.add(uploadObj_1);
+                                    sellVolumes.add(item.sellVolumes.get(j));
                                 }
                                 uploadObj.put("sellVolumes",new JSONArray(sellVolumes));
                             }else {
@@ -149,12 +121,13 @@ public class TradeQuoteTest_1 {
                             uploadObj.put("quantityUnitBuy",item.quantityUnitBuy);
                             uploadObj.put("quantityUnitSell",item.quantityUnitSell);
                             uploadObj.put("hkPriceDifferenceCategory",item.hkPriceDifferenceCategory);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
+                            uploadObj_1.put(item.id,uploadObj);
                         }
+                        Log.d("data", String.valueOf(uploadObj_1));
+                        result.complete(uploadObj_1);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

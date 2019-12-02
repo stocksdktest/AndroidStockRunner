@@ -73,6 +73,7 @@ public class BidChartTest_1 {
                     } catch (AssertionError e) {
                         result.completeExceptionally(e);
                     }
+                    JSONObject uploadObj = new JSONObject();
                     try {
                         for (BidItem item : bidChartResponse.bidItems) {
                             JSONObject uploadObj_1 = new JSONObject();
@@ -84,8 +85,9 @@ public class BidChartTest_1 {
                             uploadObj_1.put("buy1",item.buy1);
                             uploadObj_1.put("buy2",item.buy2);
                             Log.d("data", String.valueOf(uploadObj_1));
-                            result.complete(uploadObj_1);
+                            uploadObj.put(item.time,uploadObj_1);
                         }
+                        result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

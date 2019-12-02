@@ -111,11 +111,10 @@ public class F10_StockNewsListTest_1 {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    List<JSONObject> items=new ArrayList<>();
                     if (stockNewsListResponse.list!=null){
-                        for (StockNewsItem item : stockNewsListResponse.list) {
-                            JSONObject uploadObj_1 = new JSONObject();
-                            try {
+                        try {
+                            for (StockNewsItem item : stockNewsListResponse.list) {
+                                JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("INIPUBDATE_", item.INIPUBDATE_);
                                 uploadObj_1.put("ID_", item.ID_);
                                 uploadObj_1.put("REPORTTITLE_", item.REPORTTITLE_);
@@ -126,10 +125,11 @@ public class F10_StockNewsListTest_1 {
                                 uploadObj_1.put("ENTRYDATE", item.ENTRYDATE);
                                 uploadObj_1.put("ENTRYTIME", item.ENTRYTIME);
                                 Log.d("data", String.valueOf(uploadObj_1));
-                                result.complete(uploadObj_1);
-                            } catch (JSONException e) {
-                                result.completeExceptionally(e);
+                                uploadObj.put(item.INIPUBDATE_,uploadObj_1);
                             }
+                            result.complete(uploadObj);
+                        } catch (JSONException e) {
+                            result.completeExceptionally(e);
                         }
                     }
                 }

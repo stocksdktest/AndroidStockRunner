@@ -86,20 +86,18 @@ public class TradeDateTest_2 {
                     HashMap<String,ArrayList<TradeDate>> tradeDatesMap = tradeDateResponse.tradeDatesMap;
                     JSONObject uploadObj = new JSONObject();
                     try {
-                        List<JSONObject> tradeDates=new ArrayList<>();
                         for (int i=0;i<tradeDatesMap.get(quoteNumbers).size();i++){
                             JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("date",tradeDatesMap.get(quoteNumbers).get(i).date);
                             uploadObj_1.put("isTrade",tradeDatesMap.get(quoteNumbers).get(i).isTrade);
                             uploadObj_1.put("description",tradeDatesMap.get(quoteNumbers).get(i).description);
-                            tradeDates.add(uploadObj_1);
+                            uploadObj.put(tradeDatesMap.get(quoteNumbers).get(i).date,uploadObj_1);
+                            Log.d("data", String.valueOf(uploadObj_1));
                         }
-                        uploadObj.put("tradeDates",new JSONArray(tradeDates));
+                        result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

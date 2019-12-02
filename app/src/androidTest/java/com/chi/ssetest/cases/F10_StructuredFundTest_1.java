@@ -111,27 +111,22 @@ public class F10_StructuredFundTest_1 {
                         switch (quoteNumbers){
                             //"/fndclassinfo"
                             case StructuredFundRequest.INFO:
-                                List<JSONObject> fndclassinfo=new ArrayList<>();
-                                JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("MASTERCODEA",info.get("MASTERCODEA"));
-                                uploadObj_1.put("SNAMECOMPA",info.get("SNAMECOMPA"));
-                                uploadObj_1.put("ATOTSHARE",info.get("ATOTSHARE"));
-                                uploadObj_1.put("MASTERCODE",info.get("MASTERCODE"));
-                                uploadObj_1.put("SNAMECOMP",info.get("SNAMECOMP"));
-                                uploadObj_1.put("MASTERCODEB",info.get("MASTERCODEB"));
-                                uploadObj_1.put("SNAMECOMPB",info.get("SNAMECOMPB"));
-                                uploadObj_1.put("BTOTSHARE",info.get("BTOTSHARE"));
-                                uploadObj_1.put("MAPCODE",info.get("MAPCODE"));
-                                uploadObj_1.put("MAPNAME",info.get("MAPNAME"));
-                                uploadObj_1.put("LISTDATE",info.get("LISTDATE"));
-                                uploadObj_1.put("ENDDATE",info.get("ENDDATE"));
-                                uploadObj_1.put("KEEPERNAME",info.get("KEEPERNAME"));
-                                fndclassinfo.add(uploadObj_1);
-                                uploadObj.put("fndclassinfo",new JSONArray(fndclassinfo));
+                                uploadObj.put("MASTERCODEA",info.get("MASTERCODEA"));
+                                uploadObj.put("SNAMECOMPA",info.get("SNAMECOMPA"));
+                                uploadObj.put("ATOTSHARE",info.get("ATOTSHARE"));
+                                uploadObj.put("MASTERCODE",info.get("MASTERCODE"));
+                                uploadObj.put("SNAMECOMP",info.get("SNAMECOMP"));
+                                uploadObj.put("MASTERCODEB",info.get("MASTERCODEB"));
+                                uploadObj.put("SNAMECOMPB",info.get("SNAMECOMPB"));
+                                uploadObj.put("BTOTSHARE",info.get("BTOTSHARE"));
+                                uploadObj.put("MAPCODE",info.get("MAPCODE"));
+                                uploadObj.put("MAPNAME",info.get("MAPNAME"));
+                                uploadObj.put("LISTDATE",info.get("LISTDATE"));
+                                uploadObj.put("ENDDATE",info.get("ENDDATE"));
+                                uploadObj.put("KEEPERNAME",info.get("KEEPERNAME"));
                                 break;
                             //"/fndclassstockpre"
                             case StructuredFundRequest.STOCKPRE:
-                                List<JSONObject> fndclassstockpre=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
                                     JSONObject uploadObj_2 = new JSONObject();
                                     uploadObj_2.put("SKCODE",infos.get(i).get("SKCODE"));
@@ -139,81 +134,56 @@ public class F10_StructuredFundTest_1 {
                                     uploadObj_2.put("NAVRTO",infos.get(i).get("NAVRTO"));
                                     uploadObj_2.put("ACCSTKRTO",infos.get(i).get("ACCSTKRTO"));
                                     uploadObj_2.put("ACCCIRCRTO",infos.get(i).get("ACCCIRCRTO"));
-                                    fndclassstockpre.add(uploadObj_2);
+                                    uploadObj.put((String) infos.get(i).get("SKCODE"),uploadObj_2);
                                 }
-                                uploadObj.put("fndclassstockpre",new JSONArray(fndclassstockpre));
                                 break;
                             //"/fndclassforcast"
                             case StructuredFundRequest.FORCAST:
-                                List<JSONObject> fndclassforcast=new ArrayList<>();
-                                JSONObject uploadObj_3 = new JSONObject();
-                                uploadObj_3.put("FSYMBOL",info.get("FSYMBOL"));
-                                uploadObj_3.put("PRIXLEVERAGE",info.get("PRIXLEVERAGE"));
-                                uploadObj_3.put("NAVLEVERAGE",info.get("NAVLEVERAGE"));
-                                uploadObj_3.put("THRESHOLD",info.get("THRESHOLD"));
-                                fndclassforcast.add(uploadObj_3);
-                                uploadObj.put("fndclassforcast",new JSONArray(fndclassforcast));
+                                uploadObj.put("FSYMBOL",info.get("FSYMBOL"));
+                                uploadObj.put("PRIXLEVERAGE",info.get("PRIXLEVERAGE"));
+                                uploadObj.put("NAVLEVERAGE",info.get("NAVLEVERAGE"));
+                                uploadObj.put("THRESHOLD",info.get("THRESHOLD"));
                                 break;
                             //"/fndclasssubredinfo"
                             case StructuredFundRequest.SUBREDINFO:
-                                List<JSONObject> fndclasssubredinfo=new ArrayList<>();
-                                JSONObject uploadObj_4 = new JSONObject();
-                                uploadObj_4.put("INVESTSTYLE",info.get("INVESTSTYLE"));
-                                uploadObj_4.put("SUBREDSTATUS",info.get("SUBREDSTATUS"));
-                                uploadObj_4.put("ACCUNITNAV",info.get("ACCUNITNAV"));
-                                uploadObj_4.put("RATEMAXCOST",info.get("RATEMAXCOST"));
-                                uploadObj_4.put("APPMINAMT",info.get("APPMINAMT"));
-                                fndclasssubredinfo.add(uploadObj_4);
-                                uploadObj.put("fndclasssubredinfo",new JSONArray(fndclasssubredinfo));
+                                uploadObj.put("INVESTSTYLE",info.get("INVESTSTYLE"));
+                                uploadObj.put("SUBREDSTATUS",info.get("SUBREDSTATUS"));
+                                uploadObj.put("ACCUNITNAV",info.get("ACCUNITNAV"));
+                                uploadObj.put("RATEMAXCOST",info.get("RATEMAXCOST"));
+                                uploadObj.put("APPMINAMT",info.get("APPMINAMT"));
                                 break;
                             //"/fndclassmergesplit"
                             case StructuredFundRequest.MERGESPLIT:
-                                List<JSONObject> fndclassmergesplit=new ArrayList<>();
-                                JSONObject uploadObj_5 = new JSONObject();
-                                uploadObj_5.put("MASTERCODEA",info.get("MASTERCODEA"));
-                                uploadObj_5.put("SNAMECOMPA",info.get("SNAMECOMPA"));
-                                uploadObj_5.put("ATOTSHARE",info.get("ATOTSHARE"));
-                                uploadObj_5.put("MASTERCODE",info.get("MASTERCODE"));
-                                uploadObj_5.put("SNAMECOMP",info.get("SNAMECOMP"));
-                                uploadObj_5.put("MASTERCODEB",info.get("MASTERCODEB"));
-                                uploadObj_5.put("SNAMECOMPB",info.get("SNAMECOMPB"));
-                                uploadObj_5.put("BTOTSHARE",info.get("BTOTSHARE"));
-                                uploadObj_5.put("ACCUNITNAV",info.get("ACCUNITNAV"));
-                                fndclassmergesplit.add(uploadObj_5);
-                                uploadObj.put("fndclassmergesplit",new JSONArray(fndclassmergesplit));
+                                uploadObj.put("MASTERCODEA",info.get("MASTERCODEA"));
+                                uploadObj.put("SNAMECOMPA",info.get("SNAMECOMPA"));
+                                uploadObj.put("ATOTSHARE",info.get("ATOTSHARE"));
+                                uploadObj.put("MASTERCODE",info.get("MASTERCODE"));
+                                uploadObj.put("SNAMECOMP",info.get("SNAMECOMP"));
+                                uploadObj.put("MASTERCODEB",info.get("MASTERCODEB"));
+                                uploadObj.put("SNAMECOMPB",info.get("SNAMECOMPB"));
+                                uploadObj.put("BTOTSHARE",info.get("BTOTSHARE"));
+                                uploadObj.put("ACCUNITNAV",info.get("ACCUNITNAV"));
                                 break;
                             //"/fndclassconverted"
                             case StructuredFundRequest.CONVERTED:
-                                List<JSONObject> fndclassconverted=new ArrayList<>();
-                                JSONObject uploadObj_6 = new JSONObject();
-                                uploadObj_6.put("BENCHMARK",info.get("BENCHMARK"));
-                                uploadObj_6.put("ELDMEMO",info.get("ELDMEMO"));
-                                fndclassconverted.add(uploadObj_6);
-                                uploadObj.put("fndclassconverted",new JSONArray(fndclassconverted));
+                                uploadObj.put("BENCHMARK",info.get("BENCHMARK"));
+                                uploadObj.put("ELDMEMO",info.get("ELDMEMO"));
                                 break;
                             //"/fndclassmasterrate"
                             case StructuredFundRequest.MASTERRATE:
-                                List<JSONObject> fndclassmasterrate=new ArrayList<>();
-                                JSONObject uploadObj_7 = new JSONObject();
-                                uploadObj_7.put("subamt",info.get("subamt"));
+                                uploadObj.put("subamt",info.get("subamt"));
                                 List<HashMap<String,Object>> masterRateinfos =( List<HashMap<String,Object>>)info.get("subcost");
-                                List<JSONObject> subcost=new ArrayList<>();
                                 if (masterRateinfos!=null){
                                     for (int k=0;k<masterRateinfos.size();k++){
-                                        JSONObject uploadObj_8 = new JSONObject();
-                                        uploadObj_8.put("RATEMAXCOST",masterRateinfos.get(k).get("RATEMAXCOST"));
-                                        uploadObj_8.put("APPMINAMT",masterRateinfos.get(k).get("APPMINAMT"));
-                                        uploadObj_8.put("APPAMTRESH",masterRateinfos.get(k).get("APPAMTRESH"));
-                                        uploadObj_8.put("APPMAXAMT",masterRateinfos.get(k).get("APPMAXAMT"));
-                                        uploadObj_8.put("SUBMIXAMT",masterRateinfos.get(k).get("SUBMIXAMT"));
-                                        subcost.add(uploadObj_8);
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("RATEMAXCOST",masterRateinfos.get(k).get("RATEMAXCOST"));
+                                        uploadObj_1.put("APPMINAMT",masterRateinfos.get(k).get("APPMINAMT"));
+                                        uploadObj_1.put("APPAMTRESH",masterRateinfos.get(k).get("APPAMTRESH"));
+                                        uploadObj_1.put("APPMAXAMT",masterRateinfos.get(k).get("APPMAXAMT"));
+                                        uploadObj_1.put("SUBMIXAMT",masterRateinfos.get(k).get("SUBMIXAMT"));
+                                        uploadObj.put(String.valueOf((k+1)),uploadObj_1);
                                     }
-                                    uploadObj_7.put("subcost",new JSONArray(subcost));
-                                }else {
-                                    uploadObj_7.put("subcost",info.get("subcost"));
                                 }
-                                fndclassmasterrate.add(uploadObj_7);
-                                uploadObj.put("fndclassmasterrate",new JSONArray(fndclassmasterrate));
                                 break;
                         }
                     } catch (JSONException e) {

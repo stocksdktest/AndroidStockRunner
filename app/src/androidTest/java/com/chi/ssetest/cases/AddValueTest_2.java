@@ -36,7 +36,7 @@ import static org.junit.Assert.*;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
- *增值指标2
+ *增值指标 2(不返回增值指标数据，已废弃）
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
@@ -72,12 +72,11 @@ public class AddValueTest_2 {
                     } catch (AssertionError e) {
                         result.completeExceptionally(e);
                     }
-                    List<JSONObject> items=new ArrayList<>();
                     JSONObject uploadObj = new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value
-                    for (AddValueModel item : addValueResponse.list) {
-                        JSONObject uploadObj_1 = new JSONObject();
-                        try {
+                    try {
+                        for (AddValueModel item : addValueResponse.list) {
+                            JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("code",item.code);
                             uploadObj_1.put("date",item.date);
                             uploadObj_1.put("time",item.time);
@@ -103,28 +102,26 @@ public class AddValueTest_2 {
                             uploadObj_1.put("mediumNetInflow",item.mediumNetInflow);
                             uploadObj_1.put("smallNetInflow",item.smallNetInflow);
 
-                            List<JSONObject> fundsInflows=new ArrayList<>();
+                            List<String> fundsInflows=new ArrayList<>();
                             if (item.fundsInflows!=null&&item.fundsInflows.length>0){
                                 for (int j=0;j<item.fundsInflows.length;j++){
-                                    JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("fundsInflows"+(j+1),item.fundsInflows[j]);
-                                    fundsInflows.add(uploadObj_2);
+                                    fundsInflows.add(item.fundsInflows[j]);
                                 }
-                                uploadObj.put("fundsInflows",new JSONArray(fundsInflows));
+                                uploadObj_1.put("fundsInflows",new JSONArray(fundsInflows));
                             }else {
-                                uploadObj.put("fundsInflows",item.fundsInflows);
+                                uploadObj_1.put("fundsInflows",item.fundsInflows);
                             }
-                            List<JSONObject> fundsOutflows=new ArrayList<>();
+
+                            List<String> fundsOutflows=new ArrayList<>();
                             if (item.fundsOutflows!=null&&item.fundsOutflows.length>0){
                                 for (int j=0;j<item.fundsOutflows.length;j++){
-                                    JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("fundsOutflows"+(j+1),item.fundsOutflows[j]);
-                                    fundsOutflows.add(uploadObj_2);
+                                    fundsOutflows.add(item.fundsOutflows[j]);
                                 }
-                                uploadObj.put("fundsOutflows",new JSONArray(fundsOutflows));
+                                uploadObj_1.put("fundsOutflows",new JSONArray(fundsOutflows));
                             }else {
-                                uploadObj.put("fundsOutflows",item.fundsOutflows);
+                                uploadObj_1.put("fundsOutflows",item.fundsOutflows);
                             }
+
                             uploadObj_1.put("ultraLargeDiffer",item.ultraLargeDiffer);
                             uploadObj_1.put("largeDiffer",item.largeDiffer);
                             uploadObj_1.put("mediumDiffer",item.mediumDiffer);
@@ -145,30 +142,27 @@ public class AddValueTest_2 {
                             uploadObj_1.put("DDY10",item.DDY10);
                             uploadObj_1.put("DDZ",item.DDZ);
                             uploadObj_1.put("RatioBS",item.RatioBS);
-                            List<JSONObject> othersFundsInflows=new ArrayList<>();
+                            List<String> othersFundsInflows=new ArrayList<>();
                             if (item.othersFundsInflows!=null&&item.othersFundsInflows.length>0){
                                 for (int j=0;j<item.othersFundsInflows.length;j++){
-                                    JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("othersFundsInflows"+(j+1),item.othersFundsInflows[j]);
-                                    othersFundsInflows.add(uploadObj_2);
+                                    othersFundsInflows.add(item.othersFundsInflows[j]);
                                 }
-                                uploadObj.put("othersFundsInflows",new JSONArray(othersFundsInflows));
+                                uploadObj_1.put("othersFundsInflows",new JSONArray(othersFundsInflows));
                             }else {
-                                uploadObj.put("othersFundsInflows",item.othersFundsInflows);
+                                uploadObj_1.put("othersFundsInflows",item.othersFundsInflows);
                             }
-                            List<JSONObject> othersFundsOutflows=new ArrayList<>();
+
+                            List<String> othersFundsOutflows=new ArrayList<>();
                             if (item.othersFundsOutflows!=null&&item.othersFundsOutflows.length>0){
                                 for (int j=0;j<item.othersFundsOutflows.length;j++){
-                                    JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("othersFundsOutflows"+(j+1),item.othersFundsOutflows[j]);
-                                    othersFundsOutflows.add(uploadObj_2);
+                                    othersFundsOutflows.add(item.othersFundsOutflows[j]);
                                 }
-                                uploadObj.put("othersFundsOutflows",new JSONArray(othersFundsOutflows));
+                                uploadObj_1.put("othersFundsOutflows",new JSONArray(othersFundsOutflows));
                             }else {
-                                uploadObj.put("othersFundsOutflows",item.othersFundsOutflows);
+                                uploadObj_1.put("othersFundsOutflows",item.othersFundsOutflows);
                             }
-                            uploadObj_1.put("fiveMinutesChangeRate",item.fiveMinutesChangeRate);
 
+                            uploadObj_1.put("fiveMinutesChangeRate",item.fiveMinutesChangeRate);
                             uploadObj_1.put("largeOrderNumB",item.largeOrderNumB);
                             uploadObj_1.put("largeOrderNumS",item.largeOrderNumS);
                             uploadObj_1.put("bigOrderNumB",item.bigOrderNumB);
@@ -184,10 +178,11 @@ public class AddValueTest_2 {
                             uploadObj_1.put("ratioMainforceMoneyNetInflow10",item.ratioMainforceMoneyNetInflow10);
                             uploadObj_1.put("ratioMainforceMoneyNetInflow20",item.ratioMainforceMoneyNetInflow20);
                             Log.d("data", String.valueOf(uploadObj_1));
-                            result.complete(uploadObj_1);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
+                            uploadObj.put(item.date+item.time,uploadObj_1);
                         }
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
                 }
                 @Override

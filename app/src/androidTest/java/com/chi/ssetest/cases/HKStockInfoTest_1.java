@@ -83,19 +83,19 @@ public class HKStockInfoTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value
                     try {
-                        uploadObj.put("",list.vcmDataTimestamp);
-                        uploadObj.put("",list.vcmStartTime);
-                        uploadObj.put("",list.vcmEndTime);
-                        uploadObj.put("",list.vcmReffPrice);
-                        uploadObj.put("",list.vcmLowerPrice);
-                        uploadObj.put("",list.vcmUpperPrice);
-                        uploadObj.put("",list.casDataTimestamp);
-                        uploadObj.put("",list.casOrdImbDirection);
-                        uploadObj.put("",list.casOrdImbQty);
-                        uploadObj.put("",list.casReffPrice);
-                        uploadObj.put("",list.casLowerPrice);
-                        uploadObj.put("",list.casUpperPrice);
-                        List<JSONObject> HKOtherItem=new ArrayList<>();
+                        uploadObj.put("vcmDataTimestamp",list.vcmDataTimestamp);
+                        uploadObj.put("vcmStartTime",list.vcmStartTime);
+                        uploadObj.put("vcmEndTime",list.vcmEndTime);
+                        uploadObj.put("vcmReffPrice",list.vcmReffPrice);
+                        uploadObj.put("vcmLowerPrice",list.vcmLowerPrice);
+                        uploadObj.put("vcmUpperPrice",list.vcmUpperPrice);
+                        uploadObj.put("casDataTimestamp",list.casDataTimestamp);
+                        uploadObj.put("casOrdImbDirection",list.casOrdImbDirection);
+                        uploadObj.put("casOrdImbQty",list.casOrdImbQty);
+                        uploadObj.put("casReffPrice",list.casReffPrice);
+                        uploadObj.put("casLowerPrice",list.casLowerPrice);
+                        uploadObj.put("casUpperPrice",list.casUpperPrice);
+
                         if (list.list!=null&&list.list.size()>0){
                             for (int k=0;k<list.list.size();k++){
                                 JSONObject uploadObj_1 = new JSONObject();
@@ -105,11 +105,8 @@ public class HKStockInfoTest_1 {
                                 uploadObj_1.put("BrokerID",list.list.get(k).BrokerID);
                                 uploadObj_1.put("Side",list.list.get(k).Side);
                                 uploadObj_1.put("DataTimestamp",list.list.get(k).DataTimestamp);
-                                HKOtherItem.add(uploadObj_1);
+                                uploadObj.put(list.list.get(k).OrderId,uploadObj_1);
                             }
-                            uploadObj.put("HKOtherItem",new JSONArray(HKOtherItem));
-                        }else {
-                            uploadObj.put("HKOtherItem",list.list);
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

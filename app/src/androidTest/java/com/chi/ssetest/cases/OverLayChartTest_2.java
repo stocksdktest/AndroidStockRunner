@@ -90,78 +90,81 @@ public class OverLayChartTest_2 {
             @Override
             public void callback(Response response) {
                 QuoteResponse quoteResponse=(QuoteResponse) response;
-                QuoteItem quoteItem=quoteResponse.quoteItems.get(0);
-                OverLayChartRequest request = new OverLayChartRequest();
-                request.send(quoteNumbers,quoteNumbers1,quoteNumbers2,Integer.parseInt(quoteNumbers3),new IResponseInfoCallback<ChartResponse>() {
+                final QuoteItem quoteItem1=quoteResponse.quoteItems.get(0);
+                QuoteDetailRequest quoteDetailRequest1=new QuoteDetailRequest();
+                quoteDetailRequest1.send(quoteNumbers1, new IResponseInfoCallback() {
                     @Override
-                    public void callback(ChartResponse chartResponse) {
-                        try {
-                            assertNotNull(chartResponse.historyItems);
-                        } catch (AssertionError e) {
-                            result.completeExceptionally(e);
-                        }
-                        CopyOnWriteArrayList<OHLCItem> list=chartResponse.historyItems;
-                        CopyOnWriteArrayList<OHLCItem> list2=chartResponse.overLayChartResponse.historyItems;
-                        List<JSONObject> items=new ArrayList<>();
-                        JSONObject uploadObj = new JSONObject();
-                        try {
-                            if (quoteNumbers2.equals("ChartTypeOneDay")){
-                                uploadObj.put("dayList",chartResponse.dayList.get(0));
-                            }else {
-                                List<JSONObject> dayList=new ArrayList<>();
-                                for (int k=0;k<chartResponse.dayList.size();k++){
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("day",chartResponse.dayList.get(k));
-                                    dayList.add(uploadObj_1);
+                    public void callback(Response response) {
+                        QuoteResponse quoteResponse1=(QuoteResponse)response;
+                        QuoteItem quoteItem2=quoteResponse1.quoteItems.get(0);
+                        OverLayChartRequest request = new OverLayChartRequest();
+                        request.send(quoteItem1,quoteItem2,quoteNumbers2,Integer.parseInt(quoteNumbers3),new IResponseInfoCallback<ChartResponse>() {
+                            @Override
+                            public void callback(ChartResponse chartResponse) {
+                                try {
+                                    assertNotNull(chartResponse.historyItems);
+                                } catch (AssertionError e) {
+                                    result.completeExceptionally(e);
                                 }
-                                uploadObj.put("dayList",new JSONArray(dayList));
-                            }
-                            List<JSONObject> OHLCItem=new ArrayList<>();
-                            for (int k=0;k<chartResponse.historyItems.size();k++) {
-                                JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("datetime",list.get(k).datetime);
-                                uploadObj_1.put("openPrice",list.get(k).openPrice);
-                                uploadObj_1.put("highPrice",list.get(k).highPrice);
-                                uploadObj_1.put("lowPrice",list.get(k).lowPrice);
-                                uploadObj_1.put("closePrice",list.get(k).closePrice);
-                                uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
-                                uploadObj_1.put("averagePrice",list.get(k).averagePrice);//ios需要判断是否存在字段
-                                uploadObj_1.put("reference_price",list.get(k).reference_price);
-                                uploadObj_1.put("transaction_price",list.get(k).transaction_price);
-                                uploadObj_1.put("openInterest",list.get(k).openInterest);//ios需要判断是否存在字段
-                                uploadObj_1.put("fp_volume",list.get(k).fp_volume);
-                                uploadObj_1.put("fp_amount",list.get(k).fp_amount);
-                                OHLCItem.add(uploadObj_1);
-                            }
-                            uploadObj.put("OHLCItem",new JSONArray(OHLCItem));
+                                CopyOnWriteArrayList<OHLCItem> list=chartResponse.historyItems;
+                                CopyOnWriteArrayList<OHLCItem> list2=chartResponse.overLayChartResponse.historyItems;
+                                JSONObject uploadObj = new JSONObject();
+                                JSONObject uploadObj_2 = new JSONObject();
+                                JSONObject uploadObj_3 = new JSONObject();
+                                try {
+                                    List<String> dayList=new ArrayList<>();
+                                    if (quoteNumbers2.equals("ChartTypeOneDay")){
+                                        dayList.add(chartResponse.dayList.get(0));
+                                    }else {
+                                        for (int k=0;k<chartResponse.dayList.size();k++){
+                                            dayList.add(chartResponse.dayList.get(k));
+                                        }
+                                    }
+                                    uploadObj.put("dayList",new JSONArray(dayList));
 
-                            List<JSONObject> overLayChart=new ArrayList<>();
-                            for (int k=0;k<list2.size();k++){
-                                JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("datetime",list2.get(k).datetime);
-                                uploadObj_1.put("openPrice",list2.get(k).openPrice);
-                                uploadObj_1.put("highPrice",list2.get(k).highPrice);
-                                uploadObj_1.put("lowPrice",list2.get(k).lowPrice);
-                                uploadObj_1.put("closePrice",list2.get(k).closePrice);
-                                uploadObj_1.put("tradeVolume",list2.get(k).tradeVolume);
-                                uploadObj_1.put("averagePrice",list2.get(k).averagePrice);//ios需要判断是否存在字段
-                                uploadObj_1.put("reference_price",list2.get(k).reference_price);
-                                uploadObj_1.put("transaction_price",list2.get(k).transaction_price);
-                                uploadObj_1.put("openInterest",list2.get(k).openInterest);//ios需要判断是否存在字段
-                                uploadObj_1.put("fp_volume",list2.get(k).fp_volume);
-                                uploadObj_1.put("fp_amount",list2.get(k).fp_amount);
-                                overLayChart.add(uploadObj_1);
+                                    for (int k=0;k<chartResponse.historyItems.size();k++) {
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("datetime",list.get(k).datetime);
+                                        uploadObj_1.put("closePrice",list.get(k).closePrice);
+                                        uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
+                                        uploadObj_1.put("averagePrice",list.get(k).averagePrice);
+                                        uploadObj_1.put("md",list.get(k).getMd());
+                                        uploadObj_1.put("iopv",list.get(k).iopv);
+                                        uploadObj_1.put("iopvPre",list.get(k).iopvPre);
+                                        uploadObj_1.put("openInterest",list.get(k).openInterest);
+                                        uploadObj_2.put(list.get(k).datetime,uploadObj_1);
+                                    }
+                                    uploadObj.put("OHLCItem",uploadObj_2);
+
+                                    for (int k=0;k<list2.size();k++){
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("datetime",list2.get(k).datetime);
+                                        uploadObj_1.put("closePrice",list2.get(k).closePrice);
+                                        uploadObj_1.put("tradeVolume",list2.get(k).tradeVolume);
+                                        uploadObj_1.put("averagePrice",list2.get(k).averagePrice);
+                                        uploadObj_1.put("md",list2.get(k).getMd());
+                                        uploadObj_1.put("iopv",list2.get(k).iopv);
+                                        uploadObj_1.put("iopvPre",list2.get(k).iopvPre);
+                                        uploadObj_1.put("openInterest",list2.get(k).openInterest);
+                                        uploadObj_3.put(list2.get(k).datetime,uploadObj_1);
+                                    }
+                                    uploadObj.put("overLayChart",uploadObj_3);
+                                } catch (JSONException e) {
+                                    result.completeExceptionally(e);
+                                }
+                                Log.d("data", String.valueOf(uploadObj));
+                                result.complete(uploadObj);
                             }
-                            uploadObj.put("overLayChart",new JSONArray(overLayChart));
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
-                        }
-                        Log.d("data", String.valueOf(uploadObj));
-                        result.complete(uploadObj);
+                            @Override
+                            public void exception(ErrorInfo errorInfo) {
+                                result.completeExceptionally(new Exception(errorInfo.toString()));
+                            }
+                        });
                     }
+
                     @Override
                     public void exception(ErrorInfo errorInfo) {
-                        result.completeExceptionally(new Exception(errorInfo.toString()));
+
                     }
                 });
             }

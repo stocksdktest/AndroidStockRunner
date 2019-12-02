@@ -121,55 +121,43 @@ public class F10V2Test_2 {
                         switch (quoteNumbers3) {
                             //沪深股api----大事提醒---按时间
                             case F10Type.IMPORT_NOTICE_DATA:
-                                List<JSONObject> IMPORT_NOTICE_DATA=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_6 = new JSONObject();
-                                    uploadObj_6.put("REPTITLE",infos.get(i).get("REPTITLE"));
-                                    uploadObj_6.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
-                                    uploadObj_6.put("TEXT",infos.get(i).get("TEXT"));
-                                    uploadObj_6.put("ID",infos.get(i).get("ID"));
-                                    uploadObj_6.put("ISPDF",infos.get(i).get("ISPDF"));
-                                    IMPORT_NOTICE_DATA.add(uploadObj_6);
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("REPTITLE",infos.get(i).get("REPTITLE"));
+                                    uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
+                                    uploadObj_1.put("TEXT",infos.get(i).get("TEXT"));
+                                    uploadObj_1.put("ID",infos.get(i).get("ID"));
+                                    uploadObj_1.put("ISPDF",infos.get(i).get("ISPDF"));
+                                    uploadObj.put((String) infos.get(i).get("TRADEDATE"),uploadObj_1);
                                 }
-                                uploadObj.put("IMPORT_NOTICE_DATA",new JSONArray(IMPORT_NOTICE_DATA));
                                 break;
                             //沪深股api----大事提醒---按标题
                             case F10Type.IMPORT_NOTICE_TITLE:
-                                List<JSONObject> IMPORT_NOTICE_TITLE=new ArrayList<>();
                                 for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_6 = new JSONObject();
-                                    uploadObj_6.put("REPTITLE",infos.get(i).get("REPTITLE"));
-                                    uploadObj_6.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
-                                    uploadObj_6.put("TEXT",infos.get(i).get("TEXT"));
-                                    uploadObj_6.put("ID",infos.get(i).get("ID"));
-                                    uploadObj_6.put("ISPDF",infos.get(i).get("ISPDF"));
-                                    IMPORT_NOTICE_TITLE.add(uploadObj_6);
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("REPTITLE",infos.get(i).get("REPTITLE"));
+                                    uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
+                                    uploadObj_1.put("TEXT",infos.get(i).get("TEXT"));
+                                    uploadObj_1.put("ID",infos.get(i).get("ID"));
+                                    uploadObj_1.put("ISPDF",infos.get(i).get("ISPDF"));
+                                    uploadObj.put((String) infos.get(i).get("TRADEDATE"),uploadObj_1);
                                 }
-                                uploadObj.put("IMPORT_NOTICE_TITLE",new JSONArray(IMPORT_NOTICE_TITLE));
                                 break;
                             //大事提醒-业绩预告
                             case F10Type.EXPT_PERFORMANCE:
-                                List<JSONObject> EXPT_PERFORMANCE=new ArrayList<>();
-                                JSONObject uploadObj_8 = new JSONObject();
-                                uploadObj_8.put("Page",info.get("Page"));
-                                uploadObj_8.put("PageNumber",info.get("PageNumber"));
+                                uploadObj.put("Page",info.get("Page"));
+                                uploadObj.put("PageNumber",info.get("PageNumber"));
                                 List<HashMap<String,Object>> items2= (List<HashMap<String,Object>>) info.get("List");
                                 if (items2!=null){
-                                    List<JSONObject> list=new ArrayList<>();
                                     for (int i=0;i<items2.size();i++){
-                                        JSONObject uploadObj_7 = new JSONObject();
-                                        uploadObj_7.put("SESNAME",items2.get(i).get("SESNAME"));
-                                        uploadObj_7.put("PUBLISHDATE",items2.get(i).get("PUBLISHDATE"));
-                                        uploadObj_7.put("RETAMAXPROFITSMK",items2.get(i).get("RETAMAXPROFITSMK"));
-                                        uploadObj_7.put("RETAMAXPROFITSINC",items2.get(i).get("RETAMAXPROFITSINC"));
-                                        list.add(uploadObj_7);
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("SESNAME",items2.get(i).get("SESNAME"));
+                                        uploadObj_1.put("PUBLISHDATE",items2.get(i).get("PUBLISHDATE"));
+                                        uploadObj_1.put("RETAMAXPROFITSMK",items2.get(i).get("RETAMAXPROFITSMK"));
+                                        uploadObj_1.put("RETAMAXPROFITSINC",items2.get(i).get("RETAMAXPROFITSINC"));
+                                        uploadObj.put((String) items2.get(i).get("PUBLISHDATE"),uploadObj_1);
                                     }
-                                    uploadObj_8.put("list",new JSONArray(list));
-                                }else {
-                                    uploadObj_8.put("list",items2);
                                 }
-                                EXPT_PERFORMANCE.add(uploadObj_8);
-                                uploadObj.put("EXPT_PERFORMANCE",new JSONArray(EXPT_PERFORMANCE));
                                 break;
                         }
                     } catch (JSONException e) {

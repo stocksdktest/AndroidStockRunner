@@ -88,11 +88,12 @@ public class DRQuoteListTest_1 {
                     } catch (AssertionError e) {
                         result.completeExceptionally(e);
                     }
+                    JSONObject uploadObj = new JSONObject();
                     try {
                         for (DRQuoteItem item : drQuoteListResponse.mDRQuoteItems) {
                             JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("code", item.code);
-                            uploadObj_1.put("code", item.name);
+                            uploadObj_1.put("name", item.name);
                             uploadObj_1.put("lastPrice", item.lastPrice);
                             uploadObj_1.put("preClosePrice", item.preClosePrice);
                             uploadObj_1.put("change",item.change);
@@ -109,8 +110,9 @@ public class DRQuoteListTest_1 {
                             uploadObj_1.put("baseSubtype",item.baseSubtype);
                             uploadObj_1.put("baseDateTime",item.baseDateTime);
                             Log.d("data", String.valueOf(uploadObj_1));
-                            result.complete(uploadObj_1);
+                            uploadObj.put(item.dateTime,uploadObj_1);
                         }
+                        result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

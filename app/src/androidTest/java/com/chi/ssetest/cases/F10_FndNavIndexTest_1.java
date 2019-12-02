@@ -102,11 +102,12 @@ public class F10_FndNavIndexTest_1 {
                         if (list!=null){
                             for (int i=0;i<list.size();i++){
                                 JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("NAVDATE",list.get(i).NAVDATE);
-                                uploadObj_1.put("UNITNAV",list.get(i).UNITNAV);
+                                uploadObj_1.put("ENDDATE_",list.get(i).NAVDATE);
+                                uploadObj_1.put("UNITNAV_",list.get(i).UNITNAV);
                                 Log.d("data", String.valueOf(uploadObj_1));
-                                result.complete(uploadObj_1);
+                                uploadObj.put(list.get(i).NAVDATE,uploadObj_1);
                             }
+                            result.complete(uploadObj);
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

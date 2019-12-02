@@ -84,15 +84,17 @@ public class ChartV2Test_6 {
                             ChartResponse chartResponse = (ChartResponse) response;
                             try {
                                 assertNotNull(chartResponse.historyItems);
+                                if (Boolean.parseBoolean(isNeedAfterHours)){
+                                    assertNotNull(chartResponse.afterHoursChartResponse.historyItems);
+                                }
                             } catch (AssertionError e) {
                                 result.completeExceptionally(e);
                             }
                             CopyOnWriteArrayList<OHLCItem> list=chartResponse.historyItems;
                             JSONObject uploadObj = new JSONObject();
-                            List<JSONObject> items = new ArrayList<>();
                             // TODO fill uploadObj with QuoteResponse value
-                            for (int k=0;k<list.size();k++) {
-                                try {
+                            try {
+                                for (int k=0;k<list.size();k++) {
                                     JSONObject uploadObj_1 = new JSONObject();
                                     //存储到JSON
                                     uploadObj_1.put("datetime",list.get(k).datetime);
@@ -103,12 +105,28 @@ public class ChartV2Test_6 {
                                     uploadObj_1.put("openInterest",list.get(k).openInterest);
                                     uploadObj_1.put("iopv",list.get(k).iopv);
                                     uploadObj_1.put("iopvPre",list.get(k).iopvPre);
-                                    Log.d("data", String.valueOf(uploadObj_1));
-                                    result.complete(uploadObj_1);
-                                } catch (JSONException e) {
-                                    result.completeExceptionally(e);
+                                    uploadObj.put(list.get(k).datetime,uploadObj_1);
                                 }
+                                if (Boolean.parseBoolean(isNeedAfterHours)){
+                                    if (null!=chartResponse.afterHoursChartResponse.historyItems){
+                                        CopyOnWriteArrayList<OHLCItem> list1=chartResponse.afterHoursChartResponse.historyItems;
+                                        for (int i=0;i<list1.size();i++){
+                                            JSONObject uploadObj_1 = new JSONObject();
+                                            uploadObj_1.put("datetime",list1.get(i).datetime);
+                                            uploadObj_1.put("closePrice",list1.get(i).closePrice);
+                                            uploadObj_1.put("tradeVolume",list1.get(i).tradeVolume);
+                                            uploadObj_1.put("reference_price",list1.get(i).reference_price);
+//                                        Log.d("panh", String.valueOf(uploadObj_1));
+                                            uploadObj.put(list1.get(i).datetime,uploadObj_1);
+                                        }
+                                    }
+                                }
+                                Log.d("data", String.valueOf(uploadObj));
+                                result.complete(uploadObj);
+                            } catch (JSONException e) {
+                                result.completeExceptionally(e);
                             }
+
                         }
                         @Override
                         public void exception(ErrorInfo errorInfo) {

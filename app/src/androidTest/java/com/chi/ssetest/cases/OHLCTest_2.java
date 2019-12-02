@@ -39,7 +39,7 @@ import static org.junit.Assert.*;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
- *k线数据2--选择复权方式
+ *k线数据2--选择复权方式(已废弃)
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
@@ -86,26 +86,28 @@ public class OHLCTest_2 {
                                 result.completeExceptionally(e);
                             }
                             CopyOnWriteArrayList<OHLCItem> list =ohlcResponse.historyItems;
-                            for (int k=0;k<list.size();k++){
-                                try {
+                            try {
+                                JSONObject uploadObj = new JSONObject();
+                                for (int k=0;k<list.size();k++){
                                     JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("datetime",list.get(k).datetime+list.get(k).time);
+                                    uploadObj_1.put("datetime",list.get(k).datetime);
                                     uploadObj_1.put("openPrice",list.get(k).openPrice);
                                     uploadObj_1.put("highPrice",list.get(k).highPrice);
                                     uploadObj_1.put("lowPrice",list.get(k).lowPrice);
                                     uploadObj_1.put("closePrice",list.get(k).closePrice);
-                                    uploadObj_1.put("averagePrice",list.get(k).averagePrice);
-                                    uploadObj_1.put("openInterest",list.get(k).openInterest);
                                     uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
+                                    uploadObj_1.put("averagePrice",list.get(k).averagePrice);//ios需要判断是否存在字段
                                     uploadObj_1.put("reference_price",list.get(k).reference_price);
                                     uploadObj_1.put("transaction_price",list.get(k).transaction_price);
+                                    uploadObj_1.put("openInterest",list.get(k).openInterest);//ios需要判断是否存在字段
                                     uploadObj_1.put("fp_volume",list.get(k).fp_volume);
                                     uploadObj_1.put("fp_amount",list.get(k).fp_amount);
                                     Log.d("data", String.valueOf(uploadObj_1));
-                                    result.complete(uploadObj_1);
-                                } catch (JSONException e) {
-                                    result.completeExceptionally(e);
+                                    uploadObj.put(list.get(k).datetime,uploadObj_1);
                                 }
+                                result.complete(uploadObj);
+                            } catch (JSONException e) {
+                                result.completeExceptionally(e);
                             }
                         }
                         @Override

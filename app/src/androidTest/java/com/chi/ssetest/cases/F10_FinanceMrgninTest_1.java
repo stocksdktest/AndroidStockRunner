@@ -109,29 +109,29 @@ public class F10_FinanceMrgninTest_1 {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    List<JSONObject> items=new ArrayList<>();
                     List<HashMap<String,Object>> infos = f10V2Response.infos;
                     try {
-                        if (infos!=null){
-                            for (int i=0;i<infos.size();i++){
-                                JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
-                                uploadObj_1.put("TRADING",infos.get(i).get("TRADING"));
-                                uploadObj_1.put("FINBALANCE",infos.get(i).get("FINBALANCE"));
-                                uploadObj_1.put("FINBUYAMT",infos.get(i).get("FINBUYAMT"));
-                                uploadObj_1.put("FINREPAYAMT",infos.get(i).get("FINREPAYAMT"));
-                                uploadObj_1.put("FINROEBUY",infos.get(i).get("FINROEBUY"));
-                                uploadObj_1.put("MRGGBAL",infos.get(i).get("MRGGBAL"));
-                                uploadObj_1.put("MRGNRESQTY",infos.get(i).get("MRGNRESQTY"));
-                                uploadObj_1.put("MRGNSELLAMT",infos.get(i).get("MRGNSELLAMT"));
-                                uploadObj_1.put("MRGNREPAYAMT",infos.get(i).get("MRGNREPAYAMT"));
-                                uploadObj_1.put("MRGNROESELL",infos.get(i).get("MRGNROESELL"));
-                                uploadObj_1.put("FINMRGHBAL",infos.get(i).get("FINMRGHBAL"));
-                                uploadObj_1.put("FINMRGNBAL",infos.get(i).get("FINMRGNBAL"));
-                                Log.d("data", String.valueOf(uploadObj_1));
-                                result.complete(uploadObj_1);
-                            }
+                        uploadObj.put("pageNumber",f10V2Response.pageNumber);
+                        uploadObj.put("page",f10V2Response.page);
+                        for (int i=0;i<infos.size();i++){
+                            JSONObject uploadObj_1 = new JSONObject();
+                            uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
+                            uploadObj_1.put("TRADING",infos.get(i).get("TRADING"));
+                            uploadObj_1.put("FINBALANCE",infos.get(i).get("FINBALANCE"));
+                            uploadObj_1.put("FINBUYAMT",infos.get(i).get("FINBUYAMT"));
+                            uploadObj_1.put("FINREPAYAMT",infos.get(i).get("FINREPAYAMT"));
+                            uploadObj_1.put("FINROEBUY",infos.get(i).get("FINROEBUY"));
+                            uploadObj_1.put("MRGGBAL",infos.get(i).get("MRGGBAL"));
+                            uploadObj_1.put("MRGNRESQTY",infos.get(i).get("MRGNRESQTY"));
+                            uploadObj_1.put("MRGNSELLAMT",infos.get(i).get("MRGNSELLAMT"));
+                            uploadObj_1.put("MRGNREPAYAMT",infos.get(i).get("MRGNREPAYAMT"));
+                            uploadObj_1.put("MRGNROESELL",infos.get(i).get("MRGNROESELL"));
+                            uploadObj_1.put("FINMRGHBAL",infos.get(i).get("FINMRGHBAL"));
+                            uploadObj_1.put("FINMRGNBAL",infos.get(i).get("FINMRGNBAL"));
+                            uploadObj.put(String.valueOf(i+1),uploadObj_1);
                         }
+                        Log.d("data", String.valueOf(uploadObj));
+                        result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

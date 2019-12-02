@@ -87,18 +87,18 @@ public class F10_BonusFinanceTest_1 {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    List<JSONObject> items=new ArrayList<>();
-                    for (BonusFinance item : bonusFinanceResponse.list) {
-                        JSONObject uploadObj_1 = new JSONObject();
-                        try {
+                    try {
+                        for (BonusFinance item : bonusFinanceResponse.list) {
+                            JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("ExDiviDate",item.ExDiviDate);
                             uploadObj_1.put("DiviScheme",item.DiviScheme);
                             uploadObj_1.put("NoticeDate",item.NoticeDate);
                             Log.d("data", String.valueOf(uploadObj_1));
-                            result.complete(uploadObj_1);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
+                            uploadObj.put(item.NoticeDate,uploadObj_1);
                         }
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
                 }
                 @Override

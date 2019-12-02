@@ -97,23 +97,19 @@ public class ChartSubTest_2 {
                             String[][] list=chartSubResponse.line;
                             JSONObject uploadObj = new JSONObject();
                             try {
-                                uploadObj.put("code",chartSubResponse.code);
-                                uploadObj.put("data",chartSubResponse.date);
-                                List<JSONObject> line=new ArrayList<>();
                                 String[] kname=quoteNumbers4.split(",");
                                 for (int i=0;i<list.length;i++){
-                                    for (int k=0;k<list[i].length;k++){
-                                        JSONObject uploadObj_1 = new JSONObject();
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    for (int k=1;k<list[i].length;k++){
                                         uploadObj_1.put(kname[k],list[i][k]);
-                                        line.add(uploadObj_1);
                                     }
+                                    uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                 }
-                                uploadObj.put("line",new JSONArray(line));
+                                Log.d("data", String.valueOf(uploadObj));
+                                result.complete(uploadObj);
                             } catch (JSONException e) {
                                 result.completeExceptionally(e);
                             }
-                            Log.d("data", String.valueOf(uploadObj));
-                            result.complete(uploadObj);
                         }
                         @Override
                         public void exception(ErrorInfo errorInfo) {

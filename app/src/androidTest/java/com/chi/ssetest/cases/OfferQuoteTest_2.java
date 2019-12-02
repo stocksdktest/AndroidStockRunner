@@ -92,11 +92,10 @@ public class OfferQuoteTest_2 {
                         result.completeExceptionally(e);
                     }
                     List<OfferQuoteBean> list=offerQuoteResponse.offerQuoteList;
-                    List<JSONObject> items=new ArrayList<>();
                     JSONObject uploadObj = new JSONObject();
-                    for (int i=0;i<list.size();i++) {
-                        JSONObject uploadObj_1 = new JSONObject();
-                        try {
+                    try {
+                        for (int i=0;i<list.size();i++) {
+                            JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("code",list.get(i).code);
                             uploadObj_1.put("name",list.get(i).name);
                             uploadObj_1.put("offerId",list.get(i).offerId);
@@ -105,10 +104,11 @@ public class OfferQuoteTest_2 {
                             uploadObj_1.put("startDate",list.get(i).startDate);
                             uploadObj_1.put("endDate",list.get(i).endDate);
                             Log.d("data", String.valueOf(uploadObj_1));
-                            result.complete(uploadObj_1);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
+                            uploadObj.put(list.get(i).code,uploadObj_1);
                         }
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
                 }
                 @Override

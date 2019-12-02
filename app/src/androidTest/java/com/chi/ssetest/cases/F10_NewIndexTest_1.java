@@ -96,7 +96,7 @@ public class F10_NewIndexTest_1 {
                         uploadObj.put("basicEPS",list.basicEPS);
                         uploadObj.put("totalShare",list.totalShare);
                         uploadObj.put("BVPS_",list.BVPS_);
-                        uploadObj.put("totalShareL",list.totalShareL);
+//                        uploadObj.put("totalShareL",list.totalShareL);
                         uploadObj.put("reservePS",list.reservePS);
                         uploadObj.put("REPTITLE_",list.REPTITLE_);
                         uploadObj.put("netCashFlowOperPS",list.netCashFlowOperPS);

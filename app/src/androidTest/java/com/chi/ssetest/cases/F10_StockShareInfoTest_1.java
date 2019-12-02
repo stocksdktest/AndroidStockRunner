@@ -109,11 +109,11 @@ public class F10_StockShareInfoTest_1 {
                             uploadObj.put("ULRatio",list.ULRatio);
                             uploadObj.put("HTotalShare",list.HTotalShare);
                         }
+                        Log.d("data", String.valueOf(uploadObj));
+                        result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

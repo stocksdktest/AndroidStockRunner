@@ -101,28 +101,22 @@ public class F10_StockReportTest_1 {
                     }
                     JSONObject uploadObj = new JSONObject();
                     StockReportDetailItem list = stockReportResponse.info;
-                    if (list!=null){
-                        try {
+                    try {
+                        if (list!=null){
                             uploadObj.put("PUBDATE_",list.PUBDATE_);
                             uploadObj.put("ID_",list.ID_);
                             uploadObj.put("reportTitle",list.reportTitle);
                             uploadObj.put("dataSource",list.dataSource);
                             uploadObj.put("ABSTRACT_",list.ABSTRACT_);
                             uploadObj.put("ABSTRACTFORMAT_",list.ABSTRACTFORMAT_);
-                            uploadObj.put("ComName",list.ComName);
+//                            uploadObj.put("ComName",list.ComName);
                             uploadObj.put("PURL_",list.PURL_);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
+                            Log.d("data", String.valueOf(uploadObj));
+                            result.complete(uploadObj);
                         }
-                    }else {
-                        try {
-                            uploadObj.put("data",list);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

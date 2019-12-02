@@ -109,25 +109,25 @@ public class F10_StockBulletinListTest_2 {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    List<JSONObject> items=new ArrayList<>();
                     if (stockBulletinListResponse.list!=null){
-                        for (StockBulletinItem item : stockBulletinListResponse.list) {
-                            JSONObject uploadObj_1 = new JSONObject();
-                            try {
+                        try {
+                            for (StockBulletinItem item : stockBulletinListResponse.list) {
+                                JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("PUBDATE_", item.PUBDATE_);
                                 uploadObj_1.put("ID_", item.ID_);
                                 uploadObj_1.put("TITLE_", item.TITLE_);
                                 uploadObj_1.put("dataSource", item.dataSource);
                                 uploadObj_1.put("STOCKNAME_", item.STOCKNAME_);
-                                uploadObj_1.put("COUNT_", item.COUNT_);
+//                                uploadObj_1.put("COUNT_", item.COUNT_);
                                 uploadObj_1.put("ISPDF_", item.ISPDF_);
                                 uploadObj_1.put("ENTRYDATE", item.ENTRYDATE);
                                 uploadObj_1.put("ENTRYTIME", item.ENTRYTIME);
                                 Log.d("data", String.valueOf(uploadObj_1));
-                                result.complete(uploadObj_1);
-                            } catch (JSONException e) {
-                                result.completeExceptionally(e);
+                                uploadObj.put(item.PUBDATE_,uploadObj_1);
                             }
+                            result.complete(uploadObj);
+                        } catch (JSONException e) {
+                            result.completeExceptionally(e);
                         }
                     }
                 }

@@ -97,11 +97,10 @@ public class F10_StockShareChangeInfoTest_1 {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    List<JSONObject> items=new ArrayList<>();
                     if (stockShareChangeInfoResponse.list!=null){
-                        for (StockShareChangeInfo item : stockShareChangeInfoResponse.list) {
-                            JSONObject uploadObj_1 = new JSONObject();
-                            try {
+                        try {
+                            for (StockShareChangeInfo item : stockShareChangeInfoResponse.list) {
+                                JSONObject uploadObj_1 = new JSONObject();
                                 if (quoteNumbers1.equals("g")){
                                     uploadObj_1.put("totalShare",item.totalShare);
                                     uploadObj_1.put("CONSTDESC_",item.CONSTDESC_);
@@ -116,11 +115,13 @@ public class F10_StockShareChangeInfoTest_1 {
                                     uploadObj_1.put("changedire",item.changedire);
                                 }
                                 Log.d("data", String.valueOf(uploadObj_1));
-                                result.complete(uploadObj_1);
-                            } catch (JSONException e) {
-                                result.completeExceptionally(e);
+                                uploadObj.put(item.lastChangeDate,uploadObj_1);
                             }
+                            result.complete(uploadObj);
+                        } catch (JSONException e) {
+                            result.completeExceptionally(e);
                         }
+
                     }
                 }
                 @Override

@@ -75,12 +75,13 @@ public class SubNewStockRankingTest_1 {
                         result.completeExceptionally(e);
                     }
                     ArrayList<SubNewStockRankingModel> list=subNewStockRankingResponse.list;
-                    for (int i=0;i<list.size();i++) {
-                        JSONObject uploadObj_1 = new JSONObject();
-                        try {
+                    try {
+                        JSONObject uploadObj = new JSONObject();
+                        for (int i=0;i<list.size();i++) {
+                            JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("name",list.get(i).getName());
                             uploadObj_1.put("code",list.get(i).getCode());
-                            uploadObj_1.put("subType",list.get(i).getSubType());
+//                            uploadObj_1.put("subType",list.get(i).getSubType());
                             uploadObj_1.put("originalPrice",list.get(i).getOriginalPrice());
                             uploadObj_1.put("lastestPrice",list.get(i).getLastestPrice());
                             uploadObj_1.put("originalData",list.get(i).getOriginalData());
@@ -89,11 +90,13 @@ public class SubNewStockRankingTest_1 {
                             uploadObj_1.put("allRate",list.get(i).getAllRate());
                             uploadObj_1.put("preClosePrice",list.get(i).getPreClosePrice());
                             Log.d("data", String.valueOf(uploadObj_1));
-                            result.complete(uploadObj_1);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
+                            uploadObj.put(list.get(i).getCode(),uploadObj_1);
                         }
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
+
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

@@ -93,12 +93,9 @@ public class F10_BndNewSharesCalTest_1 {
                     } catch (AssertionError e) {
                         result.completeExceptionally(e);
                     }
-                    JSONObject uploadObj = new JSONObject();
-                    List<JSONObject> items=new ArrayList<>();
                     HashMap<String,Object> info = f10V2Response.info;
                     try {
                         JSONObject uploadObj_2 = new JSONObject();
-                        List<JSONObject> sglist=new ArrayList<>();
                         List<HashMap<String,Object>> list1= (List<HashMap<String,Object>>) info.get("sglist");
                         if (list1!=null){
                             for (int i=0;i<list1.size();i++){
@@ -110,14 +107,10 @@ public class F10_BndNewSharesCalTest_1 {
                                 uploadObj_1.put("STOCKSECUABBR",list1.get(i).get("STOCKSECUABBR"));
                                 uploadObj_1.put("SECUABBR",list1.get(i).get("SECUABBR"));
                                 uploadObj_1.put("TRADINGCODE",list1.get(i).get("TRADINGCODE"));
-                                sglist.add(uploadObj_1);
+                                uploadObj_2.put("sglist"+(String) list1.get(i).get("APPLYCODE"),uploadObj_1);
                             }
-                            uploadObj_2.put("sglist",new JSONArray(sglist));
-                        }else {
-                            uploadObj_2.put("sglist",list1);
                         }
 
-                        List<JSONObject> jjsglist=new ArrayList<>();
                         List<HashMap<String,Object>> list2= (List<HashMap<String,Object>>) info.get("jjsglist");
                         if (info.get("jjsglist")!=null){
                             for (int i=0;i<list2.size();i++){
@@ -129,13 +122,10 @@ public class F10_BndNewSharesCalTest_1 {
                                 uploadObj_1.put("STOCKSECUABBR",list2.get(i).get("STOCKSECUABBR"));
                                 uploadObj_1.put("SECUABBR",list2.get(i).get("SECUABBR"));
                                 uploadObj_1.put("TRADINGCODE",list2.get(i).get("TRADINGCODE"));
-                                jjsglist.add(uploadObj_1);
+                                uploadObj_2.put("jjsglist"+list2.get(i).get("APPLYCODE"),uploadObj_1);
                             }
-                            uploadObj_2.put("jjsglist",new JSONArray(jjsglist));
-                        }else {
-                            uploadObj_2.put("jjsglist",list2);
                         }
-                        List<JSONObject> dsslist=new ArrayList<>();
+
                         List<HashMap<String,Object>> list= (List<HashMap<String,Object>>) info.get("dsslist");
                         if (info.get("dsslist")!=null){
                             for (int i=0;i<list.size();i++){
@@ -144,19 +134,14 @@ public class F10_BndNewSharesCalTest_1 {
                                 uploadObj_1.put("ALLOTRATEON",list.get(i).get("ALLOTRATEON"));
                                 uploadObj_1.put("TRADINGCODE",list.get(i).get("TRADINGCODE"));
                                 uploadObj_1.put("SECUABBR",list.get(i).get("SECUABBR"));
-                                dsslist.add(uploadObj_1);
+                                uploadObj_2.put("dsslist"+list.get(i).get("LISTINGDATE"),uploadObj_1);
                             }
-                            uploadObj_2.put("dsslist",new JSONArray(dsslist));
-                        }else {
-                            uploadObj_2.put("dsslist",list);
                         }
-                        items.add(uploadObj_2);
-                        uploadObj.put("items",new JSONArray(items));
+                        Log.d("data", String.valueOf(uploadObj_2));
+                        result.complete(uploadObj_2);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

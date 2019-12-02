@@ -114,23 +114,23 @@ public class F10_NewsListTest_1 {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    List<JSONObject> items=new ArrayList<>();
                     if (newsListResponse.list!=null){
-                        for (NewsList item : newsListResponse.list) {
-                            JSONObject uploadObj_1 = new JSONObject();
-                            try {
+                        try {
+                            for (NewsList item : newsListResponse.list) {
+                                JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("ID_", item.ID_);
                                 uploadObj_1.put("INIPUBDATE_", item.INIPUBDATE_);
                                 uploadObj_1.put("REPORTTITLE_", item.REPORTTITLE_);
                                 uploadObj_1.put("MEDIANAME_", item.MEDIANAME_);
                                 uploadObj_1.put("ABSTRACTFORMAT_", item.ABSTRACTFORMAT_);
-                                uploadObj_1.put("OVERPAGE_", item.OVERPAGE_);
-                                uploadObj_1.put("COUNT_", item.COUNT_);
+//                                uploadObj_1.put("OVERPAGE_", item.OVERPAGE_);
+//                                uploadObj_1.put("COUNT_", item.COUNT_);
                                 Log.d("data", String.valueOf(uploadObj_1));
-                                result.complete(uploadObj_1);
-                            } catch (JSONException e) {
-                                result.completeExceptionally(e);
+                                uploadObj.put(item.INIPUBDATE_,uploadObj_1);
                             }
+                            result.complete(uploadObj);
+                        } catch (JSONException e) {
+                            result.completeExceptionally(e);
                         }
                     }
                 }
