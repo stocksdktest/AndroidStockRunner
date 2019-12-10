@@ -62,36 +62,6 @@ public class TestResultLogcatCollector implements TestResultCollector {
         collectionName = cfg.getStoreConfig().getCollectionName();
     }
 
-    // plan to use files to record the test result before, now connect remote mongodb from android
-    @Deprecated
-    private void fileWriter(String recordID, String dataStr) {
-        Log.d("fileWriter", recordID);
-        String filePath = null;
-        boolean hasSDCard = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
-        if (hasSDCard) {
-            filePath = Environment.getExternalStorageDirectory().toString() + File.separator + "hello.txt";
-        } else
-            filePath = Environment.getDownloadCacheDirectory().toString() + File.separator + "hello.txt";
-        try {
-            File file = new File(filePath);
-            if (!file.exists()) {
-                File dir = new File(file.getParent());
-                dir.mkdirs();
-                file.createNewFile();
-            }
-            FileOutputStream outStream = new FileOutputStream(file, true);
-//            FileOutputStream outStream = new FileOutputStream(file);
-            String newLine = System.getProperty("line.separator");
-            outStream.write(dataStr.getBytes());
-            outStream.write(newLine.getBytes());
-            outStream.close();
-            outStream.flush();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
     // to keep safety, mongodb will throw exception when the key in bson contains '.' or '$'
     private JSONObject fixDotDollarKey(JSONObject obj) throws JSONException {
         //.replace(".","_").replace("$","_"
@@ -144,7 +114,6 @@ public class TestResultLogcatCollector implements TestResultCollector {
         String dataStr = Utils.base64Encode(data);
         String logTag = "TestResult." + tag;
         Log.d("TestResult.", "sum len: " + dataStr.length());
-//        fileWriter(recordID, dataStr);
         if (dataStr.length() <= LOGCAT_LINE_LIMIT) {
             Log.w(logTag, dataStr);
             return;
