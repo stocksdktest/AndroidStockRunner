@@ -39,6 +39,7 @@ dependencies {
 
     implementation files('libs/MStock.jar')
     implementation files('libs/MMqtt.jar')
+    compile 'org.mongodb:mongodb-driver-legacy:3.11.2'
 
     testImplementation 'junit:junit:4.12'
 
