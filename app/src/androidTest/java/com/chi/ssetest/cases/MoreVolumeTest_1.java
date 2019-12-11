@@ -1,4 +1,4 @@
-//package com.chi.ssetest.cases;
+package com.chi.ssetest.cases;//package com.chi.ssetest.cases;
 //
 //import android.support.test.runner.AndroidJUnit4;
 //import android.util.Log;

@@ -49,7 +49,7 @@ volumes:
     path: /root/AndroidTestRunner/build-cache
 - name: build-deps-jar
   host:
-    path: /root/sdks/Android/v3.1.0.004/libs
+    path: /root/sdks/Android/v3.2.0.007/libs
 - name: build-deps-jni
   host:
-    path: /root/sdks/Android/v3.1.0.004/jniLibs
+    path: /root/sdks/Android/v3.2.0.007/jniLibs
