@@ -89,7 +89,12 @@ public class QuoteTest_1 {
                             uploadObj_1.put("lowPrice", list.lowPrice);
                             uploadObj_1.put("openPrice", list.openPrice);
                             uploadObj_1.put("preClosePrice", list.preClosePrice);
-                            uploadObj_1.put("changeRate", list.upDownFlag+list.changeRate);//ios注意
+//                            uploadObj_1.put("changeRate", list.upDownFlag+list.changeRate);//ios注意
+                            if ("+".equals(list.upDownFlag)||"-".equals(list.upDownFlag)){
+                                uploadObj.put("changeRate",list.upDownFlag+list.changeRate);//加涨跌符号
+                            }else {
+                                uploadObj.put("changeRate",list.changeRate);
+                            }
                             uploadObj_1.put("volume", list.volume);
                             uploadObj_1.put("nowVolume", list.nowVolume);
                             uploadObj_1.put("turnoverRate", list.turnoverRate);
