@@ -456,7 +456,7 @@ public class CateSortingTest_1 {
                                     }
                                 }
                             }
-//                            Log.d("data", String.valueOf(uploadObj_1));
+                            Log.d("data", String.valueOf(uploadObj_1));
                             uploadObj.put(list.get(i).id,uploadObj_1);
                         }
                         result.complete(uploadObj);

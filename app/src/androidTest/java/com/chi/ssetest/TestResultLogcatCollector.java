@@ -1,6 +1,7 @@
 package com.chi.ssetest;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.test.InstrumentationRegistry;
 import android.util.Log;
@@ -17,12 +18,16 @@ import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.logging.FileHandler;
 import java.util.logging.Formatter;
@@ -30,19 +35,81 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.mongodb.MongoSocketOpenException;
+import com.mongodb.client.*;
+
+import org.bson.Document;
+
 public class TestResultLogcatCollector implements TestResultCollector {
     // logcat line limit is 4096
     public static final int LOGCAT_LINE_LIMIT = 3900;
     private String jobID;
     private String runnerID;
     private Map<StockTestcaseName, Long> testStartTimeMap;
+    // TODO: collection name could get from params
+    private String mongoUri;
+    private String dbName;
+    private String collectionName;
 
     public TestResultLogcatCollector(SetupConfig.RunnerConfig cfg, Bundle bundle) throws IOException {
         jobID = cfg.getJobID();
         runnerID = cfg.getRunnerID();
         testStartTimeMap = new HashMap<>();
+        // StoreConfig
+        mongoUri = cfg.getStoreConfig().getMongoUri();
+        dbName = cfg.getStoreConfig().getDbName();
+        collectionName = cfg.getStoreConfig().getCollectionName();
     }
 
+    // to keep safety, mongodb will throw exception when the key in bson contains '.' or '$'
+    private JSONObject fixDotDollarKey(JSONObject obj) throws JSONException {
+        //.replace(".","_").replace("$","_"
+        Iterator<String> it = obj.keys();
+        Set<String> keys = new HashSet<String>();
+        while (it.hasNext()) {
+            String key = it.next();
+            keys.add(key);
+        }
+
+        for (String key : keys) {
+            if (key.contains(".") || key.contains("$")) {
+                String oldKey = key;
+                key = key.replace(".", "_").replace("$", "_");
+                if (obj.get(oldKey) instanceof JSONObject) {
+                    obj.put(key, fixDotDollarKey((JSONObject) obj.get(oldKey)));
+                    obj.remove(oldKey);
+                } else {
+                    obj.put(key, obj.get(oldKey));
+                    obj.remove(oldKey);
+                }
+            }
+        }
+        return obj;
+    }
+
+    // to keep safety, mongodb will throw exception when the key in bson contains '.' or '$', so replace them
+    private Document formatBSON(JSONObject obj) {
+        Document document = null;
+        try {
+            document = Document.parse(fixDotDollarKey(obj).toString());
+        } catch (JSONException e) {
+            document = Document.parse(obj.toString().replace(".", "_").replace("$", "_"));
+        }
+        return document;
+    }
+
+    private void mongoWriter(String mongoUri, String dbName, String collectionName, Document document) {
+        MongoClient mongoClient = MongoClients.create(mongoUri);
+        MongoDatabase database = mongoClient.getDatabase(dbName);
+        Log.d("mongo", database.getName());
+        MongoCollection<Document> collection = database.getCollection(collectionName);
+        Log.d("mongo", document.toString());
+        collection.insertOne(document);
+        mongoClient.close();
+    }
+
+    @Deprecated
     private void logger(String tag, String recordID, byte[] data) {
         String dataStr = Utils.base64Encode(data);
         String logTag = "TestResult." + tag;
@@ -60,6 +127,7 @@ public class TestResultLogcatCollector implements TestResultCollector {
             chunkOffset += LOGCAT_LINE_LIMIT;
             logChunkIdx -= 1;
         } while (chunkOffset < dataLen);
+
     }
 
     private StockTestcaseName getClassAnnotationValue(@NonNull Description description) {
@@ -103,6 +171,26 @@ public class TestResultLogcatCollector implements TestResultCollector {
                 .setStartTime(testStartTimeMap.get(testcaseName))
                 .setEndTime(System.currentTimeMillis());
         logger("TestExecutionRecord", recordID, builder.build().toByteArray());
+
+        //测试成功
+        TestRecord.TestExecutionRecord record = builder.build();
+        Document document = new Document();
+        document.append("jobID", record.getJobID());
+        document.append("runnerID", record.getRunnerID());
+        document.append("testcaseID", record.getTestcaseID());
+        document.append("recordID", record.getRecordID());
+        document.append("isPass", record.getIsPass());
+        document.append("startTime", record.getStartTime());
+//        document.append("endTime", record.getEndTime());
+        document.append("paramData", null);
+        document.append("resultData", null);
+        document.append("exceptionData", null);
+
+        try {
+            mongoWriter(mongoUri, dbName, collectionName, document);
+        } catch (MongoSocketOpenException e) {
+            Log.d("mongo", e.getMessage());
+        }
     }
 
     @Override
@@ -119,6 +207,25 @@ public class TestResultLogcatCollector implements TestResultCollector {
                 .setParamData(Utils.jsonToBytes(param))
                 .setResultData(Utils.jsonToBytes(result));
         logger("TestExecutionRecord", recordID, builder.build().toByteArray());
+
+        //测试结果
+        TestRecord.TestExecutionRecord record = builder.build();
+        Document document = new Document();
+        document.append("jobID", record.getJobID());
+        document.append("runnerID", record.getRunnerID());
+        document.append("testcaseID", record.getTestcaseID());
+        document.append("recordID", record.getRecordID());
+        document.append("isPass", record.getIsPass());
+        document.append("startTime", record.getStartTime());
+        document.append("paramData", formatBSON(param));
+        document.append("resultData", formatBSON(result));
+        document.append("exceptionData", null);
+
+        try {
+            mongoWriter(mongoUri, dbName, collectionName, document);
+        } catch (MongoSocketOpenException e) {
+            Log.d("mongo", e.getMessage());
+        }
     }
 
     @Override
@@ -136,15 +243,36 @@ public class TestResultLogcatCollector implements TestResultCollector {
                 .setIsPass(false)
                 .setStartTime(testStartTimeMap.get(testcaseName))
                 .setEndTime(System.currentTimeMillis());
+
+        //测试结果
+        TestRecord.TestExecutionRecord record = builder.build();
+        Document document = new Document();
+        document.append("jobID", record.getJobID());
+        document.append("runnerID", record.getRunnerID());
+        document.append("testcaseID", record.getTestcaseID());
+        document.append("recordID", record.getRecordID());
+        document.append("isPass", record.getIsPass());
+        document.append("startTime", record.getStartTime());
+        document.append("paramData", null);
+        document.append("resultData", null);
+        document.append("exceptionData", null);
+
         try {
             JSONObject obj = new JSONObject();
             obj.put("trace", failure.getTrace());
             obj.put("message", failure.getMessage());
             builder.setExceptionData(Utils.jsonToBytes(obj));
+            document.append("exceptionData", formatBSON(obj));
         } catch (JSONException e) {
             // pass
         }
         logger("TestExecutionRecord", recordID, builder.build().toByteArray());
+
+        try {
+            mongoWriter(mongoUri, dbName, collectionName, document);
+        } catch (MongoSocketOpenException e) {
+            Log.d("mongo", e.getMessage());
+        }
     }
 
     @Override
