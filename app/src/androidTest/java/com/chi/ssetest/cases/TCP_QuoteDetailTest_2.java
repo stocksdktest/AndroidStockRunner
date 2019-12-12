@@ -143,7 +143,13 @@ public class TCP_QuoteDetailTest_2 {
                             uploadObj.put("lowPrice", item.lowPrice);
                             uploadObj.put("openPrice", item.openPrice);
                             uploadObj.put("preClosePrice", item.preClosePrice);
-                            uploadObj.put("changeRate", item.upDownFlag+item.changeRate);//ios注意
+
+                            if ("+".equals(item.upDownFlag)||"-".equals(item.upDownFlag)){
+                                uploadObj.put("changeRate",item.upDownFlag+item.changeRate);//加涨跌符号
+                            }else {
+                                uploadObj.put("changeRate",item.changeRate);
+                            }
+//                            uploadObj.put("changeRate", item.upDownFlag+item.changeRate);//ios注意
                             uploadObj.put("volume", item.volume);
                             uploadObj.put("nowVolume", item.nowVolume);
                             uploadObj.put("turnoverRate", item.turnoverRate);
