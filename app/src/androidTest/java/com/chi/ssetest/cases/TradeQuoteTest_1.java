@@ -112,7 +112,11 @@ public class TradeQuoteTest_1 {
                             }
                             uploadObj.put("lastPrice",item.lastPrice);
                             uploadObj.put("change",item.change);
-                            uploadObj.put("changeRate",item.upDownFlag+item.changeRate);//加涨跌符号
+                            if ("+".equals(item.upDownFlag)||"-".equals(item.upDownFlag)){
+                                uploadObj.put("changeRate",item.upDownFlag+item.changeRate);//加涨跌符号
+                            }else {
+                                uploadObj.put("changeRate",item.changeRate);
+                            }
                             uploadObj.put("preClosePrice",item.preClosePrice);
 //                            uploadObj.put("upDownFlag",item.upDownFlag);
                             uploadObj.put("limitDown",item.limitDown);

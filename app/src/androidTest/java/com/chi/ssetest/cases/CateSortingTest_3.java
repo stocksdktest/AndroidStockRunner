@@ -120,7 +120,12 @@ public class CateSortingTest_3 {
                             uploadObj_1.put("lowPrice", list.get(i).lowPrice);
                             uploadObj_1.put("openPrice", list.get(i).openPrice);
                             uploadObj_1.put("preClosePrice", list.get(i).preClosePrice);
-                            uploadObj_1.put("changeRate", list.get(i).upDownFlag+list.get(i).changeRate);//ios注意
+//                            uploadObj_1.put("changeRate", list.get(i).upDownFlag+list.get(i).changeRate);//ios注意
+                            if ("+".equals(list.get(i).upDownFlag)||"-".equals(list.get(i).upDownFlag)){
+                                uploadObj.put("changeRate",list.get(i).upDownFlag+list.get(i).changeRate);//加涨跌符号
+                            }else {
+                                uploadObj.put("changeRate",list.get(i).changeRate);
+                            }
                             uploadObj_1.put("volume", list.get(i).volume);
                             uploadObj_1.put("nowVolume", list.get(i).nowVolume);
                             uploadObj_1.put("turnoverRate", list.get(i).turnoverRate);
@@ -474,7 +479,7 @@ public class CateSortingTest_3 {
                                     }
                                 }
                             }
-                            Log.d("data", String.valueOf(uploadObj_1));
+//                            Log.d("data", String.valueOf(uploadObj_1));
                             uploadObj.put(list.get(i).id,uploadObj_1);
                         }
                         result.complete(uploadObj);
