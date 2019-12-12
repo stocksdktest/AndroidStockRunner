@@ -92,46 +92,46 @@ public class F10_MainFinaIndexNasTest_1 {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    if (mainFinaIndexNasResponse.mMainFinaIndexHasList!=null){
-                        try {
-                            for (MainFinaIndexHas item : mainFinaIndexNasResponse.mMainFinaIndexHasList) {
+                    try {
+                        if (mainFinaIndexNasResponse.mMainFinaIndexHasList!=null){
+                            for (int i=0;i<mainFinaIndexNasResponse.mMainFinaIndexHasList.size();i++) {
                                 JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("REPORTTITLE_",item.REPORTTITLE_);
-                                uploadObj_1.put("BasicEPS",item.BasicEPS);
-                                uploadObj_1.put("RESERVEPS_",item.RESERVEPS_);
-                                uploadObj_1.put("BVPS_",item.BVPS_);
-                                uploadObj_1.put("TotalAssetTurnover",item.TotalAssetTurnover);
-                                uploadObj_1.put("EBITPS_",item.EBITPS_);
-                                uploadObj_1.put("RetainedEarningPS",item.RetainedEarningPS);
-                                uploadObj_1.put("NetCashFlowOperPS",item.NetCashFlowOperPS);
-                                uploadObj_1.put("NETCASHFLOWPS_",item.NETCASHFLOWPS_);
-                                uploadObj_1.put("WEIGHTEDROE_",item.WEIGHTEDROE_);
-                                uploadObj_1.put("ROA_EBIT_",item.ROA_EBIT_);
-                                uploadObj_1.put("GROSSPROFITMARGIN_",item.GROSSPROFITMARGIN_);
-                                uploadObj_1.put("PROFITMARGIN_",item.PROFITMARGIN_);
-                                uploadObj_1.put("TLToTA_",item.TLToTA_);
-                                uploadObj_1.put("TAToSHE_",item.TAToSHE_);
-                                uploadObj_1.put("CurrentRatio",item.CurrentRatio);
-                                uploadObj_1.put("QuickRatio",item.QuickRatio);
-                                uploadObj_1.put("EBITPS_",item.EBITPS_);
-                                uploadObj_1.put("InventoryTurnover",item.InventoryTurnover);
-                                uploadObj_1.put("ACCOUNTRECTURNOVER_",item.ACCOUNTRECTURNOVER_);
-                                uploadObj_1.put("FixedAssetTurnover",item.FixedAssetTurnover);
-                                uploadObj_1.put("TotalAssetTurnover",item.TotalAssetTurnover);
-                                uploadObj_1.put("OperRevenueYOY",item.OperRevenueYOY);
-                                uploadObj_1.put("OperProfitYOY",item.OperProfitYOY);
-                                uploadObj_1.put("NETPROFITPARENTCOMYOY_",item.NETPROFITPARENTCOMYOY_);
-                                uploadObj_1.put("NetCashFlowOperYOY",item.NetCashFlowOperYOY);
-                                uploadObj_1.put("ROEYOY_",item.ROEYOY_);
-                                uploadObj_1.put("NetAssetYOY",item.NetAssetYOY);
-                                uploadObj_1.put("TotalAssetYOY",item.TotalAssetYOY);
-                                Log.d("data", String.valueOf(uploadObj_1));
-                                uploadObj.put(item.REPORTTITLE_,uploadObj_1);
+                                uploadObj_1.put("REPORTTITLE_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).REPORTTITLE_);
+                                uploadObj_1.put("BasicEPS",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).BasicEPS);
+                                uploadObj_1.put("RESERVEPS_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).RESERVEPS_);
+                                uploadObj_1.put("BVPS_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).BVPS_);
+                                uploadObj_1.put("TotalAssetTurnover",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).TotalAssetTurnover);
+                                uploadObj_1.put("EBITPS_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).EBITPS_);
+                                uploadObj_1.put("RetainedEarningPS",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).RetainedEarningPS);
+                                uploadObj_1.put("NetCashFlowOperPS",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).NetCashFlowOperPS);
+                                uploadObj_1.put("NETCASHFLOWPS_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).NETCASHFLOWPS_);
+                                uploadObj_1.put("WEIGHTEDROE_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).WEIGHTEDROE_);
+                                uploadObj_1.put("ROA_EBIT_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).ROA_EBIT_);
+                                uploadObj_1.put("GROSSPROFITMARGIN_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).GROSSPROFITMARGIN_);
+                                uploadObj_1.put("PROFITMARGIN_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).PROFITMARGIN_);
+                                uploadObj_1.put("TLToTA_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).TLToTA_);
+                                uploadObj_1.put("TAToSHE_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).TAToSHE_);
+                                uploadObj_1.put("CurrentRatio",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).CurrentRatio);
+                                uploadObj_1.put("QuickRatio",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).QuickRatio);
+                                uploadObj_1.put("EBITPS_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).EBITPS_);
+                                uploadObj_1.put("InventoryTurnover",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).InventoryTurnover);
+                                uploadObj_1.put("ACCOUNTRECTURNOVER_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).ACCOUNTRECTURNOVER_);
+                                uploadObj_1.put("FixedAssetTurnover",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).FixedAssetTurnover);
+                                uploadObj_1.put("TotalAssetTurnover",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).TotalAssetTurnover);
+                                uploadObj_1.put("OperRevenueYOY",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).OperRevenueYOY);
+                                uploadObj_1.put("OperProfitYOY",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).OperProfitYOY);
+                                uploadObj_1.put("NETPROFITPARENTCOMYOY_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).NETPROFITPARENTCOMYOY_);
+                                uploadObj_1.put("NetCashFlowOperYOY",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).NetCashFlowOperYOY);
+                                uploadObj_1.put("ROEYOY_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).ROEYOY_);
+                                uploadObj_1.put("NetAssetYOY",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).NetAssetYOY);
+                                uploadObj_1.put("TotalAssetYOY",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).TotalAssetYOY);
+                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
-                            result.complete(uploadObj);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
                         }
+                        Log.d("data", String.valueOf(uploadObj));
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
                 }
                 @Override

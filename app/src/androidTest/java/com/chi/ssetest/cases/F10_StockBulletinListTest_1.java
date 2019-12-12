@@ -122,7 +122,7 @@ public class F10_StockBulletinListTest_1 {
                                 uploadObj_1.put("ENTRYDATE", item.ENTRYDATE);
                                 uploadObj_1.put("ENTRYTIME", item.ENTRYTIME);
                                 Log.d("data", String.valueOf(uploadObj_1));
-                                uploadObj.put(item.PUBDATE_,uploadObj_1);
+                                uploadObj.put(item.ID_,uploadObj_1);
                             }
                             result.complete(uploadObj);
                         } catch (JSONException e) {

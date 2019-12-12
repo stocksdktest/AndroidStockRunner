@@ -113,7 +113,7 @@ public class F10_BlockTradeTest_1 {
                             uploadObj_1.put("BUYERNAME",infos.get(i).get("BUYERNAME"));
                             uploadObj_1.put("SELLERNAME",infos.get(i).get("SELLERNAME"));
                             Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(String.valueOf(infos.get(i).get("TRADEDATE")),uploadObj_1);
+                            uploadObj.put(String.valueOf(i+1),uploadObj_1);
                         }
                         result.complete(uploadObj);
                     } catch (JSONException e) {

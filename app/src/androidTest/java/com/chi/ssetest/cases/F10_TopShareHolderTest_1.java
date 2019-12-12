@@ -103,27 +103,27 @@ public class F10_TopShareHolderTest_1 {
                     List<JSONObject> items=new ArrayList<>();
                     if (topShareHolderResponse.list!=null){
                         try {
-                            for (TopShareHolder item : topShareHolderResponse.list) {
+                            for (int i=0;i<topShareHolderResponse.list.size();i++) {
                                 JSONObject uploadObj_1 = new JSONObject();
                                 if (quoteNumbers1.equals("g")){
-                                    uploadObj_1.put("SHNO_",item.SHNO_);
-                                    uploadObj_1.put("SHNAME_",item.SHNAME_);
-                                    uploadObj_1.put("SHCODE_",item.SHCODE_);
-                                    uploadObj_1.put("PCTTOTALSHAREUR_",item.PCTTOTALSHAREUR_);
-                                    uploadObj_1.put("DIFF_",item.DIFF_);
-                                    uploadObj_1.put("HOLDASHAREUR_",item.HOLDASHAREUR_);
-                                    uploadObj_1.put("ENDDATE_",item.ENDDATE_);
+                                    uploadObj_1.put("SHNO_",topShareHolderResponse.list.get(i).SHNO_);
+                                    uploadObj_1.put("SHNAME_",topShareHolderResponse.list.get(i).SHNAME_);
+                                    uploadObj_1.put("SHCODE_",topShareHolderResponse.list.get(i).SHCODE_);
+                                    uploadObj_1.put("PCTTOTALSHAREUR_",topShareHolderResponse.list.get(i).PCTTOTALSHAREUR_);
+                                    uploadObj_1.put("DIFF_",topShareHolderResponse.list.get(i).DIFF_);
+                                    uploadObj_1.put("HOLDASHAREUR_",topShareHolderResponse.list.get(i).HOLDASHAREUR_);
+                                    uploadObj_1.put("ENDDATE_",topShareHolderResponse.list.get(i).ENDDATE_);
                                 }
                                 if (quoteNumbers1.equals("d")){
-                                    uploadObj_1.put("SHNAME_",item.SHNAME_);
-                                    uploadObj_1.put("PCTTOTALSHAREUR_",item.PCTTOTALSHAREUR_);
-                                    uploadObj_1.put("DIFF_",item.DIFF_);
-                                    uploadObj_1.put("ENDDATE_",item.ENDDATE_);
-                                    uploadObj_1.put("SHCODE_",item.SHCODE_);
-                                    uploadObj_1.put("HOLDASHAREUR_",item.HOLDASHAREUR_);
+                                    uploadObj_1.put("SHNAME_",topShareHolderResponse.list.get(i).SHNAME_);
+                                    uploadObj_1.put("PCTTOTALSHAREUR_",topShareHolderResponse.list.get(i).PCTTOTALSHAREUR_);
+                                    uploadObj_1.put("DIFF_",topShareHolderResponse.list.get(i).DIFF_);
+                                    uploadObj_1.put("ENDDATE_",topShareHolderResponse.list.get(i).ENDDATE_);
+                                    uploadObj_1.put("SHCODE_",topShareHolderResponse.list.get(i).SHCODE_);
+                                    uploadObj_1.put("HOLDASHAREUR_",topShareHolderResponse.list.get(i).HOLDASHAREUR_);
                                 }
                                 Log.d("data", String.valueOf(uploadObj_1));
-                                uploadObj.put(item.ENDDATE_,uploadObj_1);
+                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
                             result.complete(uploadObj);
                         } catch (JSONException e) {
