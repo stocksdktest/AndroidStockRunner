@@ -62,9 +62,8 @@ import static org.junit.Assert.*;
 public class F10_MainFinaDataNassTest_2 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.F10_MAINFINADATANASSTEST_2;
     private static SetupConfig.TestcaseConfig testcaseConfig;
-
+    private static final int timeout_ms = 1000000;
     @BeforeClass
-
     public static void setup() throws Exception {
         Log.d("F10_MainFinaDataNassTest_2", "Setup");
         testcaseConfig = RunnerSetup.getInstance().getTestcaseConfig(testcaseName);
@@ -72,11 +71,10 @@ public class F10_MainFinaDataNassTest_2 {
             throw new Exception(String.format("Testcase(%s) setup failed, config is empty", testcaseName));
         }
     }
-
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
 
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("F10_MainFinaDataNassTest_2", "requestWork");
         // TODO get custom args from param
@@ -146,7 +144,7 @@ public class F10_MainFinaDataNassTest_2 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);
