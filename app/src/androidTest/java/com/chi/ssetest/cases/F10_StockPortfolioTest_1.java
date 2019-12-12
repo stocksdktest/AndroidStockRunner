@@ -106,7 +106,7 @@ public class F10_StockPortfolioTest_1 {
                                 uploadObj_1.put("ACCTFORNAV",list.get(i).get("ACCTFORNAV"));
                                 uploadObj_1.put("HOLDVALUE",list.get(i).get("HOLDVALUE"));
                                 Log.d("data", String.valueOf(uploadObj_1));
-                               uploadObj.put((String) list.get(i).get("ENDDATE"),uploadObj_1);
+                               uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
                             result.complete(uploadObj);
                         }

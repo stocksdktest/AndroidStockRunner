@@ -92,16 +92,16 @@ public class F10_CoreBusinessTest_1 {
                     }
                     JSONObject uploadObj = new JSONObject();
                     try {
-                        for (CoreBusiness item : coreBusinessResponse.list) {
+                        for (int i=0;i<coreBusinessResponse.list.size();i++) {
                             JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("BUSSINESSNATURE_",item.BUSSINESSNATURE_);
-                            uploadObj_1.put("OperCost",item.OperCost);
-                            uploadObj_1.put("OPERREVENUETOTOR_",item.OPERREVENUETOTOR_);
-                            uploadObj_1.put("OperProfit",item.OperProfit);
-                            uploadObj_1.put("OperRevenue",item.OperRevenue);
-                            uploadObj_1.put("ENDDATE_",item.ENDDATE_);
+                            uploadObj_1.put("BUSSINESSNATURE_",coreBusinessResponse.list.get(i).BUSSINESSNATURE_);
+                            uploadObj_1.put("OperCost",coreBusinessResponse.list.get(i).OperCost);
+                            uploadObj_1.put("OPERREVENUETOTOR_",coreBusinessResponse.list.get(i).OPERREVENUETOTOR_);
+                            uploadObj_1.put("OperProfit",coreBusinessResponse.list.get(i).OperProfit);
+                            uploadObj_1.put("OperRevenue",coreBusinessResponse.list.get(i).OperRevenue);
+                            uploadObj_1.put("ENDDATE_",coreBusinessResponse.list.get(i).ENDDATE_);
                             Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(item.ENDDATE_,uploadObj_1);
+                            uploadObj.put(String.valueOf(i+1),uploadObj_1);
                         }
                         result.complete(uploadObj);
                     } catch (JSONException e) {

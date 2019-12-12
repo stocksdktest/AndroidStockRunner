@@ -110,11 +110,11 @@ public class F10_LeaderPersonInfoTest_1 {
                                     uploadObj_1.put("DUTYTYPE",infos.get(i).get("DUTYTYPE"));
                                     uploadObj_1.put("BEGINDATE",infos.get(i).get("BEGINDATE"));
                                 }
-                                Log.d("data", String.valueOf(uploadObj_1));
-                                uploadObj.put((String) infos.get(i).get("LEADERNAME"),uploadObj_1);
+                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
-                            result.complete(uploadObj);
                         }
+                        Log.d("data", String.valueOf(uploadObj));
+                        result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

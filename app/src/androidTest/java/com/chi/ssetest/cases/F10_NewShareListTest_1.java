@@ -133,7 +133,7 @@ public class F10_NewShareListTest_1 {
                                     uploadObj_1.put("capplySharePlan",item.getDataList().get(i).getCapplySharePlan());
                                     uploadObj_1.put("issuePricePlan",item.getDataList().get(i).getIssuePricePlan());
                                     uploadObj_1.put("keyCode",item.getDataList().get(i).getKeyCode());
-                                    uploadObj.put(item.getDataList().get(i).getApplyCode(),uploadObj_1);
+                                    uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                 }
 
                             }

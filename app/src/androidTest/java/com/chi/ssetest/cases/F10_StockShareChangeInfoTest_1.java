@@ -99,23 +99,23 @@ public class F10_StockShareChangeInfoTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     if (stockShareChangeInfoResponse.list!=null){
                         try {
-                            for (StockShareChangeInfo item : stockShareChangeInfoResponse.list) {
+                            for (int i=0;i<stockShareChangeInfoResponse.list.size();i++) {
                                 JSONObject uploadObj_1 = new JSONObject();
                                 if (quoteNumbers1.equals("g")){
-                                    uploadObj_1.put("totalShare",item.totalShare);
-                                    uploadObj_1.put("CONSTDESC_",item.CONSTDESC_);
-                                    uploadObj_1.put("aListedShare",item.aListedShare);
-                                    uploadObj_1.put("lastChangeDate",item.lastChangeDate);
+                                    uploadObj_1.put("totalShare",stockShareChangeInfoResponse.list.get(i).totalShare);
+                                    uploadObj_1.put("CONSTDESC_",stockShareChangeInfoResponse.list.get(i).CONSTDESC_);
+                                    uploadObj_1.put("aListedShare",stockShareChangeInfoResponse.list.get(i).aListedShare);
+                                    uploadObj_1.put("lastChangeDate",stockShareChangeInfoResponse.list.get(i).lastChangeDate);
                                 }
                                 if (quoteNumbers1.equals("d")){
-                                    uploadObj_1.put("totalShare",item.totalShare);
-                                    uploadObj_1.put("CONSTDESC_",item.CONSTDESC_);
-                                    uploadObj_1.put("lastChangeDate",item.lastChangeDate);
-                                    uploadObj_1.put("changeamt",item.changeamt);
-                                    uploadObj_1.put("changedire",item.changedire);
+                                    uploadObj_1.put("totalShare",stockShareChangeInfoResponse.list.get(i).totalShare);
+                                    uploadObj_1.put("CONSTDESC_",stockShareChangeInfoResponse.list.get(i).CONSTDESC_);
+                                    uploadObj_1.put("lastChangeDate",stockShareChangeInfoResponse.list.get(i).lastChangeDate);
+                                    uploadObj_1.put("changeamt",stockShareChangeInfoResponse.list.get(i).changeamt);
+                                    uploadObj_1.put("changedire",stockShareChangeInfoResponse.list.get(i).changedire);
                                 }
                                 Log.d("data", String.valueOf(uploadObj_1));
-                                uploadObj.put(item.lastChangeDate,uploadObj_1);
+                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
                             result.complete(uploadObj);
                         } catch (JSONException e) {

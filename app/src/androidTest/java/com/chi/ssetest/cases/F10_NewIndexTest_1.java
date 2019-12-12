@@ -107,7 +107,8 @@ public class F10_NewIndexTest_1 {
                         uploadObj.put("operRevenue",list.operRevenue);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
-                    }Log.d("data", String.valueOf(uploadObj));
+                    }
+                    Log.d("data", String.valueOf(uploadObj));
                     result.complete(uploadObj);
                 }
                 @Override
