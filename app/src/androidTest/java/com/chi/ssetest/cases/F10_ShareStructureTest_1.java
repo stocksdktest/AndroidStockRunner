@@ -105,11 +105,11 @@ public class F10_ShareStructureTest_1 {
                                 uploadObj_1.put("ENDFDSHARE",list.get(i).get("ENDFDSHARE"));
                                 uploadObj_1.put("SUBSHARETOT",list.get(i).get("SUBSHARETOT"));
                                 uploadObj_1.put("REDTOTSHARE",list.get(i).get("REDTOTSHARE"));
-                                Log.d("data", String.valueOf(uploadObj_1));
-                                uploadObj.put((String) list.get(i).get("ENDDATE"),uploadObj_1);
+                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
-                            result.complete(uploadObj);
                         }
+                        Log.d("data", String.valueOf(uploadObj));
+                        result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

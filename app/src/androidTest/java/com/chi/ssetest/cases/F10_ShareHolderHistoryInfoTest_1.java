@@ -103,24 +103,24 @@ public class F10_ShareHolderHistoryInfoTest_1 {
                     List<JSONObject> items=new ArrayList<>();
                     if (shareHolderHistoryInfoResponse.list!=null){
                         try {
-                            for (ShareHolderHistoryInfo item : shareHolderHistoryInfoResponse.list) {
+                            for (int i=0;i<shareHolderHistoryInfoResponse.list.size();i++) {
                                 JSONObject uploadObj_1 = new JSONObject();
                                 if (quoteNumbers1.equals("g")){
-                                    uploadObj_1.put("AVGSHAREM_", item.AVGSHAREM_);
-                                    uploadObj_1.put("CLOSINGPRICE_", item.CLOSINGPRICE_);
-                                    uploadObj_1.put("AVGSHARE_", item.AVGSHARE_);
-                                    uploadObj_1.put("PCTOFTOTALSH_", item.PCTOFTOTALSH_);
-                                    uploadObj_1.put("TOTALSH_", item.TOTALSH_);
-                                    uploadObj_1.put("ENDDATE_", item.ENDDATE_);
+                                    uploadObj_1.put("AVGSHAREM_", shareHolderHistoryInfoResponse.list.get(i).AVGSHAREM_);
+                                    uploadObj_1.put("CLOSINGPRICE_", shareHolderHistoryInfoResponse.list.get(i).CLOSINGPRICE_);
+                                    uploadObj_1.put("AVGSHARE_", shareHolderHistoryInfoResponse.list.get(i).AVGSHARE_);
+                                    uploadObj_1.put("PCTOFTOTALSH_", shareHolderHistoryInfoResponse.list.get(i).PCTOFTOTALSH_);
+                                    uploadObj_1.put("TOTALSH_", shareHolderHistoryInfoResponse.list.get(i).TOTALSH_);
+                                    uploadObj_1.put("ENDDATE_", shareHolderHistoryInfoResponse.list.get(i).ENDDATE_);
                                 }
                                 if (quoteNumbers.equals("d")){
-                                    uploadObj_1.put("CLOSINGPRICE_", item.CLOSINGPRICE_);
-                                    uploadObj_1.put("PCTOFTOTALSH_", item.PCTOFTOTALSH_);
-                                    uploadObj_1.put("TOTALSH_", item.TOTALSH_);
-                                    uploadObj_1.put("ENDDATE_", item.ENDDATE_);
+                                    uploadObj_1.put("CLOSINGPRICE_", shareHolderHistoryInfoResponse.list.get(i).CLOSINGPRICE_);
+                                    uploadObj_1.put("PCTOFTOTALSH_", shareHolderHistoryInfoResponse.list.get(i).PCTOFTOTALSH_);
+                                    uploadObj_1.put("TOTALSH_", shareHolderHistoryInfoResponse.list.get(i).TOTALSH_);
+                                    uploadObj_1.put("ENDDATE_", shareHolderHistoryInfoResponse.list.get(i).ENDDATE_);
                                 }
                                 Log.d("data", String.valueOf(uploadObj_1));
-                                uploadObj.put(item.ENDDATE_,uploadObj_1);
+                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
                             result.complete(uploadObj);
                         } catch (JSONException e) {

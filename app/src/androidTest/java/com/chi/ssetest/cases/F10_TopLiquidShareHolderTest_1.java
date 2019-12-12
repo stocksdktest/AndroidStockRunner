@@ -99,27 +99,27 @@ public class F10_TopLiquidShareHolderTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     if (topLiquidShareHolderResponse.list!=null){
                         try {
-                            for (TopLiquidShareHolder item : topLiquidShareHolderResponse.list) {
+                            for (int i=0;i<topLiquidShareHolderResponse.list.size();i++) {
                                 JSONObject uploadObj_1 = new JSONObject();
                                 if (quoteNumbers1.equals("g")){
-                                    uploadObj_1.put("SHNO_",item.SHNO_);
-                                    uploadObj_1.put("SHNAME_",item.SHNAME_);
-                                    uploadObj_1.put("SHCODE_",item.SHCODE_);
-                                    uploadObj_1.put("PCTTOTALSHAREUR_",item.PCTTOTALSHAREUR_);
-                                    uploadObj_1.put("HOLDASHAREUR_",item.HOLDASHAREUR_);
-                                    uploadObj_1.put("ENDDATE_",item.ENDDATE_);
-                                    uploadObj_1.put("DIFF_",item.DIFF_);
+                                    uploadObj_1.put("SHNO_",topLiquidShareHolderResponse.list.get(i).SHNO_);
+                                    uploadObj_1.put("SHNAME_",topLiquidShareHolderResponse.list.get(i).SHNAME_);
+                                    uploadObj_1.put("SHCODE_",topLiquidShareHolderResponse.list.get(i).SHCODE_);
+                                    uploadObj_1.put("PCTTOTALSHAREUR_",topLiquidShareHolderResponse.list.get(i).PCTTOTALSHAREUR_);
+                                    uploadObj_1.put("HOLDASHAREUR_",topLiquidShareHolderResponse.list.get(i).HOLDASHAREUR_);
+                                    uploadObj_1.put("ENDDATE_",topLiquidShareHolderResponse.list.get(i).ENDDATE_);
+                                    uploadObj_1.put("DIFF_",topLiquidShareHolderResponse.list.get(i).DIFF_);
                                 }
                                 if (quoteNumbers1.equals("d")){
-                                    uploadObj_1.put("SHNAME_",item.SHNAME_);
-                                    uploadObj_1.put("PCTTOTALSHAREUR_",item.PCTTOTALSHAREUR_);
-                                    uploadObj_1.put("DIFF_",item.DIFF_);
-                                    uploadObj_1.put("ENDDATE_",item.ENDDATE_);
-                                    uploadObj_1.put("SHCODE_",item.SHCODE_);
-                                    uploadObj_1.put("HOLDASHAREUR_",item.HOLDASHAREUR_);
+                                    uploadObj_1.put("SHNAME_",topLiquidShareHolderResponse.list.get(i).SHNAME_);
+                                    uploadObj_1.put("PCTTOTALSHAREUR_",topLiquidShareHolderResponse.list.get(i).PCTTOTALSHAREUR_);
+                                    uploadObj_1.put("DIFF_",topLiquidShareHolderResponse.list.get(i).DIFF_);
+                                    uploadObj_1.put("ENDDATE_",topLiquidShareHolderResponse.list.get(i).ENDDATE_);
+                                    uploadObj_1.put("SHCODE_",topLiquidShareHolderResponse.list.get(i).SHCODE_);
+                                    uploadObj_1.put("HOLDASHAREUR_",topLiquidShareHolderResponse.list.get(i).HOLDASHAREUR_);
                                 }
                                 Log.d("data", String.valueOf(uploadObj_1));
-                                uploadObj.put(item.ENDDATE_,uploadObj_1);
+                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
                             result.complete(uploadObj);
                         } catch (JSONException e) {

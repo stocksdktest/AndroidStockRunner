@@ -88,13 +88,13 @@ public class F10_BonusFinanceTest_1 {
                     }
                     JSONObject uploadObj = new JSONObject();
                     try {
-                        for (BonusFinance item : bonusFinanceResponse.list) {
+                        for (int i=0;i<bonusFinanceResponse.list.size();i++) {
                             JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("ExDiviDate",item.ExDiviDate);
-                            uploadObj_1.put("DiviScheme",item.DiviScheme);
-                            uploadObj_1.put("NoticeDate",item.NoticeDate);
+                            uploadObj_1.put("ExDiviDate",bonusFinanceResponse.list.get(i).ExDiviDate);
+                            uploadObj_1.put("DiviScheme",bonusFinanceResponse.list.get(i).DiviScheme);
+                            uploadObj_1.put("NoticeDate",bonusFinanceResponse.list.get(i).NoticeDate);
                             Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(item.NoticeDate,uploadObj_1);
+                            uploadObj.put(String.valueOf(i+1),uploadObj_1);
                         }
                         result.complete(uploadObj);
                     } catch (JSONException e) {
