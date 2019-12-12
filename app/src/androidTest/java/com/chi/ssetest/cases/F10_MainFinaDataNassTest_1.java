@@ -91,37 +91,37 @@ public class F10_MainFinaDataNassTest_1 {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    if (mainFinaDataNasResponse.mMainFinaDataNasList!=null){
-                        try {
-                            for (MainFinaDataNas item : mainFinaDataNasResponse.mMainFinaDataNasList) {
+                    try {
+                        if (mainFinaDataNasResponse.mMainFinaDataNasList!=null){
+                            for (int i=0;i<mainFinaDataNasResponse.mMainFinaDataNasList.size();i++) {
                                 JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("REPORTTITLE_",item.REPORTTITLE_);
-                                uploadObj_1.put("BasicEPS",item.BasicEPS);
-//                                uploadObj_1.put("RESERVEPS_",item.RESERVEPS_);
-                                uploadObj_1.put("BVPS_",item.BVPS_);
-                                uploadObj_1.put("NETCASHFLOWOPERPS_",item.NETCASHFLOWOPERPS_);
-                                uploadObj_1.put("WEIGHTEDROE_",item.WEIGHTEDROE_);
-                                uploadObj_1.put("ROA_",item.ROA_);
-                                uploadObj_1.put("TotalOperRevenue",item.TotalOperRevenue);
-                                uploadObj_1.put("OperProfit",item.OperProfit);
-                                uploadObj_1.put("NetProfit",item.NetProfit);
-                                uploadObj_1.put("TotalAsset",item.TotalAsset);
-                                uploadObj_1.put("TotalLiab",item.TotalLiab);
-                                uploadObj_1.put("TotalSHEquity",item.TotalSHEquity);
-                                uploadObj_1.put("NetCashFlowOper",item.NetCashFlowOper);
-                                uploadObj_1.put("NetCashFlowInv",item.NetCashFlowInv);
-                                uploadObj_1.put("NetCashFlowFina",item.NetCashFlowFina);
-                                uploadObj_1.put("CashEquiNetIncr",item.CashEquiNetIncr);
-                                uploadObj_1.put("EPSBASIC",item.EPSBASIC);
+                                uploadObj_1.put("REPORTTITLE_",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).REPORTTITLE_);
+                                uploadObj_1.put("BasicEPS",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).BasicEPS);
+//                                uploadObj_1.put("RESERVEPS_",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).RESERVEPS_);
+                                uploadObj_1.put("BVPS_",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).BVPS_);
+                                uploadObj_1.put("NETCASHFLOWOPERPS_",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).NETCASHFLOWOPERPS_);
+                                uploadObj_1.put("WEIGHTEDROE_",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).WEIGHTEDROE_);
+                                uploadObj_1.put("ROA_",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).ROA_);
+                                uploadObj_1.put("TotalOperRevenue",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).TotalOperRevenue);
+                                uploadObj_1.put("OperProfit",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).OperProfit);
+                                uploadObj_1.put("NetProfit",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).NetProfit);
+                                uploadObj_1.put("TotalAsset",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).TotalAsset);
+                                uploadObj_1.put("TotalLiab",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).TotalLiab);
+                                uploadObj_1.put("TotalSHEquity",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).TotalSHEquity);
+                                uploadObj_1.put("NetCashFlowOper",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).NetCashFlowOper);
+                                uploadObj_1.put("NetCashFlowInv",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).NetCashFlowInv);
+                                uploadObj_1.put("NetCashFlowFina",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).NetCashFlowFina);
+                                uploadObj_1.put("CashEquiNetIncr",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).CashEquiNetIncr);
+                                uploadObj_1.put("EPSBASIC",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).EPSBASIC);
 //                                uploadObj_1.put("ENDDATE",item.ENDDATE);
 //                                uploadObj_1.put("MOM",item.MOM);
-                                Log.d("data", String.valueOf(uploadObj_1));
-                                uploadObj.put(item.REPORTTITLE_,uploadObj_1);
+                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
-                            result.complete(uploadObj);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
                         }
+                        Log.d("data", String.valueOf(uploadObj));
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
                 }
                 @Override

@@ -89,13 +89,13 @@ public class F10_ImportantnoticeTest_1 {
                     }
                     JSONObject uploadObj = new JSONObject();
                     try {
-                        for (Importantnotice item : importantnoticeResponse.list) {
+                        for (int i=0;i<importantnoticeResponse.list.size();i++) {
                             JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("PUBDATE_",item.PUBDATE_);
-                            uploadObj_1.put("diviScheme",item.diviScheme);
-                            Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(item.PUBDATE_,uploadObj_1);
+                            uploadObj_1.put("PUBDATE_",importantnoticeResponse.list.get(i).PUBDATE_);
+                            uploadObj_1.put("diviScheme",importantnoticeResponse.list.get(i).diviScheme);
+                            uploadObj.put(String.valueOf(i+1),uploadObj_1);
                         }
+                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

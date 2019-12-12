@@ -116,17 +116,17 @@ public class F10_NewsListTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     if (newsListResponse.list!=null){
                         try {
-                            for (NewsList item : newsListResponse.list) {
+                            for (int i=0;i<newsListResponse.list.size();i++) {
                                 JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("ID_", item.ID_);
-                                uploadObj_1.put("INIPUBDATE_", item.INIPUBDATE_);
-                                uploadObj_1.put("REPORTTITLE_", item.REPORTTITLE_);
-                                uploadObj_1.put("MEDIANAME_", item.MEDIANAME_);
-                                uploadObj_1.put("ABSTRACTFORMAT_", item.ABSTRACTFORMAT_);
-//                                uploadObj_1.put("OVERPAGE_", item.OVERPAGE_);
-//                                uploadObj_1.put("COUNT_", item.COUNT_);
+                                uploadObj_1.put("ID_", newsListResponse.list.get(i).ID_);
+                                uploadObj_1.put("INIPUBDATE_", newsListResponse.list.get(i).INIPUBDATE_);
+                                uploadObj_1.put("REPORTTITLE_", newsListResponse.list.get(i).REPORTTITLE_);
+                                uploadObj_1.put("MEDIANAME_", newsListResponse.list.get(i).MEDIANAME_);
+                                uploadObj_1.put("ABSTRACTFORMAT_", newsListResponse.list.get(i).ABSTRACTFORMAT_);
+//                                uploadObj_1.put("OVERPAGE_", newsListResponse.list.get(i).OVERPAGE_);
+//                                uploadObj_1.put("COUNT_", newsListResponse.list.get(i).COUNT_);
                                 Log.d("data", String.valueOf(uploadObj_1));
-                                uploadObj.put(item.INIPUBDATE_,uploadObj_1);
+                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
                             result.complete(uploadObj);
                         } catch (JSONException e) {
