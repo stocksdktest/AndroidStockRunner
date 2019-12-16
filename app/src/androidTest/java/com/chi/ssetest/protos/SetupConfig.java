@@ -4380,6 +4380,966 @@ public final class SetupConfig {
 
   }
 
+  public interface StoreConfigOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:stock_testing.StoreConfig)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string mongoUri = 1;</code>
+     */
+    java.lang.String getMongoUri();
+    /**
+     * <code>string mongoUri = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getMongoUriBytes();
+
+    /**
+     * <code>string dbName = 2;</code>
+     */
+    java.lang.String getDbName();
+    /**
+     * <code>string dbName = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getDbNameBytes();
+
+    /**
+     * <code>string collectionName = 3;</code>
+     */
+    java.lang.String getCollectionName();
+    /**
+     * <code>string collectionName = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getCollectionNameBytes();
+
+    /**
+     * <code>string restEndpoint = 4;</code>
+     */
+    java.lang.String getRestEndpoint();
+    /**
+     * <code>string restEndpoint = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getRestEndpointBytes();
+  }
+  /**
+   * Protobuf type {@code stock_testing.StoreConfig}
+   */
+  public  static final class StoreConfig extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:stock_testing.StoreConfig)
+      StoreConfigOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use StoreConfig.newBuilder() to construct.
+    private StoreConfig(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private StoreConfig() {
+      mongoUri_ = "";
+      dbName_ = "";
+      collectionName_ = "";
+      restEndpoint_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private StoreConfig(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              mongoUri_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              dbName_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              collectionName_ = s;
+              break;
+            }
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              restEndpoint_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.chi.ssetest.protos.SetupConfig.internal_static_stock_testing_StoreConfig_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.chi.ssetest.protos.SetupConfig.internal_static_stock_testing_StoreConfig_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.chi.ssetest.protos.SetupConfig.StoreConfig.class, com.chi.ssetest.protos.SetupConfig.StoreConfig.Builder.class);
+    }
+
+    public static final int MONGOURI_FIELD_NUMBER = 1;
+    private volatile java.lang.Object mongoUri_;
+    /**
+     * <code>string mongoUri = 1;</code>
+     */
+    public java.lang.String getMongoUri() {
+      java.lang.Object ref = mongoUri_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        mongoUri_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string mongoUri = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getMongoUriBytes() {
+      java.lang.Object ref = mongoUri_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        mongoUri_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int DBNAME_FIELD_NUMBER = 2;
+    private volatile java.lang.Object dbName_;
+    /**
+     * <code>string dbName = 2;</code>
+     */
+    public java.lang.String getDbName() {
+      java.lang.Object ref = dbName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        dbName_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string dbName = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDbNameBytes() {
+      java.lang.Object ref = dbName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        dbName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int COLLECTIONNAME_FIELD_NUMBER = 3;
+    private volatile java.lang.Object collectionName_;
+    /**
+     * <code>string collectionName = 3;</code>
+     */
+    public java.lang.String getCollectionName() {
+      java.lang.Object ref = collectionName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        collectionName_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string collectionName = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCollectionNameBytes() {
+      java.lang.Object ref = collectionName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        collectionName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int RESTENDPOINT_FIELD_NUMBER = 4;
+    private volatile java.lang.Object restEndpoint_;
+    /**
+     * <code>string restEndpoint = 4;</code>
+     */
+    public java.lang.String getRestEndpoint() {
+      java.lang.Object ref = restEndpoint_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        restEndpoint_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string restEndpoint = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getRestEndpointBytes() {
+      java.lang.Object ref = restEndpoint_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        restEndpoint_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getMongoUriBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, mongoUri_);
+      }
+      if (!getDbNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, dbName_);
+      }
+      if (!getCollectionNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, collectionName_);
+      }
+      if (!getRestEndpointBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, restEndpoint_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getMongoUriBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, mongoUri_);
+      }
+      if (!getDbNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, dbName_);
+      }
+      if (!getCollectionNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, collectionName_);
+      }
+      if (!getRestEndpointBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, restEndpoint_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.chi.ssetest.protos.SetupConfig.StoreConfig)) {
+        return super.equals(obj);
+      }
+      com.chi.ssetest.protos.SetupConfig.StoreConfig other = (com.chi.ssetest.protos.SetupConfig.StoreConfig) obj;
+
+      if (!getMongoUri()
+          .equals(other.getMongoUri())) return false;
+      if (!getDbName()
+          .equals(other.getDbName())) return false;
+      if (!getCollectionName()
+          .equals(other.getCollectionName())) return false;
+      if (!getRestEndpoint()
+          .equals(other.getRestEndpoint())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + MONGOURI_FIELD_NUMBER;
+      hash = (53 * hash) + getMongoUri().hashCode();
+      hash = (37 * hash) + DBNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getDbName().hashCode();
+      hash = (37 * hash) + COLLECTIONNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getCollectionName().hashCode();
+      hash = (37 * hash) + RESTENDPOINT_FIELD_NUMBER;
+      hash = (53 * hash) + getRestEndpoint().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.chi.ssetest.protos.SetupConfig.StoreConfig parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.StoreConfig parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.StoreConfig parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.StoreConfig parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.StoreConfig parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.StoreConfig parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.StoreConfig parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.StoreConfig parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.StoreConfig parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.StoreConfig parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.StoreConfig parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.chi.ssetest.protos.SetupConfig.StoreConfig parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.chi.ssetest.protos.SetupConfig.StoreConfig prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code stock_testing.StoreConfig}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:stock_testing.StoreConfig)
+        com.chi.ssetest.protos.SetupConfig.StoreConfigOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.chi.ssetest.protos.SetupConfig.internal_static_stock_testing_StoreConfig_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.chi.ssetest.protos.SetupConfig.internal_static_stock_testing_StoreConfig_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.chi.ssetest.protos.SetupConfig.StoreConfig.class, com.chi.ssetest.protos.SetupConfig.StoreConfig.Builder.class);
+      }
+
+      // Construct using com.chi.ssetest.protos.SetupConfig.StoreConfig.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        mongoUri_ = "";
+
+        dbName_ = "";
+
+        collectionName_ = "";
+
+        restEndpoint_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.chi.ssetest.protos.SetupConfig.internal_static_stock_testing_StoreConfig_descriptor;
+      }
+
+      @java.lang.Override
+      public com.chi.ssetest.protos.SetupConfig.StoreConfig getDefaultInstanceForType() {
+        return com.chi.ssetest.protos.SetupConfig.StoreConfig.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.chi.ssetest.protos.SetupConfig.StoreConfig build() {
+        com.chi.ssetest.protos.SetupConfig.StoreConfig result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.chi.ssetest.protos.SetupConfig.StoreConfig buildPartial() {
+        com.chi.ssetest.protos.SetupConfig.StoreConfig result = new com.chi.ssetest.protos.SetupConfig.StoreConfig(this);
+        result.mongoUri_ = mongoUri_;
+        result.dbName_ = dbName_;
+        result.collectionName_ = collectionName_;
+        result.restEndpoint_ = restEndpoint_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.chi.ssetest.protos.SetupConfig.StoreConfig) {
+          return mergeFrom((com.chi.ssetest.protos.SetupConfig.StoreConfig)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.chi.ssetest.protos.SetupConfig.StoreConfig other) {
+        if (other == com.chi.ssetest.protos.SetupConfig.StoreConfig.getDefaultInstance()) return this;
+        if (!other.getMongoUri().isEmpty()) {
+          mongoUri_ = other.mongoUri_;
+          onChanged();
+        }
+        if (!other.getDbName().isEmpty()) {
+          dbName_ = other.dbName_;
+          onChanged();
+        }
+        if (!other.getCollectionName().isEmpty()) {
+          collectionName_ = other.collectionName_;
+          onChanged();
+        }
+        if (!other.getRestEndpoint().isEmpty()) {
+          restEndpoint_ = other.restEndpoint_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.chi.ssetest.protos.SetupConfig.StoreConfig parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.chi.ssetest.protos.SetupConfig.StoreConfig) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object mongoUri_ = "";
+      /**
+       * <code>string mongoUri = 1;</code>
+       */
+      public java.lang.String getMongoUri() {
+        java.lang.Object ref = mongoUri_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          mongoUri_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string mongoUri = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getMongoUriBytes() {
+        java.lang.Object ref = mongoUri_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          mongoUri_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string mongoUri = 1;</code>
+       */
+      public Builder setMongoUri(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        mongoUri_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string mongoUri = 1;</code>
+       */
+      public Builder clearMongoUri() {
+        
+        mongoUri_ = getDefaultInstance().getMongoUri();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string mongoUri = 1;</code>
+       */
+      public Builder setMongoUriBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        mongoUri_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object dbName_ = "";
+      /**
+       * <code>string dbName = 2;</code>
+       */
+      public java.lang.String getDbName() {
+        java.lang.Object ref = dbName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          dbName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string dbName = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDbNameBytes() {
+        java.lang.Object ref = dbName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          dbName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string dbName = 2;</code>
+       */
+      public Builder setDbName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        dbName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string dbName = 2;</code>
+       */
+      public Builder clearDbName() {
+        
+        dbName_ = getDefaultInstance().getDbName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string dbName = 2;</code>
+       */
+      public Builder setDbNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        dbName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object collectionName_ = "";
+      /**
+       * <code>string collectionName = 3;</code>
+       */
+      public java.lang.String getCollectionName() {
+        java.lang.Object ref = collectionName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          collectionName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string collectionName = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCollectionNameBytes() {
+        java.lang.Object ref = collectionName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          collectionName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string collectionName = 3;</code>
+       */
+      public Builder setCollectionName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        collectionName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string collectionName = 3;</code>
+       */
+      public Builder clearCollectionName() {
+        
+        collectionName_ = getDefaultInstance().getCollectionName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string collectionName = 3;</code>
+       */
+      public Builder setCollectionNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        collectionName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object restEndpoint_ = "";
+      /**
+       * <code>string restEndpoint = 4;</code>
+       */
+      public java.lang.String getRestEndpoint() {
+        java.lang.Object ref = restEndpoint_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          restEndpoint_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string restEndpoint = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getRestEndpointBytes() {
+        java.lang.Object ref = restEndpoint_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          restEndpoint_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string restEndpoint = 4;</code>
+       */
+      public Builder setRestEndpoint(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        restEndpoint_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string restEndpoint = 4;</code>
+       */
+      public Builder clearRestEndpoint() {
+        
+        restEndpoint_ = getDefaultInstance().getRestEndpoint();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string restEndpoint = 4;</code>
+       */
+      public Builder setRestEndpointBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        restEndpoint_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:stock_testing.StoreConfig)
+    }
+
+    // @@protoc_insertion_point(class_scope:stock_testing.StoreConfig)
+    private static final com.chi.ssetest.protos.SetupConfig.StoreConfig DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.chi.ssetest.protos.SetupConfig.StoreConfig();
+    }
+
+    public static com.chi.ssetest.protos.SetupConfig.StoreConfig getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<StoreConfig>
+        PARSER = new com.google.protobuf.AbstractParser<StoreConfig>() {
+      @java.lang.Override
+      public StoreConfig parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new StoreConfig(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<StoreConfig> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<StoreConfig> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.chi.ssetest.protos.SetupConfig.StoreConfig getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface RunnerConfigOrBuilder extends
       // @@protoc_insertion_point(interface_extends:stock_testing.RunnerConfig)
       com.google.protobuf.MessageOrBuilder {
@@ -4440,6 +5400,19 @@ public final class SetupConfig {
      */
     com.chi.ssetest.protos.SetupConfig.TestcaseConfigOrBuilder getCasesConfigOrBuilder(
         int index);
+
+    /**
+     * <code>.stock_testing.StoreConfig storeConfig = 5;</code>
+     */
+    boolean hasStoreConfig();
+    /**
+     * <code>.stock_testing.StoreConfig storeConfig = 5;</code>
+     */
+    com.chi.ssetest.protos.SetupConfig.StoreConfig getStoreConfig();
+    /**
+     * <code>.stock_testing.StoreConfig storeConfig = 5;</code>
+     */
+    com.chi.ssetest.protos.SetupConfig.StoreConfigOrBuilder getStoreConfigOrBuilder();
   }
   /**
    * Protobuf type {@code stock_testing.RunnerConfig}
@@ -4515,6 +5488,19 @@ public final class SetupConfig {
               }
               casesConfig_.add(
                   input.readMessage(com.chi.ssetest.protos.SetupConfig.TestcaseConfig.parser(), extensionRegistry));
+              break;
+            }
+            case 42: {
+              com.chi.ssetest.protos.SetupConfig.StoreConfig.Builder subBuilder = null;
+              if (storeConfig_ != null) {
+                subBuilder = storeConfig_.toBuilder();
+              }
+              storeConfig_ = input.readMessage(com.chi.ssetest.protos.SetupConfig.StoreConfig.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(storeConfig_);
+                storeConfig_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             default: {
@@ -4677,6 +5663,27 @@ public final class SetupConfig {
       return casesConfig_.get(index);
     }
 
+    public static final int STORECONFIG_FIELD_NUMBER = 5;
+    private com.chi.ssetest.protos.SetupConfig.StoreConfig storeConfig_;
+    /**
+     * <code>.stock_testing.StoreConfig storeConfig = 5;</code>
+     */
+    public boolean hasStoreConfig() {
+      return storeConfig_ != null;
+    }
+    /**
+     * <code>.stock_testing.StoreConfig storeConfig = 5;</code>
+     */
+    public com.chi.ssetest.protos.SetupConfig.StoreConfig getStoreConfig() {
+      return storeConfig_ == null ? com.chi.ssetest.protos.SetupConfig.StoreConfig.getDefaultInstance() : storeConfig_;
+    }
+    /**
+     * <code>.stock_testing.StoreConfig storeConfig = 5;</code>
+     */
+    public com.chi.ssetest.protos.SetupConfig.StoreConfigOrBuilder getStoreConfigOrBuilder() {
+      return getStoreConfig();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -4703,6 +5710,9 @@ public final class SetupConfig {
       for (int i = 0; i < casesConfig_.size(); i++) {
         output.writeMessage(4, casesConfig_.get(i));
       }
+      if (storeConfig_ != null) {
+        output.writeMessage(5, getStoreConfig());
+      }
       unknownFields.writeTo(output);
     }
 
@@ -4725,6 +5735,10 @@ public final class SetupConfig {
       for (int i = 0; i < casesConfig_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, casesConfig_.get(i));
+      }
+      if (storeConfig_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, getStoreConfig());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -4752,6 +5766,11 @@ public final class SetupConfig {
       }
       if (!getCasesConfigList()
           .equals(other.getCasesConfigList())) return false;
+      if (hasStoreConfig() != other.hasStoreConfig()) return false;
+      if (hasStoreConfig()) {
+        if (!getStoreConfig()
+            .equals(other.getStoreConfig())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -4774,6 +5793,10 @@ public final class SetupConfig {
       if (getCasesConfigCount() > 0) {
         hash = (37 * hash) + CASESCONFIG_FIELD_NUMBER;
         hash = (53 * hash) + getCasesConfigList().hashCode();
+      }
+      if (hasStoreConfig()) {
+        hash = (37 * hash) + STORECONFIG_FIELD_NUMBER;
+        hash = (53 * hash) + getStoreConfig().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -4925,6 +5948,12 @@ public final class SetupConfig {
         } else {
           casesConfigBuilder_.clear();
         }
+        if (storeConfigBuilder_ == null) {
+          storeConfig_ = null;
+        } else {
+          storeConfig_ = null;
+          storeConfigBuilder_ = null;
+        }
         return this;
       }
 
@@ -4968,6 +5997,11 @@ public final class SetupConfig {
           result.casesConfig_ = casesConfig_;
         } else {
           result.casesConfig_ = casesConfigBuilder_.build();
+        }
+        if (storeConfigBuilder_ == null) {
+          result.storeConfig_ = storeConfig_;
+        } else {
+          result.storeConfig_ = storeConfigBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -5054,6 +6088,9 @@ public final class SetupConfig {
               casesConfigBuilder_.addAllMessages(other.casesConfig_);
             }
           }
+        }
+        if (other.hasStoreConfig()) {
+          mergeStoreConfig(other.getStoreConfig());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -5579,6 +6616,123 @@ public final class SetupConfig {
         }
         return casesConfigBuilder_;
       }
+
+      private com.chi.ssetest.protos.SetupConfig.StoreConfig storeConfig_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.chi.ssetest.protos.SetupConfig.StoreConfig, com.chi.ssetest.protos.SetupConfig.StoreConfig.Builder, com.chi.ssetest.protos.SetupConfig.StoreConfigOrBuilder> storeConfigBuilder_;
+      /**
+       * <code>.stock_testing.StoreConfig storeConfig = 5;</code>
+       */
+      public boolean hasStoreConfig() {
+        return storeConfigBuilder_ != null || storeConfig_ != null;
+      }
+      /**
+       * <code>.stock_testing.StoreConfig storeConfig = 5;</code>
+       */
+      public com.chi.ssetest.protos.SetupConfig.StoreConfig getStoreConfig() {
+        if (storeConfigBuilder_ == null) {
+          return storeConfig_ == null ? com.chi.ssetest.protos.SetupConfig.StoreConfig.getDefaultInstance() : storeConfig_;
+        } else {
+          return storeConfigBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.stock_testing.StoreConfig storeConfig = 5;</code>
+       */
+      public Builder setStoreConfig(com.chi.ssetest.protos.SetupConfig.StoreConfig value) {
+        if (storeConfigBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          storeConfig_ = value;
+          onChanged();
+        } else {
+          storeConfigBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.stock_testing.StoreConfig storeConfig = 5;</code>
+       */
+      public Builder setStoreConfig(
+          com.chi.ssetest.protos.SetupConfig.StoreConfig.Builder builderForValue) {
+        if (storeConfigBuilder_ == null) {
+          storeConfig_ = builderForValue.build();
+          onChanged();
+        } else {
+          storeConfigBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.stock_testing.StoreConfig storeConfig = 5;</code>
+       */
+      public Builder mergeStoreConfig(com.chi.ssetest.protos.SetupConfig.StoreConfig value) {
+        if (storeConfigBuilder_ == null) {
+          if (storeConfig_ != null) {
+            storeConfig_ =
+              com.chi.ssetest.protos.SetupConfig.StoreConfig.newBuilder(storeConfig_).mergeFrom(value).buildPartial();
+          } else {
+            storeConfig_ = value;
+          }
+          onChanged();
+        } else {
+          storeConfigBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.stock_testing.StoreConfig storeConfig = 5;</code>
+       */
+      public Builder clearStoreConfig() {
+        if (storeConfigBuilder_ == null) {
+          storeConfig_ = null;
+          onChanged();
+        } else {
+          storeConfig_ = null;
+          storeConfigBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.stock_testing.StoreConfig storeConfig = 5;</code>
+       */
+      public com.chi.ssetest.protos.SetupConfig.StoreConfig.Builder getStoreConfigBuilder() {
+        
+        onChanged();
+        return getStoreConfigFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.stock_testing.StoreConfig storeConfig = 5;</code>
+       */
+      public com.chi.ssetest.protos.SetupConfig.StoreConfigOrBuilder getStoreConfigOrBuilder() {
+        if (storeConfigBuilder_ != null) {
+          return storeConfigBuilder_.getMessageOrBuilder();
+        } else {
+          return storeConfig_ == null ?
+              com.chi.ssetest.protos.SetupConfig.StoreConfig.getDefaultInstance() : storeConfig_;
+        }
+      }
+      /**
+       * <code>.stock_testing.StoreConfig storeConfig = 5;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.chi.ssetest.protos.SetupConfig.StoreConfig, com.chi.ssetest.protos.SetupConfig.StoreConfig.Builder, com.chi.ssetest.protos.SetupConfig.StoreConfigOrBuilder> 
+          getStoreConfigFieldBuilder() {
+        if (storeConfigBuilder_ == null) {
+          storeConfigBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.chi.ssetest.protos.SetupConfig.StoreConfig, com.chi.ssetest.protos.SetupConfig.StoreConfig.Builder, com.chi.ssetest.protos.SetupConfig.StoreConfigOrBuilder>(
+                  getStoreConfig(),
+                  getParentForChildren(),
+                  isClean());
+          storeConfig_ = null;
+        }
+        return storeConfigBuilder_;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -5658,6 +6812,11 @@ public final class SetupConfig {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_stock_testing_TestcaseConfig_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_stock_testing_StoreConfig_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_stock_testing_StoreConfig_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_stock_testing_RunnerConfig_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -5685,12 +6844,16 @@ public final class SetupConfig {
       "alue\030\002 \001(\0132\023.stock_testing.Site:\0028\001\"m\n\016T" +
       "estcaseConfig\022\022\n\ntestcaseID\030\001 \001(\t\022\032\n\022con" +
       "tinueWhenFailed\030\002 \001(\010\022\030\n\020roundIntervalSe" +
-      "c\030\003 \001(\003\022\021\n\tparamStrs\030\004 \003(\t\"\220\001\n\014RunnerCon" +
-      "fig\022\r\n\005jobID\030\001 \001(\t\022\020\n\010runnerID\030\002 \001(\t\022+\n\t" +
-      "sdkConfig\030\003 \001(\0132\030.stock_testing.SDKConfi" +
-      "g\0222\n\013casesConfig\030\004 \003(\0132\035.stock_testing.T" +
-      "estcaseConfigB%\n\026com.chi.ssetest.protosB" +
-      "\013SetupConfigb\006proto3"
+      "c\030\003 \001(\003\022\021\n\tparamStrs\030\004 \003(\t\"]\n\013StoreConfi" +
+      "g\022\020\n\010mongoUri\030\001 \001(\t\022\016\n\006dbName\030\002 \001(\t\022\026\n\016c" +
+      "ollectionName\030\003 \001(\t\022\024\n\014restEndpoint\030\004 \001(" +
+      "\t\"\301\001\n\014RunnerConfig\022\r\n\005jobID\030\001 \001(\t\022\020\n\010run" +
+      "nerID\030\002 \001(\t\022+\n\tsdkConfig\030\003 \001(\0132\030.stock_t" +
+      "esting.SDKConfig\0222\n\013casesConfig\030\004 \003(\0132\035." +
+      "stock_testing.TestcaseConfig\022/\n\013storeCon" +
+      "fig\030\005 \001(\0132\032.stock_testing.StoreConfigB%\n" +
+      "\026com.chi.ssetest.protosB\013SetupConfigb\006pr" +
+      "oto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5734,12 +6897,18 @@ public final class SetupConfig {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_stock_testing_TestcaseConfig_descriptor,
         new java.lang.String[] { "TestcaseID", "ContinueWhenFailed", "RoundIntervalSec", "ParamStrs", });
-    internal_static_stock_testing_RunnerConfig_descriptor =
+    internal_static_stock_testing_StoreConfig_descriptor =
       getDescriptor().getMessageTypes().get(4);
+    internal_static_stock_testing_StoreConfig_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_stock_testing_StoreConfig_descriptor,
+        new java.lang.String[] { "MongoUri", "DbName", "CollectionName", "RestEndpoint", });
+    internal_static_stock_testing_RunnerConfig_descriptor =
+      getDescriptor().getMessageTypes().get(5);
     internal_static_stock_testing_RunnerConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_stock_testing_RunnerConfig_descriptor,
-        new java.lang.String[] { "JobID", "RunnerID", "SdkConfig", "CasesConfig", });
+        new java.lang.String[] { "JobID", "RunnerID", "SdkConfig", "CasesConfig", "StoreConfig", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
