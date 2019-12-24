@@ -94,41 +94,45 @@ public class F10V2Test_3 {
         }else {
             src=quoteNumbers1;
         }
+        String quarterType;
+        if (quoteNumbers2.equals("null")){
+            quarterType=null;
+        }else {
+            quarterType=quoteNumbers2;
+        }
             F10V2Request request = new F10V2Request();
-            request.sendV2(quoteNumbers,src,quoteNumbers2,quoteNumbers3,new IResponseInfoCallback<F10V2Response>() {
+            request.send(quoteNumbers,src,quarterType,quoteNumbers3,new IResponseInfoCallback<F10V2Response>() {
                 @Override
                 public void callback(F10V2Response f10V2Response) {
-                    if (quoteNumbers3.equals("/importantindex")){
-                        try {
-                            assertNotNull(f10V2Response.info);
-                        } catch (AssertionError e) {
-                            result.completeExceptionally(e);
-                        }
-                    }else {
-                        try {
-                            assertNotNull(f10V2Response.infos);
-                        } catch (AssertionError e) {
-                            result.completeExceptionally(e);
-                        }
+                    try {
+                        assertNotNull(f10V2Response.infos);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    HashMap<String,Object> info = f10V2Response.info;
                     List<HashMap<String,Object>> infos=f10V2Response.infos;
                     try {
                         switch (quoteNumbers3){
-                            //重要指标
-                            case F10Type.D_IMPORTANTINDEX:
-                                uploadObj.put("REPORTTITLE",info.get("REPORTTITLE"));
-                                uploadObj.put("EPSBASIC",info.get("EPSBASIC"));
-                                uploadObj.put("NAPS",info.get("NAPS"));
-                                uploadObj.put("NPCUT",info.get("NPCUT"));
-                                uploadObj.put("TOTALSHARE",info.get("TOTALSHARE"));
-                                uploadObj.put("CIRCSKAMT",info.get("CIRCSKAMT"));
-                                uploadObj.put("BIZINCO",info.get("BIZINCO"));
-                                uploadObj.put("OPERINYOYB",info.get("OPERINYOYB"));
-                                uploadObj.put("NETPROFITYOYB",info.get("NETPROFITYOYB"));
-                                uploadObj.put("DISTRIBUTION",info.get("DISTRIBUTION"));
-                                uploadObj.put("EXRIGHT",info.get("EXRIGHT"));
+                            //主要指标
+                            case F10Type.D_PROFINMAININDEX:
+                                for (int i=0;i<infos.size();i++){
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("REPORTTITLE",infos.get(i).get("REPORTTITLE"));
+                                    uploadObj_1.put("EPSBASIC",infos.get(i).get("EPSBASIC"));
+                                    uploadObj_1.put("EPSDILUTED",infos.get(i).get("EPSDILUTED"));
+                                    uploadObj_1.put("NAPS",infos.get(i).get("NAPS"));
+                                    uploadObj_1.put("UPPS",infos.get(i).get("UPPS"));
+                                    uploadObj_1.put("CRPS",infos.get(i).get("CRPS"));
+                                    uploadObj_1.put("SGPMARGIN",infos.get(i).get("SGPMARGIN"));
+                                    uploadObj_1.put("OPPRORT",infos.get(i).get("OPPRORT"));
+                                    uploadObj_1.put("SNPMARGIN",infos.get(i).get("SNPMARGIN"));
+                                    uploadObj_1.put("ROEWEIGHTED",infos.get(i).get("ROEWEIGHTED"));
+                                    uploadObj_1.put("ROEDILUTED",infos.get(i).get("ROEDILUTED"));
+                                    uploadObj_1.put("CURRENTRT",infos.get(i).get("CURRENTRT"));
+                                    uploadObj_1.put("QUICKRT",infos.get(i).get("QUICKRT"));
+                                    uploadObj_1.put("OPNCFPS",infos.get(i).get("OPNCFPS"));
+                                    uploadObj.put((String) infos.get(i).get("REPORTTITLE"),uploadObj_1);
+                                }
                                 break;
                             //利润表
                             case F10Type.D_PROINCSTATEMENTNEW:
