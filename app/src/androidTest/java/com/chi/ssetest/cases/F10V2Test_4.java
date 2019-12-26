@@ -80,12 +80,12 @@ public class F10V2Test_4 {
     public void requestWork() throws Exception {
         Log.d("F10V2Test_4", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final String quoteNumbers2 = rule.getParam().optString("param");
-        final String quoteNumbers3 = rule.getParam().optString("apiType");
-        final String quoteNumbers4 = rule.getParam().optString("part");
-        final String quoteNumbers5 = rule.getParam().optString("type");
+        final String quoteNumbers3 = rule.getParam().optString("REQUESTTYPE");
+        final String quoteNumbers4 = rule.getParam().optString("PART");
+        final String quoteNumbers5 = rule.getParam().optString("TYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         // F10Type
 //        for (int i=0;i<quoteNumbers.length;i++){
@@ -130,32 +130,36 @@ public class F10V2Test_4 {
                     try {
                         if (quoteNumbers3.equals("/newsinteractive")){
                             //董秘问答
-                            uploadObj.put("Page",info.get("Page"));
-                            uploadObj.put("PageNumber",info.get("PageNumber"));
-                            List<HashMap<String,Object>> items1= (List<HashMap<String,Object>>) info.get("List");
-                            if (items1!=null){
-                                for (int i=0;i<items1.size();i++){
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("TRADING",items1.get(i).get("TRADING"));
-                                    uploadObj_1.put("SESNAME",items1.get(i).get("SESNAME"));
-                                    uploadObj_1.put("PROBLEM",items1.get(i).get("PROBLEM"));
-                                    uploadObj_1.put("QUESTIONTIME",items1.get(i).get("QUESTIONTIME"));
-                                    uploadObj_1.put("REPLY",items1.get(i).get("REPLY"));
-                                    uploadObj_1.put("ANSWERTIME",items1.get(i).get("ANSWERTIME"));
-                                    uploadObj_1.put("NEWSSOURCE",items1.get(i).get("NEWSSOURCE"));
-                                    uploadObj_1.put("INTERACTIVEID",items1.get(i).get("INTERACTIVEID"));
-                                    uploadObj.put((String) items1.get(i).get("TRADING"),uploadObj_1);
+                            if (info!=null){
+                                uploadObj.put("Page",info.get("Page"));
+                                uploadObj.put("PageNumber",info.get("PageNumber"));
+                                List<HashMap<String,Object>> items1= (List<HashMap<String,Object>>) info.get("List");
+                                if (items1!=null){
+                                    for (int i=0;i<items1.size();i++){
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("TRADING",items1.get(i).get("TRADING"));
+                                        uploadObj_1.put("SESNAME",items1.get(i).get("SESNAME"));
+                                        uploadObj_1.put("PROBLEM",items1.get(i).get("PROBLEM"));
+                                        uploadObj_1.put("QUESTIONTIME",items1.get(i).get("QUESTIONTIME"));
+                                        uploadObj_1.put("REPLY",items1.get(i).get("REPLY"));
+                                        uploadObj_1.put("ANSWERTIME",items1.get(i).get("ANSWERTIME"));
+                                        uploadObj_1.put("NEWSSOURCE",items1.get(i).get("NEWSSOURCE"));
+                                        uploadObj_1.put("INTERACTIVEID",items1.get(i).get("INTERACTIVEID"));
+                                        uploadObj.put((String) items1.get(i).get("TRADING"),uploadObj_1);
+                                    }
                                 }
                             }
                         }else {
-                            for (int i=0;i<infos.size();i++){
-                                JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("REPTITLE",infos.get(i).get("REPTITLE"));
-                                uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
-                                uploadObj_1.put("TEXT",infos.get(i).get("TEXT"));
-                                uploadObj_1.put("ID",infos.get(i).get("ID"));
-                                uploadObj_1.put("ISPDF",infos.get(i).get("ISPDF"));
-                                uploadObj.put((String) infos.get(i).get("TRADEDATE"),uploadObj_1);
+                            if (infos!=null){
+                                for (int i=0;i<infos.size();i++){
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("REPTITLE",infos.get(i).get("REPTITLE"));
+                                    uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
+                                    uploadObj_1.put("TEXT",infos.get(i).get("TEXT"));
+                                    uploadObj_1.put("ID",infos.get(i).get("ID"));
+                                    uploadObj_1.put("ISPDF",infos.get(i).get("ISPDF"));
+                                    uploadObj.put((String) infos.get(i).get("TRADEDATE"),uploadObj_1);
+                                }
                             }
                         }
                     } catch (JSONException e) {

@@ -77,8 +77,8 @@ public class F10_BndInterestPayTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_BndInterestPayTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("stockId");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         //CategoryType
 //        for (int i=0;i<quoteNumbers.length;i++){
@@ -98,16 +98,18 @@ public class F10_BndInterestPayTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     HashMap<String,Object> list = f10V2Response.info;
                     try {
-                        uploadObj.put("BONDNAME",list.get("BONDNAME"));
-                        uploadObj.put("BONDSNAME",list.get("BONDSNAME"));
-                        uploadObj.put("SYMBOL",list.get("SYMBOL"));
-                        uploadObj.put("PERPAYDATEYEAR",list.get("PERPAYDATEYEAR"));
-                        uploadObj.put("PRETAXINT",list.get("PRETAXINT"));
-                        uploadObj.put("IPRATE",list.get("IPRATE"));
-                        uploadObj.put("EQURECORDDATE",list.get("EQURECORDDATE"));
-                        uploadObj.put("PERPAYDATE",list.get("PERPAYDATE"));
-                        uploadObj.put("XDRDATE",list.get("XDRDATE"));
-                        uploadObj.put("REPAYDATE",list.get("REPAYDATE"));
+                        if(list!=null){
+                            uploadObj.put("BONDNAME",list.get("BONDNAME"));
+                            uploadObj.put("BONDSNAME",list.get("BONDSNAME"));
+                            uploadObj.put("SYMBOL",list.get("SYMBOL"));
+                            uploadObj.put("PERPAYDATEYEAR",list.get("PERPAYDATEYEAR"));
+                            uploadObj.put("PRETAXINT",list.get("PRETAXINT"));
+                            uploadObj.put("IPRATE",list.get("IPRATE"));
+                            uploadObj.put("EQURECORDDATE",list.get("EQURECORDDATE"));
+                            uploadObj.put("PERPAYDATE",list.get("PERPAYDATE"));
+                            uploadObj.put("XDRDATE",list.get("XDRDATE"));
+                            uploadObj.put("REPAYDATE",list.get("REPAYDATE"));
+                        }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

@@ -83,9 +83,9 @@ public class F10_FndNavIndexTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_FndNavIndexTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("stockId");
-        final String quoteNumbers1 = rule.getParam().optString("type");
-        final String quoteNumbers2 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("TYPE");
+        final String quoteNumbers2 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             FndNavIndexRequest request = new FndNavIndexRequest();
@@ -105,11 +105,11 @@ public class F10_FndNavIndexTest_1 {
                                 JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("ENDDATE_",list.get(i).NAVDATE);
                                 uploadObj_1.put("UNITNAV_",list.get(i).UNITNAV);
-                                Log.d("data", String.valueOf(uploadObj_1));
                                 uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
-                            result.complete(uploadObj);
                         }
+                        Log.d("data", String.valueOf(uploadObj));
+                        result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

@@ -44,6 +44,7 @@ import static org.junit.Assert.*;
 public class AddValueTest_2 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.ADDVALUETEST_2;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d(" AddValueTest_2", "Setup");
@@ -54,13 +55,13 @@ public class AddValueTest_2 {
     }
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("AddValueTest_2", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
-        final String quoteNumbers1 = rule.getParam().optString("subtype");
-        final String quoteNumbers2 = rule.getParam().optString("market");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SUBTYPE");
+        final String quoteNumbers2 = rule.getParam().optString("MARKET");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             AddValueRequest request = new AddValueRequest();
@@ -75,110 +76,112 @@ public class AddValueTest_2 {
                     JSONObject uploadObj = new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value
                     try {
-                        for (AddValueModel item : addValueResponse.list) {
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("code",item.code);
-                            uploadObj_1.put("date",item.date);
-                            uploadObj_1.put("time",item.time);
-                            uploadObj_1.put("ultraLargeBuyVolume",item.ultraLargeBuyVolume);
-                            uploadObj_1.put("ultraLargeSellVolume",item.ultraLargeSellVolume);
-                            uploadObj_1.put("ultraLargeBuyAmount",item.ultraLargeBuyAmount);
-                            uploadObj_1.put("ultraLargeSellAmount",item.ultraLargeSellAmount);
-                            uploadObj_1.put("largeBuyVolume",item.largeBuyVolume);
-                            uploadObj_1.put("largeSellVolume",item.largeSellVolume);
-                            uploadObj_1.put("largeBuyAmount",item.largeBuyAmount);
-                            uploadObj_1.put("largeSellAmount",item.largeSellAmount);
-                            uploadObj_1.put("mediumBuyVolume",item.mediumBuyVolume);
-                            uploadObj_1.put("mediumSellVolume",item.mediumSellVolume);
-                            uploadObj_1.put("mediumBuyAmount",item.mediumBuyAmount);
-                            uploadObj_1.put("mediumSellAmount",item.mediumSellAmount);
-                            uploadObj_1.put("smallBuyVolume",item.smallBuyVolume);
-                            uploadObj_1.put("smallSellVolume",item.smallSellVolume);
-                            uploadObj_1.put("smallBuyAmount",item.smallBuyAmount);
-                            uploadObj_1.put("smallSellAmount",item.smallSellAmount);
-                            uploadObj_1.put("ultraLargeNetInflow",item.ultraLargeNetInflow);
-                            uploadObj_1.put("largeNetInflow",item.largeNetInflow);
-                            uploadObj_1.put("netCapitalInflow",item.netCapitalInflow);
-                            uploadObj_1.put("mediumNetInflow",item.mediumNetInflow);
-                            uploadObj_1.put("smallNetInflow",item.smallNetInflow);
+                        if(addValueResponse.list!=null){
+                            for (AddValueModel item : addValueResponse.list) {
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("code",item.code);
+                                uploadObj_1.put("date",item.date);
+                                uploadObj_1.put("time",item.time);
+                                uploadObj_1.put("ultraLargeBuyVolume",item.ultraLargeBuyVolume);
+                                uploadObj_1.put("ultraLargeSellVolume",item.ultraLargeSellVolume);
+                                uploadObj_1.put("ultraLargeBuyAmount",item.ultraLargeBuyAmount);
+                                uploadObj_1.put("ultraLargeSellAmount",item.ultraLargeSellAmount);
+                                uploadObj_1.put("largeBuyVolume",item.largeBuyVolume);
+                                uploadObj_1.put("largeSellVolume",item.largeSellVolume);
+                                uploadObj_1.put("largeBuyAmount",item.largeBuyAmount);
+                                uploadObj_1.put("largeSellAmount",item.largeSellAmount);
+                                uploadObj_1.put("mediumBuyVolume",item.mediumBuyVolume);
+                                uploadObj_1.put("mediumSellVolume",item.mediumSellVolume);
+                                uploadObj_1.put("mediumBuyAmount",item.mediumBuyAmount);
+                                uploadObj_1.put("mediumSellAmount",item.mediumSellAmount);
+                                uploadObj_1.put("smallBuyVolume",item.smallBuyVolume);
+                                uploadObj_1.put("smallSellVolume",item.smallSellVolume);
+                                uploadObj_1.put("smallBuyAmount",item.smallBuyAmount);
+                                uploadObj_1.put("smallSellAmount",item.smallSellAmount);
+                                uploadObj_1.put("ultraLargeNetInflow",item.ultraLargeNetInflow);
+                                uploadObj_1.put("largeNetInflow",item.largeNetInflow);
+                                uploadObj_1.put("netCapitalInflow",item.netCapitalInflow);
+                                uploadObj_1.put("mediumNetInflow",item.mediumNetInflow);
+                                uploadObj_1.put("smallNetInflow",item.smallNetInflow);
 
-                            List<String> fundsInflows=new ArrayList<>();
-                            if (item.fundsInflows!=null&&item.fundsInflows.length>0){
-                                for (int j=0;j<item.fundsInflows.length;j++){
-                                    fundsInflows.add(item.fundsInflows[j]);
+                                List<String> fundsInflows=new ArrayList<>();
+                                if (item.fundsInflows!=null&&item.fundsInflows.length>0){
+                                    for (int j=0;j<item.fundsInflows.length;j++){
+                                        fundsInflows.add(item.fundsInflows[j]);
+                                    }
+                                    uploadObj_1.put("fundsInflows",new JSONArray(fundsInflows));
+                                }else {
+                                    uploadObj_1.put("fundsInflows",item.fundsInflows);
                                 }
-                                uploadObj_1.put("fundsInflows",new JSONArray(fundsInflows));
-                            }else {
-                                uploadObj_1.put("fundsInflows",item.fundsInflows);
-                            }
 
-                            List<String> fundsOutflows=new ArrayList<>();
-                            if (item.fundsOutflows!=null&&item.fundsOutflows.length>0){
-                                for (int j=0;j<item.fundsOutflows.length;j++){
-                                    fundsOutflows.add(item.fundsOutflows[j]);
+                                List<String> fundsOutflows=new ArrayList<>();
+                                if (item.fundsOutflows!=null&&item.fundsOutflows.length>0){
+                                    for (int j=0;j<item.fundsOutflows.length;j++){
+                                        fundsOutflows.add(item.fundsOutflows[j]);
+                                    }
+                                    uploadObj_1.put("fundsOutflows",new JSONArray(fundsOutflows));
+                                }else {
+                                    uploadObj_1.put("fundsOutflows",item.fundsOutflows);
                                 }
-                                uploadObj_1.put("fundsOutflows",new JSONArray(fundsOutflows));
-                            }else {
-                                uploadObj_1.put("fundsOutflows",item.fundsOutflows);
-                            }
 
-                            uploadObj_1.put("ultraLargeDiffer",item.ultraLargeDiffer);
-                            uploadObj_1.put("largeDiffer",item.largeDiffer);
-                            uploadObj_1.put("mediumDiffer",item.mediumDiffer);
-                            uploadObj_1.put("smallDiffer",item.smallDiffer);
-                            uploadObj_1.put("largeBuyDealCount",item.largeBuyDealCount);
-                            uploadObj_1.put("largeSellDealCount",item.largeSellDealCount);
-                            uploadObj_1.put("dealCountMovingAverage",item.dealCountMovingAverage);
-                            uploadObj_1.put("buyCount",item.buyCount);
-                            uploadObj_1.put("sellCount",item.sellCount);
-                            uploadObj_1.put("BBD",item.BBD);
-                            uploadObj_1.put("BBD5",item.BBD5);
-                            uploadObj_1.put("BBD10",item.BBD10);
-                            uploadObj_1.put("DDX",item.DDX);
-                            uploadObj_1.put("DDX5",item.DDX5);
-                            uploadObj_1.put("DDX10",item.DDX10);
-                            uploadObj_1.put("DDY",item.DDY);
-                            uploadObj_1.put("DDY5",item.DDY5);
-                            uploadObj_1.put("DDY10",item.DDY10);
-                            uploadObj_1.put("DDZ",item.DDZ);
-                            uploadObj_1.put("RatioBS",item.RatioBS);
-                            List<String> othersFundsInflows=new ArrayList<>();
-                            if (item.othersFundsInflows!=null&&item.othersFundsInflows.length>0){
-                                for (int j=0;j<item.othersFundsInflows.length;j++){
-                                    othersFundsInflows.add(item.othersFundsInflows[j]);
+                                uploadObj_1.put("ultraLargeDiffer",item.ultraLargeDiffer);
+                                uploadObj_1.put("largeDiffer",item.largeDiffer);
+                                uploadObj_1.put("mediumDiffer",item.mediumDiffer);
+                                uploadObj_1.put("smallDiffer",item.smallDiffer);
+                                uploadObj_1.put("largeBuyDealCount",item.largeBuyDealCount);
+                                uploadObj_1.put("largeSellDealCount",item.largeSellDealCount);
+                                uploadObj_1.put("dealCountMovingAverage",item.dealCountMovingAverage);
+                                uploadObj_1.put("buyCount",item.buyCount);
+                                uploadObj_1.put("sellCount",item.sellCount);
+                                uploadObj_1.put("BBD",item.BBD);
+                                uploadObj_1.put("BBD5",item.BBD5);
+                                uploadObj_1.put("BBD10",item.BBD10);
+                                uploadObj_1.put("DDX",item.DDX);
+                                uploadObj_1.put("DDX5",item.DDX5);
+                                uploadObj_1.put("DDX10",item.DDX10);
+                                uploadObj_1.put("DDY",item.DDY);
+                                uploadObj_1.put("DDY5",item.DDY5);
+                                uploadObj_1.put("DDY10",item.DDY10);
+                                uploadObj_1.put("DDZ",item.DDZ);
+                                uploadObj_1.put("RatioBS",item.RatioBS);
+                                List<String> othersFundsInflows=new ArrayList<>();
+                                if (item.othersFundsInflows!=null&&item.othersFundsInflows.length>0){
+                                    for (int j=0;j<item.othersFundsInflows.length;j++){
+                                        othersFundsInflows.add(item.othersFundsInflows[j]);
+                                    }
+                                    uploadObj_1.put("othersFundsInflows",new JSONArray(othersFundsInflows));
+                                }else {
+                                    uploadObj_1.put("othersFundsInflows",item.othersFundsInflows);
                                 }
-                                uploadObj_1.put("othersFundsInflows",new JSONArray(othersFundsInflows));
-                            }else {
-                                uploadObj_1.put("othersFundsInflows",item.othersFundsInflows);
-                            }
 
-                            List<String> othersFundsOutflows=new ArrayList<>();
-                            if (item.othersFundsOutflows!=null&&item.othersFundsOutflows.length>0){
-                                for (int j=0;j<item.othersFundsOutflows.length;j++){
-                                    othersFundsOutflows.add(item.othersFundsOutflows[j]);
+                                List<String> othersFundsOutflows=new ArrayList<>();
+                                if (item.othersFundsOutflows!=null&&item.othersFundsOutflows.length>0){
+                                    for (int j=0;j<item.othersFundsOutflows.length;j++){
+                                        othersFundsOutflows.add(item.othersFundsOutflows[j]);
+                                    }
+                                    uploadObj_1.put("othersFundsOutflows",new JSONArray(othersFundsOutflows));
+                                }else {
+                                    uploadObj_1.put("othersFundsOutflows",item.othersFundsOutflows);
                                 }
-                                uploadObj_1.put("othersFundsOutflows",new JSONArray(othersFundsOutflows));
-                            }else {
-                                uploadObj_1.put("othersFundsOutflows",item.othersFundsOutflows);
-                            }
 
-                            uploadObj_1.put("fiveMinutesChangeRate",item.fiveMinutesChangeRate);
-                            uploadObj_1.put("largeOrderNumB",item.largeOrderNumB);
-                            uploadObj_1.put("largeOrderNumS",item.largeOrderNumS);
-                            uploadObj_1.put("bigOrderNumB",item.bigOrderNumB);
-                            uploadObj_1.put("bigOrderNumS",item.bigOrderNumS);
-                            uploadObj_1.put("midOrderNumB",item.midOrderNumB);
-                            uploadObj_1.put("midOrderNumS",item.midOrderNumS);
-                            uploadObj_1.put("smallOrderNumB",item.smallOrderNumB);
-                            uploadObj_1.put("smallOrderNumS",item.smallOrderNumS);
-                            uploadObj_1.put("mainforceMoneyNetInflow5",item.mainforceMoneyNetInflow5);
-                            uploadObj_1.put("mainforceMoneyNetInflow10",item.mainforceMoneyNetInflow10);
-                            uploadObj_1.put("mainforceMoneyNetInflow20",item.mainforceMoneyNetInflow20);
-                            uploadObj_1.put("ratioMainforceMoneyNetInflow5",item.ratioMainforceMoneyNetInflow5);
-                            uploadObj_1.put("ratioMainforceMoneyNetInflow10",item.ratioMainforceMoneyNetInflow10);
-                            uploadObj_1.put("ratioMainforceMoneyNetInflow20",item.ratioMainforceMoneyNetInflow20);
-                            Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(item.date+item.time,uploadObj_1);
+                                uploadObj_1.put("fiveMinutesChangeRate",item.fiveMinutesChangeRate);
+                                uploadObj_1.put("largeOrderNumB",item.largeOrderNumB);
+                                uploadObj_1.put("largeOrderNumS",item.largeOrderNumS);
+                                uploadObj_1.put("bigOrderNumB",item.bigOrderNumB);
+                                uploadObj_1.put("bigOrderNumS",item.bigOrderNumS);
+                                uploadObj_1.put("midOrderNumB",item.midOrderNumB);
+                                uploadObj_1.put("midOrderNumS",item.midOrderNumS);
+                                uploadObj_1.put("smallOrderNumB",item.smallOrderNumB);
+                                uploadObj_1.put("smallOrderNumS",item.smallOrderNumS);
+                                uploadObj_1.put("mainforceMoneyNetInflow5",item.mainforceMoneyNetInflow5);
+                                uploadObj_1.put("mainforceMoneyNetInflow10",item.mainforceMoneyNetInflow10);
+                                uploadObj_1.put("mainforceMoneyNetInflow20",item.mainforceMoneyNetInflow20);
+                                uploadObj_1.put("ratioMainforceMoneyNetInflow5",item.ratioMainforceMoneyNetInflow5);
+                                uploadObj_1.put("ratioMainforceMoneyNetInflow10",item.ratioMainforceMoneyNetInflow10);
+                                uploadObj_1.put("ratioMainforceMoneyNetInflow20",item.ratioMainforceMoneyNetInflow20);
+//                                Log.d("data", String.valueOf(uploadObj_1));
+                                uploadObj.put(item.date+item.time,uploadObj_1);
+                            }
                         }
                         result.complete(uploadObj);
                     } catch (JSONException e) {
@@ -191,7 +194,7 @@ public class AddValueTest_2 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

@@ -87,8 +87,8 @@ public class F10_NewsTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_NewsTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("newsID");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("NEWSID");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             NewsRequest request = new NewsRequest();
@@ -103,10 +103,12 @@ public class F10_NewsTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     NewsDetailItem list = newsResponse.info;
                     try {
-                        uploadObj.put("ABSTRACT_",list.ABSTRACT_);
-                        uploadObj.put("INIPUBDATE_",list.INIPUBDATE_);
-                        uploadObj.put("MEDIANAME_",list.MEDIANAME_);
-                        uploadObj.put("ABSTRACTFORMAT_",list.ABSTRACTFORMAT_);
+                        if (list!=null){
+                            uploadObj.put("ABSTRACT_",list.ABSTRACT_);
+                            uploadObj.put("INIPUBDATE_",list.INIPUBDATE_);
+                            uploadObj.put("MEDIANAME_",list.MEDIANAME_);
+                            uploadObj.put("ABSTRACTFORMAT_",list.ABSTRACTFORMAT_);
+                        }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

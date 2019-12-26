@@ -74,8 +74,8 @@ public class F10_ForecastyearTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_ForecastyearTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         //CategoryType
 //        for (int i=0;i<quoteNumbers.length;i++){
@@ -92,13 +92,15 @@ public class F10_ForecastyearTest_1 {
                     // TODO fill uploadObj with QuoteResponse value
                     Forecastyear list =  forecastyearResponse.info;
                     try {
-                        uploadObj.put("NETEPS_",list.NETEPS_);
-                        uploadObj.put("AVGCOREREVENUE_",list.AVGCOREREVENUE_);
-                        uploadObj.put("FORECASTYEAR_",list.FORECASTYEAR_);
-                        uploadObj.put("STATISTICDATE_",list.STATISTICDATE_);
-                        uploadObj.put("AVGPROFIT_",list.AVGPROFIT_);
-                        uploadObj.put("ForecastYYYY",list.ForecastYYYY);
-                        uploadObj.put("FORECASTCOUNT_",list.FORECASTCOUNT_);
+                        if (list!=null){
+                            uploadObj.put("NETEPS_",list.NETEPS_);
+                            uploadObj.put("AVGCOREREVENUE_",list.AVGCOREREVENUE_);
+                            uploadObj.put("FORECASTYEAR_",list.FORECASTYEAR_);
+                            uploadObj.put("STATISTICDATE_",list.STATISTICDATE_);
+                            uploadObj.put("AVGPROFIT_",list.AVGPROFIT_);
+                            uploadObj.put("ForecastYYYY",list.ForecastYYYY);
+                            uploadObj.put("FORECASTCOUNT_",list.FORECASTCOUNT_);
+                        }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

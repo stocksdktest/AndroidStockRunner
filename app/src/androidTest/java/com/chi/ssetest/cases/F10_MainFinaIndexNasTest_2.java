@@ -78,9 +78,9 @@ public class F10_MainFinaIndexNasTest_2 {
     public void requestWork() throws Exception {
         Log.d("F10_MainFinaIndexNasTest_2", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("stockId");
-        final String quoteNumbers1 = rule.getParam().optString("dataSourceType");
-        final String quoteNumbers2 = rule.getParam().optString("cueryContent");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
+        final String quoteNumbers2 = rule.getParam().optString("param");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
         String dataSourceType;

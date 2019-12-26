@@ -48,6 +48,7 @@ import static org.junit.Assert.*;
 public class BidChartTest_2 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.BIDCHARTTEST_2;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d(" BidChartTest_2", "Setup");
@@ -58,11 +59,11 @@ public class BidChartTest_2 {
     }
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("BidChartTest_2", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("quoteitem");
+        final String quoteNumbers = rule.getParam().optString("CODE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i = 0; i < quoteNumbers.length; i++) {
             QuoteDetailRequest quoteDetailRequest=new QuoteDetailRequest();
@@ -82,18 +83,21 @@ public class BidChartTest_2 {
                             }
                             JSONObject uploadObj = new JSONObject();
                             try {
-                                for (BidItem item : bidChartResponse.bidItems) {
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("closePrice",item.closePrice);
-                                    uploadObj_1.put("referencePrice",item.referencePrice);
-                                    uploadObj_1.put("time",item.time);
-                                    uploadObj_1.put("sell1",item.sell1);
-                                    uploadObj_1.put("sell2",item.sell2);
-                                    uploadObj_1.put("buy1",item.buy1);
-                                    uploadObj_1.put("buy2",item.buy2);
-                                    Log.d("data", String.valueOf(uploadObj_1));
-                                    uploadObj.put(item.time,uploadObj_1);
+                                if (bidChartResponse.bidItems!=null){
+                                    for (BidItem item : bidChartResponse.bidItems) {
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("closePrice",item.closePrice);
+                                        uploadObj_1.put("referencePrice",item.referencePrice);
+                                        uploadObj_1.put("time",item.time);
+                                        uploadObj_1.put("sell1",item.sell1);
+                                        uploadObj_1.put("sell2",item.sell2);
+                                        uploadObj_1.put("buy1",item.buy1);
+                                        uploadObj_1.put("buy2",item.buy2);
+//                                        Log.d("data", String.valueOf(uploadObj_1));
+                                        uploadObj.put(item.time,uploadObj_1);
+                                    }
                                 }
+//                                Log.d("data", String.valueOf(uploadObj));
                                 result.complete(uploadObj);
                             } catch (JSONException e) {
                                 result.completeExceptionally(e);
@@ -111,7 +115,7 @@ public class BidChartTest_2 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject) result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject) result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

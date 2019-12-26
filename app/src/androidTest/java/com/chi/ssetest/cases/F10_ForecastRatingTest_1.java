@@ -77,8 +77,8 @@ public class F10_ForecastRatingTest_1 {
     public void requestWork() throws Exception {
         Log.d(" F10_ForecastRatingTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         //CategoryType
 //        for (int i=0;i<quoteNumbers.length;i++){
@@ -94,17 +94,21 @@ public class F10_ForecastRatingTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     ForecastRating list = forecastRatingResponse.info;
                     try {
-                        uploadObj.put("RatingFlag",list.RatingFlag);
-                        uploadObj.put("RatingDec",list.RatingDec);
-                        uploadObj.put("DATETITLE_",list.DATETITLE_);
-                        List<JSONObject> item=new ArrayList<>();
-                        for (int i=0;i<list.list.size();i++){
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("WRITINGDATE_",list.list.get(i).WRITINGDATE_);
-                            uploadObj_1.put("CHINAMEABBR_",list.list.get(i).CHINAMEABBR_);
-                            uploadObj_1.put("INVRATINGDESC_",list.list.get(i).INVRATINGDESC_);
-                            uploadObj_1.put("LAST_INVRATINGDESC_",list.list.get(i).LAST_INVRATINGDESC_);
-                            uploadObj.put(String.valueOf(i+1),uploadObj_1);
+                        if (list!=null){
+                            uploadObj.put("RatingFlag",list.RatingFlag);
+                            uploadObj.put("RatingDec",list.RatingDec);
+                            uploadObj.put("DATETITLE_",list.DATETITLE_);
+                            List<JSONObject> item=new ArrayList<>();
+                            if (item!=null){
+                                for (int i=0;i<list.list.size();i++){
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("WRITINGDATE_",list.list.get(i).WRITINGDATE_);
+                                    uploadObj_1.put("CHINAMEABBR_",list.list.get(i).CHINAMEABBR_);
+                                    uploadObj_1.put("INVRATINGDESC_",list.list.get(i).INVRATINGDESC_);
+                                    uploadObj_1.put("LAST_INVRATINGDESC_",list.list.get(i).LAST_INVRATINGDESC_);
+                                    uploadObj.put(String.valueOf(i+1),uploadObj_1);
+                                }
+                            }
                         }
                         Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);

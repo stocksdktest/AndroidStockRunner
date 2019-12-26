@@ -63,7 +63,7 @@ public class TCP_TickTest_1 {
     public void requestWork() throws Exception {
         Log.d("TCP_TickTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("CODES", "");
+        final String quoteNumbers = rule.getParam().optString("CODE", "");
         final String tcpSeconds = rule.getParam().optString("SECONDS", ""); //设置TCP监听的时间
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         final JSONObject uploadObj = new JSONObject();
@@ -119,13 +119,15 @@ public class TCP_TickTest_1 {
                                 code = entry.getKey();
                                 tickItems = entry.getValue();
 //                                uploadObj.put("code",code);
-                                for (TickItem tickItem : tickItems) {
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("datetime",tickItem.getTransactionTime());
-                                    uploadObj_1.put("price",tickItem.getTransactionPrice());
-                                    uploadObj_1.put("volume",tickItem.getSingleVolume());
-                                    uploadObj_1.put("Status",tickItem.getTransactionStatus());
-                                    uploadObj.put(tickItem.getTransactionTime(),uploadObj_1);
+                                if(tickItems!=null){
+                                    for (TickItem tickItem : tickItems) {
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("datetime",tickItem.getTransactionTime());
+                                        uploadObj_1.put("price",tickItem.getTransactionPrice());
+                                        uploadObj_1.put("volume",tickItem.getSingleVolume());
+                                        uploadObj_1.put("Status",tickItem.getTransactionStatus());
+                                        uploadObj.put(tickItem.getTransactionTime(),uploadObj_1);
+                                    }
                                 }
                             }
                             Log.d("tcp00", String.valueOf(uploadObj));

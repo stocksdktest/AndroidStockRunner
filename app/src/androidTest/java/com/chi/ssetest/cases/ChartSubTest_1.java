@@ -42,6 +42,7 @@ import static org.junit.Assert.*;
 public class ChartSubTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.CHARTSUBTEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
      //ChartSubType
     public static void setup() throws Exception {
@@ -53,13 +54,13 @@ public class ChartSubTest_1 {
     }
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("  ChartSubSampleTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("quoteitem");
-        final String quoteNumbers1 = rule.getParam().optString("type");
-        final String quoteNumbers2 = rule.getParam().optString("indexType");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("ChartType");
+        final String quoteNumbers2 = rule.getParam().optString("TYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i = 0; i < quoteNumbers.length; i++) {
             QuoteDetailRequest quoteDetailRequest=new QuoteDetailRequest();
@@ -79,41 +80,44 @@ public class ChartSubTest_1 {
                             String[][] list=chartSubResponse.line;
                             JSONObject uploadObj = new JSONObject();
                             try {
-                                for (int i=0;i<list.length;i++){
-                                    for (int k=0;k<list[i].length;k++){
-                                        JSONObject uploadObj_1 = new JSONObject();
-                                        if (quoteNumbers2.equals("1")){
-                                            uploadObj_1.put("time",list[i][0]);
-                                            uploadObj_1.put("ddx",list[i][1]);
-                                        }else if (quoteNumbers2.equals("2")){
-                                            uploadObj_1.put("time",list[i][0]);
-                                            uploadObj_1.put("ddy",list[i][1]);
-                                        }else if (quoteNumbers2.equals("3")){
-                                            uploadObj_1.put("time",list[i][0]);
-                                            uploadObj_1.put("ddz",list[i][1]);
-                                        }else if (quoteNumbers2.equals("4")){
-                                            uploadObj_1.put("time",list[i][0]);
-                                            uploadObj_1.put("bbd",list[i][1]);
-                                        }else if (quoteNumbers2.equals("5")){
-                                            uploadObj_1.put("time",list[i][0]);
-                                            uploadObj_1.put("ratioBS",list[i][1]);
-                                        }else if (quoteNumbers2.equals("6")){
-                                            uploadObj_1.put("time",list[i][0]);
-                                            uploadObj_1.put("largeMoneyInflow",list[i][1]);
-                                            uploadObj_1.put("bigMoneyInflow",list[i][2]);
-                                            uploadObj_1.put("midMoneyInflow",list[i][3]);
-                                            uploadObj_1.put("smallMoneyInflow",list[i][4]);
-                                        }else if (quoteNumbers2.equals("7")){
-                                            uploadObj_1.put("time",list[i][0]);
-                                            uploadObj_1.put("bigNetVolume",list[i][1]);
+                                if (list!=null){
+                                    for (int i=0;i<list.length;i++){
+                                        for (int k=0;k<list[i].length;k++){
+                                            JSONObject uploadObj_1 = new JSONObject();
+                                            if (quoteNumbers2.equals("1")){
+//                                            uploadObj_1.put("time",list[i][0]);
+                                                uploadObj_1.put("ddx",list[i][1]);
+                                            }else if (quoteNumbers2.equals("2")){
+//                                            uploadObj_1.put("time",list[i][0]);
+                                                uploadObj_1.put("ddy",list[i][1]);
+                                            }else if (quoteNumbers2.equals("3")){
+//                                            uploadObj_1.put("time",list[i][0]);
+                                                uploadObj_1.put("ddz",list[i][1]);
+                                            }else if (quoteNumbers2.equals("4")){
+//                                            uploadObj_1.put("time",list[i][0]);
+                                                uploadObj_1.put("bbd",list[i][1]);
+                                            }else if (quoteNumbers2.equals("5")){
+//                                            uploadObj_1.put("time",list[i][0]);
+                                                uploadObj_1.put("ratioBS",list[i][1]);
+                                            }else if (quoteNumbers2.equals("6")){
+//                                            uploadObj_1.put("time",list[i][0]);
+                                                uploadObj_1.put("largeMoneyInflow",list[i][1]);
+                                                uploadObj_1.put("bigMoneyInflow",list[i][2]);
+                                                uploadObj_1.put("midMoneyInflow",list[i][3]);
+                                                uploadObj_1.put("smallMoneyInflow",list[i][4]);
+                                            }else if (quoteNumbers2.equals("7")){
+//                                            uploadObj_1.put("time",list[i][0]);
+                                                uploadObj_1.put("bigNetVolume",list[i][1]);
+                                            }
+//                                        Log.d("data", String.valueOf(uploadObj_1));
+                                            uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                         }
-                                        Log.d("data", String.valueOf(uploadObj_1));
-                                        uploadObj.put(list[i][0],uploadObj_1);
                                     }
                                 }
                             } catch (JSONException e) {
                                 result.completeExceptionally(e);
                             }
+//                            Log.d("data", String.valueOf(uploadObj));
                             result.complete(uploadObj);
                         }
                         @Override
@@ -128,7 +132,7 @@ public class ChartSubTest_1 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

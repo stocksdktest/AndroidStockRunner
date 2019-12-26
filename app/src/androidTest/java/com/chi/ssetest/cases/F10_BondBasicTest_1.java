@@ -77,8 +77,8 @@ public class F10_BondBasicTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_BondBasicTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("stockId");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             BondBasicRequest request = new BondBasicRequest();
@@ -93,21 +93,23 @@ public class F10_BondBasicTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     HashMap<String,Object> list = f10V2Response.info;
                     try {
-                        uploadObj.put("BONDNAME",list.get("BONDNAME"));
-                        uploadObj.put("BONDSNAME",list.get("BONDSNAME"));
-                        uploadObj.put("SYMBOL",list.get("SYMBOL"));
-                        uploadObj.put("BONDTYPE2",list.get("BONDTYPE2"));
-                        uploadObj.put("INITIALCREDITRATE",list.get("INITIALCREDITRATE"));
-                        uploadObj.put("PARVALUE",list.get("PARVALUE"));
-                        uploadObj.put("MATURITYYEAR",list.get("MATURITYYEAR"));
-                        uploadObj.put("BASERATE",list.get("BASERATE"));
-                        uploadObj.put("CALCAMODE",list.get("CALCAMODE"));
-                        uploadObj.put("PAYMENTMODE",list.get("PAYMENTMODE"));
-                        uploadObj.put("LISTDATE",list.get("LISTDATE"));
-                        uploadObj.put("EXCHANGENAME",list.get("EXCHANGENAME"));
-                        uploadObj.put("LISTSTATE",list.get("LISTSTATE"));
-                        uploadObj.put("PAYMENTDATE",list.get("PAYMENTDATE"));
-                        uploadObj.put("DECLAREDATE",list.get("DECLAREDATE"));
+                        if (list!=null){
+                            uploadObj.put("BONDNAME",list.get("BONDNAME"));
+                            uploadObj.put("BONDSNAME",list.get("BONDSNAME"));
+                            uploadObj.put("SYMBOL",list.get("SYMBOL"));
+                            uploadObj.put("BONDTYPE2",list.get("BONDTYPE2"));
+                            uploadObj.put("INITIALCREDITRATE",list.get("INITIALCREDITRATE"));
+                            uploadObj.put("PARVALUE",list.get("PARVALUE"));
+                            uploadObj.put("MATURITYYEAR",list.get("MATURITYYEAR"));
+                            uploadObj.put("BASERATE",list.get("BASERATE"));
+                            uploadObj.put("CALCAMODE",list.get("CALCAMODE"));
+                            uploadObj.put("PAYMENTMODE",list.get("PAYMENTMODE"));
+                            uploadObj.put("LISTDATE",list.get("LISTDATE"));
+                            uploadObj.put("EXCHANGENAME",list.get("EXCHANGENAME"));
+                            uploadObj.put("LISTSTATE",list.get("LISTSTATE"));
+                            uploadObj.put("PAYMENTDATE",list.get("PAYMENTDATE"));
+                            uploadObj.put("DECLAREDATE",list.get("DECLAREDATE"));
+                        }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

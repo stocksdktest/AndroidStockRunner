@@ -40,7 +40,7 @@ import static org.junit.Assert.*;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
- *历史分时1--传单只股票
+ *历史分时--传单只股票 方法一
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
@@ -48,6 +48,7 @@ import static org.junit.Assert.*;
 public class HistoryChartTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.HISTORYCHARTTEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("HistoryChartTest_1", "Setup");
@@ -58,12 +59,12 @@ public class HistoryChartTest_1 {
     }
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("HistoryChartTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
-        final String quoteNumbers1 = rule.getParam().optString("date");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("DATE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             HistoryChartRequest request = new HistoryChartRequest();
@@ -78,19 +79,22 @@ public class HistoryChartTest_1 {
                     CopyOnWriteArrayList<OHLCItem> list=ohlcResponse.historyItems;
                     JSONObject uploadObj = new JSONObject();
                     try {
-                        for (int k=0;k<list.size();k++) {
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("datetime",list.get(k).datetime);
-                            uploadObj_1.put("closePrice",list.get(k).closePrice);
-                            uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
-                            uploadObj_1.put("averagePrice",list.get(k).averagePrice);
-                            uploadObj_1.put("md",list.get(k).getMd());
-                            uploadObj_1.put("openInterest",list.get(k).openInterest);
-                            uploadObj_1.put("iopv",list.get(k).iopv);
-                            uploadObj_1.put("iopvPre",list.get(k).iopvPre);
-                            Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(list.get(k).datetime,uploadObj_1);
+                        if (list!=null){
+                            for (int k=0;k<list.size();k++) {
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("datetime",list.get(k).datetime);
+                                uploadObj_1.put("closePrice",list.get(k).closePrice);
+                                uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
+                                uploadObj_1.put("averagePrice",list.get(k).averagePrice);
+                                uploadObj_1.put("md",list.get(k).getMd());
+                                uploadObj_1.put("openInterest",list.get(k).openInterest);
+                                uploadObj_1.put("iopv",list.get(k).iopv);
+                                uploadObj_1.put("iopvPre",list.get(k).iopvPre);
+//                            Log.d("data", String.valueOf(uploadObj_1));
+                                uploadObj.put(list.get(k).datetime,uploadObj_1);
+                            }
                         }
+//                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
@@ -102,7 +106,7 @@ public class HistoryChartTest_1 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

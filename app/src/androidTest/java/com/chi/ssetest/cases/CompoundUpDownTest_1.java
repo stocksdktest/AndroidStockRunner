@@ -39,6 +39,7 @@ import static org.junit.Assert.*;
 public class CompoundUpDownTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.COMPOUNDUPDOWNTEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d(" MorePriceSampleTest1", "Setup");
@@ -50,13 +51,13 @@ public class CompoundUpDownTest_1 {
 //    CompoundUpDownRequest.DateType
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d(" MorePriceSampleTest1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("market");
-        final String quoteNumbers1 = rule.getParam().optString("time");
-        final String quoteNumbers2 = rule.getParam().optString("datetype");
+        final String quoteNumbers = rule.getParam().optString("MARKET");
+        final String quoteNumbers1 = rule.getParam().optString("TYPE");
+        final String quoteNumbers2 = rule.getParam().optString("TIME");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        CompoundUpDownRequest.DateType
         //        for (int i=0;i<quoteNumbers.length;i++){
@@ -78,27 +79,30 @@ public class CompoundUpDownTest_1 {
                     List<CompoundUpDownBean> list=compoundUpDownResponse.compoundUpDownList;
                     JSONObject uploadObj = new JSONObject();
                     try {
-                        for (int i=0;i<list.size();i++){
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("dateTime",list.get(i).dateTime);
-                            uploadObj_1.put("riseCount",list.get(i).riseCount);
-                            uploadObj_1.put("fallCount",list.get(i).fallCount);
-                            uploadObj_1.put("flatCount",list.get(i).flatCount);
-                            uploadObj_1.put("stopCount",list.get(i).stopCount);
-                            uploadObj_1.put("riseLimitCount",list.get(i).riseLimitCount);
-                            uploadObj_1.put("fallLimitCount",list.get(i).fallLimitCount);
+                        if(list!=null){
+                            for (int i=0;i<list.size();i++){
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("dateTime",list.get(i).dateTime);
+                                uploadObj_1.put("riseCount",list.get(i).riseCount);
+                                uploadObj_1.put("fallCount",list.get(i).fallCount);
+                                uploadObj_1.put("flatCount",list.get(i).flatCount);
+                                uploadObj_1.put("stopCount",list.get(i).stopCount);
+                                uploadObj_1.put("riseLimitCount",list.get(i).riseLimitCount);
+                                uploadObj_1.put("fallLimitCount",list.get(i).fallLimitCount);
 
-                            List<String> riseFallRange=new ArrayList<>();
-                            for (int k=0;k<list.get(i).riseFallRange.length;k++){
-                                riseFallRange.add(list.get(i).riseFallRange[k]);
+                                List<String> riseFallRange=new ArrayList<>();
+                                for (int k=0;k<list.get(i).riseFallRange.length;k++){
+                                    riseFallRange.add(list.get(i).riseFallRange[k]);
+                                }
+                                uploadObj_1.put("riseFallRange",new JSONArray(riseFallRange));
+
+                                uploadObj_1.put("oneRiseLimitCount",list.get(i).oneRiseLimitCount);
+                                uploadObj_1.put("natureRiseLimitCount",list.get(i).natureRiseLimitCount);
+//                            Log.d("data", String.valueOf(uploadObj_1));
+                                uploadObj.put(list.get(i).dateTime,uploadObj_1);
                             }
-                            uploadObj_1.put("riseFallRange",new JSONArray(riseFallRange));
-
-                            uploadObj_1.put("oneRiseLimitCount",list.get(i).oneRiseLimitCount);
-                            uploadObj_1.put("natureRiseLimitCount",list.get(i).natureRiseLimitCount);
-                            Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(list.get(i).dateTime,uploadObj_1);
                         }
+//                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
@@ -110,7 +114,7 @@ public class CompoundUpDownTest_1 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

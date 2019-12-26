@@ -71,8 +71,8 @@ public class F10_NewIndexTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_NewIndexTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         //CategoryType
 //        for (int i=0;i<quoteNumbers.length;i++){
@@ -89,23 +89,25 @@ public class F10_NewIndexTest_1 {
                     // TODO fill uploadObj with QuoteResponse value
                     NewIndex list = newIndexResponse.info;
                     try {
-                        uploadObj.put("netProfitCutParentComYOY",list.netProfitCutParentComYOY);
-                        uploadObj.put("netProfitCutParentCom",list.netProfitCutParentCom);
-                        uploadObj.put("cutBasicEPS",list.cutBasicEPS);
-                        uploadObj.put("annuROE",list.annuROE);
-                        uploadObj.put("netProfitCutParentCom",list.netProfitCutParentCom);
-                        uploadObj.put("basicEPS",list.basicEPS);
-                        uploadObj.put("totalShare",list.totalShare);
-                        uploadObj.put("BVPS_",list.BVPS_);
+                        if(list!=null){
+                            uploadObj.put("netProfitCutParentComYOY",list.netProfitCutParentComYOY);
+                            uploadObj.put("netProfitCutParentCom",list.netProfitCutParentCom);
+                            uploadObj.put("cutBasicEPS",list.cutBasicEPS);
+                            uploadObj.put("annuROE",list.annuROE);
+                            uploadObj.put("netProfitCutParentCom",list.netProfitCutParentCom);
+                            uploadObj.put("basicEPS",list.basicEPS);
+                            uploadObj.put("totalShare",list.totalShare);
+                            uploadObj.put("BVPS_",list.BVPS_);
 //                        uploadObj.put("totalShareL",list.totalShareL);
-                        uploadObj.put("reservePS",list.reservePS);
-                        uploadObj.put("REPTITLE_",list.REPTITLE_);
-                        uploadObj.put("netCashFlowOperPS",list.netCashFlowOperPS);
-                        uploadObj.put("grossProfitMargin",list.grossProfitMargin);
-                        uploadObj.put("netProfitParentComYOY",list.netProfitParentComYOY);
-                        uploadObj.put("retainedEarningPS",list.retainedEarningPS);
-                        uploadObj.put("operRevenueYOY",list.operRevenueYOY);
-                        uploadObj.put("operRevenue",list.operRevenue);
+                            uploadObj.put("reservePS",list.reservePS);
+                            uploadObj.put("REPTITLE_",list.REPTITLE_);
+                            uploadObj.put("netCashFlowOperPS",list.netCashFlowOperPS);
+                            uploadObj.put("grossProfitMargin",list.grossProfitMargin);
+                            uploadObj.put("netProfitParentComYOY",list.netProfitParentComYOY);
+                            uploadObj.put("retainedEarningPS",list.retainedEarningPS);
+                            uploadObj.put("operRevenueYOY",list.operRevenueYOY);
+                            uploadObj.put("operRevenue",list.operRevenue);
+                        }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

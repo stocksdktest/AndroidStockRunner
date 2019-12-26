@@ -75,8 +75,8 @@ public class F10_CompanyInfoTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_CompanyInfoTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         //CategoryType
 //        for (int i=0;i<quoteNumbers.length;i++){
@@ -93,26 +93,28 @@ public class F10_CompanyInfoTest_1 {
                     // TODO fill uploadObj with QuoteResponse value
                     F10V2Response mCompanyInfoResponse = (F10V2Response) f10V2Response;
                     try {
-                         if (quoteNumbers1.equals("g")){
-                             uploadObj.put("LEGALREPR",mCompanyInfoResponse.info.get("LEGALREPR"));
-                             uploadObj.put("COREBUSINESS",mCompanyInfoResponse.info.get("COREBUSINESS"));
-                             uploadObj.put("PROVINCENAME",mCompanyInfoResponse.info.get("PROVINCENAME"));
-                             uploadObj.put("LISTINGDATE",mCompanyInfoResponse.info.get("LISTINGDATE"));
-                             uploadObj.put("BUSINESSSCOPE",mCompanyInfoResponse.info.get("BUSINESSSCOPE"));
-                             uploadObj.put("INDUNAMESW",mCompanyInfoResponse.info.get("INDUNAMESW"));
-                             uploadObj.put("REGCAPITAL",mCompanyInfoResponse.info.get("REGCAPITAL"));
-                             uploadObj.put("CHINAME",mCompanyInfoResponse.info.get("CHINAME"));
-                             uploadObj.put("REGADDRESS",mCompanyInfoResponse.info.get("REGADDRESS"));
-                         }
-                         if (quoteNumbers1.equals("d")){
-                             uploadObj.put("CHINAME",mCompanyInfoResponse.info.get("CHINAME"));
-                             uploadObj.put("SEENGNAME",mCompanyInfoResponse.info.get("SEENGNAME"));
-                             uploadObj.put("AUTHCAPSK",mCompanyInfoResponse.info.get("AUTHCAPSK"));
-                             uploadObj.put("LISTINGDATE",mCompanyInfoResponse.info.get("LISTINGDATE"));
-                             uploadObj.put("ISSUECAPSK",mCompanyInfoResponse.info.get("ISSUECAPSK"));
-                             uploadObj.put("CURNAME",mCompanyInfoResponse.info.get("CURNAME"));
-                             uploadObj.put("PARVALUE",mCompanyInfoResponse.info.get("PARVALUE"));
-                             uploadObj.put("DEBTBOARDLOT",mCompanyInfoResponse.info.get("DEBTBOARDLOT"));
+                         if(mCompanyInfoResponse.info!=null){
+                             if (quoteNumbers1.equals("g")){
+                                 uploadObj.put("LEGALREPR",mCompanyInfoResponse.info.get("LEGALREPR"));
+                                 uploadObj.put("COREBUSINESS",mCompanyInfoResponse.info.get("COREBUSINESS"));
+                                 uploadObj.put("PROVINCENAME",mCompanyInfoResponse.info.get("PROVINCENAME"));
+                                 uploadObj.put("LISTINGDATE",mCompanyInfoResponse.info.get("LISTINGDATE"));
+                                 uploadObj.put("BUSINESSSCOPE",mCompanyInfoResponse.info.get("BUSINESSSCOPE"));
+                                 uploadObj.put("INDUNAMESW",mCompanyInfoResponse.info.get("INDUNAMESW"));
+                                 uploadObj.put("REGCAPITAL",mCompanyInfoResponse.info.get("REGCAPITAL"));
+                                 uploadObj.put("CHINAME",mCompanyInfoResponse.info.get("CHINAME"));
+                                 uploadObj.put("REGADDRESS",mCompanyInfoResponse.info.get("REGADDRESS"));
+                             }
+                             if (quoteNumbers1.equals("d")){
+                                 uploadObj.put("CHINAME",mCompanyInfoResponse.info.get("CHINAME"));
+                                 uploadObj.put("SEENGNAME",mCompanyInfoResponse.info.get("SEENGNAME"));
+                                 uploadObj.put("AUTHCAPSK",mCompanyInfoResponse.info.get("AUTHCAPSK"));
+                                 uploadObj.put("LISTINGDATE",mCompanyInfoResponse.info.get("LISTINGDATE"));
+                                 uploadObj.put("ISSUECAPSK",mCompanyInfoResponse.info.get("ISSUECAPSK"));
+                                 uploadObj.put("CURNAME",mCompanyInfoResponse.info.get("CURNAME"));
+                                 uploadObj.put("PARVALUE",mCompanyInfoResponse.info.get("PARVALUE"));
+                                 uploadObj.put("DEBTBOARDLOT",mCompanyInfoResponse.info.get("DEBTBOARDLOT"));
+                             }
                          }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

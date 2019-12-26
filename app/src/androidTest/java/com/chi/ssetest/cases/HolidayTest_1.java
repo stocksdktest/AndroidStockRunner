@@ -38,6 +38,7 @@ import static org.junit.Assert.*;
 public class HolidayTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.HOLIDAYTEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("HolidayTest_1", "Setup");
@@ -48,7 +49,7 @@ public class HolidayTest_1 {
     }
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("HolidayTest_1", "requestWork");
         // TODO get custom args from param
@@ -66,11 +67,13 @@ public class HolidayTest_1 {
                     }
                     try {
                         JSONObject uploadObj= new JSONObject();
-                        List<String> dateList=new ArrayList<>();
-                        for (int i=0;i<holidayResponse.info.size();i++){
-                            dateList.add(holidayResponse.info.get(i));
+                        if (holidayResponse.info!=null){
+                            List<String> dateList=new ArrayList<>();
+                            for (int i=0;i<holidayResponse.info.size();i++){
+                                dateList.add(holidayResponse.info.get(i));
+                            }
+                            uploadObj.put("date",new JSONArray(dateList));
                         }
-                        uploadObj.put("date",new JSONArray(dateList));
                         Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
@@ -83,7 +86,7 @@ public class HolidayTest_1 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

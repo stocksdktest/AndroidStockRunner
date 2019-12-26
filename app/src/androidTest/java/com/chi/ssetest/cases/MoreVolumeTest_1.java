@@ -50,7 +50,7 @@ import static org.junit.Assert.*;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
- *分价1——适合所有市场
+ *分量--只用于沪深L2
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
@@ -58,7 +58,7 @@ import static org.junit.Assert.*;
 public class MoreVolumeTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName. MOREVOLUMETEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
-
+    private static final int timeout_ms = 1000000;
     @BeforeClass
 
     public static void setup() throws Exception {
@@ -72,12 +72,12 @@ public class MoreVolumeTest_1 {
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
 
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d(" MoreVolumeTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
-        final String quoteNumbers1 = rule.getParam().optString("subtype");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SUBTYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         //CategoryType
 //        for (int i=0;i<quoteNumbers.length;i++){
@@ -93,28 +93,30 @@ public class MoreVolumeTest_1 {
                 }
                 try {
                     JSONObject uploadObj = new JSONObject();
-                    List<String> volumes=new ArrayList<>();
-                    if (moreVolumeResponse.values[0]!=null){
-                        for (int i=0;i<moreVolumeResponse.values[0].length;i++){
-                            volumes.add(moreVolumeResponse.values[0][i]);
+                    if(moreVolumeResponse!=null){
+                        List<String> volumes=new ArrayList<>();
+                        if (moreVolumeResponse.values[0]!=null){
+                            for (int i=0;i<moreVolumeResponse.values[0].length;i++){
+                                volumes.add(moreVolumeResponse.values[0][i]);
+                            }
+                            uploadObj.put("volumes",new JSONArray(volumes));
                         }
-                        uploadObj.put("volumes",new JSONArray(volumes));
-                    }
-                    List<String> buyVolumes=new ArrayList<>();
-                    if (moreVolumeResponse.values[1]!=null){
-                        for (int i=0;i<moreVolumeResponse.values[1].length;i++){
-                            volumes.add(moreVolumeResponse.values[1][i]);
+                        List<String> buyVolumes=new ArrayList<>();
+                        if (moreVolumeResponse.values[1]!=null){
+                            for (int i=0;i<moreVolumeResponse.values[1].length;i++){
+                                volumes.add(moreVolumeResponse.values[1][i]);
+                            }
+                            uploadObj.put("buyVolumes",new JSONArray(volumes));
                         }
-                        uploadObj.put("buyVolumes",new JSONArray(volumes));
-                    }
-                    List<String> sellVolumes=new ArrayList<>();
-                    if (moreVolumeResponse.values[2]!=null){
-                        for (int i=0;i<moreVolumeResponse.values[2].length;i++){
-                            volumes.add(moreVolumeResponse.values[2][i]);
+                        List<String> sellVolumes=new ArrayList<>();
+                        if (moreVolumeResponse.values[2]!=null){
+                            for (int i=0;i<moreVolumeResponse.values[2].length;i++){
+                                volumes.add(moreVolumeResponse.values[2][i]);
+                            }
+                            uploadObj.put("sellVolumes",new JSONArray(volumes));
                         }
-                        uploadObj.put("sellVolumes",new JSONArray(volumes));
                     }
-                    Log.d("data", String.valueOf(uploadObj));
+//                    Log.d("data", String.valueOf(uploadObj));
                     result.complete(uploadObj);
                 } catch (JSONException e) {
                     result.completeExceptionally(e);
@@ -127,7 +129,7 @@ public class MoreVolumeTest_1 {
             }
         });
         try {
-            JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+            JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
             RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
         } catch (Exception e) {
             throw new Exception(e);
