@@ -8,7 +8,7 @@ trigger:
   - tag
 
 steps:
-- name: test
+- name: build
   image: mingc/android-build-box:1.12.0
   mem_limit: 600000000
   environment:
@@ -26,18 +26,31 @@ steps:
   - cd /drone/src && ./gradlew --build-cache build assembleAndroidTest -Papk_version=${DRONE_TAG}
   - test -f /drone/src/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
   - test -f /drone/src/app/build/outputs/apk/debug/app-debug.apk
-- name: publish
-  image: plugins/github-release
+- name: checksum
+  image: busybox:1.27.2
   volumes:
   - name: build-result
-    path: /tmp/build
-  settings:
-    api_key:
-      from_secret: release-token
-    files:
-    - /tmp/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-    - /tmp/build/outputs/apk/debug/app-debug.apk
-    title: 0.0.1
+    path: /root/build
+  - name: release
+    path: /root/release
+  commands:
+  - mkdir -p /root/release/${DRONE_TAG}
+  - md5sum /root/build/outputs/apk/debug/app-debug.apk > /root/release/${DRONE_TAG}/md5sum.txt
+  - md5sum /root/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk >> /root/release/${DRONE_TAG}/md5sum.txt
+  - cp /root/build/outputs/apk/debug/app-debug.apk /root/release/${DRONE_TAG}/app-debug.apk
+  - cp /root/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk /root/release/${DRONE_TAG}/app-debug-androidTest.apk
+# - name: publish
+#   image: plugins/github-release
+#   volumes:
+#   - name: build-result
+#     path: /tmp/build
+#   settings:
+#     api_key:
+#       from_secret: release-token
+#     files:
+#     - /tmp/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+#     - /tmp/build/outputs/apk/debug/app-debug.apk
+#     title: 0.0.1
 
 volumes:
 - name: build-result
@@ -47,7 +60,10 @@ volumes:
     path: /root/AndroidTestRunner/build-cache
 - name: build-deps-jar
   host:
-    path: /root/sdks/Android/v3.1.0.003/libs
+    path: /root/ftp-cache/sdk/Android/v3.1.0.003/libs
 - name: build-deps-jni
   host:
-    path: /root/sdks/Android/v3.1.0.003/jniLibs
+    path: /root/ftp-cache/sdk/Android/v3.1.0.003/jniLibs
+- name: release
+  host:
+    path: /root/ftp-cache/release/Android
