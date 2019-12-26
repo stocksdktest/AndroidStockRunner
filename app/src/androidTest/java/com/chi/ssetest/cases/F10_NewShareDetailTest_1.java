@@ -95,8 +95,8 @@ public class F10_NewShareDetailTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_NewShareDetailTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             NewShareDetailRequest request = new NewShareDetailRequest();
@@ -111,33 +111,35 @@ public class F10_NewShareDetailTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     NewShareDetail  list = newShareDetailResponse.info;
                     try {
-                        uploadObj.put("applyCode",list.getApplyCode());
-                        uploadObj.put("secuabbr",list.getSecuabbr());
-                        uploadObj.put("tradingCode",list.getTradingCode());
-                        uploadObj.put("peaIssue",list.getPeaIssue());
-                        uploadObj.put("succResultNoticeDate",list.getSuccResultNoticeDate());
-                        uploadObj.put("issuePrice",list.getIssuePrice());
-                        uploadObj.put("capplyShare",list.getCapplyShare());
-                        uploadObj.put("allotrateon",list.getAllotrateon());
-                        uploadObj.put("listingDate",list.getListingDate());
-                        uploadObj.put("bookStartDateOn",list.getBookStartDateOn());
-                        uploadObj.put("issueSharePlan",list.getIssueSharePlan());
-                        uploadObj.put("issueShareOnPlan",list.getIssueShareOnPlan());
-                        uploadObj.put("issueShare",list.getIssueShare());
-                        uploadObj.put("issueShareOn",list.getIssueShareOn());
-                        uploadObj.put("capplyPrice",list.getCapplyPrice());
-                        uploadObj.put("boradName",list.getBoradName());
-                        uploadObj.put("comProfile",list.getComProfile());
-                        uploadObj.put("refundDateOn",list.getRefundDateOn());
-                        uploadObj.put("issueAllotnOn",list.getIssueAllotnOn());
-                        uploadObj.put("businessScope",list.getBusinessScope());
-                        uploadObj.put("leadUnderwriter",list.getLeadUnderwriter());
-                        uploadObj.put("issuePricePlan",list.getIssuePricePlan());
-                        uploadObj.put("capplyPricePlan",list.getCapplyPricePlan());
-                        uploadObj.put("capplySharePlan",list.getCapplySharePlan());
-                        uploadObj.put("newTotRaiseAmt",list.getNewTotRaiseAmt());
-                        uploadObj.put("newNetRaiseAmt",list.getNewNetRaiseAmt());
-                        uploadObj.put("keyCode",list.getKeyCode());
+                        if (list!=null){
+                            uploadObj.put("applyCode",list.getApplyCode());
+                            uploadObj.put("secuabbr",list.getSecuabbr());
+                            uploadObj.put("tradingCode",list.getTradingCode());
+                            uploadObj.put("peaIssue",list.getPeaIssue());
+                            uploadObj.put("succResultNoticeDate",list.getSuccResultNoticeDate());
+                            uploadObj.put("issuePrice",list.getIssuePrice());
+                            uploadObj.put("capplyShare",list.getCapplyShare());
+                            uploadObj.put("allotrateon",list.getAllotrateon());
+                            uploadObj.put("listingDate",list.getListingDate());
+                            uploadObj.put("bookStartDateOn",list.getBookStartDateOn());
+                            uploadObj.put("issueSharePlan",list.getIssueSharePlan());
+                            uploadObj.put("issueShareOnPlan",list.getIssueShareOnPlan());
+                            uploadObj.put("issueShare",list.getIssueShare());
+                            uploadObj.put("issueShareOn",list.getIssueShareOn());
+                            uploadObj.put("capplyPrice",list.getCapplyPrice());
+                            uploadObj.put("boradName",list.getBoradName());
+                            uploadObj.put("comProfile",list.getComProfile());
+                            uploadObj.put("refundDateOn",list.getRefundDateOn());
+                            uploadObj.put("issueAllotnOn",list.getIssueAllotnOn());
+                            uploadObj.put("businessScope",list.getBusinessScope());
+                            uploadObj.put("leadUnderwriter",list.getLeadUnderwriter());
+                            uploadObj.put("issuePricePlan",list.getIssuePricePlan());
+                            uploadObj.put("capplyPricePlan",list.getCapplyPricePlan());
+                            uploadObj.put("capplySharePlan",list.getCapplySharePlan());
+                            uploadObj.put("newTotRaiseAmt",list.getNewTotRaiseAmt());
+                            uploadObj.put("newNetRaiseAmt",list.getNewNetRaiseAmt());
+                            uploadObj.put("keyCode",list.getKeyCode());
+                        }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

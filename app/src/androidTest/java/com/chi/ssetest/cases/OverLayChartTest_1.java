@@ -40,6 +40,7 @@ import static org.junit.Assert.*;
 public class OverLayChartTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.OVERLAYCHARTTEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("OverLayChartTest_1", "Setup");
@@ -50,13 +51,13 @@ public class OverLayChartTest_1 {
     }
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("OverLayChartTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("baseCode");
-        final String quoteNumbers1 = rule.getParam().optString("overLayCode");
-        final String quoteNumbers2 = rule.getParam().optString("chartType");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("superpositionCode");
+        final String quoteNumbers2 = rule.getParam().optString("TYPE");
         final String quoteNumbers3 = rule.getParam().optString("pointType");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         //PointAddType 0  1   2
@@ -77,47 +78,53 @@ public class OverLayChartTest_1 {
                     JSONObject uploadObj_2 = new JSONObject();
                     JSONObject uploadObj_3 = new JSONObject();
                     try {
-                        List<String> dayList=new ArrayList<>();
-                        if (quoteNumbers2.equals("ChartTypeOneDay")){
-                            dayList.add(chartResponse.dayList.get(0));
-                        }else {
-                            for (int k=0;k<chartResponse.dayList.size();k++){
-                                dayList.add(chartResponse.dayList.get(k));
+                       if(chartResponse.dayList!=null){
+                           List<String> dayList=new ArrayList<>();
+                           if (quoteNumbers2.equals("ChartTypeOneDay")){
+                               dayList.add(chartResponse.dayList.get(0));
+                           }else {
+                               for (int k=0;k<chartResponse.dayList.size();k++){
+                                   dayList.add(chartResponse.dayList.get(k));
+                               }
+                           }
+                           uploadObj.put("dayList",new JSONArray(dayList));
+                       }
+
+                        if(list!=null){
+                            for (int k=0;k<chartResponse.historyItems.size();k++) {
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("datetime",list.get(k).datetime);
+                                uploadObj_1.put("closePrice",list.get(k).closePrice);
+                                uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
+                                uploadObj_1.put("averagePrice",list.get(k).averagePrice);
+                                uploadObj_1.put("md",list.get(k).getMd());
+                                uploadObj_1.put("iopv",list.get(k).iopv);
+                                uploadObj_1.put("iopvPre",list.get(k).iopvPre);
+                                uploadObj_1.put("openInterest",list.get(k).openInterest);
+                                uploadObj_2.put(list.get(k).datetime,uploadObj_1);
                             }
+                            uploadObj.put("OHLCItem",uploadObj_2);
                         }
-                        uploadObj.put("dayList",new JSONArray(dayList));
 
-                        for (int k=0;k<chartResponse.historyItems.size();k++) {
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("datetime",list.get(k).datetime);
-                            uploadObj_1.put("closePrice",list.get(k).closePrice);
-                            uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
-                            uploadObj_1.put("averagePrice",list.get(k).averagePrice);
-                            uploadObj_1.put("md",list.get(k).getMd());
-                            uploadObj_1.put("iopv",list.get(k).iopv);
-                            uploadObj_1.put("iopvPre",list.get(k).iopvPre);
-                            uploadObj_1.put("openInterest",list.get(k).openInterest);
-                            uploadObj_2.put(list.get(k).datetime,uploadObj_1);
+                        if(list2!=null){
+                            for (int k=0;k<list2.size();k++){
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("datetime",list2.get(k).datetime);
+                                uploadObj_1.put("closePrice",list2.get(k).closePrice);
+                                uploadObj_1.put("tradeVolume",list2.get(k).tradeVolume);
+                                uploadObj_1.put("averagePrice",list2.get(k).averagePrice);
+                                uploadObj_1.put("md",list2.get(k).getMd());
+                                uploadObj_1.put("iopv",list2.get(k).iopv);
+                                uploadObj_1.put("iopvPre",list2.get(k).iopvPre);
+                                uploadObj_1.put("openInterest",list2.get(k).openInterest);
+                                uploadObj_3.put(list2.get(k).datetime,uploadObj_1);
+                            }
+                            uploadObj.put("overLayChart",uploadObj_3);
                         }
-                        uploadObj.put("OHLCItem",uploadObj_2);
-
-                        for (int k=0;k<list2.size();k++){
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("datetime",list2.get(k).datetime);
-                            uploadObj_1.put("closePrice",list2.get(k).closePrice);
-                            uploadObj_1.put("tradeVolume",list2.get(k).tradeVolume);
-                            uploadObj_1.put("averagePrice",list2.get(k).averagePrice);
-                            uploadObj_1.put("md",list2.get(k).getMd());
-                            uploadObj_1.put("iopv",list2.get(k).iopv);
-                            uploadObj_1.put("iopvPre",list2.get(k).iopvPre);
-                            uploadObj_1.put("openInterest",list2.get(k).openInterest);
-                            uploadObj_3.put(list2.get(k).datetime,uploadObj_1);
-                        }
-                        uploadObj.put("overLayChart",uploadObj_3);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
+//                    Log.d("data", String.valueOf(uploadObj));
                     result.complete(uploadObj);
                 }
                 @Override
@@ -126,7 +133,7 @@ public class OverLayChartTest_1 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

@@ -47,7 +47,7 @@ import static org.junit.Assert.*;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
- *分价2——只适合中金所
+ *分价——只适合中金所  方法二
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
@@ -55,6 +55,7 @@ import static org.junit.Assert.*;
 public class MorePriceTest_2 {
     private static final StockTestcaseName testcaseName = StockTestcaseName. MOREPRICETEST_2;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d(" MorePriceTest_2", "Setup");
@@ -66,11 +67,11 @@ public class MorePriceTest_2 {
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
 
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d(" MorePriceTest_2", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
+        final String quoteNumbers = rule.getParam().optString("CODE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         //CategoryType
 //        for (int i=0;i<quoteNumbers.length;i++){
@@ -83,9 +84,9 @@ public class MorePriceTest_2 {
                     } catch (AssertionError e) {
                         result.completeExceptionally(e);
                     }
-                    if (morePriceResponse.strs!=null&&morePriceResponse.strs.length>0){
-                        try {
-                            JSONObject uploadObj = new JSONObject();
+                    try {
+                        JSONObject uploadObj = new JSONObject();
+                        if(morePriceResponse.strs!=null){
                             for (int i=0;i<morePriceResponse.strs.length;i++){
                                 JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("price",morePriceResponse.strs[i][0]);
@@ -97,13 +98,14 @@ public class MorePriceTest_2 {
                                 uploadObj_1.put("buyCount",morePriceResponse.strs[i][6]);
                                 uploadObj_1.put("sellCount",morePriceResponse.strs[i][7]);
                                 uploadObj_1.put("unknownCount",morePriceResponse.strs[i][8]);
-                                Log.d("data", String.valueOf(uploadObj_1));
+//                                Log.d("data", String.valueOf(uploadObj_1));
                                 uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
-                            result.complete(uploadObj);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
                         }
+//                            Log.d("data", String.valueOf(uploadObj));
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
                 }
                 @Override
@@ -112,7 +114,7 @@ public class MorePriceTest_2 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

@@ -78,8 +78,8 @@ public class F10_FndDivideEndTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_FndDivideEndTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("stockId");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             FndDivideEndRequest request = new FndDivideEndRequest();
@@ -94,19 +94,21 @@ public class F10_FndDivideEndTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     HashMap<String,Object> list = f10V2Response.info;
                     try {
-                        uploadObj.put("DEFSHAREMODE",list.get("DEFSHAREMODE"));
-                        uploadObj.put("INNERDEVDATE",list.get("INNERDEVDATE"));
-                        uploadObj.put("INNERDEVPSETDATE",list.get("INNERDEVPSETDATE"));
-                        uploadObj.put("INNERRIGHTDATE",list.get("INNERRIGHTDATE"));
-                        uploadObj.put("ISBONUS",list.get("ISBONUS"));
-                        uploadObj.put("PUBLISHDATE",list.get("PUBLISHDATE"));
-                        uploadObj.put("RECORDDATE",list.get("RECORDDATE"));
-                        uploadObj.put("UNITPTAXDEV",list.get("UNITPTAXDEV"));
+                        if (list!=null){
+                            uploadObj.put("DEFSHAREMODE",list.get("DEFSHAREMODE"));
+                            uploadObj.put("INNERDEVDATE",list.get("INNERDEVDATE"));
+                            uploadObj.put("INNERDEVPSETDATE",list.get("INNERDEVPSETDATE"));
+                            uploadObj.put("INNERRIGHTDATE",list.get("INNERRIGHTDATE"));
+                            uploadObj.put("ISBONUS",list.get("ISBONUS"));
+                            uploadObj.put("PUBLISHDATE",list.get("PUBLISHDATE"));
+                            uploadObj.put("RECORDDATE",list.get("RECORDDATE"));
+                            uploadObj.put("UNITPTAXDEV",list.get("UNITPTAXDEV"));
+                        }
+                        Log.d("data", String.valueOf(uploadObj));
+                        result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
                 }
                 @Override
                 public void exception(ErrorInfo errorInfo) {

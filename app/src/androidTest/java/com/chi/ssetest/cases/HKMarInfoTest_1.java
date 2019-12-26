@@ -48,7 +48,7 @@ import static org.junit.Assert.*;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
- *两市港股通额度资讯------------error
+ *两市港股通额度资讯
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
@@ -56,7 +56,7 @@ import static org.junit.Assert.*;
 public class HKMarInfoTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.HKMARINFOTEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
-
+    private static final int timeout_ms = 1000000;
     @BeforeClass
 
     public static void setup() throws Exception {
@@ -70,7 +70,7 @@ public class HKMarInfoTest_1 {
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
 
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d(" HKMarInfoTest_1", "requestWork");
         // TODO get custom args from param
@@ -89,16 +89,18 @@ public class HKMarInfoTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value
                     try {
-                        uploadObj.put("shInitialQuota", hkMarInfoResponse.shInitialQuota);
-                        uploadObj.put("shRemainQuota", hkMarInfoResponse.shRemainQuota);
-                        uploadObj.put("shStatus", hkMarInfoResponse.shStatus);
-                        uploadObj.put("szInitialQuota", hkMarInfoResponse.szInitialQuota);
-                        uploadObj.put("szRemainQuota", hkMarInfoResponse.szRemainQuota);
-                        uploadObj.put("szStatus", hkMarInfoResponse.szStatus);
+                        if(hkMarInfoResponse!=null){
+                            uploadObj.put("shInitialQuota", hkMarInfoResponse.shInitialQuota);
+                            uploadObj.put("shRemainQuota", hkMarInfoResponse.shRemainQuota);
+                            uploadObj.put("shStatus", hkMarInfoResponse.shStatus);
+                            uploadObj.put("szInitialQuota", hkMarInfoResponse.szInitialQuota);
+                            uploadObj.put("szRemainQuota", hkMarInfoResponse.szRemainQuota);
+                            uploadObj.put("szStatus", hkMarInfoResponse.szStatus);
+                        }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
+//                    Log.d("data", String.valueOf(uploadObj));
                     result.complete(uploadObj);
                 }
                 @Override
@@ -107,7 +109,7 @@ public class HKMarInfoTest_1 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

@@ -48,6 +48,7 @@ import static org.junit.Assert.*;
 public class ConvertibleDebTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.CONVERTIBLETEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("ConvertibleDebTest_1", "Setup");
@@ -58,11 +59,11 @@ public class ConvertibleDebTest_1 {
     }
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("ConvertibleDebTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
+        final String quoteNumbers = rule.getParam().optString("CODE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             ConvertibleDebtRequest request = new  ConvertibleDebtRequest();
@@ -77,26 +78,29 @@ public class ConvertibleDebTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value
                     try {
-                        for (ConvertibleBoundItem item :convertibleBoundResponse.items) {
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("code",item.code);
-                            uploadObj_1.put("name",item.name);
+                        if(convertibleBoundResponse.items!=null){
+                            for (ConvertibleBoundItem item :convertibleBoundResponse.items) {
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("code",item.code);
+                                uploadObj_1.put("name",item.name);
 //                            uploadObj_1.put("market",item.market);
 //                            uploadObj_1.put("subtype",item.subtype);
-                            uploadObj_1.put("lastPrice",item.lastPrice);
+                                uploadObj_1.put("lastPrice",item.lastPrice);
 //                            uploadObj_1.put("preClosePrice",item.preClosePrice);
-                            uploadObj_1.put("premium",item.premium);
+                                uploadObj_1.put("premium",item.premium);
 //                            uploadObj_1.put("upDownFlag",item.upDownFlag);
 //                            uploadObj_1.put("changeRate",item.upDownFlag+item.changeRate);
-                            if ("+".equals(item.upDownFlag)||"-".equals(item.upDownFlag)){
-                                uploadObj.put("changeRate",item.upDownFlag+item.changeRate);//加涨跌符号
-                            }else {
-                                uploadObj.put("changeRate",item.changeRate);
+                                if ("+".equals(item.upDownFlag)||"-".equals(item.upDownFlag)){
+                                    uploadObj.put("changeRate",item.upDownFlag+item.changeRate);//加涨跌符号
+                                }else {
+                                    uploadObj.put("changeRate",item.changeRate);
+                                }
+                                uploadObj_1.put("change",item.change);
+//                            Log.d("data", String.valueOf(uploadObj_1));
+                                uploadObj.put(item.code,uploadObj_1);
                             }
-                            uploadObj_1.put("change",item.change);
-                            Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(item.code,uploadObj_1);
                         }
+//                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
@@ -108,7 +112,7 @@ public class ConvertibleDebTest_1 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

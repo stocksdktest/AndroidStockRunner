@@ -47,6 +47,7 @@ import static org.junit.Assert.*;
 public class SubNewStockRankingTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.SUBNEWSTOCKRANKINGTEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d(" SubNewStockRankingTest_1", "Setup");
@@ -58,15 +59,15 @@ public class SubNewStockRankingTest_1 {
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
 
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("SubNewStockRankingTest_1", "requestWork");
         // TODO get custom args from param
-        final String []quoteNumbers = rule.getParam().optString("param").split(";");
+        final String quoteNumbers = rule.getParam().optString("param");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
-        for (int i=0;i<quoteNumbers.length;i++){
+//        for (int i=0;i<quoteNumbers.length;i++){
             SubNewStockRankingRequest request = new SubNewStockRankingRequest();
-            request.send(quoteNumbers[i], new IResponseInfoCallback<SubNewStockRankingResponse>() {
+            request.send(quoteNumbers, new IResponseInfoCallback<SubNewStockRankingResponse>() {
                 @Override
                 public void callback(SubNewStockRankingResponse subNewStockRankingResponse) {
                     try {
@@ -77,21 +78,24 @@ public class SubNewStockRankingTest_1 {
                     ArrayList<SubNewStockRankingModel> list=subNewStockRankingResponse.list;
                     try {
                         JSONObject uploadObj = new JSONObject();
-                        for (int i=0;i<list.size();i++) {
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("name",list.get(i).getName());
-                            uploadObj_1.put("code",list.get(i).getCode());
+                        if(list!=null){
+                            for (int i=0;i<list.size();i++) {
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("name",list.get(i).getName());
+                                uploadObj_1.put("code",list.get(i).getCode());
 //                            uploadObj_1.put("subType",list.get(i).getSubType());
-                            uploadObj_1.put("originalPrice",list.get(i).getOriginalPrice());
-                            uploadObj_1.put("lastestPrice",list.get(i).getLastestPrice());
-                            uploadObj_1.put("originalData",list.get(i).getOriginalData());
-                            uploadObj_1.put("continuousLimitedDays",list.get(i).getContinuousLimitedDays());
-                            uploadObj_1.put("rate",list.get(i).getRate());
-                            uploadObj_1.put("allRate",list.get(i).getAllRate());
-                            uploadObj_1.put("preClosePrice",list.get(i).getPreClosePrice());
-                            Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(list.get(i).getCode(),uploadObj_1);
+                                uploadObj_1.put("originalPrice",list.get(i).getOriginalPrice());
+                                uploadObj_1.put("lastestPrice",list.get(i).getLastestPrice());
+                                uploadObj_1.put("originalData",list.get(i).getOriginalData());
+                                uploadObj_1.put("continuousLimitedDays",list.get(i).getContinuousLimitedDays());
+                                uploadObj_1.put("rate",list.get(i).getRate());
+                                uploadObj_1.put("allRate",list.get(i).getAllRate());
+                                uploadObj_1.put("preClosePrice",list.get(i).getPreClosePrice());
+//                            Log.d("data", String.valueOf(uploadObj_1));
+                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
+                            }
                         }
+//                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
@@ -104,11 +108,11 @@ public class SubNewStockRankingTest_1 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);
             }
-        }
+
     }
 }

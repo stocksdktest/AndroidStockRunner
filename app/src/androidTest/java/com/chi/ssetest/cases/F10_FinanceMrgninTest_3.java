@@ -82,10 +82,10 @@ public class F10_FinanceMrgninTest_3 {
     public void requestWork() throws Exception {
         Log.d("F10_FinanceMrgninTest_3", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final String quoteNumbers2 = rule.getParam().optString("param");
-        final String quoteNumbers3 = rule.getParam().optString("part");
+        final String quoteNumbers3 = rule.getParam().optString("OPTIONS");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
         String src;
@@ -130,9 +130,9 @@ public class F10_FinanceMrgninTest_3 {
                                 uploadObj_1.put("FINMRGNBAL",infos.get(i).get("FINMRGNBAL"));
                                 uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
-                            Log.d("data", String.valueOf(uploadObj));
-                            result.complete(uploadObj);
                         }
+                        Log.d("data", String.valueOf(uploadObj));
+                        result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

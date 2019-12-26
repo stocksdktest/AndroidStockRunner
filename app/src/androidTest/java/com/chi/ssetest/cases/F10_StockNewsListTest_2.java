@@ -90,11 +90,11 @@ public class F10_StockNewsListTest_2 {
     public void requestWork() throws Exception {
         Log.d("F10_StockNewsListTest_2", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("stockId");
-        final String quoteNumbers1 = rule.getParam().optString("updateType");
-        final String quoteNumbers2 = rule.getParam().optString("newsID");
-        final String quoteNumbers3 = rule.getParam().optString("src");
-        final String quoteNumbers4 = rule.getParam().optString("count");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("TYPE");
+        final String quoteNumbers2 = rule.getParam().optString("NEWSID");
+        final String quoteNumbers3 = rule.getParam().optString("SOURCETYPE");
+        final String quoteNumbers4 = rule.getParam().optString("PAGESIZE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
         String newsID;
@@ -113,8 +113,8 @@ public class F10_StockNewsListTest_2 {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    if (stockNewsListResponse.list!=null){
-                        try {
+                    try {
+                        if (stockNewsListResponse.list!=null){
                             for (StockNewsItem item : stockNewsListResponse.list) {
                                 JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("INIPUBDATE_", item.INIPUBDATE_);
@@ -126,13 +126,13 @@ public class F10_StockNewsListTest_2 {
                                 uploadObj_1.put("ISPDF_", item.ISPDF_);
                                 uploadObj_1.put("ENTRYDATE", item.ENTRYDATE);
                                 uploadObj_1.put("ENTRYTIME", item.ENTRYTIME);
-                                Log.d("data", String.valueOf(uploadObj_1));
                                 uploadObj.put(item.ID_,uploadObj_1);
                             }
-                            result.complete(uploadObj);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
                         }
+                        Log.d("data", String.valueOf(uploadObj));
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
                 }
                 @Override

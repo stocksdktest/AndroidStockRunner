@@ -60,6 +60,7 @@ import static org.junit.Assert.*;
 public class OfferQuoteTest_2 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.OFFERQUOTETEST_2;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("OfferQuoteTest_2", "Setup");
@@ -71,14 +72,14 @@ public class OfferQuoteTest_2 {
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
     // OfferQuoteSort.SortField
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("OfferQuoteTest_2", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("pageNum");
-        final String quoteNumbers1 = rule.getParam().optString("pageSize");
-        final String quoteNumbers2 = rule.getParam().optString("sortField");
-        final String quoteNumbers3 = rule.getParam().optString("sortType");
+        final String quoteNumbers = rule.getParam().optString("PAGEINDEX");
+        final String quoteNumbers1 = rule.getParam().optString("PAGESIZE");
+        final String quoteNumbers2 = rule.getParam().optString("FIELD");
+        final String quoteNumbers3 = rule.getParam().optString("ASCENDING");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        OfferQuoteSort.SortField
 //        for (int i=0;i<quoteNumbers.length;i++){
@@ -94,18 +95,21 @@ public class OfferQuoteTest_2 {
                     List<OfferQuoteBean> list=offerQuoteResponse.offerQuoteList;
                     JSONObject uploadObj = new JSONObject();
                     try {
-                        for (int i=0;i<list.size();i++) {
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("code",list.get(i).code);
-                            uploadObj_1.put("name",list.get(i).name);
-                            uploadObj_1.put("offerId",list.get(i).offerId);
-                            uploadObj_1.put("offerName",list.get(i).offerName);
-                            uploadObj_1.put("price",list.get(i).price);
-                            uploadObj_1.put("startDate",list.get(i).startDate);
-                            uploadObj_1.put("endDate",list.get(i).endDate);
-                            Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(list.get(i).code,uploadObj_1);
+                        if(list!=null){
+                            for (int i=0;i<list.size();i++) {
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("code",list.get(i).code);
+                                uploadObj_1.put("name",list.get(i).name);
+                                uploadObj_1.put("offerId",list.get(i).offerId);
+                                uploadObj_1.put("offerName",list.get(i).offerName);
+                                uploadObj_1.put("price",list.get(i).price);
+                                uploadObj_1.put("startDate",list.get(i).startDate);
+                                uploadObj_1.put("endDate",list.get(i).endDate);
+//                            Log.d("data", String.valueOf(uploadObj_1));
+                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
+                            }
                         }
+//                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
@@ -117,7 +121,7 @@ public class OfferQuoteTest_2 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

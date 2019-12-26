@@ -69,7 +69,7 @@ import static org.junit.Assert.*;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
- *财经资讯图片
+ *财经资讯图片 ios无此接口
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
@@ -105,19 +105,19 @@ public class F10_FininfoimageTest_1 {
                     } catch (AssertionError e) {
                         result.completeExceptionally(e);
                     }
-                    if (finInfoImageResponse.imageData!=null){
-                        try {
-                            JSONObject uploadObj = new JSONObject();
-                            List<String> images=new ArrayList<>();
+                    try {
+                        JSONObject uploadObj = new JSONObject();
+                        List<String> images=new ArrayList<>();
+                        if (finInfoImageResponse.imageData!=null){
                             for (int i=0;i<finInfoImageResponse.imageData.length;i++){
                                 images.add(String.valueOf(finInfoImageResponse.imageData[i]));
                             }
                             uploadObj.put("images",new JSONArray(images));
-                            Log.d("data", String.valueOf(uploadObj));
-                            result.complete(uploadObj);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
                         }
+                        Log.d("data", String.valueOf(uploadObj));
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
                 }
                 @Override

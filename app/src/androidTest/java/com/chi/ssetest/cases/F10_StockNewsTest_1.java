@@ -84,8 +84,8 @@ public class F10_StockNewsTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_StockNewsTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("stockNewsID");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("STOCKNEWSID");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             StockNewsRequest request = new StockNewsRequest();
@@ -100,13 +100,15 @@ public class F10_StockNewsTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     StockNewsDetailItem list = stockNewsResponse.info;
                     try {
-                        uploadObj.put("INIPUBDATE_",list.INIPUBDATE_);
-                        uploadObj.put("ID_",list.ID_);
-                        uploadObj.put("reportTitle",list.reportTitle);
-                        uploadObj.put("ABSTRACT_",list.ABSTRACT_);
-                        uploadObj.put("ABSTRACTFORMAT_",list.ABSTRACTFORMAT_);
-                        uploadObj.put("MEDIANAME_",list.MEDIANAME_);
-                        uploadObj.put("PURL_",list.PURL_);
+                        if (list!=null){
+                            uploadObj.put("INIPUBDATE_",list.INIPUBDATE_);
+                            uploadObj.put("ID_",list.ID_);
+                            uploadObj.put("reportTitle",list.reportTitle);
+                            uploadObj.put("ABSTRACT_",list.ABSTRACT_);
+                            uploadObj.put("ABSTRACTFORMAT_",list.ABSTRACTFORMAT_);
+                            uploadObj.put("MEDIANAME_",list.MEDIANAME_);
+                            uploadObj.put("PURL_",list.PURL_);
+                        }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

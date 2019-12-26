@@ -80,8 +80,8 @@ public class F10_AssetAllocationTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_AssetAllocationTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("stockId");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             AssetAllocationRequest request = new AssetAllocationRequest();
@@ -105,9 +105,9 @@ public class F10_AssetAllocationTest_1 {
                                 uploadObj_1.put("STKINVE",list.get(i).get("STKINVE"));
                                 uploadObj_1.put("TOTASSET",list.get(i).get("TOTASSET"));
                                 uploadObj_1.put("TOTASSETYOY",list.get(i).get("TOTASSETYOY"));
-                                Log.d("data", String.valueOf(uploadObj_1));
                                 uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
+                            Log.d("data", String.valueOf(uploadObj));
                             result.complete(uploadObj);
                         }
                     } catch (JSONException e) {

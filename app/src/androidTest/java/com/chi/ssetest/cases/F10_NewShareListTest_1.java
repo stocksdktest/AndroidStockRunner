@@ -94,8 +94,8 @@ public class F10_NewShareListTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_NewShareListTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("date");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("DATE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             NewShareListRequest request = new NewShareListRequest();
@@ -108,41 +108,41 @@ public class F10_NewShareListTest_1 {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    for (NewShareList item : newShareListResponse.infos) {
-                        try {
-                            uploadObj.put("title",item.getTitle());
-                            List<JSONObject> dataList=new ArrayList<>();
-                            if(item.getDataList()!=null){
-                                for (int i=0;i<item.getDataList().size();i++){
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("applyCode",item.getDataList().get(i).getApplyCode());
-                                    uploadObj_1.put("capplyShare",item.getDataList().get(i).getCapplyShare());
-                                    uploadObj_1.put("secuabbr",item.getDataList().get(i).getSecuabbr());
-                                    uploadObj_1.put("tradingCode",item.getDataList().get(i).getTradingCode());
-                                    uploadObj_1.put("peaIssue",item.getDataList().get(i).getPeaIssue());
-                                    uploadObj_1.put("succResultNoticeDate",item.getDataList().get(i).getSuccResultNoticeDate());
-                                    uploadObj_1.put("issuePrice",item.getDataList().get(i).getIssuePrice());
-                                    uploadObj_1.put("allotrateon",item.getDataList().get(i).getAllotrateon());
-                                    uploadObj_1.put("listingDate",item.getDataList().get(i).getListingDate());
-                                    uploadObj_1.put("bookStartDateOn",item.getDataList().get(i).getBookStartDateOn());
-                                    uploadObj_1.put("issueShare",item.getDataList().get(i).getIssueShare());
-                                    uploadObj_1.put("issueShareOn",item.getDataList().get(i).getIssueShareOn());
-                                    uploadObj_1.put("capplyPrice",item.getDataList().get(i).getCapplyPrice());
-                                    uploadObj_1.put("cissueSharePlan",item.getDataList().get(i).getCissueSharePlan());
-                                    uploadObj_1.put("issueShareOnPlan",item.getDataList().get(i).getIssueShareOnPlan());
-                                    uploadObj_1.put("capplyPricePlan",item.getDataList().get(i).getCapplyPricePlan());
-                                    uploadObj_1.put("capplySharePlan",item.getDataList().get(i).getCapplySharePlan());
-                                    uploadObj_1.put("issuePricePlan",item.getDataList().get(i).getIssuePricePlan());
-                                    uploadObj_1.put("keyCode",item.getDataList().get(i).getKeyCode());
-                                    uploadObj.put(String.valueOf(i+1),uploadObj_1);
+                    try {
+                        if (newShareListResponse.infos!=null){
+                            for (NewShareList item : newShareListResponse.infos) {
+                                uploadObj.put("title",item.getTitle());
+                                if(item.getDataList()!=null){
+                                    for (int i=0;i<item.getDataList().size();i++){
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("applyCode",item.getDataList().get(i).getApplyCode());
+                                        uploadObj_1.put("capplyShare",item.getDataList().get(i).getCapplyShare());
+                                        uploadObj_1.put("secuabbr",item.getDataList().get(i).getSecuabbr());
+                                        uploadObj_1.put("tradingCode",item.getDataList().get(i).getTradingCode());
+                                        uploadObj_1.put("peaIssue",item.getDataList().get(i).getPeaIssue());
+                                        uploadObj_1.put("succResultNoticeDate",item.getDataList().get(i).getSuccResultNoticeDate());
+                                        uploadObj_1.put("issuePrice",item.getDataList().get(i).getIssuePrice());
+                                        uploadObj_1.put("allotrateon",item.getDataList().get(i).getAllotrateon());
+                                        uploadObj_1.put("listingDate",item.getDataList().get(i).getListingDate());
+                                        uploadObj_1.put("bookStartDateOn",item.getDataList().get(i).getBookStartDateOn());
+                                        uploadObj_1.put("issueShare",item.getDataList().get(i).getIssueShare());
+                                        uploadObj_1.put("issueShareOn",item.getDataList().get(i).getIssueShareOn());
+                                        uploadObj_1.put("capplyPrice",item.getDataList().get(i).getCapplyPrice());
+                                        uploadObj_1.put("cissueSharePlan",item.getDataList().get(i).getCissueSharePlan());
+                                        uploadObj_1.put("issueShareOnPlan",item.getDataList().get(i).getIssueShareOnPlan());
+                                        uploadObj_1.put("capplyPricePlan",item.getDataList().get(i).getCapplyPricePlan());
+                                        uploadObj_1.put("capplySharePlan",item.getDataList().get(i).getCapplySharePlan());
+                                        uploadObj_1.put("issuePricePlan",item.getDataList().get(i).getIssuePricePlan());
+                                        uploadObj_1.put("keyCode",item.getDataList().get(i).getKeyCode());
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
+                                    }
                                 }
-
                             }
-                            Log.d("data", String.valueOf(uploadObj));
-                            result.complete(uploadObj);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
                         }
+                        Log.d("data", String.valueOf(uploadObj));
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
                 }
                 @Override

@@ -65,6 +65,7 @@ import static org.junit.Assert.*;
 public class SearchTest_4 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.SEARCHTEST_4;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("   SearchTest_4", "Setup");
@@ -76,13 +77,13 @@ public class SearchTest_4 {
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
     // SortType
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("   SearchTest_4", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("keyword");
-        final String quoteNumbers1 = rule.getParam().optString("searchCode");
-        final String quoteNumbers2 = rule.getParam().optString("searchSize");
+        final String quoteNumbers = rule.getParam().optString("KEYWORD");
+        final String quoteNumbers1 = rule.getParam().optString("CATEGORIES");
+        final String quoteNumbers2 = rule.getParam().optString("SEARCHLIMIT");
         final String quoteNumbers3 = rule.getParam().optString("querySts");
 //        CateType
         final CompletableFuture result = new CompletableFuture<JSONObject>();
@@ -111,19 +112,22 @@ public class SearchTest_4 {
                     ArrayList<SearchResultItem> list=searchResponse.results;
                     try {
                         JSONObject uploadObj = new JSONObject();
-                        for (int i=0;i<list.size();i++){
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("stockID",list.get(i).stockID);
-                            uploadObj_1.put("name",list.get(i).name);
-                            uploadObj_1.put("market",list.get(i).market);
-                            uploadObj_1.put("pinyin",list.get(i).pinyin);
-                            uploadObj_1.put("subtype",list.get(i).subtype);
-                            uploadObj_1.put("stockType",list.get(i).stockType);
+                        if(list!=null){
+                            for (int i=0;i<list.size();i++){
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("stockID",list.get(i).stockID);
+                                uploadObj_1.put("name",list.get(i).name);
+                                uploadObj_1.put("market",list.get(i).market);
+                                uploadObj_1.put("pinyin",list.get(i).pinyin);
+                                uploadObj_1.put("subtype",list.get(i).subtype);
+                                uploadObj_1.put("stockType",list.get(i).stockType);
 //                            uploadObj_1.put("hkType",list.get(i).hkType);
-                            uploadObj_1.put("st",list.get(i).st);
-                            Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(list.get(i).stockID,uploadObj_1);
+                                uploadObj_1.put("st",list.get(i).st);
+//                            Log.d("data", String.valueOf(uploadObj_1));
+                                uploadObj.put(list.get(i).stockID,uploadObj_1);
+                            }
                         }
+//                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
@@ -135,7 +139,7 @@ public class SearchTest_4 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

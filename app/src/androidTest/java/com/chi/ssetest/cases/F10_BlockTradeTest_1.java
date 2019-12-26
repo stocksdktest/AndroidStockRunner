@@ -82,8 +82,8 @@ public class F10_BlockTradeTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_BlockTradeTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("send");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
         String src;
@@ -104,18 +104,20 @@ public class F10_BlockTradeTest_1 {
                     List<HashMap<String,Object>> infos = f10V2Response.infos;
                     JSONObject uploadObj = new JSONObject();
                     try {
-                        for (int i=0;i<infos.size();i++){
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
-                            uploadObj_1.put("TRADEPRICE",infos.get(i).get("TRADEPRICE"));
-                            uploadObj_1.put("VOLUME",infos.get(i).get("VOLUME"));
-                            uploadObj_1.put("AMOUNT",infos.get(i).get("AMOUNT"));
-                            uploadObj_1.put("PRC",infos.get(i).get("PRC"));
-                            uploadObj_1.put("BUYERNAME",infos.get(i).get("BUYERNAME"));
-                            uploadObj_1.put("SELLERNAME",infos.get(i).get("SELLERNAME"));
-                            Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(String.valueOf(i+1),uploadObj_1);
+                        if (infos!=null){
+                            for (int i=0;i<infos.size();i++){
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
+                                uploadObj_1.put("TRADEPRICE",infos.get(i).get("TRADEPRICE"));
+                                uploadObj_1.put("VOLUME",infos.get(i).get("VOLUME"));
+                                uploadObj_1.put("AMOUNT",infos.get(i).get("AMOUNT"));
+                                uploadObj_1.put("PRC",infos.get(i).get("PRC"));
+                                uploadObj_1.put("BUYERNAME",infos.get(i).get("BUYERNAME"));
+                                uploadObj_1.put("SELLERNAME",infos.get(i).get("SELLERNAME"));
+                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
+                            }
                         }
+                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

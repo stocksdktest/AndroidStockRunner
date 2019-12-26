@@ -94,7 +94,7 @@ public class F10_CalendarTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_CalendarTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             CalendarRequest request = new CalendarRequest();
@@ -110,17 +110,19 @@ public class F10_CalendarTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     ArrayList<NewShareDates> list = dataResponse.infos;
                     try {
-                        for (int i=0;i<list.size();i++){
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("sg",list.get(i).getSg());
-                            uploadObj_1.put("zq",list.get(i).getZq());
-                            uploadObj_1.put("ss",list.get(i).getSs());
-                            uploadObj_1.put("jjfx",list.get(i).getJjfx());
-                            uploadObj_1.put("wss",list.get(i).getWss());
-                            uploadObj_1.put("normalDay",list.get(i).getNormalDay());
-                            Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(list.get(i).getNormalDay(),uploadObj_1);
+                        if(list!=null){
+                            for (int i=0;i<list.size();i++){
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("sg",list.get(i).getSg());
+                                uploadObj_1.put("zq",list.get(i).getZq());
+                                uploadObj_1.put("ss",list.get(i).getSs());
+                                uploadObj_1.put("jjfx",list.get(i).getJjfx());
+                                uploadObj_1.put("wss",list.get(i).getWss());
+                                uploadObj_1.put("normalDay",list.get(i).getNormalDay());
+                                uploadObj.put(list.get(i).getNormalDay(),uploadObj_1);
+                            }
                         }
+                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

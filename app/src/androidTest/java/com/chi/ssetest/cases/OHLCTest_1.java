@@ -56,6 +56,7 @@ import static org.junit.Assert.*;
 public class OHLCTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.OHLCTEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
   // OHLChartType
     @BeforeClass
 
@@ -70,12 +71,12 @@ public class OHLCTest_1 {
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
 
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d(" OHLCTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("stk");
-        final String quoteNumbers1 = rule.getParam().optString("type");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("PERIOD");
       //  OHLChartType
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i = 0; i < quoteNumbers.length; i++) {
@@ -98,23 +99,26 @@ public class OHLCTest_1 {
                             CopyOnWriteArrayList<OHLCItem> list =ohlcResponse.historyItems;
                             try {
                                 JSONObject uploadObj = new JSONObject();
-                                for (int k=0;k<list.size();k++){
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("datetime",list.get(k).datetime);
-                                    uploadObj_1.put("openPrice",list.get(k).openPrice);
-                                    uploadObj_1.put("highPrice",list.get(k).highPrice);
-                                    uploadObj_1.put("lowPrice",list.get(k).lowPrice);
-                                    uploadObj_1.put("closePrice",list.get(k).closePrice);
-                                    uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
-                                    uploadObj_1.put("averagePrice",list.get(k).averagePrice);//ios需要判断是否存在字段
-                                    uploadObj_1.put("reference_price",list.get(k).reference_price);
-                                    uploadObj_1.put("transaction_price",list.get(k).transaction_price);
-                                    uploadObj_1.put("openInterest",list.get(k).openInterest);//ios需要判断是否存在字段
-                                    uploadObj_1.put("fp_volume",list.get(k).fp_volume);
-                                    uploadObj_1.put("fp_amount",list.get(k).fp_amount);
-                                    Log.d("data", String.valueOf(uploadObj_1));
-                                    uploadObj.put(list.get(k).datetime,uploadObj_1);
+                                if (list!=null){
+                                    for (int k=0;k<list.size();k++){
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("datetime",list.get(k).datetime);
+                                        uploadObj_1.put("openPrice",list.get(k).openPrice);
+                                        uploadObj_1.put("highPrice",list.get(k).highPrice);
+                                        uploadObj_1.put("lowPrice",list.get(k).lowPrice);
+                                        uploadObj_1.put("closePrice",list.get(k).closePrice);
+                                        uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
+                                        uploadObj_1.put("averagePrice",list.get(k).averagePrice);//ios需要判断是否存在字段
+                                        uploadObj_1.put("reference_price",list.get(k).reference_price);
+                                        uploadObj_1.put("transaction_price",list.get(k).transaction_price);
+                                        uploadObj_1.put("openInterest",list.get(k).openInterest);//ios需要判断是否存在字段
+                                        uploadObj_1.put("fp_volume",list.get(k).fp_volume);
+                                        uploadObj_1.put("fp_amount",list.get(k).fp_amount);
+//                                    Log.d("data", String.valueOf(uploadObj_1));
+                                        uploadObj.put(list.get(k).datetime,uploadObj_1);
+                                    }
                                 }
+//                                Log.d("data", String.valueOf(uploadObj));
                                 result.complete(uploadObj);
                             } catch (JSONException e) {
                                 result.completeExceptionally(e);
@@ -132,7 +136,7 @@ public class OHLCTest_1 {
                }
              });
             try {
-                JSONObject resultObj = (JSONObject) result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject) result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);
