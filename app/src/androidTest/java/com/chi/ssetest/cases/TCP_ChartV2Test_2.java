@@ -63,9 +63,9 @@ public class TCP_ChartV2Test_2 {
     public void requestWork() throws Exception {
         Log.d("TCP_ChartV2Test_2", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().getString("CODES");
-        final String Types = rule.getParam().getString("Chart_Types");
-        final String isNeedAfterHours = rule.getParam().getString("isNeedAfterHours");
+        final String quoteNumbers = rule.getParam().getString("CODE");
+        final String Types = rule.getParam().getString("TYPE");
+        final String isNeedAfterHours = rule.getParam().getString("RETURNAFDATA");
         final String tcpSeconds = rule.getParam().optString("SECONDS", ""); //设置TCP监听的时间
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         final JSONObject uploadObj = new JSONObject();
@@ -129,32 +129,34 @@ public class TCP_ChartV2Test_2 {
                     public void pushLine(ChartResponse item, String Types, String code) {
 //                        Log.d("tcp00", item.toString());
                         try {
-                            for (int k=0;k<item.historyItems.size();k++){
-                                JSONObject uploadObj_1 = new JSONObject();
-                                //存储到JSON
-                                uploadObj_1.put("datetime",item.historyItems.get(k).datetime);
-                                uploadObj_1.put("closePrice",item.historyItems.get(k).closePrice);
-                                uploadObj_1.put("tradeVolume",item.historyItems.get(k).tradeVolume);
-                                uploadObj_1.put("averagePrice",item.historyItems.get(k).averagePrice);
-                                uploadObj_1.put("md",item.historyItems.get(k).getMd());
-                                uploadObj_1.put("openInterest",item.historyItems.get(k).openInterest);
-                                uploadObj_1.put("iopv",item.historyItems.get(k).iopv);
-                                uploadObj_1.put("iopvPre",item.historyItems.get(k).iopvPre);
-                                uploadObj.put(item.historyItems.get(k).datetime,uploadObj_1);
-                            }
-                            if (Boolean.parseBoolean(isNeedAfterHours)){
-                                for (int k=0;k<item.afterHoursChartResponse.historyItems.size();k++){
+                            if(item.historyItems!=null){
+                                for (int k=0;k<item.historyItems.size();k++){
                                     JSONObject uploadObj_1 = new JSONObject();
                                     //存储到JSON
-                                    uploadObj_1.put("datetime",item.afterHoursChartResponse.historyItems.get(k).datetime);
-                                    uploadObj_1.put("closePrice",item.afterHoursChartResponse.historyItems.get(k).closePrice);
-                                    uploadObj_1.put("tradeVolume",item.afterHoursChartResponse.historyItems.get(k).tradeVolume);
-                                    uploadObj_1.put("averagePrice",item.afterHoursChartResponse.historyItems.get(k).averagePrice);
-                                    uploadObj_1.put("md",item.afterHoursChartResponse.historyItems.get(k).getMd());
-                                    uploadObj_1.put("openInterest",item.afterHoursChartResponse.historyItems.get(k).openInterest);
-                                    uploadObj_1.put("iopv",item.afterHoursChartResponse.historyItems.get(k).iopv);
-                                    uploadObj_1.put("iopvPre",item.afterHoursChartResponse.historyItems.get(k).iopvPre);
-                                    uploadObj.put(item.afterHoursChartResponse.historyItems.get(k).datetime,uploadObj_1);
+                                    uploadObj_1.put("datetime",item.historyItems.get(k).datetime);
+                                    uploadObj_1.put("closePrice",item.historyItems.get(k).closePrice);
+                                    uploadObj_1.put("tradeVolume",item.historyItems.get(k).tradeVolume);
+                                    uploadObj_1.put("averagePrice",item.historyItems.get(k).averagePrice);
+                                    uploadObj_1.put("md",item.historyItems.get(k).getMd());
+                                    uploadObj_1.put("openInterest",item.historyItems.get(k).openInterest);
+                                    uploadObj_1.put("iopv",item.historyItems.get(k).iopv);
+                                    uploadObj_1.put("iopvPre",item.historyItems.get(k).iopvPre);
+                                    uploadObj.put(item.historyItems.get(k).datetime,uploadObj_1);
+                                }
+                                if (Boolean.parseBoolean(isNeedAfterHours)){
+                                    for (int k=0;k<item.afterHoursChartResponse.historyItems.size();k++){
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        //存储到JSON
+                                        uploadObj_1.put("datetime",item.afterHoursChartResponse.historyItems.get(k).datetime);
+                                        uploadObj_1.put("closePrice",item.afterHoursChartResponse.historyItems.get(k).closePrice);
+                                        uploadObj_1.put("tradeVolume",item.afterHoursChartResponse.historyItems.get(k).tradeVolume);
+                                        uploadObj_1.put("averagePrice",item.afterHoursChartResponse.historyItems.get(k).averagePrice);
+                                        uploadObj_1.put("md",item.afterHoursChartResponse.historyItems.get(k).getMd());
+                                        uploadObj_1.put("openInterest",item.afterHoursChartResponse.historyItems.get(k).openInterest);
+                                        uploadObj_1.put("iopv",item.afterHoursChartResponse.historyItems.get(k).iopv);
+                                        uploadObj_1.put("iopvPre",item.afterHoursChartResponse.historyItems.get(k).iopvPre);
+                                        uploadObj.put(item.afterHoursChartResponse.historyItems.get(k).datetime,uploadObj_1);
+                                    }
                                 }
                             }
                             Log.d("tcp00", String.valueOf(uploadObj));

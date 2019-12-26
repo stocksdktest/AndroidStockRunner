@@ -45,6 +45,7 @@ import static org.junit.Assert.*;
 public class UpdownsTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.UPDOWNSTEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("UpdownsTest_1", "Setup");
@@ -55,11 +56,11 @@ public class UpdownsTest_1 {
     }
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("UpdownsTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
+        final String quoteNumbers = rule.getParam().optString("UDCODE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             UpdownsRequest request = new UpdownsRequest();
@@ -75,13 +76,15 @@ public class UpdownsTest_1 {
                     UpdownsItem list = updownsResponse.mUpdownsItem;
                     // TODO fill uploadObj with QuoteResponse value
                     try {
-                        uploadObj.put("upCount",list.upCount);
-                        uploadObj.put("downCount",list.downCount);
-                        uploadObj.put("sameCount",list.sameCount);
+                        if(list!=null){
+                            uploadObj.put("upCount",list.upCount);
+                            uploadObj.put("downCount",list.downCount);
+                            uploadObj.put("sameCount",list.sameCount);
+                        }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
+//                    Log.d("data", String.valueOf(uploadObj));
                     result.complete(uploadObj);
                 }
                 @Override
@@ -90,7 +93,7 @@ public class UpdownsTest_1 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(),resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

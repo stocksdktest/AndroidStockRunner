@@ -58,6 +58,7 @@ import static org.junit.Assert.*;
 public class ChartSubTest_2 {
     private static final StockTestcaseName testcaseName = StockTestcaseName. CHARTSUBTEST_2;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     //ChartType
     public static void setup() throws Exception {
@@ -69,15 +70,15 @@ public class ChartSubTest_2 {
     }
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("  ChartSubSampleTest_2", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("quoteitem");
-        final String quoteNumbers1 = rule.getParam().optString("type");
-        final String quoteNumbers2 = rule.getParam().optString("begin");
-        final String quoteNumbers3 = rule.getParam().optString("end");
-        final String quoteNumbers4 = rule.getParam().optString("select");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("ChartType");
+        final String quoteNumbers2 = rule.getParam().optString("BEGIN");
+        final String quoteNumbers3 = rule.getParam().optString("END");
+        final String quoteNumbers4 = rule.getParam().optString("TYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i = 0; i < quoteNumbers.length; i++) {
             QuoteDetailRequest quoteDetailRequest=new QuoteDetailRequest();
@@ -97,15 +98,17 @@ public class ChartSubTest_2 {
                             String[][] list=chartSubResponse.line;
                             JSONObject uploadObj = new JSONObject();
                             try {
-                                String[] kname=quoteNumbers4.split(",");
-                                for (int i=0;i<list.length;i++){
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    for (int k=1;k<list[i].length;k++){
-                                        uploadObj_1.put(kname[k],list[i][k]);
+                                if (list!=null){
+                                    String[] kname=quoteNumbers4.split(",");
+                                    for (int i=0;i<list.length;i++){
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        for (int k=1;k<list[i].length;k++){
+                                            uploadObj_1.put(kname[k],list[i][k]);
+                                        }
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
-                                    uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                 }
-                                Log.d("data", String.valueOf(uploadObj));
+//                                Log.d("data", String.valueOf(uploadObj));
                                 result.complete(uploadObj);
                             } catch (JSONException e) {
                                 result.completeExceptionally(e);
@@ -123,7 +126,7 @@ public class ChartSubTest_2 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(),resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

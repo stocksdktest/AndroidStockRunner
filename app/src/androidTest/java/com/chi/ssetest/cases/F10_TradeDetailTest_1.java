@@ -75,8 +75,8 @@ public class F10_TradeDetailTest_1 {
     public void requestWork() throws Exception {
         Log.d(" F10_TradeDetailTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             TradeDetailRequest request = new TradeDetailRequest();
@@ -91,13 +91,15 @@ public class F10_TradeDetailTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     TradeDetail list =  tradeDetailResponse.info;
                     try {
-                        uploadObj.put("payVolumeStock",list.payVolumeStock);
-                        uploadObj.put("amountFinance",list.amountFinance);
-                        uploadObj.put("payAmountFinance",list.payAmountFinance);
-                        uploadObj.put("buyAmountFinance",list.buyAmountFinance);
-                        uploadObj.put("sellVolumeStock",list.sellVolumeStock);
-                        uploadObj.put("amountStock",list.amountStock);
-                        uploadObj.put("tradingDay",list.tradingDay);
+                        if(list!=null){
+                            uploadObj.put("payVolumeStock",list.payVolumeStock);
+                            uploadObj.put("amountFinance",list.amountFinance);
+                            uploadObj.put("payAmountFinance",list.payAmountFinance);
+                            uploadObj.put("buyAmountFinance",list.buyAmountFinance);
+                            uploadObj.put("sellVolumeStock",list.sellVolumeStock);
+                            uploadObj.put("amountStock",list.amountStock);
+                            uploadObj.put("tradingDay",list.tradingDay);
+                        }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

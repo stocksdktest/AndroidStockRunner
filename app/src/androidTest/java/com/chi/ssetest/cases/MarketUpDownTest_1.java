@@ -39,6 +39,7 @@ import static org.junit.Assert.*;
 public class MarketUpDownTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.MARKETUPDOWNTEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d(" MorePriceSampleTest1", "Setup");
@@ -49,7 +50,7 @@ public class MarketUpDownTest_1 {
     }
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d(" MorePriceSampleTest1", "requestWork");
         // TODO get custom args from param
@@ -69,28 +70,30 @@ public class MarketUpDownTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     MarketUpDownItem upDownItem = marketUpDownResponse.upDownItem;
                     try {
-                        uploadObj.put("tTime",upDownItem.tTime);
-                        uploadObj.put("tUp",upDownItem.tUp);
-                        uploadObj.put("tDown",upDownItem.tDown);
-                        uploadObj.put("tEqual",upDownItem.tEqual);
-                        uploadObj.put("tLimitUp",upDownItem.tLimitUp);
-                        uploadObj.put("tLimitDown",upDownItem.tLimitDown);
-                        uploadObj.put("yTime",upDownItem.yTime);
-                        uploadObj.put("yUp",upDownItem.yUp);
-                        uploadObj.put("yDown",upDownItem.yDown);
-                        uploadObj.put("yEqual",upDownItem.yEqual);
-                        uploadObj.put("yLimitUp",upDownItem.yLimitUp);
-                        uploadObj.put("yLimitDown",upDownItem.yLimitDown);
+                        if(upDownItem!=null){
+                            uploadObj.put("tTime",upDownItem.tTime);
+                            uploadObj.put("tUp",upDownItem.tUp);
+                            uploadObj.put("tDown",upDownItem.tDown);
+                            uploadObj.put("tEqual",upDownItem.tEqual);
+                            uploadObj.put("tLimitUp",upDownItem.tLimitUp);
+                            uploadObj.put("tLimitDown",upDownItem.tLimitDown);
+                            uploadObj.put("yTime",upDownItem.yTime);
+                            uploadObj.put("yUp",upDownItem.yUp);
+                            uploadObj.put("yDown",upDownItem.yDown);
+                            uploadObj.put("yEqual",upDownItem.yEqual);
+                            uploadObj.put("yLimitUp",upDownItem.yLimitUp);
+                            uploadObj.put("yLimitDown",upDownItem.yLimitDown);
 
-                        List<Integer> list=new ArrayList<>();
-                        for (int i=0;i<upDownItem.list.size();i++){
-                            list.add(upDownItem.list.get(i));
+                            List<Integer> list=new ArrayList<>();
+                            for (int i=0;i<upDownItem.list.size();i++){
+                                list.add(upDownItem.list.get(i));
+                            }
+                            uploadObj.put("list",new JSONArray(list));
                         }
-                        uploadObj.put("list",new JSONArray(list));
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
+//                    Log.d("data", String.valueOf(uploadObj));
                     result.complete(uploadObj);
                 }
                 @Override
@@ -99,7 +102,7 @@ public class MarketUpDownTest_1 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

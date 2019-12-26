@@ -77,8 +77,8 @@ public class F10_BndshareIPODetaiTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_BndshareIPODetaiTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         //CategoryType
 //        for (int i=0;i<quoteNumbers.length;i++){
@@ -100,23 +100,25 @@ public class F10_BndshareIPODetaiTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     HashMap<String,Object> info = f10V2Response.info;
                     try {
-                        uploadObj.put("APPLYCODE",info.get("APPLYCODE"));
-                        uploadObj.put("TRADINGCODE",info.get("TRADINGCODE"));
-                        uploadObj.put("STOCKTRADINGCODE",info.get("STOCKTRADINGCODE"));
-                        uploadObj.put("STOCKSECUABBR",info.get("STOCKSECUABBR"));
-                        uploadObj.put("ISSUEPRICE",info.get("ISSUEPRICE"));
-                        uploadObj.put("CONVERTPRICE",info.get("CONVERTPRICE"));
-                        uploadObj.put("PREFERREDPLACINGCODE",info.get("PREFERREDPLACINGCODE"));
-                        uploadObj.put("PREFERREDPLACINGNAME",info.get("PREFERREDPLACINGNAME"));
-                        uploadObj.put("ISSUERRATING",info.get("ISSUERRATING"));
-                        uploadObj.put("ISSUEVAL",info.get("ISSUEVAL"));
-                        uploadObj.put("INTERESTTERM",info.get("INTERESTTERM"));
-                        uploadObj.put("CAPPLYVOL",info.get("CAPPLYVOL"));
-                        uploadObj.put("BOOKSTARTDATEON",info.get("BOOKSTARTDATEON"));
-                        uploadObj.put("SUCCRESULTNOTICEDATE",info.get("SUCCRESULTNOTICEDATE"));
-                        uploadObj.put("LISTINGDATE",info.get("LISTINGDATE"));
-                        uploadObj.put("ALLOTRATEON",info.get("ALLOTRATEON"));
-                        uploadObj.put("SECUABBR",info.get("SECUABBR"));
+                        if(info!=null){
+                            uploadObj.put("APPLYCODE",info.get("APPLYCODE"));
+                            uploadObj.put("TRADINGCODE",info.get("TRADINGCODE"));
+                            uploadObj.put("STOCKTRADINGCODE",info.get("STOCKTRADINGCODE"));
+                            uploadObj.put("STOCKSECUABBR",info.get("STOCKSECUABBR"));
+                            uploadObj.put("ISSUEPRICE",info.get("ISSUEPRICE"));
+                            uploadObj.put("CONVERTPRICE",info.get("CONVERTPRICE"));
+                            uploadObj.put("PREFERREDPLACINGCODE",info.get("PREFERREDPLACINGCODE"));
+                            uploadObj.put("PREFERREDPLACINGNAME",info.get("PREFERREDPLACINGNAME"));
+                            uploadObj.put("ISSUERRATING",info.get("ISSUERRATING"));
+                            uploadObj.put("ISSUEVAL",info.get("ISSUEVAL"));
+                            uploadObj.put("INTERESTTERM",info.get("INTERESTTERM"));
+                            uploadObj.put("CAPPLYVOL",info.get("CAPPLYVOL"));
+                            uploadObj.put("BOOKSTARTDATEON",info.get("BOOKSTARTDATEON"));
+                            uploadObj.put("SUCCRESULTNOTICEDATE",info.get("SUCCRESULTNOTICEDATE"));
+                            uploadObj.put("LISTINGDATE",info.get("LISTINGDATE"));
+                            uploadObj.put("ALLOTRATEON",info.get("ALLOTRATEON"));
+                            uploadObj.put("SECUABBR",info.get("SECUABBR"));
+                        }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

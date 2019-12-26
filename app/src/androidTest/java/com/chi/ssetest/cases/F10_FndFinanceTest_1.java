@@ -77,8 +77,8 @@ public class F10_FndFinanceTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_FndFinanceTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("stockId");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         //CategoryType
 //        for (int i=0;i<quoteNumbers.length;i++){
@@ -94,13 +94,15 @@ public class F10_FndFinanceTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     HashMap<String,Object> list = f10V2Response.info;
                     try {
-                        uploadObj.put("PUBLISHDATE",list.get("PUBLISHDATE"));
-                        uploadObj.put("ENDDATE",list.get("ENDDATE"));
-                        uploadObj.put("UNFDDISTNETINC",list.get("UNFDDISTNETINC"));
-                        uploadObj.put("FINAUNFDASSNAV",list.get("FINAUNFDASSNAV"));
-                        uploadObj.put("FDNETPROPER",list.get("FDNETPROPER"));
-                        uploadObj.put("FINAFDASSETNAV",list.get("FINAFDASSETNAV"));
-                        uploadObj.put("NAVGRORATE",list.get("NAVGRORATE"));
+                        if(list!=null){
+                            uploadObj.put("PUBLISHDATE",list.get("PUBLISHDATE"));
+                            uploadObj.put("ENDDATE",list.get("ENDDATE"));
+                            uploadObj.put("UNFDDISTNETINC",list.get("UNFDDISTNETINC"));
+                            uploadObj.put("FINAUNFDASSNAV",list.get("FINAUNFDASSNAV"));
+                            uploadObj.put("FDNETPROPER",list.get("FDNETPROPER"));
+                            uploadObj.put("FINAFDASSETNAV",list.get("FINAFDASSETNAV"));
+                            uploadObj.put("NAVGRORATE",list.get("NAVGRORATE"));
+                        }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

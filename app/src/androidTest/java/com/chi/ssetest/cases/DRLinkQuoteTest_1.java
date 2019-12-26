@@ -59,6 +59,7 @@ import static org.junit.Assert.*;
 public class DRLinkQuoteTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.DRLINKQUOTETEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("DRLinkQuoteTest_1", "Setup");
@@ -69,11 +70,11 @@ public class DRLinkQuoteTest_1 {
     }
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("DRLinkQuoteTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
+        final String quoteNumbers = rule.getParam().optString("CODE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        DRSortType
 //        for (int i=0;i<quoteNumbers.length;i++){
@@ -90,19 +91,21 @@ public class DRLinkQuoteTest_1 {
                     DRLinkQuoteitem list =  drLinkQuoteResponse.drLinkQuoteitem;
                     // TODO fill uploadObj with QuoteResponse value
                     try {
-                        uploadObj.put("code", list.code);
-                        uploadObj.put("name", list.name);
-                        uploadObj.put("lastPrice", list.lastPrice);
-                        uploadObj.put("preClosePrice", list.preClosePrice);
-                        uploadObj.put("change",list.change);
-                        uploadObj.put("changeRate", list.changeRate);
-                        uploadObj.put("subType", list.subType);
-                        uploadObj.put("dateTime", list.dateTime);
-                        uploadObj.put("premium", list.premium);
+                        if(list!=null){
+                            uploadObj.put("code", list.code);
+                            uploadObj.put("name", list.name);
+                            uploadObj.put("lastPrice", list.lastPrice);
+                            uploadObj.put("preClosePrice", list.preClosePrice);
+                            uploadObj.put("change",list.change);
+                            uploadObj.put("changeRate", list.changeRate);
+                            uploadObj.put("subType", list.subType);
+                            uploadObj.put("dateTime", list.dateTime);
+                            uploadObj.put("premium", list.premium);
+                        }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
+//                    Log.d("data", String.valueOf(uploadObj));
                     result.complete(uploadObj);
                 }
                 @Override
@@ -111,7 +114,7 @@ public class DRLinkQuoteTest_1 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

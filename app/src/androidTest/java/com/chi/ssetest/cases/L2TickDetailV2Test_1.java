@@ -35,12 +35,13 @@ import static org.junit.Assert.assertNotNull;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-//L2逐笔
+//L2逐笔   返回全部的数据
 @RunWith(AndroidJUnit4.class)
 @StockTestcase(StockTestcaseName.L2TICKDETAILV2TEST_1)
 public class L2TickDetailV2Test_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.L2TICKDETAILV2TEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     final CompletableFuture result = new CompletableFuture<JSONObject>();
     private static JSONObject uploadObj = new JSONObject();
     @BeforeClass
@@ -54,17 +55,16 @@ public class L2TickDetailV2Test_1 {
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
 
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("L2TickDetailV2Test_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("CODES", "");
-        final String Pages = rule.getParam().optString("PAGES", "");
-        final String SubTypes = rule.getParam().optString("SUBTYPES", "");
+        final String quoteNumbers = rule.getParam().optString("CODE", "");
+        final String SubTypes = rule.getParam().optString("SUBTYPE", "");
 
-        L2TickDEtailjk(quoteNumbers,Pages,SubTypes);
+        L2TickDEtailjk(quoteNumbers,"0,100,-1",SubTypes);
         try {
-            JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+            JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
             RunnerSetup.getInstance().getCollector().onTestResult(testcaseName,rule.getParam(), resultObj);
         } catch (Exception e) {
             throw new Exception(e);

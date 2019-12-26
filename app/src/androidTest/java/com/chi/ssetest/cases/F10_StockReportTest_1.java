@@ -87,8 +87,8 @@ public class F10_StockReportTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_StockReportTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("STOCKREPORTID");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             StockReportRequest request = new StockReportRequest();
@@ -112,9 +112,9 @@ public class F10_StockReportTest_1 {
                             uploadObj.put("ABSTRACTFORMAT_",list.ABSTRACTFORMAT_);
 //                            uploadObj.put("ComName",list.ComName);
                             uploadObj.put("PURL_",list.PURL_);
-                            Log.d("data", String.valueOf(uploadObj));
-                            result.complete(uploadObj);
                         }
+                        Log.d("data", String.valueOf(uploadObj));
+                        result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

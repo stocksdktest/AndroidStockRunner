@@ -50,6 +50,7 @@ import static org.junit.Assert.*;
 public class AfterHoursChartTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.AFTERHOURSCHARTTEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("AfterHoursChartTest_1", "Setup");
@@ -61,11 +62,11 @@ public class AfterHoursChartTest_1 {
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
 
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("AfterHoursChartTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
+        final String quoteNumbers = rule.getParam().optString("CODE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i = 0; i < quoteNumbers.length; i++) {
             AfterHoursChartRequest request = new AfterHoursChartRequest();
@@ -80,21 +81,24 @@ public class AfterHoursChartTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value
                     try {
-                        for (OHLCItem item : afterHoursChartResponse.historyItems) {
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("datetime",item.datetime);
-                            uploadObj_1.put("closePrice",item.closePrice);
-                            uploadObj_1.put("tradeVolume",item.tradeVolume);
-                            uploadObj_1.put("reference_price",item.reference_price);
-                            uploadObj_1.put("tickCount",afterHoursChartResponse.tradeTimes);
-                            uploadObj_1.put("lowPrice",item.lowPrice);//接口没值
-                            uploadObj_1.put("openPrice",item.openPrice);//接口没值
-                            uploadObj_1.put("highPrice",item.highPrice);//接口没值
-                            uploadObj_1.put("fp_volume",item.fp_volume);//接口没值
-                            uploadObj_1.put("fp_amount",item.fp_amount);//接口没值
-                            Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(item.datetime,uploadObj_1);
+                        if(afterHoursChartResponse.historyItems!=null){
+                            for (OHLCItem item : afterHoursChartResponse.historyItems) {
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("datetime",item.datetime);
+                                uploadObj_1.put("closePrice",item.closePrice);
+                                uploadObj_1.put("tradeVolume",item.tradeVolume);
+                                uploadObj_1.put("reference_price",item.reference_price);
+                                uploadObj_1.put("tickCount",afterHoursChartResponse.tradeTimes);
+                                uploadObj_1.put("lowPrice",item.lowPrice);//接口没值
+                                uploadObj_1.put("openPrice",item.openPrice);//接口没值
+                                uploadObj_1.put("highPrice",item.highPrice);//接口没值
+                                uploadObj_1.put("fp_volume",item.fp_volume);//接口没值
+                                uploadObj_1.put("fp_amount",item.fp_amount);//接口没值
+//                            Log.d("data", String.valueOf(uploadObj_1));
+                                uploadObj.put(item.datetime,uploadObj_1);
+                            }
                         }
+//                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
@@ -107,7 +111,7 @@ public class AfterHoursChartTest_1 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject) result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject) result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

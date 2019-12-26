@@ -82,10 +82,10 @@ public class F10_FinanceMrgninTest_2 {
     public void requestWork() throws Exception {
         Log.d("F10_FinanceMrgninTest_2", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("MARKET");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final String quoteNumbers2 = rule.getParam().optString("param");
-        final String quoteNumbers3 = rule.getParam().optString("part");
+        final String quoteNumbers3 = rule.getParam().optString("OPTIONS");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
         String src;
@@ -113,24 +113,28 @@ public class F10_FinanceMrgninTest_2 {
                     List<JSONObject> list =new ArrayList<>();
                     List<HashMap<String,Object>> infos = f10V2Response.infos;
                     try {
-                        uploadObj.put("pageNumber",f10V2Response.pageNumber);
-                        uploadObj.put("page",f10V2Response.page);
-                        for (int i=0;i<infos.size();i++){
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
-                            uploadObj_1.put("TRADING",infos.get(i).get("TRADING"));
-                            uploadObj_1.put("FINBALANCE",infos.get(i).get("FINBALANCE"));
-                            uploadObj_1.put("FINBUYAMT",infos.get(i).get("FINBUYAMT"));
-                            uploadObj_1.put("FINREPAYAMT",infos.get(i).get("FINREPAYAMT"));
-                            uploadObj_1.put("FINROEBUY",infos.get(i).get("FINROEBUY"));
-                            uploadObj_1.put("MRGGBAL",infos.get(i).get("MRGGBAL"));
-                            uploadObj_1.put("MRGNRESQTY",infos.get(i).get("MRGNRESQTY"));
-                            uploadObj_1.put("MRGNSELLAMT",infos.get(i).get("MRGNSELLAMT"));
-                            uploadObj_1.put("MRGNREPAYAMT",infos.get(i).get("MRGNREPAYAMT"));
-                            uploadObj_1.put("MRGNROESELL",infos.get(i).get("MRGNROESELL"));
-                            uploadObj_1.put("FINMRGHBAL",infos.get(i).get("FINMRGHBAL"));
-                            uploadObj_1.put("FINMRGNBAL",infos.get(i).get("FINMRGNBAL"));
-                            uploadObj.put(String.valueOf(i+1),uploadObj_1);
+                        if(f10V2Response!=null){
+                            uploadObj.put("pageNumber",f10V2Response.pageNumber);
+                            uploadObj.put("page",f10V2Response.page);
+                            if (infos!=null){
+                                for (int i=0;i<infos.size();i++){
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
+                                    uploadObj_1.put("TRADING",infos.get(i).get("TRADING"));
+                                    uploadObj_1.put("FINBALANCE",infos.get(i).get("FINBALANCE"));
+                                    uploadObj_1.put("FINBUYAMT",infos.get(i).get("FINBUYAMT"));
+                                    uploadObj_1.put("FINREPAYAMT",infos.get(i).get("FINREPAYAMT"));
+                                    uploadObj_1.put("FINROEBUY",infos.get(i).get("FINROEBUY"));
+                                    uploadObj_1.put("MRGGBAL",infos.get(i).get("MRGGBAL"));
+                                    uploadObj_1.put("MRGNRESQTY",infos.get(i).get("MRGNRESQTY"));
+                                    uploadObj_1.put("MRGNSELLAMT",infos.get(i).get("MRGNSELLAMT"));
+                                    uploadObj_1.put("MRGNREPAYAMT",infos.get(i).get("MRGNREPAYAMT"));
+                                    uploadObj_1.put("MRGNROESELL",infos.get(i).get("MRGNROESELL"));
+                                    uploadObj_1.put("FINMRGHBAL",infos.get(i).get("FINMRGHBAL"));
+                                    uploadObj_1.put("FINMRGNBAL",infos.get(i).get("FINMRGNBAL"));
+                                    uploadObj.put(String.valueOf(i+1),uploadObj_1);
+                                }
+                            }
                         }
                         Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);

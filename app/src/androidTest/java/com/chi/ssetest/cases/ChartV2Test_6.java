@@ -45,7 +45,7 @@ import static org.junit.Assert.assertNotNull;
 public class ChartV2Test_6 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.CHARTV2TEST_6;
     private static SetupConfig.TestcaseConfig testcaseConfig;
-
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("ChartV2Test_6", "Setup");
@@ -58,13 +58,13 @@ public class ChartV2Test_6 {
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
 
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("ChartV2Test_6", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().getString("CODES");
-        final String Types = rule.getParam().getString("Chart_Types");
-        final String isNeedAfterHours = rule.getParam().getString("isNeedAfterHours");
+        final String quoteNumbers = rule.getParam().getString("CODE");
+        final String Types = rule.getParam().getString("TYPE");
+        final String isNeedAfterHours = rule.getParam().getString("RETURNAFDATA");
 
 //        ChartType
         final CompletableFuture result = new CompletableFuture<JSONObject>();
@@ -94,30 +94,32 @@ public class ChartV2Test_6 {
                             JSONObject uploadObj = new JSONObject();
                             // TODO fill uploadObj with QuoteResponse value
                             try {
-                                for (int k=0;k<list.size();k++) {
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    //存储到JSON
-                                    uploadObj_1.put("datetime",list.get(k).datetime);
-                                    uploadObj_1.put("closePrice",list.get(k).closePrice);
-                                    uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
-                                    uploadObj_1.put("averagePrice",list.get(k).averagePrice);
-                                    uploadObj_1.put("md",list.get(k).getMd());
-                                    uploadObj_1.put("openInterest",list.get(k).openInterest);
-                                    uploadObj_1.put("iopv",list.get(k).iopv);
-                                    uploadObj_1.put("iopvPre",list.get(k).iopvPre);
-                                    uploadObj.put(list.get(k).datetime,uploadObj_1);
-                                }
-                                if (Boolean.parseBoolean(isNeedAfterHours)){
-                                    if (null!=chartResponse.afterHoursChartResponse.historyItems){
-                                        CopyOnWriteArrayList<OHLCItem> list1=chartResponse.afterHoursChartResponse.historyItems;
-                                        for (int i=0;i<list1.size();i++){
-                                            JSONObject uploadObj_1 = new JSONObject();
-                                            uploadObj_1.put("datetime",list1.get(i).datetime);
-                                            uploadObj_1.put("closePrice",list1.get(i).closePrice);
-                                            uploadObj_1.put("tradeVolume",list1.get(i).tradeVolume);
-                                            uploadObj_1.put("reference_price",list1.get(i).reference_price);
+                                if(list!=null){
+                                    for (int k=0;k<list.size();k++) {
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        //存储到JSON
+                                        uploadObj_1.put("datetime",list.get(k).datetime);
+                                        uploadObj_1.put("closePrice",list.get(k).closePrice);
+                                        uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
+                                        uploadObj_1.put("averagePrice",list.get(k).averagePrice);
+                                        uploadObj_1.put("md",list.get(k).getMd());
+                                        uploadObj_1.put("openInterest",list.get(k).openInterest);
+                                        uploadObj_1.put("iopv",list.get(k).iopv);
+                                        uploadObj_1.put("iopvPre",list.get(k).iopvPre);
+                                        uploadObj.put(list.get(k).datetime,uploadObj_1);
+                                    }
+                                    if (Boolean.parseBoolean(isNeedAfterHours)){
+                                        if (null!=chartResponse.afterHoursChartResponse.historyItems){
+                                            CopyOnWriteArrayList<OHLCItem> list1=chartResponse.afterHoursChartResponse.historyItems;
+                                            for (int i=0;i<list1.size();i++){
+                                                JSONObject uploadObj_1 = new JSONObject();
+                                                uploadObj_1.put("datetime",list1.get(i).datetime);
+                                                uploadObj_1.put("closePrice",list1.get(i).closePrice);
+                                                uploadObj_1.put("tradeVolume",list1.get(i).tradeVolume);
+                                                uploadObj_1.put("reference_price",list1.get(i).reference_price);
 //                                        Log.d("panh", String.valueOf(uploadObj_1));
-                                            uploadObj.put(list1.get(i).datetime,uploadObj_1);
+                                                uploadObj.put(list1.get(i).datetime,uploadObj_1);
+                                            }
                                         }
                                     }
                                 }
@@ -140,7 +142,7 @@ public class ChartV2Test_6 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName,rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

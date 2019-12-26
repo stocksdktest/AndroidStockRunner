@@ -69,7 +69,7 @@ public class TCP_TradeTest_1 {
     public void requestWork() throws Exception {
         Log.d("TCP_TradeTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
+        final String quoteNumbers = rule.getParam().optString("CODE");
         final String tcpSeconds = rule.getParam().optString("SECONDS", ""); //设置TCP监听的时间
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         final JSONObject uploadObj_1 = new JSONObject();
@@ -120,63 +120,65 @@ public class TCP_TradeTest_1 {
                         //                        Log.d("tcp00", item.toString());
                         try {
                             JSONObject uploadObj = new JSONObject();
-                            uploadObj.put("id", item.id);
-                            uploadObj.put("name", item.name);
-                            uploadObj.put("subtype",item.subtype);
-                            List<String> buyPrices=new ArrayList<>();
-                            if (item.buyPrices!=null&&item.buyPrices.size()>0){
-                                for (int j=0;j<item.buyPrices.size();j++){
-                                    buyPrices.add(item.buyPrices.get(j));
+                            if(item!=null){
+                                uploadObj.put("id", item.id);
+                                uploadObj.put("name", item.name);
+                                uploadObj.put("subtype",item.subtype);
+                                List<String> buyPrices=new ArrayList<>();
+                                if (item.buyPrices!=null&&item.buyPrices.size()>0){
+                                    for (int j=0;j<item.buyPrices.size();j++){
+                                        buyPrices.add(item.buyPrices.get(j));
+                                    }
+                                    uploadObj.put("buyPrices",new JSONArray(buyPrices));
+                                }else {
+                                    uploadObj.put("buyPrices",item.buyPrices);
                                 }
-                                uploadObj.put("buyPrices",new JSONArray(buyPrices));
-                            }else {
-                                uploadObj.put("buyPrices",item.buyPrices);
-                            }
 
-                            List<String> buyVolumes=new ArrayList<>();
-                            if (item.buyVolumes!=null&&item.buyVolumes.size()>0){
-                                for (int j=0;j<item.buyVolumes.size();j++){
-                                    buyVolumes.add(item.buyVolumes.get(j));
+                                List<String> buyVolumes=new ArrayList<>();
+                                if (item.buyVolumes!=null&&item.buyVolumes.size()>0){
+                                    for (int j=0;j<item.buyVolumes.size();j++){
+                                        buyVolumes.add(item.buyVolumes.get(j));
+                                    }
+                                    uploadObj.put("buyVolumes",new JSONArray(buyVolumes));
+                                }else {
+                                    uploadObj.put("buyVolumes",item.buyVolumes);
                                 }
-                                uploadObj.put("buyVolumes",new JSONArray(buyVolumes));
-                            }else {
-                                uploadObj.put("buyVolumes",item.buyVolumes);
-                            }
-                            List<String> sellPrices=new ArrayList<>();
-                            if (item.sellPrices!=null&&item.sellPrices.size()>0){
-                                for (int j=0;j<item.sellPrices.size();j++){
-                                    sellPrices.add(item.sellPrices.get(j));
+                                List<String> sellPrices=new ArrayList<>();
+                                if (item.sellPrices!=null&&item.sellPrices.size()>0){
+                                    for (int j=0;j<item.sellPrices.size();j++){
+                                        sellPrices.add(item.sellPrices.get(j));
+                                    }
+                                    uploadObj.put("sellPrices",new JSONArray(sellPrices));
+                                }else {
+                                    uploadObj.put("sellPrices",item.sellPrices);
                                 }
-                                uploadObj.put("sellPrices",new JSONArray(sellPrices));
-                            }else {
-                                uploadObj.put("sellPrices",item.sellPrices);
-                            }
-                            List<String> sellVolumes=new ArrayList<>();
-                            if (item.sellVolumes!=null&&item.sellVolumes.size()>0){
-                                for (int j=0;j<item.sellVolumes.size();j++){
-                                    sellVolumes.add(item.sellVolumes.get(j));
+                                List<String> sellVolumes=new ArrayList<>();
+                                if (item.sellVolumes!=null&&item.sellVolumes.size()>0){
+                                    for (int j=0;j<item.sellVolumes.size();j++){
+                                        sellVolumes.add(item.sellVolumes.get(j));
+                                    }
+                                    uploadObj.put("sellVolumes",new JSONArray(sellVolumes));
+                                }else {
+                                    uploadObj.put("sellVolumes",item.sellVolumes);
                                 }
-                                uploadObj.put("sellVolumes",new JSONArray(sellVolumes));
-                            }else {
-                                uploadObj.put("sellVolumes",item.sellVolumes);
-                            }
-                            uploadObj.put("lastPrice",item.lastPrice);
-                            uploadObj.put("change",item.change);
+                                uploadObj.put("lastPrice",item.lastPrice);
+                                uploadObj.put("change",item.change);
 //                            uploadObj.put("changeRate",item.upDownFlag+item.changeRate);//加涨跌符号
-                            if ("+".equals(item.upDownFlag)||"-".equals(item.upDownFlag)){
-                                uploadObj.put("changeRate",item.upDownFlag+item.changeRate);//加涨跌符号
-                            }else {
-                                uploadObj.put("changeRate",item.changeRate);
-                            }
-                            uploadObj.put("preClosePrice",item.preClosePrice);
+                                if ("+".equals(item.upDownFlag)||"-".equals(item.upDownFlag)){
+                                    uploadObj.put("changeRate",item.upDownFlag+item.changeRate);//加涨跌符号
+                                }else {
+                                    uploadObj.put("changeRate",item.changeRate);
+                                }
+                                uploadObj.put("preClosePrice",item.preClosePrice);
 //                            uploadObj.put("upDownFlag",item.upDownFlag);
-                            uploadObj.put("limitDown",item.limitDown);
-                            uploadObj.put("limitUP",item.limitUP);
-                            uploadObj.put("pricePosition",item.pricePosition);
-                            uploadObj.put("quantityUnitBuy",item.quantityUnitBuy);
-                            uploadObj.put("quantityUnitSell",item.quantityUnitSell);
-                            uploadObj.put("hkPriceDifferenceCategory",item.hkPriceDifferenceCategory);
-                            uploadObj_1.put(item.id,uploadObj);
+                                uploadObj.put("limitDown",item.limitDown);
+                                uploadObj.put("limitUP",item.limitUP);
+                                uploadObj.put("pricePosition",item.pricePosition);
+                                uploadObj.put("quantityUnitBuy",item.quantityUnitBuy);
+                                uploadObj.put("quantityUnitSell",item.quantityUnitSell);
+                                uploadObj.put("hkPriceDifferenceCategory",item.hkPriceDifferenceCategory);
+                                uploadObj_1.put(item.id,uploadObj);
+                            }
                             Log.d("tcp00", String.valueOf(uploadObj_1));
                         } catch (JSONException e) {
                             e.printStackTrace();
