@@ -74,8 +74,8 @@ public class F10_ImportantnoticeTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_ImportantnoticeTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         //CategoryType
 //        for (int i=0;i<quoteNumbers.length;i++){
@@ -90,11 +90,13 @@ public class F10_ImportantnoticeTest_1 {
                     }
                     JSONObject uploadObj = new JSONObject();
                     try {
-                        for (int i=0;i<importantnoticeResponse.list.size();i++) {
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("PUBDATE_",importantnoticeResponse.list.get(i).PUBDATE_);
-                            uploadObj_1.put("diviScheme",importantnoticeResponse.list.get(i).diviScheme);
-                            uploadObj.put(String.valueOf(i+1),uploadObj_1);
+                        if (importantnoticeResponse.list!=null){
+                            for (int i=0;i<importantnoticeResponse.list.size();i++) {
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("PUBDATE_",importantnoticeResponse.list.get(i).PUBDATE_);
+                                uploadObj_1.put("diviScheme",importantnoticeResponse.list.get(i).diviScheme);
+                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
+                            }
                         }
                         Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);

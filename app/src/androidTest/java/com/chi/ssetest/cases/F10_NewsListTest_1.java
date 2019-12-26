@@ -93,10 +93,10 @@ public class F10_NewsListTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_NewsListTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("newsType");
-        final String quoteNumbers1 = rule.getParam().optString("updateType");
-        final String quoteNumbers2 = rule.getParam().optString("newsID");
-        final String quoteNumbers3 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("NEWSTYPE");
+        final String quoteNumbers1 = rule.getParam().optString("TYPE");
+        final String quoteNumbers2 = rule.getParam().optString("NEWSID");
+        final String quoteNumbers3 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
         String newsID;
@@ -115,8 +115,8 @@ public class F10_NewsListTest_1 {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    if (newsListResponse.list!=null){
-                        try {
+                    try {
+                        if (newsListResponse.list!=null){
                             for (int i=0;i<newsListResponse.list.size();i++) {
                                 JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("ID_", newsListResponse.list.get(i).ID_);
@@ -126,13 +126,13 @@ public class F10_NewsListTest_1 {
                                 uploadObj_1.put("ABSTRACTFORMAT_", newsListResponse.list.get(i).ABSTRACTFORMAT_);
 //                                uploadObj_1.put("OVERPAGE_", newsListResponse.list.get(i).OVERPAGE_);
 //                                uploadObj_1.put("COUNT_", newsListResponse.list.get(i).COUNT_);
-                                Log.d("data", String.valueOf(uploadObj_1));
                                 uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
-                            result.complete(uploadObj);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
                         }
+                        Log.d("data", String.valueOf(uploadObj));
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
                 }
                 @Override

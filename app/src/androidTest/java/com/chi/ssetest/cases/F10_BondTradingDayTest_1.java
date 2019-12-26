@@ -82,7 +82,7 @@ public class F10_BondTradingDayTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_BondTradingDayTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
         String src;
@@ -103,15 +103,17 @@ public class F10_BondTradingDayTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     List<HashMap<String,Object>> list = f10V2Response.infos;
                     try {
-                        for (int i=0;i<list.size();i++){
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("sg",list.get(i).get("sg"));
-                            uploadObj_1.put("jjsg",list.get(i).get("jjsg"));
-                            uploadObj_1.put("dss",list.get(i).get("dss"));
-                            uploadObj_1.put("NORMALDAY",list.get(i).get("NORMALDAY"));
-                            Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put((String) list.get(i).get("NORMALDAY"),uploadObj_1);
+                        if(list!=null){
+                            for (int i=0;i<list.size();i++){
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("sg",list.get(i).get("sg"));
+                                uploadObj_1.put("jjsg",list.get(i).get("jjsg"));
+                                uploadObj_1.put("dss",list.get(i).get("dss"));
+                                uploadObj_1.put("NORMALDAY",list.get(i).get("NORMALDAY"));
+                                uploadObj.put((String) list.get(i).get("NORMALDAY"),uploadObj_1);
+                            }
                         }
+                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

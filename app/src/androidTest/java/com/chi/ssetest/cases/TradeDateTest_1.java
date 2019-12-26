@@ -42,6 +42,7 @@ import static org.junit.Assert.*;
 public class TradeDateTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.TRADEDATETEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("TradeDateSampleTest_1", "Setup");
@@ -52,11 +53,11 @@ public class TradeDateTest_1 {
     }
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("TradeDateSampleTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("markets");
+        final String quoteNumbers = rule.getParam().optString("MARKET");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             final TradeDateRequest request = new TradeDateRequest();
@@ -71,13 +72,15 @@ public class TradeDateTest_1 {
                     }
                     JSONObject uploadObj = new JSONObject();
                     try {
-                        uploadObj.put("status",response.status);
-                        uploadObj.put("message",response.message);
-                        uploadObj.put("tradeDates",response.extra);
+                       if(response!=null){
+                           uploadObj.put("status",response.status);
+                           uploadObj.put("message",response.message);
+                           uploadObj.put("tradeDates",response.extra);
+                       }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    Log.d("data", String.valueOf(uploadObj));
+//                    Log.d("data", String.valueOf(uploadObj));
                     result.complete(uploadObj);
                 }
 
@@ -87,7 +90,7 @@ public class TradeDateTest_1 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(),resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

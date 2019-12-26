@@ -41,7 +41,7 @@ import static org.junit.Assert.assertNotNull;
 public class AHListTest_2 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.AHLISTTEST_2;
     private static SetupConfig.TestcaseConfig testcaseConfig;
-
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("AHListTest_2", "Setup");
@@ -54,7 +54,7 @@ public class AHListTest_2 {
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
 
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("AHListTest_2", "requestWork");
         // TODO get custom args from param
@@ -76,23 +76,26 @@ public class AHListTest_2 {
                     JSONObject uploadObj=new JSONObject();
                     // TODO fill uploadObj with QuoteResponse value
                     try {
-                        for (int k=0;k<list.size();k++){
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("name", list.get(k).name);
-                            uploadObj_1.put("codeA", list.get(k).codeA);
-                            uploadObj_1.put("lastPriceA", list.get(k).lastPriceA);
-                            uploadObj_1.put("preClosePriceA", list.get(k).preClosePriceA);
-                            uploadObj_1.put("datetimeA", list.get(k).datetimeA);
-                            uploadObj_1.put("codeH", list.get(k).codeH);
-                            uploadObj_1.put("lastPriceH", list.get(k).lastPriceH);
-                            uploadObj_1.put("preClosePriceH", list.get(k).preClosePriceH);
-                            uploadObj_1.put("datetimeH", list.get(k).datetimeH);
-                            uploadObj_1.put("premiumAH", list.get(k).premiumAH);
-                            uploadObj_1.put("changeRateA", list.get(k).changeRateA);
-                            uploadObj_1.put("changeRateH", list.get(k).changeRateH);
-                            Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(list.get(k).datetimeA,uploadObj_1);
+                        if (list!=null){
+                            for (int k=0;k<list.size();k++){
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("name", list.get(k).name);
+                                uploadObj_1.put("codeA", list.get(k).codeA);
+                                uploadObj_1.put("lastPriceA", list.get(k).lastPriceA);
+                                uploadObj_1.put("preClosePriceA", list.get(k).preClosePriceA);
+                                uploadObj_1.put("datetimeA", list.get(k).datetimeA);
+                                uploadObj_1.put("codeH", list.get(k).codeH);
+                                uploadObj_1.put("lastPriceH", list.get(k).lastPriceH);
+                                uploadObj_1.put("preClosePriceH", list.get(k).preClosePriceH);
+                                uploadObj_1.put("datetimeH", list.get(k).datetimeH);
+                                uploadObj_1.put("premiumAH", list.get(k).premiumAH);
+                                uploadObj_1.put("changeRateA", list.get(k).changeRateA);
+                                uploadObj_1.put("changeRateH", list.get(k).changeRateH);
+//                            Log.d("data", String.valueOf(uploadObj_1));
+                                uploadObj.put(String.valueOf(k+1),uploadObj_1);
+                            }
                         }
+//                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
@@ -105,7 +108,7 @@ public class AHListTest_2 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName,rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

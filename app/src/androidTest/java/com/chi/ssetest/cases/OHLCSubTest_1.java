@@ -50,6 +50,7 @@ import static org.junit.Assert.*;
 public class OHLCSubTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.OHLCSUBTEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("OHLCSubTest_1", "Setup");
@@ -60,11 +61,11 @@ public class OHLCSubTest_1 {
     }
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("OHLCSubTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
+        final String quoteNumbers = rule.getParam().optString("CODE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             OHLCSubRequest request = new OHLCSubRequest();
@@ -79,19 +80,22 @@ public class OHLCSubTest_1 {
                     CopyOnWriteArrayList<FQItem> list=ohlcSubResponse.fq;
                     JSONObject uploadObj = new JSONObject();
                     try {
-                        for (int i=0;i<list.size();i++) {
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("dateTime", list.get(i).dateTime);
-                            uploadObj_1.put("increasePrice", list.get(i).increasePrice);
-                            uploadObj_1.put("allotmentPrice", list.get(i).allotmentPrice);
-                            uploadObj_1.put("bonusAmount", list.get(i).bonusAmount);
-                            uploadObj_1.put("bonusProportion", list.get(i).bonusProportion);
-                            uploadObj_1.put("increaseProportion", list.get(i).increaseProportion);
-                            uploadObj_1.put("increaseVolume", list.get(i).increaseVolume);
-                            uploadObj_1.put("allotmentProportion", list.get(i).allotmentProportion);
-                            Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put( list.get(i).dateTime,uploadObj_1);
+                        if(list!=null){
+                            for (int i=0;i<list.size();i++) {
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("dateTime", list.get(i).dateTime);
+                                uploadObj_1.put("increasePrice", list.get(i).increasePrice);
+                                uploadObj_1.put("allotmentPrice", list.get(i).allotmentPrice);
+                                uploadObj_1.put("bonusAmount", list.get(i).bonusAmount);
+                                uploadObj_1.put("bonusProportion", list.get(i).bonusProportion);
+                                uploadObj_1.put("increaseProportion", list.get(i).increaseProportion);
+                                uploadObj_1.put("increaseVolume", list.get(i).increaseVolume);
+                                uploadObj_1.put("allotmentProportion", list.get(i).allotmentProportion);
+//                            Log.d("data", String.valueOf(uploadObj_1));
+                                uploadObj.put( list.get(i).dateTime,uploadObj_1);
+                            }
                         }
+//                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                     result.completeExceptionally(e);
@@ -103,7 +107,7 @@ public class OHLCSubTest_1 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(),resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

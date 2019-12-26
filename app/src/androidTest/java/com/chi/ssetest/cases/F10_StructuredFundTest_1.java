@@ -82,9 +82,9 @@ public class F10_StructuredFundTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_StructuredFundTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("requestType");
-        final String quoteNumbers1 = rule.getParam().optString("stockId");
-        final String quoteNumbers2 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("GRADEFUNDTYPE");
+        final String quoteNumbers1 = rule.getParam().optString("CODE");
+        final String quoteNumbers2 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        StructuredFundRequest
 //        for (int i=0;i<quoteNumbers.length;i++){
@@ -112,77 +112,87 @@ public class F10_StructuredFundTest_1 {
                         switch (quoteNumbers){
                             //"/fndclassinfo"
                             case StructuredFundRequest.INFO:
-                                uploadObj.put("MASTERCODEA",info.get("MASTERCODEA"));
-                                uploadObj.put("SNAMECOMPA",info.get("SNAMECOMPA"));
-                                uploadObj.put("ATOTSHARE",info.get("ATOTSHARE"));
-                                uploadObj.put("MASTERCODE",info.get("MASTERCODE"));
-                                uploadObj.put("SNAMECOMP",info.get("SNAMECOMP"));
-                                uploadObj.put("MASTERCODEB",info.get("MASTERCODEB"));
-                                uploadObj.put("SNAMECOMPB",info.get("SNAMECOMPB"));
-                                uploadObj.put("BTOTSHARE",info.get("BTOTSHARE"));
-                                uploadObj.put("MAPCODE",info.get("MAPCODE"));
-                                uploadObj.put("MAPNAME",info.get("MAPNAME"));
-                                uploadObj.put("LISTDATE",info.get("LISTDATE"));
-                                uploadObj.put("ENDDATE",info.get("ENDDATE"));
-                                uploadObj.put("KEEPERNAME",info.get("KEEPERNAME"));
+                                if(info!=null){
+                                    uploadObj.put("MASTERCODEA",info.get("MASTERCODEA"));
+                                    uploadObj.put("SNAMECOMPA",info.get("SNAMECOMPA"));
+                                    uploadObj.put("ATOTSHARE",info.get("ATOTSHARE"));
+                                    uploadObj.put("MASTERCODE",info.get("MASTERCODE"));
+                                    uploadObj.put("SNAMECOMP",info.get("SNAMECOMP"));
+                                    uploadObj.put("MASTERCODEB",info.get("MASTERCODEB"));
+                                    uploadObj.put("SNAMECOMPB",info.get("SNAMECOMPB"));
+                                    uploadObj.put("BTOTSHARE",info.get("BTOTSHARE"));
+                                    uploadObj.put("MAPCODE",info.get("MAPCODE"));
+                                    uploadObj.put("MAPNAME",info.get("MAPNAME"));
+                                    uploadObj.put("LISTDATE",info.get("LISTDATE"));
+                                    uploadObj.put("ENDDATE",info.get("ENDDATE"));
+                                    uploadObj.put("KEEPERNAME",info.get("KEEPERNAME"));
+                                }
                                 break;
                             //"/fndclassstockpre"
                             case StructuredFundRequest.STOCKPRE:
-                                for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("SKCODE",infos.get(i).get("SKCODE"));
-                                    uploadObj_2.put("SKNAME",infos.get(i).get("SKNAME"));
-                                    uploadObj_2.put("NAVRTO",infos.get(i).get("NAVRTO"));
-                                    uploadObj_2.put("ACCSTKRTO",infos.get(i).get("ACCSTKRTO"));
-                                    uploadObj_2.put("ACCCIRCRTO",infos.get(i).get("ACCCIRCRTO"));
-                                    uploadObj.put((String) infos.get(i).get("SKCODE"),uploadObj_2);
+                                if(infos!=null){
+                                    for (int i=0;i<infos.size();i++){
+                                        JSONObject uploadObj_2 = new JSONObject();
+                                        uploadObj_2.put("SKCODE",infos.get(i).get("SKCODE"));
+                                        uploadObj_2.put("SKNAME",infos.get(i).get("SKNAME"));
+                                        uploadObj_2.put("NAVRTO",infos.get(i).get("NAVRTO"));
+                                        uploadObj_2.put("ACCSTKRTO",infos.get(i).get("ACCSTKRTO"));
+                                        uploadObj_2.put("ACCCIRCRTO",infos.get(i).get("ACCCIRCRTO"));
+                                        uploadObj.put((String) infos.get(i).get("SKCODE"),uploadObj_2);
+                                    }
                                 }
                                 break;
                             //"/fndclassforcast"
                             case StructuredFundRequest.FORCAST:
-                                uploadObj.put("FSYMBOL",info.get("FSYMBOL"));
-                                uploadObj.put("PRIXLEVERAGE",info.get("PRIXLEVERAGE"));
-                                uploadObj.put("NAVLEVERAGE",info.get("NAVLEVERAGE"));
-                                uploadObj.put("THRESHOLD",info.get("THRESHOLD"));
+                                if (info!=null){
+                                    uploadObj.put("FSYMBOL",info.get("FSYMBOL"));
+                                    uploadObj.put("PRIXLEVERAGE",info.get("PRIXLEVERAGE"));
+                                    uploadObj.put("NAVLEVERAGE",info.get("NAVLEVERAGE"));
+                                    uploadObj.put("THRESHOLD",info.get("THRESHOLD"));
+                                }
                                 break;
                             //"/fndclasssubredinfo"
                             case StructuredFundRequest.SUBREDINFO:
-                                uploadObj.put("INVESTSTYLE",info.get("INVESTSTYLE"));
-                                uploadObj.put("SUBREDSTATUS",info.get("SUBREDSTATUS"));
-                                uploadObj.put("ACCUNITNAV",info.get("ACCUNITNAV"));
-                                uploadObj.put("RATEMAXCOST",info.get("RATEMAXCOST"));
-                                uploadObj.put("APPMINAMT",info.get("APPMINAMT"));
+                                if (info!=null){
+                                    uploadObj.put("INVESTSTYLE",info.get("INVESTSTYLE"));
+                                    uploadObj.put("SUBREDSTATUS",info.get("SUBREDSTATUS"));
+                                    uploadObj.put("ACCUNITNAV",info.get("ACCUNITNAV"));
+                                    uploadObj.put("RATEMAXCOST",info.get("RATEMAXCOST"));
+                                    uploadObj.put("APPMINAMT",info.get("APPMINAMT"));
+                                }
                                 break;
                             //"/fndclassmergesplit"
                             case StructuredFundRequest.MERGESPLIT:
-                                uploadObj.put("MASTERCODEA",info.get("MASTERCODEA"));
-                                uploadObj.put("SNAMECOMPA",info.get("SNAMECOMPA"));
-                                uploadObj.put("ATOTSHARE",info.get("ATOTSHARE"));
-                                uploadObj.put("MASTERCODE",info.get("MASTERCODE"));
-                                uploadObj.put("SNAMECOMP",info.get("SNAMECOMP"));
-                                uploadObj.put("MASTERCODEB",info.get("MASTERCODEB"));
-                                uploadObj.put("SNAMECOMPB",info.get("SNAMECOMPB"));
-                                uploadObj.put("BTOTSHARE",info.get("BTOTSHARE"));
-                                uploadObj.put("ACCUNITNAV",info.get("ACCUNITNAV"));
+                                if (info!=null){uploadObj.put("MASTERCODEA",info.get("MASTERCODEA"));
+                                    uploadObj.put("SNAMECOMPA",info.get("SNAMECOMPA"));
+                                    uploadObj.put("ATOTSHARE",info.get("ATOTSHARE"));
+                                    uploadObj.put("MASTERCODE",info.get("MASTERCODE"));
+                                    uploadObj.put("SNAMECOMP",info.get("SNAMECOMP"));
+                                    uploadObj.put("MASTERCODEB",info.get("MASTERCODEB"));
+                                    uploadObj.put("SNAMECOMPB",info.get("SNAMECOMPB"));
+                                    uploadObj.put("BTOTSHARE",info.get("BTOTSHARE"));
+                                    uploadObj.put("ACCUNITNAV",info.get("ACCUNITNAV"));}
                                 break;
                             //"/fndclassconverted"
                             case StructuredFundRequest.CONVERTED:
-                                uploadObj.put("BENCHMARK",info.get("BENCHMARK"));
-                                uploadObj.put("ELDMEMO",info.get("ELDMEMO"));
+                                if (info!=null){uploadObj.put("BENCHMARK",info.get("BENCHMARK"));
+                                    uploadObj.put("ELDMEMO",info.get("ELDMEMO"));}
                                 break;
                             //"/fndclassmasterrate"
                             case StructuredFundRequest.MASTERRATE:
-                                uploadObj.put("subamt",info.get("subamt"));
-                                List<HashMap<String,Object>> masterRateinfos =( List<HashMap<String,Object>>)info.get("subcost");
-                                if (masterRateinfos!=null){
-                                    for (int k=0;k<masterRateinfos.size();k++){
-                                        JSONObject uploadObj_1 = new JSONObject();
-                                        uploadObj_1.put("RATEMAXCOST",masterRateinfos.get(k).get("RATEMAXCOST"));
-                                        uploadObj_1.put("APPMINAMT",masterRateinfos.get(k).get("APPMINAMT"));
-                                        uploadObj_1.put("APPAMTRESH",masterRateinfos.get(k).get("APPAMTRESH"));
-                                        uploadObj_1.put("APPMAXAMT",masterRateinfos.get(k).get("APPMAXAMT"));
-                                        uploadObj_1.put("SUBMIXAMT",masterRateinfos.get(k).get("SUBMIXAMT"));
-                                        uploadObj.put(String.valueOf((k+1)),uploadObj_1);
+                                if(info!=null){
+                                    uploadObj.put("subamt",info.get("subamt"));
+                                    List<HashMap<String,Object>> masterRateinfos =( List<HashMap<String,Object>>)info.get("subcost");
+                                    if (masterRateinfos!=null){
+                                        for (int k=0;k<masterRateinfos.size();k++){
+                                            JSONObject uploadObj_1 = new JSONObject();
+                                            uploadObj_1.put("RATEMAXCOST",masterRateinfos.get(k).get("RATEMAXCOST"));
+                                            uploadObj_1.put("APPMINAMT",masterRateinfos.get(k).get("APPMINAMT"));
+                                            uploadObj_1.put("APPAMTRESH",masterRateinfos.get(k).get("APPAMTRESH"));
+                                            uploadObj_1.put("APPMAXAMT",masterRateinfos.get(k).get("APPMAXAMT"));
+                                            uploadObj_1.put("SUBMIXAMT",masterRateinfos.get(k).get("SUBMIXAMT"));
+                                            uploadObj.put(String.valueOf((k+1)),uploadObj_1);
+                                        }
                                     }
                                 }
                                 break;

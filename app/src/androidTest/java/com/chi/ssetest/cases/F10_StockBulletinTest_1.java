@@ -85,8 +85,8 @@ public class F10_StockBulletinTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_StockBulletinTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("bulletinID");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("STOCKBULLETINID");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             StockBulletinRequest request = new StockBulletinRequest();
@@ -101,13 +101,15 @@ public class F10_StockBulletinTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     StockBulletinDetailItem list = stockBulletinResponse.info;
                     try {
-                        uploadObj.put("PUBDATE_",list.PUBDATE_);
-                        uploadObj.put("ID_",list.ID_);
-                        uploadObj.put("title",list.title);
-                        uploadObj.put("Content",list.Content);
-                        uploadObj.put("dataSource",list.dataSource);
-                        uploadObj.put("CONTENTFORMAT_",list.CONTENTFORMAT_);
-                        uploadObj.put("PURL_",list.PURL_);
+                        if (list!=null){
+                            uploadObj.put("PUBDATE_",list.PUBDATE_);
+                            uploadObj.put("ID_",list.ID_);
+                            uploadObj.put("title",list.title);
+                            uploadObj.put("Content",list.Content);
+                            uploadObj.put("dataSource",list.dataSource);
+                            uploadObj.put("CONTENTFORMAT_",list.CONTENTFORMAT_);
+                            uploadObj.put("PURL_",list.PURL_);
+                        }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

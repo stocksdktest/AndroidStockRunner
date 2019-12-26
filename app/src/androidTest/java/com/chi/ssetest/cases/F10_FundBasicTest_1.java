@@ -76,8 +76,8 @@ public class F10_FundBasicTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_FundBasicTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("stockId");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         //CategoryType
 //        for (int i=0;i<quoteNumbers.length;i++){
@@ -93,16 +93,18 @@ public class F10_FundBasicTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     HashMap<String,Object> list = f10V2Response.info;
                     try {
-                        uploadObj.put("FDNAME",list.get("FDNAME"));
-                        uploadObj.put("FDSNAME",list.get("FDSNAME"));
-                        uploadObj.put("FSYMBOL",list.get("FSYMBOL"));
-                        uploadObj.put("FDTYPE",list.get("FDTYPE"));
-                        uploadObj.put("FOUNDDATE",list.get("FOUNDDATE"));
-                        uploadObj.put("TRUSTEENAME",list.get("TRUSTEENAME"));
-                        uploadObj.put("KEEPERNAME",list.get("KEEPERNAME"));
-                        uploadObj.put("MANAGERNAME",list.get("MANAGERNAME"));
-                        uploadObj.put("FDINVCATEGORY",list.get("FDINVCATEGORY"));
-                        uploadObj.put("INVRULE",list.get("INVRULE"));
+                        if (list!=null){
+                            uploadObj.put("FDNAME",list.get("FDNAME"));
+                            uploadObj.put("FDSNAME",list.get("FDSNAME"));
+                            uploadObj.put("FSYMBOL",list.get("FSYMBOL"));
+                            uploadObj.put("FDTYPE",list.get("FDTYPE"));
+                            uploadObj.put("FOUNDDATE",list.get("FOUNDDATE"));
+                            uploadObj.put("TRUSTEENAME",list.get("TRUSTEENAME"));
+                            uploadObj.put("KEEPERNAME",list.get("KEEPERNAME"));
+                            uploadObj.put("MANAGERNAME",list.get("MANAGERNAME"));
+                            uploadObj.put("FDINVCATEGORY",list.get("FDINVCATEGORY"));
+                            uploadObj.put("INVRULE",list.get("INVRULE"));
+                        }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

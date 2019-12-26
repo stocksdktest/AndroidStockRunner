@@ -48,6 +48,7 @@ import static org.junit.Assert.*;
 public class SubNewBondStockRankingTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.SUBNEWBONDSTOCKRANKINGTEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d(" SubNewBondStockRankingTest_1", "Setup");
@@ -59,7 +60,7 @@ public class SubNewBondStockRankingTest_1 {
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
 
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("SubNewBondStockRankingTest_1", "requestWork");
         // TODO get custom args from param
@@ -78,21 +79,24 @@ public class SubNewBondStockRankingTest_1 {
                     ArrayList<SubNewStockRankingModel> list=subNewStockRankingResponse.list;
                     try {
                         JSONObject uploadObj = new JSONObject();
-                        for (int i=0;i<list.size();i++) {
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("name",list.get(i).getName());
-                            uploadObj_1.put("code",list.get(i).getCode());
-                            uploadObj_1.put("subType",list.get(i).getSubType());
-                            uploadObj_1.put("originalPrice",list.get(i).getOriginalPrice());
-                            uploadObj_1.put("lastestPrice",list.get(i).getLastestPrice());
-                            uploadObj_1.put("originalData",list.get(i).getOriginalData());
+                        if(list!=null){
+                            for (int i=0;i<list.size();i++) {
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("name",list.get(i).getName());
+                                uploadObj_1.put("code",list.get(i).getCode());
+                                uploadObj_1.put("subType",list.get(i).getSubType());
+                                uploadObj_1.put("originalPrice",list.get(i).getOriginalPrice());
+                                uploadObj_1.put("lastestPrice",list.get(i).getLastestPrice());
+                                uploadObj_1.put("originalData",list.get(i).getOriginalData());
 //                            uploadObj_1.put("continuousLimitedDays",list.get(i).getContinuousLimitedDays());//无值
-                            uploadObj_1.put("rate",list.get(i).getRate());
-                            uploadObj_1.put("allRate",list.get(i).getAllRate());
-                            uploadObj_1.put("preClosePrice",list.get(i).getPreClosePrice());
-                            Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(list.get(i).getCode(),uploadObj_1);
+                                uploadObj_1.put("rate",list.get(i).getRate());
+                                uploadObj_1.put("allRate",list.get(i).getAllRate());
+                                uploadObj_1.put("preClosePrice",list.get(i).getPreClosePrice());
+//                            Log.d("data", String.valueOf(uploadObj_1));
+                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
+                            }
                         }
+//                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
@@ -104,7 +108,7 @@ public class SubNewBondStockRankingTest_1 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

@@ -56,6 +56,7 @@ import static org.junit.Assert.*;
 public class HSAmountTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.HSAMOUNTTEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("HSAmountTest_1", "Setup");
@@ -66,7 +67,7 @@ public class HSAmountTest_1 {
     }
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("HSAmountTest_1", "requestWork");
         // TODO get custom args from param
@@ -87,14 +88,16 @@ public class HSAmountTest_1 {
                     HSAmountItem list = hsAmountResponse.mHSAmountItem;
                     // TODO fill uploadObj with QuoteResponse value
                     try {
-                        uploadObj.put("shInitialQuota",list.shInitialQuota);
-                        uploadObj.put("shRemainQuota",list.shRemainQuota);
-                        uploadObj.put("szInitialQuota",list.szInitialQuota);
-                        uploadObj.put("szRemainQuota",list.szRemainQuota);
+                        if(list!=null){
+                            uploadObj.put("shInitialQuota",list.shInitialQuota);
+                            uploadObj.put("shRemainQuota",list.shRemainQuota);
+                            uploadObj.put("szInitialQuota",list.szInitialQuota);
+                            uploadObj.put("szRemainQuota",list.szRemainQuota);
+                        }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }
-                    Log.d("data", String.valueOf(uploadObj));
+//                    Log.d("data", String.valueOf(uploadObj));
                     result.complete(uploadObj);
                 }
                 @Override
@@ -103,7 +106,7 @@ public class HSAmountTest_1 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

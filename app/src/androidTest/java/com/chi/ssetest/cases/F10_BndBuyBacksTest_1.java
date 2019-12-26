@@ -77,8 +77,8 @@ public class F10_BndBuyBacksTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_BndBuyBacksTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("stockId");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             BndBuyBacksRequest request = new BndBuyBacksRequest();
@@ -93,14 +93,16 @@ public class F10_BndBuyBacksTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     HashMap<String,Object> list = f10V2Response.info;
                     try {
-                        uploadObj.put("BONDNAME",list.get("BONDNAME"));
-                        uploadObj.put("BONDSNAME",list.get("BONDSNAME"));
-                        uploadObj.put("SYMBOL",list.get("SYMBOL"));
-                        uploadObj.put("EXERENDDATE",list.get("EXERENDDATE"));
-                        uploadObj.put("PARVALUE",list.get("PARVALUE"));
-                        uploadObj.put("CONVERTRATE",list.get("CONVERTRATE"));
-                        uploadObj.put("CONVERTPRC",list.get("CONVERTPRC"));
-                        uploadObj.put("REPAYDATE",list.get("REPAYDATE"));
+                        if (list!=null) {
+                            uploadObj.put("BONDNAME",list.get("BONDNAME"));
+                            uploadObj.put("BONDSNAME",list.get("BONDSNAME"));
+                            uploadObj.put("SYMBOL",list.get("SYMBOL"));
+                            uploadObj.put("EXERENDDATE",list.get("EXERENDDATE"));
+                            uploadObj.put("PARVALUE",list.get("PARVALUE"));
+                            uploadObj.put("CONVERTRATE",list.get("CONVERTRATE"));
+                            uploadObj.put("CONVERTPRC",list.get("CONVERTPRC"));
+                            uploadObj.put("REPAYDATE",list.get("REPAYDATE"));
+                        }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

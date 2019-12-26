@@ -84,8 +84,8 @@ public class F10_TopLiquidShareHolderTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_TopLiquidShareHolderTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             TopLiquidShareHolderRequest request = new TopLiquidShareHolderRequest();
@@ -98,8 +98,8 @@ public class F10_TopLiquidShareHolderTest_1 {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    if (topLiquidShareHolderResponse.list!=null){
-                        try {
+                    try {
+                        if (topLiquidShareHolderResponse.list!=null){
                             for (int i=0;i<topLiquidShareHolderResponse.list.size();i++) {
                                 JSONObject uploadObj_1 = new JSONObject();
                                 if (quoteNumbers1.equals("g")){
@@ -119,14 +119,13 @@ public class F10_TopLiquidShareHolderTest_1 {
                                     uploadObj_1.put("SHCODE_",topLiquidShareHolderResponse.list.get(i).SHCODE_);
                                     uploadObj_1.put("HOLDASHAREUR_",topLiquidShareHolderResponse.list.get(i).HOLDASHAREUR_);
                                 }
-                                Log.d("data", String.valueOf(uploadObj_1));
                                 uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
-                            result.complete(uploadObj);
-                        } catch (JSONException e) {
-                            result.completeExceptionally(e);
                         }
-
+                        Log.d("data", String.valueOf(uploadObj));
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
                     }
                 }
                 @Override

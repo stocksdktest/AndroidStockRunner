@@ -60,6 +60,7 @@ import static org.junit.Assert.*;
 public class DRQuoteListTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.DRQUOTELISTTEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("DRQuoteListTest_1", "Setup");
@@ -70,11 +71,11 @@ public class DRQuoteListTest_1 {
     }
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("DRQuoteListTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
+        final String quoteNumbers = rule.getParam().optString("DRCODE");
         final String quoteNumbers1 = rule.getParam().optString("param");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         //DRSortType
@@ -90,28 +91,31 @@ public class DRQuoteListTest_1 {
                     }
                     JSONObject uploadObj = new JSONObject();
                     try {
-                        for (DRQuoteItem item : drQuoteListResponse.mDRQuoteItems) {
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("code", item.code);
-                            uploadObj_1.put("name", item.name);
-                            uploadObj_1.put("lastPrice", item.lastPrice);
-                            uploadObj_1.put("preClosePrice", item.preClosePrice);
-                            uploadObj_1.put("change",item.change);
-                            uploadObj_1.put("changeRate", item.changeRate);
-                            uploadObj_1.put("subType", item.subType);
-                            uploadObj_1.put("dateTime", item.dateTime);
-                            uploadObj_1.put("premium", item.premium);
-                            uploadObj_1.put("baseCode",item.baseCode);
-                            uploadObj_1.put("baseName",item.baseName);
-                            uploadObj_1.put("baseLastPrice",item.baseLastPrice);
-                            uploadObj_1.put("basePreClosePrice",item.basePreClosePrice);
-                            uploadObj_1.put("baseChange",item.baseChange);
-                            uploadObj_1.put("baseChangeRate",item.baseChangeRate);
-                            uploadObj_1.put("baseSubtype",item.baseSubtype);
-                            uploadObj_1.put("baseDateTime",item.baseDateTime);
-                            Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(item.dateTime,uploadObj_1);
+                        if(drQuoteListResponse.mDRQuoteItems!=null){
+                            for (int i=0;i<drQuoteListResponse.mDRQuoteItems.size();i++) {
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("code",drQuoteListResponse.mDRQuoteItems.get(i).code);
+                                uploadObj_1.put("name", drQuoteListResponse.mDRQuoteItems.get(i).name);
+                                uploadObj_1.put("lastPrice", drQuoteListResponse.mDRQuoteItems.get(i).lastPrice);
+                                uploadObj_1.put("preClosePrice", drQuoteListResponse.mDRQuoteItems.get(i).preClosePrice);
+                                uploadObj_1.put("change",drQuoteListResponse.mDRQuoteItems.get(i).change);
+                                uploadObj_1.put("changeRate", drQuoteListResponse.mDRQuoteItems.get(i).changeRate);
+                                uploadObj_1.put("subType", drQuoteListResponse.mDRQuoteItems.get(i).subType);
+                                uploadObj_1.put("dateTime", drQuoteListResponse.mDRQuoteItems.get(i).dateTime);
+                                uploadObj_1.put("premium", drQuoteListResponse.mDRQuoteItems.get(i).premium);
+                                uploadObj_1.put("baseCode",drQuoteListResponse.mDRQuoteItems.get(i).baseCode);
+                                uploadObj_1.put("baseName",drQuoteListResponse.mDRQuoteItems.get(i).baseName);
+                                uploadObj_1.put("baseLastPrice",drQuoteListResponse.mDRQuoteItems.get(i).baseLastPrice);
+                                uploadObj_1.put("basePreClosePrice",drQuoteListResponse.mDRQuoteItems.get(i).basePreClosePrice);
+                                uploadObj_1.put("baseChange",drQuoteListResponse.mDRQuoteItems.get(i).baseChange);
+                                uploadObj_1.put("baseChangeRate",drQuoteListResponse.mDRQuoteItems.get(i).baseChangeRate);
+                                uploadObj_1.put("baseSubtype",drQuoteListResponse.mDRQuoteItems.get(i).baseSubtype);
+                                uploadObj_1.put("baseDateTime",drQuoteListResponse.mDRQuoteItems.get(i).baseDateTime);
+//                            Log.d("data", String.valueOf(uploadObj_1));
+                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
+                            }
                         }
+//                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
@@ -123,7 +127,7 @@ public class DRQuoteListTest_1 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

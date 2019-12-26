@@ -181,7 +181,7 @@ public class TestResultLogcatCollector implements TestResultCollector {
         document.append("recordID", record.getRecordID());
         document.append("isPass", record.getIsPass());
         document.append("startTime", record.getStartTime());
-//        document.append("endTime", record.getEndTime());
+        document.append("endTime", record.getEndTime());
         document.append("paramData", null);
         document.append("resultData", null);
         document.append("exceptionData", null);
@@ -217,6 +217,7 @@ public class TestResultLogcatCollector implements TestResultCollector {
         document.append("recordID", record.getRecordID());
         document.append("isPass", record.getIsPass());
         document.append("startTime", record.getStartTime());
+        document.append("endTime", record.getEndTime());
         document.append("paramData", formatBSON(param));
         document.append("resultData", formatBSON(result));
         document.append("exceptionData", null);
@@ -253,6 +254,7 @@ public class TestResultLogcatCollector implements TestResultCollector {
         document.append("recordID", record.getRecordID());
         document.append("isPass", record.getIsPass());
         document.append("startTime", record.getStartTime());
+        document.append("endTime", record.getEndTime());
         document.append("paramData", null);
         document.append("resultData", null);
         document.append("exceptionData", null);

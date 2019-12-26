@@ -9,13 +9,12 @@ import com.chi.ssetest.protos.SetupConfig;
 import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.setup.TestcaseConfigRule;
 import com.mitake.core.OHLCItem;
-import com.mitake.core.QuoteItem;
 import com.mitake.core.bean.log.ErrorInfo;
 import com.mitake.core.request.ChartRequestV2;
-import com.mitake.core.request.QuoteDetailRequest;
+import com.mitake.core.request.PointAddType;
 import com.mitake.core.response.ChartResponse;
+import com.mitake.core.response.IResponseCallback;
 import com.mitake.core.response.IResponseInfoCallback;
-import com.mitake.core.response.QuoteResponse;
 import com.mitake.core.response.Response;
 
 import org.json.JSONArray;
@@ -39,13 +38,13 @@ import static org.junit.Assert.assertNotNull;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-//走势数据 方法四 对应文档方法三传入quoteitem补全
+//走势数据 方法四 对应文档方法四传入code
 @RunWith(AndroidJUnit4.class)
 @StockTestcase(StockTestcaseName.CHARTV2TEST_4)
 public class ChartV2Test_4 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.CHARTV2TEST_4;
     private static SetupConfig.TestcaseConfig testcaseConfig;
-
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("ChartV2Test_4", "Setup");
@@ -58,62 +57,54 @@ public class ChartV2Test_4 {
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
 
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("ChartV2Test_4", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().getString("CODES");
-        final String Types = rule.getParam().getString("Chart_Types");
+        final String quoteNumbers = rule.getParam().getString("CODE");
+        final String Types = rule.getParam().getString("TYPE");
+        final String PointAddTypes = rule.getParam().getString("PointAddTypes");
+        final String subtypes = rule.getParam().getString("SUBTYPE");
 //        ChartType
+//        PointAddType
         final CompletableFuture result = new CompletableFuture<JSONObject>();
-
 //        for (int i=0;i<quoteNumbers.length;i++){
 //            final int a=i;
-            QuoteDetailRequest quoteDetailRequest=new QuoteDetailRequest();
-
-            quoteDetailRequest.send(quoteNumbers, new IResponseInfoCallback() {
+            ChartRequestV2 request = new ChartRequestV2();
+            request.send(quoteNumbers, Types, Integer.parseInt(PointAddTypes), subtypes, new IResponseInfoCallback() {
                 @Override
                 public void callback(Response response) {
-                    QuoteResponse quoteResponse=(QuoteResponse) response;
-                    QuoteItem quoteItem=quoteResponse.quoteItems.get(0);
-                    ChartRequestV2 request = new ChartRequestV2();
-                    request.send(quoteItem,Types, new IResponseInfoCallback() {
-                        @Override
-                        public void callback(Response response) {
-                            ChartResponse chartResponse = (ChartResponse) response;
-                            try {
-                                assertNotNull(chartResponse.historyItems);
-                            } catch (AssertionError e) {
-                                result.completeExceptionally(e);
-                            }
-                            CopyOnWriteArrayList<OHLCItem> list=chartResponse.historyItems;
-                            JSONObject uploadObj = new JSONObject();
-                            // TODO fill uploadObj with QuoteResponse value
-                            try {
-                                for (int k=0;k<list.size();k++) {
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    //存储到JSON
-                                    uploadObj_1.put("datetime",list.get(k).datetime);
-                                    uploadObj_1.put("closePrice",list.get(k).closePrice);
-                                    uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
-                                    uploadObj_1.put("averagePrice",list.get(k).averagePrice);
-                                    uploadObj_1.put("md",list.get(k).getMd());
-                                    uploadObj_1.put("openInterest",list.get(k).openInterest);
-                                    uploadObj_1.put("iopv",list.get(k).iopv);
-                                    uploadObj_1.put("iopvPre",list.get(k).iopvPre);
-                                    Log.d("data", String.valueOf(uploadObj_1));
-                                    uploadObj.put(list.get(k).datetime,uploadObj_1);
-                                }
-                                result.complete(uploadObj);
-                            } catch (JSONException e) {
-                                result.completeExceptionally(e);
+                    ChartResponse chartResponse = (ChartResponse) response;
+                    try {
+                        assertNotNull(chartResponse.historyItems);
+                    } catch (AssertionError e) {
+                        result.completeExceptionally(e);
+                    }
+                    CopyOnWriteArrayList<OHLCItem> list=chartResponse.historyItems;
+                    JSONObject uploadObj = new JSONObject();
+                    // TODO fill uploadObj with QuoteResponse value
+                    try {
+                        if(list!=null){
+                            for (int k=0;k<list.size();k++) {
+                                JSONObject uploadObj_1 = new JSONObject();
+                                //存储到JSON
+                                uploadObj_1.put("datetime",list.get(k).datetime);
+                                uploadObj_1.put("closePrice",list.get(k).closePrice);
+                                uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
+                                uploadObj_1.put("averagePrice",list.get(k).averagePrice);
+                                uploadObj_1.put("md",list.get(k).getMd());
+                                uploadObj_1.put("openInterest",list.get(k).openInterest);
+                                uploadObj_1.put("iopv",list.get(k).iopv);
+                                uploadObj_1.put("iopvPre",list.get(k).iopvPre);
+//                            Log.d("data", String.valueOf(uploadObj_1));
+                                uploadObj.put(list.get(k).datetime,uploadObj_1);
                             }
                         }
-                        @Override
-                        public void exception(ErrorInfo errorInfo) {
-                            result.completeExceptionally(new Exception(errorInfo.toString()));
-                        }
-                    });
+//                        Log.d("data", String.valueOf(uploadObj));
+                        result.complete(uploadObj);
+                    } catch (JSONException e) {
+                        result.completeExceptionally(e);
+                    }
                 }
 
                 @Override
@@ -122,7 +113,7 @@ public class ChartV2Test_4 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName,rule.getParam(), resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

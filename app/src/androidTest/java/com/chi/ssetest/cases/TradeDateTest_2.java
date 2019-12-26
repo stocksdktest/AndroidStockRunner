@@ -50,6 +50,7 @@ import static org.junit.Assert.*;
 public class TradeDateTest_2 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.TRADEDATETEST_2;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("TradeDateSampleTest_2", "Setup");
@@ -60,12 +61,12 @@ public class TradeDateTest_2 {
     }
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("TradeDateSampleTest_2", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("markets");
-        final String quoteNumbers1 = rule.getParam().optString("date");
+        final String quoteNumbers = rule.getParam().optString("MARKET");
+        final String quoteNumbers1 = rule.getParam().optString("DATE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
         final String date;
@@ -86,14 +87,17 @@ public class TradeDateTest_2 {
                     HashMap<String,ArrayList<TradeDate>> tradeDatesMap = tradeDateResponse.tradeDatesMap;
                     JSONObject uploadObj = new JSONObject();
                     try {
-                        for (int i=0;i<tradeDatesMap.get(quoteNumbers).size();i++){
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("date",tradeDatesMap.get(quoteNumbers).get(i).date);
-                            uploadObj_1.put("isTrade",tradeDatesMap.get(quoteNumbers).get(i).isTrade);
-                            uploadObj_1.put("description",tradeDatesMap.get(quoteNumbers).get(i).description);
-                            uploadObj.put(tradeDatesMap.get(quoteNumbers).get(i).date,uploadObj_1);
-                            Log.d("data", String.valueOf(uploadObj_1));
+                        if(tradeDatesMap.get(quoteNumbers)!=null){
+                            for (int i=0;i<tradeDatesMap.get(quoteNumbers).size();i++){
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("date",tradeDatesMap.get(quoteNumbers).get(i).date);
+                                uploadObj_1.put("isTrade",tradeDatesMap.get(quoteNumbers).get(i).isTrade);
+                                uploadObj_1.put("description",tradeDatesMap.get(quoteNumbers).get(i).description);
+                                uploadObj.put(tradeDatesMap.get(quoteNumbers).get(i).date,uploadObj_1);
+//                                Log.d("data", String.valueOf(uploadObj_1));
+                            }
                         }
+//                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
@@ -105,7 +109,7 @@ public class TradeDateTest_2 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(),resultObj);
             } catch (Exception e) {
                 throw new Exception(e);

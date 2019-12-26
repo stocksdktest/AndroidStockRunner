@@ -79,10 +79,10 @@ public class F10V2Test_2 {
     public void requestWork() throws Exception {
         Log.d("F10V2Test_2", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("code");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
         final String quoteNumbers2 = rule.getParam().optString("param");
-        final String quoteNumbers3 = rule.getParam().optString("apiType");
+        final String quoteNumbers3 = rule.getParam().optString("REQUESTTYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         // F10Type
 //        for (int i=0;i<quoteNumbers.length;i++){
@@ -122,41 +122,47 @@ public class F10V2Test_2 {
                         switch (quoteNumbers3) {
                             //沪深股api----大事提醒---按时间
                             case F10Type.IMPORT_NOTICE_DATA:
-                                for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("REPTITLE",infos.get(i).get("REPTITLE"));
-                                    uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
-                                    uploadObj_1.put("TEXT",infos.get(i).get("TEXT"));
-                                    uploadObj_1.put("ID",infos.get(i).get("ID"));
-                                    uploadObj_1.put("ISPDF",infos.get(i).get("ISPDF"));
-                                    uploadObj.put((String) infos.get(i).get("TRADEDATE"),uploadObj_1);
+                                if (infos!=null){
+                                    for (int i=0;i<infos.size();i++){
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("REPTITLE",infos.get(i).get("REPTITLE"));
+                                        uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
+                                        uploadObj_1.put("TEXT",infos.get(i).get("TEXT"));
+                                        uploadObj_1.put("ID",infos.get(i).get("ID"));
+                                        uploadObj_1.put("ISPDF",infos.get(i).get("ISPDF"));
+                                        uploadObj.put((String) infos.get(i).get("TRADEDATE"),uploadObj_1);
+                                    }
                                 }
                                 break;
                             //沪深股api----大事提醒---按标题
                             case F10Type.IMPORT_NOTICE_TITLE:
-                                for (int i=0;i<infos.size();i++){
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("REPTITLE",infos.get(i).get("REPTITLE"));
-                                    uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
-                                    uploadObj_1.put("TEXT",infos.get(i).get("TEXT"));
-                                    uploadObj_1.put("ID",infos.get(i).get("ID"));
-                                    uploadObj_1.put("ISPDF",infos.get(i).get("ISPDF"));
-                                    uploadObj.put((String) infos.get(i).get("TRADEDATE"),uploadObj_1);
+                                if (infos!=null){
+                                    for (int i=0;i<infos.size();i++){
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("REPTITLE",infos.get(i).get("REPTITLE"));
+                                        uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
+                                        uploadObj_1.put("TEXT",infos.get(i).get("TEXT"));
+                                        uploadObj_1.put("ID",infos.get(i).get("ID"));
+                                        uploadObj_1.put("ISPDF",infos.get(i).get("ISPDF"));
+                                        uploadObj.put((String) infos.get(i).get("TRADEDATE"),uploadObj_1);
+                                    }
                                 }
                                 break;
                             //大事提醒-业绩预告
                             case F10Type.EXPT_PERFORMANCE:
-                                uploadObj.put("Page",info.get("Page"));
-                                uploadObj.put("PageNumber",info.get("PageNumber"));
-                                List<HashMap<String,Object>> items2= (List<HashMap<String,Object>>) info.get("List");
-                                if (items2!=null){
-                                    for (int i=0;i<items2.size();i++){
-                                        JSONObject uploadObj_1 = new JSONObject();
-                                        uploadObj_1.put("SESNAME",items2.get(i).get("SESNAME"));
-                                        uploadObj_1.put("PUBLISHDATE",items2.get(i).get("PUBLISHDATE"));
-                                        uploadObj_1.put("RETAMAXPROFITSMK",items2.get(i).get("RETAMAXPROFITSMK"));
-                                        uploadObj_1.put("RETAMAXPROFITSINC",items2.get(i).get("RETAMAXPROFITSINC"));
-                                        uploadObj.put((String) items2.get(i).get("PUBLISHDATE"),uploadObj_1);
+                                if (info!=null){
+                                    uploadObj.put("Page",info.get("Page"));
+                                    uploadObj.put("PageNumber",info.get("PageNumber"));
+                                    List<HashMap<String,Object>> items2= (List<HashMap<String,Object>>) info.get("List");
+                                    if (items2!=null){
+                                        for (int i=0;i<items2.size();i++){
+                                            JSONObject uploadObj_1 = new JSONObject();
+                                            uploadObj_1.put("SESNAME",items2.get(i).get("SESNAME"));
+                                            uploadObj_1.put("PUBLISHDATE",items2.get(i).get("PUBLISHDATE"));
+                                            uploadObj_1.put("RETAMAXPROFITSMK",items2.get(i).get("RETAMAXPROFITSMK"));
+                                            uploadObj_1.put("RETAMAXPROFITSINC",items2.get(i).get("RETAMAXPROFITSINC"));
+                                            uploadObj.put((String) items2.get(i).get("PUBLISHDATE"),uploadObj_1);
+                                        }
                                     }
                                 }
                                 break;

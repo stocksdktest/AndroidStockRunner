@@ -47,6 +47,7 @@ import static org.junit.Assert.*;
 public class BrokerInfoTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.BROKERINFOTEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
+    private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("BrokerInfoTest_1", "Setup");
@@ -57,11 +58,11 @@ public class BrokerInfoTest_1 {
     }
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
-    @Test(timeout = 5000)
+    @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
         Log.d("BrokerInfoTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("stockID");
+        final String quoteNumbers = rule.getParam().optString("CODE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             BrokerInfoRequest request = new BrokerInfoRequest();
@@ -76,14 +77,17 @@ public class BrokerInfoTest_1 {
                     ArrayList<BrokerInfoItem> list=brokerInfoResponse.list;
                     JSONObject uploadObj = new JSONObject();
                     try {
-                        for (int i=0;i<list.size();i++) {
-                            JSONObject uploadObj_1 = new JSONObject();
-                            uploadObj_1.put("corp",list.get(i).corp);
-                            uploadObj_1.put("corporation",list.get(i).corporation);
-                            uploadObj_1.put("state",list.get(i).state);
-                            Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(String.valueOf(i+1),uploadObj_1);
+                        if(list!=null){
+                            for (int i=0;i<list.size();i++) {
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("corp",list.get(i).corp);
+                                uploadObj_1.put("corporation",list.get(i).corporation);
+                                uploadObj_1.put("state",list.get(i).state);
+//                                Log.d("data", String.valueOf(uploadObj_1));
+                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
+                            }
                         }
+//                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
@@ -95,7 +99,7 @@ public class BrokerInfoTest_1 {
                 }
             });
             try {
-                JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
+                JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(),resultObj);
             } catch (Exception e) {
                 throw new Exception(e);
