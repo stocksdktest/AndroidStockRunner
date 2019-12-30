@@ -42,6 +42,7 @@ import com.mitake.core.response.BankuaisortingResponse;
 import com.mitake.core.response.CatequoteResponse;
 import com.mitake.core.response.DataResponse;
 import com.mitake.core.response.DatesResponse;
+import com.mitake.core.response.F10V2Response;
 import com.mitake.core.response.IResponseInfoCallback;
 import com.mitake.core.response.ImportantnoticeResponse;
 import com.mitake.core.response.MainFinaIndexNasResponse;
@@ -98,28 +99,27 @@ public class F10_CalendarTest_1 {
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             CalendarRequest request = new CalendarRequest();
-            request.sendV2(quoteNumbers,new IResponseInfoCallback() {
+            request.send(quoteNumbers,new IResponseInfoCallback() {
                 @Override
                 public void callback(Response response) {
-                    DatesResponse dataResponse = (DatesResponse) response;
+                    F10V2Response f10V2Response= (F10V2Response) response;
                     try {
-                        assertNotNull(dataResponse.infos);
+                        assertNotNull(f10V2Response.infos);
                     } catch (AssertionError e) {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    ArrayList<NewShareDates> list = dataResponse.infos;
                     try {
-                        if(list!=null){
-                            for (int i=0;i<list.size();i++){
+                        if(f10V2Response.infos!=null){
+                            for (int i=0;i<f10V2Response.infos.size();i++){
                                 JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("sg",list.get(i).getSg());
-                                uploadObj_1.put("zq",list.get(i).getZq());
-                                uploadObj_1.put("ss",list.get(i).getSs());
-                                uploadObj_1.put("jjfx",list.get(i).getJjfx());
-                                uploadObj_1.put("wss",list.get(i).getWss());
-                                uploadObj_1.put("normalDay",list.get(i).getNormalDay());
-                                uploadObj.put(list.get(i).getNormalDay(),uploadObj_1);
+                                uploadObj_1.put("sg",f10V2Response.infos.get(i).get("sg"));
+                                uploadObj_1.put("zq",f10V2Response.infos.get(i).get("zq"));
+                                uploadObj_1.put("ss",f10V2Response.infos.get(i).get("ss"));
+                                uploadObj_1.put("jjfx",f10V2Response.infos.get(i).get("jjfx"));
+                                uploadObj_1.put("wss",f10V2Response.infos.get(i).get("wss"));
+                                uploadObj_1.put("normalDay",f10V2Response.infos.get(i).get("NORMALDAY"));
+                                uploadObj.put(String.valueOf(f10V2Response.infos.get(i).get("NORMALDAY")),uploadObj_1);
                             }
                         }
                         Log.d("data", String.valueOf(uploadObj));
