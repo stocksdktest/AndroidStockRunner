@@ -86,22 +86,25 @@ public class F10_BndBuyBacksTest_1 {
                 @Override
                 public void callback(F10V2Response f10V2Response) {
                     try {
-                        assertNotNull(f10V2Response.info);
+                        assertNotNull(f10V2Response.infos);
                     } catch (AssertionError e) {
                         result.completeExceptionally(e);
                     }
                     JSONObject uploadObj = new JSONObject();
-                    HashMap<String,Object> list = f10V2Response.info;
                     try {
-                        if (list!=null) {
-                            uploadObj.put("BONDNAME",list.get("BONDNAME"));
-                            uploadObj.put("BONDSNAME",list.get("BONDSNAME"));
-                            uploadObj.put("SYMBOL",list.get("SYMBOL"));
-                            uploadObj.put("EXERENDDATE",list.get("EXERENDDATE"));
-                            uploadObj.put("PARVALUE",list.get("PARVALUE"));
-                            uploadObj.put("CONVERTRATE",list.get("CONVERTRATE"));
-                            uploadObj.put("CONVERTPRC",list.get("CONVERTPRC"));
-                            uploadObj.put("REPAYDATE",list.get("REPAYDATE"));
+                        if (f10V2Response.infos!=null) {
+                            for (int i=0;i<f10V2Response.infos.size();i++){
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("BONDNAME",f10V2Response.infos.get(i).get("BONDNAME"));
+                                uploadObj_1.put("BONDSNAME",f10V2Response.infos.get(i).get("BONDSNAME"));
+                                uploadObj_1.put("SYMBOL",f10V2Response.infos.get(i).get("SYMBOL"));
+                                uploadObj_1.put("EXERENDDATE",f10V2Response.infos.get(i).get("EXERENDDATE"));
+                                uploadObj_1.put("PARVALUE",f10V2Response.infos.get(i).get("PARVALUE"));
+                                uploadObj_1.put("CONVERTRATE",f10V2Response.infos.get(i).get("CONVERTRATE"));
+                                uploadObj_1.put("CONVERTPRC",f10V2Response.infos.get(i).get("CONVERTPRC"));
+                                uploadObj_1.put("REPAYDATE",f10V2Response.infos.get(i).get("REPAYDATE"));
+                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
+                            }
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

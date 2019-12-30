@@ -5,40 +5,40 @@ name: default
 
 trigger:
   event:
-    - tag
+  - tag
 
 steps:
-  - name: build
-    image: mingc/android-build-box:1.12.0
-    mem_limit: 600000000
-    environment:
-      GRADLE_HOME: /root/.gradle
-    volumes:
-      - name: build-cache
-        path: /root/.gradle/caches
-      - name: build-result
-        path: /drone/src/app/build
-      - name: build-deps-jar
-        path: /drone/src/app/libs
-      - name: build-deps-jni
-        path: /drone/src/app/jniLibs
-    commands:
-      - cd /drone/src && ./gradlew --build-cache build assembleAndroidTest -Papk_version=${DRONE_TAG}
-      - test -f /drone/src/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-      - test -f /drone/src/app/build/outputs/apk/debug/app-debug.apk
-  - name: checksum
-    image: busybox:1.27.2
-    volumes:
-      - name: build-result
-        path: /root/build
-      - name: release
-        path: /root/release
-    commands:
-      - mkdir -p /root/release/${DRONE_TAG}
-      - md5sum /root/build/outputs/apk/debug/app-debug.apk > /root/release/${DRONE_TAG}/md5sum.txt
-      - md5sum /root/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk >> /root/release/${DRONE_TAG}/md5sum.txt
-      - cp /root/build/outputs/apk/debug/app-debug.apk /root/release/${DRONE_TAG}/app-debug.apk
-      - cp /root/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk /root/release/${DRONE_TAG}/app-debug-androidTest.apk
+- name: build
+  image: mingc/android-build-box:1.12.0
+  mem_limit: 600000000
+  environment:
+    GRADLE_HOME: /root/.gradle
+  volumes:
+  - name: build-cache
+    path: /root/.gradle/caches
+  - name: build-result
+    path: /drone/src/app/build
+  - name: build-deps-jar
+    path: /drone/src/app/libs
+  - name: build-deps-jni
+    path: /drone/src/app/jniLibs
+  commands:
+  - cd /drone/src && ./gradlew --build-cache build assembleAndroidTest -Papk_version=${DRONE_TAG}
+  - test -f /drone/src/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+  - test -f /drone/src/app/build/outputs/apk/debug/app-debug.apk
+- name: checksum
+  image: busybox:1.27.2
+  volumes:
+  - name: build-result
+    path: /root/build
+  - name: release
+    path: /root/release
+  commands:
+  - mkdir -p /root/release/${DRONE_TAG}
+  - md5sum /root/build/outputs/apk/debug/app-debug.apk > /root/release/${DRONE_TAG}/md5sum.txt
+  - md5sum /root/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk >> /root/release/${DRONE_TAG}/md5sum.txt
+  - cp /root/build/outputs/apk/debug/app-debug.apk /root/release/${DRONE_TAG}/app-debug.apk
+  - cp /root/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk /root/release/${DRONE_TAG}/app-debug-androidTest.apk
 # - name: publish
 #   image: plugins/github-release
 #   volumes:
@@ -53,17 +53,17 @@ steps:
 #     title: 0.0.1
 
 volumes:
-  - name: build-result
-    temp: {}
-  - name: build-cache
-    host:
-      path: /root/AndroidTestRunner/build-cache
-  - name: build-deps-jar
-    host:
-      path: /root/ftp-cache/sdk/Android/v3.2.0.007/libs
-  - name: build-deps-jni
-    host:
-      path: /root/ftp-cache/sdk/Android/v3.2.0.007/jniLibs
-  - name: release
-    host:
-      path: /root/ftp-cache/release/Android
+- name: build-result
+  temp: {}
+- name: build-cache
+  host:
+    path: /root/AndroidTestRunner/build-cache
+- name: build-deps-jar
+  host:
+    path: /root/ftp-cache/sdk/Android/v3.2.0.007/libs
+- name: build-deps-jni
+  host:
+    path: /root/ftp-cache/sdk/Android/v3.2.0.007/jniLibs
+- name: release
+  host:
+    path: /root/ftp-cache/release/Android
