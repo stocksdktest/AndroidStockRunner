@@ -77,7 +77,7 @@ public class AHQuoteTest_1 {
                     try {
                         if (ahQuoteResponse!=null){
                             uploadObj.put("code",ahQuoteResponse.code);
-                            uploadObj.put("name",ahQuoteResponse.name);
+//                            uploadObj.put("name",ahQuoteResponse.name);
                             uploadObj.put("lastPrice",ahQuoteResponse.lastPrice);
                             uploadObj.put("premium",ahQuoteResponse.premium);
                             uploadObj.put("preClosePrice",ahQuoteResponse.preClosePrice);

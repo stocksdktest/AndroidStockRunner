@@ -85,7 +85,7 @@ public class OHLCV3Test_5 {
                     }else {
                         data1=Dates;
                     }
-                    request.send(quoteItem,Types,Integer.parseInt(FqTypes),data1,Integer.parseInt(Numbers), new IResponseCallback() {
+                    request.send(quoteItem,Types,FqTypes,data1,Integer.parseInt(Numbers), new IResponseCallback() {
                         @Override
                         public void callback(Response response) {
                             OHLCResponse ohlcResponse = (OHLCResponse) response;

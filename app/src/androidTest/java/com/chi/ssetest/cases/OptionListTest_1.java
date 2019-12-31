@@ -193,8 +193,8 @@ public class OptionListTest_1 {
 
                                 uploadObj_1.put("change2", list.get(i).change2);
 
-                                uploadObj_1.put("limitPriceUpperLimit", list.get(i).limitPriceUpperLimit);
-                                uploadObj_1.put("limitPriceLowerLimit", list.get(i).limitPriceLowerLimit);
+//                                uploadObj_1.put("limitPriceUpperLimit", list.get(i).limitPriceUpperLimit);
+//                                uploadObj_1.put("limitPriceLowerLimit", list.get(i).limitPriceLowerLimit);
                                 uploadObj.put(list.get(i).id,uploadObj_1);
                             }
                         }

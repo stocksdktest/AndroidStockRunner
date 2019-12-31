@@ -22,7 +22,7 @@ import com.mitake.core.request.F10Type;
 import com.mitake.core.request.F10V2Request;
 import com.mitake.core.request.MorePriceRequest;
 import com.mitake.core.request.QuoteRequest;
-import com.mitake.core.request.offer.OfferQuoteSort;
+//import com.mitake.core.request.offer.OfferQuoteSort;
 import com.mitake.core.response.AddValueResponse;
 import com.mitake.core.response.BankuaiRankingResponse;
 import com.mitake.core.response.Bankuaisorting;

@@ -120,7 +120,7 @@ public class OptionQuoteTest_1 {
                                 uploadObj_1.put("netAsset", list.get(i).netAsset);
                                 uploadObj_1.put("pe", list.get(i).pe);
                                 uploadObj_1.put("pe2", list.get(i).pe2);
-                                uploadObj_1.put("pb", list.get(i).pb);
+//                                uploadObj_1.put("pb", list.get(i).pb);
                                 uploadObj_1.put("capitalization", list.get(i).capitalization);
                                 uploadObj_1.put("circulatingShares", list.get(i).circulatingShares);
                                 uploadObj_1.put("amplitudeRate", list.get(i).amplitudeRate);
@@ -141,8 +141,8 @@ public class OptionQuoteTest_1 {
                                 uploadObj_1.put("change2", list.get(i).change2);
                                 uploadObj_1.put("earningsPerShare", list.get(i).earningsPerShare);
                                 uploadObj_1.put("earningsPerShareReportingPeriod", list.get(i).earningsPerShareReportingPeriod);
-                                uploadObj_1.put("limitPriceUpperLimit", list.get(i).limitPriceUpperLimit);
-                                uploadObj_1.put("limitPriceLowerLimit", list.get(i).limitPriceLowerLimit);
+//                                uploadObj_1.put("limitPriceUpperLimit", list.get(i).limitPriceUpperLimit);
+//                                uploadObj_1.put("limitPriceLowerLimit", list.get(i).limitPriceLowerLimit);
                                 uploadObj_1.put("upf", list.get(i).upf);
                                 uploadObj_1.put("contractID", list.get(i).contractID);
                                 uploadObj_1.put("objectID", list.get(i).objectID);

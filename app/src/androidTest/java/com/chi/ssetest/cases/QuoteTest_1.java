@@ -100,7 +100,7 @@ public class QuoteTest_1 {
                                 uploadObj_1.put("volume", list.volume);
                                 uploadObj_1.put("nowVolume", list.nowVolume);
                                 uploadObj_1.put("turnoverRate", list.turnoverRate);
-                                uploadObj_1.put("upDownLimitType", list.upDownLimitType);//ios注意
+//                                uploadObj_1.put("upDownLimitType", list.upDownLimitType);//ios注意
                                 uploadObj_1.put("limitUP", list.limitUP);
                                 uploadObj_1.put("limitDown", list.limitDown);
                                 uploadObj_1.put("averageValue", list.averageValue);//ios无
@@ -117,7 +117,7 @@ public class QuoteTest_1 {
                                 uploadObj_1.put("netAsset", list.netAsset);
                                 uploadObj_1.put("pe", list.pe);
                                 uploadObj_1.put("pe2", list.pe2);
-                                uploadObj_1.put("pb", list.pb);
+//                                uploadObj_1.put("pb", list.pb);
                                 uploadObj_1.put("capitalization", list.capitalization);
                                 uploadObj_1.put("circulatingShares", list.circulatingShares);
                                 List<String> buyPrices=new ArrayList<>();
@@ -329,14 +329,14 @@ public class QuoteTest_1 {
                                 uploadObj_1.put("afterHoursBuyVolume", list.afterHoursBuyVolume);
                                 uploadObj_1.put("afterHoursSellVolume", list.afterHoursSellVolume);
                                 uploadObj_1.put("issuedCapital", list.issuedCapital);
-                                uploadObj_1.put("limitPriceUpperLimit", list.limitPriceUpperLimit);
-                                uploadObj_1.put("limitPriceLowerLimit", list.limitPriceLowerLimit);
-                                uploadObj_1.put("longName", list.longName);
-                                //板块指数
-                                uploadObj_1.put("blockChg", list.blockChg);
-                                uploadObj_1.put("averageChg", list.averageChg);
-                                uploadObj_1.put("indexChg5", list.indexChg5);
-                                uploadObj_1.put("indexChg10", list.indexChg10);
+//                                uploadObj_1.put("limitPriceUpperLimit", list.limitPriceUpperLimit);
+//                                uploadObj_1.put("limitPriceLowerLimit", list.limitPriceLowerLimit);
+//                                uploadObj_1.put("longName", list.longName);
+//                                //板块指数
+//                                uploadObj_1.put("blockChg", list.blockChg);
+//                                uploadObj_1.put("averageChg", list.averageChg);
+//                                uploadObj_1.put("indexChg5", list.indexChg5);
+//                                uploadObj_1.put("indexChg10", list.indexChg10);
 //                            //增值指标
 //                            if (quoteResponse.addValueModel!=null){
 //                                ArrayList<AddValueModel> addValueModels=quoteResponse.addValueModel;

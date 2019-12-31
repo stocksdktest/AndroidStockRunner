@@ -30,7 +30,7 @@ import com.mitake.core.request.QuoteRequest;
 import com.mitake.core.request.StockNewsRequest;
 import com.mitake.core.request.StockShareInfoRequest;
 import com.mitake.core.request.TopLiquidShareHolderRequest;
-import com.mitake.core.request.offer.OfferQuoteSort;
+//import com.mitake.core.request.offer.OfferQuoteSort;
 import com.mitake.core.response.AddValueResponse;
 import com.mitake.core.response.BankuaiRankingResponse;
 import com.mitake.core.response.Bankuaisorting;
@@ -103,7 +103,7 @@ public class F10_StockNewsTest_1 {
                         if (list!=null){
                             uploadObj.put("INIPUBDATE_",list.INIPUBDATE_);
                             uploadObj.put("ID_",list.ID_);
-                            uploadObj.put("reportTitle",list.reportTitle);
+//                            uploadObj.put("reportTitle",list.reportTitle);
                             uploadObj.put("ABSTRACT_",list.ABSTRACT_);
                             uploadObj.put("ABSTRACTFORMAT_",list.ABSTRACTFORMAT_);
                             uploadObj.put("MEDIANAME_",list.MEDIANAME_);
