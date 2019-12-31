@@ -98,7 +98,13 @@ public class OHLCV3Test_2 {
                                 if(list!=null){
                                     for (int k=0;k<list.size();k++){
                                         JSONObject uploadObj_1 = new JSONObject();
-                                        uploadObj_1.put("datetime",list.get(k).datetime);
+                                        String datetime = "";
+                                        if (Types.equals("dayk")||Types.equals("weekk")||Types.equals("monthk")||Types.equals("yeark")){
+                                            datetime=list.get(k).datetime;
+                                        }else {
+                                            datetime=list.get(k).datetime+list.get(k).time;
+                                        }
+                                        uploadObj_1.put("datetime",datetime);
                                         uploadObj_1.put("openPrice",list.get(k).openPrice);
                                         uploadObj_1.put("highPrice",list.get(k).highPrice);
                                         uploadObj_1.put("lowPrice",list.get(k).lowPrice);
@@ -111,7 +117,7 @@ public class OHLCV3Test_2 {
                                         uploadObj_1.put("fp_volume",list.get(k).fp_volume);
                                         uploadObj_1.put("fp_amount",list.get(k).fp_amount);
 //                                    Log.d("data", String.valueOf(uploadObj_1));
-                                        uploadObj.put(list.get(k).datetime,uploadObj_1);
+                                        uploadObj.put(datetime,uploadObj_1);
                                     }
                                 }
 //                                Log.d("data", String.valueOf(uploadObj));
