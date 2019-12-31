@@ -130,7 +130,7 @@ public class BankuaisortingTest_2 {
                                 uploadObj_1.put("stockLastPrice",list.get(i).lzgj);
                                 uploadObj_1.put("limitUpCount",list.get(i).limitUpCount);
                                 uploadObj_1.put("limitDownCount",list.get(i).limitDownCount);
-                                uploadObj_1.put("upDownFlag",list.get(i).upDownFlag);
+//                                uploadObj_1.put("upDownFlag",list.get(i).upDownFlag);
 //                            Log.d("data", String.valueOf(uploadObj_1));
                                 uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }

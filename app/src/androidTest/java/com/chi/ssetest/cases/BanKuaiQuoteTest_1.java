@@ -20,7 +20,7 @@ import com.mitake.core.request.CategoryType;
 import com.mitake.core.request.CatequoteRequest;
 import com.mitake.core.request.MorePriceRequest;
 import com.mitake.core.request.QuoteRequest;
-import com.mitake.core.request.offer.OfferQuoteSort;
+//import com.mitake.core.request.offer.OfferQuoteSort;
 import com.mitake.core.response.AddValueResponse;
 import com.mitake.core.response.BankuaiRankingResponse;
 import com.mitake.core.response.Bankuaisorting;
@@ -84,7 +84,7 @@ public class BanKuaiQuoteTest_1 {
             param=quoteNumbers1;
         }
             BanKuaiQuoteRequest request = new BanKuaiQuoteRequest();
-            request.send(quoteNumbers,param,new IResponseInfoCallback<BankuaisortingResponse>() {
+            request.send(param,new IResponseInfoCallback<BankuaisortingResponse>() {
                 @Override
                 public void callback(BankuaisortingResponse bankuaisortingResponse) {
                     try {

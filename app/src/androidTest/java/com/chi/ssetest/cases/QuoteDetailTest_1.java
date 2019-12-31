@@ -98,7 +98,7 @@ public class QuoteDetailTest_1 {
                             uploadObj.put("volume", list.volume);
                             uploadObj.put("nowVolume", list.nowVolume);
                             uploadObj.put("turnoverRate", list.turnoverRate);
-                            uploadObj.put("upDownLimitType", list.upDownLimitType);//ios注意
+//                            uploadObj.put("upDownLimitType", list.upDownLimitType);//ios注意
                             uploadObj.put("limitUP", list.limitUP);
                             uploadObj.put("limitDown", list.limitDown);
                             uploadObj.put("averageValue", list.averageValue);//ios无
@@ -115,7 +115,7 @@ public class QuoteDetailTest_1 {
                             uploadObj.put("netAsset", list.netAsset);
                             uploadObj.put("pe", list.pe);
                             uploadObj.put("pe2", list.pe2);
-                            uploadObj.put("pb", list.pb);
+//                            uploadObj.put("pb", list.pb);
                             uploadObj.put("capitalization", list.capitalization);
                             uploadObj.put("circulatingShares", list.circulatingShares);
 
@@ -347,14 +347,14 @@ public class QuoteDetailTest_1 {
                             uploadObj.put("afterHoursBuyVolume", list.afterHoursBuyVolume);
                             uploadObj.put("afterHoursSellVolume", list.afterHoursSellVolume);
                             uploadObj.put("issuedCapital", list.issuedCapital);
-                            uploadObj.put("limitPriceUpperLimit", list.limitPriceUpperLimit);
-                            uploadObj.put("limitPriceLowerLimit", list.limitPriceLowerLimit);
-                            uploadObj.put("longName", list.longName);
-                            //板块指数
-                            uploadObj.put("blockChg", list.blockChg);
-                            uploadObj.put("averageChg", list.averageChg);
-                            uploadObj.put("indexChg5", list.indexChg5);
-                            uploadObj.put("indexChg10", list.indexChg10);
+//                            uploadObj.put("limitPriceUpperLimit", list.limitPriceUpperLimit);
+//                            uploadObj.put("limitPriceLowerLimit", list.limitPriceLowerLimit);
+//                            uploadObj.put("longName", list.longName);
+//                            //板块指数
+//                            uploadObj.put("blockChg", list.blockChg);
+//                            uploadObj.put("averageChg", list.averageChg);
+//                            uploadObj.put("indexChg5", list.indexChg5);
+//                            uploadObj.put("indexChg10", list.indexChg10);
                             //买卖队列
                             if (quoteResponse.OrderQuantityBuyList!=null) {
                                 ArrayList<OrderQuantityItem> orderQuantityItem1 = quoteResponse.OrderQuantityBuyList;

@@ -21,7 +21,7 @@ import com.mitake.core.request.CatequoteRequest;
 import com.mitake.core.request.MorePriceRequest;
 import com.mitake.core.request.NewIndexRequest;
 import com.mitake.core.request.QuoteRequest;
-import com.mitake.core.request.offer.OfferQuoteSort;
+//import com.mitake.core.request.offer.OfferQuoteSort;
 import com.mitake.core.response.AddValueResponse;
 import com.mitake.core.response.BankuaiRankingResponse;
 import com.mitake.core.response.Bankuaisorting;

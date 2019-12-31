@@ -26,7 +26,7 @@ import com.mitake.core.request.MainFinaIndexNasRequest;
 import com.mitake.core.request.MorePriceRequest;
 import com.mitake.core.request.QuoteRequest;
 import com.mitake.core.request.StockShareInfoRequest;
-import com.mitake.core.request.offer.OfferQuoteSort;
+//import com.mitake.core.request.offer.OfferQuoteSort;
 import com.mitake.core.response.AddValueResponse;
 import com.mitake.core.response.BankuaiRankingResponse;
 import com.mitake.core.response.Bankuaisorting;

@@ -33,7 +33,7 @@ import com.mitake.core.request.StockBulletinListRequest;
 import com.mitake.core.request.StockReportListRequest;
 import com.mitake.core.request.StockShareInfoRequest;
 import com.mitake.core.request.TopLiquidShareHolderRequest;
-import com.mitake.core.request.offer.OfferQuoteSort;
+//import com.mitake.core.request.offer.OfferQuoteSort;
 import com.mitake.core.response.AddValueResponse;
 import com.mitake.core.response.BankuaiRankingResponse;
 import com.mitake.core.response.Bankuaisorting;
@@ -120,7 +120,7 @@ public class F10_StockReportListTest_1 {
                                 uploadObj_1.put("PUBDATE_", item.PUBDATE_);
                                 uploadObj_1.put("ID_", item.ID_);
                                 uploadObj_1.put("ReportTitle", item.ReportTitle);
-                                uploadObj_1.put("dataSource", item.dataSource);
+//                                uploadObj_1.put("dataSource", item.dataSource);
                                 uploadObj_1.put("REPORTLEVEL_", item.REPORTLEVEL_);
                                 uploadObj_1.put("ComName", item.ComName);
                                 uploadObj_1.put("STOCKNAME_", item.STOCKNAME_);

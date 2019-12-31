@@ -24,7 +24,7 @@ import com.mitake.core.request.OverLayChartRequest;
 import com.mitake.core.request.PointAddType;
 import com.mitake.core.request.QuoteDetailRequest;
 import com.mitake.core.request.QuoteRequest;
-import com.mitake.core.request.offer.OfferQuoteSort;
+//import com.mitake.core.request.offer.OfferQuoteSort;
 import com.mitake.core.response.AddValueResponse;
 import com.mitake.core.response.BankuaiRankingResponse;
 import com.mitake.core.response.Bankuaisorting;
