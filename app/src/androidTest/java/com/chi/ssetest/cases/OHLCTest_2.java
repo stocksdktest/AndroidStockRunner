@@ -67,7 +67,7 @@ public class OHLCTest_2 {
         Log.d(" OHLCTest_2", "requestWork");
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("CODE");
-        final String quoteNumbers1 = rule.getParam().optString("PERIOD");
+        final String Types = rule.getParam().optString("PERIOD");
         final String quoteNumbers2 = rule.getParam().optString("SUBTYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i = 0; i < quoteNumbers.length; i++) {
@@ -78,7 +78,7 @@ public class OHLCTest_2 {
                     QuoteResponse quoteResponse=(QuoteResponse) response;
                     QuoteItem quoteItem=quoteResponse.quoteItems.get(0);
                    final OHLCRequest request = new OHLCRequest();
-                    request.send(quoteItem,quoteNumbers1, Integer.parseInt(quoteNumbers2),new IResponseCallback() {
+                    request.send(quoteItem,Types, Integer.parseInt(quoteNumbers2),new IResponseCallback() {
                         public void callback(Response response) {
                             OHLCResponse ohlcResponse = (OHLCResponse) response;
                             try {
@@ -92,7 +92,13 @@ public class OHLCTest_2 {
                                 if(list!=null){
                                     for (int k=0;k<list.size();k++){
                                         JSONObject uploadObj_1 = new JSONObject();
-                                        uploadObj_1.put("datetime",list.get(k).datetime);
+                                        String datetime = "";
+                                        if (Types.equals("dayk")||Types.equals("weekk")||Types.equals("monthk")||Types.equals("yeark")){
+                                            datetime=list.get(k).datetime;
+                                        }else {
+                                            datetime=list.get(k).datetime+list.get(k).time;
+                                        }
+                                        uploadObj_1.put("datetime",datetime);
                                         uploadObj_1.put("openPrice",list.get(k).openPrice);
                                         uploadObj_1.put("highPrice",list.get(k).highPrice);
                                         uploadObj_1.put("lowPrice",list.get(k).lowPrice);
@@ -105,10 +111,10 @@ public class OHLCTest_2 {
                                         uploadObj_1.put("fp_volume",list.get(k).fp_volume);
                                         uploadObj_1.put("fp_amount",list.get(k).fp_amount);
 //                                    Log.d("data", String.valueOf(uploadObj_1));
-                                        uploadObj.put(list.get(k).datetime,uploadObj_1);
+                                        uploadObj.put(datetime,uploadObj_1);
                                     }
                                 }
-//                                Log.d("data", String.valueOf(uploadObj));
+                                Log.d("data", String.valueOf(uploadObj));
                                 result.complete(uploadObj);
                             } catch (JSONException e) {
                                 result.completeExceptionally(e);
