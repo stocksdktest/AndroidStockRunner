@@ -51,8 +51,8 @@ public enum StockTestcaseName {
     OFFERQUOTETEST_1("OFFERQUOTE_1"),//要约收购接口请求
     OFFERQUOTETEST_2("OFFERQUOTE_2"),//要约收购接口请求
     OHLCSUBTEST_1("OHLCSUB_1"),//复权信息接口  K线复权接口
-    OHLCTEST_1("OHLCTEST_1"),//K线数据(已废弃)
-    OHLCTEST_2("OHLCTEST_2"),//K线数据(已废弃)
+    OHLCTEST_1("OHLCTEST_1"),//K线数据(已废弃)暂可使用
+    OHLCTEST_2("OHLCTEST_2"),//K线数据(已废弃)暂可使用
     OHLCV3TEST_1("OHLCV3_1"),//历史K线
     OHLCV3TEST_2("OHLCV3_2"),//历史K线
     OHLCV3TEST_3("OHLCV3_3"),//历史K线
