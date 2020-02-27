@@ -3,6 +3,7 @@ package com.chi.ssetest;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.test.InstrumentationRegistry;
 import android.util.Log;
 
@@ -230,7 +231,7 @@ public class TestResultLogcatCollector implements TestResultCollector {
     }
 
     @Override
-    public void onTestError(@NonNull Failure failure) {
+    public void onTestError(@NonNull Failure failure, @Nullable JSONObject param) {
         StockTestcaseName testcaseName = getClassAnnotationValue(failure.getDescription());
         if (testcaseName == null) {
             return;
@@ -244,6 +245,9 @@ public class TestResultLogcatCollector implements TestResultCollector {
                 .setIsPass(false)
                 .setStartTime(testStartTimeMap.get(testcaseName))
                 .setEndTime(System.currentTimeMillis());
+        if (param != null) {
+            builder.setParamData(Utils.jsonToBytes(param));
+        }
 
         //测试结果
         TestRecord.TestExecutionRecord record = builder.build();
