@@ -2,6 +2,7 @@ package com.chi.ssetest;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.test.InstrumentationRegistry;
 import android.util.Log;
 
@@ -115,7 +116,7 @@ public class TestResultFileCollector implements TestResultCollector {
     }
 
     @Override
-    public void onTestError(@NonNull Failure failure) {
+    public void onTestError(@NonNull Failure failure, @Nullable JSONObject param) {
         StockTestcaseName testcaseName = getClassAnnotationValue(failure.getDescription());
         if (testcaseName == null) {
             return;
@@ -128,6 +129,9 @@ public class TestResultFileCollector implements TestResultCollector {
                 .setIsPass(false)
                 .setStartTime(testStartTimeMap.get(testcaseName))
                 .setEndTime(System.currentTimeMillis());
+        if (param != null) {
+            builder.setParamData(Utils.jsonToBytes(param));
+        }
         if (failure.getException() != null) {
             StringWriter errors = new StringWriter();
             failure.getException().printStackTrace(new PrintWriter(errors));

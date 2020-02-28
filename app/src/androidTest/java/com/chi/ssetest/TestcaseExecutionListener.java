@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.chi.ssetest.setup.RunnerSetup;
 
+import org.json.JSONObject;
 import org.junit.runner.Description;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
@@ -33,12 +34,18 @@ public class TestcaseExecutionListener extends RunListener {
     }
 
     public void testFailure(Failure failure) throws Exception {
-        collector.onTestError(failure);
+        Throwable throwable = failure.getException();
+        if (throwable instanceof TestcaseException) {
+            TestcaseException testcaseException = TestcaseException.class.cast(throwable);
+            collector.onTestError(failure, testcaseException.param);
+        } else {
+            collector.onTestError(failure, null);
+        }
         Log.d("TestcaseExecutionListener","Failed: " + failure.getDescription().getMethodName());
     }
 
     public void testAssumptionFailure(Failure failure) {
-        collector.onTestError(failure);
+        collector.onTestError(failure, null);
         Log.d("TestcaseExecutionListener","Failed: " + failure.getDescription().getMethodName());
     }
 
