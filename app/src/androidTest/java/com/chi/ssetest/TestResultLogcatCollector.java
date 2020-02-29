@@ -52,6 +52,9 @@ public class TestResultLogcatCollector implements TestResultCollector {
     private String mongoUri;
     private String dbName;
     private String collectionName;
+    private MongoClient mongoClient;
+    private MongoDatabase database;
+    private MongoCollection<Document> collection;
 
     public TestResultLogcatCollector(SetupConfig.RunnerConfig cfg, Bundle bundle) throws IOException {
         jobID = cfg.getJobID();
@@ -61,6 +64,10 @@ public class TestResultLogcatCollector implements TestResultCollector {
         mongoUri = cfg.getStoreConfig().getMongoUri();
         dbName = cfg.getStoreConfig().getDbName();
         collectionName = cfg.getStoreConfig().getCollectionName();
+        mongoClient = MongoClients.create(mongoUri);
+        database = mongoClient.getDatabase(dbName);
+        Log.d("mongo", database.getName());
+        collection = database.getCollection(collectionName);
     }
 
     // to keep safety, mongodb will throw exception when the key in bson contains '.' or '$'
@@ -101,13 +108,8 @@ public class TestResultLogcatCollector implements TestResultCollector {
     }
 
     private void mongoWriter(String mongoUri, String dbName, String collectionName, Document document) {
-        MongoClient mongoClient = MongoClients.create(mongoUri);
-        MongoDatabase database = mongoClient.getDatabase(dbName);
-        Log.d("mongo", database.getName());
-        MongoCollection<Document> collection = database.getCollection(collectionName);
         Log.d("mongo", document.toString());
         collection.insertOne(document);
-        mongoClient.close();
     }
 
     @Deprecated
@@ -283,5 +285,6 @@ public class TestResultLogcatCollector implements TestResultCollector {
 
     @Override
     public void afterAllTests(Result result) {
+        mongoClient.close();
     }
 }
