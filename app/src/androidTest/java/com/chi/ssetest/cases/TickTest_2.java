@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.chi.ssetest.StockTestcase;
 import com.chi.ssetest.StockTestcaseName;
+import com.chi.ssetest.TestcaseException;
 import com.chi.ssetest.protos.SetupConfig;
 import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.setup.TestcaseConfigRule;
@@ -69,7 +70,8 @@ public class TickTest_2 {
                 try {
                     assertNotNull(tickResponse.tickItems);
                 } catch (AssertionError e) {
-                    result.completeExceptionally(e);
+                    //                        result.completeExceptionally(e);
+                    result.complete(new JSONObject());
                 }
                 List<TickItem> list=tickResponse.tickItems;
                 try {
@@ -101,7 +103,8 @@ public class TickTest_2 {
             JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
             RunnerSetup.getInstance().getCollector().onTestResult(testcaseName,rule.getParam(), resultObj);
         } catch (Exception e) {
-            throw new Exception(e);
+            //                throw new Exception(e);
+            throw new TestcaseException(e,rule.getParam());
         }
     }
 }

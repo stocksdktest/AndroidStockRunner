@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.chi.ssetest.StockTestcase;
 import com.chi.ssetest.StockTestcaseName;
+import com.chi.ssetest.TestcaseException;
 import com.chi.ssetest.protos.SetupConfig;
 import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.setup.TestcaseConfigRule;
@@ -88,7 +89,8 @@ public class QuoteTest_2 {
                 try {
                     assertNotNull(quoteResponse.quoteItems);
                 } catch (AssertionError e) {
-                    result.completeExceptionally(e);
+                    //                        result.completeExceptionally(e);
+                    result.complete(new JSONObject());
                 }
                 JSONObject uploadObj = new JSONObject();
                 try {
@@ -354,6 +356,11 @@ public class QuoteTest_2 {
                             uploadObj_1.put("averageChg", list.averageChg);
                             uploadObj_1.put("indexChg5", list.indexChg5);
                             uploadObj_1.put("indexChg10", list.indexChg10);
+                            //3.3.0.002新增字段
+                            uploadObj_1.put("monthChangeRate", list.monthChangeRate);
+                            uploadObj_1.put("yearChangeRate", list.yearChangeRate);
+                            uploadObj_1.put("recentMonthChangeRate", list.recentMonthChangeRate);
+                            uploadObj_1.put("recentYearChangeRate", list.recentYearChangeRate);
                             //增值指标
                             if (!"null".equals(INTS2[0])){
                                 ArrayList<AddValueModel> addValueModels=quoteResponse.addValueModel;
@@ -483,7 +490,8 @@ public class QuoteTest_2 {
             JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
             RunnerSetup.getInstance().getCollector().onTestResult(testcaseName,rule.getParam(), resultObj);
         } catch (Exception e) {
-            throw new Exception(e);
+            //                throw new Exception(e);
+            throw new TestcaseException(e,rule.getParam());
         }
     }
 }

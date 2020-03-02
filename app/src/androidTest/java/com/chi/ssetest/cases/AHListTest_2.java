@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.chi.ssetest.StockTestcase;
 import com.chi.ssetest.StockTestcaseName;
+import com.chi.ssetest.TestcaseException;
 import com.chi.ssetest.protos.SetupConfig;
 import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.setup.TestcaseConfigRule;
@@ -70,7 +71,8 @@ public class AHListTest_2 {
                     try {
                         assertNotNull(ahQuoteListResponse.mAHQuoteItems);
                     } catch (AssertionError e) {
-                        result.completeExceptionally(e);
+                        //                        result.completeExceptionally(e);
+                        result.complete(new JSONObject());
                     }
                     List<AHQuoteItem> list=ahQuoteListResponse.mAHQuoteItems;
                     JSONObject uploadObj=new JSONObject();
@@ -91,6 +93,7 @@ public class AHListTest_2 {
                                 uploadObj_1.put("premiumAH", list.get(k).premiumAH);
                                 uploadObj_1.put("changeRateA", list.get(k).changeRateA);
                                 uploadObj_1.put("changeRateH", list.get(k).changeRateH);
+                                uploadObj_1.put("premiumHA", list.get(k).premiumHA);
 //                            Log.d("data", String.valueOf(uploadObj_1));
                                 uploadObj.put(String.valueOf(k+1),uploadObj_1);
                             }
@@ -111,7 +114,8 @@ public class AHListTest_2 {
                 JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName,rule.getParam(), resultObj);
             } catch (Exception e) {
-                throw new Exception(e);
+                //                throw new Exception(e);
+                throw new TestcaseException(e,rule.getParam());
             }
 //        }
     }

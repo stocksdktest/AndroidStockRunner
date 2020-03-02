@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.chi.ssetest.StockTestcase;
 import com.chi.ssetest.StockTestcaseName;
+import com.chi.ssetest.TestcaseException;
 import com.chi.ssetest.protos.SetupConfig;
 import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.setup.TestcaseConfigRule;
@@ -78,7 +79,8 @@ public class PlateIndexQuoteTest_2 {
                     try {
                         assertNotNull(plateIndexResponse.indexItems);
                     } catch (AssertionError e) {
-                        result.completeExceptionally(e);
+                        //                        result.completeExceptionally(e);
+                        result.complete(new JSONObject());
                     }
                     List<PlateIndexItem> list=plateIndexResponse.indexItems;
                     if (list!=null){
@@ -171,7 +173,8 @@ public class PlateIndexQuoteTest_2 {
             JSONObject resultObj = (JSONObject)result.get(5000, TimeUnit.MILLISECONDS);
             RunnerSetup.getInstance().getCollector().onTestResult(testcaseName,rule.getParam(), resultObj);
         } catch (Exception e) {
-            throw new Exception(e);
+            //                throw new Exception(e);
+            throw new TestcaseException(e,rule.getParam());
         }
     }
 }
