@@ -15,12 +15,16 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.mitake.core.AppInfo;
 import com.mitake.core.config.SseSdk;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
 public class RunnerSetup {
-    public static final String RUNNER_CONFIG_ENV = "runner_config";
+    public static final String RUNNER_CONFIG_PATH = "runner_config";
 
     private static RunnerSetup instance = null;
     private SetupConfig.RunnerConfig runnerConfig;
@@ -31,7 +35,37 @@ public class RunnerSetup {
         if (instance == null) {
             Bundle bundle = InstrumentationRegistry.getArguments();
             Log.d("RunnerSetup", "bundle: " + bundle.toString());
-            String confStr = bundle.getString(RUNNER_CONFIG_ENV);
+            String runnerConfigPath = bundle.getString(RUNNER_CONFIG_PATH);
+            Log.d("runnerConfigPath", "runnerConfigPath: " + runnerConfigPath);
+            if (runnerConfigPath == null) {
+                throw new RunnerSetupException("runner_config_file is null");
+            }
+            File file = new File(runnerConfigPath);
+            FileInputStream is = null;
+            StringBuilder stringBuilder = null;
+            try {
+                if (file.length() != 0) {
+                    is = new FileInputStream(file);
+                    InputStreamReader streamReader = new InputStreamReader(is);
+                    BufferedReader reader = new BufferedReader(streamReader);
+                    String line;
+                    stringBuilder = new StringBuilder();
+                    while ((line = reader.readLine()) != null) {
+                        stringBuilder.append(line);
+                    }
+                    reader.close();
+                    is.close();
+                } else {
+                    throw new RunnerSetupException("runner_config_file is empty");
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            String confStr = String.valueOf(stringBuilder);
+            Log.d("RunnerConfig", "RunnerConfig: " + confStr);
+
             if (confStr == null) {
                 throw new RunnerSetupException("runner_config is empty");
             }
