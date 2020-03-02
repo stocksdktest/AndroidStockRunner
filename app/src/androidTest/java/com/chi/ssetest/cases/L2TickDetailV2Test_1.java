@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.chi.ssetest.StockTestcase;
 import com.chi.ssetest.StockTestcaseName;
+import com.chi.ssetest.TestcaseException;
 import com.chi.ssetest.protos.SetupConfig;
 import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.setup.TestcaseConfigRule;
@@ -67,7 +68,8 @@ public class L2TickDetailV2Test_1 {
             JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
             RunnerSetup.getInstance().getCollector().onTestResult(testcaseName,rule.getParam(), resultObj);
         } catch (Exception e) {
-            throw new Exception(e);
+            //                throw new Exception(e);
+            throw new TestcaseException(e,rule.getParam());
         }
     }
     private void L2TickDEtailjk(final String id, final String page, final String subtype) {
@@ -82,7 +84,8 @@ public class L2TickDetailV2Test_1 {
                     try {
                         assertNotNull(l2TickDetailResponseV2.tickDetailItems);
                     } catch (AssertionError e) {
-                        result.completeExceptionally(e);
+                        //                        result.completeExceptionally(e);
+                        result.complete(new JSONObject());
                     }
                 }
                 if (list!=null){

@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.chi.ssetest.StockTestcase;
 import com.chi.ssetest.StockTestcaseName;
+import com.chi.ssetest.TestcaseException;
 import com.chi.ssetest.protos.SetupConfig;
 import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.setup.TestcaseConfigRule;
@@ -79,7 +80,8 @@ public class TCP_ChartV2Test_2 {
                 try {
                     assertNotNull(quoteResponse.quoteItems);
                 } catch (AssertionError e) {
-                    result.completeExceptionally(e);
+                    //                        result.completeExceptionally(e);
+                    result.complete(new JSONObject());
                 }
                 final QuoteItem quoteItem=quoteResponse.quoteItems.get(0);
                 ChartRequestV2 request = new ChartRequestV2();
@@ -141,6 +143,7 @@ public class TCP_ChartV2Test_2 {
                                     uploadObj_1.put("openInterest",item.historyItems.get(k).openInterest);
                                     uploadObj_1.put("iopv",item.historyItems.get(k).iopv);
                                     uploadObj_1.put("iopvPre",item.historyItems.get(k).iopvPre);
+                                    uploadObj_1.put("volRatio",item.historyItems.get(k).volRatio);
                                     uploadObj.put(item.historyItems.get(k).datetime,uploadObj_1);
                                 }
                                 if (Boolean.parseBoolean(isNeedAfterHours)){
@@ -176,7 +179,8 @@ public class TCP_ChartV2Test_2 {
             JSONObject resultObj = (JSONObject) result.get(timeout_ms, TimeUnit.MILLISECONDS);
             RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
         } catch (Exception e) {
-            throw new Exception(e);
+            //                throw new Exception(e);
+            throw new TestcaseException(e,rule.getParam());
         }
     }
 }

@@ -3,6 +3,7 @@ package com.chi.ssetest.cases;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
+import com.chi.ssetest.TestcaseException;
 import com.chi.ssetest.protos.SetupConfig;
 import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.StockTestcase;
@@ -90,7 +91,8 @@ public class OfferQuoteTest_2 {
                     try {
                         assertNotNull(offerQuoteResponse.offerQuoteList);
                     } catch (AssertionError e) {
-                        result.completeExceptionally(e);
+                        //                        result.completeExceptionally(e);
+                        result.complete(new JSONObject());
                     }
                     List<OfferQuoteBean> list=offerQuoteResponse.offerQuoteList;
                     JSONObject uploadObj = new JSONObject();
@@ -124,7 +126,8 @@ public class OfferQuoteTest_2 {
                 JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
-                throw new Exception(e);
+                //                throw new Exception(e);
+                throw new TestcaseException(e,rule.getParam());
             }
 //        }
     }

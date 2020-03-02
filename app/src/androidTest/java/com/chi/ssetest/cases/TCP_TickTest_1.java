@@ -5,10 +5,12 @@ import android.util.Log;
 
 import com.chi.ssetest.StockTestcase;
 import com.chi.ssetest.StockTestcaseName;
+import com.chi.ssetest.TestcaseException;
 import com.chi.ssetest.protos.SetupConfig;
 import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.setup.TestcaseConfigRule;
 import com.mitake.core.QuoteItem;
+import com.mitake.core.bean.TickDetailItem;
 import com.mitake.core.bean.TickItem;
 import com.mitake.core.bean.log.ErrorInfo;
 import com.mitake.core.listener.AbstractTickPush;
@@ -76,7 +78,8 @@ public class TCP_TickTest_1 {
                 try {
                     assertNotNull(quoteResponse.quoteItems);
                 } catch (AssertionError e) {
-                    result.completeExceptionally(e);
+                    //                        result.completeExceptionally(e);
+                    result.complete(new JSONObject());
                 }
                 // 准备监听TCP的消息
                 TCPManager.getInstance().subscribeTick(quoteResponse.quoteItems.get(0));   // quoteResponse.quoteItems.get(0).id : StockID:600000.sh
@@ -135,6 +138,11 @@ public class TCP_TickTest_1 {
                             e.printStackTrace();
                         }
                     }
+
+                    @Override
+                    public void pushTickDetail(List<TickDetailItem> list) {
+
+                    }
                 });
             }
         }
@@ -147,7 +155,8 @@ public class TCP_TickTest_1 {
             JSONObject resultObj = (JSONObject) result.get(timeout_ms, TimeUnit.MILLISECONDS);
             RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
         } catch (Exception e) {
-            throw new Exception(e);
+            //                throw new Exception(e);
+            throw new TestcaseException(e,rule.getParam());
         }
     }
 }

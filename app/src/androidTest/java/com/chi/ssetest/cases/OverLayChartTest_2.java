@@ -3,6 +3,7 @@ package com.chi.ssetest.cases;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
+import com.chi.ssetest.TestcaseException;
 import com.chi.ssetest.protos.SetupConfig;
 import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.StockTestcase;
@@ -105,7 +106,8 @@ public class OverLayChartTest_2 {
                                 try {
                                     assertNotNull(chartResponse.historyItems);
                                 } catch (AssertionError e) {
-                                    result.completeExceptionally(e);
+                                    //                        result.completeExceptionally(e);
+                                    result.complete(new JSONObject());
                                 }
                                 CopyOnWriteArrayList<OHLCItem> list=chartResponse.historyItems;
                                 CopyOnWriteArrayList<OHLCItem> list2=chartResponse.overLayChartResponse.historyItems;
@@ -136,6 +138,7 @@ public class OverLayChartTest_2 {
                                             uploadObj_1.put("iopv",list.get(k).iopv);
                                             uploadObj_1.put("iopvPre",list.get(k).iopvPre);
                                             uploadObj_1.put("openInterest",list.get(k).openInterest);
+                                            uploadObj_1.put("volRatio",list.get(k).volRatio);
                                             uploadObj_2.put(list.get(k).datetime,uploadObj_1);
                                         }
                                         uploadObj.put("OHLCItem",uploadObj_2);
@@ -152,6 +155,7 @@ public class OverLayChartTest_2 {
                                             uploadObj_1.put("iopv",list2.get(k).iopv);
                                             uploadObj_1.put("iopvPre",list2.get(k).iopvPre);
                                             uploadObj_1.put("openInterest",list2.get(k).openInterest);
+                                            uploadObj_1.put("volRatio",list2.get(k).volRatio);
                                             uploadObj_3.put(list2.get(k).datetime,uploadObj_1);
                                         }
                                         uploadObj.put("overLayChart",uploadObj_3);
@@ -184,7 +188,8 @@ public class OverLayChartTest_2 {
             JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
             RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
         } catch (Exception e) {
-            throw new Exception(e);
+            //                throw new Exception(e);
+            throw new TestcaseException(e,rule.getParam());
         }
 //        }
     }

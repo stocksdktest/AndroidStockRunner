@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.chi.ssetest.StockTestcase;
 import com.chi.ssetest.StockTestcaseName;
+import com.chi.ssetest.TestcaseException;
 import com.chi.ssetest.protos.SetupConfig;
 import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.setup.TestcaseConfigRule;
@@ -70,7 +71,8 @@ public class QuoteDetailTest_1 {
                     try {
                         assertNotNull(quoteResponse.quoteItems);
                     } catch (AssertionError e) {
-                        result.completeExceptionally(e);
+                        //                        result.completeExceptionally(e);
+                        result.complete(new JSONObject());
                     }
                     QuoteItem list=quoteResponse.quoteItems.get(0);
                     JSONObject uploadObj = new JSONObject();
@@ -355,6 +357,11 @@ public class QuoteDetailTest_1 {
                             uploadObj.put("averageChg", list.averageChg);
                             uploadObj.put("indexChg5", list.indexChg5);
                             uploadObj.put("indexChg10", list.indexChg10);
+                            //3.3.0.002新增字段
+                            uploadObj.put("monthChangeRate", list.monthChangeRate);
+                            uploadObj.put("yearChangeRate", list.yearChangeRate);
+                            uploadObj.put("recentMonthChangeRate", list.recentMonthChangeRate);
+                            uploadObj.put("recentYearChangeRate", list.recentYearChangeRate);
                             //买卖队列
                             if (quoteResponse.OrderQuantityBuyList!=null) {
                                 ArrayList<OrderQuantityItem> orderQuantityItem1 = quoteResponse.OrderQuantityBuyList;
@@ -529,7 +536,8 @@ public class QuoteDetailTest_1 {
             JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
             RunnerSetup.getInstance().getCollector().onTestResult(testcaseName,rule.getParam(), resultObj);
         } catch (Exception e) {
-            throw new Exception(e);
+            //                throw new Exception(e);
+            throw new TestcaseException(e,rule.getParam());
         }
     }
 }

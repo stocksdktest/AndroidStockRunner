@@ -3,6 +3,7 @@ package com.chi.ssetest.cases;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
+import com.chi.ssetest.TestcaseException;
 import com.chi.ssetest.protos.SetupConfig;
 import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.StockTestcase;
@@ -103,7 +104,8 @@ public class CateSortingTest_2 {
                     try {
                         assertNotNull(cateSortingResponse.list);
                     } catch (AssertionError e) {
-                        result.completeExceptionally(e);
+                        //                        result.completeExceptionally(e);
+                        result.complete(new JSONObject());
                     }
                     ArrayList<QuoteItem> list=cateSortingResponse.list;
                     JSONObject uploadObj = new JSONObject();
@@ -370,6 +372,11 @@ public class CateSortingTest_2 {
                                 uploadObj_1.put("averageChg", list.get(i).averageChg);
                                 uploadObj_1.put("indexChg5", list.get(i).indexChg5);
                                 uploadObj_1.put("indexChg10", list.get(i).indexChg10);
+                                //3.3.0.002新增字段
+                                uploadObj.put("monthChangeRate", list.get(i).monthChangeRate);
+                                uploadObj.put("yearChangeRate", list.get(i).yearChangeRate);
+                                uploadObj.put("recentMonthChangeRate", list.get(i).recentMonthChangeRate);
+                                uploadObj.put("recentYearChangeRate", list.get(i).recentYearChangeRate);
                                 //增值指标
                                 if (cateSortingResponse.addValueModel!=null){
                                     ArrayList<AddValueModel> addValueModels=cateSortingResponse.addValueModel;
@@ -500,7 +507,8 @@ public class CateSortingTest_2 {
                 JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
-                throw new Exception(e);
+                //                throw new Exception(e);
+                throw new TestcaseException(e,rule.getParam());
             }
 //        }
     }

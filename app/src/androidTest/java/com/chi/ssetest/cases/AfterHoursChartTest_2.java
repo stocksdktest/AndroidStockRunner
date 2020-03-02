@@ -3,6 +3,7 @@ package com.chi.ssetest.cases;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
+import com.chi.ssetest.TestcaseException;
 import com.chi.ssetest.protos.SetupConfig;
 import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.StockTestcase;
@@ -91,7 +92,8 @@ public class AfterHoursChartTest_2 {
                             try {
                                 assertNotNull(afterHoursChartResponse.historyItems);
                             } catch (AssertionError e) {
-                                result.completeExceptionally(e);
+                                //                        result.completeExceptionally(e);
+                                result.complete(new JSONObject());
                             }
                             JSONObject uploadObj = new JSONObject();
                             // TODO fill uploadObj with QuoteResponse value
@@ -109,6 +111,7 @@ public class AfterHoursChartTest_2 {
                                         uploadObj_1.put("highPrice",item.highPrice);//接口没值
                                         uploadObj_1.put("fp_volume",item.fp_volume);//接口没值
                                         uploadObj_1.put("fp_amount",item.fp_amount);//接口没值
+                                        uploadObj_1.put("volRatio",item.volRatio);//接口没值
 //                                    Log.d("data", String.valueOf(uploadObj_1));
                                         uploadObj.put(item.datetime,uploadObj_1);
                                     }
@@ -135,7 +138,8 @@ public class AfterHoursChartTest_2 {
                 JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(),resultObj);
             } catch (Exception e) {
-                throw new Exception(e);
+                //                throw new Exception(e);
+                throw new TestcaseException(e,rule.getParam());
             }
 //        }
     }

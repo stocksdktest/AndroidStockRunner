@@ -3,6 +3,7 @@ package com.chi.ssetest.cases;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
+import com.chi.ssetest.TestcaseException;
 import com.chi.ssetest.protos.SetupConfig;
 import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.StockTestcase;
@@ -74,7 +75,8 @@ public class SubNewBondStockRankingTest_1 {
                     try {
                         assertNotNull(subNewStockRankingResponse.list);
                     } catch (AssertionError e) {
-                        result.completeExceptionally(e);
+                        //                        result.completeExceptionally(e);
+                        result.complete(new JSONObject());
                     }
                     ArrayList<SubNewStockRankingModel> list=subNewStockRankingResponse.list;
                     try {
@@ -92,6 +94,15 @@ public class SubNewBondStockRankingTest_1 {
                                 uploadObj_1.put("rate",list.get(i).getRate());
                                 uploadObj_1.put("allRate",list.get(i).getAllRate());
                                 uploadObj_1.put("preClosePrice",list.get(i).getPreClosePrice());
+                                uploadObj_1.put("change",list.get(i).getChange());
+                                uploadObj_1.put("turnoverRate",list.get(i).getTurnoverRate());
+                                uploadObj_1.put("amount",list.get(i).getAmount());
+                                uploadObj_1.put("mainforceMoneyNetInflow",list.get(i).getMainforceMoneyNetInflow());
+                                uploadObj_1.put("pe",list.get(i).getPe());
+                                uploadObj_1.put("totalValue",list.get(i).getTotalValue());
+                                uploadObj_1.put("flowValue",list.get(i).getFlowValue());
+                                uploadObj_1.put("bu",list.get(i).getBu());
+                                uploadObj_1.put("su",list.get(i).getSu());
 //                            Log.d("data", String.valueOf(uploadObj_1));
                                 uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
@@ -111,7 +122,8 @@ public class SubNewBondStockRankingTest_1 {
                 JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
             } catch (Exception e) {
-                throw new Exception(e);
+                //                throw new Exception(e);
+                throw new TestcaseException(e,rule.getParam());
             }
 //        }
     }

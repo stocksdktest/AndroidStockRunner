@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.chi.ssetest.StockTestcase;
 import com.chi.ssetest.StockTestcaseName;
+import com.chi.ssetest.TestcaseException;
 import com.chi.ssetest.protos.SetupConfig;
 import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.setup.TestcaseConfigRule;
@@ -13,6 +14,7 @@ import com.mitake.core.OHLCItem;
 import com.mitake.core.QuoteItem;
 import com.mitake.core.bean.log.ErrorInfo;
 import com.mitake.core.parser.FQItem;
+import com.mitake.core.parser.GBItem;
 import com.mitake.core.request.OHLCRequestV3;
 import com.mitake.core.request.QuoteDetailRequest;
 import com.mitake.core.response.IResponseCallback;
@@ -99,9 +101,11 @@ public class OHLCV3Test_4 {
                             try {
                                 assertNotNull(ohlcResponse.historyItems);
                             } catch (AssertionError e) {
-                                result.completeExceptionally(e);
+                                //                        result.completeExceptionally(e);
+                                result.complete(new JSONObject());
                             }
                             CopyOnWriteArrayList<OHLCItem> list =ohlcResponse.historyItems;
+                            ArrayList<GBItem> gblist=ohlcResponse.gb;
                             JSONObject uploadObj = new JSONObject();
                             try {
                                 if(list!=null){
@@ -119,6 +123,16 @@ public class OHLCV3Test_4 {
                                         uploadObj_1.put("openInterest",list.get(k).openInterest);//ios需要判断是否存在字段
                                         uploadObj_1.put("fp_volume",list.get(k).fp_volume);
                                         uploadObj_1.put("fp_amount",list.get(k).fp_amount);
+                                        uploadObj_1.put("iopv",list.get(k).iopv);
+
+                                        if (gblist!=null){
+                                            JSONObject uploadObj_2 = new JSONObject();
+                                            for (int i=0;i<gblist.size();i++){
+                                                uploadObj_2.put("date",gblist.get(i).date);
+                                                uploadObj_2.put("gb",gblist.get(i).gb);
+                                                uploadObj_1.put(String.valueOf(i+1),uploadObj_2);
+                                            }
+                                        }
 //                                    Log.d("data", String.valueOf(uploadObj_1));
                                         uploadObj.put(list.get(k).datetime,uploadObj_1);
                                     }
@@ -145,7 +159,8 @@ public class OHLCV3Test_4 {
                 JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
                 RunnerSetup.getInstance().getCollector().onTestResult(testcaseName,rule.getParam(), resultObj);
             } catch (Exception e) {
-                throw new Exception(e);
+                //                throw new Exception(e);
+                throw new TestcaseException(e,rule.getParam());
             }
 //        }
     }
