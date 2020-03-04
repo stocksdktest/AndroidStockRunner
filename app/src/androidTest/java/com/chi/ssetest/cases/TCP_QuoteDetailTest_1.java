@@ -398,6 +398,11 @@ public class TCP_QuoteDetailTest_1 {
                                 uploadObj.put("averageChg", item.averageChg);
                                 uploadObj.put("indexChg5", item.indexChg5);
                                 uploadObj.put("indexChg10", item.indexChg10);
+                                //3.3.0.002新增字段
+                                uploadObj.put("monthChangeRate", item.monthChangeRate);
+                                uploadObj.put("yearChangeRate", item.yearChangeRate);
+                                uploadObj.put("recentMonthChangeRate", item.recentMonthChangeRate);
+                                uploadObj.put("recentYearChangeRate", item.recentYearChangeRate);
                                 //买卖队列
                                 if (buyItems!=null) {
                                     ArrayList<OrderQuantityItem> orderQuantityItem1 = buyItems;

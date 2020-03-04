@@ -158,6 +158,7 @@ public class TCP_ChartV2Test_2 {
                                         uploadObj_1.put("openInterest",item.afterHoursChartResponse.historyItems.get(k).openInterest);
                                         uploadObj_1.put("iopv",item.afterHoursChartResponse.historyItems.get(k).iopv);
                                         uploadObj_1.put("iopvPre",item.afterHoursChartResponse.historyItems.get(k).iopvPre);
+                                        uploadObj_1.put("volRatio",item.afterHoursChartResponse.historyItems.get(k).volRatio);
                                         uploadObj.put(item.afterHoursChartResponse.historyItems.get(k).datetime,uploadObj_1);
                                     }
                                 }
