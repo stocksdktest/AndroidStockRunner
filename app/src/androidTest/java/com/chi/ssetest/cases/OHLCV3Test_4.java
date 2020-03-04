@@ -22,6 +22,7 @@ import com.mitake.core.response.IResponseInfoCallback;
 import com.mitake.core.response.OHLCResponse;
 import com.mitake.core.response.QuoteResponse;
 import com.mitake.core.response.Response;
+import com.mitake.core.util.FormatUtility;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -124,14 +125,11 @@ public class OHLCV3Test_4 {
                                         uploadObj_1.put("fp_volume",list.get(k).fp_volume);
                                         uploadObj_1.put("fp_amount",list.get(k).fp_amount);
                                         uploadObj_1.put("iopv",list.get(k).iopv);
-
+                                        String turnoverRate = FormatUtility.calculateTurnoverRate(list.get(k),ohlcResponse.gb);
+                                        uploadObj_1.put("turnoverRate",turnoverRate);
                                         if (gblist!=null){
-                                            JSONObject uploadObj_2 = new JSONObject();
-                                            for (int i=0;i<gblist.size();i++){
-                                                uploadObj_2.put("date",gblist.get(i).date);
-                                                uploadObj_2.put("gb",gblist.get(i).gb);
-                                                uploadObj_1.put(String.valueOf(i+1),uploadObj_2);
-                                            }
+                                            uploadObj_1.put("date",gblist.get(k).date);
+                                            uploadObj_1.put("gb",gblist.get(k).gb);
                                         }
 //                                    Log.d("data", String.valueOf(uploadObj_1));
                                         uploadObj.put(list.get(k).datetime,uploadObj_1);
