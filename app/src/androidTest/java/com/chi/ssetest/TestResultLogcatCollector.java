@@ -261,7 +261,7 @@ public class TestResultLogcatCollector implements TestResultCollector {
         document.append("isPass", record.getIsPass());
         document.append("startTime", record.getStartTime());
         document.append("endTime", record.getEndTime());
-        document.append("paramData", null);
+        document.append("paramData", formatBSON(param));
         document.append("resultData", null);
         document.append("exceptionData", null);
 
