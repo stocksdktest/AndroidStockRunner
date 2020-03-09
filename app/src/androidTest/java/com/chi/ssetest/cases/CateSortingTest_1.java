@@ -130,7 +130,7 @@ public class CateSortingTest_1 {
                                 uploadObj_1.put("netAsset", list.get(i).netAsset);
                                 uploadObj_1.put("pe", list.get(i).pe);
                                 uploadObj_1.put("pe2", list.get(i).pe2);
-                                uploadObj_1.put("pb", list.get(i).pb);
+//                                uploadObj_1.put("pb", list.get(i).pb);
                                 uploadObj_1.put("capitalization", list.get(i).capitalization);
                                 uploadObj_1.put("circulatingShares", list.get(i).circulatingShares);
                                 List<String> buyPrices=new ArrayList<>();
@@ -346,19 +346,19 @@ public class CateSortingTest_1 {
                                 uploadObj_1.put("afterHoursBuyVolume", list.get(i).afterHoursBuyVolume);
                                 uploadObj_1.put("afterHoursSellVolume", list.get(i).afterHoursSellVolume);
                                 uploadObj_1.put("issuedCapital", list.get(i).issuedCapital);
-                                uploadObj_1.put("limitPriceUpperLimit", list.get(i).limitPriceUpperLimit);
-                                uploadObj_1.put("limitPriceLowerLimit", list.get(i).limitPriceLowerLimit);
-                                uploadObj_1.put("longName", list.get(i).longName);
-                                //板块指数
-                                uploadObj_1.put("blockChg", list.get(i).blockChg);
-                                uploadObj_1.put("averageChg", list.get(i).averageChg);
-                                uploadObj_1.put("indexChg5", list.get(i).indexChg5);
-                                uploadObj_1.put("indexChg10", list.get(i).indexChg10);
-                                //3.3.0.002新增字段
-                                uploadObj.put("monthChangeRate", list.get(i).monthChangeRate);
-                                uploadObj.put("yearChangeRate", list.get(i).yearChangeRate);
-                                uploadObj.put("recentMonthChangeRate", list.get(i).recentMonthChangeRate);
-                                uploadObj.put("recentYearChangeRate", list.get(i).recentYearChangeRate);
+//                                uploadObj_1.put("limitPriceUpperLimit", list.get(i).limitPriceUpperLimit);
+//                                uploadObj_1.put("limitPriceLowerLimit", list.get(i).limitPriceLowerLimit);
+//                                uploadObj_1.put("longName", list.get(i).longName);
+//                                //板块指数
+//                                uploadObj_1.put("blockChg", list.get(i).blockChg);
+//                                uploadObj_1.put("averageChg", list.get(i).averageChg);
+//                                uploadObj_1.put("indexChg5", list.get(i).indexChg5);
+//                                uploadObj_1.put("indexChg10", list.get(i).indexChg10);
+//                                //3.3.0.002新增字段
+//                                uploadObj.put("monthChangeRate", list.get(i).monthChangeRate);
+//                                uploadObj.put("yearChangeRate", list.get(i).yearChangeRate);
+//                                uploadObj.put("recentMonthChangeRate", list.get(i).recentMonthChangeRate);
+//                                uploadObj.put("recentYearChangeRate", list.get(i).recentYearChangeRate);
                                 //增值指标
                                 if (cateSortingResponse.addValueModel!=null){
                                     ArrayList<AddValueModel> addValueModels=cateSortingResponse.addValueModel;

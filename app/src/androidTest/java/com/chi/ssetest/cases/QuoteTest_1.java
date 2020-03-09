@@ -119,7 +119,7 @@ public class QuoteTest_1 {
                                 uploadObj_1.put("netAsset", list.netAsset);
                                 uploadObj_1.put("pe", list.pe);
                                 uploadObj_1.put("pe2", list.pe2);
-                                uploadObj_1.put("pb", list.pb);
+//                                uploadObj_1.put("pb", list.pb);
                                 uploadObj_1.put("capitalization", list.capitalization);
                                 uploadObj_1.put("circulatingShares", list.circulatingShares);
                                 List<String> buyPrices=new ArrayList<>();
@@ -331,19 +331,19 @@ public class QuoteTest_1 {
                                 uploadObj_1.put("afterHoursBuyVolume", list.afterHoursBuyVolume);
                                 uploadObj_1.put("afterHoursSellVolume", list.afterHoursSellVolume);
                                 uploadObj_1.put("issuedCapital", list.issuedCapital);
-                                uploadObj_1.put("limitPriceUpperLimit", list.limitPriceUpperLimit);
-                                uploadObj_1.put("limitPriceLowerLimit", list.limitPriceLowerLimit);
-                                uploadObj_1.put("longName", list.longName);
-                                //板块指数
-                                uploadObj_1.put("blockChg", list.blockChg);
-                                uploadObj_1.put("averageChg", list.averageChg);
-                                uploadObj_1.put("indexChg5", list.indexChg5);
-                                uploadObj_1.put("indexChg10", list.indexChg10);
-                                //3.3.0.002新增字段
-                                uploadObj_1.put("monthChangeRate", list.monthChangeRate);
-                                uploadObj_1.put("yearChangeRate", list.yearChangeRate);
-                                uploadObj_1.put("recentMonthChangeRate", list.recentMonthChangeRate);
-                                uploadObj_1.put("recentYearChangeRate", list.recentYearChangeRate);
+//                                uploadObj_1.put("limitPriceUpperLimit", list.limitPriceUpperLimit);
+//                                uploadObj_1.put("limitPriceLowerLimit", list.limitPriceLowerLimit);
+//                                uploadObj_1.put("longName", list.longName);
+//                                //板块指数
+//                                uploadObj_1.put("blockChg", list.blockChg);
+//                                uploadObj_1.put("averageChg", list.averageChg);
+//                                uploadObj_1.put("indexChg5", list.indexChg5);
+//                                uploadObj_1.put("indexChg10", list.indexChg10);
+//                                //3.3.0.002新增字段
+//                                uploadObj_1.put("monthChangeRate", list.monthChangeRate);
+//                                uploadObj_1.put("yearChangeRate", list.yearChangeRate);
+//                                uploadObj_1.put("recentMonthChangeRate", list.recentMonthChangeRate);
+//                                uploadObj_1.put("recentYearChangeRate", list.recentYearChangeRate);
 //                            //增值指标
 //                            if (quoteResponse.addValueModel!=null){
 //                                ArrayList<AddValueModel> addValueModels=quoteResponse.addValueModel;

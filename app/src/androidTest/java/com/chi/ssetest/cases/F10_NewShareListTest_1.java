@@ -32,14 +32,6 @@ import com.mitake.core.request.MainFinaIndexNasRequest;
 import com.mitake.core.request.MorePriceRequest;
 import com.mitake.core.request.NewShareListRequest;
 import com.mitake.core.request.NewsRequest;
-import com.mitake.core.request.QuoteRequest;
-import com.mitake.core.request.StockNewsRequest;
-import com.mitake.core.request.StockShareInfoRequest;
-import com.mitake.core.request.TopLiquidShareHolderRequest;
-import com.mitake.core.request.offer.OfferQuoteSort;
-import com.mitake.core.response.AddValueResponse;
-import com.mitake.core.response.BankuaiRankingResponse;
-import com.mitake.core.response.Bankuaisorting;
 import com.mitake.core.response.BankuaisortingResponse;
 import com.mitake.core.response.CatequoteResponse;
 import com.mitake.core.response.IResponseInfoCallback;
@@ -135,7 +127,7 @@ public class F10_NewShareListTest_1 {
                                         uploadObj_1.put("capplyPricePlan",item.getDataList().get(i).getCapplyPricePlan());
                                         uploadObj_1.put("capplySharePlan",item.getDataList().get(i).getCapplySharePlan());
                                         uploadObj_1.put("issuePricePlan",item.getDataList().get(i).getIssuePricePlan());
-                                        uploadObj_1.put("keyCode",item.getDataList().get(i).getKeyCode());
+//                                        uploadObj_1.put("keyCode",item.getDataList().get(i).getKeyCode());
                                         uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }

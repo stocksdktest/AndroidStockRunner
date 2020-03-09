@@ -38,7 +38,7 @@ import com.mitake.core.request.QuoteRequest;
 import com.mitake.core.request.StockNewsRequest;
 import com.mitake.core.request.StockShareInfoRequest;
 import com.mitake.core.request.TopLiquidShareHolderRequest;
-import com.mitake.core.request.offer.OfferQuoteSort;
+//import com.mitake.core.request.offer.OfferQuoteSort;
 import com.mitake.core.response.AddValueResponse;
 import com.mitake.core.response.BankuaiRankingResponse;
 import com.mitake.core.response.Bankuaisorting;
@@ -140,7 +140,7 @@ public class F10_NewShareDetailTest_1 {
                             uploadObj.put("capplySharePlan",list.getCapplySharePlan());
                             uploadObj.put("newTotRaiseAmt",list.getNewTotRaiseAmt());
                             uploadObj.put("newNetRaiseAmt",list.getNewNetRaiseAmt());
-                            uploadObj.put("keyCode",list.getKeyCode());
+//                            uploadObj.put("keyCode",list.getKeyCode());
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

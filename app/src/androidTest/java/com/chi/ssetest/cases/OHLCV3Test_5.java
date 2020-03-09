@@ -13,7 +13,7 @@ import com.mitake.core.OHLCItem;
 import com.mitake.core.QuoteItem;
 import com.mitake.core.bean.log.ErrorInfo;
 import com.mitake.core.parser.FQItem;
-import com.mitake.core.parser.GBItem;
+//import com.mitake.core.parser.GBItem;
 import com.mitake.core.request.OHLCRequestV3;
 import com.mitake.core.request.QuoteDetailRequest;
 import com.mitake.core.response.IResponseCallback;
@@ -21,6 +21,7 @@ import com.mitake.core.response.IResponseInfoCallback;
 import com.mitake.core.response.OHLCResponse;
 import com.mitake.core.response.QuoteResponse;
 import com.mitake.core.response.Response;
+import com.mitake.core.util.FormatUtility;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -87,7 +88,7 @@ public class OHLCV3Test_5 {
                     }else {
                         data1=Dates;
                     }
-                    request.send(quoteItem,Types,Integer.parseInt(FqTypes),data1,Integer.parseInt(Numbers), new IResponseCallback() {
+                    request.send(quoteItem,Types,FqTypes,data1,Integer.parseInt(Numbers), new IResponseCallback() {
                         @Override
                         public void callback(Response response) {
                             OHLCResponse ohlcResponse = (OHLCResponse) response;
@@ -98,7 +99,7 @@ public class OHLCV3Test_5 {
                                 result.complete(new JSONObject());
                             }
                             CopyOnWriteArrayList<OHLCItem> list =ohlcResponse.historyItems;
-                            ArrayList<GBItem> gblist=ohlcResponse.gb;
+//                            ArrayList<GBItem> gblist=ohlcResponse.gb;
                             JSONObject uploadObj = new JSONObject();
                             try {
                                 if(list!=null){
@@ -117,15 +118,12 @@ public class OHLCV3Test_5 {
                                         uploadObj_1.put("fp_volume",list.get(k).fp_volume);
                                         uploadObj_1.put("fp_amount",list.get(k).fp_amount);
                                         uploadObj_1.put("iopv",list.get(k).iopv);
-
-                                        if (gblist!=null){
-                                            JSONObject uploadObj_2 = new JSONObject();
-                                            for (int i=0;i<gblist.size();i++){
-                                                uploadObj_2.put("date",gblist.get(i).date);
-                                                uploadObj_2.put("gb",gblist.get(i).gb);
-                                                uploadObj_1.put(String.valueOf(i+1),uploadObj_2);
-                                            }
-                                        }
+//                                        String turnoverRate = FormatUtility.calculateTurnoverRate(list.get(k),ohlcResponse.gb);
+//                                        uploadObj_1.put("turnoverRate",turnoverRate);
+//                                        if (gblist!=null){
+//                                            uploadObj_1.put("date",gblist.get(k).date);
+//                                            uploadObj_1.put("gb",gblist.get(k).gb);
+//                                        }
 //                                    Log.d("data", String.valueOf(uploadObj_1));
                                         uploadObj.put(list.get(k).datetime,uploadObj_1);
                                     }

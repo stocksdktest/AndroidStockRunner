@@ -31,12 +31,6 @@ import com.mitake.core.request.MorePriceRequest;
 import com.mitake.core.request.QuoteRequest;
 import com.mitake.core.request.StockNewsRequest;
 import com.mitake.core.request.StockReportRequest;
-import com.mitake.core.request.StockShareInfoRequest;
-import com.mitake.core.request.TopLiquidShareHolderRequest;
-import com.mitake.core.request.offer.OfferQuoteSort;
-import com.mitake.core.response.AddValueResponse;
-import com.mitake.core.response.BankuaiRankingResponse;
-import com.mitake.core.response.Bankuaisorting;
 import com.mitake.core.response.BankuaisortingResponse;
 import com.mitake.core.response.CatequoteResponse;
 import com.mitake.core.response.IResponseInfoCallback;
@@ -108,8 +102,8 @@ public class F10_StockReportTest_1 {
                         if (list!=null){
                             uploadObj.put("PUBDATE_",list.PUBDATE_);
                             uploadObj.put("ID_",list.ID_);
-                            uploadObj.put("reportTitle",list.reportTitle);
-                            uploadObj.put("dataSource",list.dataSource);
+//                            uploadObj.put("reportTitle",list.reportTitle);
+//                            uploadObj.put("dataSource",list.dataSource);
                             uploadObj.put("ABSTRACT_",list.ABSTRACT_);
                             uploadObj.put("ABSTRACTFORMAT_",list.ABSTRACTFORMAT_);
 //                            uploadObj.put("ComName",list.ComName);
