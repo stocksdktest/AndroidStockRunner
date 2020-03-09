@@ -144,7 +144,7 @@ public class QuoteDetailTest_2 {
                         uploadObj.put("netAsset", list.netAsset);
                         uploadObj.put("pe", list.pe);
                         uploadObj.put("pe2", list.pe2);
-                        uploadObj.put("pb", list.pb);
+//                        uploadObj.put("pb", list.pb);
                         uploadObj.put("capitalization", list.capitalization);
                         uploadObj.put("circulatingShares", list.circulatingShares);
                         List<String> buyPrices=new ArrayList<>();
@@ -375,19 +375,19 @@ public class QuoteDetailTest_2 {
                         uploadObj.put("afterHoursBuyVolume", list.afterHoursBuyVolume);
                         uploadObj.put("afterHoursSellVolume", list.afterHoursSellVolume);
                         uploadObj.put("issuedCapital", list.issuedCapital);
-                        uploadObj.put("limitPriceUpperLimit", list.limitPriceUpperLimit);
-                        uploadObj.put("limitPriceLowerLimit", list.limitPriceLowerLimit);
-                        uploadObj.put("longName", list.longName);
-                        //板块指数
-                        uploadObj.put("blockChg", list.blockChg);
-                        uploadObj.put("averageChg", list.averageChg);
-                        uploadObj.put("indexChg5", list.indexChg5);
-                        uploadObj.put("indexChg10", list.indexChg10);
-                        //3.3.0.002新增字段
-                        uploadObj.put("monthChangeRate", list.monthChangeRate);
-                        uploadObj.put("yearChangeRate", list.yearChangeRate);
-                        uploadObj.put("recentMonthChangeRate", list.recentMonthChangeRate);
-                        uploadObj.put("recentYearChangeRate", list.recentYearChangeRate);
+//                        uploadObj.put("limitPriceUpperLimit", list.limitPriceUpperLimit);
+//                        uploadObj.put("limitPriceLowerLimit", list.limitPriceLowerLimit);
+//                        uploadObj.put("longName", list.longName);
+//                        //板块指数
+//                        uploadObj.put("blockChg", list.blockChg);
+//                        uploadObj.put("averageChg", list.averageChg);
+//                        uploadObj.put("indexChg5", list.indexChg5);
+//                        uploadObj.put("indexChg10", list.indexChg10);
+//                        //3.3.0.002新增字段
+//                        uploadObj.put("monthChangeRate", list.monthChangeRate);
+//                        uploadObj.put("yearChangeRate", list.yearChangeRate);
+//                        uploadObj.put("recentMonthChangeRate", list.recentMonthChangeRate);
+//                        uploadObj.put("recentYearChangeRate", list.recentYearChangeRate);
                         //买卖队列
                         if (quoteResponse.OrderQuantityBuyList!=null) {
                             ArrayList<OrderQuantityItem> orderQuantityItem1 = quoteResponse.OrderQuantityBuyList;

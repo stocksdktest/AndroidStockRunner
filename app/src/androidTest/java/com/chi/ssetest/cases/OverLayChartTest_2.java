@@ -24,12 +24,7 @@ import com.mitake.core.request.MorePriceRequest;
 import com.mitake.core.request.OverLayChartRequest;
 import com.mitake.core.request.PointAddType;
 import com.mitake.core.request.QuoteDetailRequest;
-import com.mitake.core.request.QuoteRequest;
-import com.mitake.core.request.offer.OfferQuoteSort;
-import com.mitake.core.response.AddValueResponse;
-import com.mitake.core.response.BankuaiRankingResponse;
-import com.mitake.core.response.Bankuaisorting;
-import com.mitake.core.response.BankuaisortingResponse;
+import com.mitake.core.request.QuoteRequest;;
 import com.mitake.core.response.CatequoteResponse;
 import com.mitake.core.response.ChartResponse;
 import com.mitake.core.response.IResponseInfoCallback;
@@ -138,7 +133,7 @@ public class OverLayChartTest_2 {
                                             uploadObj_1.put("iopv",list.get(k).iopv);
                                             uploadObj_1.put("iopvPre",list.get(k).iopvPre);
                                             uploadObj_1.put("openInterest",list.get(k).openInterest);
-                                            uploadObj_1.put("volRatio",list.get(k).volRatio);
+//                                            uploadObj_1.put("volRatio",list.get(k).volRatio);
                                             uploadObj_2.put(list.get(k).datetime,uploadObj_1);
                                         }
                                         uploadObj.put("OHLCItem",uploadObj_2);
@@ -155,7 +150,7 @@ public class OverLayChartTest_2 {
                                             uploadObj_1.put("iopv",list2.get(k).iopv);
                                             uploadObj_1.put("iopvPre",list2.get(k).iopvPre);
                                             uploadObj_1.put("openInterest",list2.get(k).openInterest);
-                                            uploadObj_1.put("volRatio",list2.get(k).volRatio);
+//                                            uploadObj_1.put("volRatio",list2.get(k).volRatio);
                                             uploadObj_3.put(list2.get(k).datetime,uploadObj_1);
                                         }
                                         uploadObj.put("overLayChart",uploadObj_3);

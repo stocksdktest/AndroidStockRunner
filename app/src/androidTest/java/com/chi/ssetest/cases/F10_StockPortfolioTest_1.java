@@ -28,7 +28,7 @@ import com.mitake.core.request.IndustryPortfolioRequest;
 import com.mitake.core.request.MorePriceRequest;
 import com.mitake.core.request.QuoteRequest;
 import com.mitake.core.request.StockPortfolioRequest;
-import com.mitake.core.request.offer.OfferQuoteSort;
+//import com.mitake.core.request.offer.OfferQuoteSort;
 import com.mitake.core.response.AddValueResponse;
 import com.mitake.core.response.BankuaiRankingResponse;
 import com.mitake.core.response.Bankuaisorting;

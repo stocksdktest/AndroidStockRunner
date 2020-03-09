@@ -35,7 +35,7 @@ import com.mitake.core.request.QuoteRequest;
 import com.mitake.core.request.StockBulletinListRequest;
 import com.mitake.core.request.StockShareInfoRequest;
 import com.mitake.core.request.TopLiquidShareHolderRequest;
-import com.mitake.core.request.offer.OfferQuoteSort;
+//import com.mitake.core.request.offer.OfferQuoteSort;
 import com.mitake.core.response.AddValueResponse;
 import com.mitake.core.response.BankuaiRankingResponse;
 import com.mitake.core.response.Bankuaisorting;

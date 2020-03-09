@@ -77,7 +77,7 @@ public class TradeDateTest_1 {
                        if(response!=null){
                            uploadObj.put("status",response.status);
                            uploadObj.put("message",response.message);
-                           uploadObj.put("tradeDates",response.extra);
+//                           uploadObj.put("tradeDates",response.extra);
                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
