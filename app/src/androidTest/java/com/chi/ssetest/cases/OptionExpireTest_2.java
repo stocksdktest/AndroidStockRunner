@@ -89,7 +89,7 @@ public class OptionExpireTest_2 {
                                 uploadObj.put("list",new JSONArray(list));
                             }
                         }
-//                        Log.d("data", String.valueOf(uploadObj));
+                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

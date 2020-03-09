@@ -99,7 +99,6 @@ public class OHLCV3Test_6 {
                             result.complete(new JSONObject());
                         }
                         CopyOnWriteArrayList<OHLCItem> list =ohlcResponse.historyItems;
-                        ArrayList<GBItem> gblist=ohlcResponse.gb;
                         JSONObject uploadObj = new JSONObject();
                         try {
                             if(list!=null){
@@ -120,13 +119,21 @@ public class OHLCV3Test_6 {
                                     uploadObj_1.put("iopv",list.get(k).iopv);
                                     String turnoverRate = FormatUtility.calculateTurnoverRate(list.get(k),ohlcResponse.gb);
                                     uploadObj_1.put("turnoverRate",turnoverRate);
-                                    if (gblist!=null){
-                                        uploadObj_1.put("date",gblist.get(k).date);
-                                        uploadObj_1.put("gb",gblist.get(k).gb);
-                                    }
 //                                Log.d("data", String.valueOf(uploadObj_1));
                                     uploadObj.put(list.get(k).datetime,uploadObj_1);
                                 }
+                            }
+                            if (ohlcResponse.gb!=null){
+                                ArrayList<JSONObject> gblist=new ArrayList<>();
+                                JSONObject uploadObj_1 = new JSONObject();
+                                for(int j=0;j<ohlcResponse.gb.size();j++){
+                                    JSONObject uploadObj_2 = new JSONObject();
+                                    uploadObj_2.put("date",ohlcResponse.gb.get(j).date);
+                                    uploadObj_2.put("gb",ohlcResponse.gb.get(j).gb);
+                                    uploadObj_1.put(String.valueOf(j+1),uploadObj_2);
+                                    gblist.add(uploadObj_1);
+                                }
+                                uploadObj.put("gblist",new JSONArray(gblist));
                             }
 //                            Log.d("data", String.valueOf(uploadObj));
                             result.complete(uploadObj);
