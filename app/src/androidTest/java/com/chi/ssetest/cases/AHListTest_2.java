@@ -93,7 +93,7 @@ public class AHListTest_2 {
                                 uploadObj_1.put("premiumAH", list.get(k).premiumAH);
                                 uploadObj_1.put("changeRateA", list.get(k).changeRateA);
                                 uploadObj_1.put("changeRateH", list.get(k).changeRateH);
-                                uploadObj_1.put("premiumHA", list.get(k).premiumHA);
+//                                uploadObj_1.put("premiumHA", list.get(k).premiumHA);
 //                            Log.d("data", String.valueOf(uploadObj_1));
                                 uploadObj.put(String.valueOf(k+1),uploadObj_1);
                             }

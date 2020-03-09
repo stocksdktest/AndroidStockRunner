@@ -373,10 +373,10 @@ public class CateSortingTest_3 {
                                 uploadObj_1.put("indexChg5", list.get(i).indexChg5);
                                 uploadObj_1.put("indexChg10", list.get(i).indexChg10);
                                 //3.3.0.002新增字段
-                                uploadObj.put("monthChangeRate", list.get(i).monthChangeRate);
-                                uploadObj.put("yearChangeRate", list.get(i).yearChangeRate);
-                                uploadObj.put("recentMonthChangeRate", list.get(i).recentMonthChangeRate);
-                                uploadObj.put("recentYearChangeRate", list.get(i).recentYearChangeRate);
+//                                uploadObj.put("monthChangeRate", list.get(i).monthChangeRate);
+//                                uploadObj.put("yearChangeRate", list.get(i).yearChangeRate);
+//                                uploadObj.put("recentMonthChangeRate", list.get(i).recentMonthChangeRate);
+//                                uploadObj.put("recentYearChangeRate", list.get(i).recentYearChangeRate);
                                 //增值指标
                                 if (cateSortingResponse.addValueModel!=null){
                                     ArrayList<AddValueModel> addValueModels=cateSortingResponse.addValueModel;

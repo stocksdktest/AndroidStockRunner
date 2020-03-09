@@ -340,10 +340,10 @@ public class QuoteTest_1 {
                                 uploadObj_1.put("indexChg5", list.indexChg5);
                                 uploadObj_1.put("indexChg10", list.indexChg10);
                                 //3.3.0.002新增字段
-                                uploadObj_1.put("monthChangeRate", list.monthChangeRate);
-                                uploadObj_1.put("yearChangeRate", list.yearChangeRate);
-                                uploadObj_1.put("recentMonthChangeRate", list.recentMonthChangeRate);
-                                uploadObj_1.put("recentYearChangeRate", list.recentYearChangeRate);
+//                                uploadObj_1.put("monthChangeRate", list.monthChangeRate);
+//                                uploadObj_1.put("yearChangeRate", list.yearChangeRate);
+//                                uploadObj_1.put("recentMonthChangeRate", list.recentMonthChangeRate);
+//                                uploadObj_1.put("recentYearChangeRate", list.recentYearChangeRate);
 //                            //增值指标
 //                            if (quoteResponse.addValueModel!=null){
 //                                ArrayList<AddValueModel> addValueModels=quoteResponse.addValueModel;

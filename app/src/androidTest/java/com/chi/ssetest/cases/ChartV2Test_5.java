@@ -104,7 +104,7 @@ public class ChartV2Test_5 {
                                         uploadObj_1.put("openInterest",list.get(k).openInterest);
                                         uploadObj_1.put("iopv",list.get(k).iopv);
                                         uploadObj_1.put("iopvPre",list.get(k).iopvPre);
-                                        uploadObj_1.put("volRatio",list.get(k).volRatio);
+//                                        uploadObj_1.put("volRatio",list.get(k).volRatio);
 //                                    Log.d("data", String.valueOf(uploadObj_1));
                                         uploadObj.put(list.get(k).datetime,uploadObj_1);
                                     }

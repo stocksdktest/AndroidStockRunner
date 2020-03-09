@@ -384,10 +384,10 @@ public class QuoteDetailTest_2 {
                         uploadObj.put("indexChg5", list.indexChg5);
                         uploadObj.put("indexChg10", list.indexChg10);
                         //3.3.0.002新增字段
-                        uploadObj.put("monthChangeRate", list.monthChangeRate);
-                        uploadObj.put("yearChangeRate", list.yearChangeRate);
-                        uploadObj.put("recentMonthChangeRate", list.recentMonthChangeRate);
-                        uploadObj.put("recentYearChangeRate", list.recentYearChangeRate);
+//                        uploadObj.put("monthChangeRate", list.monthChangeRate);
+//                        uploadObj.put("yearChangeRate", list.yearChangeRate);
+//                        uploadObj.put("recentMonthChangeRate", list.recentMonthChangeRate);
+//                        uploadObj.put("recentYearChangeRate", list.recentYearChangeRate);
                         //买卖队列
                         if (quoteResponse.OrderQuantityBuyList!=null) {
                             ArrayList<OrderQuantityItem> orderQuantityItem1 = quoteResponse.OrderQuantityBuyList;
