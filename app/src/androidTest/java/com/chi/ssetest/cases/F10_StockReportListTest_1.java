@@ -117,19 +117,19 @@ public class F10_StockReportListTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     try {
                         if (stockReportListResponse.list!=null){
-                            for (StockReportItem item : stockReportListResponse.list) {
+                            for (int i=0; i<stockReportListResponse.list.size();i++) {
                                 JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("PUBDATE_", item.PUBDATE_);
-                                uploadObj_1.put("ID_", item.ID_);
-                                uploadObj_1.put("ReportTitle", item.ReportTitle);
-                                uploadObj_1.put("dataSource", item.dataSource);
-                                uploadObj_1.put("REPORTLEVEL_", item.REPORTLEVEL_);
-                                uploadObj_1.put("ComName", item.ComName);
-                                uploadObj_1.put("STOCKNAME_", item.STOCKNAME_);
-                                uploadObj_1.put("ISPDF_", item.ISPDF_);
-                                uploadObj_1.put("ENTRYDATE", item.ENTRYDATE);
-                                uploadObj_1.put("ENTRYTIME", item.ENTRYTIME);
-                                uploadObj.put(item.ID_,uploadObj_1);
+                                uploadObj_1.put("PUBDATE_", stockReportListResponse.list.get(i).PUBDATE_);
+                                uploadObj_1.put("ID_", stockReportListResponse.list.get(i).ID_);
+                                uploadObj_1.put("ReportTitle", stockReportListResponse.list.get(i).ReportTitle);
+                                uploadObj_1.put("dataSource", stockReportListResponse.list.get(i).dataSource);
+                                uploadObj_1.put("REPORTLEVEL_", stockReportListResponse.list.get(i).REPORTLEVEL_);
+                                uploadObj_1.put("ComName", stockReportListResponse.list.get(i).ComName);
+                                uploadObj_1.put("STOCKNAME_", stockReportListResponse.list.get(i).STOCKNAME_);
+                                uploadObj_1.put("ISPDF_", stockReportListResponse.list.get(i).ISPDF_);
+                                uploadObj_1.put("ENTRYDATE", stockReportListResponse.list.get(i).ENTRYDATE);
+                                uploadObj_1.put("ENTRYTIME", stockReportListResponse.list.get(i).ENTRYTIME);
+                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
                         }
                         Log.d("data", String.valueOf(uploadObj));
