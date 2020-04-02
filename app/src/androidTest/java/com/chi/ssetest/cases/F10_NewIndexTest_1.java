@@ -96,7 +96,7 @@ public class F10_NewIndexTest_1 {
                             uploadObj.put("netProfitCutParentCom",list.netProfitCutParentCom);
                             uploadObj.put("cutBasicEPS",list.cutBasicEPS);
                             uploadObj.put("annuROE",list.annuROE);
-                            uploadObj.put("netProfitCutParentCom",list.netProfitCutParentCom);
+                            uploadObj.put("netProfitParentCom",list.netProfitParentCom);
                             uploadObj.put("basicEPS",list.basicEPS);
                             uploadObj.put("totalShare",list.totalShare);
                             uploadObj.put("BVPS_",list.BVPS_);

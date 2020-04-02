@@ -116,18 +116,18 @@ public class F10_StockNewsListTest_1 {
                     JSONObject uploadObj = new JSONObject();
                     try {
                         if(stockNewsListResponse.list!=null){
-                            for (StockNewsItem item : stockNewsListResponse.list) {
+                            for (int i=0;i<stockNewsListResponse.list.size();i++) {
                                 JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("INIPUBDATE_", item.INIPUBDATE_);
-                                uploadObj_1.put("ID_", item.ID_);
-                                uploadObj_1.put("REPORTTITLE_", item.REPORTTITLE_);
-                                uploadObj_1.put("REPORTLEVEL_", item.REPORTLEVEL_);
-                                uploadObj_1.put("MEDIANAME_", item.MEDIANAME_);
-                                uploadObj_1.put("STOCKNAME_", item.STOCKNAME_);
-                                uploadObj_1.put("ISPDF_", item.ISPDF_);
-                                uploadObj_1.put("ENTRYDATE", item.ENTRYDATE);
-                                uploadObj_1.put("ENTRYTIME", item.ENTRYTIME);
-                                uploadObj.put(item.ID_,uploadObj_1);
+                                uploadObj_1.put("INIPUBDATE_", stockNewsListResponse.list.get(i).INIPUBDATE_);
+                                uploadObj_1.put("ID_", stockNewsListResponse.list.get(i).ID_);
+                                uploadObj_1.put("REPORTTITLE_", stockNewsListResponse.list.get(i).REPORTTITLE_);
+                                uploadObj_1.put("REPORTLEVEL_", stockNewsListResponse.list.get(i).REPORTLEVEL_);
+                                uploadObj_1.put("MEDIANAME_", stockNewsListResponse.list.get(i).MEDIANAME_);
+                                uploadObj_1.put("STOCKNAME_", stockNewsListResponse.list.get(i).STOCKNAME_);
+                                uploadObj_1.put("ISPDF_", stockNewsListResponse.list.get(i).ISPDF_);
+                                uploadObj_1.put("ENTRYDATE", stockNewsListResponse.list.get(i).ENTRYDATE);
+                                uploadObj_1.put("ENTRYTIME", stockNewsListResponse.list.get(i).ENTRYTIME);
+                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
                         }
                         Log.d("data", String.valueOf(uploadObj));

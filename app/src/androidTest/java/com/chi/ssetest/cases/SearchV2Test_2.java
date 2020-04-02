@@ -83,7 +83,7 @@ public class SearchV2Test_2 {
 //                            uploadObj_1.put("hkType",list.get(i).hkType);
                             uploadObj_1.put("st",list.get(i).st);
 //                        Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(list.get(i).stockID,uploadObj_1);
+                            uploadObj.put(String.valueOf(i+1),uploadObj_1);
                         }
                     }
 //                    Log.d("data", String.valueOf(uploadObj));

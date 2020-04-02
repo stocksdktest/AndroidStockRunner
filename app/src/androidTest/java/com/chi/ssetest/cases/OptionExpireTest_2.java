@@ -3,56 +3,46 @@ package com.chi.ssetest.cases;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
+import com.chi.ssetest.StockTestcase;
+import com.chi.ssetest.StockTestcaseName;
 import com.chi.ssetest.TestcaseException;
 import com.chi.ssetest.protos.SetupConfig;
 import com.chi.ssetest.setup.RunnerSetup;
-import com.chi.ssetest.StockTestcase;
-import com.chi.ssetest.StockTestcaseName;
 import com.chi.ssetest.setup.TestcaseConfigRule;
-import com.mitake.core.AddValueModel;
-import com.mitake.core.CateType;
-import com.mitake.core.QuoteItem;
 import com.mitake.core.bean.log.ErrorInfo;
-import com.mitake.core.bean.quote.ConvertibleBoundItem;
-import com.mitake.core.request.AddValueRequest;
-import com.mitake.core.request.CategoryType;
-import com.mitake.core.request.CatequoteRequest;
-import com.mitake.core.request.ConvertibleDebtRequest;
-import com.mitake.core.request.QuoteRequest;
-import com.mitake.core.response.AddValueResponse;
-import com.mitake.core.response.CatequoteResponse;
-import com.mitake.core.response.ConvertibleBoundResponse;
+import com.mitake.core.request.OptionExpireRequest;
 import com.mitake.core.response.IResponseInfoCallback;
-import com.mitake.core.response.QuoteResponse;
-import com.mitake.core.response.Response;
+import com.mitake.core.response.OptionExpireResponse;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
- *可转债溢价查询
+ *期权——交割月方法二
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-@StockTestcase(StockTestcaseName.CONVERTIBLETEST_1)
-public class ConvertibleDebTest_1 {
-    private static final StockTestcaseName testcaseName = StockTestcaseName.CONVERTIBLETEST_1;
+@StockTestcase(StockTestcaseName.OPTIONEXPIRETEST_2)
+public class OptionExpireTest_2 {
+    private static final StockTestcaseName testcaseName = StockTestcaseName.OPTIONEXPIRETEST_2;
     private static SetupConfig.TestcaseConfig testcaseConfig;
     private static final int timeout_ms = 1000000;
     @BeforeClass
     public static void setup() throws Exception {
-        Log.d("ConvertibleDebTest_1", "Setup");
+        Log.d("OptionExpireTest_2", "Setup");
         testcaseConfig = RunnerSetup.getInstance().getTestcaseConfig(testcaseName);
         if (testcaseConfig == null ) {
             throw new Exception(String.format("Testcase(%s) setup failed, config is empty", testcaseName));
@@ -62,42 +52,44 @@ public class ConvertibleDebTest_1 {
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
     @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
-        Log.d("ConvertibleDebTest_1", "requestWork");
+        Log.d("OptionExpireTest_2", "requestWork");
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("adjusted");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
-            ConvertibleDebtRequest request = new  ConvertibleDebtRequest();
-            request.send(quoteNumbers,new IResponseInfoCallback<ConvertibleBoundResponse>() {
+            OptionExpireRequest request = new OptionExpireRequest();
+            request.send(quoteNumbers, Boolean.parseBoolean(quoteNumbers1),new IResponseInfoCallback<OptionExpireResponse>() {
                 @Override
-                public void callback(ConvertibleBoundResponse convertibleBoundResponse) {
+                public void callback(OptionExpireResponse optionExpireResponse) {
                     try {
-                        assertNotNull(convertibleBoundResponse.items);
+                        assertNotNull(optionExpireResponse.list);
                     } catch (AssertionError e) {
                         //                        result.completeExceptionally(e);
                         result.complete(new JSONObject());
                     }
-                    JSONObject uploadObj = new JSONObject();
-                    // TODO fill uploadObj with QuoteResponse value
                     try {
-                        if(convertibleBoundResponse.items!=null){
-                            for (ConvertibleBoundItem item :convertibleBoundResponse.items) {
+                        JSONObject uploadObj = new JSONObject();
+                        if (optionExpireResponse.list!=null&&optionExpireResponse.list.length>0){
+                            if (Boolean.parseBoolean(quoteNumbers1)){
+                                //分割
+                                List<String> datas=new ArrayList<>();
                                 JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("code",item.code);
-                                uploadObj_1.put("name",item.name);
-//                            uploadObj_1.put("market",item.market);
-//                            uploadObj_1.put("subtype",item.subtype);
-                                uploadObj_1.put("lastPrice",item.lastPrice);
-//                            uploadObj_1.put("preClosePrice",item.preClosePrice);
-                                uploadObj_1.put("premium",item.premium);
-//                            uploadObj_1.put("upDownFlag",item.upDownFlag);
-                                uploadObj_1.put("changeRate",item.changeRate);
-                                uploadObj_1.put("change",item.change);
-//                            Log.d("data", String.valueOf(uploadObj_1));
-                                uploadObj.put(item.code,uploadObj_1);
+                                for (int i=0;i<optionExpireResponse.datas.length;i++){
+                                    uploadObj_1.put("time",optionExpireResponse.datas[i][0]);
+                                    uploadObj_1.put("day",optionExpireResponse.datas[i][1]);
+                                    uploadObj.put(String.valueOf(i+1),uploadObj_1);
+                                }
+                            }else {
+                                //未分割
+                                List<String> list=new ArrayList<>();
+                                for (int i=0;i<optionExpireResponse.list.length;i++){
+                                    list.add(optionExpireResponse.list[i]);
+                                }
+                                uploadObj.put("list",new JSONArray(list));
                             }
                         }
-//                        Log.d("data", String.valueOf(uploadObj));
+                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
@@ -110,7 +102,7 @@ public class ConvertibleDebTest_1 {
             });
             try {
                 JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
-                RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
+                RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(),resultObj);
             } catch (Exception e) {
                 //                throw new Exception(e);
                 throw new TestcaseException(e,rule.getParam());
