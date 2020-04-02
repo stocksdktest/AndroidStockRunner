@@ -124,7 +124,7 @@ public class TCP_TickTest_1 {
                                 tickItems = entry.getValue();
 //                                uploadObj.put("code",code);
                                 if(tickItems!=null){
-//                                    for (int i=0;i<tickItems.tickItems.size();i++) {
+//                                    for (TickItem tickItem : tickItems) {
                                         JSONObject uploadObj_1 = new JSONObject();
                                         uploadObj_1.put("time",tickItems.tickItems.get(tickItems.tickItems.size()-1).getTransactionTime());
                                         uploadObj_1.put("tradePrice",tickItems.tickItems.get(tickItems.tickItems.size()-1).getTransactionPrice());
@@ -138,6 +138,11 @@ public class TCP_TickTest_1 {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                    }
+
+                    @Override
+                    public void pushTickDetail(List<TickDetailItem> list) {
+
                     }
                 });
             }
