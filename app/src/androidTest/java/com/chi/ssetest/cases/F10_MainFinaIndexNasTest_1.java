@@ -81,7 +81,7 @@ public class F10_MainFinaIndexNasTest_1 {
         Log.d("F10_MainFinaIndexNasTest_1", "requestWork");
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("CODE");
-        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
+        final String quoteNumbers1 = rule.getParam().optString("SRC");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             MainFinaIndexNasRequest request = new MainFinaIndexNasRequest();

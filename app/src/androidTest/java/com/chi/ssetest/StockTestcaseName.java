@@ -156,8 +156,20 @@ public enum StockTestcaseName {
     QUOTEDETAILTCPTEST_1("QUOTEDETAILTCPTEST_1"),//行情快照TCP
     QUOTEDETAILTCPTEST_2("QUOTEDETAILTCPTEST_2"),//行情快照TCP
     TCP_TICKTEST_1("TCP_TICKTEST_1"),//分笔TCP
-    TCP_TRADETEST_1("TCP_TRADETEST_1");//交易行情
-
+    TCP_TRADETEST_1("TCP_TRADETEST_1"),//交易行情
+    //android和竞品对比接口
+    A_P_TCP_QuoteDetailTest_1("CRAWLER_QUOTEDETAIL_1"),//行情快照对比竞品
+    A_P_ChartV2Test_1("CRAWLER_CHARTV2TEST_1"),//走势数据对比竞品 盘中
+    A_P_ChartV2Test_2("CRAWLER_CHARTV2TEST_2"),//走势数据对比竞品 盘前 处理时间
+    A_P_ChartV2Test_3("CRAWLER_CHARTV2TEST_3"),//走势数据对比竞品 盘后
+    A_P_ChartV2Test_4("CRAWLER_CHARTV2TEST_4"),//走势数据对比竞品 盘前
+    A_P_TickTest_1("CRAWLER_TICK_1"),//分时明细对比竞品  100条  时间6位
+    A_P_TickTest_2("CRAWLER_TICK_2"),//分时明细对比竞品  全部   时间6位
+    A_P_TickTest_3("CRAWLER_TICK_3"),//分时明细对比竞品  100条  时间8位
+    A_P_TickTest_4("CRAWLER_TICK_4"),//分时明细对比竞品  全部   时间8位
+    A_P_OHLCV3Test_1("CRAWLER_OHLCV3_1"),//历史k线对比竞品
+    A_P_OHLCV3Test_2("CRAWLER_OHLCV3_2"),//历史k线对比竞品
+    A_P_OHLCV3Test_3("CRAWLER_OHLCV3_3");//历史k线对比竞品
 
     private String stringVal;
     StockTestcaseName(String numVal) {

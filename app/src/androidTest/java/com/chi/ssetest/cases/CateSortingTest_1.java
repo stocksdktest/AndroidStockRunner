@@ -76,7 +76,7 @@ public class CateSortingTest_1 {
         Log.d("  CateSortingTest_1", "requestWork");
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("CateType");
-        final String quoteNumbers1 = rule.getParam().optString("param");
+        final String quoteNumbers1 = rule.getParam().optString("PARAMS");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             CateSortingRequest request = new  CateSortingRequest();

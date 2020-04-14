@@ -64,7 +64,7 @@ public class AHListTest_1 {
         Log.d("AHListTest_1", "requestWork");
         // TODO get custom args from param
 //        final String []Params = rule.getParam().optString("param", "").split(";");
-        final String Params = rule.getParam().optString("param", "");
+        final String Params = rule.getParam().optString("PARAMS", "");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<Params.length;i++){
             AHQuoteListRequest request = new AHQuoteListRequest();
