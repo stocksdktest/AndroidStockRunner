@@ -97,7 +97,7 @@ public class F10_NewShareDetailTest_1 {
         Log.d("F10_NewShareDetailTest_1", "requestWork");
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("CODE");
-        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
+        final String quoteNumbers1 = rule.getParam().optString("SRC");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             NewShareDetailRequest request = new NewShareDetailRequest();

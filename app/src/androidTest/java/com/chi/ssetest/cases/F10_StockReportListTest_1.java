@@ -95,7 +95,7 @@ public class F10_StockReportListTest_1 {
         final String quoteNumbers = rule.getParam().optString("CODE");
         final String quoteNumbers1 = rule.getParam().optString("TYPE");
         final String quoteNumbers2 = rule.getParam().optString("NEWSID");
-        final String quoteNumbers3 = rule.getParam().optString("SOURCETYPE");
+        final String quoteNumbers3 = rule.getParam().optString("SRC");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
         String newsID;

@@ -59,7 +59,7 @@ public class AHListTest_2 {
     public void requestWork() throws Exception {
         Log.d("AHListTest_2", "requestWork");
         // TODO get custom args from param
-        final String Params = rule.getParam().optString("param", "");
+        final String Params = rule.getParam().optString("PARAMS", "");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 
 //        for (int i=0;i<Params.length;i++){

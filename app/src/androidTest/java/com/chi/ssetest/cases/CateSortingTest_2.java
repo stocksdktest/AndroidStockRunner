@@ -78,7 +78,7 @@ public class CateSortingTest_2 {
         Log.d("  CateSortingTest_2", "requestWork");
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("CateType");
-        final String quoteNumbers1 = rule.getParam().optString("param");
+        final String quoteNumbers1 = rule.getParam().optString("PARAMS");
         final String quoteNumbers2 = rule.getParam().optString("STOCKFIELDS");
         final String quoteNumbers3 = rule.getParam().optString("ADDVALUEFIELDS");
 //        SortType
