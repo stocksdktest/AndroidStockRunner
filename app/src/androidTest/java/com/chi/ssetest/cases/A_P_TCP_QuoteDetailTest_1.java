@@ -387,12 +387,12 @@ public class A_P_TCP_QuoteDetailTest_1 {
                                 ||item.subtype.equals("1132")||item.subtype.equals("1133")||item.subtype.equals("1140")){
                             System.out.println("基金--------------"+item.subtype);
                             uploadObj.put("lastPrice", item.lastPrice == "一" ? "-" : item.lastPrice);
+                            uploadObj.put("change", item.change == "一" ? "-" : item.change);
                             if ("-".equals(item.upDownFlag)){
                                 uploadObj.put("changeRate",item.upDownFlag+item.changeRate);//加涨跌符号
                             }else {
                                 uploadObj.put("changeRate",item.changeRate == "一" ? "-" : item.changeRate);
                             }
-                            uploadObj.put("change", item.change == "一" ? "-" : item.change);
                             if (item.turnoverRate.isEmpty()){
                                 uploadObj.put("turnoverRate","-");
                             }else {
@@ -465,12 +465,12 @@ public class A_P_TCP_QuoteDetailTest_1 {
                         if (item.subtype.equals("1300")||item.subtype.equals("1311")||item.subtype.equals("1312")||item.subtype.equals("1313")||item.subtype.equals("1314")||item.subtype.equals("1321")||item.subtype.equals("1322")){
                             System.out.println("债券--------------"+item.subtype);
                             uploadObj.put("lastPrice", item.lastPrice == "一" ? "-" : item.lastPrice);
+                            uploadObj.put("change", item.change == "一" ? "-" : item.change);
                             if ("-".equals(item.upDownFlag)){
                                 uploadObj.put("changeRate",item.upDownFlag+item.changeRate);//加涨跌符号
                             }else {
                                 uploadObj.put("changeRate",item.changeRate == "一" ? "-" : item.changeRate);
                             }
-                            uploadObj.put("change", item.change == "一" ? "-" : item.change);
                             uploadObj.put("volume", item.volume == "一" ? "-" : String.valueOf(Math.round(Float.parseFloat(item.volume))));
                             if (item.volumeRatio.isEmpty()){
                                 uploadObj.put("volumeRatio","-");
@@ -987,12 +987,12 @@ public class A_P_TCP_QuoteDetailTest_1 {
                                         ||item.subtype.equals("1132")||item.subtype.equals("1133")||item.subtype.equals("1140")){
                                     System.out.println("基金++++++++++++++"+item.subtype);
                                     uploadObj.put("lastPrice", item.lastPrice == "一" ? "-" : item.lastPrice);
+                                    uploadObj.put("change", item.change == "一" ? "-" : item.change);
                                     if ("-".equals(item.upDownFlag)){
                                         uploadObj.put("changeRate",item.upDownFlag+item.changeRate);//加涨跌符号
                                     }else {
                                         uploadObj.put("changeRate",item.changeRate == "一" ? "-" : item.changeRate);
                                     }
-                                    uploadObj.put("change", item.change == "一" ? "-" : item.change);
                                     if (item.turnoverRate.isEmpty()){
                                         uploadObj.put("turnoverRate","-");
                                     }else {
@@ -1065,12 +1065,12 @@ public class A_P_TCP_QuoteDetailTest_1 {
                                 if (item.subtype.equals("1300")||item.subtype.equals("1311")||item.subtype.equals("1312")||item.subtype.equals("1313")||item.subtype.equals("1314")||item.subtype.equals("1321")||item.subtype.equals("1322")){
                                     System.out.println("债券++++++++++++++++"+item.subtype);
                                     uploadObj.put("lastPrice", item.lastPrice == "一" ? "-" : item.lastPrice);
+                                    uploadObj.put("change", item.change == "一" ? "-" : item.change);
                                     if ("-".equals(item.upDownFlag)){
                                         uploadObj.put("changeRate",item.upDownFlag+item.changeRate);//加涨跌符号
                                     }else {
                                         uploadObj.put("changeRate",item.changeRate == "一" ? "-" : item.changeRate);
                                     }
-                                    uploadObj.put("change", item.change == "一" ? "-" : item.change);
                                     uploadObj.put("volume", item.volume == "一" ? "-" : String.valueOf(Math.round(Float.parseFloat(item.volume))));
                                     if (item.volumeRatio.isEmpty()){
                                         uploadObj.put("volumeRatio","-");
