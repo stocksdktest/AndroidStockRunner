@@ -154,7 +154,7 @@ public class A_P_TCP_QuoteDetailTest_1 {
                             //五档卖量
                             if (item.sellVolumes.size()>0){
                                 for (int i=0;i<item.sellVolumes.size();i++){
-                                    uploadObj.put("sellVolumes"+(i+1),item.sellVolumes.get(i)== "一" ? "-" : item.sellVolumes.get(i));
+                                    uploadObj.put("sellVolumes"+(i+1),item.sellVolumes.get(i)== "一" ? "-" : String.valueOf(Math.round(Float.parseFloat(item.sellVolumes.get(i)))));
                                 }
                             }else {
                                 uploadObj.put("sellVolumes1", "-");
@@ -178,7 +178,7 @@ public class A_P_TCP_QuoteDetailTest_1 {
                             //五档买量
                             if (item.buyVolumes.size()>0){
                                 for (int i=item.buyVolumes.size()-1;i>=0;i--){
-                                    uploadObj.put("buyVolumes"+(5-i),item.buyVolumes.get(i)== "一" ? "-" : item.buyVolumes.get(i));
+                                    uploadObj.put("buyVolumes"+(5-i),item.buyVolumes.get(i)== "一" ? "-" : String.valueOf(Math.round(Float.parseFloat(item.buyVolumes.get(i)))));
                                 }
                             }else {
                                 uploadObj.put("buyVolumes1", "-");
@@ -247,7 +247,7 @@ public class A_P_TCP_QuoteDetailTest_1 {
                                 //五档卖量
                                 if (item.sellVolumes.size()>0){
                                     for (int i=0;i<item.sellVolumes.size();i++){
-                                        uploadObj.put("sellVolumes"+(i+1),item.sellVolumes.get(i)== "一" ? "-" : item.sellVolumes.get(i));
+                                        uploadObj.put("sellVolumes"+(i+1),item.sellVolumes.get(i)== "一" ? "-" : String.valueOf(Math.round(Float.parseFloat(item.sellVolumes.get(i)))));
                                     }
                                 }else {
                                     uploadObj.put("sellVolumes1", "-");
@@ -271,7 +271,7 @@ public class A_P_TCP_QuoteDetailTest_1 {
                                 //五档买量
                                 if (item.buyVolumes.size()>0){
                                     for (int i=item.buyVolumes.size()-1;i>=0;i--){
-                                        uploadObj.put("buyVolumes"+(5-i),item.buyVolumes.get(i)== "一" ? "-" : item.buyVolumes.get(i));
+                                        uploadObj.put("buyVolumes"+(5-i),item.buyVolumes.get(i)== "一" ? "-" : String.valueOf(Math.round(Float.parseFloat(item.buyVolumes.get(i)))));
                                     }
                                 }else {
                                     uploadObj.put("buyVolumes1", "-");
@@ -310,11 +310,6 @@ public class A_P_TCP_QuoteDetailTest_1 {
                             uploadObj.put("turnoverRate", item.turnoverRate == "一" ? "-" : item.turnoverRate);//不返回字段 数据库里面没有该字段
                             uploadObj.put("limitUP", item.limitUP == "一" ? "-" : item.limitUP);
                             uploadObj.put("limitDown", item.limitDown == "一" ? "-" : item.limitDown);
-                            if (item.volumeRatio.isEmpty()){
-                                uploadObj.put("volumeRatio","-");
-                            }else {
-                                uploadObj.put("volumeRatio",item.volumeRatio=="一" ? "-" : String.format("%.2f",Float.parseFloat(item.volumeRatio)));
-                            }//不返回字段 数据库里面没有该字段
                         }
                         //指数
                         if (item.subtype.equals("1400")){
@@ -432,7 +427,7 @@ public class A_P_TCP_QuoteDetailTest_1 {
                             //五档卖量
                             if (item.sellVolumes.size()>0){
                                 for (int i=0;i<item.sellVolumes.size();i++){
-                                    uploadObj.put("sellVolumes"+(i+1),item.sellVolumes.get(i)== "一" ? "-" : item.sellVolumes.get(i));
+                                    uploadObj.put("sellVolumes"+(i+1),item.sellVolumes.get(i)== "一" ? "-" : String.valueOf(Math.round(Float.parseFloat(item.sellVolumes.get(i)))));
                                 }
                             }else {
                                 uploadObj.put("sellVolumes1", "-");
@@ -456,7 +451,7 @@ public class A_P_TCP_QuoteDetailTest_1 {
                             //五档买量
                             if (item.buyVolumes.size()>0){
                                 for (int i=item.buyVolumes.size()-1;i>=0;i--){
-                                    uploadObj.put("buyVolumes"+(5-i),item.buyVolumes.get(i)== "一" ? "-" : item.buyVolumes.get(i));
+                                    uploadObj.put("buyVolumes"+(5-i),item.buyVolumes.get(i)== "一" ? "-" : String.valueOf(Math.round(Float.parseFloat(item.buyVolumes.get(i)))));
                                 }
                             }else {
                                 uploadObj.put("buyVolumes1", "-");
@@ -502,7 +497,7 @@ public class A_P_TCP_QuoteDetailTest_1 {
                             //五档卖量
                             if (item.sellVolumes.size()>0){
                                 for (int i=0;i<item.sellVolumes.size();i++){
-                                    uploadObj.put("sellVolumes"+(i+1),item.sellVolumes.get(i)== "一" ? "-" : item.sellVolumes.get(i));
+                                    uploadObj.put("sellVolumes"+(i+1),item.sellVolumes.get(i)== "一" ? "-" : String.valueOf(Math.round(Float.parseFloat(item.sellVolumes.get(i)))));
                                 }
                             }else {
                                 uploadObj.put("sellVolumes1", "-");
@@ -526,7 +521,7 @@ public class A_P_TCP_QuoteDetailTest_1 {
                             //五档买量
                             if (item.buyVolumes.size()>0){
                                 for (int i=item.buyVolumes.size()-1;i>=0;i--){
-                                    uploadObj.put("buyVolumes"+(5-i),item.buyVolumes.get(i)== "一" ? "-" : item.buyVolumes.get(i));
+                                    uploadObj.put("buyVolumes"+(5-i),item.buyVolumes.get(i)== "一" ? "-" : String.valueOf(Math.round(Float.parseFloat(item.buyVolumes.get(i)))));
                                 }
                             }else {
                                 uploadObj.put("buyVolumes1", "-");
@@ -759,7 +754,7 @@ public class A_P_TCP_QuoteDetailTest_1 {
                                     //五档卖量
                                     if (item.sellVolumes.size()>0){
                                         for (int i=0;i<item.sellVolumes.size();i++){
-                                            uploadObj.put("sellVolumes"+(i+1),item.sellVolumes.get(i)== "一" ? "-" : item.sellVolumes.get(i));
+                                            uploadObj.put("sellVolumes"+(i+1),item.sellVolumes.get(i)== "一" ? "-" : String.valueOf(Math.round(Float.parseFloat(item.sellVolumes.get(i)))));
                                         }
                                     }else {
                                         uploadObj.put("sellVolumes1", "-");
@@ -783,7 +778,7 @@ public class A_P_TCP_QuoteDetailTest_1 {
                                     //五档买量
                                     if (item.buyVolumes.size()>0){
                                         for (int i=item.buyVolumes.size()-1;i>=0;i--){
-                                            uploadObj.put("buyVolumes"+(5-i),item.buyVolumes.get(i)== "一" ? "-" : item.buyVolumes.get(i));
+                                            uploadObj.put("buyVolumes"+(5-i),item.buyVolumes.get(i)== "一" ? "-" : String.valueOf(Math.round(Float.parseFloat(item.buyVolumes.get(i)))));
                                         }
                                     }else {
                                         uploadObj.put("buyVolumes1", "-");
@@ -852,7 +847,7 @@ public class A_P_TCP_QuoteDetailTest_1 {
                                         //五档卖量
                                         if (item.sellVolumes.size()>0){
                                             for (int i=0;i<item.sellVolumes.size();i++){
-                                                uploadObj.put("sellVolumes"+(i+1),item.sellVolumes.get(i)== "一" ? "-" : item.sellVolumes.get(i));
+                                                uploadObj.put("sellVolumes"+(i+1),item.sellVolumes.get(i)== "一" ? "-" : String.valueOf(Math.round(Float.parseFloat(item.sellVolumes.get(i)))));
                                             }
                                         }else {
                                             uploadObj.put("sellVolumes1", "-");
@@ -876,7 +871,7 @@ public class A_P_TCP_QuoteDetailTest_1 {
                                         //五档买量
                                         if (item.buyVolumes.size()>0){
                                             for (int i=item.buyVolumes.size()-1;i>=0;i--){
-                                                uploadObj.put("buyVolumes"+(5-i),item.buyVolumes.get(i)== "一" ? "-" : item.buyVolumes.get(i));
+                                                uploadObj.put("buyVolumes"+(5-i),item.buyVolumes.get(i)== "一" ? "-" : String.valueOf(Math.round(Float.parseFloat(item.buyVolumes.get(i)))));
                                             }
                                         }else {
                                             uploadObj.put("buyVolumes1", "-");
@@ -915,11 +910,6 @@ public class A_P_TCP_QuoteDetailTest_1 {
                                     uploadObj.put("turnoverRate", item.turnoverRate == "一" ? "-" : item.turnoverRate);//不返回字段 数据库里面没有该字段
                                     uploadObj.put("limitUP", item.limitUP == "一" ? "-" : item.limitUP);
                                     uploadObj.put("limitDown", item.limitDown == "一" ? "-" : item.limitDown);
-                                    if (item.volumeRatio.isEmpty()){
-                                        uploadObj.put("volumeRatio","-");
-                                    }else {
-                                        uploadObj.put("volumeRatio",item.volumeRatio=="一" ? "-" : String.format("%.2f",Float.parseFloat(item.volumeRatio)));
-                                    }//不返回字段 数据库里面没有该字段
                                 }
                                 //指数
                                 if (item.subtype.equals("1400")){
@@ -1037,7 +1027,7 @@ public class A_P_TCP_QuoteDetailTest_1 {
                                     //五档卖量
                                     if (item.sellVolumes.size()>0){
                                         for (int i=0;i<item.sellVolumes.size();i++){
-                                            uploadObj.put("sellVolumes"+(i+1),item.sellVolumes.get(i)== "一" ? "-" : item.sellVolumes.get(i));
+                                            uploadObj.put("sellVolumes"+(i+1),item.sellVolumes.get(i)== "一" ? "-" : String.valueOf(Math.round(Float.parseFloat(item.sellVolumes.get(i)))));
                                         }
                                     }else {
                                         uploadObj.put("sellVolumes1", "-");
@@ -1061,7 +1051,7 @@ public class A_P_TCP_QuoteDetailTest_1 {
                                     //五档买量
                                     if (item.buyVolumes.size()>0){
                                         for (int i=item.buyVolumes.size()-1;i>=0;i--){
-                                            uploadObj.put("buyVolumes"+(5-i),item.buyVolumes.get(i)== "一" ? "-" : item.buyVolumes.get(i));
+                                            uploadObj.put("buyVolumes"+(5-i),item.buyVolumes.get(i)== "一" ? "-" : String.valueOf(Math.round(Float.parseFloat(item.buyVolumes.get(i)))));
                                         }
                                     }else {
                                         uploadObj.put("buyVolumes1", "-");
@@ -1107,7 +1097,7 @@ public class A_P_TCP_QuoteDetailTest_1 {
                                     //五档卖量
                                     if (item.sellVolumes.size()>0){
                                         for (int i=0;i<item.sellVolumes.size();i++){
-                                            uploadObj.put("sellVolumes"+(i+1),item.sellVolumes.get(i)== "一" ? "-" : item.sellVolumes.get(i));
+                                            uploadObj.put("sellVolumes"+(i+1),item.sellVolumes.get(i)== "一" ? "-" : String.valueOf(Math.round(Float.parseFloat(item.sellVolumes.get(i)))));
                                         }
                                     }else {
                                         uploadObj.put("sellVolumes1", "-");
@@ -1131,7 +1121,7 @@ public class A_P_TCP_QuoteDetailTest_1 {
                                     //五档买量
                                     if (item.buyVolumes.size()>0){
                                         for (int i=item.buyVolumes.size()-1;i>=0;i--){
-                                            uploadObj.put("buyVolumes"+(5-i),item.buyVolumes.get(i)== "一" ? "-" : item.buyVolumes.get(i));
+                                            uploadObj.put("buyVolumes"+(5-i),item.buyVolumes.get(i)== "一" ? "-" : String.valueOf(Math.round(Float.parseFloat(item.buyVolumes.get(i)))));
                                         }
                                     }else {
                                         uploadObj.put("buyVolumes1", "-");

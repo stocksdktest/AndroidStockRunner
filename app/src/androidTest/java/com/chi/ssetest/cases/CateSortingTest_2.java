@@ -486,7 +486,7 @@ public class CateSortingTest_2 {
                                         uploadObj_1.put("addValue",uploadObj_2);
                                     }
                                 }
-//                                Log.d("data", String.valueOf(uploadObj_1));
+                                Log.d("data", String.valueOf(uploadObj_1));
                                 uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
                         }
