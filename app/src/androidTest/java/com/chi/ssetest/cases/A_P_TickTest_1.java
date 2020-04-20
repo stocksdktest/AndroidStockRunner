@@ -84,7 +84,7 @@ public class A_P_TickTest_1 {
                             uploadObj_1.put("transactionPrice", list.get(k).getTransactionPrice());
                             uploadObj_1.put("OpenInterestDiff", list.get(k).getOpenInterestDiff());
 //                            Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(transactionTime+"_"+(k+1),uploadObj_1);
+                            uploadObj.put(transactionTime,uploadObj_1);
                         }
                     }
 //                    Log.d("data", String.valueOf(uploadObj));
