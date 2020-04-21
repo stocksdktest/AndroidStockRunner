@@ -87,7 +87,7 @@ public class A_P_ChartV2Test_1 {
                             if (list.get(k).tradeVolume==null){
                                 uploadObj_1.put("tradeVolume","-");
                             }else {
-                                uploadObj_1.put("tradeVolume",Math.round(Float.parseFloat(list.get(k).tradeVolume)));
+                                uploadObj_1.put("tradeVolume",String.valueOf(Math.round(Float.parseFloat(list.get(k).tradeVolume))));
                             }
                             uploadObj_1.put("averagePrice",list.get(k).averagePrice == null ? "-" : list.get(k).averagePrice);
 //                            Log.d("data", String.valueOf(uploadObj_1));
