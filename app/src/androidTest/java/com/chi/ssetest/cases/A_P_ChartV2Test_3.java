@@ -96,7 +96,7 @@ public class A_P_ChartV2Test_3 {
                                             JSONObject uploadObj_1 = new JSONObject();
                                             uploadObj_1.put("datetime",list1.get(i).datetime);
                                             uploadObj_1.put("closePrice",list1.get(i).closePrice);
-                                            uploadObj_1.put("tradeVolume",list1.get(i).tradeVolume);
+                                            uploadObj_1.put("tradeVolume",String.valueOf(Math.round(Float.parseFloat(list1.get(i).tradeVolume))));
 //                                        Log.d("panh", String.valueOf(uploadObj_1));
                                             uploadObj.put(list1.get(i).datetime,uploadObj_1);
                                         }
