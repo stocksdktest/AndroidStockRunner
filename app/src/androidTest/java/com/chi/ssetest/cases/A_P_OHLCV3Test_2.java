@@ -115,7 +115,7 @@ public class A_P_OHLCV3Test_2 {
                                     uploadObj_1.put("highPrice",list.get(k).highPrice == null ? "-" : list.get(k).highPrice);
                                     uploadObj_1.put("lowPrice",list.get(k).lowPrice == null ? "-" : list.get(k).lowPrice);
                                     uploadObj_1.put("closePrice",list.get(k).closePrice == null ? "-" : list.get(k).closePrice);
-                                    uploadObj_1.put("tradeVolume",list.get(k).tradeVolume == null ? "-" : list.get(k).tradeVolume);
+                                    uploadObj_1.put("tradeVolume",list.get(k).tradeVolume == null ? "-" : String.valueOf(Math.round(Float.parseFloat(list.get(k).tradeVolume))));
                                     uploadObj_1.put("transaction_price",list.get(k).transaction_price == null ? "-" : list.get(k).transaction_price);
                                     uploadObj.put(timedata,uploadObj_1);
                                 }
