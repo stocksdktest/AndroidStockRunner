@@ -163,6 +163,7 @@ public enum StockTestcaseName {
     A_P_ChartV2Test_2("CRAWLER_CHARTV2TEST_2"),//走势数据对比竞品 盘前 处理时间
     A_P_ChartV2Test_3("CRAWLER_CHARTV2TEST_3"),//走势数据对比竞品 盘后
     A_P_ChartV2Test_4("CRAWLER_CHARTV2TEST_4"),//走势数据对比竞品 盘前
+    A_P_OHLCSubTest_1("CRAWLER_OHLCSUBTEST_1"),//k线复权接口
     A_P_TickTest_1("CRAWLER_TICK_1"),//分时明细对比竞品  100条  时间6位
     A_P_TickTest_2("CRAWLER_TICK_2"),//分时明细对比竞品  全部   时间6位
     A_P_TickTest_3("CRAWLER_TICK_3"),//分时明细对比竞品  100条  时间8位
