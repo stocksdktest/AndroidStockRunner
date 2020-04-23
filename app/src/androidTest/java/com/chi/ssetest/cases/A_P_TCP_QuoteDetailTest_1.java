@@ -566,7 +566,7 @@ public class A_P_TCP_QuoteDetailTest_1 {
                                 uploadObj.put("orderRatio", item.orderRatio == "一" ? "-" : item.orderRatio);
                                 uploadObj.put("amplitudeRate", item.amplitudeRate == "一" ? "-" : item.amplitudeRate);
                                 uploadObj.put("afterHoursVolume", item.afterHoursVolume == "一" ? "-" : item.afterHoursVolume);
-                                uploadObj.put("afterHoursAmount", item.afterHoursAmount == "" ? "-" : item.afterHoursAmount);//不返回字段 数据库里面没有该字段
+                                uploadObj.put("afterHoursAmount", item.afterHoursAmount == null ? "-" : item.afterHoursAmount);//不返回字段 数据库里面没有该字段
 
                                 uploadObj.put("pe", item.pe == "一" ? "-" : item.pe);
                                 uploadObj.put("pe2", item.pe2 == "一" ? "-" : item.pe2);
@@ -1166,7 +1166,7 @@ public class A_P_TCP_QuoteDetailTest_1 {
                                         uploadObj.put("orderRatio", item.orderRatio == "一" ? "-" : item.orderRatio);
                                         uploadObj.put("amplitudeRate", item.amplitudeRate == "一" ? "-" : item.amplitudeRate);
                                         uploadObj.put("afterHoursVolume", item.afterHoursVolume == "一" ? "-" : item.afterHoursVolume);
-                                        uploadObj.put("afterHoursAmount", item.afterHoursAmount == "" ? "-" : item.afterHoursAmount);//不返回字段 数据库里面没有该字段
+                                        uploadObj.put("afterHoursAmount", item.afterHoursAmount == null ? "-" : item.afterHoursAmount);//不返回字段 数据库里面没有该字段
 
                                         uploadObj.put("pe", item.pe == "一" ? "-" : item.pe);
                                         uploadObj.put("pe2", item.pe2 == "一" ? "-" : item.pe2);
