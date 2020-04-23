@@ -126,16 +126,14 @@ public class OHLCV3Test_3 {
                                     }
                                 }
                                 if (ohlcResponse.gb!=null){
-                                    ArrayList<JSONObject> gblist=new ArrayList<>();
                                     JSONObject uploadObj_1 = new JSONObject();
                                     for(int j=0;j<ohlcResponse.gb.size();j++){
                                         JSONObject uploadObj_2 = new JSONObject();
                                         uploadObj_2.put("date",ohlcResponse.gb.get(j).date);
                                         uploadObj_2.put("gb",ohlcResponse.gb.get(j).gb);
-                                        uploadObj_1.put(String.valueOf(j+1),uploadObj_2);
-                                        gblist.add(uploadObj_1);
+                                        uploadObj_1.put(ohlcResponse.gb.get(j).date,uploadObj_2);
                                     }
-                                    uploadObj.put("gblist",new JSONArray(gblist));
+                                    uploadObj.put("gblist",uploadObj_1);
                                 }
 //                                Log.d("data", String.valueOf(uploadObj));
                                 result.complete(uploadObj);
