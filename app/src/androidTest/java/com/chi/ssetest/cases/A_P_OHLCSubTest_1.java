@@ -73,13 +73,13 @@ public class A_P_OHLCSubTest_1 {
                             for (int i=0;i<list.size();i++) {
                                 JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("dateTime", list.get(i).dateTime);
-                                uploadObj_1.put("increasePrice", list.get(i).increasePrice == null ? "-" : list.get(i).increasePrice);
-                                uploadObj_1.put("allotmentPrice", list.get(i).allotmentPrice == null ? "-" : list.get(i).allotmentPrice);
-                                uploadObj_1.put("bonusAmount", list.get(i).bonusAmount == null ? "-" : list.get(i).bonusAmount);
-                                uploadObj_1.put("bonusProportion", list.get(i).bonusProportion == null ? "-" : list.get(i).bonusProportion);
-                                uploadObj_1.put("increaseProportion", list.get(i).increaseProportion == null ? "-" : list.get(i).increaseProportion);
-                                uploadObj_1.put("increaseVolume", list.get(i).increaseVolume == null ? "-" : list.get(i).increaseVolume);
-                                uploadObj_1.put("allotmentProportion", list.get(i).allotmentProportion == null ? "-" : list.get(i).allotmentProportion);
+                                uploadObj_1.put("increasePrice", list.get(i).increasePrice == null ? "0.0" : String.format("%.3f",Float.parseFloat(list.get(i).increasePrice)));
+                                uploadObj_1.put("allotmentPrice", list.get(i).allotmentPrice == null ? "0.0" : String.format("%.3f",Float.parseFloat(list.get(i).allotmentPrice)));
+                                uploadObj_1.put("bonusAmount", list.get(i).bonusAmount == null ? "0.0" : String.format("%.3f",Float.parseFloat(list.get(i).bonusAmount)));
+                                uploadObj_1.put("bonusProportion", list.get(i).bonusProportion == null ? "0.0" : String.format("%.3f",Float.parseFloat(list.get(i).bonusProportion)));
+                                uploadObj_1.put("increaseProportion", list.get(i).increaseProportion == null ? "0.0" : String.format("%.3f",Float.parseFloat(list.get(i).increaseProportion)));
+                                uploadObj_1.put("increaseVolume", list.get(i).increaseVolume == null ? "0.0" : String.format("%.3f",Float.parseFloat(list.get(i).increaseVolume)));
+                                uploadObj_1.put("allotmentProportion", list.get(i).allotmentProportion == null ? "0.0" : String.format("%.3f",Float.parseFloat(list.get(i).allotmentProportion)));
 //                            Log.d("data", String.valueOf(uploadObj_1));
                                 uploadObj.put( list.get(i).dateTime,uploadObj_1);
                             }

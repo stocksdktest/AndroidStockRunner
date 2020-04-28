@@ -60,7 +60,7 @@ public class A_P_TickTest_2 {
         Log.d("A_P_TickTest_2", "requestWork");
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("CODE_A", "");
-        final String SubTypes = rule.getParam().optString("SUBTYPE", "");
+        final String SubTypes = rule.getParam().optString("SUBTYPE_C", "");
 
         tickjk(quoteNumbers,"0,100,-1",SubTypes);
         try {
