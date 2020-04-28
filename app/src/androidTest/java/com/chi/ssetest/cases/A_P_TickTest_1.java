@@ -60,7 +60,7 @@ public class A_P_TickTest_1 {
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("CODE_A", "");
         final String Pages = rule.getParam().optString("COUNT", "");
-        final String SubTypes = rule.getParam().optString("SUBTYPE", "");
+        final String SubTypes = rule.getParam().optString("SUBTYPE_C", "");
 
         TickRequest request = new TickRequest();
         request.send(quoteNumbers,"0,"+Pages+",-1",SubTypes, new IResponseInfoCallback() {
