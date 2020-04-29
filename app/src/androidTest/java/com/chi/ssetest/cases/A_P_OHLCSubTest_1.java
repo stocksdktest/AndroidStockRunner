@@ -76,8 +76,12 @@ public class A_P_OHLCSubTest_1 {
                                 uploadObj_1.put("increasePrice", list.get(i).increasePrice == null ? "0.0" : String.format("%.3f",Float.parseFloat(list.get(i).increasePrice)));
                                 uploadObj_1.put("allotmentPrice", list.get(i).allotmentPrice == null ? "0.0" : String.format("%.3f",Float.parseFloat(list.get(i).allotmentPrice)));
                                 uploadObj_1.put("bonusAmount", list.get(i).bonusAmount == null ? "0.0" : String.format("%.3f",Float.parseFloat(list.get(i).bonusAmount)));
-                                uploadObj_1.put("bonusProportion", list.get(i).bonusProportion == null ? "0.0" : String.format("%.3f",Float.parseFloat(list.get(i).bonusProportion)));
-                                uploadObj_1.put("increaseProportion", list.get(i).increaseProportion == null ? "0.0" : String.format("%.3f",Float.parseFloat(list.get(i).increaseProportion)));
+                                if(list.get(i).increaseProportion == null){
+                                    uploadObj_1.put("bonusProportion", list.get(i).bonusProportion == null ? "0.0" : String.format("%.3f",Float.parseFloat(list.get(i).bonusProportion)));
+                                }else {
+                                    uploadObj_1.put("bonusProportion", list.get(i).bonusProportion == null ? "0.0" : String.format("%.3f",(Float.parseFloat(list.get(i).bonusProportion)+Float.parseFloat(list.get(i).increaseProportion))));
+                                }
+                                uploadObj_1.put("increaseProportion", "0.0");
                                 uploadObj_1.put("increaseVolume", list.get(i).increaseVolume == null ? "0.0" : String.format("%.3f",Float.parseFloat(list.get(i).increaseVolume)));
                                 uploadObj_1.put("allotmentProportion", list.get(i).allotmentProportion == null ? "0.0" : String.format("%.3f",Float.parseFloat(list.get(i).allotmentProportion)));
 //                            Log.d("data", String.valueOf(uploadObj_1));

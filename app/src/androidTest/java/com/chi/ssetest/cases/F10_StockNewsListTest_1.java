@@ -121,13 +121,17 @@ public class F10_StockNewsListTest_1 {
                                 uploadObj_1.put("INIPUBDATE_", stockNewsListResponse.list.get(i).INIPUBDATE_);
                                 uploadObj_1.put("ID_", stockNewsListResponse.list.get(i).ID_);
                                 uploadObj_1.put("REPORTTITLE_", stockNewsListResponse.list.get(i).REPORTTITLE_);
-                                uploadObj_1.put("REPORTLEVEL_", stockNewsListResponse.list.get(i).REPORTLEVEL_);
+                                if (stockNewsListResponse.list.get(i).REPORTLEVEL_==null){
+                                    uploadObj_1.put("REPORTLEVEL_","-");
+                                }else {
+                                    uploadObj_1.put("REPORTLEVEL_", stockNewsListResponse.list.get(i).REPORTLEVEL_);
+                                }
                                 uploadObj_1.put("MEDIANAME_", stockNewsListResponse.list.get(i).MEDIANAME_);
                                 uploadObj_1.put("STOCKNAME_", stockNewsListResponse.list.get(i).STOCKNAME_);
                                 uploadObj_1.put("ISPDF_", stockNewsListResponse.list.get(i).ISPDF_);
                                 uploadObj_1.put("ENTRYDATE", stockNewsListResponse.list.get(i).ENTRYDATE);
                                 uploadObj_1.put("ENTRYTIME", stockNewsListResponse.list.get(i).ENTRYTIME);
-                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
+                                uploadObj.put(stockNewsListResponse.list.get(i).ID_,uploadObj_1);
                             }
                         }
                         Log.d("data", String.valueOf(uploadObj));

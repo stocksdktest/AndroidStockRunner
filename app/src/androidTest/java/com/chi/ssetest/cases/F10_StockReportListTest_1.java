@@ -123,13 +123,13 @@ public class F10_StockReportListTest_1 {
                                 uploadObj_1.put("ID_", stockReportListResponse.list.get(i).ID_);
                                 uploadObj_1.put("ReportTitle", stockReportListResponse.list.get(i).ReportTitle);
                                 uploadObj_1.put("dataSource", stockReportListResponse.list.get(i).dataSource);
-                                uploadObj_1.put("REPORTLEVEL_", stockReportListResponse.list.get(i).REPORTLEVEL_);
-                                uploadObj_1.put("ComName", stockReportListResponse.list.get(i).ComName);
+                                uploadObj_1.put("REPORTLEVEL_", stockReportListResponse.list.get(i).REPORTLEVEL_ == null ? "-" : stockReportListResponse.list.get(i).REPORTLEVEL_);
+                                uploadObj_1.put("ComName", stockReportListResponse.list.get(i).ComName == null ? "-" : stockReportListResponse.list.get(i).ComName);
                                 uploadObj_1.put("STOCKNAME_", stockReportListResponse.list.get(i).STOCKNAME_);
                                 uploadObj_1.put("ISPDF_", stockReportListResponse.list.get(i).ISPDF_);
                                 uploadObj_1.put("ENTRYDATE", stockReportListResponse.list.get(i).ENTRYDATE);
                                 uploadObj_1.put("ENTRYTIME", stockReportListResponse.list.get(i).ENTRYTIME);
-                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
+                                uploadObj.put(stockReportListResponse.list.get(i).ID_,uploadObj_1);
                             }
                         }
                         Log.d("data", String.valueOf(uploadObj));

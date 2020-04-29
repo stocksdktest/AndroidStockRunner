@@ -125,7 +125,7 @@ public class F10_StockBulletinListTest_2 {
                                 uploadObj_1.put("ISPDF_", stockBulletinListResponse.list.get(i).ISPDF_);
                                 uploadObj_1.put("ENTRYDATE", stockBulletinListResponse.list.get(i).ENTRYDATE);
                                 uploadObj_1.put("ENTRYTIME", stockBulletinListResponse.list.get(i).ENTRYTIME);
-                                uploadObj.put(String.valueOf(i+1),uploadObj_1);
+                                uploadObj.put(stockBulletinListResponse.list.get(i).ID_,uploadObj_1);//20200428由i+1 改为 ID_
                             }
                         }
                         Log.d("data", String.valueOf(uploadObj));
