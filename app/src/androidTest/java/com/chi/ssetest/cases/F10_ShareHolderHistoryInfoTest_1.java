@@ -115,7 +115,7 @@ public class F10_ShareHolderHistoryInfoTest_1 {
                                     uploadObj_1.put("TOTALSH_", shareHolderHistoryInfoResponse.list.get(i).TOTALSH_);
                                     uploadObj_1.put("ENDDATE_", shareHolderHistoryInfoResponse.list.get(i).ENDDATE_);
                                 }
-                                if (quoteNumbers.equals("d")){
+                                if (quoteNumbers1.equals("d")){
                                     uploadObj_1.put("CLOSINGPRICE_", shareHolderHistoryInfoResponse.list.get(i).CLOSINGPRICE_);
                                     uploadObj_1.put("PCTOFTOTALSH_", shareHolderHistoryInfoResponse.list.get(i).PCTOFTOTALSH_);
                                     uploadObj_1.put("TOTALSH_", shareHolderHistoryInfoResponse.list.get(i).TOTALSH_);
