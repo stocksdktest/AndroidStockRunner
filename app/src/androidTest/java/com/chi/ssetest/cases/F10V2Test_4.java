@@ -82,8 +82,8 @@ public class F10V2Test_4 {
         Log.d("F10V2Test_4", "requestWork");
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("CODE");
-        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
-        final String quoteNumbers2 = rule.getParam().optString("param");
+        final String quoteNumbers1 = rule.getParam().optString("SRC");
+        final String quoteNumbers2 = rule.getParam().optString("PARAMS");
         final String quoteNumbers3 = rule.getParam().optString("REQUESTTYPE");
         final String quoteNumbers4 = rule.getParam().optString("PART");
         final String quoteNumbers5 = rule.getParam().optString("TYPE");

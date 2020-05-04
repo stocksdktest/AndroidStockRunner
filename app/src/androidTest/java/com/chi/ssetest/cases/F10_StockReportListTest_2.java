@@ -94,7 +94,7 @@ public class F10_StockReportListTest_2 {
         final String quoteNumbers = rule.getParam().optString("CODE");
         final String quoteNumbers1 = rule.getParam().optString("TYPE");
         final String quoteNumbers2 = rule.getParam().optString("NEWSID");
-        final String quoteNumbers3 = rule.getParam().optString("SOURCETYPE");
+        final String quoteNumbers3 = rule.getParam().optString("SRC");
         final String quoteNumbers4 = rule.getParam().optString("PAGESIZE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
@@ -117,19 +117,19 @@ public class F10_StockReportListTest_2 {
                     JSONObject uploadObj = new JSONObject();
                     try {
                         if (stockReportListResponse.list!=null){
-                            for (StockReportItem item : stockReportListResponse.list) {
+                            for (int i=0; i<stockReportListResponse.list.size();i++) {
                                 JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("PUBDATE_", item.PUBDATE_);
-                                uploadObj_1.put("ID_", item.ID_);
-                                uploadObj_1.put("ReportTitle", item.ReportTitle);
-                                uploadObj_1.put("dataSource", item.dataSource);
-                                uploadObj_1.put("REPORTLEVEL_", item.REPORTLEVEL_);
-                                uploadObj_1.put("ComName", item.ComName);
-                                uploadObj_1.put("STOCKNAME_", item.STOCKNAME_);
-                                uploadObj_1.put("ISPDF_", item.ISPDF_);
-                                uploadObj_1.put("ENTRYDATE", item.ENTRYDATE);
-                                uploadObj_1.put("ENTRYTIME", item.ENTRYTIME);
-                                uploadObj.put(item.ID_,uploadObj_1);
+                                uploadObj_1.put("PUBDATE_", stockReportListResponse.list.get(i).PUBDATE_);
+                                uploadObj_1.put("ID_", stockReportListResponse.list.get(i).ID_);
+                                uploadObj_1.put("ReportTitle", stockReportListResponse.list.get(i).ReportTitle);
+                                uploadObj_1.put("dataSource", stockReportListResponse.list.get(i).dataSource);
+                                uploadObj_1.put("REPORTLEVEL_", stockReportListResponse.list.get(i).REPORTLEVEL_ == null ? "-" : stockReportListResponse.list.get(i).REPORTLEVEL_);
+                                uploadObj_1.put("ComName", stockReportListResponse.list.get(i).ComName == null ? "-" : stockReportListResponse.list.get(i).ComName);
+                                uploadObj_1.put("STOCKNAME_", stockReportListResponse.list.get(i).STOCKNAME_);
+                                uploadObj_1.put("ISPDF_", stockReportListResponse.list.get(i).ISPDF_);
+                                uploadObj_1.put("ENTRYDATE", stockReportListResponse.list.get(i).ENTRYDATE);
+                                uploadObj_1.put("ENTRYTIME", stockReportListResponse.list.get(i).ENTRYTIME);
+                                uploadObj.put(stockReportListResponse.list.get(i).ID_,uploadObj_1);
                             }
                         }
                         Log.d("data", String.valueOf(uploadObj));
