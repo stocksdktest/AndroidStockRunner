@@ -82,7 +82,7 @@ public class F10_BndNewSharesCalTest_1 {
         Log.d("F10_BndNewSharesCalTest_1", "requestWork");
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("DATE");
-        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
+        final String quoteNumbers1 = rule.getParam().optString("SRC");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         //CategoryType
 //        for (int i=0;i<quoteNumbers.length;i++){
@@ -98,9 +98,11 @@ public class F10_BndNewSharesCalTest_1 {
                     }
                     HashMap<String,Object> info = f10V2Response.info;
                     try {
-                        JSONObject uploadObj_2 = new JSONObject();
+                        JSONObject uploadObj_4 = new JSONObject();
                         if (info!=null){
                             if (info.get("sglist")!=null){
+                                JSONObject uploadObj_3 = new JSONObject();
+                                JSONObject uploadObj_2 = new JSONObject();
                                 List<HashMap<String,Object>> list1= (List<HashMap<String,Object>>) info.get("sglist");
                                 for (int i=0;i<list1.size();i++){
                                     JSONObject uploadObj_1 = new JSONObject();
@@ -111,10 +113,14 @@ public class F10_BndNewSharesCalTest_1 {
                                     uploadObj_1.put("STOCKSECUABBR",list1.get(i).get("STOCKSECUABBR"));
                                     uploadObj_1.put("SECUABBR",list1.get(i).get("SECUABBR"));
                                     uploadObj_1.put("TRADINGCODE",list1.get(i).get("TRADINGCODE"));
-                                    uploadObj_2.put("sglist"+(String) list1.get(i).get("APPLYCODE"),uploadObj_1);
+                                    uploadObj_2.put(((String) list1.get(i).get("APPLYCODE")).replace(".","_"),uploadObj_1);
                                 }
+                                uploadObj_3.put("dataList",uploadObj_2);
+                                uploadObj_4.put("sglist",uploadObj_3);
                             }
                             if (info.get("jjsglist")!=null){
+                                JSONObject uploadObj_3 = new JSONObject();
+                                JSONObject uploadObj_2 = new JSONObject();
                                 List<HashMap<String,Object>> list2= (List<HashMap<String,Object>>) info.get("jjsglist");
                                 for (int i=0;i<list2.size();i++){
                                     JSONObject uploadObj_1 = new JSONObject();
@@ -125,10 +131,14 @@ public class F10_BndNewSharesCalTest_1 {
                                     uploadObj_1.put("STOCKSECUABBR",list2.get(i).get("STOCKSECUABBR"));
                                     uploadObj_1.put("SECUABBR",list2.get(i).get("SECUABBR"));
                                     uploadObj_1.put("TRADINGCODE",list2.get(i).get("TRADINGCODE"));
-                                    uploadObj_2.put("jjsglist"+list2.get(i).get("APPLYCODE"),uploadObj_1);
+                                    uploadObj_2.put((String.valueOf(list2.get(i).get("APPLYCODE"))).replace(".","_"),uploadObj_1);
                                 }
+                                uploadObj_3.put("dataList",uploadObj_2);
+                                uploadObj_4.put("jjsglist",uploadObj_3);
                             }
                             if (info.get("dsslist")!=null){
+                                JSONObject uploadObj_3 = new JSONObject();
+                                JSONObject uploadObj_2 = new JSONObject();
                                 List<HashMap<String,Object>> list= (List<HashMap<String,Object>>) info.get("dsslist");
                                 for (int i=0;i<list.size();i++){
                                     JSONObject uploadObj_1 = new JSONObject();
@@ -136,12 +146,14 @@ public class F10_BndNewSharesCalTest_1 {
                                     uploadObj_1.put("ALLOTRATEON",list.get(i).get("ALLOTRATEON"));
                                     uploadObj_1.put("TRADINGCODE",list.get(i).get("TRADINGCODE"));
                                     uploadObj_1.put("SECUABBR",list.get(i).get("SECUABBR"));
-                                    uploadObj_2.put("dsslist"+list.get(i).get("LISTINGDATE"),uploadObj_1);
+                                    uploadObj_2.put((String.valueOf(list.get(i).get("TRADINGCODE"))).replace(".","_"),uploadObj_1);
                                 }
+                                uploadObj_3.put("dataList",uploadObj_2);
+                                uploadObj_4.put("dsslist",uploadObj_3);
                             }
                         }
-                        Log.d("data", String.valueOf(uploadObj_2));
-                        result.complete(uploadObj_2);
+                        Log.d("data", String.valueOf(uploadObj_4));
+                        result.complete(uploadObj_4);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
                     }

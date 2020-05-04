@@ -85,7 +85,7 @@ public class F10_StructuredFundTest_1 {
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("GRADEFUNDTYPE");
         final String quoteNumbers1 = rule.getParam().optString("CODE");
-        final String quoteNumbers2 = rule.getParam().optString("SOURCETYPE");
+        final String quoteNumbers2 = rule.getParam().optString("SRC");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        StructuredFundRequest
 //        for (int i=0;i<quoteNumbers.length;i++){

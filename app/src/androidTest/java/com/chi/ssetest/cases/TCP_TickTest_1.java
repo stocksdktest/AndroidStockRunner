@@ -10,6 +10,7 @@ import com.chi.ssetest.protos.SetupConfig;
 import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.setup.TestcaseConfigRule;
 import com.mitake.core.QuoteItem;
+import com.mitake.core.bean.TickData;
 import com.mitake.core.bean.TickDetailItem;
 import com.mitake.core.bean.TickItem;
 import com.mitake.core.bean.log.ErrorInfo;
@@ -112,26 +113,20 @@ public class TCP_TickTest_1 {
                 break;
             }else{
                 NetworkManager.getInstance().addIPush(new AbstractTickPush() {
-
                     @Override
-                    public void pushTick(Map<String, List<TickItem>> map) {
+                    public void pushTick(String s, TickData tickData) {
+
+                        String code=s;
+
                         try {
-                            String code;
-                            List<TickItem> tickItems;
-                            for (Map.Entry<String, List<TickItem>> entry : map.entrySet()) {
-                                code = entry.getKey();
-                                tickItems = entry.getValue();
-//                                uploadObj.put("code",code);
-                                if(tickItems!=null){
-                                    for (TickItem tickItem : tickItems) {
-                                        JSONObject uploadObj_1 = new JSONObject();
-                                        uploadObj_1.put("datetime",tickItem.getTransactionTime());
-                                        uploadObj_1.put("price",tickItem.getTransactionPrice());
-                                        uploadObj_1.put("volume",tickItem.getSingleVolume());
-                                        uploadObj_1.put("Status",tickItem.getTransactionStatus());
-                                        uploadObj.put(tickItem.getTransactionTime(),uploadObj_1);
-                                    }
-                                }
+//                            uploadObj.put("code",code);
+                            if(tickData!=null){
+                                JSONObject uploadObj_1 = new JSONObject();
+                                uploadObj_1.put("time",tickData.tickItems.get(tickData.tickItems.size()-1).getTransactionTime());
+                                uploadObj_1.put("tradePrice",tickData.tickItems.get(tickData.tickItems.size()-1).getTransactionPrice());
+                                uploadObj_1.put("tradeVolume",tickData.tickItems.get(tickData.tickItems.size()-1).getSingleVolume());
+                                uploadObj_1.put("type",tickData.tickItems.get(tickData.tickItems.size()-1).getTransactionStatus());
+                                uploadObj.put(tickData.tickItems.get(tickData.tickItems.size()-1).getTransactionTime(),uploadObj_1);
                             }
                             Log.d("tcp00", String.valueOf(uploadObj));
                         } catch (JSONException e) {
@@ -139,10 +134,31 @@ public class TCP_TickTest_1 {
                         }
                     }
 
-                    @Override
-                    public void pushTickDetail(List<TickDetailItem> list) {
-
-                    }
+//                    @Override
+//                    public void pushTick(Map<String, TickData>data) {
+//                        try {
+//                            String code;
+//                            TickData tickItems;
+//                            for (Map.Entry<String, TickData> entry : data.entrySet()) {
+//                                code = entry.getKey();
+//                                tickItems = entry.getValue();
+////                                uploadObj.put("code",code);
+//                                if(tickItems!=null){
+////                                    for (TickItem tickItem : tickItems) {
+//                                        JSONObject uploadObj_1 = new JSONObject();
+//                                        uploadObj_1.put("time",tickItems.tickItems.get(tickItems.tickItems.size()-1).getTransactionTime());
+//                                        uploadObj_1.put("tradePrice",tickItems.tickItems.get(tickItems.tickItems.size()-1).getTransactionPrice());
+//                                        uploadObj_1.put("tradeVolume",tickItems.tickItems.get(tickItems.tickItems.size()-1).getSingleVolume());
+//                                        uploadObj_1.put("type",tickItems.tickItems.get(tickItems.tickItems.size()-1).getTransactionStatus());
+//                                        uploadObj.put(tickItems.tickItems.get(tickItems.tickItems.size()-1).getTransactionTime(),uploadObj_1);
+////                                    }
+//                                }
+//                            }
+//                            Log.d("tcp00", String.valueOf(uploadObj));
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
                 });
             }
         }

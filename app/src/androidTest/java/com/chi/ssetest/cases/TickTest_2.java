@@ -78,7 +78,6 @@ public class TickTest_2 {
                     if(list!=null){
                         for (int k=0;k<list.size();k++){
                             JSONObject uploadObj_1=new JSONObject();
-//                            uploadObj_1.put("code", id);
                             uploadObj_1.put("type", list.get(k).getTransactionStatus());
                             uploadObj_1.put("time", list.get(k).getTransactionTime());
                             uploadObj_1.put("tradeVolume", list.get(k).getSingleVolume());

@@ -89,7 +89,7 @@ public class F10_ShareHolderHistoryInfoTest_1 {
         Log.d("F10_ShareHolderHistoryInfoTest_1", "requestWork");
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("CODE");
-        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
+        final String quoteNumbers1 = rule.getParam().optString("SRC");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             ShareHolderHistoryInfoRequest request = new ShareHolderHistoryInfoRequest();
@@ -115,7 +115,7 @@ public class F10_ShareHolderHistoryInfoTest_1 {
                                     uploadObj_1.put("TOTALSH_", shareHolderHistoryInfoResponse.list.get(i).TOTALSH_);
                                     uploadObj_1.put("ENDDATE_", shareHolderHistoryInfoResponse.list.get(i).ENDDATE_);
                                 }
-                                if (quoteNumbers.equals("d")){
+                                if (quoteNumbers1.equals("d")){
                                     uploadObj_1.put("CLOSINGPRICE_", shareHolderHistoryInfoResponse.list.get(i).CLOSINGPRICE_);
                                     uploadObj_1.put("PCTOFTOTALSH_", shareHolderHistoryInfoResponse.list.get(i).PCTOFTOTALSH_);
                                     uploadObj_1.put("TOTALSH_", shareHolderHistoryInfoResponse.list.get(i).TOTALSH_);
