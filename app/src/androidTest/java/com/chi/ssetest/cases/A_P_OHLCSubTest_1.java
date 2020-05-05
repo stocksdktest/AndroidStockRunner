@@ -72,7 +72,7 @@ public class A_P_OHLCSubTest_1 {
                         if(list!=null){
                             for (int i=0;i<list.size();i++) {
                                 JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("dateTime", list.get(i).dateTime);
+                                uploadObj_1.put("datetime", list.get(i).dateTime);
                                 uploadObj_1.put("increasePrice", list.get(i).increasePrice == null ? "0.000" : String.format("%.3f",Float.parseFloat(list.get(i).increasePrice)));
                                 uploadObj_1.put("allotmentPrice", list.get(i).allotmentPrice == null ? "0.000" : String.format("%.3f",Float.parseFloat(list.get(i).allotmentPrice)));
                                 uploadObj_1.put("bonusAmount", list.get(i).bonusAmount == null ? "0.000" : String.format("%.3f",Float.parseFloat(list.get(i).bonusAmount)));
