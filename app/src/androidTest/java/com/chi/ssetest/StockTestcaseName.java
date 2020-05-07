@@ -91,6 +91,8 @@ public enum StockTestcaseName {
     TRADEQUOTETEST_1("TRADEQUOTE_1"),//交易行情
     UKQUOTETEST_1("UKQUOTE_1"),//uk市场快照单独接口
     UPDOWNSTEST_1("UPDOWNS_1"),//沪深A股及指数涨跌平家数
+    TONGLINETEST_1("TONGLINETEST_1"),//港股通/沪深股通额度走势
+    ZTSORTINGTEST_1("ZTSORTINGTEST_1"),//涨停行情数据接口
 //    F10
     F10_ASSETALLOCATIONTEST_1("F10_ASSETALLOCATION_1"),//资产配置
     F10_BLOCKTRADETEST_1("F10_BLOCKTRADE_1"),//大宗交易
