@@ -96,7 +96,7 @@ public class F10_CalendarTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_CalendarTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("SOURCETYPE");
+        final String quoteNumbers = rule.getParam().optString("SRC");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             CalendarRequest request = new CalendarRequest();

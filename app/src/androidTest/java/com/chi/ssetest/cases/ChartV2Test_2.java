@@ -90,15 +90,15 @@ public class ChartV2Test_2 {
                             for (int k=0;k<list.size();k++) {
                                 JSONObject uploadObj_1 = new JSONObject();
                                 //存储到JSON
-                                uploadObj_1.put("datetime",list.get(k).datetime);
-                                uploadObj_1.put("closePrice",list.get(k).closePrice);
-                                uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
-                                uploadObj_1.put("averagePrice",list.get(k).averagePrice);
-                                uploadObj_1.put("md",list.get(k).getMd());
-                                uploadObj_1.put("openInterest",list.get(k).openInterest);
-                                uploadObj_1.put("iopv",list.get(k).iopv);
-                                uploadObj_1.put("iopvPre",list.get(k).iopvPre);
-                                uploadObj_1.put("volRatio",list.get(k).volRatio);
+                                uploadObj_1.put("datetime",list.get(k).datetime == null ? "-" : list.get(k).datetime);
+                                uploadObj_1.put("closePrice",list.get(k).closePrice == null ? "-" : list.get(k).closePrice);
+                                uploadObj_1.put("tradeVolume",list.get(k).tradeVolume == null ? "-" : list.get(k).tradeVolume);
+                                uploadObj_1.put("averagePrice",list.get(k).averagePrice == null ? "-" : list.get(k).averagePrice);
+                                uploadObj_1.put("md",list.get(k).getMd() == null ? "-" : list.get(k).getMd());
+                                uploadObj_1.put("openInterest",list.get(k).openInterest == null ? "-" : list.get(k).openInterest);
+                                uploadObj_1.put("iopv",list.get(k).iopv == null ? "-" : list.get(k).iopv);
+                                uploadObj_1.put("iopvPre",list.get(k).iopvPre == null ? "-" : list.get(k).iopvPre);
+                                uploadObj_1.put("volRatio",list.get(k).volRatio == null ? "-" : list.get(k).volRatio);
 //                            Log.d("data", String.valueOf(uploadObj_1));
                                 uploadObj.put(list.get(k).datetime,uploadObj_1);
                             }

@@ -64,7 +64,7 @@ public class SubNewStockRankingTest_1 {
     public void requestWork() throws Exception {
         Log.d("SubNewStockRankingTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("param");
+        final String quoteNumbers = rule.getParam().optString("PARAMS");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             SubNewStockRankingRequest request = new SubNewStockRankingRequest();

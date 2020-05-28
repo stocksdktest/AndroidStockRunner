@@ -81,7 +81,7 @@ public class F10_MainFinaIndexNasTest_1 {
         Log.d("F10_MainFinaIndexNasTest_1", "requestWork");
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("CODE");
-        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
+        final String quoteNumbers1 = rule.getParam().optString("SRC");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             MainFinaIndexNasRequest request = new MainFinaIndexNasRequest();
@@ -103,7 +103,7 @@ public class F10_MainFinaIndexNasTest_1 {
                                 uploadObj_1.put("BasicEPS",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).BasicEPS);
                                 uploadObj_1.put("RESERVEPS_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).RESERVEPS_);
                                 uploadObj_1.put("BVPS_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).BVPS_);
-                                uploadObj_1.put("TotalAssetTurnover",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).TotalAssetTurnover);
+                                uploadObj_1.put("TotalOperIncomePS",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).TotalOperIncomePS);
                                 uploadObj_1.put("EBITPS_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).EBITPS_);
                                 uploadObj_1.put("RetainedEarningPS",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).RetainedEarningPS);
                                 uploadObj_1.put("NetCashFlowOperPS",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).NetCashFlowOperPS);
@@ -116,7 +116,7 @@ public class F10_MainFinaIndexNasTest_1 {
                                 uploadObj_1.put("TAToSHE_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).TAToSHE_);
                                 uploadObj_1.put("CurrentRatio",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).CurrentRatio);
                                 uploadObj_1.put("QuickRatio",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).QuickRatio);
-                                uploadObj_1.put("EBITPS_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).EBITPS_);
+                                uploadObj_1.put("EBITToIE_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).EBITToIE_);
                                 uploadObj_1.put("InventoryTurnover",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).InventoryTurnover);
                                 uploadObj_1.put("ACCOUNTRECTURNOVER_",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).ACCOUNTRECTURNOVER_);
                                 uploadObj_1.put("FixedAssetTurnover",mainFinaIndexNasResponse.mMainFinaIndexHasList.get(i).FixedAssetTurnover);
