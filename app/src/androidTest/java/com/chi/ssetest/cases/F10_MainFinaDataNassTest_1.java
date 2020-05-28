@@ -79,7 +79,7 @@ public class F10_MainFinaDataNassTest_1 {
         Log.d("F10_MainFinaDataNassTest_1", "requestWork");
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("CODE");
-        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
+        final String quoteNumbers1 = rule.getParam().optString("SRC");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         //CategoryType
 //        for (int i=0;i<quoteNumbers.length;i++){
@@ -115,7 +115,7 @@ public class F10_MainFinaDataNassTest_1 {
                                 uploadObj_1.put("NetCashFlowInv",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).NetCashFlowInv);
                                 uploadObj_1.put("NetCashFlowFina",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).NetCashFlowFina);
                                 uploadObj_1.put("CashEquiNetIncr",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).CashEquiNetIncr);
-                                uploadObj_1.put("EPSBASIC",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).EPSBASIC);
+                                uploadObj_1.put("EPSBASIC",mainFinaDataNasResponse.mMainFinaDataNasList.get(i).EPSBASIC == null ? "-" : mainFinaDataNasResponse.mMainFinaDataNasList.get(i).EPSBASIC);
 //                                uploadObj_1.put("ENDDATE",item.ENDDATE);
 //                                uploadObj_1.put("MOM",item.MOM);
                                 uploadObj.put(String.valueOf(i+1),uploadObj_1);

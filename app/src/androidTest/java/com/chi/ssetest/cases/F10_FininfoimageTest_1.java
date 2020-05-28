@@ -94,7 +94,7 @@ public class F10_FininfoimageTest_1 {
         Log.d("F10_FininfoimageTest_1", "requestWork");
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("FininfoimageID");
-        final String quoteNumbers1 = rule.getParam().optString("src");
+        final String quoteNumbers1 = rule.getParam().optString("SRC");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             FinInfoImageRequest request = new FinInfoImageRequest();
