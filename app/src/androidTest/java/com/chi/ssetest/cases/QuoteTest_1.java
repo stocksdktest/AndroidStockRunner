@@ -358,7 +358,7 @@ public class QuoteTest_1 {
                                 uploadObj_1.put("buyAuctionRange", list.buyAuctionRange == null ? "-" : ("["+list.buyAuctionRange[0]+","+list.buyAuctionRange[1])+"]");
                                 uploadObj_1.put("sellAuctionRange", list.sellAuctionRange == null ? "-" : ("["+list.sellAuctionRange[0]+","+list.sellAuctionRange[1])+"]");
                                 uploadObj_1.put("afterHoursBuyQtyUpperLimit", list.afterHoursBuyQtyUpperLimit == null ? "-" : list.afterHoursBuyQtyUpperLimit);
-                                uploadObj_1.put("afterHoursBuyQtyUpperLimit", list.afterHoursBuyQtyUpperLimit == null ? "-" : list.afterHoursBuyQtyUpperLimit);
+                                uploadObj_1.put("afterHoursSellQtyUpperLimit", list.afterHoursSellQtyUpperLimit == null ? "-" : list.afterHoursSellQtyUpperLimit);
 //                            //增值指标
 //                            if (quoteResponse.addValueModel!=null){
 //                                ArrayList<AddValueModel> addValueModels=quoteResponse.addValueModel;
