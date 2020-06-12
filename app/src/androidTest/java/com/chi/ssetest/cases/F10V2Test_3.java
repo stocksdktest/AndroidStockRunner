@@ -83,7 +83,7 @@ public class F10V2Test_3 {
         Log.d("F10V2Test_3", "requestWork");
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("CODE");
-        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
+        final String quoteNumbers1 = rule.getParam().optString("SRC");
         final String quoteNumbers2 = rule.getParam().optString("quarterType");
         final String quoteNumbers3 = rule.getParam().optString("REQUESTTYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();

@@ -69,7 +69,7 @@ public class BankuaisortingTest_2 {
         Log.d(" BankuaisortingTest_2", "requestWork");
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("SYMBOL");
-        final String quoteNumbers1 = rule.getParam().optString("param");
+        final String quoteNumbers1 = rule.getParam().optString("PARAMS");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         //CategoryType
 //        for (int i=0;i<quoteNumbers.length;i++){

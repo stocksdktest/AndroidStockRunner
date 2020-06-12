@@ -85,6 +85,7 @@ public class AHQuoteTest_1 {
                             uploadObj.put("preClosePrice",ahQuoteResponse.preClosePrice);
                             //涨跌幅
                             uploadObj.put("changeRate",ahQuoteResponse.changeRate);
+//                            uploadObj.put("premiumHA",ahQuoteResponse.premiumHA);
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

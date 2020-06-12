@@ -105,7 +105,7 @@ public class ChartSubTest_2 {
                                     for (int i=0;i<list.length;i++){
                                         JSONObject uploadObj_1 = new JSONObject();
                                         for (int k=1;k<list[i].length;k++){
-                                            uploadObj_1.put(kname[k],list[i][k]);
+                                            uploadObj_1.put(kname[k],list[i][k] == null ? "-" : list[i][k]);
                                         }
                                         uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
