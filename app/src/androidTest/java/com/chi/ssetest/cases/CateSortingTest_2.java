@@ -391,7 +391,7 @@ public class CateSortingTest_2 {
                                 uploadObj_1.put("buyAuctionRange", list.get(i).buyAuctionRange == null ? "-" : ("["+list.get(i).buyAuctionRange[0]+","+list.get(i).buyAuctionRange[1])+"]");
                                 uploadObj_1.put("sellAuctionRange", list.get(i).sellAuctionRange == null ? "-" : ("["+list.get(i).sellAuctionRange[0]+","+list.get(i).sellAuctionRange[1])+"]");
                                 uploadObj_1.put("afterHoursBuyQtyUpperLimit", list.get(i).afterHoursBuyQtyUpperLimit == null ? "-" : list.get(i).afterHoursBuyQtyUpperLimit);
-                                uploadObj_1.put("afterHoursBuyQtyUpperLimit", list.get(i).afterHoursBuyQtyUpperLimit == null ? "-" : list.get(i).afterHoursBuyQtyUpperLimit);
+                                uploadObj_1.put("afterHoursSellQtyUpperLimit", list.get(i).afterHoursSellQtyUpperLimit == null ? "-" : list.get(i).afterHoursSellQtyUpperLimit);
                                 //增值指标
                                 if (cateSortingResponse.addValueModel!=null){
                                     ArrayList<AddValueModel> addValueModels=cateSortingResponse.addValueModel;

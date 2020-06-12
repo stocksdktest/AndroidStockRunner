@@ -604,7 +604,7 @@ public class QuoteDetailTest_2 {
                         uploadObj.put("buyAuctionRange", list.buyAuctionRange == null ? "-" : ("["+list.buyAuctionRange[0]+","+list.buyAuctionRange[1])+"]");
                         uploadObj.put("sellAuctionRange", list.sellAuctionRange == null ? "-" : ("["+list.sellAuctionRange[0]+","+list.sellAuctionRange[1])+"]");
                         uploadObj.put("afterHoursBuyQtyUpperLimit", list.afterHoursBuyQtyUpperLimit == null ? "-" : list.afterHoursBuyQtyUpperLimit);
-                        uploadObj.put("afterHoursBuyQtyUpperLimit", list.afterHoursBuyQtyUpperLimit == null ? "-" : list.afterHoursBuyQtyUpperLimit);
+                        uploadObj.put("afterHoursSellQtyUpperLimit", list.afterHoursSellQtyUpperLimit == null ? "-" : list.afterHoursSellQtyUpperLimit);
                         //买卖队列
                         if (quoteResponse.OrderQuantityBuyList!=null) {
                             ArrayList<OrderQuantityItem> orderQuantityItem1 = quoteResponse.OrderQuantityBuyList;
