@@ -620,7 +620,7 @@ public class TCP_QuoteDetailTest_1 {
                                 uploadObj.put("buyAuctionRange", item.buyAuctionRange == null ? "-" : ("["+item.buyAuctionRange[0]+","+item.buyAuctionRange[1])+"]");
                                 uploadObj.put("sellAuctionRange", item.sellAuctionRange == null ? "-" : ("["+item.sellAuctionRange[0]+","+item.sellAuctionRange[1])+"]");
                                 uploadObj.put("afterHoursBuyQtyUpperLimit", item.afterHoursBuyQtyUpperLimit == null ? "-" : item.afterHoursBuyQtyUpperLimit);
-                                uploadObj.put("afterHoursBuyQtyUpperLimit", item.afterHoursBuyQtyUpperLimit == null ? "-" : item.afterHoursBuyQtyUpperLimit);
+                                uploadObj.put("afterHoursSellQtyUpperLimit", item.afterHoursSellQtyUpperLimit == null ? "-" : item.afterHoursSellQtyUpperLimit);
                                 //买卖队列
                                 if (buyItems!=null) {
                                     ArrayList<OrderQuantityItem> orderQuantityItem1 = buyItems;
