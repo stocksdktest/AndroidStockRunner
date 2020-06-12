@@ -111,7 +111,7 @@ public class AfterHoursChartTest_2 {
                                         uploadObj_1.put("highPrice",item.highPrice);//接口没值
                                         uploadObj_1.put("fp_volume",item.fp_volume);//接口没值
                                         uploadObj_1.put("fp_amount",item.fp_amount);//接口没值
-                                        uploadObj_1.put("volRatio",item.volRatio);//接口没值
+//                                        uploadObj_1.put("volRatio",item.volRatio);//接口没值
 //                                    Log.d("data", String.valueOf(uploadObj_1));
                                         uploadObj.put(item.datetime,uploadObj_1);
                                     }

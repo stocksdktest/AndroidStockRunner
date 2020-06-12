@@ -94,7 +94,7 @@ public class F10_StockNewsListTest_2 {
         final String quoteNumbers = rule.getParam().optString("CODE");
         final String quoteNumbers1 = rule.getParam().optString("TYPE");
         final String quoteNumbers2 = rule.getParam().optString("NEWSID");
-        final String quoteNumbers3 = rule.getParam().optString("SOURCETYPE");
+        final String quoteNumbers3 = rule.getParam().optString("SRC");
         final String quoteNumbers4 = rule.getParam().optString("PAGESIZE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
@@ -117,18 +117,22 @@ public class F10_StockNewsListTest_2 {
                     JSONObject uploadObj = new JSONObject();
                     try {
                         if (stockNewsListResponse.list!=null){
-                            for (StockNewsItem item : stockNewsListResponse.list) {
+                            for (int i=0;i<stockNewsListResponse.list.size();i++) {
                                 JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("INIPUBDATE_", item.INIPUBDATE_);
-                                uploadObj_1.put("ID_", item.ID_);
-                                uploadObj_1.put("REPORTTITLE_", item.REPORTTITLE_);
-                                uploadObj_1.put("REPORTLEVEL_", item.REPORTLEVEL_);
-                                uploadObj_1.put("MEDIANAME_", item.MEDIANAME_);
-                                uploadObj_1.put("STOCKNAME_", item.STOCKNAME_);
-                                uploadObj_1.put("ISPDF_", item.ISPDF_);
-                                uploadObj_1.put("ENTRYDATE", item.ENTRYDATE);
-                                uploadObj_1.put("ENTRYTIME", item.ENTRYTIME);
-                                uploadObj.put(item.ID_,uploadObj_1);
+                                uploadObj_1.put("INIPUBDATE_", stockNewsListResponse.list.get(i).INIPUBDATE_);
+                                uploadObj_1.put("ID_", stockNewsListResponse.list.get(i).ID_);
+                                uploadObj_1.put("REPORTTITLE_", stockNewsListResponse.list.get(i).REPORTTITLE_);
+                                if (stockNewsListResponse.list.get(i).REPORTLEVEL_==null){
+                                    uploadObj_1.put("REPORTLEVEL_","-");
+                                }else {
+                                    uploadObj_1.put("REPORTLEVEL_", stockNewsListResponse.list.get(i).REPORTLEVEL_);
+                                }
+                                uploadObj_1.put("MEDIANAME_", stockNewsListResponse.list.get(i).MEDIANAME_);
+                                uploadObj_1.put("STOCKNAME_", stockNewsListResponse.list.get(i).STOCKNAME_);
+                                uploadObj_1.put("ISPDF_", stockNewsListResponse.list.get(i).ISPDF_);
+                                uploadObj_1.put("ENTRYDATE", stockNewsListResponse.list.get(i).ENTRYDATE);
+                                uploadObj_1.put("ENTRYTIME", stockNewsListResponse.list.get(i).ENTRYTIME);
+                                uploadObj.put(stockNewsListResponse.list.get(i).ID_,uploadObj_1);
                             }
                         }
                         Log.d("data", String.valueOf(uploadObj));

@@ -60,7 +60,7 @@ public class QuoteTest_1 {
     public void requestWork() throws Exception {
         Log.d("QuoteTest_1", "requestWork");
         // TODO get custom args from param
-        final String[] quoteNumbers = rule.getParam().optString("CODE", "").split(",");
+        final String[] quoteNumbers = rule.getParam().optString("CODES", "").split(",");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             QuoteRequest request = new QuoteRequest();
@@ -339,11 +339,26 @@ public class QuoteTest_1 {
                                 uploadObj_1.put("averageChg", list.averageChg);
                                 uploadObj_1.put("indexChg5", list.indexChg5);
                                 uploadObj_1.put("indexChg10", list.indexChg10);
-                                //3.3.0.002新增字段
-                                uploadObj_1.put("monthChangeRate", list.monthChangeRate);
-                                uploadObj_1.put("yearChangeRate", list.yearChangeRate);
-                                uploadObj_1.put("recentMonthChangeRate", list.recentMonthChangeRate);
-                                uploadObj_1.put("recentYearChangeRate", list.recentYearChangeRate);
+//                                //3.3.0.002新增字段
+//                                uploadObj_1.put("monthChangeRate", list.monthChangeRate);
+//                                uploadObj_1.put("yearChangeRate", list.yearChangeRate);
+//                                uploadObj_1.put("recentMonthChangeRate", list.recentMonthChangeRate);
+//                                uploadObj_1.put("recentYearChangeRate", list.recentYearChangeRate);
+                                //3.1.7.003新增字段
+                                uploadObj_1.put("securityStatus", list.securityStatus == null ? "-" : list.securityStatus);
+                                uploadObj_1.put("buyQtyUpperLimit", list.buyQtyUpperLimit == null ? "-" : list.buyQtyUpperLimit);
+                                uploadObj_1.put("sellQtyUpperLimit", list.sellQtyUpperLimit == null ? "-" : list.sellQtyUpperLimit);
+                                uploadObj_1.put("marketBuyQtyUpperLimit", list.marketBuyQtyUpperLimit == null ? "-" : list.marketBuyQtyUpperLimit);
+                                uploadObj_1.put("marketSellQtyUpperLimit", list.marketSellQtyUpperLimit == null ? "-" : list.marketSellQtyUpperLimit);
+                                uploadObj_1.put("reg", list.reg == null ? "-" : list.reg);
+                                uploadObj_1.put("vie", list.vie == null ? "-" : list.vie);
+                                uploadObj_1.put("mf", list.mf == null ? "-" : list.mf);
+                                uploadObj_1.put("rslf", list.rslf == null ? "-" : list.rslf);
+                                uploadObj_1.put("mmf", list.mmf == null ? "-" : list.mmf);
+                                uploadObj_1.put("buyAuctionRange", list.buyAuctionRange == null ? "-" : ("["+list.buyAuctionRange[0]+","+list.buyAuctionRange[1])+"]");
+                                uploadObj_1.put("sellAuctionRange", list.sellAuctionRange == null ? "-" : ("["+list.sellAuctionRange[0]+","+list.sellAuctionRange[1])+"]");
+                                uploadObj_1.put("afterHoursBuyQtyUpperLimit", list.afterHoursBuyQtyUpperLimit == null ? "-" : list.afterHoursBuyQtyUpperLimit);
+                                uploadObj_1.put("afterHoursBuyQtyUpperLimit", list.afterHoursBuyQtyUpperLimit == null ? "-" : list.afterHoursBuyQtyUpperLimit);
 //                            //增值指标
 //                            if (quoteResponse.addValueModel!=null){
 //                                ArrayList<AddValueModel> addValueModels=quoteResponse.addValueModel;

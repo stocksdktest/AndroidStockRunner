@@ -129,6 +129,17 @@ public class TradeQuoteTest_1 {
                                 uploadObj.put("quantityUnitBuy",item.quantityUnitBuy);
                                 uploadObj.put("quantityUnitSell",item.quantityUnitSell);
                                 uploadObj.put("hkPriceDifferenceCategory",item.hkPriceDifferenceCategory);
+                                //3.1.7.003新增字段
+                                uploadObj.put("buyQtyUpperLimit",item.buyQtyUpperLimit);
+                                uploadObj.put("sellQtyUpperLimit",item.sellQtyUpperLimit);
+                                uploadObj.put("marketBuyQtyUpperLimit",item.marketBuyQtyUpperLimit);
+                                uploadObj.put("marketSellQtyUpperLimit",item.marketSellQtyUpperLimit);
+                                uploadObj.put("afterHoursBuyQtyUpperLimit",item.afterHoursBuyQtyUpperLimit);
+                                uploadObj.put("afterHoursSellQtyUpperLimit",item.afterHoursSellQtyUpperLimit);
+                                uploadObj.put("marketBuyQtyUnit",item.marketBuyQtyUnit);
+                                uploadObj.put("marketSellQtyUnit",item.marketSellQtyUnit);
+                                uploadObj.put("afterHoursBuyQtyUnit",item.afterHoursBuyQtyUnit);
+                                uploadObj.put("afterHoursSellQtyUnit",item.afterHoursSellQtyUnit);
                                 uploadObj_1.put(item.id,uploadObj);
                             }
                         }

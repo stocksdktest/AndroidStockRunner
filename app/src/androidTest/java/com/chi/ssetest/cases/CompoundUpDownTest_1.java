@@ -57,10 +57,10 @@ public class CompoundUpDownTest_1 {
         Log.d(" MorePriceSampleTest1", "requestWork");
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("MARKET");
-        final String quoteNumbers1 = rule.getParam().optString("TYPE");
-        final String quoteNumbers2 = rule.getParam().optString("TIME");
+        final String quoteNumbers1 = rule.getParam().optString("TIME");
+        final String quoteNumbers2 = rule.getParam().optString("TYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
-//        CompoundUpDownRequest.DateType
+//        CompoundUpDownRequest.DateType  Integer.parseInt()
         //        for (int i=0;i<quoteNumbers.length;i++){
         String time;
         if (quoteNumbers1.equals("null")){

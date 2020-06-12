@@ -64,7 +64,7 @@ public class SubNewStockRankingTest_1 {
     public void requestWork() throws Exception {
         Log.d("SubNewStockRankingTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("param");
+        final String quoteNumbers = rule.getParam().optString("PARAMS");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             SubNewStockRankingRequest request = new SubNewStockRankingRequest();
@@ -93,15 +93,15 @@ public class SubNewStockRankingTest_1 {
                                 uploadObj_1.put("rate",list.get(i).getRate());
                                 uploadObj_1.put("allRate",list.get(i).getAllRate());
                                 uploadObj_1.put("preClosePrice",list.get(i).getPreClosePrice());
-                                uploadObj_1.put("change",list.get(i).getChange());
-                                uploadObj_1.put("turnoverRate",list.get(i).getTurnoverRate());
-                                uploadObj_1.put("amount",list.get(i).getAmount());
-                                uploadObj_1.put("mainforceMoneyNetInflow",list.get(i).getMainforceMoneyNetInflow());
-                                uploadObj_1.put("pe",list.get(i).getPe());
-                                uploadObj_1.put("totalValue",list.get(i).getTotalValue());
-                                uploadObj_1.put("flowValue",list.get(i).getFlowValue());
-                                uploadObj_1.put("bu",list.get(i).getBu());
-                                uploadObj_1.put("su",list.get(i).getSu());
+//                                uploadObj_1.put("change",list.get(i).getChange());
+//                                uploadObj_1.put("turnoverRate",list.get(i).getTurnoverRate());
+//                                uploadObj_1.put("amount",list.get(i).getAmount());
+//                                uploadObj_1.put("mainforceMoneyNetInflow",list.get(i).getMainforceMoneyNetInflow());
+//                                uploadObj_1.put("pe",list.get(i).getPe());
+//                                uploadObj_1.put("totalValue",list.get(i).getTotalValue());
+//                                uploadObj_1.put("flowValue",list.get(i).getFlowValue());
+//                                uploadObj_1.put("bu",list.get(i).getBu());
+//                                uploadObj_1.put("su",list.get(i).getSu());
 //                            Log.d("data", String.valueOf(uploadObj_1));
                                 uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
