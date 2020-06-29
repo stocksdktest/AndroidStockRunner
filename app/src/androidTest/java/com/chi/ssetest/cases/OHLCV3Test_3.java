@@ -103,7 +103,8 @@ public class OHLCV3Test_3 {
                                         }else {
                                             timedata=list.get(k).datetime+list.get(k).time;
                                         }
-                                        uploadObj_1.put("datetime",timedata);                                        uploadObj_1.put("openPrice",list.get(k).openPrice == null ? "-" : list.get(k).openPrice);
+                                        uploadObj_1.put("datetime",timedata);
+                                        uploadObj_1.put("openPrice",list.get(k).openPrice == null ? "-" : list.get(k).openPrice);
                                         uploadObj_1.put("highPrice",list.get(k).highPrice == null ? "-" : list.get(k).highPrice);
                                         uploadObj_1.put("lowPrice",list.get(k).lowPrice == null ? "-" : list.get(k).lowPrice);
                                         uploadObj_1.put("closePrice",list.get(k).closePrice == null ? "-" : list.get(k).closePrice);
