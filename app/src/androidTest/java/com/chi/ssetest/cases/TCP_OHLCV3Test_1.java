@@ -92,9 +92,9 @@ public class TCP_OHLCV3Test_1 {
                                 JSONObject uploadObj_1 = new JSONObject();
                                 String timedata;
                                 if (TYPES.equals("dayk")||TYPES.equals("weekk")||TYPES.equals("monthk")||TYPES.equals("yeark")){
-                                    timedata=ohlcResponse.historyItems.get(ohlcResponse.historyItems.size()-1).datetime;
-                                }else {
                                     timedata=ohlcResponse.historyItems.get(ohlcResponse.historyItems.size()-1).datetime+ohlcResponse.historyItems.get(ohlcResponse.historyItems.size()-1).time;
+                                }else {
+                                    timedata=ohlcResponse.historyItems.get(ohlcResponse.historyItems.size()-1).datetime;
                                 }
                                 uploadObj_1.put("datetime",timedata);
                                 uploadObj_1.put("openPrice",ohlcResponse.historyItems.get(ohlcResponse.historyItems.size()-1).openPrice == null ? "-" : ohlcResponse.historyItems.get(ohlcResponse.historyItems.size()-1).openPrice);
