@@ -33,6 +33,7 @@ dependencies {
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'com.android.support:gridlayout-v7:28.0.0'
     implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
     implementation 'com.google.protobuf:protobuf-java:3.4.0'
 
     implementation(name: 'MStock_UI', ext: 'aar')

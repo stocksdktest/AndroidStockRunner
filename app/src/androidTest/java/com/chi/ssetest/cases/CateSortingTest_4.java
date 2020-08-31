@@ -78,8 +78,8 @@ public class CateSortingTest_4 {
     public void requestWork() throws Exception {
         Log.d("  CateSortingTest_4", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("id");
-        final String quoteNumbers1 = rule.getParam().optString("param");
+        final String quoteNumbers = rule.getParam().optString("CODE");
+        final String quoteNumbers1 = rule.getParam().optString("PARAMS");
         final String quoteNumbers2 = rule.getParam().optString("quoteCustom");
 //       FuturesQuoteBaseField
          //QuoteCustomField

@@ -96,32 +96,39 @@ public class F10_CalendarTest_1 {
     public void requestWork() throws Exception {
         Log.d("F10_CalendarTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("SOURCETYPE");
+        final String quoteNumbers = rule.getParam().optString("SRC");
+        final String quoteNumbers1 = rule.getParam().optString("TYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
+        String TYPE=new String();
+        if (quoteNumbers1.equals("null")){
+            TYPE=null;
+        }else {
+            TYPE=quoteNumbers1;
+        }
             CalendarRequest request = new CalendarRequest();
-            request.send(quoteNumbers,new IResponseInfoCallback() {
+            request.sendV2(quoteNumbers,TYPE,new IResponseInfoCallback() {
                 @Override
                 public void callback(Response response) {
-                    F10V2Response f10V2Response= (F10V2Response) response;
+                    DatesResponse dataResponse = (DatesResponse) response;
                     try {
-                        assertNotNull(f10V2Response.infos);
+                        assertNotNull(dataResponse.infos);
                     } catch (AssertionError e) {
                         //                        result.completeExceptionally(e);
                         result.complete(new JSONObject());
                     }
                     JSONObject uploadObj = new JSONObject();
                     try {
-                        if(f10V2Response.infos!=null){
-                            for (int i=0;i<f10V2Response.infos.size();i++){
+                        if(dataResponse.infos!=null){
+                            for (int i=0;i<dataResponse.infos.size();i++){
                                 JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("sg",f10V2Response.infos.get(i).get("sg"));
-                                uploadObj_1.put("zq",f10V2Response.infos.get(i).get("zq"));
-                                uploadObj_1.put("ss",f10V2Response.infos.get(i).get("ss"));
-                                uploadObj_1.put("jjfx",f10V2Response.infos.get(i).get("jjfx"));
-                                uploadObj_1.put("wss",f10V2Response.infos.get(i).get("wss"));
-                                uploadObj_1.put("normalDay",f10V2Response.infos.get(i).get("NORMALDAY"));
-                                uploadObj.put(String.valueOf(f10V2Response.infos.get(i).get("NORMALDAY")),uploadObj_1);
+                                uploadObj_1.put("sg",dataResponse.infos.get(i).getSg());
+                                uploadObj_1.put("zq",dataResponse.infos.get(i).getZq());
+                                uploadObj_1.put("ss",dataResponse.infos.get(i).getSs());
+                                uploadObj_1.put("jjfx",dataResponse.infos.get(i).getJjfx());
+                                uploadObj_1.put("wss",dataResponse.infos.get(i).getWss());
+                                uploadObj_1.put("normalDay",dataResponse.infos.get(i).getNormalDay());
+                                uploadObj.put(String.valueOf(dataResponse.infos.get(i).getNormalDay()),uploadObj_1);
                             }
                         }
                         Log.d("data", String.valueOf(uploadObj));

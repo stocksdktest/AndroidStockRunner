@@ -60,7 +60,7 @@ public class QuoteTest_1 {
     public void requestWork() throws Exception {
         Log.d("QuoteTest_1", "requestWork");
         // TODO get custom args from param
-        final String[] quoteNumbers = rule.getParam().optString("CODE", "").split(",");
+        final String[] quoteNumbers = rule.getParam().optString("CODES", "").split(",");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             QuoteRequest request = new QuoteRequest();
@@ -344,6 +344,34 @@ public class QuoteTest_1 {
                                 uploadObj_1.put("yearChangeRate", list.yearChangeRate);
                                 uploadObj_1.put("recentMonthChangeRate", list.recentMonthChangeRate);
                                 uploadObj_1.put("recentYearChangeRate", list.recentYearChangeRate);
+                                //新三板字段   20200828
+                                uploadObj_1.put("listingType", list.listingType == null ? "-" : list.listingType);
+                                uploadObj_1.put("underlyingSecurity", list.underlyingSecurity == null ? "-" : list.underlyingSecurity);
+                                uploadObj_1.put("listDate", list.listDate == null ? "-" : list.listDate);
+                                uploadObj_1.put("valueDate", list.valueDate == null ? "-" : list.valueDate);
+                                uploadObj_1.put("expiringDate", list.expiringDate == null ? "-" : list.expiringDate);
+                                uploadObj_1.put("serviceStatus", list.serviceStatus == null ? "-" : list.serviceStatus);
+                                uploadObj_1.put("suspendedSymbol", list.suspendedSymbol == null ? "-" : list.suspendedSymbol);
+                                uploadObj_1.put("mbxl", list.mbxl == null ? "-" : list.mbxl);
+                                uploadObj_1.put("zxsbsl", list.zxsbsl == null ? "-" : list.zxsbsl);
+                                uploadObj_1.put("en", list.en == null ? "-" : list.en);//期货品种
+                                //创业板字段
+                                uploadObj_1.put("securityStatus", list.securityStatus == null ? "-" : list.securityStatus);
+                                uploadObj_1.put("buyQtyUpperLimit", list.buyQtyUpperLimit == null ? "-" : list.buyQtyUpperLimit);
+                                uploadObj_1.put("sellQtyUpperLimit", list.sellQtyUpperLimit == null ? "-" : list.sellQtyUpperLimit);
+                                uploadObj_1.put("marketBuyQtyUpperLimit", list.marketBuyQtyUpperLimit == null ? "-" : list.marketBuyQtyUpperLimit);
+                                uploadObj_1.put("marketSellQtyUpperLimit", list.marketSellQtyUpperLimit == null ? "-" : list.marketSellQtyUpperLimit);
+                                uploadObj_1.put("reg", list.reg == null ? "-" : list.reg);
+                                uploadObj_1.put("vie", list.vie == null ? "-" : list.vie);
+                                uploadObj_1.put("mf", list.mf == null ? "-" : list.mf);
+                                uploadObj_1.put("rslf", list.rslf == null ? "-" : list.rslf);
+                                uploadObj_1.put("mmf", list.mmf == null ? "-" : list.mmf);
+                                uploadObj_1.put("buyAuctionRange", list.buyAuctionRange == null ? "-" : "["+ list.buyAuctionRange[0]+","+list.buyAuctionRange[1]+"]");
+                                uploadObj_1.put("sellAuctionRange", list.sellAuctionRange == null ? "-" : "["+ list.sellAuctionRange[0]+","+list.sellAuctionRange[1]+"]");
+                                uploadObj_1.put("afterHoursBuyQtyUpperLimit", list.afterHoursBuyQtyUpperLimit == null ? "-" : list.afterHoursBuyQtyUpperLimit);
+                                uploadObj_1.put("afterHoursSellQtyUpperLimit", list.afterHoursSellQtyUpperLimit == null ? "-" : list.afterHoursSellQtyUpperLimit);
+
+
 //                            //增值指标
 //                            if (quoteResponse.addValueModel!=null){
 //                                ArrayList<AddValueModel> addValueModels=quoteResponse.addValueModel;

@@ -73,7 +73,7 @@ public class F10_NewIndexTest_1 {
         Log.d("F10_NewIndexTest_1", "requestWork");
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("CODE");
-        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
+        final String quoteNumbers1 = rule.getParam().optString("SRC");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         //CategoryType
 //        for (int i=0;i<quoteNumbers.length;i++){
@@ -96,7 +96,7 @@ public class F10_NewIndexTest_1 {
                             uploadObj.put("netProfitCutParentCom",list.netProfitCutParentCom);
                             uploadObj.put("cutBasicEPS",list.cutBasicEPS);
                             uploadObj.put("annuROE",list.annuROE);
-                            uploadObj.put("netProfitCutParentCom",list.netProfitCutParentCom);
+                            uploadObj.put("netProfitParentCom",list.netProfitParentCom);
                             uploadObj.put("basicEPS",list.basicEPS);
                             uploadObj.put("totalShare",list.totalShare);
                             uploadObj.put("BVPS_",list.BVPS_);
