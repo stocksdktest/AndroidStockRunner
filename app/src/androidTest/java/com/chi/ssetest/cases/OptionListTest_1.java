@@ -32,7 +32,7 @@ import static org.junit.Assert.*;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
- *期权——标的行情（无参数传递）
+ *期权——标的行情
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
@@ -56,11 +56,11 @@ public class OptionListTest_1 {
     public void requestWork() throws Exception {
         Log.d(" OptionListTest_1", "requestWork");
         // TODO get custom args from param
-        final String quoteNumbers = rule.getParam().optString("");
+        final String quoteNumbers = rule.getParam().optString("MARKET");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             OptionListRequest request = new OptionListRequest();
-            request.send(new IResponseInfoCallback<OptionListResponse>() {
+            request.send(quoteNumbers,new IResponseInfoCallback<OptionListResponse>() {
                 @Override
                 public void callback(OptionListResponse optionListResponse) {
                     try {

@@ -81,7 +81,7 @@ public class F10V2Test_1 {
         Log.d("F10V2Test_1", "requestWork");
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("CODE");
-        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
+        final String quoteNumbers1 = rule.getParam().optString("SRC");
         final String quoteNumbers2 = rule.getParam().optString("REQUESTTYPE");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
        // F10Type
@@ -502,6 +502,20 @@ public class F10V2Test_1 {
                                     }
                                 }
                                 break;
+                            //沪深股api----场内基金十大持股(仅 src=d 有数据)
+                            case F10Type.FUND_HOLDINGS10:
+                                if (infos!=null){
+                                    for (int i=0;i<infos.size();i++){
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("PUBLISHDATE",infos.get(i).get("PUBLISHDATE"));
+                                        uploadObj_1.put("TRADINGCODE",infos.get(i).get("TRADINGCODE"));
+                                        uploadObj_1.put("SKNAME",infos.get(i).get("SKNAME"));
+                                        uploadObj_1.put("NAVRTO",infos.get(i).get("NAVRTO"));
+                                        uploadObj_1.put("ACCSTKRTO",infos.get(i).get("ACCSTKRTO"));
+                                        uploadObj_1.put("ACCCIRCRTO",infos.get(i).get("ACCCIRCRTO"));
+                                        uploadObj.put((String) infos.get(i).get("TRADINGCODE"),uploadObj_1);
+                                    }
+                                }
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

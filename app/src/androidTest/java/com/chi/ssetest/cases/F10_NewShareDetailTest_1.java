@@ -97,7 +97,7 @@ public class F10_NewShareDetailTest_1 {
         Log.d("F10_NewShareDetailTest_1", "requestWork");
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("CODE");
-        final String quoteNumbers1 = rule.getParam().optString("SOURCETYPE");
+        final String quoteNumbers1 = rule.getParam().optString("SRC");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<quoteNumbers.length;i++){
             NewShareDetailRequest request = new NewShareDetailRequest();
@@ -135,12 +135,18 @@ public class F10_NewShareDetailTest_1 {
                             uploadObj.put("issueAllotnOn",list.getIssueAllotnOn());
                             uploadObj.put("businessScope",list.getBusinessScope());
                             uploadObj.put("leadUnderwriter",list.getLeadUnderwriter());
-                            uploadObj.put("issuePricePlan",list.getIssuePricePlan());
+                            uploadObj.put("issuePricePlan",list.getIssuePricePlan() == null ? "-" :list.getIssuePricePlan());
                             uploadObj.put("capplyPricePlan",list.getCapplyPricePlan());
                             uploadObj.put("capplySharePlan",list.getCapplySharePlan());
                             uploadObj.put("newTotRaiseAmt",list.getNewTotRaiseAmt());
                             uploadObj.put("newNetRaiseAmt",list.getNewNetRaiseAmt());
                             uploadObj.put("keyCode",list.getKeyCode());
+                            //新加字段  20200828
+                            uploadObj.put("type",list.getType());
+                            uploadObj.put("profit",list.getProfit());
+                            uploadObj.put("vote",list.getVote());
+                            uploadObj.put("rie",list.getRie());
+                            uploadObj.put("issuanceSystem",list.getIssuanceSystem());
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

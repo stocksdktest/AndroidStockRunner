@@ -11,20 +11,14 @@ import com.chi.ssetest.setup.RunnerSetup;
 import com.chi.ssetest.setup.TestcaseConfigRule;
 import com.mitake.core.OHLCItem;
 import com.mitake.core.QuoteItem;
-import com.mitake.core.bean.AHQuoteItem;
 import com.mitake.core.bean.log.ErrorInfo;
-import com.mitake.core.parser.FQItem;
-import com.mitake.core.parser.GBItem;
-import com.mitake.core.request.AHQuoteListRequest;
 import com.mitake.core.request.OHLCRequestV3;
-import com.mitake.core.request.OHLChartType;
 import com.mitake.core.request.QuoteDetailRequest;
-import com.mitake.core.request.QuoteRequest;
-import com.mitake.core.response.AHQuoteListResponse;
 import com.mitake.core.response.IResponseInfoCallback;
 import com.mitake.core.response.OHLCResponse;
 import com.mitake.core.response.QuoteResponse;
 import com.mitake.core.response.Response;
+import com.mitake.core.util.FormatUtility;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,7 +29,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
@@ -93,38 +86,51 @@ public class OHLCV3Test_1 {
                                 result.complete(new JSONObject());
                             }
                             CopyOnWriteArrayList<OHLCItem> list =ohlcResponse.historyItems;
-                            ArrayList<GBItem> gblist=ohlcResponse.gb;
                             JSONObject uploadObj = new JSONObject();
                             try {
                                 if (list!=null){
                                     for (int k=0;k<list.size();k++){
                                         JSONObject uploadObj_1 = new JSONObject();
-                                        uploadObj_1.put("datetime",list.get(k).datetime);
-                                        uploadObj_1.put("openPrice",list.get(k).openPrice);
-                                        uploadObj_1.put("highPrice",list.get(k).highPrice);
-                                        uploadObj_1.put("lowPrice",list.get(k).lowPrice);
-                                        uploadObj_1.put("closePrice",list.get(k).closePrice);
-                                        uploadObj_1.put("tradeVolume",list.get(k).tradeVolume);
-                                        uploadObj_1.put("averagePrice",list.get(k).averagePrice);//ios需要判断是否存在字段
-                                        uploadObj_1.put("reference_price",list.get(k).reference_price);
-                                        uploadObj_1.put("transaction_price",list.get(k).transaction_price);
-                                        uploadObj_1.put("openInterest",list.get(k).openInterest);//ios需要判断是否存在字段
-                                        uploadObj_1.put("fp_volume",list.get(k).fp_volume);
-                                        uploadObj_1.put("fp_amount",list.get(k).fp_amount);
-                                        uploadObj_1.put("iopv",list.get(k).iopv);
-//                                        uploadObj_1.put("gb",ohlcResponse.gb);
-
-                                        if (gblist!=null){
-                                            JSONObject uploadObj_2 = new JSONObject();
-                                            for (int i=0;i<gblist.size();i++){
-                                                uploadObj_2.put("date",gblist.get(i).date);
-                                                uploadObj_2.put("gb",gblist.get(i).gb);
-                                                uploadObj_1.put(String.valueOf(i+1),uploadObj_2);
-                                            }
+                                        String timedata;
+                                        if (Types.equals("dayk")||Types.equals("weekk")||Types.equals("monthk")||Types.equals("yeark")){
+                                            timedata=list.get(k).datetime;
+                                        }else {
+                                            timedata=list.get(k).datetime+list.get(k).time;
                                         }
-                                        Log.d("data", String.valueOf(uploadObj_1));
-                                        uploadObj.put(list.get(k).datetime,uploadObj_1);
+                                        uploadObj_1.put("datetime",timedata);
+                                        uploadObj_1.put("openPrice",list.get(k).openPrice == null ? "-" : list.get(k).openPrice);
+                                        uploadObj_1.put("highPrice",list.get(k).highPrice == null ? "-" : list.get(k).highPrice);
+                                        uploadObj_1.put("lowPrice",list.get(k).lowPrice == null ? "-" : list.get(k).lowPrice);
+                                        uploadObj_1.put("closePrice",list.get(k).closePrice == null ? "-" : list.get(k).closePrice);
+                                        uploadObj_1.put("tradeVolume",list.get(k).tradeVolume == null ? "-" : list.get(k).tradeVolume);
+                                        uploadObj_1.put("averagePrice",list.get(k).averagePrice == null ? "-" : list.get(k).averagePrice);//ios需要判断是否存在字段
+                                        uploadObj_1.put("reference_price",list.get(k).reference_price == null ? "-" : list.get(k).reference_price);
+                                        uploadObj_1.put("transaction_price",list.get(k).transaction_price == null ? "-" : list.get(k).transaction_price);
+                                        uploadObj_1.put("openInterest",list.get(k).openInterest == null ? "-" : list.get(k).openInterest);//ios需要判断是否存在字段
+                                        //盘后成交量成交额
+                                        if (list.get(k).fp_volume.equals("一")){
+                                            uploadObj_1.put("fp_volume",list.get(k).fp_volume == "一" ? "-" : list.get(k).openInterest);
+                                        }else {
+                                            uploadObj_1.put("fp_volume",list.get(k).fp_volume == null ? "-" : list.get(k).openInterest);
+                                        }
+                                        uploadObj_1.put("fp_amount",list.get(k).fp_amount == null ? "-" : list.get(k).fp_amount);
+
+                                        uploadObj_1.put("iopv",list.get(k).iopv == null ? "-" : list.get(k).iopv);
+                                        String turnoverRate = FormatUtility.calculateTurnoverRate(list.get(k),ohlcResponse.gb);
+                                        uploadObj_1.put("turnoverRate",turnoverRate == null ? "-" : turnoverRate);
+//                                        Log.d("data", String.valueOf(uploadObj_1));
+                                        uploadObj.put(timedata,uploadObj_1);
                                     }
+                                }
+                                if (ohlcResponse.gb!=null){
+                                    JSONObject uploadObj_1 = new JSONObject();
+                                    for(int j=0;j<ohlcResponse.gb.size();j++){
+                                        JSONObject uploadObj_2 = new JSONObject();
+                                        uploadObj_2.put("date",ohlcResponse.gb.get(j).date);
+                                        uploadObj_2.put("gb",ohlcResponse.gb.get(j).gb);
+                                        uploadObj_1.put(ohlcResponse.gb.get(j).date,uploadObj_2);
+                                    }
+                                    uploadObj.put("gblist",uploadObj_1);
                                 }
 //                                Log.d("data", String.valueOf(uploadObj));
                                 result.complete(uploadObj);
