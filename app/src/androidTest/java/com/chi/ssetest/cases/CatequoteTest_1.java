@@ -116,7 +116,7 @@ public class CatequoteTest_1 {
                                     for (int j=0;j<list.get(i).buyPrices.size();j++){
                                         buyPrices.add(list.get(i).buyPrices.get(j));
                                     }
-                                    uploadObj_1.put("bidpx1", list.get(i).buyPrices.get(0));
+                                    uploadObj_1.put("bidpx1", list.get(i).buyPrices.get(list.get(i).buyPrices.size()-1));
                                     uploadObj_1.put("buyPrices",new JSONArray(buyPrices));
                                 }else {
                                     uploadObj_1.put("bidpx1", "");
@@ -126,7 +126,7 @@ public class CatequoteTest_1 {
                                 List<String> buySingleVolumes=new ArrayList<>();
                                 if (list.get(i).buySingleVolumes!=null&&list.get(i).buySingleVolumes.size()>0){
                                     for (int j=0;j<list.get(i).buySingleVolumes.size();j++){
-                                        buySingleVolumes.add(list.get(i).buySingleVolumes.get(j));
+                                        buySingleVolumes.add(list.get(i).buySingleVolumes.get(j) == "一" ? "-" : list.get(i).buySingleVolumes.get(j));
                                     }
                                     uploadObj_1.put("buySingleVolumes",new JSONArray(buySingleVolumes));
                                 }else {
@@ -136,9 +136,9 @@ public class CatequoteTest_1 {
                                 List<String> buyVolumes=new ArrayList<>();
                                 if (list.get(i).buyVolumes!=null&&list.get(i).buyVolumes.size()>0){
                                     for (int j=0;j<list.get(i).buyVolumes.size();j++){
-                                        buyVolumes.add(list.get(i).buyVolumes.get(j));
+                                        buyVolumes.add(list.get(i).buyVolumes.get(j)== "一" ? "-" : list.get(i).buyVolumes.get(j));
                                     }
-                                    uploadObj_1.put("bidvol1", list.get(i).buyVolumes.get(0));
+                                    uploadObj_1.put("bidvol1", list.get(i).buyVolumes.get(list.get(i).buyPrices.size()-1));
                                     uploadObj_1.put("buyVolumes",new JSONArray(buyVolumes));
                                 }else {
                                     uploadObj_1.put("bidvol1", "");
