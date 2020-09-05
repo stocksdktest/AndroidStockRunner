@@ -10,7 +10,7 @@ trigger:
 steps:
 - name: build
   image: mingc/android-build-box:1.12.0
-  mem_limit: 600000000
+  mem_limit: 3000000000
   environment:
     GRADLE_HOME: /root/.gradle
   volumes:
