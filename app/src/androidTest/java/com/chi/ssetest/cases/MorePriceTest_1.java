@@ -108,7 +108,7 @@ public class MorePriceTest_1 {
                                 uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
                         }
-//                            Log.d("data", String.valueOf(uploadObj));
+                            Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
