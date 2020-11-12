@@ -131,12 +131,35 @@ public class F10_NewShareListTest_1 {
                                         uploadObj_1.put("capplyShare",newShareListResponse.infos.get(k).getDataList().get(i).getCapplyShare());
                                         uploadObj_1.put("secuabbr",newShareListResponse.infos.get(k).getDataList().get(i).getSecuabbr());
                                         uploadObj_1.put("tradingCode",newShareListResponse.infos.get(k).getDataList().get(i).getTradingCode());
-                                        uploadObj_1.put("peaIssue",newShareListResponse.infos.get(k).getDataList().get(i).getPeaIssue());
-                                        uploadObj_1.put("succResultNoticeDate",newShareListResponse.infos.get(k).getDataList().get(i).getSuccResultNoticeDate());
+                                        if (newShareListResponse.infos.get(k).getTitle().equals("即将发行")){
+                                            uploadObj_1.put("peaIssue",newShareListResponse.infos.get(k).getDataList().get(i).getPeaIssue());
+                                            uploadObj_1.put("bookStartDateOn",newShareListResponse.infos.get(k).getDataList().get(i).getBookStartDateOn());
+                                        }
+                                        if (newShareListResponse.infos.get(k).getTitle().equals("今日申购")){
+                                            uploadObj_1.put("peaIssue",newShareListResponse.infos.get(k).getDataList().get(i).getPeaIssue());
+                                            uploadObj_1.put("succResultNoticeDate",newShareListResponse.infos.get(k).getDataList().get(i).getSuccResultNoticeDate());
+                                        }
+                                        if (newShareListResponse.infos.get(k).getTitle().equals("今日中签")){
+                                            uploadObj_1.put("peaIssue",newShareListResponse.infos.get(k).getDataList().get(i).getPeaIssue());
+                                            uploadObj_1.put("allotrateon",newShareListResponse.infos.get(k).getDataList().get(i).getAllotrateon());
+                                            uploadObj_1.put("listingDate",newShareListResponse.infos.get(k).getDataList().get(i).getListingDate());
+                                        }
+                                        if (newShareListResponse.infos.get(k).getTitle().equals("今日上市")){
+                                            uploadObj_1.put("peaIssue",newShareListResponse.infos.get(k).getDataList().get(i).getPeaIssue());
+                                            uploadObj_1.put("allotrateon",newShareListResponse.infos.get(k).getDataList().get(i).getAllotrateon());
+                                        }
+                                        if (newShareListResponse.infos.get(k).getTitle().equals("未上市")){
+                                            uploadObj_1.put("allotrateon",newShareListResponse.infos.get(k).getDataList().get(i).getAllotrateon());
+                                            uploadObj_1.put("listingDate",newShareListResponse.infos.get(k).getDataList().get(i).getListingDate());
+                                        }
+                                        //五个list中不同的字段
+//                                        uploadObj_1.put("peaIssue",newShareListResponse.infos.get(k).getDataList().get(i).getPeaIssue());
+//                                        uploadObj_1.put("succResultNoticeDate",newShareListResponse.infos.get(k).getDataList().get(i).getSuccResultNoticeDate());
+//                                        uploadObj_1.put("bookStartDateOn",newShareListResponse.infos.get(k).getDataList().get(i).getBookStartDateOn());
+//                                        uploadObj_1.put("allotrateon",newShareListResponse.infos.get(k).getDataList().get(i).getAllotrateon());
+//                                        uploadObj_1.put("listingDate",newShareListResponse.infos.get(k).getDataList().get(i).getListingDate());
+
                                         uploadObj_1.put("issuePrice",newShareListResponse.infos.get(k).getDataList().get(i).getIssuePrice());
-                                        uploadObj_1.put("allotrateon",newShareListResponse.infos.get(k).getDataList().get(i).getAllotrateon());
-                                        uploadObj_1.put("listingDate",newShareListResponse.infos.get(k).getDataList().get(i).getListingDate());
-                                        uploadObj_1.put("bookStartDateOn",newShareListResponse.infos.get(k).getDataList().get(i).getBookStartDateOn());
                                         uploadObj_1.put("issueShare",newShareListResponse.infos.get(k).getDataList().get(i).getIssueShare());
                                         uploadObj_1.put("issueShareOn",newShareListResponse.infos.get(k).getDataList().get(i).getIssueShareOn());
                                         uploadObj_1.put("capplyPrice",newShareListResponse.infos.get(k).getDataList().get(i).getCapplyPrice());

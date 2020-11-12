@@ -91,7 +91,7 @@ public class ConvertibleDebtListTest_1 {
                             uploadObj_1.put("conversionPremiumRate", list.get(k).conversionPremiumRate);
                             uploadObj_1.put("conversionPrice", list.get(k).conversionPrice);
                             uploadObj_1.put("conversionValue", list.get(k).conversionValue);
-                            uploadObj.put(String.valueOf(k+1),uploadObj_1);
+                            uploadObj.put(list.get(k).code,uploadObj_1);
                         }
                     }
 //                        Log.d("data", String.valueOf(uploadObj));
