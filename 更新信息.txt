@@ -1,3 +1,7 @@
+20201118   by  liu_bin
+1、添加新股列表和新股详情接口字段setype、stockcbx、cdrcby
+2、添加分价接口方法三sendV2方法
+
 20201112   by  liu_bin
 1、修复L2分笔、L2逐笔、分时明细接口方法一和方法二的代码问题
 
