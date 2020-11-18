@@ -3,65 +3,44 @@ package com.chi.ssetest.cases;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
+import com.chi.ssetest.StockTestcase;
+import com.chi.ssetest.StockTestcaseName;
 import com.chi.ssetest.TestcaseException;
 import com.chi.ssetest.protos.SetupConfig;
 import com.chi.ssetest.setup.RunnerSetup;
-import com.chi.ssetest.StockTestcase;
-import com.chi.ssetest.StockTestcaseName;
 import com.chi.ssetest.setup.TestcaseConfigRule;
-import com.mitake.core.AddValueModel;
-import com.mitake.core.CateType;
-import com.mitake.core.QuoteItem;
-import com.mitake.core.bean.MorePriceItem;
 import com.mitake.core.bean.log.ErrorInfo;
-import com.mitake.core.request.AddValueRequest;
-import com.mitake.core.request.BankuaisortingRequest;
-import com.mitake.core.request.CategoryType;
-import com.mitake.core.request.CatequoteRequest;
 import com.mitake.core.request.MorePriceRequest;
-import com.mitake.core.request.QuoteRequest;
-import com.mitake.core.request.offer.OfferQuoteSort;
-import com.mitake.core.response.AddValueResponse;
-import com.mitake.core.response.BankuaiRankingResponse;
-import com.mitake.core.response.Bankuaisorting;
-import com.mitake.core.response.BankuaisortingResponse;
-import com.mitake.core.response.CatequoteResponse;
 import com.mitake.core.response.IResponseInfoCallback;
 import com.mitake.core.response.MorePriceResponse;
-import com.mitake.core.response.QuoteResponse;
-import com.mitake.core.response.Response;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
- *分价——适合所有市场  方法一
+ *分价——沪深港 sendV2  方法三
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-@StockTestcase(StockTestcaseName. MOREPRICETEST_1)
-public class MorePriceTest_1 {
-    private static final StockTestcaseName testcaseName = StockTestcaseName. MOREPRICETEST_1;
+@StockTestcase(StockTestcaseName. MOREPRICETEST_3)
+public class MorePriceTest_3 {
+    private static final StockTestcaseName testcaseName = StockTestcaseName. MOREPRICETEST_3;
     private static SetupConfig.TestcaseConfig testcaseConfig;
     private static final int timeout_ms = 1000000;
     @BeforeClass
 
     public static void setup() throws Exception {
-        Log.d(" MorePriceTest_1", "Setup");
+        Log.d(" MorePriceTest_3", "Setup");
         testcaseConfig = RunnerSetup.getInstance().getTestcaseConfig(testcaseName);
         if (testcaseConfig == null ) {
             throw new Exception(String.format("Testcase(%s) setup failed, config is empty", testcaseName));
@@ -73,15 +52,16 @@ public class MorePriceTest_1 {
 
     @Test(timeout = timeout_ms)
     public void requestWork() throws Exception {
-        Log.d(" MorePriceTest_1", "requestWork");
+        Log.d(" MorePriceTest_3", "requestWork");
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("CODE");
         final String quoteNumbers1 = rule.getParam().optString("SUBTYPE");
+        final String quoteNumbers2 = rule.getParam().optString("PARAMS");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
         //CategoryType
 //        for (int i=0;i<quoteNumbers.length;i++){
            MorePriceRequest request = new  MorePriceRequest();
-            request.send(quoteNumbers,quoteNumbers1,new IResponseInfoCallback<MorePriceResponse>() {
+            request.sendV2(quoteNumbers,quoteNumbers1,quoteNumbers2,new IResponseInfoCallback<MorePriceResponse>() {
                 @Override
                 public void callback(MorePriceResponse morePriceResponse) {
                     try {

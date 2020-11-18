@@ -92,14 +92,14 @@ public class MorePriceTest_2 {
                             for (int i=0;i<morePriceResponse.strs.length;i++){
                                 JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("price",morePriceResponse.strs[i][0]);
-                                uploadObj_1.put("volume",morePriceResponse.strs[i][1]);
-                                uploadObj_1.put("buyVolume",morePriceResponse.strs[i][2]);
-                                uploadObj_1.put("sellVolume",morePriceResponse.strs[i][3]);
-                                uploadObj_1.put("unknownVolume",morePriceResponse.strs[i][4]);
-                                uploadObj_1.put("tradeCount",morePriceResponse.strs[i][5]);
-                                uploadObj_1.put("buyCount",morePriceResponse.strs[i][6]);
-                                uploadObj_1.put("sellCount",morePriceResponse.strs[i][7]);
-                                uploadObj_1.put("unknownCount",morePriceResponse.strs[i][8]);
+                                uploadObj_1.put("volume",morePriceResponse.strs[i][1]== "一" ? "-" :morePriceResponse.strs[i][1]);
+                                uploadObj_1.put("buyVolume",morePriceResponse.strs[i][2]== "一" ? "-" :morePriceResponse.strs[i][2]);
+                                uploadObj_1.put("sellVolume",morePriceResponse.strs[i][3]== "一" ? "-" :morePriceResponse.strs[i][3]);
+                                uploadObj_1.put("unknownVolume",morePriceResponse.strs[i][4]== "一" ? "-" :morePriceResponse.strs[i][4]);
+                                uploadObj_1.put("tradeCount",morePriceResponse.strs[i][5].isEmpty() ? "-" :morePriceResponse.strs[i][5]);
+                                uploadObj_1.put("buyCount",morePriceResponse.strs[i][6].isEmpty() ? "-" :morePriceResponse.strs[i][6]);
+                                uploadObj_1.put("sellCount",morePriceResponse.strs[i][7].isEmpty() ? "-" :morePriceResponse.strs[i][7]);
+                                uploadObj_1.put("unknownCount",morePriceResponse.strs[i][8].isEmpty() ? "-" :morePriceResponse.strs[i][8]);
 //                                Log.d("data", String.valueOf(uploadObj_1));
                                 uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
