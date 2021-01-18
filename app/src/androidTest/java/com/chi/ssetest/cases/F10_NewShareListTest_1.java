@@ -175,6 +175,10 @@ public class F10_NewShareListTest_1 {
                                         uploadObj_1.put("vote",newShareListResponse.infos.get(k).getDataList().get(i).getVote());
                                         uploadObj_1.put("rie",newShareListResponse.infos.get(k).getDataList().get(i).getRie());
                                         uploadObj_1.put("issuanceSystem",newShareListResponse.infos.get(k).getDataList().get(i).getIssuanceSystem());
+                                        //新加字段 20201117
+                                        uploadObj_1.put("setype",newShareListResponse.infos.get(k).getDataList().get(i).getSetype());
+                                        uploadObj_1.put("stockcbx",newShareListResponse.infos.get(k).getDataList().get(i).getStockcbx());
+                                        uploadObj_1.put("cdrcby",newShareListResponse.infos.get(k).getDataList().get(i).getCdrcby());
                                         uploadObj_3.put(newShareListResponse.infos.get(k).getDataList().get(i).getApplyCode(),uploadObj_1);
                                     }
                                     uploadObj_2.put("dataList",uploadObj_3);
