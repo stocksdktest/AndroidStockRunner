@@ -334,6 +334,12 @@ public class QuoteDetailTest_2 {
                         }else {
                             uploadObj.put("CASFlag", list.CASFlag == null ? "-" : list.CASFlag);
                         }
+                        //20210118添加 POSFlag 该字段
+                        if (list.POSFlag.equals("")){
+                            uploadObj.put("POSFlag", list.POSFlag == "" ? "-" : list.POSFlag);
+                        }else {
+                            uploadObj.put("POSFlag", list.POSFlag == null ? "-" : list.POSFlag);
+                        }
 
                         if (list.rp.equals("")){
                             uploadObj.put("rp", list.rp == "" ? "-" : list.rp);

@@ -41,8 +41,9 @@ public class TickTest_2 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.TICKTEST_2;
     private static SetupConfig.TestcaseConfig testcaseConfig;
     private static final int timeout_ms = 1000000;
-    final CompletableFuture result = new CompletableFuture<JSONObject>();
-    private static JSONObject uploadObj = new JSONObject();
+    String sttime="";
+    int i=1;
+
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("TickTest_2", "Setup");
@@ -61,6 +62,7 @@ public class TickTest_2 {
         final String quoteNumbers = rule.getParam().optString("CODE", "");
         final String Pages = rule.getParam().optString("page", "");
         final String SubTypes = rule.getParam().optString("SUBTYPE", "");
+        final CompletableFuture result = new CompletableFuture<JSONObject>();
 
         TickRequest request = new TickRequest();
         request.send(quoteNumbers,Pages,SubTypes, new IResponseInfoCallback() {
@@ -74,6 +76,7 @@ public class TickTest_2 {
                     result.complete(new JSONObject());
                 }
                 List<TickItem> list=tickResponse.tickItems;
+                JSONObject uploadObj = new JSONObject();
                 try {
                     if(list!=null){
                         for (int k=0;k<list.size();k++){
@@ -83,7 +86,14 @@ public class TickTest_2 {
                             uploadObj_1.put("tradeVolume", list.get(k).getSingleVolume());
                             uploadObj_1.put("tradePrice", list.get(k).getTransactionPrice());
 //                            Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(list.get(k).getTransactionTime(),uploadObj_1);
+                            if (sttime.equals(list.get(k).getTransactionTime())){
+                                uploadObj.put(list.get(k).getTransactionTime()+i,uploadObj_1);
+                                i++;
+                            }else {
+                                sttime=list.get(k).getTransactionTime();
+                                uploadObj.put(list.get(k).getTransactionTime(),uploadObj_1);
+                                i=1;
+                            }
                         }
                     }
 //                    Log.d("data", String.valueOf(uploadObj));

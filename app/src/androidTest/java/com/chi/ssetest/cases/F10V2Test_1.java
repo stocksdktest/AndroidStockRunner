@@ -240,6 +240,8 @@ public class F10V2Test_1 {
                                         uploadObj_1.put("PRETAXCASHMAXDVCNY",infos.get(i).get("PRETAXCASHMAXDVCNY"));
                                         uploadObj_1.put("EQURECORDDATE",infos.get(i).get("EQURECORDDATE"));
                                         uploadObj_1.put("XDRDATE",infos.get(i).get("XDRDATE"));
+                                        uploadObj_1.put("CASHDVARRBEGDATE",infos.get(i).get("CASHDVARRBEGDATE"));
+                                        uploadObj_1.put("CASHDVARRENDDATE",infos.get(i).get("CASHDVARRENDDATE"));
                                         uploadObj.put((String) infos.get(i).get("DATETYPENAME"),uploadObj_1);
                                     }
                                 }
