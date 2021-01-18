@@ -348,6 +348,12 @@ public class TCP_QuoteDetailTest_1 {
                                 }else {
                                     uploadObj.put("CASFlag", item.CASFlag == null ? "-" : item.CASFlag);
                                 }
+                                //20210118添加 POSFlag 该字段
+                                if (item.POSFlag.equals("")){
+                                    uploadObj.put("POSFlag", item.POSFlag == "" ? "-" : item.POSFlag);
+                                }else {
+                                    uploadObj.put("POSFlag", item.POSFlag == null ? "-" : item.POSFlag);
+                                }
 
                                 if (item.rp.equals("")){
                                     uploadObj.put("rp", item.rp == "" ? "-" : item.rp);

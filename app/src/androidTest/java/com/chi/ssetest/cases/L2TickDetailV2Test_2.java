@@ -41,8 +41,8 @@ public class L2TickDetailV2Test_2 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.L2TICKDETAILV2TEST_2;
     private static SetupConfig.TestcaseConfig testcaseConfig;
     private static final int timeout_ms = 1000000;
-    final CompletableFuture result = new CompletableFuture<JSONObject>();
-    private static JSONObject uploadObj = new JSONObject();
+    String sttime="";
+    int i=1;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("L2TickDetailV2Test_2", "Setup");
@@ -51,6 +51,7 @@ public class L2TickDetailV2Test_2 {
             throw new Exception(String.format("Testcase(%s) setup failed, config is empty", testcaseName));
         }
     }
+
     @Rule
     public TestcaseConfigRule rule = new TestcaseConfigRule(testcaseConfig);
 
@@ -61,7 +62,8 @@ public class L2TickDetailV2Test_2 {
         final String quoteNumbers = rule.getParam().optString("CODE", "");
         final String Pages = rule.getParam().optString("page", "");
         final String SubTypes = rule.getParam().optString("SUBTYPE", "");
-
+        final CompletableFuture result = new CompletableFuture<JSONObject>();
+//        for (int i=0;i<Params.length;i++){
         L2TickDetailRequestV2 request = new L2TickDetailRequestV2();
         request.send(quoteNumbers,Pages,SubTypes, new IResponseInfoCallback() {
             @Override
@@ -74,6 +76,8 @@ public class L2TickDetailV2Test_2 {
                     //                        result.completeExceptionally(e);
                     result.complete(new JSONObject());
                 }
+                JSONObject uploadObj=new JSONObject();
+                // TODO fill uploadObj with QuoteResponse value
                 try {
                     if(list!=null){
                         for (int k=0;k<list.size();k++){
@@ -83,14 +87,22 @@ public class L2TickDetailV2Test_2 {
                             uploadObj_1.put("tradeVolume", list.get(k).getSingleVolume());
                             uploadObj_1.put("tradePrice", list.get(k).getTransactionPrice());
 //                            Log.d("data", String.valueOf(uploadObj_1));
-                            uploadObj.put(list.get(k).getTransactionTime(),uploadObj_1);
+                            if (sttime.equals(list.get(k).getTransactionTime())){
+                                uploadObj.put(list.get(k).getTransactionTime()+i,uploadObj_1);
+                                i++;
+                            }else {
+                                sttime=list.get(k).getTransactionTime();
+                                uploadObj.put(list.get(k).getTransactionTime(),uploadObj_1);
+                                i=1;
+                            }
                         }
                     }
-//                    Log.d("data", String.valueOf(uploadObj));
+//                        Log.d("data", String.valueOf(uploadObj));
                     result.complete(uploadObj);
                 } catch (JSONException e) {
                     result.completeExceptionally(e);
                 }
+
             }
             @Override
             public void exception(ErrorInfo errorInfo) {
@@ -99,10 +111,11 @@ public class L2TickDetailV2Test_2 {
         });
         try {
             JSONObject resultObj = (JSONObject)result.get(timeout_ms, TimeUnit.MILLISECONDS);
-            RunnerSetup.getInstance().getCollector().onTestResult(testcaseName,rule.getParam(), resultObj);
+            RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
         } catch (Exception e) {
             //                throw new Exception(e);
             throw new TestcaseException(e,rule.getParam());
         }
+//        }
     }
 }

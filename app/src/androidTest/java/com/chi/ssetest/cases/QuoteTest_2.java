@@ -263,6 +263,7 @@ public class QuoteTest_2 {
                             uploadObj_1.put("ah", list.ah);
                             uploadObj_1.put("VCMFlag", list.VCMFlag);
                             uploadObj_1.put("CASFlag", list.CASFlag);
+                            uploadObj_1.put("POSFlag", list.POSFlag);//20210118添加POSFlag
                             uploadObj_1.put("rp", list.rp);
                             uploadObj_1.put("cd", list.cd);
                             uploadObj_1.put("hg", list.hg);

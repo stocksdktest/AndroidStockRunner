@@ -147,6 +147,10 @@ public class F10_NewShareDetailTest_1 {
                             uploadObj.put("vote",list.getVote());
                             uploadObj.put("rie",list.getRie());
                             uploadObj.put("issuanceSystem",list.getIssuanceSystem());
+                            //新加字段 20201117
+                            uploadObj.put("setype",list.getSetype());
+                            uploadObj.put("stockcbx",list.getStockcbx());
+                            uploadObj.put("cdrcby",list.getCdrcby());
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
