@@ -102,11 +102,12 @@ public class ChartV2Test_3 {
                                         uploadObj_1.put("averagePrice",list.get(k).averagePrice == null ? "-" : list.get(k).averagePrice);
                                         uploadObj_1.put("md",list.get(k).getMd() == null ? "-" : list.get(k).getMd());
                                         uploadObj_1.put("openInterest",list.get(k).openInterest == null ? "-" : list.get(k).openInterest);
-                                        if (list.get(k).iopv.equals("一")){
-                                            uploadObj_1.put("iopv",list.get(k).iopv == "一" ? "-" : list.get(k).iopv);
-                                        }else {
+                                        if (null==list.get(k).iopv){
                                             uploadObj_1.put("iopv",list.get(k).iopv == null ? "-" : list.get(k).iopv);
-                                        }                                        uploadObj_1.put("iopvPre",list.get(k).iopvPre == null ? "-" : list.get(k).iopvPre);
+                                        }else {
+                                            uploadObj_1.put("iopv",list.get(k).iopv == "一" ? "-" : list.get(k).iopv);
+                                        }
+                                        uploadObj_1.put("iopvPre",list.get(k).iopvPre == null ? "-" : list.get(k).iopvPre);
                                         uploadObj_1.put("volRatio",list.get(k).volRatio == null ? "-" : list.get(k).volRatio);
                                         uploadObj_1.put("buyNum",list.get(k).buyNum == null ? "-" : list.get(k).buyNum);
                                         uploadObj_1.put("sellNum",list.get(k).sellNum == null ? "-" : list.get(k).sellNum);
