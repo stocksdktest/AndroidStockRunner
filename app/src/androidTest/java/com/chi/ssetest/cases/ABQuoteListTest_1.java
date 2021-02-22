@@ -79,19 +79,19 @@ public class ABQuoteListTest_1 {
                                 JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("codeA", list.get(k).codeA);
                                 uploadObj_1.put("nameA", list.get(k).nameA);
-                                uploadObj_1.put("marketA", list.get(k).marketA);
+//                                uploadObj_1.put("marketA", list.get(k).marketA);//ios没有该字段
                                 uploadObj_1.put("subtypeA", list.get(k).subtypeA);
                                 uploadObj_1.put("lastPriceA", list.get(k).lastPriceA);
-                                uploadObj_1.put("preClosePriceA", list.get(k).preClosePriceA);
+//                                uploadObj_1.put("preClosePriceA", list.get(k).preClosePriceA);//ios没有该字段
                                 uploadObj_1.put("changeA", list.get(k).changeA);
                                 uploadObj_1.put("changeRateA", list.get(k).changeRateA);
                                 uploadObj_1.put("datetimeA", list.get(k).datetimeA);
                                 uploadObj_1.put("codeB", list.get(k).codeB);
                                 uploadObj_1.put("nameB", list.get(k).nameB);
-                                uploadObj_1.put("marketB", list.get(k).marketB);
+//                                uploadObj_1.put("marketB", list.get(k).marketB);//ios没有该字段
                                 uploadObj_1.put("subtypeB", list.get(k).subtypeB);
                                 uploadObj_1.put("lastPriceB", list.get(k).lastPriceB == "一" ? "-":list.get(k).lastPriceB);
-                                uploadObj_1.put("preClosePriceB", list.get(k).preClosePriceB == "一" ? "-":list.get(k).preClosePriceB);
+//                                uploadObj_1.put("preClosePriceB", list.get(k).preClosePriceB == "一" ? "-":list.get(k).preClosePriceB);//ios没有该字段
                                 uploadObj_1.put("changeB", list.get(k).changeB == null ? "-":list.get(k).changeB);
                                 uploadObj_1.put("changeRateB", list.get(k).changeRateB == null ? "-":list.get(k).changeRateB);
                                 uploadObj_1.put("datetimeB", list.get(k).datetimeB.isEmpty() ? "-":list.get(k).datetimeB);
@@ -100,7 +100,7 @@ public class ABQuoteListTest_1 {
                                 uploadObj.put(list.get(k).codeA,uploadObj_1);
                             }
                         }
-                        Log.d("data", String.valueOf(uploadObj));
+//                        Log.d("data", String.valueOf(uploadObj));
                         result.complete(uploadObj);
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

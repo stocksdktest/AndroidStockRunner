@@ -1,3 +1,41 @@
+20210222   by  liubin
+1、F10通用方法一,F10V2Test_1,各接口返回数据为列表(infos)的标识字段修改为 i+1
+以下为需要修改的F10通用中的接口信息
+//主营构成                           String D_BUSINESSINFO = "/businessinfo";
+//龙虎榜-买入前5营业部               String D_CHARTS5BUYS = "/charts5buys";
+//龙虎榜-卖出前5营业部               String D_CHARTS5SELLS = "/charts5sells";
+//机构观点-机构评级                  String D_EXPTSKINVRATING = "/exptskinvrating";
+//分红扩股                           String D_SHAREBONUS = "/sharebonus";
+//公司高管                           String D_COMPANYMANAGER = "/companymanager";
+//十大流通股东                       String D_OTSHOLDER10 = "/otsholder10";
+//十大股东                           String D_SHAREHOLDER10 = "/shareholder10";
+//股东户数                           String D_SHAREHOLDERNUM = "/shareholdernum";
+//主要指标                           String D_PROFINMAININDEX = "/profinmainindex";
+//利润表                             String D_PROINCSTATEMENTNEW = "/proincstatementnew";
+//资产负债表                         String D_PROBALSHEETNEW = "/probalsheetnew";
+//现金流量表                         String D_PROCFSTATEMENTNEW = "/procfstatementnew";
+//股东深度挖掘数据                   String IINVHOLDCHG = "/iinvholdchg";
+//沪深股api----大事提醒---按时间     String IMPORT_NOTICE_DATA = "/importnoticedate";
+//沪深股api----大事提醒---按标题     String IMPORT_NOTICE_TITLE = "/importnoticetitle";
+//董秘问答                           String NEWS_INTEARACTIVE = "/newsinteractive";
+//大事提醒-业绩预告                  String EXPT_PERFORMANCE = "/exptperformance";
+//沪深股api----大事提醒—业绩公告    String PROINDIC_DATA = "/proindicdata";
+//沪深股api----场内基金十大持股      String FUND_HOLDINGS10 = "/fundholdings10";
+
+2、F10通用方法二，F10V2Test_2 同样修改
+//沪深股api----大事提醒---按时间      String IMPORT_NOTICE_DATA = "/importnoticedate";
+//沪深股api----大事提醒---按标题      String IMPORT_NOTICE_TITLE = "/importnoticetitle";
+//大事提醒-业绩预告                   String EXPT_PERFORMANCE = "/exptperformance";
+
+3、F10通用方法三，F10V2Test_3 同样修改
+//主要指标              String D_PROFINMAININDEX = "/profinmainindex";
+//利润表                String D_PROINCSTATEMENTNEW = "/proincstatementnew";
+//资产负债表            String D_PROBALSHEETNEW = "/probalsheetnew";
+//现金流量表            String D_PROCFSTATEMENTNEW = "/procfstatementnew";
+
+4、F10通用方法四，F10V2Test_4 同样修改
+//董秘问答              String NEWS_INTEARACTIVE = "/newsinteractive";
+
 20210118   by  liu_bin
 1、次新股，次新债提供主力资金净流入数据
 2、添加ab股联动，列表接口
