@@ -142,7 +142,7 @@ public class F10V2Test_1 {
                                         uploadObj_1.put("TCOREBIZINCOME",infos.get(i).get("TCOREBIZINCOME"));
                                         uploadObj_1.put("TYPESTYLE",infos.get(i).get("TYPESTYLE"));
                                         uploadObj_1.put("PUBLISHDATE",infos.get(i).get("PUBLISHDATE"));
-                                        uploadObj.put((String) infos.get(i).get("PUBLISHDATE"),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
                                 break;
@@ -156,7 +156,7 @@ public class F10V2Test_1 {
                                         uploadObj_1.put("SALEAMT",infos.get(i).get("SALEAMT"));
                                         uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
                                         uploadObj_1.put("CHGDESC",infos.get(i).get("CHGDESC"));
-                                        uploadObj.put((String) infos.get(i).get("TRADEDATE"),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
                                 break;
@@ -170,7 +170,7 @@ public class F10V2Test_1 {
                                         uploadObj_1.put("SALEAMT",infos.get(i).get("SALEAMT"));
                                         uploadObj_1.put("TRADEDATE",infos.get(i).get("TRADEDATE"));
                                         uploadObj_1.put("CHGDESC",infos.get(i).get("CHGDESC"));
-                                        uploadObj.put((String) infos.get(i).get("TRADEDATE"),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
                                 break;
@@ -187,7 +187,7 @@ public class F10V2Test_1 {
                                             uploadObj_1.put("RADJUSTDIR",items.get(i).get("RADJUSTDIR"));
                                             uploadObj_1.put("DATE",items.get(i).get("DATE"));
                                             uploadObj_1.put("PRICECAP",items.get(i).get("PRICECAP"));
-                                            uploadObj.put((String) items.get(i).get("DATE"),uploadObj_1);
+                                            uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                         }
                                     }
                                 }
@@ -242,7 +242,7 @@ public class F10V2Test_1 {
                                         uploadObj_1.put("XDRDATE",infos.get(i).get("XDRDATE"));
                                         uploadObj_1.put("CASHDVARRBEGDATE",infos.get(i).get("CASHDVARRBEGDATE"));
                                         uploadObj_1.put("CASHDVARRENDDATE",infos.get(i).get("CASHDVARRENDDATE"));
-                                        uploadObj.put((String) infos.get(i).get("DATETYPENAME"),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
                                 break;
@@ -257,7 +257,7 @@ public class F10V2Test_1 {
                                         uploadObj_1.put("REMBEFTAX",infos.get(i).get("REMBEFTAX"));
                                         uploadObj_1.put("BEGINEND",infos.get(i).get("BEGINEND"));
                                         uploadObj_1.put("MEMO",infos.get(i).get("MEMO"));
-                                        uploadObj.put((String) infos.get(i).get("CNAME"),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
                                 break;
@@ -272,10 +272,11 @@ public class F10V2Test_1 {
                                         uploadObj_1.put("PCTOFFLOTSHARES",infos.get(i).get("PCTOFFLOTSHARES"));
                                         uploadObj_1.put("HOLDERSUMCHG",infos.get(i).get("HOLDERSUMCHG"));
                                         uploadObj_1.put("SHHOLDERCODE",infos.get(i).get("SHHOLDERCODE"));
-                                        uploadObj.put((String) infos.get(i).get("ENDDATE"),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
-                                break;//十大股东
+                                break;
+                                //十大股东
                             case F10Type.D_SHAREHOLDER10:
                                 if (infos!=null){
                                     for (int i=0;i<infos.size();i++){
@@ -286,7 +287,7 @@ public class F10V2Test_1 {
                                         uploadObj_1.put("HOLDERRTO",infos.get(i).get("HOLDERRTO"));
                                         uploadObj_1.put("CURCHG",infos.get(i).get("CURCHG"));
                                         uploadObj_1.put("SHHOLDERCODE",infos.get(i).get("SHHOLDERCODE"));
-                                        uploadObj.put((String) infos.get(i).get("ENDDATE"),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
                                 break;
@@ -311,7 +312,7 @@ public class F10V2Test_1 {
                                         uploadObj_1.put("TOTALSHAMT",infos.get(i).get("TOTALSHAMT"));
                                         uploadObj_1.put("KAVGSH",infos.get(i).get("KAVGSH"));
                                         uploadObj_1.put("MOM",infos.get(i).get("MOM"));
-                                        uploadObj.put((String) infos.get(i).get("ENDDATE"),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
                                 break;
@@ -334,7 +335,7 @@ public class F10V2Test_1 {
                                         uploadObj_1.put("CURRENTRT",infos.get(i).get("CURRENTRT"));
                                         uploadObj_1.put("QUICKRT",infos.get(i).get("QUICKRT"));
                                         uploadObj_1.put("OPNCFPS",infos.get(i).get("OPNCFPS"));
-                                        uploadObj.put((String) infos.get(i).get("REPORTTITLE"),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
                                 break;
@@ -354,7 +355,7 @@ public class F10V2Test_1 {
                                         uploadObj_1.put("NONOPERINCOMEN",infos.get(i).get("NONOPERINCOMEN"));
                                         uploadObj_1.put("TOTPROFIT",infos.get(i).get("TOTPROFIT"));
                                         uploadObj_1.put("PARENETP",infos.get(i).get("PARENETP"));
-                                        uploadObj.put((String) infos.get(i).get("REPORTTITLE"),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
                                 break;
@@ -383,7 +384,7 @@ public class F10V2Test_1 {
                                         uploadObj_1.put("PARESHARRIGH",infos.get(i).get("PARESHARRIGH"));
                                         uploadObj_1.put("CAPISURP",infos.get(i).get("CAPISURP"));
                                         uploadObj_1.put("GOODWILL",infos.get(i).get("GOODWILL"));
-                                        uploadObj.put((String) infos.get(i).get("REPORTTITLE"),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
                                 break;
@@ -403,7 +404,7 @@ public class F10V2Test_1 {
                                         uploadObj_1.put("FINCASHOUTF",infos.get(i).get("FINCASHOUTF"));
                                         uploadObj_1.put("FINNETCFLOW",infos.get(i).get("FINNETCFLOW"));
                                         uploadObj_1.put("CASHNETR",infos.get(i).get("CASHNETR"));
-                                        uploadObj.put((String) infos.get(i).get("REPORTTITLE"),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
                                 break;
@@ -419,7 +420,7 @@ public class F10V2Test_1 {
                                         uploadObj_1.put("HOLDQTY",infos.get(i).get("HOLDQTY"));
                                         uploadObj_1.put("HOLDAMT",infos.get(i).get("HOLDAMT"));
                                         uploadObj_1.put("HOLDQTYSUMCHG",infos.get(i).get("HOLDQTYSUMCHG"));
-                                        uploadObj.put((String) infos.get(i).get("REPORTDATE"),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
                                 break;
@@ -433,7 +434,7 @@ public class F10V2Test_1 {
                                         uploadObj_1.put("TEXT",infos.get(i).get("TEXT"));
 //                                    uploadObj_1.put("ID",infos.get(i).get("ID"));
 //                                    uploadObj_1.put("ISPDF",infos.get(i).get("ISPDF"));
-                                        uploadObj.put((String) infos.get(i).get("TRADEDATE"),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
                                 break;
@@ -447,7 +448,7 @@ public class F10V2Test_1 {
                                         uploadObj_1.put("TEXT",infos.get(i).get("TEXT"));
 //                                    uploadObj_1.put("ID",infos.get(i).get("ID"));
 //                                    uploadObj_1.put("ISPDF",infos.get(i).get("ISPDF"));
-                                        uploadObj.put((String) infos.get(i).get("TRADEDATE"),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
                                 break;
@@ -466,7 +467,7 @@ public class F10V2Test_1 {
                                             uploadObj_1.put("ANSWERTIME",items1.get(i).get("ANSWERTIME"));
                                             uploadObj_1.put("NEWSSOURCE",items1.get(i).get("NEWSSOURCE"));
                                             uploadObj_1.put("INTERACTIVEID",items1.get(i).get("INTERACTIVEID"));
-                                            uploadObj.put((String) items1.get(i).get("TRADING"),uploadObj_1);
+                                            uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                         }
                                     }
                                 }
@@ -482,7 +483,7 @@ public class F10V2Test_1 {
                                             uploadObj_1.put("PUBLISHDATE",items2.get(i).get("PUBLISHDATE"));
                                             uploadObj_1.put("RETAMAXPROFITSMK",items2.get(i).get("RETAMAXPROFITSMK"));
                                             uploadObj_1.put("RETAMAXPROFITSINC",items2.get(i).get("RETAMAXPROFITSINC"));
-                                            uploadObj.put((String) items2.get(i).get("PUBLISHDATE"),uploadObj_1);
+                                            uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                         }
                                     }
                                 }
@@ -499,7 +500,7 @@ public class F10V2Test_1 {
                                             uploadObj_1.put("EPSBASIC",items3.get(i).get("EPSBASIC"));
                                             uploadObj_1.put("TAGRT",items3.get(i).get("TAGRT"));
                                             uploadObj_1.put("NPGRT",items3.get(i).get("NPGRT"));
-                                            uploadObj.put((String) items3.get(i).get("PUBLISHDATE"),uploadObj_1);
+                                            uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                         }
                                     }
                                 }
@@ -515,7 +516,7 @@ public class F10V2Test_1 {
                                         uploadObj_1.put("NAVRTO",infos.get(i).get("NAVRTO"));
                                         uploadObj_1.put("ACCSTKRTO",infos.get(i).get("ACCSTKRTO"));
                                         uploadObj_1.put("ACCCIRCRTO",infos.get(i).get("ACCCIRCRTO"));
-                                        uploadObj.put((String) infos.get(i).get("TRADINGCODE"),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
                         }

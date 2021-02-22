@@ -136,7 +136,7 @@ public class F10V2Test_3 {
                                         uploadObj_1.put("CURRENTRT",infos.get(i).get("CURRENTRT"));
                                         uploadObj_1.put("QUICKRT",infos.get(i).get("QUICKRT"));
                                         uploadObj_1.put("OPNCFPS",infos.get(i).get("OPNCFPS"));
-                                        uploadObj.put(String.valueOf(infos.get(i).get("ENDDATE")),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
                                 break;
@@ -158,7 +158,7 @@ public class F10V2Test_3 {
                                         uploadObj_1.put("NONOPERINCOMEN",infos.get(i).get("NONOPERINCOMEN"));
                                         uploadObj_1.put("TOTPROFIT",infos.get(i).get("TOTPROFIT"));
                                         uploadObj_1.put("PARENETP",infos.get(i).get("PARENETP"));
-                                        uploadObj.put(String.valueOf(infos.get(i).get("ENDDATE")),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
                                 break;
@@ -189,7 +189,7 @@ public class F10V2Test_3 {
                                         uploadObj_1.put("PARESHARRIGH",infos.get(i).get("PARESHARRIGH"));
                                         uploadObj_1.put("CAPISURP",infos.get(i).get("CAPISURP"));
                                         uploadObj_1.put("GOODWILL",infos.get(i).get("GOODWILL"));
-                                        uploadObj.put(String.valueOf(infos.get(i).get("ENDDATE")),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
                                 break;
@@ -211,7 +211,7 @@ public class F10V2Test_3 {
                                         uploadObj_1.put("FINCASHOUTF",infos.get(i).get("FINCASHOUTF"));
                                         uploadObj_1.put("FINNETCFLOW",infos.get(i).get("FINNETCFLOW"));
                                         uploadObj_1.put("CASHNETR",infos.get(i).get("CASHNETR"));
-                                        uploadObj.put(String.valueOf(infos.get(i).get("ENDDATE")),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
                                 break;

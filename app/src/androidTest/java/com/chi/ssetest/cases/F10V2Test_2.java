@@ -133,7 +133,7 @@ public class F10V2Test_2 {
                                         uploadObj_1.put("TEXT",infos.get(i).get("TEXT"));
                                         uploadObj_1.put("ID",infos.get(i).get("ID"));
                                         uploadObj_1.put("ISPDF",infos.get(i).get("ISPDF"));
-                                        uploadObj.put((String) infos.get(i).get("TRADEDATE"),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
                                 break;
@@ -147,7 +147,7 @@ public class F10V2Test_2 {
                                         uploadObj_1.put("TEXT",infos.get(i).get("TEXT"));
                                         uploadObj_1.put("ID",infos.get(i).get("ID"));
                                         uploadObj_1.put("ISPDF",infos.get(i).get("ISPDF"));
-                                        uploadObj.put((String) infos.get(i).get("TRADEDATE"),uploadObj_1);
+                                        uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                     }
                                 }
                                 break;
@@ -164,7 +164,7 @@ public class F10V2Test_2 {
                                             uploadObj_1.put("PUBLISHDATE",items2.get(i).get("PUBLISHDATE"));
                                             uploadObj_1.put("RETAMAXPROFITSMK",items2.get(i).get("RETAMAXPROFITSMK"));
                                             uploadObj_1.put("RETAMAXPROFITSINC",items2.get(i).get("RETAMAXPROFITSINC"));
-                                            uploadObj.put((String) items2.get(i).get("PUBLISHDATE"),uploadObj_1);
+                                            uploadObj.put(String.valueOf(i+1),uploadObj_1);
                                         }
                                     }
                                 }
