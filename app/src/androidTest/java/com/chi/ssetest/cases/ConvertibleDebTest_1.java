@@ -84,15 +84,15 @@ public class ConvertibleDebTest_1 {
                             for (ConvertibleBoundItem item :convertibleBoundResponse.items) {
                                 JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("code",item.code);
-                                uploadObj_1.put("name",item.name);
-//                            uploadObj_1.put("market",item.market);
-//                            uploadObj_1.put("subtype",item.subtype);
-                                uploadObj_1.put("lastPrice",item.lastPrice);
-//                            uploadObj_1.put("preClosePrice",item.preClosePrice);
-                                uploadObj_1.put("premium",item.premium);
-//                            uploadObj_1.put("upDownFlag",item.upDownFlag);
-                                uploadObj_1.put("changeRate",item.changeRate);
-                                uploadObj_1.put("change",item.change);
+//                                uploadObj_1.put("name",item.name);
+////                            uploadObj_1.put("market",item.market);
+////                            uploadObj_1.put("subtype",item.subtype);
+//                                uploadObj_1.put("lastPrice",item.lastPrice);
+////                            uploadObj_1.put("preClosePrice",item.preClosePrice);
+//                                uploadObj_1.put("premium",item.premium);
+////                            uploadObj_1.put("upDownFlag",item.upDownFlag);
+//                                uploadObj_1.put("changeRate",item.changeRate);
+//                                uploadObj_1.put("change",item.change);
 //                            Log.d("data", String.valueOf(uploadObj_1));
                                 uploadObj.put(item.code,uploadObj_1);
                             }

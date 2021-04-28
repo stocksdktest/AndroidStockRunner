@@ -73,24 +73,24 @@ public class ConvertibleDebtListTest_1 {
                         for (int k=0;k<list.size();k++){
                             JSONObject uploadObj_1 = new JSONObject();
                             uploadObj_1.put("code", list.get(k).code);
-                            uploadObj_1.put("name", list.get(k).name);
-                            uploadObj_1.put("market", list.get(k).market);
-                            uploadObj_1.put("subtype", list.get(k).subtype);
-                            uploadObj_1.put("lastPrice", list.get(k).lastPrice);
-                            uploadObj_1.put("preClosePrice", list.get(k).preClosePrice);
-                            uploadObj_1.put("changeRate", list.get(k).changeRate);
-                            uploadObj_1.put("dateTime", list.get(k).dateTime);
+//                            uploadObj_1.put("name", list.get(k).name);
+//                            uploadObj_1.put("market", list.get(k).market);
+//                            uploadObj_1.put("subtype", list.get(k).subtype);
+//                            uploadObj_1.put("lastPrice", list.get(k).lastPrice);
+//                            uploadObj_1.put("preClosePrice", list.get(k).preClosePrice);
+//                            uploadObj_1.put("changeRate", list.get(k).changeRate);
+//                            uploadObj_1.put("dateTime", list.get(k).dateTime);
                             uploadObj_1.put("zgCode", list.get(k).zgCode);
-                            uploadObj_1.put("zgName", list.get(k).zgName);
-                            uploadObj_1.put("zgMarket", list.get(k).zgMarket);
-                            uploadObj_1.put("zgSubtype", list.get(k).zgSubtype);
-                            uploadObj_1.put("zgLastPrice", list.get(k).zgLastPrice);
-                            uploadObj_1.put("zgPreClosePrice", list.get(k).zgPreClosePrice);
-                            uploadObj_1.put("zgChangeRate", list.get(k).zgChangeRate);
-                            uploadObj_1.put("zgDateTime", list.get(k).zgDateTime);
-                            uploadObj_1.put("conversionPremiumRate", list.get(k).conversionPremiumRate);
-                            uploadObj_1.put("conversionPrice", list.get(k).conversionPrice);
-                            uploadObj_1.put("conversionValue", list.get(k).conversionValue);
+//                            uploadObj_1.put("zgName", list.get(k).zgName);
+//                            uploadObj_1.put("zgMarket", list.get(k).zgMarket);
+//                            uploadObj_1.put("zgSubtype", list.get(k).zgSubtype);
+//                            uploadObj_1.put("zgLastPrice", list.get(k).zgLastPrice);
+//                            uploadObj_1.put("zgPreClosePrice", list.get(k).zgPreClosePrice);
+//                            uploadObj_1.put("zgChangeRate", list.get(k).zgChangeRate);
+//                            uploadObj_1.put("zgDateTime", list.get(k).zgDateTime);
+//                            uploadObj_1.put("conversionPremiumRate", list.get(k).conversionPremiumRate);
+//                            uploadObj_1.put("conversionPrice", list.get(k).conversionPrice);
+//                            uploadObj_1.put("conversionValue", list.get(k).conversionValue);
                             uploadObj.put(list.get(k).code,uploadObj_1);
                         }
                     }

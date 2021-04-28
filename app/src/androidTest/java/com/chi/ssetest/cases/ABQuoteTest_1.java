@@ -74,16 +74,16 @@ public class ABQuoteTest_1 {
                     try {
                         if (abQuoteResponse!=null){
                             uploadObj.put("code",abQuoteResponse.abQuoteItem.code);
-                            uploadObj.put("name",abQuoteResponse.abQuoteItem.name);
-//                            uploadObj.put("market",abQuoteResponse.abQuoteItem.market);//ios没有该字段
-                            uploadObj.put("subtype",abQuoteResponse.abQuoteItem.subtype);
-                            uploadObj.put("lastPrice",abQuoteResponse.abQuoteItem.lastPrice == "一" ? "-":abQuoteResponse.abQuoteItem.lastPrice);
-//                            uploadObj.put("preClosePrice",abQuoteResponse.abQuoteItem.preClosePrice == "一" ? "-":abQuoteResponse.abQuoteItem.preClosePrice);//ios没有该字段
-                            uploadObj.put("change",abQuoteResponse.abQuoteItem.change == null ? "-":abQuoteResponse.abQuoteItem.change);
-                            //涨跌幅
-                            uploadObj.put("changeRate",abQuoteResponse.abQuoteItem.changeRate == null ? "-":abQuoteResponse.abQuoteItem.changeRate);
-                            uploadObj.put("premiumRateAB",abQuoteResponse.abQuoteItem.premiumRateAB.isEmpty() ? "-":abQuoteResponse.abQuoteItem.premiumRateAB);
-                            uploadObj.put("premiumRateBA",abQuoteResponse.abQuoteItem.premiumRateBA.isEmpty() ? "-":abQuoteResponse.abQuoteItem.premiumRateBA);
+//                            uploadObj.put("name",abQuoteResponse.abQuoteItem.name);
+////                            uploadObj.put("market",abQuoteResponse.abQuoteItem.market);//ios没有该字段
+//                            uploadObj.put("subtype",abQuoteResponse.abQuoteItem.subtype);
+//                            uploadObj.put("lastPrice",abQuoteResponse.abQuoteItem.lastPrice == "一" ? "-":abQuoteResponse.abQuoteItem.lastPrice);
+////                            uploadObj.put("preClosePrice",abQuoteResponse.abQuoteItem.preClosePrice == "一" ? "-":abQuoteResponse.abQuoteItem.preClosePrice);//ios没有该字段
+//                            uploadObj.put("change",abQuoteResponse.abQuoteItem.change == null ? "-":abQuoteResponse.abQuoteItem.change);
+//                            //涨跌幅
+//                            uploadObj.put("changeRate",abQuoteResponse.abQuoteItem.changeRate == null ? "-":abQuoteResponse.abQuoteItem.changeRate);
+//                            uploadObj.put("premiumRateAB",abQuoteResponse.abQuoteItem.premiumRateAB.isEmpty() ? "-":abQuoteResponse.abQuoteItem.premiumRateAB);
+//                            uploadObj.put("premiumRateBA",abQuoteResponse.abQuoteItem.premiumRateBA.isEmpty() ? "-":abQuoteResponse.abQuoteItem.premiumRateBA);
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

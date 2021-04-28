@@ -668,115 +668,115 @@ public class QuoteDetailTest_2 {
                                 uploadObj.put(brokerInfoItems2.get(i).state+"_"+String.valueOf(i+1),uploadObj_1);
                             }
                         }
-                        //增值指标
-                        if (quoteResponse.addValueModel!=null){
-                            ArrayList<AddValueModel> addValueModel=quoteResponse.addValueModel;
-                            for (AddValueModel item : addValueModel) {
-                                JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("code",item.code == null ? "-" : item.code);
-                                uploadObj_1.put("date",item.date == null ? "-" : item.date);
-                                uploadObj_1.put("time",item.time == null ? "-" : item.time);
-                                uploadObj_1.put("ultraLargeBuyVolume",item.ultraLargeBuyVolume == null ? "-" : item.ultraLargeBuyVolume);
-                                uploadObj_1.put("ultraLargeSellVolume",item.ultraLargeSellVolume == null ? "-" : item.ultraLargeSellVolume);
-                                uploadObj_1.put("ultraLargeBuyAmount",item.ultraLargeBuyAmount == null ? "-" : item.ultraLargeBuyAmount);
-                                uploadObj_1.put("ultraLargeSellAmount",item.ultraLargeSellAmount == null ? "-" : item.ultraLargeSellAmount);
-                                uploadObj_1.put("largeBuyVolume",item.largeBuyVolume == null ? "-" : item.largeBuyVolume);
-                                uploadObj_1.put("largeSellVolume",item.largeSellVolume == null ? "-" : item.largeSellVolume);
-                                uploadObj_1.put("largeBuyAmount",item.largeBuyAmount == null ? "-" : item.largeBuyAmount);
-                                uploadObj_1.put("largeSellAmount",item.largeSellAmount == null ? "-" : item.largeSellAmount);
-                                uploadObj_1.put("mediumBuyVolume",item.mediumBuyVolume == null ? "-" : item.mediumBuyVolume);
-                                uploadObj_1.put("mediumSellVolume",item.mediumSellVolume == null ? "-" : item.mediumSellVolume);
-                                uploadObj_1.put("mediumBuyAmount",item.mediumBuyAmount == null ? "-" : item.mediumBuyAmount);
-                                uploadObj_1.put("mediumSellAmount",item.mediumSellAmount == null ? "-" : item.mediumSellAmount);
-                                uploadObj_1.put("smallBuyVolume",item.smallBuyVolume == null ? "-" : item.smallBuyVolume);
-                                uploadObj_1.put("smallSellVolume",item.smallSellVolume == null ? "-" : item.smallSellVolume);
-                                uploadObj_1.put("smallBuyAmount",item.smallBuyAmount == null ? "-" : item.smallBuyAmount);
-                                uploadObj_1.put("smallSellAmount",item.smallSellAmount == null ? "-" : item.smallSellAmount);
-                                uploadObj_1.put("ultraLargeNetInflow",item.ultraLargeNetInflow == null ? "-" : item.ultraLargeNetInflow);
-                                uploadObj_1.put("largeNetInflow",item.largeNetInflow == null ? "-" : item.largeNetInflow);
-                                uploadObj_1.put("netCapitalInflow",item.netCapitalInflow == null ? "-" : item.netCapitalInflow);
-                                uploadObj_1.put("mediumNetInflow",item.mediumNetInflow == null ? "-" : item.mediumNetInflow);
-                                uploadObj_1.put("smallNetInflow",item.smallNetInflow == null ? "-" : item.smallNetInflow);
-
-                                List<String> fundsInflows=new ArrayList<>();
-                                if (item.fundsInflows!=null&&item.fundsInflows.length>0){
-                                    for (int j=0;j<item.fundsInflows.length;j++){
-                                        fundsInflows.add(item.fundsInflows[j] == null ? "-" : item.fundsInflows[j]);
-                                    }
-                                    uploadObj_1.put("fundsInflows",new JSONArray(fundsInflows));
-                                }else {
-                                    uploadObj_1.put("fundsInflows",item.fundsInflows == null ? "-" : item.fundsInflows);
-                                }
-
-                                List<String> fundsOutflows=new ArrayList<>();
-                                if (item.fundsOutflows!=null&&item.fundsOutflows.length>0){
-                                    for (int j=0;j<item.fundsOutflows.length;j++){
-                                        fundsOutflows.add(item.fundsOutflows[j] == null ? "-" : item.fundsOutflows[j]);
-                                    }
-                                    uploadObj_1.put("fundsOutflows",new JSONArray(fundsOutflows));
-                                }else {
-                                    uploadObj_1.put("fundsOutflows",item.fundsOutflows == null ? "-" : item.fundsOutflows);
-                                }
-
-                                uploadObj_1.put("ultraLargeDiffer",item.ultraLargeDiffer == null ? "-" : item.ultraLargeDiffer);
-                                uploadObj_1.put("largeDiffer",item.largeDiffer == null ? "-" : item.largeDiffer);
-                                uploadObj_1.put("mediumDiffer",item.mediumDiffer == null ? "-" : item.mediumDiffer);
-                                uploadObj_1.put("smallDiffer",item.smallDiffer == null ? "-" : item.smallDiffer);
-                                uploadObj_1.put("largeBuyDealCount",item.largeBuyDealCount == null ? "-" : item.largeBuyDealCount);
-                                uploadObj_1.put("largeSellDealCount",item.largeSellDealCount == null ? "-" : item.largeSellDealCount);
-                                uploadObj_1.put("dealCountMovingAverage",item.dealCountMovingAverage == null ? "-" : item.dealCountMovingAverage);
-                                uploadObj_1.put("buyCount",item.buyCount == null ? "-" : item.buyCount);
-                                uploadObj_1.put("sellCount",item.sellCount == null ? "-" : item.sellCount);
-                                uploadObj_1.put("BBD",item.BBD == null ? "-" : item.BBD);
-                                uploadObj_1.put("BBD5",item.BBD5 == null ? "-" : item.BBD5);
-                                uploadObj_1.put("BBD10",item.BBD10 == null ? "-" : item.BBD10);
-                                uploadObj_1.put("DDX",item.DDX == null ? "-" : item.DDX);
-                                uploadObj_1.put("DDX5",item.DDX5 == null ? "-" : item.DDX5);
-                                uploadObj_1.put("DDX10",item.DDX10 == null ? "-" : item.DDX10);
-                                uploadObj_1.put("DDY",item.DDY == null ? "-" : item.DDY);
-                                uploadObj_1.put("DDY5",item.DDY5 == null ? "-" : item.DDY5);
-                                uploadObj_1.put("DDY10",item.DDY10 == null ? "-" : item.DDY10);
-                                uploadObj_1.put("DDZ",item.DDZ == null ? "-" : item.DDZ);
-                                uploadObj_1.put("RatioBS",item.RatioBS == null ? "-" : item.RatioBS);
-
-                                List<String> othersFundsInflows=new ArrayList<>();
-                                if (item.othersFundsInflows!=null&&item.othersFundsInflows.length>0){
-                                    for (int j=0;j<item.othersFundsInflows.length;j++){
-                                        othersFundsInflows.add(item.othersFundsInflows[j] == null ? "-" : item.othersFundsInflows[j]);
-                                    }
-                                    uploadObj_1.put("othersFundsInflows",new JSONArray(othersFundsInflows));
-                                }else {
-                                    uploadObj_1.put("othersFundsInflows",item.othersFundsInflows == null ? "-" : item.othersFundsInflows);
-                                }
-
-                                List<String> othersFundsOutflows=new ArrayList<>();
-                                if (item.othersFundsOutflows!=null&&item.othersFundsOutflows.length>0){
-                                    for (int j=0;j<item.othersFundsOutflows.length;j++){
-                                        othersFundsOutflows.add(item.othersFundsOutflows[j] == null ? "-" : item.othersFundsOutflows[j]);
-                                    }
-                                    uploadObj_1.put("othersFundsOutflows",new JSONArray(othersFundsOutflows));
-                                }else {
-                                    uploadObj_1.put("othersFundsOutflows",item.othersFundsOutflows == null ? "-" : item.othersFundsOutflows);
-                                }
-
-                                uploadObj_1.put("fiveMinutesChangeRate",item.fiveMinutesChangeRate == null ? "-" : item.fiveMinutesChangeRate);
-                                uploadObj_1.put("largeOrderNumB",item.largeOrderNumB == null ? "-" : item.largeOrderNumB);
-                                uploadObj_1.put("largeOrderNumS",item.largeOrderNumS == null ? "-" : item.largeOrderNumS);
-                                uploadObj_1.put("bigOrderNumB",item.bigOrderNumB == null ? "-" : item.bigOrderNumB);
-                                uploadObj_1.put("bigOrderNumS",item.bigOrderNumS == null ? "-" : item.bigOrderNumS);
-                                uploadObj_1.put("midOrderNumB",item.midOrderNumB == null ? "-" : item.midOrderNumB);
-                                uploadObj_1.put("midOrderNumS",item.midOrderNumS == null ? "-" : item.midOrderNumS);
-                                uploadObj_1.put("smallOrderNumB",item.smallOrderNumB == null ? "-" : item.smallOrderNumB);
-                                uploadObj_1.put("smallOrderNumS",item.smallOrderNumS == null ? "-" : item.smallOrderNumS);
-                                uploadObj_1.put("mainforceMoneyNetInflow5",item.mainforceMoneyNetInflow5 == null ? "-" : item.mainforceMoneyNetInflow5);
-                                uploadObj_1.put("mainforceMoneyNetInflow10",item.mainforceMoneyNetInflow10 == null ? "-" : item.mainforceMoneyNetInflow10);
-                                uploadObj_1.put("mainforceMoneyNetInflow20",item.mainforceMoneyNetInflow20 == null ? "-" : item.mainforceMoneyNetInflow20);
-                                uploadObj_1.put("ratioMainforceMoneyNetInflow5",item.ratioMainforceMoneyNetInflow5 == null ? "-" : item.ratioMainforceMoneyNetInflow5);
-                                uploadObj_1.put("ratioMainforceMoneyNetInflow10",item.ratioMainforceMoneyNetInflow10 == null ? "-" : item.ratioMainforceMoneyNetInflow10);
-                                uploadObj_1.put("ratioMainforceMoneyNetInflow20",item.ratioMainforceMoneyNetInflow20 == null ? "-" : item.ratioMainforceMoneyNetInflow20);
-                                uploadObj.put("addValue",uploadObj_1);
-                            }
-                        }
+//                        //增值指标
+//                        if (quoteResponse.addValueModel!=null){
+//                            ArrayList<AddValueModel> addValueModel=quoteResponse.addValueModel;
+//                            for (AddValueModel item : addValueModel) {
+//                                JSONObject uploadObj_1 = new JSONObject();
+//                                uploadObj_1.put("code",item.code == null ? "-" : item.code);
+//                                uploadObj_1.put("date",item.date == null ? "-" : item.date);
+//                                uploadObj_1.put("time",item.time == null ? "-" : item.time);
+//                                uploadObj_1.put("ultraLargeBuyVolume",item.ultraLargeBuyVolume == null ? "-" : item.ultraLargeBuyVolume);
+//                                uploadObj_1.put("ultraLargeSellVolume",item.ultraLargeSellVolume == null ? "-" : item.ultraLargeSellVolume);
+//                                uploadObj_1.put("ultraLargeBuyAmount",item.ultraLargeBuyAmount == null ? "-" : item.ultraLargeBuyAmount);
+//                                uploadObj_1.put("ultraLargeSellAmount",item.ultraLargeSellAmount == null ? "-" : item.ultraLargeSellAmount);
+//                                uploadObj_1.put("largeBuyVolume",item.largeBuyVolume == null ? "-" : item.largeBuyVolume);
+//                                uploadObj_1.put("largeSellVolume",item.largeSellVolume == null ? "-" : item.largeSellVolume);
+//                                uploadObj_1.put("largeBuyAmount",item.largeBuyAmount == null ? "-" : item.largeBuyAmount);
+//                                uploadObj_1.put("largeSellAmount",item.largeSellAmount == null ? "-" : item.largeSellAmount);
+//                                uploadObj_1.put("mediumBuyVolume",item.mediumBuyVolume == null ? "-" : item.mediumBuyVolume);
+//                                uploadObj_1.put("mediumSellVolume",item.mediumSellVolume == null ? "-" : item.mediumSellVolume);
+//                                uploadObj_1.put("mediumBuyAmount",item.mediumBuyAmount == null ? "-" : item.mediumBuyAmount);
+//                                uploadObj_1.put("mediumSellAmount",item.mediumSellAmount == null ? "-" : item.mediumSellAmount);
+//                                uploadObj_1.put("smallBuyVolume",item.smallBuyVolume == null ? "-" : item.smallBuyVolume);
+//                                uploadObj_1.put("smallSellVolume",item.smallSellVolume == null ? "-" : item.smallSellVolume);
+//                                uploadObj_1.put("smallBuyAmount",item.smallBuyAmount == null ? "-" : item.smallBuyAmount);
+//                                uploadObj_1.put("smallSellAmount",item.smallSellAmount == null ? "-" : item.smallSellAmount);
+//                                uploadObj_1.put("ultraLargeNetInflow",item.ultraLargeNetInflow == null ? "-" : item.ultraLargeNetInflow);
+//                                uploadObj_1.put("largeNetInflow",item.largeNetInflow == null ? "-" : item.largeNetInflow);
+//                                uploadObj_1.put("netCapitalInflow",item.netCapitalInflow == null ? "-" : item.netCapitalInflow);
+//                                uploadObj_1.put("mediumNetInflow",item.mediumNetInflow == null ? "-" : item.mediumNetInflow);
+//                                uploadObj_1.put("smallNetInflow",item.smallNetInflow == null ? "-" : item.smallNetInflow);
+//
+//                                List<String> fundsInflows=new ArrayList<>();
+//                                if (item.fundsInflows!=null&&item.fundsInflows.length>0){
+//                                    for (int j=0;j<item.fundsInflows.length;j++){
+//                                        fundsInflows.add(item.fundsInflows[j] == null ? "-" : item.fundsInflows[j]);
+//                                    }
+//                                    uploadObj_1.put("fundsInflows",new JSONArray(fundsInflows));
+//                                }else {
+//                                    uploadObj_1.put("fundsInflows",item.fundsInflows == null ? "-" : item.fundsInflows);
+//                                }
+//
+//                                List<String> fundsOutflows=new ArrayList<>();
+//                                if (item.fundsOutflows!=null&&item.fundsOutflows.length>0){
+//                                    for (int j=0;j<item.fundsOutflows.length;j++){
+//                                        fundsOutflows.add(item.fundsOutflows[j] == null ? "-" : item.fundsOutflows[j]);
+//                                    }
+//                                    uploadObj_1.put("fundsOutflows",new JSONArray(fundsOutflows));
+//                                }else {
+//                                    uploadObj_1.put("fundsOutflows",item.fundsOutflows == null ? "-" : item.fundsOutflows);
+//                                }
+//
+//                                uploadObj_1.put("ultraLargeDiffer",item.ultraLargeDiffer == null ? "-" : item.ultraLargeDiffer);
+//                                uploadObj_1.put("largeDiffer",item.largeDiffer == null ? "-" : item.largeDiffer);
+//                                uploadObj_1.put("mediumDiffer",item.mediumDiffer == null ? "-" : item.mediumDiffer);
+//                                uploadObj_1.put("smallDiffer",item.smallDiffer == null ? "-" : item.smallDiffer);
+//                                uploadObj_1.put("largeBuyDealCount",item.largeBuyDealCount == null ? "-" : item.largeBuyDealCount);
+//                                uploadObj_1.put("largeSellDealCount",item.largeSellDealCount == null ? "-" : item.largeSellDealCount);
+//                                uploadObj_1.put("dealCountMovingAverage",item.dealCountMovingAverage == null ? "-" : item.dealCountMovingAverage);
+//                                uploadObj_1.put("buyCount",item.buyCount == null ? "-" : item.buyCount);
+//                                uploadObj_1.put("sellCount",item.sellCount == null ? "-" : item.sellCount);
+//                                uploadObj_1.put("BBD",item.BBD == null ? "-" : item.BBD);
+//                                uploadObj_1.put("BBD5",item.BBD5 == null ? "-" : item.BBD5);
+//                                uploadObj_1.put("BBD10",item.BBD10 == null ? "-" : item.BBD10);
+//                                uploadObj_1.put("DDX",item.DDX == null ? "-" : item.DDX);
+//                                uploadObj_1.put("DDX5",item.DDX5 == null ? "-" : item.DDX5);
+//                                uploadObj_1.put("DDX10",item.DDX10 == null ? "-" : item.DDX10);
+//                                uploadObj_1.put("DDY",item.DDY == null ? "-" : item.DDY);
+//                                uploadObj_1.put("DDY5",item.DDY5 == null ? "-" : item.DDY5);
+//                                uploadObj_1.put("DDY10",item.DDY10 == null ? "-" : item.DDY10);
+//                                uploadObj_1.put("DDZ",item.DDZ == null ? "-" : item.DDZ);
+//                                uploadObj_1.put("RatioBS",item.RatioBS == null ? "-" : item.RatioBS);
+//
+//                                List<String> othersFundsInflows=new ArrayList<>();
+//                                if (item.othersFundsInflows!=null&&item.othersFundsInflows.length>0){
+//                                    for (int j=0;j<item.othersFundsInflows.length;j++){
+//                                        othersFundsInflows.add(item.othersFundsInflows[j] == null ? "-" : item.othersFundsInflows[j]);
+//                                    }
+//                                    uploadObj_1.put("othersFundsInflows",new JSONArray(othersFundsInflows));
+//                                }else {
+//                                    uploadObj_1.put("othersFundsInflows",item.othersFundsInflows == null ? "-" : item.othersFundsInflows);
+//                                }
+//
+//                                List<String> othersFundsOutflows=new ArrayList<>();
+//                                if (item.othersFundsOutflows!=null&&item.othersFundsOutflows.length>0){
+//                                    for (int j=0;j<item.othersFundsOutflows.length;j++){
+//                                        othersFundsOutflows.add(item.othersFundsOutflows[j] == null ? "-" : item.othersFundsOutflows[j]);
+//                                    }
+//                                    uploadObj_1.put("othersFundsOutflows",new JSONArray(othersFundsOutflows));
+//                                }else {
+//                                    uploadObj_1.put("othersFundsOutflows",item.othersFundsOutflows == null ? "-" : item.othersFundsOutflows);
+//                                }
+//
+//                                uploadObj_1.put("fiveMinutesChangeRate",item.fiveMinutesChangeRate == null ? "-" : item.fiveMinutesChangeRate);
+//                                uploadObj_1.put("largeOrderNumB",item.largeOrderNumB == null ? "-" : item.largeOrderNumB);
+//                                uploadObj_1.put("largeOrderNumS",item.largeOrderNumS == null ? "-" : item.largeOrderNumS);
+//                                uploadObj_1.put("bigOrderNumB",item.bigOrderNumB == null ? "-" : item.bigOrderNumB);
+//                                uploadObj_1.put("bigOrderNumS",item.bigOrderNumS == null ? "-" : item.bigOrderNumS);
+//                                uploadObj_1.put("midOrderNumB",item.midOrderNumB == null ? "-" : item.midOrderNumB);
+//                                uploadObj_1.put("midOrderNumS",item.midOrderNumS == null ? "-" : item.midOrderNumS);
+//                                uploadObj_1.put("smallOrderNumB",item.smallOrderNumB == null ? "-" : item.smallOrderNumB);
+//                                uploadObj_1.put("smallOrderNumS",item.smallOrderNumS == null ? "-" : item.smallOrderNumS);
+//                                uploadObj_1.put("mainforceMoneyNetInflow5",item.mainforceMoneyNetInflow5 == null ? "-" : item.mainforceMoneyNetInflow5);
+//                                uploadObj_1.put("mainforceMoneyNetInflow10",item.mainforceMoneyNetInflow10 == null ? "-" : item.mainforceMoneyNetInflow10);
+//                                uploadObj_1.put("mainforceMoneyNetInflow20",item.mainforceMoneyNetInflow20 == null ? "-" : item.mainforceMoneyNetInflow20);
+//                                uploadObj_1.put("ratioMainforceMoneyNetInflow5",item.ratioMainforceMoneyNetInflow5 == null ? "-" : item.ratioMainforceMoneyNetInflow5);
+//                                uploadObj_1.put("ratioMainforceMoneyNetInflow10",item.ratioMainforceMoneyNetInflow10 == null ? "-" : item.ratioMainforceMoneyNetInflow10);
+//                                uploadObj_1.put("ratioMainforceMoneyNetInflow20",item.ratioMainforceMoneyNetInflow20 == null ? "-" : item.ratioMainforceMoneyNetInflow20);
+//                                uploadObj.put("addValue",uploadObj_1);
+//                            }
+//                        }
                     }
                 } catch (JSONException e) {
                     result.completeExceptionally(e);

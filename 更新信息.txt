@@ -1,4 +1,34 @@
-20210222   by  liubin
+20210412    by  liubin
+1、逐笔委托tcp   TCP_L2TickEntrustTest_1
+2、逐笔还原tcp   TCP_L2TickRestoreTest_1
+3、千档行情tcp   TCP_ThousandsQuoteTest_1
+4、全息队列tcp   TCP_ThousandsQueueTest_1
+
+20210406    by  liubin
+1、逐笔委托接口    L2TickEntrustTest_1
+2、逐笔还原接口    L2TickRestoreTest_1
+
+20210402    by  liubin
+1、修改脚步（注释脚本中不需要对比的字段）
+接口方法包括 ：
+AB股列表接口 方法一 ABQuoteListTest_1
+AB股联动接口 方法一 ABQuoteTest_1
+AH股列表 方法一   AHListTest_1
+AH股列表 方法二   AHListTest_2
+AH股联动 方法一   AHQuoteTest_1
+可转债溢价查询 方法一 ConvertibleDebTest_1
+可转债获取列表 方法一 ConvertibleDebtListTest_1
+CDR,GDR联动   方法一 DRLinkQuoteTest_1
+CDR,GDR列表   方法一 DRQuoteListTest_1
+期权——标的行情 方法一    OptionListTest_1
+期权——T型报价    方法一 OptionTQuoteTest_1   暂未修改
+走势叠加    方法一 OverLayChartTest_1          暂未改
+走势叠加    方法二 OverLayChartTest_2          暂未改
+行情快照 方法一    QuoteDetailTest_1
+行情快照 方法二    QuoteDetailTest_2
+证券行情列表 方法一  QuoteTest_1
+证券行情列表 方法二  QuoteTest_2
+20210222    by  liubin
 1、F10通用方法一,F10V2Test_1,各接口返回数据为列表(infos)的标识字段修改为 i+1
 以下为需要修改的F10通用中的接口信息
 //主营构成                           String D_BUSINESSINFO = "/businessinfo";

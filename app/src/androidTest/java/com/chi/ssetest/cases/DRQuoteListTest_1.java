@@ -97,22 +97,22 @@ public class DRQuoteListTest_1 {
                             for (int i=0;i<drQuoteListResponse.mDRQuoteItems.size();i++) {
                                 JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("code",drQuoteListResponse.mDRQuoteItems.get(i).code);
-                                uploadObj_1.put("name", drQuoteListResponse.mDRQuoteItems.get(i).name);
-                                uploadObj_1.put("lastPrice", drQuoteListResponse.mDRQuoteItems.get(i).lastPrice);
-                                uploadObj_1.put("preClosePrice", drQuoteListResponse.mDRQuoteItems.get(i).preClosePrice);
-                                uploadObj_1.put("change",drQuoteListResponse.mDRQuoteItems.get(i).change);
-                                uploadObj_1.put("changeRate", drQuoteListResponse.mDRQuoteItems.get(i).changeRate);
-                                uploadObj_1.put("subType", drQuoteListResponse.mDRQuoteItems.get(i).subType);
-                                uploadObj_1.put("dateTime", drQuoteListResponse.mDRQuoteItems.get(i).dateTime);
-                                uploadObj_1.put("premium", drQuoteListResponse.mDRQuoteItems.get(i).premium);
+//                                uploadObj_1.put("name", drQuoteListResponse.mDRQuoteItems.get(i).name);
+//                                uploadObj_1.put("lastPrice", drQuoteListResponse.mDRQuoteItems.get(i).lastPrice);
+//                                uploadObj_1.put("preClosePrice", drQuoteListResponse.mDRQuoteItems.get(i).preClosePrice);
+//                                uploadObj_1.put("change",drQuoteListResponse.mDRQuoteItems.get(i).change);
+//                                uploadObj_1.put("changeRate", drQuoteListResponse.mDRQuoteItems.get(i).changeRate);
+//                                uploadObj_1.put("subType", drQuoteListResponse.mDRQuoteItems.get(i).subType);
+//                                uploadObj_1.put("dateTime", drQuoteListResponse.mDRQuoteItems.get(i).dateTime);
+//                                uploadObj_1.put("premium", drQuoteListResponse.mDRQuoteItems.get(i).premium);
                                 uploadObj_1.put("baseCode",drQuoteListResponse.mDRQuoteItems.get(i).baseCode);
-                                uploadObj_1.put("baseName",drQuoteListResponse.mDRQuoteItems.get(i).baseName);
-                                uploadObj_1.put("baseLastPrice",drQuoteListResponse.mDRQuoteItems.get(i).baseLastPrice);
-                                uploadObj_1.put("basePreClosePrice",drQuoteListResponse.mDRQuoteItems.get(i).basePreClosePrice);
-                                uploadObj_1.put("baseChange",drQuoteListResponse.mDRQuoteItems.get(i).baseChange);
-                                uploadObj_1.put("baseChangeRate",drQuoteListResponse.mDRQuoteItems.get(i).baseChangeRate);
-                                uploadObj_1.put("baseSubtype",drQuoteListResponse.mDRQuoteItems.get(i).baseSubtype);
-                                uploadObj_1.put("baseDateTime",drQuoteListResponse.mDRQuoteItems.get(i).baseDateTime);
+//                                uploadObj_1.put("baseName",drQuoteListResponse.mDRQuoteItems.get(i).baseName);
+//                                uploadObj_1.put("baseLastPrice",drQuoteListResponse.mDRQuoteItems.get(i).baseLastPrice);
+//                                uploadObj_1.put("basePreClosePrice",drQuoteListResponse.mDRQuoteItems.get(i).basePreClosePrice);
+//                                uploadObj_1.put("baseChange",drQuoteListResponse.mDRQuoteItems.get(i).baseChange);
+//                                uploadObj_1.put("baseChangeRate",drQuoteListResponse.mDRQuoteItems.get(i).baseChangeRate);
+//                                uploadObj_1.put("baseSubtype",drQuoteListResponse.mDRQuoteItems.get(i).baseSubtype);
+//                                uploadObj_1.put("baseDateTime",drQuoteListResponse.mDRQuoteItems.get(i).baseDateTime);
 //                            Log.d("data", String.valueOf(uploadObj_1));
                                 uploadObj.put(String.valueOf(i+1),uploadObj_1);
                             }
