@@ -388,115 +388,115 @@ public class QuoteTest_2 {
                             uploadObj_1.put("sellAuctionRange", list.sellAuctionRange == null ? "-" : "["+ list.sellAuctionRange[0]+","+list.sellAuctionRange[1]+"]");
                             uploadObj_1.put("afterHoursBuyQtyUpperLimit", list.afterHoursBuyQtyUpperLimit == null ? "-" : list.afterHoursBuyQtyUpperLimit);
                             uploadObj_1.put("afterHoursSellQtyUpperLimit", list.afterHoursSellQtyUpperLimit == null ? "-" : list.afterHoursSellQtyUpperLimit);
-                            //增值指标
-                            if (!"null".equals(INTS2[0])){
-                                ArrayList<AddValueModel> addValueModels=quoteResponse.addValueModel;
-                                for (AddValueModel item : addValueModels) {
-                                    JSONObject uploadObj_2 = new JSONObject();
-                                    uploadObj_2.put("code",item.code);
-                                    uploadObj_2.put("date",item.date);
-                                    uploadObj_2.put("time",item.time);
-                                    uploadObj_2.put("ultraLargeBuyVolume",item.ultraLargeBuyVolume);
-                                    uploadObj_2.put("ultraLargeSellVolume",item.ultraLargeSellVolume);
-                                    uploadObj_2.put("ultraLargeBuyAmount",item.ultraLargeBuyAmount);
-                                    uploadObj_2.put("ultraLargeSellAmount",item.ultraLargeSellAmount);
-                                    uploadObj_2.put("largeBuyVolume",item.largeBuyVolume);
-                                    uploadObj_2.put("largeSellVolume",item.largeSellVolume);
-                                    uploadObj_2.put("largeBuyAmount",item.largeBuyAmount);
-                                    uploadObj_2.put("largeSellAmount",item.largeSellAmount);
-                                    uploadObj_2.put("mediumBuyVolume",item.mediumBuyVolume);
-                                    uploadObj_2.put("mediumSellVolume",item.mediumSellVolume);
-                                    uploadObj_2.put("mediumBuyAmount",item.mediumBuyAmount);
-                                    uploadObj_2.put("mediumSellAmount",item.mediumSellAmount);
-                                    uploadObj_2.put("smallBuyVolume",item.smallBuyVolume);
-                                    uploadObj_2.put("smallSellVolume",item.smallSellVolume);
-                                    uploadObj_2.put("smallBuyAmount",item.smallBuyAmount);
-                                    uploadObj_2.put("smallSellAmount",item.smallSellAmount);
-                                    uploadObj_2.put("ultraLargeNetInflow",item.ultraLargeNetInflow);
-                                    uploadObj_2.put("largeNetInflow",item.largeNetInflow);
-                                    uploadObj_2.put("netCapitalInflow",item.netCapitalInflow);
-                                    uploadObj_2.put("mediumNetInflow",item.mediumNetInflow);
-                                    uploadObj_2.put("smallNetInflow",item.smallNetInflow);
-
-                                    List<String> fundsInflows=new ArrayList<>();
-                                    if (item.fundsInflows!=null&&item.fundsInflows.length>0){
-                                        for (int j=0;j<item.fundsInflows.length;j++){
-                                            fundsInflows.add(item.fundsInflows[j]);
-                                        }
-                                        uploadObj_2.put("fundsInflows",new JSONArray(fundsInflows));
-                                    }else {
-                                        uploadObj_2.put("fundsInflows",item.fundsInflows);
-                                    }
-
-                                    List<String> fundsOutflows=new ArrayList<>();
-                                    if (item.fundsOutflows!=null&&item.fundsOutflows.length>0){
-                                        for (int j=0;j<item.fundsOutflows.length;j++){
-                                            fundsOutflows.add(item.fundsOutflows[j]);
-                                        }
-                                        uploadObj_2.put("fundsOutflows",new JSONArray(fundsOutflows));
-                                    }else {
-                                        uploadObj_2.put("fundsOutflows",item.fundsOutflows);
-                                    }
-
-                                    uploadObj_2.put("ultraLargeDiffer",item.ultraLargeDiffer);
-                                    uploadObj_2.put("largeDiffer",item.largeDiffer);
-                                    uploadObj_2.put("mediumDiffer",item.mediumDiffer);
-                                    uploadObj_2.put("smallDiffer",item.smallDiffer);
-                                    uploadObj_2.put("largeBuyDealCount",item.largeBuyDealCount);
-                                    uploadObj_2.put("largeSellDealCount",item.largeSellDealCount);
-                                    uploadObj_2.put("dealCountMovingAverage",item.dealCountMovingAverage);
-                                    uploadObj_2.put("buyCount",item.buyCount);
-                                    uploadObj_2.put("sellCount",item.sellCount);
-                                    uploadObj_2.put("BBD",item.BBD);
-                                    uploadObj_2.put("BBD5",item.BBD5);
-                                    uploadObj_2.put("BBD10",item.BBD10);
-                                    uploadObj_2.put("DDX",item.DDX);
-                                    uploadObj_2.put("DDX5",item.DDX5);
-                                    uploadObj_2.put("DDX10",item.DDX10);
-                                    uploadObj_2.put("DDY",item.DDY);
-                                    uploadObj_2.put("DDY5",item.DDY5);
-                                    uploadObj_2.put("DDY10",item.DDY10);
-                                    uploadObj_2.put("DDZ",item.DDZ);
-                                    uploadObj_2.put("RatioBS",item.RatioBS);
-
-                                    List<String> othersFundsInflows=new ArrayList<>();
-                                    if (item.othersFundsInflows!=null&&item.othersFundsInflows.length>0){
-                                        for (int j=0;j<item.othersFundsInflows.length;j++){
-                                            othersFundsInflows.add(item.othersFundsInflows[j]);
-                                        }
-                                        uploadObj_2.put("othersFundsInflows",new JSONArray(othersFundsInflows));
-                                    }else {
-                                        uploadObj_2.put("othersFundsInflows",item.othersFundsInflows);
-                                    }
-
-                                    List<String> othersFundsOutflows=new ArrayList<>();
-                                    if (item.othersFundsOutflows!=null&&item.othersFundsOutflows.length>0){
-                                        for (int j=0;j<item.othersFundsOutflows.length;j++){
-                                            othersFundsOutflows.add(item.othersFundsOutflows[j]);
-                                        }
-                                        uploadObj_2.put("othersFundsOutflows",new JSONArray(othersFundsOutflows));
-                                    }else {
-                                        uploadObj_2.put("othersFundsOutflows",item.othersFundsOutflows);
-                                    }
-
-                                    uploadObj_2.put("fiveMinutesChangeRate",item.fiveMinutesChangeRate);
-                                    uploadObj_2.put("largeOrderNumB",item.largeOrderNumB);
-                                    uploadObj_2.put("largeOrderNumS",item.largeOrderNumS);
-                                    uploadObj_2.put("bigOrderNumB",item.bigOrderNumB);
-                                    uploadObj_2.put("bigOrderNumS",item.bigOrderNumS);
-                                    uploadObj_2.put("midOrderNumB",item.midOrderNumB);
-                                    uploadObj_2.put("midOrderNumS",item.midOrderNumS);
-                                    uploadObj_2.put("smallOrderNumB",item.smallOrderNumB);
-                                    uploadObj_2.put("smallOrderNumS",item.smallOrderNumS);
-                                    uploadObj_2.put("mainforceMoneyNetInflow5",item.mainforceMoneyNetInflow5);
-                                    uploadObj_2.put("mainforceMoneyNetInflow10",item.mainforceMoneyNetInflow10);
-                                    uploadObj_2.put("mainforceMoneyNetInflow20",item.mainforceMoneyNetInflow20);
-                                    uploadObj_2.put("ratioMainforceMoneyNetInflow5",item.ratioMainforceMoneyNetInflow5);
-                                    uploadObj_2.put("ratioMainforceMoneyNetInflow10",item.ratioMainforceMoneyNetInflow10);
-                                    uploadObj_2.put("ratioMainforceMoneyNetInflow20",item.ratioMainforceMoneyNetInflow20);
-                                    uploadObj_1.put("addValue",uploadObj_2);
-                                }
-                            }
+//                            //增值指标
+//                            if (!"null".equals(INTS2[0])){
+//                                ArrayList<AddValueModel> addValueModels=quoteResponse.addValueModel;
+//                                for (AddValueModel item : addValueModels) {
+//                                    JSONObject uploadObj_2 = new JSONObject();
+//                                    uploadObj_2.put("code",item.code);
+//                                    uploadObj_2.put("date",item.date);
+//                                    uploadObj_2.put("time",item.time);
+//                                    uploadObj_2.put("ultraLargeBuyVolume",item.ultraLargeBuyVolume);
+//                                    uploadObj_2.put("ultraLargeSellVolume",item.ultraLargeSellVolume);
+//                                    uploadObj_2.put("ultraLargeBuyAmount",item.ultraLargeBuyAmount);
+//                                    uploadObj_2.put("ultraLargeSellAmount",item.ultraLargeSellAmount);
+//                                    uploadObj_2.put("largeBuyVolume",item.largeBuyVolume);
+//                                    uploadObj_2.put("largeSellVolume",item.largeSellVolume);
+//                                    uploadObj_2.put("largeBuyAmount",item.largeBuyAmount);
+//                                    uploadObj_2.put("largeSellAmount",item.largeSellAmount);
+//                                    uploadObj_2.put("mediumBuyVolume",item.mediumBuyVolume);
+//                                    uploadObj_2.put("mediumSellVolume",item.mediumSellVolume);
+//                                    uploadObj_2.put("mediumBuyAmount",item.mediumBuyAmount);
+//                                    uploadObj_2.put("mediumSellAmount",item.mediumSellAmount);
+//                                    uploadObj_2.put("smallBuyVolume",item.smallBuyVolume);
+//                                    uploadObj_2.put("smallSellVolume",item.smallSellVolume);
+//                                    uploadObj_2.put("smallBuyAmount",item.smallBuyAmount);
+//                                    uploadObj_2.put("smallSellAmount",item.smallSellAmount);
+//                                    uploadObj_2.put("ultraLargeNetInflow",item.ultraLargeNetInflow);
+//                                    uploadObj_2.put("largeNetInflow",item.largeNetInflow);
+//                                    uploadObj_2.put("netCapitalInflow",item.netCapitalInflow);
+//                                    uploadObj_2.put("mediumNetInflow",item.mediumNetInflow);
+//                                    uploadObj_2.put("smallNetInflow",item.smallNetInflow);
+//
+//                                    List<String> fundsInflows=new ArrayList<>();
+//                                    if (item.fundsInflows!=null&&item.fundsInflows.length>0){
+//                                        for (int j=0;j<item.fundsInflows.length;j++){
+//                                            fundsInflows.add(item.fundsInflows[j]);
+//                                        }
+//                                        uploadObj_2.put("fundsInflows",new JSONArray(fundsInflows));
+//                                    }else {
+//                                        uploadObj_2.put("fundsInflows",item.fundsInflows);
+//                                    }
+//
+//                                    List<String> fundsOutflows=new ArrayList<>();
+//                                    if (item.fundsOutflows!=null&&item.fundsOutflows.length>0){
+//                                        for (int j=0;j<item.fundsOutflows.length;j++){
+//                                            fundsOutflows.add(item.fundsOutflows[j]);
+//                                        }
+//                                        uploadObj_2.put("fundsOutflows",new JSONArray(fundsOutflows));
+//                                    }else {
+//                                        uploadObj_2.put("fundsOutflows",item.fundsOutflows);
+//                                    }
+//
+//                                    uploadObj_2.put("ultraLargeDiffer",item.ultraLargeDiffer);
+//                                    uploadObj_2.put("largeDiffer",item.largeDiffer);
+//                                    uploadObj_2.put("mediumDiffer",item.mediumDiffer);
+//                                    uploadObj_2.put("smallDiffer",item.smallDiffer);
+//                                    uploadObj_2.put("largeBuyDealCount",item.largeBuyDealCount);
+//                                    uploadObj_2.put("largeSellDealCount",item.largeSellDealCount);
+//                                    uploadObj_2.put("dealCountMovingAverage",item.dealCountMovingAverage);
+//                                    uploadObj_2.put("buyCount",item.buyCount);
+//                                    uploadObj_2.put("sellCount",item.sellCount);
+//                                    uploadObj_2.put("BBD",item.BBD);
+//                                    uploadObj_2.put("BBD5",item.BBD5);
+//                                    uploadObj_2.put("BBD10",item.BBD10);
+//                                    uploadObj_2.put("DDX",item.DDX);
+//                                    uploadObj_2.put("DDX5",item.DDX5);
+//                                    uploadObj_2.put("DDX10",item.DDX10);
+//                                    uploadObj_2.put("DDY",item.DDY);
+//                                    uploadObj_2.put("DDY5",item.DDY5);
+//                                    uploadObj_2.put("DDY10",item.DDY10);
+//                                    uploadObj_2.put("DDZ",item.DDZ);
+//                                    uploadObj_2.put("RatioBS",item.RatioBS);
+//
+//                                    List<String> othersFundsInflows=new ArrayList<>();
+//                                    if (item.othersFundsInflows!=null&&item.othersFundsInflows.length>0){
+//                                        for (int j=0;j<item.othersFundsInflows.length;j++){
+//                                            othersFundsInflows.add(item.othersFundsInflows[j]);
+//                                        }
+//                                        uploadObj_2.put("othersFundsInflows",new JSONArray(othersFundsInflows));
+//                                    }else {
+//                                        uploadObj_2.put("othersFundsInflows",item.othersFundsInflows);
+//                                    }
+//
+//                                    List<String> othersFundsOutflows=new ArrayList<>();
+//                                    if (item.othersFundsOutflows!=null&&item.othersFundsOutflows.length>0){
+//                                        for (int j=0;j<item.othersFundsOutflows.length;j++){
+//                                            othersFundsOutflows.add(item.othersFundsOutflows[j]);
+//                                        }
+//                                        uploadObj_2.put("othersFundsOutflows",new JSONArray(othersFundsOutflows));
+//                                    }else {
+//                                        uploadObj_2.put("othersFundsOutflows",item.othersFundsOutflows);
+//                                    }
+//
+//                                    uploadObj_2.put("fiveMinutesChangeRate",item.fiveMinutesChangeRate);
+//                                    uploadObj_2.put("largeOrderNumB",item.largeOrderNumB);
+//                                    uploadObj_2.put("largeOrderNumS",item.largeOrderNumS);
+//                                    uploadObj_2.put("bigOrderNumB",item.bigOrderNumB);
+//                                    uploadObj_2.put("bigOrderNumS",item.bigOrderNumS);
+//                                    uploadObj_2.put("midOrderNumB",item.midOrderNumB);
+//                                    uploadObj_2.put("midOrderNumS",item.midOrderNumS);
+//                                    uploadObj_2.put("smallOrderNumB",item.smallOrderNumB);
+//                                    uploadObj_2.put("smallOrderNumS",item.smallOrderNumS);
+//                                    uploadObj_2.put("mainforceMoneyNetInflow5",item.mainforceMoneyNetInflow5);
+//                                    uploadObj_2.put("mainforceMoneyNetInflow10",item.mainforceMoneyNetInflow10);
+//                                    uploadObj_2.put("mainforceMoneyNetInflow20",item.mainforceMoneyNetInflow20);
+//                                    uploadObj_2.put("ratioMainforceMoneyNetInflow5",item.ratioMainforceMoneyNetInflow5);
+//                                    uploadObj_2.put("ratioMainforceMoneyNetInflow10",item.ratioMainforceMoneyNetInflow10);
+//                                    uploadObj_2.put("ratioMainforceMoneyNetInflow20",item.ratioMainforceMoneyNetInflow20);
+//                                    uploadObj_1.put("addValue",uploadObj_2);
+//                                }
+//                            }
                             uploadObj.put(list.id,uploadObj_1);
                         }
                     }

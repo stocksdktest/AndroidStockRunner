@@ -81,19 +81,19 @@ public class AHListTest_2 {
                         if (list!=null){
                             for (int k=0;k<list.size();k++){
                                 JSONObject uploadObj_1 = new JSONObject();
-                                uploadObj_1.put("name", list.get(k).name);
+//                                uploadObj_1.put("name", list.get(k).name);
                                 uploadObj_1.put("codeA", list.get(k).codeA);
-                                uploadObj_1.put("lastPriceA", list.get(k).lastPriceA);
-                                uploadObj_1.put("preClosePriceA", list.get(k).preClosePriceA);
-                                uploadObj_1.put("datetimeA", list.get(k).datetimeA);
+//                                uploadObj_1.put("lastPriceA", list.get(k).lastPriceA);
+//                                uploadObj_1.put("preClosePriceA", list.get(k).preClosePriceA);
+//                                uploadObj_1.put("datetimeA", list.get(k).datetimeA);
                                 uploadObj_1.put("codeH", list.get(k).codeH);
-                                uploadObj_1.put("lastPriceH", list.get(k).lastPriceH);
-                                uploadObj_1.put("preClosePriceH", list.get(k).preClosePriceH);
-                                uploadObj_1.put("datetimeH", list.get(k).datetimeH);
-                                uploadObj_1.put("premiumAH", list.get(k).premiumAH);
-                                uploadObj_1.put("changeRateA", list.get(k).changeRateA);
-                                uploadObj_1.put("changeRateH", list.get(k).changeRateH);
-                                uploadObj_1.put("premiumHA", list.get(k).premiumHA);
+//                                uploadObj_1.put("lastPriceH", list.get(k).lastPriceH);
+//                                uploadObj_1.put("preClosePriceH", list.get(k).preClosePriceH);
+//                                uploadObj_1.put("datetimeH", list.get(k).datetimeH);
+//                                uploadObj_1.put("premiumAH", list.get(k).premiumAH);
+//                                uploadObj_1.put("changeRateA", list.get(k).changeRateA);
+//                                uploadObj_1.put("changeRateH", list.get(k).changeRateH);
+//                                uploadObj_1.put("premiumHA", list.get(k).premiumHA);
 //                            Log.d("data", String.valueOf(uploadObj_1));
                                 uploadObj.put(list.get(k).codeA,uploadObj_1);
                             }

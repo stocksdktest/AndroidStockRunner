@@ -95,14 +95,14 @@ public class DRLinkQuoteTest_1 {
                     try {
                         if(list!=null){
                             uploadObj.put("code", list.code);
-                            uploadObj.put("name", list.name);
-                            uploadObj.put("lastPrice", list.lastPrice);
-                            uploadObj.put("preClosePrice", list.preClosePrice);
-                            uploadObj.put("change",list.change);
-                            uploadObj.put("changeRate", list.changeRate);
-                            uploadObj.put("subType", list.subType);
-                            uploadObj.put("dateTime", list.dateTime);
-                            uploadObj.put("premium", list.premium);
+//                            uploadObj.put("name", list.name);
+//                            uploadObj.put("lastPrice", list.lastPrice);
+//                            uploadObj.put("preClosePrice", list.preClosePrice);
+//                            uploadObj.put("change",list.change);
+//                            uploadObj.put("changeRate", list.changeRate);
+//                            uploadObj.put("subType", list.subType);
+//                            uploadObj.put("dateTime", list.dateTime);
+//                            uploadObj.put("premium", list.premium);
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

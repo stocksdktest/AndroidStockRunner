@@ -46,6 +46,8 @@ public enum StockTestcaseName {
     HSAMOUNTTEST_1("HSAMOUNT_1"),//沪股通和深股通额度（废弃）
     L2TICKDETAILV2TEST_1("L2TICKDETAILV2_1"),//L2单独逐笔接口
     L2TICKDETAILV2TEST_2("L2TICKDETAILV2_2"),//L2单独逐笔接口
+    L2TickEntrustTest_1("L2TICKENTRUST_1"),//L2_PLUS 逐笔委托接口
+    L2TickRestoreTest_1("L2TICKRESTORE_1"),//L2_PLUS 逐笔还原接口
     L2TICKV2TEST_1("L2TICKV2_1"),//L2单独分笔接口
     L2TICKV2TEST_2("L2TICKV2_2"),//L2单独分笔接口
     MARKETUPDOWNTEST_1("MARKETUPDOWN_1"),//沪深当日涨跌统计数据
@@ -161,9 +163,13 @@ public enum StockTestcaseName {
     //TCP
     TCP_CHARTV2TEST_1("TCP_CHARTV2TEST_1"),//走势数据TCP
     TCP_CHARTV2TEST_2("TCP_CHARTV2TEST_2"),//走势数据TCP
+    TCP_L2TickEntrustTest_1("TCP_L2TICKENTRUST_1"),//逐笔委托TCP
+    TCP_L2TickRestoreTest_1("TCP_L2TICKRESTORE_1"),//逐笔还原TCP
     TCP_OHLCV3TEST_1("TCP_OHLCV3TEST_1"),//K线数据TCP
     QUOTEDETAILTCPTEST_1("QUOTEDETAILTCPTEST_1"),//行情快照TCP
     QUOTEDETAILTCPTEST_2("QUOTEDETAILTCPTEST_2"),//行情快照TCP
+    TCP_ThousandsQuoteTest_1("TCP_THOUSANDSQUOTE_1"),//千档行情TCP
+    TCP_ThousandsQueueTest_1("TCP_THOUSANDSQUEUE_1"),//千档行情TCP
     TCP_TICKTEST_1("TCP_TICKTEST_1"),//分笔TCP
     TCP_TRADETEST_1("TCP_TRADETEST_1"),//交易行情
     //android和竞品对比接口
