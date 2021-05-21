@@ -64,7 +64,7 @@ import static org.junit.Assert.*;
 public class OverLayChartTest_2 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.OVERLAYCHARTTEST_2;
     private static SetupConfig.TestcaseConfig testcaseConfig;
-    private static final int timeout_ms = 1000000;
+    private static final int timeout_ms = 100000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("OverLayChartTest_2", "Setup");

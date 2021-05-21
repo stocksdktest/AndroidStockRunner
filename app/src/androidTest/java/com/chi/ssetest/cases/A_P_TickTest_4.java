@@ -40,7 +40,7 @@ import static org.junit.Assert.assertNotNull;
 public class A_P_TickTest_4 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.A_P_TickTest_4;
     private static SetupConfig.TestcaseConfig testcaseConfig;
-    private static final int timeout_ms = 1000000;
+    private static final int timeout_ms = 100000000;
     final CompletableFuture result = new CompletableFuture<JSONObject>();
     private static JSONObject uploadObj = new JSONObject();
     @BeforeClass

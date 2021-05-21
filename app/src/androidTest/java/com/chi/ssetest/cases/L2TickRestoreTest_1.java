@@ -35,7 +35,7 @@ import static org.junit.Assert.assertNotNull;
 public class L2TickRestoreTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.L2TickRestoreTest_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
-    private static final int timeout_ms = 1000000;
+    private static final int timeout_ms = 2000000000;
     String sttime="";
     int i=1;
 

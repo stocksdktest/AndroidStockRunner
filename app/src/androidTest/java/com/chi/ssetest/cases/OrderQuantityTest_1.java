@@ -39,7 +39,7 @@ import static org.junit.Assert.*;
 public class OrderQuantityTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.ORDERQUANTITYTEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
-    private static final int timeout_ms = 1000000;
+    private static final int timeout_ms = 100000000;
     @BeforeClass
 
     public static void setup() throws Exception {

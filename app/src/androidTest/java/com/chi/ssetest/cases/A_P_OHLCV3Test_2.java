@@ -47,7 +47,7 @@ import static org.junit.Assert.assertNotNull;
 public class A_P_OHLCV3Test_2 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.A_P_OHLCV3Test_2;
     private static SetupConfig.TestcaseConfig testcaseConfig;
-    private static final int timeout_ms = 1000000;
+    private static final int timeout_ms = 100000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("A_P_OHLCV3Test_2", "Setup");

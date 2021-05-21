@@ -66,7 +66,7 @@ import static org.junit.Assert.*;
 public class SearchTest_5 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.SEARCHTEST_5;
     private static SetupConfig.TestcaseConfig testcaseConfig;
-    private static final int timeout_ms = 1000000;
+    private static final int timeout_ms = 100000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("   SearchTest_5", "Setup");

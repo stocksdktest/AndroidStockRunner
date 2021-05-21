@@ -45,7 +45,7 @@ import static org.junit.Assert.assertNotNull;
 public class TCP_ChartV2Test_2 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.TCP_CHARTV2TEST_2;
     private static SetupConfig.TestcaseConfig testcaseConfig;
-    private static final int timeout_ms = 1000000; //上周开会说的Timeout，可以设置成final类型，TCP设置大一些没关系
+    private static final int timeout_ms = 100000000; //上周开会说的Timeout，可以设置成final类型，TCP设置大一些没关系
     private final static String tTag = "TCPTest";
 
     @BeforeClass
