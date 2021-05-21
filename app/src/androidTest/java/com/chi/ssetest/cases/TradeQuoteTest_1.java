@@ -40,7 +40,7 @@ import static org.junit.Assert.*;
 public class TradeQuoteTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.TRADEQUOTETEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
-    private static final int timeout_ms = 1000000;
+    private static final int timeout_ms = 100000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("TradeQuoteTest_1", "Setup");

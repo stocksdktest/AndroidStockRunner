@@ -39,7 +39,7 @@ import static org.junit.Assert.*;
 public class HolidayTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.HOLIDAYTEST_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
-    private static final int timeout_ms = 1000000;
+    private static final int timeout_ms = 100000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("HolidayTest_1", "Setup");

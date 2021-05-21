@@ -38,7 +38,7 @@ import static org.junit.Assert.assertNotNull;
 public class SearchV2Test_2 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.SEARCHV2TEST_2;
     private static SetupConfig.TestcaseConfig testcaseConfig;
-    private static final int timeout_ms = 1000000;
+    private static final int timeout_ms = 100000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("   SearchV2Test_2", "Setup");

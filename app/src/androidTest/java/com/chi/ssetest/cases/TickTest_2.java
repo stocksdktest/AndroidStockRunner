@@ -40,7 +40,7 @@ import static org.junit.Assert.assertNotNull;
 public class TickTest_2 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.TICKTEST_2;
     private static SetupConfig.TestcaseConfig testcaseConfig;
-    private static final int timeout_ms = 1000000;
+    private static final int timeout_ms = 100000000;
     String sttime="";
     int i=1;
 
