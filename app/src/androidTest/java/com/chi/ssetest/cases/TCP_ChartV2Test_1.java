@@ -85,23 +85,32 @@ public class TCP_ChartV2Test_1 {
                     //                        result.completeExceptionally(e);
                     result.complete(new JSONObject());
                 }
-                final QuoteItem quoteItem=quoteResponse.quoteItems.get(0);
-                ChartRequestV2 request = new ChartRequestV2();
-                request.send(quoteItem, Types, Integer.parseInt(PointAddType),new IResponseInfoCallback<ChartResponse>() {
-                    @Override
-                    public void callback(ChartResponse chartResponse) {
-
-                        // 准备监听TCP的消息
-                        TCPManager.getInstance().subScribeLines(quoteItem,Types);   // quoteResponse.quoteItems.get(0).id : StockID:600000.sh
-                        historyItems.addAll(chartResponse.historyItems);
-                        Log.d("data", uploadObj.toString());
+                if (quoteResponse.quoteItems==null||quoteResponse.quoteItems.size()==0){
+                    JSONObject uploadObj_1 = new JSONObject();
+                    try {
+                        uploadObj_1.put("quoteItems","");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
+                }else {
+                    final QuoteItem quoteItem=quoteResponse.quoteItems.get(0);
+                    ChartRequestV2 request = new ChartRequestV2();
+                    request.send(quoteItem, Types, Integer.parseInt(PointAddType),new IResponseInfoCallback<ChartResponse>() {
+                        @Override
+                        public void callback(ChartResponse chartResponse) {
 
-                    @Override
-                    public void exception(ErrorInfo errorInfo) {
-                        result.completeExceptionally(new Exception(errorInfo.toString()));
-                    }
-                });
+                            // 准备监听TCP的消息
+                            TCPManager.getInstance().subScribeLines(quoteItem,Types);   // quoteResponse.quoteItems.get(0).id : StockID:600000.sh
+                            historyItems.addAll(chartResponse.historyItems);
+                            Log.d("data", uploadObj.toString());
+                        }
+
+                        @Override
+                        public void exception(ErrorInfo errorInfo) {
+                            result.completeExceptionally(new Exception(errorInfo.toString()));
+                        }
+                    });
+                }
             }
 
             @Override
