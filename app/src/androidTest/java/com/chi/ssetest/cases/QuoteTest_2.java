@@ -92,12 +92,12 @@ public class QuoteTest_2 {
                     //                        result.completeExceptionally(e);
                     result.complete(new JSONObject());
                 }
-                JSONObject uploadObj = new JSONObject();
+                JSONObject uploadObj_1 = new JSONObject();
                 try {
                     if(quoteResponse.quoteItems!=null){
                         for (int i=0;i<quoteResponse.quoteItems.size();i++){
                             QuoteItem list=quoteResponse.quoteItems.get(i);
-                            JSONObject uploadObj_1 = new JSONObject();
+//                            JSONObject uploadObj_1 = new JSONObject();
                             // TODO fill uploadObj with QuoteResponse value
                             uploadObj_1.put("status", list.status);
                             uploadObj_1.put("id", list.id);
@@ -497,11 +497,11 @@ public class QuoteTest_2 {
 //                                    uploadObj_1.put("addValue",uploadObj_2);
 //                                }
 //                            }
-                            uploadObj.put(list.datetime,uploadObj_1);
+//                            uploadObj.put(list.id,uploadObj_1);
                         }
                     }
 //                    Log.d("data", String.valueOf(uploadObj));
-                    result.complete(uploadObj);
+                    result.complete(uploadObj_1);
                 } catch (JSONException e) {
                     result.completeExceptionally(e);
                 }
