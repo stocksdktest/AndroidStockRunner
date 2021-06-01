@@ -36,6 +36,7 @@ public class L2TickEntrustTest_1 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.L2TickEntrustTest_1;
     private static SetupConfig.TestcaseConfig testcaseConfig;
     private static final int timeout_ms = 2000000000;
+    String sttime="";
     int i=1;
 
     @BeforeClass
@@ -92,7 +93,15 @@ public class L2TickEntrustTest_1 {
                             uploadObj_1.put("volume", list.get(k).volume);
                             uploadObj_1.put("bs", list.get(k).bs);
                             uploadObj_1.put("time", list.get(k).time);
-                            uploadObj.put(list.get(k).sn,uploadObj_1);
+//                            uploadObj.put(list.get(k).sn,uploadObj_1);
+                            if (sttime.equals(list.get(k).time)){
+                                uploadObj.put(list.get(k).time+i,uploadObj_1);
+                                i++;
+                            }else {
+                                sttime=list.get(k).time;
+                                uploadObj.put(list.get(k).time,uploadObj_1);
+                                i=1;
+                            }
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);
@@ -147,7 +156,15 @@ public class L2TickEntrustTest_1 {
                             uploadObj_1.put("volume", list.get(k).volume);
                             uploadObj_1.put("bs", list.get(k).bs);
                             uploadObj_1.put("time", list.get(k).time);
-                            uploadObj.put(list.get(k).sn,uploadObj_1);
+//                            uploadObj.put(list.get(k).sn,uploadObj_1);
+                            if (sttime.equals(list.get(k).time)){
+                                uploadObj.put(list.get(k).time+i,uploadObj_1);
+                                i++;
+                            }else {
+                                sttime=list.get(k).time;
+                                uploadObj.put(list.get(k).time,uploadObj_1);
+                                i=1;
+                            }
                         }
                     } catch (JSONException e) {
                         result.completeExceptionally(e);

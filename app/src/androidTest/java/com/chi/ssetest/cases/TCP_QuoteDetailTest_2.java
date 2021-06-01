@@ -277,12 +277,8 @@ public class TCP_QuoteDetailTest_2 {
                                 uploadObj.put("delDate", item.delDate == null ? "-" : item.delDate);
                                 uploadObj.put("expDate", item.expDate == null ? "-" : item.expDate);
                                 uploadObj.put("version", item.version == null ? "-" : item.version);
+                                uploadObj.put("presetPrice", dwnull(item.presetPrice == null ? "-" : item.presetPrice));
 
-                                if (item.presetPrice.equals("一")){
-                                    uploadObj.put("presetPrice", item.presetPrice == "一" ? "-" : item.presetPrice);
-                                }else {
-                                    uploadObj.put("presetPrice", item.presetPrice == null ? "-" : item.presetPrice);
-                                }
                                 uploadObj.put("stockClose", item.stockClose == null ? "-" : item.stockClose);
                                 uploadObj.put("stockLast", item.stockLast == null ? "-" : item.stockLast);
                                 uploadObj.put("isLimit", item.isLimit == null ? "-" : item.isLimit);
@@ -302,12 +298,8 @@ public class TCP_QuoteDetailTest_2 {
                                 uploadObj.put("realLeverage", item.realLeverage == null ? "-" : item.realLeverage);
                                 uploadObj.put("theoreticalPrice", item.theoreticalPrice == null ? "-" : item.theoreticalPrice);
                                 //
+                                uploadObj.put("exerciseWay", dwnull(item.exerciseWay == null ? "-" : item.exerciseWay));
 
-                                if (item.exerciseWay.isEmpty()){
-                                    uploadObj.put("exerciseWay", "-");
-                                }else {
-                                    uploadObj.put("exerciseWay", item.exerciseWay == null ? "-" : item.exerciseWay);
-                                }
                                 uploadObj.put("orderRatio", item.orderRatio == null ? "-" : item.orderRatio);
                                 uploadObj.put("hk_paramStatus", item.hk_paramStatus == null ? "-" : item.hk_paramStatus);//ios无
                                 uploadObj.put("fundType", item.fundType == null ? "-" : item.fundType);
@@ -317,123 +309,43 @@ public class TCP_QuoteDetailTest_2 {
                                 uploadObj.put("averageSell", item.averageSell == null ? "-" : item.averageSell);
 //                        uploadObj.put("upDownFlag", item.upDownFlag);//注意一下IOS android
 
-                                if (item.zh.equals("")){
-                                    uploadObj.put("zh", item.zh == "" ? "-" : item.zh);
-                                }else {
-                                    uploadObj.put("zh", item.zh == null ? "-" : item.zh);
-                                }
-                                if (item.hh.equals("")){
-                                    uploadObj.put("hh", item.hh == "" ? "-" : item.hh);
-                                }else {
-                                    uploadObj.put("hh", item.hh == null ? "-" : item.hh);
-                                }
-                                uploadObj.put("st", item.st == null ? "-" : item.st);
-                                uploadObj.put("bu", item.bu == null ? "-" : item.bu);
-                                uploadObj.put("su", item.su == null ? "-" : item.su);
+                                uploadObj.put("zh", dwnull(item.zh == null ? "-" : item.zh));
+                                uploadObj.put("hh", dwnull(item.hh == null ? "-" : item.hh));
+                                uploadObj.put("st", dwnull(item.st == null ? "-" : item.st));
+                                uploadObj.put("bu", dwnull(item.bu == null ? "-" : item.bu));
+                                uploadObj.put("su", dwnull(item.su == null ? "-" : item.su));
 
-                                if (item.hs.equals("")){
-                                    uploadObj.put("hs", item.hs == "" ? "-" : item.hs);
-                                }else {
-                                    uploadObj.put("hs", item.hs == null ? "-" : item.hs);
-                                }
+                                uploadObj.put("hs", dwnull(item.hs == null ? "-" : item.hs));
+                                uploadObj.put("ac", dwnull(item.ac == null ? "-" : item.ac));
+                                uploadObj.put("qf", dwnull(item.qf == null ? "-" : item.qf));
+                                uploadObj.put("qc", dwnull(item.qc == null ? "-" : item.qc));
+                                uploadObj.put("ah", dwnull(item.ah == null ? "-" : item.ah));
+                                uploadObj.put("VCMFlag", dwnull(item.VCMFlag == null ? "-" : item.VCMFlag));
+                                uploadObj.put("CASFlag", dwnull(item.CASFlag == null ? "-" : item.CASFlag));
 
-                                if (item.ac.equals("")){
-                                    uploadObj.put("ac", item.ac == "" ? "-" : item.ac);
-                                }else {
-                                    uploadObj.put("ac", item.ac == null ? "-" : item.ac);
-                                }
-                                uploadObj.put("qf", item.qf == null ? "-" : item.qf);//ios无
-                                uploadObj.put("qc", item.qc == null ? "-" : item.qc);//ios无
-
-                                if (item.ah.equals("")){
-                                    uploadObj.put("ah", item.ah == "" ? "-" : item.ah);
-                                }else {
-                                    uploadObj.put("ah", item.ah == null ? "-" : item.ah);
-                                }
-
-                                if (item.VCMFlag.equals("")){
-                                    uploadObj.put("VCMFlag", item.VCMFlag == "" ? "-" : item.VCMFlag);
-                                }else {
-                                    uploadObj.put("VCMFlag", item.VCMFlag == null ? "-" : item.VCMFlag);
-                                }
-
-                                if (item.CASFlag.equals("")){
-                                    uploadObj.put("CASFlag", item.CASFlag == "" ? "-" : item.CASFlag);
-                                }else {
-                                    uploadObj.put("CASFlag", item.CASFlag == null ? "-" : item.CASFlag);
-                                }
                                 //20210118添加 POSFlag 该字段
-                                if (item.POSFlag.equals("")){
-                                    uploadObj.put("POSFlag", item.POSFlag == "" ? "-" : item.POSFlag);
-                                }else {
-                                    uploadObj.put("POSFlag", item.POSFlag == null ? "-" : item.POSFlag);
-                                }
+                                uploadObj.put("POSFlag", dwnull(item.POSFlag == null ? "-" : item.POSFlag));
+                                uploadObj.put("rp", dwnull(item.rp == null ? "-" : item.rp));
+                                uploadObj.put("cd", dwnull(item.cd == null ? "-" : item.cd));
+                                uploadObj.put("hg", dwnull(item.hg == null ? "-" : item.hg));
+                                uploadObj.put("sg", dwnull(item.sg == null ? "-" : item.sg));
+                                uploadObj.put("fx", dwnull(item.fx == null ? "-" : item.fx));
+                                uploadObj.put("ts", dwnull(item.ts == null ? "-" : item.ts));
+                                uploadObj.put("add_option_avg_price", dwnull(item.add_option_avg_price == null ? "-" : item.add_option_avg_price));
+                                uploadObj.put("add_option_avg_pb", dwnull(item.add_option_avg_pb == null ? "-" : item.add_option_avg_pb));
+                                uploadObj.put("add_option_avg_close", dwnull(item.add_option_avg_close == null ? "-" : item.add_option_avg_close));
 
-                                if (item.rp.equals("")){
-                                    uploadObj.put("rp", item.rp == "" ? "-" : item.rp);
-                                }else {
-                                    uploadObj.put("rp", item.rp == null ? "-" : item.rp);
-                                }
-
-                                if (item.cd.equals("")){
-                                    uploadObj.put("cd", item.cd == "" ? "-" : item.cd);
-                                }else {
-                                    uploadObj.put("cd", item.cd == null ? "-" : item.cd);
-                                }
-                                uploadObj.put("hg", item.hg == null ? "-" : item.hg);
-
-                                if (item.sg.equals("")){
-                                    uploadObj.put("sg", item.sg == "" ? "-" : item.sg);
-                                }else {
-                                    uploadObj.put("sg", item.sg == null ? "-" : item.sg);
-                                }
-
-                                if (item.fx.equals("")){
-                                    uploadObj.put("fx", item.fx == "" ? "-" : item.fx);
-                                }else {
-                                    uploadObj.put("fx", item.fx == null ? "-" : item.fx);
-                                }
-
-                                if (item.ts.equals("")){
-                                    uploadObj.put("ts", item.ts == "" ? "-" : item.ts);
-                                }else {
-                                    uploadObj.put("ts", item.ts == null ? "-" : item.ts);
-                                }
-
-                                if (item.add_option_avg_price.equals("一")){
-                                    uploadObj.put("add_option_avg_price", item.add_option_avg_price == "一" ? "-" : item.add_option_avg_price);
-                                }else {
-                                    uploadObj.put("add_option_avg_price", item.add_option_avg_price == null ? "-" : item.add_option_avg_price);
-                                }
-
-                                if (item.add_option_avg_pb.equals("一")){
-                                    uploadObj.put("add_option_avg_pb", item.add_option_avg_pb == "一" ? "-" : item.add_option_avg_pb);
-                                }else {
-                                    uploadObj.put("add_option_avg_pb", item.add_option_avg_pb == null ? "-" : item.add_option_avg_pb);
-                                }
-
-                                if (item.add_option_avg_close.equals("一")){
-                                    uploadObj.put("add_option_avg_close", item.add_option_avg_close == "一" ? "-" : item.add_option_avg_close);
-                                }else {
-                                    uploadObj.put("add_option_avg_close", item.add_option_avg_close == null ? "-" : item.add_option_avg_close);
-                                }
                                 uploadObj.put("hk_volum_for_every_hand", item.hk_volum_for_every_hand == null ? "-" : item.hk_volum_for_every_hand);
                                 //ios无
                                 uploadObj.put("buy_cancel_count", item.buy_cancel_count == null ? "-" : item.buy_cancel_count);
 
-                                if (item.buy_cancel_num.equals("一")){
-                                    uploadObj.put("buy_cancel_num", item.buy_cancel_num == "一" ? "-" : item.buy_cancel_num);
-                                }else {
-                                    uploadObj.put("buy_cancel_num", item.buy_cancel_num == null ? "-" : item.buy_cancel_num);
-                                }
+                                uploadObj.put("buy_cancel_num", dwnull(item.buy_cancel_num == null ? "-" : item.buy_cancel_num));
+
                                 uploadObj.put("buy_cancel_amount", item.buy_cancel_amount == null ? "-" : item.buy_cancel_amount);
                                 uploadObj.put("sell_cancel_count", item.sell_cancel_count == null ? "-" : item.sell_cancel_count);
 
-                                if (item.sell_cancel_num.equals("一")){
-                                    uploadObj.put("sell_cancel_num", item.sell_cancel_num == "一" ? "-" : item.sell_cancel_num);
-                                }else {
-                                    uploadObj.put("sell_cancel_num", item.sell_cancel_num == null ? "-" : item.sell_cancel_num);
-                                }
+                                uploadObj.put("sell_cancel_num", dwnull(item.sell_cancel_num == null ? "-" : item.sell_cancel_num));
+
                                 uploadObj.put("sell_cancel_amount", item.sell_cancel_amount == null ? "-" : item.sell_cancel_amount);
                                 uploadObj.put("tradingDay", item.tradingDay == null ? "-" : item.tradingDay);
                                 uploadObj.put("settlementID", item.settlementID == null ? "-" : item.settlementID);
@@ -460,117 +372,36 @@ public class TCP_QuoteDetailTest_2 {
                                 uploadObj.put("totalBid", item.totalBid == null ? "-" : item.totalBid);
                                 uploadObj.put("totalAsk", item.totalAsk == null ? "-" : item.totalAsk);
                                 //
-
-                                if (item.IOPV.equals("一")){
-                                    uploadObj.put("IOPV", item.IOPV == "一" ? "-" : item.IOPV);
-                                }else {
-                                    uploadObj.put("IOPV", item.IOPV == null ? "-" : item.IOPV);
-                                }
-
-                                if (item.preIOPV.equals("一")){
-                                    uploadObj.put("preIOPV", item.preIOPV == "一" ? "-" : item.preIOPV);
-                                }else {
-                                    uploadObj.put("preIOPV", item.preIOPV == null ? "-" : item.preIOPV);
-                                }
-
-                                if (item.stateOfTransfer.equals("")){
-                                    uploadObj.put("stateOfTransfer", item.stateOfTransfer == "" ? "-" : item.stateOfTransfer);
-                                }else {
-                                    uploadObj.put("stateOfTransfer", item.stateOfTransfer == null ? "-" : item.stateOfTransfer);
-                                }
-
-                                if (item.typeOfTransfer.equals("")){
-                                    uploadObj.put("typeOfTransfer", item.typeOfTransfer == "" ? "-" : item.typeOfTransfer);
-                                }else {
-                                    uploadObj.put("typeOfTransfer", item.typeOfTransfer == null ? "-" : item.typeOfTransfer);
-                                }
-
-                                if (item.exRighitDividend.equals("")){
-                                    uploadObj.put("exRighitDividend", item.exRighitDividend == "" ? "-" : item.exRighitDividend);
-                                }else {
-                                    uploadObj.put("exRighitDividend", item.exRighitDividend == null ? "-" : item.exRighitDividend);
-                                }
-
-                                if (item.securityLevel.equals("")){
-                                    uploadObj.put("securityLevel", item.securityLevel == "" ? "-" : item.securityLevel);
-                                }else {
-                                    uploadObj.put("securityLevel", item.securityLevel == null ? "-" : item.securityLevel);
-                                }
-
-                                if (item.rpd.equals("")){
-                                    uploadObj.put("rpd", item.rpd == "" ? "-" : item.rpd);
-                                }else {
-                                    uploadObj.put("rpd", item.rpd == null ? "-" : item.rpd);
-                                }
-
-                                if (item.cdd.equals("")){
-                                    uploadObj.put("cdd", item.cdd == "" ? "-" : item.cdd);
-                                }else {
-                                    uploadObj.put("cdd", item.cdd == null ? "-" : item.cdd);
-                                }
+                                uploadObj.put("IOPV", dwnull(item.IOPV == null ? "-" : item.IOPV));
+                                uploadObj.put("preIOPV", dwnull(item.preIOPV == null ? "-" : item.preIOPV));
+                                uploadObj.put("stateOfTransfer", dwnull(item.stateOfTransfer == null ? "-" : item.stateOfTransfer));
+                                uploadObj.put("typeOfTransfer", dwnull(item.typeOfTransfer == null ? "-" : item.typeOfTransfer));
+                                uploadObj.put("exRighitDividend", dwnull(item.exRighitDividend == null ? "-" : item.exRighitDividend));
+                                uploadObj.put("securityLevel", dwnull(item.securityLevel == null ? "-" : item.securityLevel));
+                                uploadObj.put("rpd", dwnull(item.rpd == null ? "-" : item.rpd));
+                                uploadObj.put("cdd", dwnull(item.cdd == null ? "-" : item.cdd));
                                 //ios无
+                                uploadObj.put("change2", dwnull(item.change2 == null ? "-" : item.change2));
 
-                                if (item.change2.equals("一")){
-                                    uploadObj.put("change2", item.change2 == "一" ? "-" : item.change2);
-                                }else {
-                                    uploadObj.put("change2", item.change2 == null ? "-" : item.change2);
-                                }
                                 uploadObj.put("earningsPerShare", item.earningsPerShare == null ? "-" : item.earningsPerShare);
                                 uploadObj.put("earningsPerShareReportingPeriod", item.earningsPerShareReportingPeriod == null ? "-" : item.earningsPerShareReportingPeriod);
                                 //
+                                uploadObj.put("hkTExchangeFlag", dwnull(item.hkTExchangeFlag == null ? "-" : item.hkTExchangeFlag));
 
-                                if (item.hkTExchangeFlag.equals("")){
-                                    uploadObj.put("hkTExchangeFlag", item.hkTExchangeFlag == "" ? "-" : item.hkTExchangeFlag);//注意ios
-                                }else {
-                                    uploadObj.put("hkTExchangeFlag", item.hkTExchangeFlag == null ? "-" : item.hkTExchangeFlag);//注意ios
-                                }
                                 uploadObj.put("vote", item.vote == null ? "-" : item.vote);//注意ios
                                 uploadObj.put("upf", item.upf == null ? "-" : item.upf);//注意ios
                                 uploadObj.put("DRCurrentShare", item.DRCurrentShare == null ? "-" : item.DRCurrentShare);
                                 uploadObj.put("DRPreviousClosingShare", item.DRPreviousClosingShare == null ? "-" : item.DRPreviousClosingShare);
                                 uploadObj.put("DRConversionBase", item.DRConversionBase == null ? "-" : item.DRConversionBase);
 
-                                if (item.DRDepositoryInstitutionCode.isEmpty()){
-                                    uploadObj.put("DRDepositoryInstitutionCode", "-");
-                                }else {
-                                    uploadObj.put("DRDepositoryInstitutionCode", item.DRDepositoryInstitutionCode == null ? "-" : item.DRDepositoryInstitutionCode);
-                                }
+                                uploadObj.put("DRDepositoryInstitutionCode", dwnull(item.DRDepositoryInstitutionCode == null ? "-" : item.DRDepositoryInstitutionCode));
+                                uploadObj.put("DRDepositoryInstitutionName", dwnull(item.DRDepositoryInstitutionName == null ? "-" : item.DRDepositoryInstitutionName));
+                                uploadObj.put("DRSubjectClosingReferencePrice", dwnull(item.DRSubjectClosingReferencePrice == null ? "-" : item.DRSubjectClosingReferencePrice));
+                                uploadObj.put("DR", dwnull(item.DR == null ? "-" : item.DR));
+                                uploadObj.put("GDR", dwnull(item.GDR == null ? "-" : item.GDR));
+                                uploadObj.put("DRStockCode", dwnull(item.DRStockCode == null ? "-" : item.DRStockCode));
+                                uploadObj.put("DRStockName", dwnull(item.DRStockName == null ? "-" : item.DRStockName));
 
-                                if (item.DRDepositoryInstitutionName.isEmpty()){
-                                    uploadObj.put("DRDepositoryInstitutionName", "-");
-                                }else {
-                                    uploadObj.put("DRDepositoryInstitutionName", item.DRDepositoryInstitutionName == null ? "-" : item.DRDepositoryInstitutionName);
-                                }
-
-                                if (item.DRSubjectClosingReferencePrice.isEmpty()){
-                                    uploadObj.put("DRSubjectClosingReferencePrice","-");
-                                }else {
-                                    uploadObj.put("DRSubjectClosingReferencePrice", item.DRSubjectClosingReferencePrice == null ? "-" : item.DRSubjectClosingReferencePrice);
-                                }
-
-                                if (item.DR.equals("")){
-                                    uploadObj.put("DR", item.DR == "" ? "-" : item.DR);
-                                }else {
-                                    uploadObj.put("DR", item.DR == null ? "-" : item.DR);
-                                }
-
-                                if (item.GDR.equals("")){
-                                    uploadObj.put("GDR", item.GDR == "" ? "-" : item.GDR);
-                                }else {
-                                    uploadObj.put("GDR", item.GDR == null ? "-" : item.GDR);
-                                }
-
-                                if (item.DRStockCode.equals("")){
-                                    uploadObj.put("DRStockCode", item.DRStockCode == "" ? "-" : item.DRStockCode);
-                                }else {
-                                    uploadObj.put("DRStockCode", item.DRStockCode == null ? "-" : item.DRStockCode);
-                                }
-
-                                if (item.DRStockName.equals("")){
-                                    uploadObj.put("DRStockName", item.DRStockName == "" ? "-" : item.DRStockName);
-                                }else {
-                                    uploadObj.put("DRStockName", item.DRStockName == null ? "-" : item.DRStockName);
-                                }
                                 uploadObj.put("DRSecuritiesConversionBase", item.DRSecuritiesConversionBase == null ? "-" : item.DRSecuritiesConversionBase);
                                 uploadObj.put("DRListingDate", item.DRListingDate == null ? "-" : item.DRListingDate);
                                 uploadObj.put("DRFlowStartDate", item.DRFlowStartDate == null ? "-" : item.DRFlowStartDate);
@@ -579,39 +410,20 @@ public class TCP_QuoteDetailTest_2 {
                                 uploadObj.put("subscribeUpperLimit", item.subscribeUpperLimit == null ? "-" : item.subscribeUpperLimit);
                                 uploadObj.put("subscribeLowerLimit", item.subscribeLowerLimit == null ? "-" : item.subscribeLowerLimit);
 
-                                if (item.afterHoursVolume.equals("一")){
-                                    uploadObj.put("afterHoursVolume", item.afterHoursVolume == "一" ? "-" : item.afterHoursVolume);
-                                }else {
-                                    uploadObj.put("afterHoursVolume", item.afterHoursVolume == null ? "-" : item.afterHoursVolume);
-                                }
+                                uploadObj.put("afterHoursVolume", dwnull(item.afterHoursVolume == null ? "-" : item.afterHoursVolume));
+
                                 uploadObj.put("afterHoursAmount", item.afterHoursAmount == null ? "-" : item.afterHoursAmount);
                                 uploadObj.put("afterHoursTransactionNumber", item.afterHoursTransactionNumber == null ? "-" : item.afterHoursTransactionNumber);
                                 uploadObj.put("afterHoursWithdrawBuyCount", item.afterHoursWithdrawBuyCount == null ? "-" : item.afterHoursWithdrawBuyCount);
 
-                                if (item.afterHoursWithdrawBuyVolume.equals("一")){
-                                    uploadObj.put("afterHoursWithdrawBuyVolume", item.afterHoursWithdrawBuyVolume == "一" ? "-" : item.afterHoursWithdrawBuyVolume);
-                                }else {
-                                    uploadObj.put("afterHoursWithdrawBuyVolume", item.afterHoursWithdrawBuyVolume == null ? "-" : item.afterHoursWithdrawBuyVolume);
-                                }
+                                uploadObj.put("afterHoursWithdrawBuyVolume", dwnull(item.afterHoursWithdrawBuyVolume == null ? "-" : item.afterHoursWithdrawBuyVolume));
+
                                 uploadObj.put("afterHoursWithdrawSellCount", item.afterHoursWithdrawSellCount == null ? "-" : item.afterHoursWithdrawSellCount);
 
-                                if (item.afterHoursWithdrawSellVolume.equals("一")){
-                                    uploadObj.put("afterHoursWithdrawSellVolume", item.afterHoursWithdrawSellVolume == "一" ? "-" : item.afterHoursWithdrawSellVolume);
-                                }else {
-                                    uploadObj.put("afterHoursWithdrawSellVolume", item.afterHoursWithdrawSellVolume == null ? "-" : item.afterHoursWithdrawSellVolume);
-                                }
+                                uploadObj.put("afterHoursWithdrawSellVolume", dwnull(item.afterHoursWithdrawSellVolume == null ? "-" : item.afterHoursWithdrawSellVolume));
+                                uploadObj.put("afterHoursBuyVolume", dwnull(item.afterHoursBuyVolume == null ? "-" : item.afterHoursBuyVolume));
+                                uploadObj.put("afterHoursSellVolume", dwnull(item.afterHoursSellVolume == null ? "-" : item.afterHoursSellVolume));
 
-                                if (item.afterHoursBuyVolume.equals("一")){
-                                    uploadObj.put("afterHoursBuyVolume", item.afterHoursBuyVolume == "一" ? "-" : item.afterHoursBuyVolume);
-                                }else {
-                                    uploadObj.put("afterHoursBuyVolume", item.afterHoursBuyVolume == null ? "-" : item.afterHoursBuyVolume);
-                                }
-
-                                if (item.afterHoursSellVolume.equals("一")){
-                                    uploadObj.put("afterHoursSellVolume", item.afterHoursSellVolume == "一" ? "-" : item.afterHoursSellVolume);
-                                }else {
-                                    uploadObj.put("afterHoursSellVolume", item.afterHoursSellVolume == null ? "-" : item.afterHoursSellVolume);
-                                }
                                 uploadObj.put("issuedCapital", item.issuedCapital == null ? "-" : item.issuedCapital);
                                 uploadObj.put("limitPriceUpperLimit", item.limitPriceUpperLimit == null ? "-" : item.limitPriceUpperLimit);
                                 uploadObj.put("limitPriceLowerLimit", item.limitPriceLowerLimit == null ? "-" : item.limitPriceLowerLimit);
@@ -706,5 +518,17 @@ public class TCP_QuoteDetailTest_2 {
             //                throw new Exception(e);
             throw new TestcaseException(e,rule.getParam());
         }
+    }
+    public String dwnull(String st){
+        if (st.equals("一")){
+            st="-";
+        }else if (st.equals("")){
+            st="-";
+        }else if(st==null){
+            st="-";
+        }else if (st.isEmpty()){
+            st="-";
+        }
+        return  st;
     }
 }

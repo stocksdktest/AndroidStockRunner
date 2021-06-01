@@ -79,27 +79,27 @@ public class QuoteDetailTest_1 {
                     // TODO fill uploadObj with QuoteResponse value
                     try {
                         if(list!=null){
-                            uploadObj.put("status", list.status == null ? "-" : list.status);
-                            uploadObj.put("id", list.id == null ? "-" : list.id);
-                            uploadObj.put("name", list.name == null ? "-" : list.name);
-                            uploadObj.put("datetime", list.datetime == null ? "-" : list.datetime);
+                            uploadObj.put("status", dwnull(list.status == null ? "-" : list.status));
+                            uploadObj.put("id", dwnull(list.id == null ? "-" : list.id));
+                            uploadObj.put("name", dwnull(list.name == null ? "-" : list.name));
+                            uploadObj.put("datetime", dwnull(list.datetime == null ? "-" : list.datetime));
 //                        uploadObj.put("pinyin", list.pinyin);//ios无
-                            uploadObj.put("market", list.market == null ? "-" : list.market);
-                            uploadObj.put("subtype", list.subtype == null ? "-" : list.subtype);
-                            uploadObj.put("lastPrice", list.lastPrice == null ? "-" : list.lastPrice);
-                            uploadObj.put("highPrice", list.highPrice == null ? "-" : list.highPrice);
-                            uploadObj.put("lowPrice", list.lowPrice == null ? "-" : list.lowPrice);
-                            uploadObj.put("openPrice", list.openPrice == null ? "-" : list.openPrice);
-                            uploadObj.put("preClosePrice", list.preClosePrice == null ? "-" : list.preClosePrice);
+                            uploadObj.put("market", dwnull(list.market == null ? "-" : list.market));
+                            uploadObj.put("subtype", dwnull(list.subtype == null ? "-" : list.subtype));
+                            uploadObj.put("lastPrice", dwnull(list.lastPrice == null ? "-" : list.lastPrice));
+                            uploadObj.put("highPrice", dwnull(list.highPrice == null ? "-" : list.highPrice));
+                            uploadObj.put("lowPrice", dwnull(list.lowPrice == null ? "-" : list.lowPrice));
+                            uploadObj.put("openPrice", dwnull(list.openPrice == null ? "-" : list.openPrice));
+                            uploadObj.put("preClosePrice", dwnull(list.preClosePrice == null ? "-" : list.preClosePrice));
 //                        uploadObj.put("changeRate", list.upDownFlag+list.changeRate);//ios注意
                             if ("+".equals(list.upDownFlag)||"-".equals(list.upDownFlag)){
                                 uploadObj.put("changeRate",list.upDownFlag+list.changeRate);//加涨跌符号
                             }else {
-                                uploadObj.put("changeRate",list.changeRate == null ? "-" : list.changeRate);
+                                uploadObj.put("changeRate",dwnull(list.changeRate == null ? "-" : list.changeRate));
                             }
-                            uploadObj.put("volume", list.volume == null ? "-" : list.volume);
-                            uploadObj.put("nowVolume", list.nowVolume == null ? "-" : list.nowVolume);
-                            uploadObj.put("turnoverRate", list.turnoverRate == null ? "-" : list.turnoverRate);
+                            uploadObj.put("volume", dwnull(list.volume == null ? "-" : list.volume));
+                            uploadObj.put("nowVolume", dwnull(list.nowVolume == null ? "-" : list.nowVolume));
+                            uploadObj.put("turnoverRate", dwnull(list.turnoverRate == null ? "-" : list.turnoverRate));
                             uploadObj.put("upDownLimitType", list.upDownLimitType == null ? "-" : list.upDownLimitType);//ios注意
                             uploadObj.put("limitUP", list.limitUP == null ? "-" : list.limitUP);
                             uploadObj.put("limitDown", list.limitDown == null ? "-" : list.limitDown);
@@ -223,11 +223,8 @@ public class QuoteDetailTest_1 {
                             uploadObj.put("expDate", list.expDate == null ? "-" : list.expDate);
                             uploadObj.put("version", list.version == null ? "-" : list.version);
 
-                            if (list.presetPrice.equals("一")){
-                                uploadObj.put("presetPrice", list.presetPrice == "一" ? "-" : list.presetPrice);
-                            }else {
-                                uploadObj.put("presetPrice", list.presetPrice == null ? "-" : list.presetPrice);
-                            }
+                            uploadObj.put("presetPrice", dwnull(list.presetPrice == null ? "-" : list.presetPrice));
+
                             uploadObj.put("stockClose", list.stockClose == null ? "-" : list.stockClose);
                             uploadObj.put("stockLast", list.stockLast == null ? "-" : list.stockLast);
                             uploadObj.put("isLimit", list.isLimit == null ? "-" : list.isLimit);
@@ -247,12 +244,12 @@ public class QuoteDetailTest_1 {
                             uploadObj.put("realLeverage", list.realLeverage == null ? "-" : list.realLeverage);
                             uploadObj.put("theoreticalPrice", list.theoreticalPrice == null ? "-" : list.theoreticalPrice);
                             //
-
-                            if (list.exerciseWay.isEmpty()){
-                                uploadObj.put("exerciseWay", "-");
-                            }else {
-                                uploadObj.put("exerciseWay", list.exerciseWay == null ? "-" : list.exerciseWay);
-                            }
+                            uploadObj.put("exerciseWay", dwnull(list.exerciseWay == null ? "-" : list.exerciseWay));
+//                        if (list.exerciseWay.isEmpty()){
+//                            uploadObj.put("exerciseWay", "-");
+//                        }else {
+//                            uploadObj.put("exerciseWay", dwnull(list.exerciseWay == null ? "-" : list.exerciseWay));
+//                        }
                             uploadObj.put("orderRatio", list.orderRatio == null ? "-" : list.orderRatio);
                             uploadObj.put("hk_paramStatus", list.hk_paramStatus == null ? "-" : list.hk_paramStatus);//ios无
                             uploadObj.put("fundType", list.fundType == null ? "-" : list.fundType);
@@ -262,117 +259,43 @@ public class QuoteDetailTest_1 {
                             uploadObj.put("averageSell", list.averageSell == null ? "-" : list.averageSell);
 //                        uploadObj.put("upDownFlag", list.upDownFlag);//注意一下IOS android
 
-                            if (list.zh.equals("")){
-                                uploadObj.put("zh", list.zh == "" ? "-" : list.zh);
-                            }else {
-                                uploadObj.put("zh", list.zh == null ? "-" : list.zh);
-                            }
-                            if (list.hh.equals("")){
-                                uploadObj.put("hh", list.hh == "" ? "-" : list.hh);
-                            }else {
-                                uploadObj.put("hh", list.hh == null ? "-" : list.hh);
-                            }
-                            uploadObj.put("st", list.st == null ? "-" : list.st);
-                            uploadObj.put("bu", list.bu == null ? "-" : list.bu);
-                            uploadObj.put("su", list.su == null ? "-" : list.su);
+                            uploadObj.put("zh", dwnull(list.zh == null ? "-" : list.zh));
+                            uploadObj.put("hh", dwnull(list.hh == null ? "-" : list.hh));
+                            uploadObj.put("st", dwnull(list.st == null ? "-" : list.st));
+                            uploadObj.put("bu", dwnull(list.bu == null ? "-" : list.bu));
+                            uploadObj.put("su", dwnull(list.su == null ? "-" : list.su));
 
-                            if (list.hs.equals("")){
-                                uploadObj.put("hs", list.hs == "" ? "-" : list.hs);
-                            }else {
-                                uploadObj.put("hs", list.hs == null ? "-" : list.hs);
-                            }
+                            uploadObj.put("hs", dwnull(list.hs == null ? "-" : list.hs));
+                            uploadObj.put("ac", dwnull(list.ac == null ? "-" : list.ac));
+                            uploadObj.put("qf", dwnull(list.qf == null ? "-" : list.qf));
+                            uploadObj.put("qc", dwnull(list.qc == null ? "-" : list.qc));
+                            uploadObj.put("ah", dwnull(list.ah == null ? "-" : list.ah));
+                            uploadObj.put("VCMFlag", dwnull(list.VCMFlag == null ? "-" : list.VCMFlag));
+                            uploadObj.put("CASFlag", dwnull(list.CASFlag == null ? "-" : list.CASFlag));
 
-                            if (list.ac.equals("")){
-                                uploadObj.put("ac", list.ac == "" ? "-" : list.ac);
-                            }else {
-                                uploadObj.put("ac", list.ac == null ? "-" : list.ac);
-                            }
-                            uploadObj.put("qf", list.qf == null ? "-" : list.qf);//ios无
-                            uploadObj.put("qc", list.qc == null ? "-" : list.qc);//ios无
+                            //20210118添加 POSFlag 该字段
+                            uploadObj.put("POSFlag", dwnull(list.POSFlag == null ? "-" : list.POSFlag));
+                            uploadObj.put("rp", dwnull(list.rp == null ? "-" : list.rp));
+                            uploadObj.put("cd", dwnull(list.cd == null ? "-" : list.cd));
+                            uploadObj.put("hg", dwnull(list.hg == null ? "-" : list.hg));
+                            uploadObj.put("sg", dwnull(list.sg == null ? "-" : list.sg));
+                            uploadObj.put("fx", dwnull(list.fx == null ? "-" : list.fx));
+                            uploadObj.put("ts", dwnull(list.ts == null ? "-" : list.ts));
+                            uploadObj.put("add_option_avg_price", dwnull(list.add_option_avg_price == null ? "-" : list.add_option_avg_price));
+                            uploadObj.put("add_option_avg_pb", dwnull(list.add_option_avg_pb == null ? "-" : list.add_option_avg_pb));
+                            uploadObj.put("add_option_avg_close", dwnull(list.add_option_avg_close == null ? "-" : list.add_option_avg_close));
 
-                            if (list.ah.equals("")){
-                                uploadObj.put("ah", list.ah == "" ? "-" : list.ah);
-                            }else {
-                                uploadObj.put("ah", list.ah == null ? "-" : list.ah);
-                            }
-
-                            if (list.VCMFlag.equals("")){
-                                uploadObj.put("VCMFlag", list.VCMFlag == "" ? "-" : list.VCMFlag);
-                            }else {
-                                uploadObj.put("VCMFlag", list.VCMFlag == null ? "-" : list.VCMFlag);
-                            }
-
-                            if (list.CASFlag.equals("")){
-                                uploadObj.put("CASFlag", list.CASFlag == "" ? "-" : list.CASFlag);
-                            }else {
-                                uploadObj.put("CASFlag", list.CASFlag == null ? "-" : list.CASFlag);
-                            }
-
-                            if (list.rp.equals("")){
-                                uploadObj.put("rp", list.rp == "" ? "-" : list.rp);
-                            }else {
-                                uploadObj.put("rp", list.rp == null ? "-" : list.rp);
-                            }
-
-                            if (list.cd.equals("")){
-                                uploadObj.put("cd", list.cd == "" ? "-" : list.cd);
-                            }else {
-                                uploadObj.put("cd", list.cd == null ? "-" : list.cd);
-                            }
-                            uploadObj.put("hg", list.hg == null ? "-" : list.hg);
-
-                            if (list.sg.equals("")){
-                                uploadObj.put("sg", list.sg == "" ? "-" : list.sg);
-                            }else {
-                                uploadObj.put("sg", list.sg == null ? "-" : list.sg);
-                            }
-
-                            if (list.fx.equals("")){
-                                uploadObj.put("fx", list.fx == "" ? "-" : list.fx);
-                            }else {
-                                uploadObj.put("fx", list.fx == null ? "-" : list.fx);
-                            }
-
-                            if (list.ts.equals("")){
-                                uploadObj.put("ts", list.ts == "" ? "-" : list.ts);
-                            }else {
-                                uploadObj.put("ts", list.ts == null ? "-" : list.ts);
-                            }
-
-                            if (list.add_option_avg_price.equals("一")){
-                                uploadObj.put("add_option_avg_price", list.add_option_avg_price == "一" ? "-" : list.add_option_avg_price);
-                            }else {
-                                uploadObj.put("add_option_avg_price", list.add_option_avg_price == null ? "-" : list.add_option_avg_price);
-                            }
-
-                            if (list.add_option_avg_pb.equals("一")){
-                                uploadObj.put("add_option_avg_pb", list.add_option_avg_pb == "一" ? "-" : list.add_option_avg_pb);
-                            }else {
-                                uploadObj.put("add_option_avg_pb", list.add_option_avg_pb == null ? "-" : list.add_option_avg_pb);
-                            }
-
-                            if (list.add_option_avg_close.equals("一")){
-                                uploadObj.put("add_option_avg_close", list.add_option_avg_close == "一" ? "-" : list.add_option_avg_close);
-                            }else {
-                                uploadObj.put("add_option_avg_close", list.add_option_avg_close == null ? "-" : list.add_option_avg_close);
-                            }
                             uploadObj.put("hk_volum_for_every_hand", list.hk_volum_for_every_hand == null ? "-" : list.hk_volum_for_every_hand);
                             //ios无
                             uploadObj.put("buy_cancel_count", list.buy_cancel_count == null ? "-" : list.buy_cancel_count);
 
-                            if (list.buy_cancel_num.equals("一")){
-                                uploadObj.put("buy_cancel_num", list.buy_cancel_num == "一" ? "-" : list.buy_cancel_num);
-                            }else {
-                                uploadObj.put("buy_cancel_num", list.buy_cancel_num == null ? "-" : list.buy_cancel_num);
-                            }
+                            uploadObj.put("buy_cancel_num", dwnull(list.buy_cancel_num == null ? "-" : list.buy_cancel_num));
+
                             uploadObj.put("buy_cancel_amount", list.buy_cancel_amount == null ? "-" : list.buy_cancel_amount);
                             uploadObj.put("sell_cancel_count", list.sell_cancel_count == null ? "-" : list.sell_cancel_count);
 
-                            if (list.sell_cancel_num.equals("一")){
-                                uploadObj.put("sell_cancel_num", list.sell_cancel_num == "一" ? "-" : list.sell_cancel_num);
-                            }else {
-                                uploadObj.put("sell_cancel_num", list.sell_cancel_num == null ? "-" : list.sell_cancel_num);
-                            }
+                            uploadObj.put("sell_cancel_num", dwnull(list.sell_cancel_num == null ? "-" : list.sell_cancel_num));
+
                             uploadObj.put("sell_cancel_amount", list.sell_cancel_amount == null ? "-" : list.sell_cancel_amount);
                             uploadObj.put("tradingDay", list.tradingDay == null ? "-" : list.tradingDay);
                             uploadObj.put("settlementID", list.settlementID == null ? "-" : list.settlementID);
@@ -399,117 +322,37 @@ public class QuoteDetailTest_1 {
                             uploadObj.put("totalBid", list.totalBid == null ? "-" : list.totalBid);
                             uploadObj.put("totalAsk", list.totalAsk == null ? "-" : list.totalAsk);
                             //
+                            uploadObj.put("IOPV", dwnull(list.IOPV == null ? "-" : list.IOPV));
+                            uploadObj.put("preIOPV", dwnull(list.preIOPV == null ? "-" : list.preIOPV));
 
-                            if (list.IOPV.equals("一")){
-                                uploadObj.put("IOPV", list.IOPV == "一" ? "-" : list.IOPV);
-                            }else {
-                                uploadObj.put("IOPV", list.IOPV == null ? "-" : list.IOPV);
-                            }
+                            uploadObj.put("stateOfTransfer", dwnull(list.stateOfTransfer == null ? "-" : list.stateOfTransfer));
+                            uploadObj.put("typeOfTransfer", dwnull(list.typeOfTransfer == null ? "-" : list.typeOfTransfer));
+                            uploadObj.put("exRighitDividend", dwnull(list.exRighitDividend == null ? "-" : list.exRighitDividend));
+                            uploadObj.put("securityLevel", dwnull(list.securityLevel == null ? "-" : list.securityLevel));
+                            uploadObj.put("rpd", dwnull(list.rpd == null ? "-" : list.rpd));
+                            uploadObj.put("cdd", dwnull(list.cdd == null ? "-" : list.cdd));
 
-                            if (list.preIOPV.equals("一")){
-                                uploadObj.put("preIOPV", list.preIOPV == "一" ? "-" : list.preIOPV);
-                            }else {
-                                uploadObj.put("preIOPV", list.preIOPV == null ? "-" : list.preIOPV);
-                            }
-
-                            if (list.stateOfTransfer.equals("")){
-                                uploadObj.put("stateOfTransfer", list.stateOfTransfer == "" ? "-" : list.stateOfTransfer);
-                            }else {
-                                uploadObj.put("stateOfTransfer", list.stateOfTransfer == null ? "-" : list.stateOfTransfer);
-                            }
-
-                            if (list.typeOfTransfer.equals("")){
-                                uploadObj.put("typeOfTransfer", list.typeOfTransfer == "" ? "-" : list.typeOfTransfer);
-                            }else {
-                                uploadObj.put("typeOfTransfer", list.typeOfTransfer == null ? "-" : list.typeOfTransfer);
-                            }
-
-                            if (list.exRighitDividend.equals("")){
-                                uploadObj.put("exRighitDividend", list.exRighitDividend == "" ? "-" : list.exRighitDividend);
-                            }else {
-                                uploadObj.put("exRighitDividend", list.exRighitDividend == null ? "-" : list.exRighitDividend);
-                            }
-
-                            if (list.securityLevel.equals("")){
-                                uploadObj.put("securityLevel", list.securityLevel == "" ? "-" : list.securityLevel);
-                            }else {
-                                uploadObj.put("securityLevel", list.securityLevel == null ? "-" : list.securityLevel);
-                            }
-
-                            if (list.rpd.equals("")){
-                                uploadObj.put("rpd", list.rpd == "" ? "-" : list.rpd);
-                            }else {
-                                uploadObj.put("rpd", list.rpd == null ? "-" : list.rpd);
-                            }
-
-                            if (list.cdd.equals("")){
-                                uploadObj.put("cdd", list.cdd == "" ? "-" : list.cdd);
-                            }else {
-                                uploadObj.put("cdd", list.cdd == null ? "-" : list.cdd);
-                            }
                             //ios无
-
-                            if (list.change2.equals("一")){
-                                uploadObj.put("change2", list.change2 == "一" ? "-" : list.change2);
-                            }else {
-                                uploadObj.put("change2", list.change2 == null ? "-" : list.change2);
-                            }
+                            uploadObj.put("change2", dwnull(list.change2 == null ? "-" : list.change2));
                             uploadObj.put("earningsPerShare", list.earningsPerShare == null ? "-" : list.earningsPerShare);
                             uploadObj.put("earningsPerShareReportingPeriod", list.earningsPerShareReportingPeriod == null ? "-" : list.earningsPerShareReportingPeriod);
                             //
+                            uploadObj.put("hkTExchangeFlag", dwnull(list.hkTExchangeFlag == null ? "-" : list.hkTExchangeFlag));
 
-                            if (list.hkTExchangeFlag.equals("")){
-                                uploadObj.put("hkTExchangeFlag", list.hkTExchangeFlag == "" ? "-" : list.hkTExchangeFlag);//注意ios
-                            }else {
-                                uploadObj.put("hkTExchangeFlag", list.hkTExchangeFlag == null ? "-" : list.hkTExchangeFlag);//注意ios
-                            }
                             uploadObj.put("vote", list.vote == null ? "-" : list.vote);//注意ios
                             uploadObj.put("upf", list.upf == null ? "-" : list.upf);//注意ios
                             uploadObj.put("DRCurrentShare", list.DRCurrentShare == null ? "-" : list.DRCurrentShare);
                             uploadObj.put("DRPreviousClosingShare", list.DRPreviousClosingShare == null ? "-" : list.DRPreviousClosingShare);
                             uploadObj.put("DRConversionBase", list.DRConversionBase == null ? "-" : list.DRConversionBase);
 
-                            if (list.DRDepositoryInstitutionCode.isEmpty()){
-                                uploadObj.put("DRDepositoryInstitutionCode", "-");
-                            }else {
-                                uploadObj.put("DRDepositoryInstitutionCode", list.DRDepositoryInstitutionCode == null ? "-" : list.DRDepositoryInstitutionCode);
-                            }
+                            uploadObj.put("DRDepositoryInstitutionCode", dwnull(list.DRDepositoryInstitutionCode == null ? "-" : list.DRDepositoryInstitutionCode));
+                            uploadObj.put("DRDepositoryInstitutionName", dwnull(list.DRDepositoryInstitutionName == null ? "-" : list.DRDepositoryInstitutionName));
+                            uploadObj.put("DRSubjectClosingReferencePrice", dwnull(list.DRSubjectClosingReferencePrice == null ? "-" : list.DRSubjectClosingReferencePrice));
+                            uploadObj.put("DR", dwnull(list.DR == null ? "-" : list.DR));
+                            uploadObj.put("GDR", dwnull(list.GDR == null ? "-" : list.GDR));
+                            uploadObj.put("DRStockCode", dwnull(list.DRStockCode == null ? "-" : list.DRStockCode));
+                            uploadObj.put("DRStockName", dwnull(list.DRStockName == null ? "-" : list.DRStockName));
 
-                            if (list.DRDepositoryInstitutionName.isEmpty()){
-                                uploadObj.put("DRDepositoryInstitutionName", "-");
-                            }else {
-                                uploadObj.put("DRDepositoryInstitutionName", list.DRDepositoryInstitutionName == null ? "-" : list.DRDepositoryInstitutionName);
-                            }
-
-                            if (list.DRSubjectClosingReferencePrice.isEmpty()){
-                                uploadObj.put("DRSubjectClosingReferencePrice","-");
-                            }else {
-                                uploadObj.put("DRSubjectClosingReferencePrice", list.DRSubjectClosingReferencePrice == null ? "-" : list.DRSubjectClosingReferencePrice);
-                            }
-
-                            if (list.DR.equals("")){
-                                uploadObj.put("DR", list.DR == "" ? "-" : list.DR);
-                            }else {
-                                uploadObj.put("DR", list.DR == null ? "-" : list.DR);
-                            }
-
-                            if (list.GDR.equals("")){
-                                uploadObj.put("GDR", list.GDR == "" ? "-" : list.GDR);
-                            }else {
-                                uploadObj.put("GDR", list.GDR == null ? "-" : list.GDR);
-                            }
-
-                            if (list.DRStockCode.equals("")){
-                                uploadObj.put("DRStockCode", list.DRStockCode == "" ? "-" : list.DRStockCode);
-                            }else {
-                                uploadObj.put("DRStockCode", list.DRStockCode == null ? "-" : list.DRStockCode);
-                            }
-
-                            if (list.DRStockName.equals("")){
-                                uploadObj.put("DRStockName", list.DRStockName == "" ? "-" : list.DRStockName);
-                            }else {
-                                uploadObj.put("DRStockName", list.DRStockName == null ? "-" : list.DRStockName);
-                            }
                             uploadObj.put("DRSecuritiesConversionBase", list.DRSecuritiesConversionBase == null ? "-" : list.DRSecuritiesConversionBase);
                             uploadObj.put("DRListingDate", list.DRListingDate == null ? "-" : list.DRListingDate);
                             uploadObj.put("DRFlowStartDate", list.DRFlowStartDate == null ? "-" : list.DRFlowStartDate);
@@ -517,40 +360,20 @@ public class QuoteDetailTest_1 {
                             uploadObj.put("changeBP", list.changeBP == null ? "-" : list.changeBP);
                             uploadObj.put("subscribeUpperLimit", list.subscribeUpperLimit == null ? "-" : list.subscribeUpperLimit);
                             uploadObj.put("subscribeLowerLimit", list.subscribeLowerLimit == null ? "-" : list.subscribeLowerLimit);
+                            uploadObj.put("afterHoursVolume", dwnull(list.afterHoursVolume == null ? "-" : list.afterHoursVolume));
 
-                            if (list.afterHoursVolume.equals("一")){
-                                uploadObj.put("afterHoursVolume", list.afterHoursVolume == "一" ? "-" : list.afterHoursVolume);
-                            }else {
-                                uploadObj.put("afterHoursVolume", list.afterHoursVolume == null ? "-" : list.afterHoursVolume);
-                            }
                             uploadObj.put("afterHoursAmount", list.afterHoursAmount == null ? "-" : list.afterHoursAmount);
                             uploadObj.put("afterHoursTransactionNumber", list.afterHoursTransactionNumber == null ? "-" : list.afterHoursTransactionNumber);
                             uploadObj.put("afterHoursWithdrawBuyCount", list.afterHoursWithdrawBuyCount == null ? "-" : list.afterHoursWithdrawBuyCount);
 
-                            if (list.afterHoursWithdrawBuyVolume.equals("一")){
-                                uploadObj.put("afterHoursWithdrawBuyVolume", list.afterHoursWithdrawBuyVolume == "一" ? "-" : list.afterHoursWithdrawBuyVolume);
-                            }else {
-                                uploadObj.put("afterHoursWithdrawBuyVolume", list.afterHoursWithdrawBuyVolume == null ? "-" : list.afterHoursWithdrawBuyVolume);
-                            }
+                            uploadObj.put("afterHoursWithdrawBuyVolume", dwnull(list.afterHoursWithdrawBuyVolume == null ? "-" : list.afterHoursWithdrawBuyVolume));
+
                             uploadObj.put("afterHoursWithdrawSellCount", list.afterHoursWithdrawSellCount == null ? "-" : list.afterHoursWithdrawSellCount);
 
-                            if (list.afterHoursWithdrawSellVolume.equals("一")){
-                                uploadObj.put("afterHoursWithdrawSellVolume", list.afterHoursWithdrawSellVolume == "一" ? "-" : list.afterHoursWithdrawSellVolume);
-                            }else {
-                                uploadObj.put("afterHoursWithdrawSellVolume", list.afterHoursWithdrawSellVolume == null ? "-" : list.afterHoursWithdrawSellVolume);
-                            }
+                            uploadObj.put("afterHoursWithdrawSellVolume", dwnull(list.afterHoursWithdrawSellVolume == null ? "-" : list.afterHoursWithdrawSellVolume));
+                            uploadObj.put("afterHoursBuyVolume", dwnull(list.afterHoursBuyVolume == null ? "-" : list.afterHoursBuyVolume));
+                            uploadObj.put("afterHoursSellVolume", dwnull(list.afterHoursSellVolume == null ? "-" : list.afterHoursSellVolume));
 
-                            if (list.afterHoursBuyVolume.equals("一")){
-                                uploadObj.put("afterHoursBuyVolume", list.afterHoursBuyVolume == "一" ? "-" : list.afterHoursBuyVolume);
-                            }else {
-                                uploadObj.put("afterHoursBuyVolume", list.afterHoursBuyVolume == null ? "-" : list.afterHoursBuyVolume);
-                            }
-
-                            if (list.afterHoursSellVolume.equals("一")){
-                                uploadObj.put("afterHoursSellVolume", list.afterHoursSellVolume == "一" ? "-" : list.afterHoursSellVolume);
-                            }else {
-                                uploadObj.put("afterHoursSellVolume", list.afterHoursSellVolume == null ? "-" : list.afterHoursSellVolume);
-                            }
                             uploadObj.put("issuedCapital", list.issuedCapital == null ? "-" : list.issuedCapital);
                             uploadObj.put("limitPriceUpperLimit", list.limitPriceUpperLimit == null ? "-" : list.limitPriceUpperLimit);
                             uploadObj.put("limitPriceLowerLimit", list.limitPriceLowerLimit == null ? "-" : list.limitPriceLowerLimit);
@@ -591,7 +414,6 @@ public class QuoteDetailTest_1 {
                             uploadObj.put("sellAuctionRange", list.sellAuctionRange == null ? "-" : "["+ list.sellAuctionRange[0]+","+list.sellAuctionRange[1]+"]");
                             uploadObj.put("afterHoursBuyQtyUpperLimit", list.afterHoursBuyQtyUpperLimit == null ? "-" : list.afterHoursBuyQtyUpperLimit);
                             uploadObj.put("afterHoursSellQtyUpperLimit", list.afterHoursSellQtyUpperLimit == null ? "-" : list.afterHoursSellQtyUpperLimit);
-
                             //买卖队列
                             if (quoteResponse.OrderQuantityBuyList!=null) {
                                 ArrayList<OrderQuantityItem> orderQuantityItem1 = quoteResponse.OrderQuantityBuyList;
@@ -769,5 +591,17 @@ public class QuoteDetailTest_1 {
             //                throw new Exception(e);
             throw new TestcaseException(e,rule.getParam());
         }
+    }
+    public String dwnull(String st){
+        if (st.equals("一")){
+            st="-";
+        }else if (st.equals("")){
+            st="-";
+        }else if(st==null){
+            st="-";
+        }else if (st.isEmpty()){
+            st="-";
+        }
+        return  st;
     }
 }
