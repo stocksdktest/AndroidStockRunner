@@ -1,10 +1,11 @@
 20210601    by  liubin
 1、修改行情快照方法一方法二和TCP行情快照方法一方法二字段处理
 2、修改逐笔委托标识字段
+3、修改历史k线接口字段处理
 20210525    by  liubin
 1、修改板块接口（两个方法）排行字段处理，ID字段取值有 ns 改为 s
 2、添加tcp走势数据接口（两个方法）的quoteItems为空的处理
-3、修改Quote_2 方法的标识字段，由 id 改为 datatime
+3、修改Quote_2 方法，无标识字段
 20210521    by  liubin
 1、修改timeout_ms
 20210520    by  liubin
