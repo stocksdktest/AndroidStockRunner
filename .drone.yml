@@ -60,10 +60,10 @@ volumes:
     path: /root/AndroidTestRunner/build-cache
 - name: build-deps-jar
   host:
-    path: /root/ftp-cache/sdk/Android/v3.8.0.003/libs
+    path: /root/ftp-cache/sdk/Android/v3.9.0.002/libs
 - name: build-deps-jni
   host:
-    path: /root/ftp-cache/sdk/Android/v3.8.0.003/jniLibs
+    path: /root/ftp-cache/sdk/Android/v3.9.0.002/jniLibs
 - name: release
   host:
     path: /root/ftp-cache/release/Android
