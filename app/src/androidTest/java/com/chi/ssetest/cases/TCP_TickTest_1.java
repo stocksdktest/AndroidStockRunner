@@ -82,10 +82,24 @@ public class TCP_TickTest_1 {
                     //                        result.completeExceptionally(e);
                     result.complete(new JSONObject());
                 }
-                // 准备监听TCP的消息
-                TCPManager.getInstance().subscribeTick(quoteResponse.quoteItems.get(0));   // quoteResponse.quoteItems.get(0).id : StockID:600000.sh
-                quoteItems.addAll(quoteResponse.quoteItems);
-                Log.d("data", uploadObj.toString());
+                Log.d("quoteItems", quoteResponse.quoteItems.toString());
+                Log.d("quoteResponse", quoteResponse.toString());
+                if (quoteResponse.quoteItems == null || quoteResponse.quoteItems.size() == 0) {
+                    JSONObject uploadObj_1 = new JSONObject();
+                    try {
+                        uploadObj_1.put("quoteItems", "");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    // 准备监听TCP的消息
+                    TCPManager.getInstance().subscribeTick(quoteResponse.quoteItems.get(0));   // quoteResponse.quoteItems.get(0).id : StockID:600000.sh
+                    quoteItems.addAll(quoteResponse.quoteItems);
+                    Log.d("data", uploadObj.toString());
+
+
+                }
+
             }
 
             @Override
@@ -117,10 +131,10 @@ public class TCP_TickTest_1 {
                     public void pushTick(String s, TickData tickData) {
 
                         String code=s;
-
+                        Log.d("tickData", tickData.toString());
                         try {
 //                            uploadObj.put("code",code);
-                            if(tickData!=null){
+                            if(tickData!=null&&tickData.tickItems.size()!=0){
                                 JSONObject uploadObj_1 = new JSONObject();
                                 uploadObj_1.put("time",tickData.tickItems.get(tickData.tickItems.size()-1).getTransactionTime());
                                 uploadObj_1.put("tradePrice",tickData.tickItems.get(tickData.tickItems.size()-1).getTransactionPrice());
