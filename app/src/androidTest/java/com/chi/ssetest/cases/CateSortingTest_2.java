@@ -377,6 +377,20 @@ public class CateSortingTest_2 {
                                 uploadObj_1.put("yearChangeRate", dwnull(list.get(i).yearChangeRate == null ? "-" : list.get(i).yearChangeRate));
                                 uploadObj_1.put("recentMonthChangeRate", dwnull(list.get(i).recentMonthChangeRate == null ? "-" : list.get(i).recentMonthChangeRate));
                                 uploadObj_1.put("recentYearChangeRate", dwnull(list.get(i).recentYearChangeRate == null ? "-" : list.get(i).recentYearChangeRate));
+                                //20210603  AppInfo.sdk_version=3.9.0
+                                if (list.get(i).market.equals("sh")||list.get(i).market.equals("sz")){
+                                    uploadObj_1.put("listDate", dwnull(list.get(i).listDate == null ? "-" : list.get(i).listDate));
+                                    uploadObj_1.put("ttm", dwnull(list.get(i).ttm == null ? "-" : list.get(i).ttm));
+                                    uploadObj_1.put("roe", dwnull(list.get(i).roe == null ? "-" : list.get(i).roe));
+                                    uploadObj_1.put("buyVol1", dwnull(list.get(i).buyVol1 == null ? "-" : list.get(i).buyVol1));
+                                    uploadObj_1.put("sellVol1", dwnull(list.get(i).sellVol1 == null ? "-" : list.get(i).sellVol1));
+                                    uploadObj_1.put("changeRate5", dwnull(list.get(i).changeRate5 == null ? "-" : list.get(i).changeRate5));
+                                    uploadObj_1.put("changeRate10", dwnull(list.get(i).changeRate10 == null ? "-" : list.get(i).changeRate10));
+                                    uploadObj_1.put("changeRate20", dwnull(list.get(i).changeRate20 == null ? "-" : list.get(i).changeRate20));
+                                    uploadObj_1.put("turnoverRate5", dwnull(list.get(i).turnoverRate5 == null ? "-" : list.get(i).turnoverRate5));
+                                    uploadObj_1.put("turnoverRate10", dwnull(list.get(i).turnoverRate10 == null ? "-" : list.get(i).turnoverRate10));
+                                    uploadObj_1.put("turnoverRate20", dwnull(list.get(i).turnoverRate20 == null ? "-" : list.get(i).turnoverRate20));
+                                }
                                 //增值指标
                                 if (cateSortingResponse.addValueModel!=null){
                                     ArrayList<AddValueModel> addValueModels=cateSortingResponse.addValueModel;

@@ -449,6 +449,11 @@ public class TCP_QuoteDetailTest_2 {
                                 uploadObj.put("mbxl", item.mbxl == null ? "-" : item.mbxl);
                                 uploadObj.put("zxsbsl", item.zxsbsl == null ? "-" : item.zxsbsl);
                                 uploadObj.put("en", item.en == null ? "-" : item.en);//期货品种
+                                if (item.market.equals("bj")){
+                                    uploadObj.put("marketMakerQty", item.marketMakerQty == null ? "-" : item.marketMakerQty);
+                                    uploadObj.put("issuePE", item.issuePE == null ? "-" : item.issuePE);
+                                    uploadObj.put("unRestrictedShareCapital", item.unRestrictedShareCapital == null ? "-" : item.unRestrictedShareCapital);
+                                }
                                 //创业板字段
                                 uploadObj.put("securityStatus", item.securityStatus == null ? "-" : item.securityStatus);
                                 uploadObj.put("buyQtyUpperLimit", item.buyQtyUpperLimit == null ? "-" : item.buyQtyUpperLimit);
@@ -464,6 +469,20 @@ public class TCP_QuoteDetailTest_2 {
                                 uploadObj.put("sellAuctionRange", item.sellAuctionRange == null ? "-" : "["+ item.sellAuctionRange[0]+","+item.sellAuctionRange[1]+"]");
                                 uploadObj.put("afterHoursBuyQtyUpperLimit", item.afterHoursBuyQtyUpperLimit == null ? "-" : item.afterHoursBuyQtyUpperLimit);
                                 uploadObj.put("afterHoursSellQtyUpperLimit", item.afterHoursSellQtyUpperLimit == null ? "-" : item.afterHoursSellQtyUpperLimit);
+                                //20210603  AppInfo.sdk_version=3.9.0
+                                if (item.market.equals("sh")||item.market.equals("sz")){
+                                    uploadObj.put("ttm", item.ttm == null ? "-" : item.ttm);
+                                    uploadObj.put("roe", item.roe == null ? "-" : item.roe);
+                                    uploadObj.put("buyVol1", item.buyVol1 == null ? "-" : item.buyVol1);
+                                    uploadObj.put("sellVol1", item.sellVol1 == null ? "-" : item.sellVol1);
+                                    uploadObj.put("changeRate5", item.changeRate5 == null ? "-" : item.changeRate5);
+                                    uploadObj.put("changeRate10", item.changeRate10 == null ? "-" : item.changeRate10);
+                                    uploadObj.put("changeRate20", item.changeRate20 == null ? "-" : item.changeRate20);
+                                    uploadObj.put("turnoverRate5", item.turnoverRate5 == null ? "-" : item.turnoverRate5);
+                                    uploadObj.put("turnoverRate10", item.turnoverRate10 == null ? "-" : item.turnoverRate10);
+                                    uploadObj.put("turnoverRate20", item.turnoverRate20 == null ? "-" : item.turnoverRate20);
+                                    uploadObj.put("limitChangeRate", item.limitChangeRate == null ? "-" : item.limitChangeRate);
+                                }
                                 //买卖队列
                                 if (buyItems!=null) {
                                     ArrayList<OrderQuantityItem> orderQuantityItem1 = buyItems;

@@ -373,6 +373,11 @@ public class QuoteTest_2 {
                             uploadObj_1.put("mbxl", list.mbxl == null ? "-" : list.mbxl);
                             uploadObj_1.put("zxsbsl", list.zxsbsl == null ? "-" : list.zxsbsl);
                             uploadObj_1.put("en", list.en == null ? "-" : list.en);//期货品种
+                            if (list.market.equals("bj")){
+                                uploadObj_1.put("marketMakerQty", list.marketMakerQty == null ? "-" : list.marketMakerQty);
+                                uploadObj_1.put("issuePE", list.issuePE == null ? "-" : list.issuePE);
+                                uploadObj_1.put("unRestrictedShareCapital", list.unRestrictedShareCapital == null ? "-" : list.unRestrictedShareCapital);
+                            }
                             //创业板字段
                             uploadObj_1.put("securityStatus", list.securityStatus == null ? "-" : list.securityStatus);
                             uploadObj_1.put("buyQtyUpperLimit", list.buyQtyUpperLimit == null ? "-" : list.buyQtyUpperLimit);
@@ -388,6 +393,20 @@ public class QuoteTest_2 {
                             uploadObj_1.put("sellAuctionRange", list.sellAuctionRange == null ? "-" : "["+ list.sellAuctionRange[0]+","+list.sellAuctionRange[1]+"]");
                             uploadObj_1.put("afterHoursBuyQtyUpperLimit", list.afterHoursBuyQtyUpperLimit == null ? "-" : list.afterHoursBuyQtyUpperLimit);
                             uploadObj_1.put("afterHoursSellQtyUpperLimit", list.afterHoursSellQtyUpperLimit == null ? "-" : list.afterHoursSellQtyUpperLimit);
+                            //20210603  AppInfo.sdk_version=3.9.0
+                            if (list.market.equals("sh")||list.market.equals("sz")){
+                                uploadObj_1.put("ttm", list.ttm == null ? "-" : list.ttm);
+                                uploadObj_1.put("roe", list.roe == null ? "-" : list.roe);
+                                uploadObj_1.put("buyVol1", list.buyVol1 == null ? "-" : list.buyVol1);
+                                uploadObj_1.put("sellVol1", list.sellVol1 == null ? "-" : list.sellVol1);
+                                uploadObj_1.put("changeRate5", list.changeRate5 == null ? "-" : list.changeRate5);
+                                uploadObj_1.put("changeRate10", list.changeRate10 == null ? "-" : list.changeRate10);
+                                uploadObj_1.put("changeRate20", list.changeRate20 == null ? "-" : list.changeRate20);
+                                uploadObj_1.put("turnoverRate5", list.turnoverRate5 == null ? "-" : list.turnoverRate5);
+                                uploadObj_1.put("turnoverRate10", list.turnoverRate10 == null ? "-" : list.turnoverRate10);
+                                uploadObj_1.put("turnoverRate20", list.turnoverRate20 == null ? "-" : list.turnoverRate20);
+                                uploadObj_1.put("limitChangeRate", list.limitChangeRate == null ? "-" : list.limitChangeRate);
+                            }
 //                            //增值指标
 //                            if (!"null".equals(INTS2[0])){
 //                                ArrayList<AddValueModel> addValueModels=quoteResponse.addValueModel;

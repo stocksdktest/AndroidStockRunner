@@ -100,6 +100,7 @@ public class CompoundUpDownTest_1 {
 
                                 uploadObj_1.put("oneRiseLimitCount",list.get(i).oneRiseLimitCount);
                                 uploadObj_1.put("natureRiseLimitCount",list.get(i).natureRiseLimitCount);
+                                uploadObj_1.put("fiveAvgRiseLimitCount",list.get(i).fiveAvgRiseLimitCount);
 //                            Log.d("data", String.valueOf(uploadObj_1));
                                 uploadObj.put(list.get(i).dateTime,uploadObj_1);
                             }

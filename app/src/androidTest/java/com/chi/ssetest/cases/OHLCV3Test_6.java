@@ -47,10 +47,10 @@ import static org.junit.Assert.assertNotNull;
 //历史K线  方法六 (支持给定时间查之前自定义条数)
 @RunWith(AndroidJUnit4.class)
 @StockTestcase(StockTestcaseName.OHLCV3TEST_6)
-public class OHLCV3Test_6 {
+public class   OHLCV3Test_6 {
     private static final StockTestcaseName testcaseName = StockTestcaseName.OHLCV3TEST_6;
     private static SetupConfig.TestcaseConfig testcaseConfig;
-    private static final int timeout_ms = 1000000;
+    private static final int timeout_ms = 100000000;
     @BeforeClass
     public static void setup() throws Exception {
         Log.d("OHLCV3Test_6", "Setup");
@@ -80,7 +80,7 @@ public class OHLCV3Test_6 {
             @Override
             public void callback(Response response) {
                 QuoteResponse quoteResponse=(QuoteResponse) response;
-                QuoteItem quoteItem=quoteResponse.quoteItems.get(0);
+                final QuoteItem quoteItem=quoteResponse.quoteItems.get(0);
                 OHLCRequestV3 request = new OHLCRequestV3();
                 String data1;
                 if (Dates.equals("null")){
@@ -111,22 +111,24 @@ public class OHLCV3Test_6 {
                                         timedata=list.get(k).datetime+list.get(k).time;
                                     }
                                     uploadObj_1.put("datetime",timedata);
-                                    uploadObj_1.put("openPrice",list.get(k).openPrice == null ? "-" : list.get(k).openPrice);
-                                    uploadObj_1.put("highPrice",list.get(k).highPrice == null ? "-" : list.get(k).highPrice);
-                                    uploadObj_1.put("lowPrice",list.get(k).lowPrice == null ? "-" : list.get(k).lowPrice);
-                                    uploadObj_1.put("closePrice",list.get(k).closePrice == null ? "-" : list.get(k).closePrice);
-                                    uploadObj_1.put("tradeVolume",list.get(k).tradeVolume == null ? "-" : list.get(k).tradeVolume);
-                                    uploadObj_1.put("averagePrice",list.get(k).averagePrice == null ? "-" : list.get(k).averagePrice);//ios需要判断是否存在字段
-                                    uploadObj_1.put("reference_price",list.get(k).reference_price == null ? "-" : list.get(k).reference_price);
-                                    uploadObj_1.put("transaction_price",list.get(k).transaction_price == null ? "-" : list.get(k).transaction_price);
-                                    uploadObj_1.put("openInterest",list.get(k).openInterest == null ? "-" : list.get(k).openInterest);//ios需要判断是否存在字段
-                                    if (list.get(k).fp_volume.equals("一")){
-                                        uploadObj_1.put("fp_volume",list.get(k).fp_volume == "一" ? "-" : list.get(k).openInterest);
-                                    }else {
-                                        uploadObj_1.put("fp_volume",list.get(k).fp_volume == null ? "-" : list.get(k).openInterest);
+                                    uploadObj_1.put("openPrice",dwnull(list.get(k).openPrice == null ? "-" : list.get(k).openPrice));
+                                    uploadObj_1.put("highPrice",dwnull(list.get(k).highPrice == null ? "-" : list.get(k).highPrice));
+                                    uploadObj_1.put("lowPrice",dwnull(list.get(k).lowPrice == null ? "-" : list.get(k).lowPrice));
+                                    uploadObj_1.put("closePrice",dwnull(list.get(k).closePrice == null ? "-" : list.get(k).closePrice));
+                                    uploadObj_1.put("tradeVolume",dwnull(list.get(k).tradeVolume == null ? "-" : list.get(k).tradeVolume));
+                                    uploadObj_1.put("averagePrice",dwnull(list.get(k).averagePrice == null ? "-" : list.get(k).averagePrice));//ios需要判断是否存在字段
+                                    uploadObj_1.put("reference_price",dwnull(list.get(k).reference_price == null ? "-" : list.get(k).reference_price));
+                                    uploadObj_1.put("transaction_price",dwnull(list.get(k).transaction_price == null ? "-" : list.get(k).transaction_price));
+                                    uploadObj_1.put("openInterest",dwnull(list.get(k).openInterest == null ? "-" : list.get(k).openInterest));//ios需要判断是否存在字段
+                                    //盘后成交量成交额
+                                    if (quoteItem.market.equals("sh")||quoteItem.market.equals("sz")){
+                                        if (quoteItem.subtype.equals("1004")||quoteItem.subtype.equals("1006")){
+                                            uploadObj_1.put("fp_volume",dwnull(list.get(k).fp_volume == null ? "-" : list.get(k).openInterest));
+                                            uploadObj_1.put("fp_amount",dwnull(list.get(k).fp_amount == null ? "-" : list.get(k).fp_amount));
+                                        }
                                     }
-                                    uploadObj_1.put("fp_amount",list.get(k).fp_amount == null ? "-" : list.get(k).fp_amount);
-                                    uploadObj_1.put("iopv",list.get(k).iopv == null ? "-" : list.get(k).iopv);
+                                    uploadObj_1.put("iopv",dwnull(list.get(k).iopv == null ? "-" : list.get(k).iopv));
+
                                     String turnoverRate = FormatUtility.calculateTurnoverRate(list.get(k),ohlcResponse.gb);
                                     uploadObj_1.put("turnoverRate",turnoverRate == null ? "-" : turnoverRate);
 //                                        Log.d("data", String.valueOf(uploadObj_1));
@@ -170,5 +172,17 @@ public class OHLCV3Test_6 {
             throw new TestcaseException(e,rule.getParam());
         }
 //        }
+    }
+    public String dwnull(String st){
+        if (st.equals("一")){
+            st="-";
+        }else if (st.equals("")){
+            st="-";
+        }else if(st==null){
+            st="-";
+        }else if (st.isEmpty()){
+            st="-";
+        }
+        return  st;
     }
 }

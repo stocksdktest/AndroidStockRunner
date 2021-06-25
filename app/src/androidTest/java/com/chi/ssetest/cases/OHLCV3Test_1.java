@@ -68,12 +68,12 @@ public class OHLCV3Test_1 {
 //        OHLChartType
         final CompletableFuture result = new CompletableFuture<JSONObject>();
 //        for (int i=0;i<CODES.length;i++){
-            QuoteDetailRequest quoteDetailRequest=new QuoteDetailRequest();
+            final QuoteDetailRequest quoteDetailRequest=new QuoteDetailRequest();
             quoteDetailRequest.send(CODES, new IResponseInfoCallback() {
                 @Override
                 public void callback(Response response) {
                     QuoteResponse quoteResponse=(QuoteResponse) response;
-                    QuoteItem quoteItem=quoteResponse.quoteItems.get(0);
+                    final QuoteItem quoteItem=quoteResponse.quoteItems.get(0);
                     OHLCRequestV3 request = new OHLCRequestV3();
                     request.send(quoteItem,Types, new IResponseInfoCallback() {
                         @Override
@@ -108,8 +108,12 @@ public class OHLCV3Test_1 {
                                         uploadObj_1.put("transaction_price",dwnull(list.get(k).transaction_price == null ? "-" : list.get(k).transaction_price));
                                         uploadObj_1.put("openInterest",dwnull(list.get(k).openInterest == null ? "-" : list.get(k).openInterest));//ios需要判断是否存在字段
                                         //盘后成交量成交额
-                                        uploadObj_1.put("fp_volume",dwnull(list.get(k).fp_volume == null ? "-" : list.get(k).openInterest));
-                                        uploadObj_1.put("fp_amount",dwnull(list.get(k).fp_amount == null ? "-" : list.get(k).fp_amount));
+                                        if (quoteItem.market.equals("sh")||quoteItem.market.equals("sz")){
+                                            if (quoteItem.subtype.equals("1004")||quoteItem.subtype.equals("1006")){
+                                                uploadObj_1.put("fp_volume",dwnull(list.get(k).fp_volume == null ? "-" : list.get(k).openInterest));
+                                                uploadObj_1.put("fp_amount",dwnull(list.get(k).fp_amount == null ? "-" : list.get(k).fp_amount));
+                                            }
+                                        }
                                         uploadObj_1.put("iopv",dwnull(list.get(k).iopv == null ? "-" : list.get(k).iopv));
 
                                         String turnoverRate = FormatUtility.calculateTurnoverRate(list.get(k),ohlcResponse.gb);

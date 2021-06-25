@@ -85,6 +85,8 @@ public class MarketUpDownTest_1 {
                             uploadObj.put("yEqual",upDownItem.yEqual);
                             uploadObj.put("yLimitUp",upDownItem.yLimitUp);
                             uploadObj.put("yLimitDown",upDownItem.yLimitDown);
+                            uploadObj.put("tLimitUpFA",upDownItem.tLimitUpFA);
+                            uploadObj.put("tLimitYzUp",upDownItem.tLimitYzUp);
 
                             List<Integer> list=new ArrayList<>();
                             for (int i=0;i<upDownItem.list.size();i++){
