@@ -431,7 +431,8 @@ public class QuoteDetailTest_1 {
                                 uploadObj.put("turnoverRate5", list.turnoverRate5 == null ? "-" : list.turnoverRate5);
                                 uploadObj.put("turnoverRate10", list.turnoverRate10 == null ? "-" : list.turnoverRate10);
                                 uploadObj.put("turnoverRate20", list.turnoverRate20 == null ? "-" : list.turnoverRate20);
-                                uploadObj.put("limitChangeRate", list.limitChangeRate == null ? "-" : list.limitChangeRate);
+                                uploadObj.put("limitUPChangeRate", list.limitUPChangeRate == null ? "-" : list.limitUPChangeRate);
+                                uploadObj.put("limitDownChangeRate", list.limitDownChangeRate == null ? "-" : list.limitDownChangeRate);
                             }
 
                             //买卖队列

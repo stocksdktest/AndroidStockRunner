@@ -481,7 +481,8 @@ public class TCP_QuoteDetailTest_2 {
                                     uploadObj.put("turnoverRate5", item.turnoverRate5 == null ? "-" : item.turnoverRate5);
                                     uploadObj.put("turnoverRate10", item.turnoverRate10 == null ? "-" : item.turnoverRate10);
                                     uploadObj.put("turnoverRate20", item.turnoverRate20 == null ? "-" : item.turnoverRate20);
-                                    uploadObj.put("limitChangeRate", item.limitChangeRate == null ? "-" : item.limitChangeRate);
+                                    uploadObj.put("limitUPChangeRate", item.limitUPChangeRate == null ? "-" : item.limitUPChangeRate);
+                                    uploadObj.put("limitDownChangeRate", item.limitDownChangeRate == null ? "-" : item.limitDownChangeRate);
                                 }
                                 //买卖队列
                                 if (buyItems!=null) {

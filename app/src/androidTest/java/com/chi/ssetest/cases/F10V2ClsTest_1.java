@@ -66,7 +66,7 @@ public class F10V2ClsTest_1 {
         request.sendCls(quoteNumbers,quoteNumbers1,quoteNumbers2,new IResponseInfoCallback<F10V2Response>() {
             @Override
             public void callback(F10V2Response f10V2Response) {
-                if (quoteNumbers2.equals("/clsimportantnewslist")&&(quoteNumbers.equals("10")||quoteNumbers.equals("13"))){
+                if ((quoteNumbers2.equals("/clsimportantnewslist")&&(quoteNumbers.equals("10")||quoteNumbers.equals("13")))||(quoteNumbers2.equals("/clsrecommendlist")&&(quoteNumbers.equals("3")||quoteNumbers.equals("4")))){
                     try {
                         assertNotNull(f10V2Response.infos);
                     } catch (AssertionError e) {
@@ -91,17 +91,21 @@ public class F10V2ClsTest_1 {
                                 uploadObj.put("Page",info.get("Page")== null ? "-" : info.get("Page"));
                                 uploadObj.put("PageNumber",info.get("PageNumber")== null ? "-" : info.get("PageNumber"));
                                 List<HashMap<String,Object>> list= (List<HashMap<String, Object>>) info.get("List");
-                                for (int i=0;i<list.size();i++){
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("ID",list.get(i).get("ID"));
-                                    uploadObj_1.put("TITLE",list.get(i).get("TITLE")== null ? "-" : list.get(i).get("TITLE"));
-                                    uploadObj_1.put("CONTENT",list.get(i).get("CONTENT")== null ? "-" : list.get(i).get("CONTENT"));
-                                    uploadObj_1.put("PUBDATE",list.get(i).get("PUBDATE")== null ? "-" : list.get(i).get("PUBDATE"));
-                                    uploadObj_1.put("RECOMMEND",list.get(i).get("RECOMMEND")== null ? "-" : list.get(i).get("RECOMMEND"));
-                                    uploadObj_1.put("STOCKS",list.get(i).get("STOCKS")== null ? "-" : list.get(i).get("STOCKS"));
-                                    uploadObj_1.put("TOPICS",list.get(i).get("TOPICS")== null ? "-" : list.get(i).get("TOPICS"));
-                                    uploadObj_1.put("BRIEF",list.get(i).get("BRIEF")== null ? "-" : list.get(i).get("BRIEF"));
-                                    uploadObj.put(String.valueOf(list.get(i).get("ID")),uploadObj_1);
+                                if (list!=null&&list.size()>0){
+                                    for (int i=0;i<list.size();i++){
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("ID",list.get(i).get("ID"));
+                                        uploadObj_1.put("TITLE",list.get(i).get("TITLE")== null ? "-" : list.get(i).get("TITLE"));
+                                        uploadObj_1.put("CONTENT",list.get(i).get("CONTENT")== null ? "-" : list.get(i).get("CONTENT"));
+                                        uploadObj_1.put("PUBDATE",list.get(i).get("PUBDATE")== null ? "-" : list.get(i).get("PUBDATE"));
+                                        uploadObj_1.put("RECOMMEND",list.get(i).get("RECOMMEND")== null ? "-" : list.get(i).get("RECOMMEND"));
+                                        uploadObj_1.put("STOCKS",list.get(i).get("STOCKS")== null ? "-" : list.get(i).get("STOCKS"));
+                                        uploadObj_1.put("TOPICS",list.get(i).get("TOPICS")== null ? "-" : list.get(i).get("TOPICS"));
+                                        uploadObj_1.put("BRIEF",list.get(i).get("BRIEF")== null ? "-" : list.get(i).get("BRIEF"));
+                                        uploadObj.put(String.valueOf(list.get(i).get("ID")),uploadObj_1);
+                                    }
+                                }else {
+                                    uploadObj.put("list","-");
                                 }
                             }
                             break;
@@ -109,7 +113,7 @@ public class F10V2ClsTest_1 {
                         case F10Type.CLS_IMPORTANT_NEWS_LIST:
                             if (quoteNumbers.equals("10")||quoteNumbers.equals("13")){
                                 List<HashMap<String,Object>> list=f10V2Response.infos;
-                                if (list!=null){
+                                if (list!=null&&list.size()>0){
                                     for (int i=0;i<list.size();i++){
                                         JSONObject uploadObj_1 = new JSONObject();
                                         uploadObj_1.put("ID",list.get(i).get("ID"));
@@ -125,26 +129,32 @@ public class F10V2ClsTest_1 {
                                         uploadObj_1.put("TOPICS",list.get(i).get("TOPICS")== null ? "-" : list.get(i).get("TOPICS"));
                                         uploadObj.put((String) list.get(i).get("ID"),uploadObj_1);
                                     }
+                                }else {
+                                    uploadObj.put("list","-");
                                 }
                             }else {
                                 if (info!=null){
                                     uploadObj.put("Page",info.get("Page")== null ? "-" : info.get("Page"));
                                     uploadObj.put("PageNumber",info.get("PageNumber")== null ? "-" : info.get("PageNumber"));
                                     List<HashMap<String,Object>> list= (List<HashMap<String, Object>>) info.get("List");
-                                    for (int i=0;i<list.size();i++){
-                                        JSONObject uploadObj_1 = new JSONObject();
-                                        uploadObj_1.put("ID",list.get(i).get("ID"));
-                                        uploadObj_1.put("TITLE",list.get(i).get("TITLE")== null ? "-" : list.get(i).get("TITLE"));
-                                        uploadObj_1.put("BRIEF",list.get(i).get("BRIEF")== null ? "-" : list.get(i).get("BRIEF"));
-                                        uploadObj_1.put("IMG",list.get(i).get("IMG")== null ? "-" : list.get(i).get("IMG"));
-                                        uploadObj_1.put("PUBDATE",list.get(i).get("PUBDATE")== null ? "-" : list.get(i).get("PUBDATE"));
-                                        uploadObj_1.put("SUBJECTID",list.get(i).get("SUBJECTID")== null ? "-" : list.get(i).get("SUBJECTID"));
-                                        uploadObj_1.put("SUBJECTNAME",list.get(i).get("SUBJECTNAME")== null ? "-" : list.get(i).get("SUBJECTNAME"));
-                                        uploadObj_1.put("PID",list.get(i).get("PID")== null ? "-" : list.get(i).get("PID"));
-                                        uploadObj_1.put("PID_ID",list.get(i).get("PID_ID")== null ? "-" : list.get(i).get("PID_ID"));
-                                        uploadObj_1.put("STOCKS",list.get(i).get("STOCKS")== null ? "-" : list.get(i).get("STOCKS"));
-                                        uploadObj_1.put("TOPICS",list.get(i).get("TOPICS")== null ? "-" : list.get(i).get("TOPICS"));
-                                        uploadObj.put((String) list.get(i).get("ID"),uploadObj_1);
+                                    if (list!=null&&list.size()>0){
+                                        for (int i=0;i<list.size();i++){
+                                            JSONObject uploadObj_1 = new JSONObject();
+                                            uploadObj_1.put("ID",list.get(i).get("ID"));
+                                            uploadObj_1.put("TITLE",list.get(i).get("TITLE")== null ? "-" : list.get(i).get("TITLE"));
+                                            uploadObj_1.put("BRIEF",list.get(i).get("BRIEF")== null ? "-" : list.get(i).get("BRIEF"));
+                                            uploadObj_1.put("IMG",list.get(i).get("IMG")== null ? "-" : list.get(i).get("IMG"));
+                                            uploadObj_1.put("PUBDATE",list.get(i).get("PUBDATE")== null ? "-" : list.get(i).get("PUBDATE"));
+                                            uploadObj_1.put("SUBJECTID",list.get(i).get("SUBJECTID")== null ? "-" : list.get(i).get("SUBJECTID"));
+                                            uploadObj_1.put("SUBJECTNAME",list.get(i).get("SUBJECTNAME")== null ? "-" : list.get(i).get("SUBJECTNAME"));
+                                            uploadObj_1.put("PID",list.get(i).get("PID")== null ? "-" : list.get(i).get("PID"));
+                                            uploadObj_1.put("PID_ID",list.get(i).get("PID_ID")== null ? "-" : list.get(i).get("PID_ID"));
+                                            uploadObj_1.put("STOCKS",list.get(i).get("STOCKS")== null ? "-" : list.get(i).get("STOCKS"));
+                                            uploadObj_1.put("TOPICS",list.get(i).get("TOPICS")== null ? "-" : list.get(i).get("TOPICS"));
+                                            uploadObj.put((String) list.get(i).get("ID"),uploadObj_1);
+                                        }
+                                    }else {
+                                        uploadObj.put("list","-");
                                     }
                                 }
                             }
@@ -173,15 +183,19 @@ public class F10V2ClsTest_1 {
                                 uploadObj.put("Page",info.get("Page")== null ? "-" : info.get("Page"));
                                 uploadObj.put("PageNumber",info.get("PageNumber")== null ? "-" : info.get("PageNumber"));
                                 List<HashMap<String,Object>> list= (List<HashMap<String, Object>>) info.get("List");
-                                for (int i=0;i<list.size();i++){
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("ID",list.get(i).get("ID"));
-                                    uploadObj_1.put("TITLE",list.get(i).get("TITLE")== null ? "-" : list.get(i).get("TITLE"));
-                                    uploadObj_1.put("BRIEF",list.get(i).get("BRIEF")== null ? "-" : list.get(i).get("BRIEF"));
-                                    uploadObj_1.put("PUBDATE",list.get(i).get("PUBDATE")== null ? "-" : list.get(i).get("PUBDATE"));
-                                    uploadObj_1.put("STOCKS",list.get(i).get("STOCKS")== null ? "-" : list.get(i).get("STOCKS"));
-                                    uploadObj_1.put("TOPICS",list.get(i).get("TOPICS")== null ? "-" : list.get(i).get("TOPICS"));
-                                    uploadObj.put((String) list.get(i).get("ID"),uploadObj_1);
+                                if (list!=null&&list.size()>0){
+                                    for (int i=0;i<list.size();i++){
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("ID",list.get(i).get("ID"));
+                                        uploadObj_1.put("TITLE",list.get(i).get("TITLE")== null ? "-" : list.get(i).get("TITLE"));
+                                        uploadObj_1.put("BRIEF",list.get(i).get("BRIEF")== null ? "-" : list.get(i).get("BRIEF"));
+                                        uploadObj_1.put("PUBDATE",list.get(i).get("PUBDATE")== null ? "-" : list.get(i).get("PUBDATE"));
+                                        uploadObj_1.put("STOCKS",list.get(i).get("STOCKS")== null ? "-" : list.get(i).get("STOCKS"));
+                                        uploadObj_1.put("TOPICS",list.get(i).get("TOPICS")== null ? "-" : list.get(i).get("TOPICS"));
+                                        uploadObj.put((String) list.get(i).get("ID"),uploadObj_1);
+                                    }
+                                }else {
+                                    uploadObj.put("list","-");
                                 }
                             }
                             break;
@@ -203,15 +217,19 @@ public class F10V2ClsTest_1 {
                                 uploadObj.put("Page",info.get("Page")== null ? "-" : info.get("Page"));
                                 uploadObj.put("PageNumber",info.get("PageNumber")== null ? "-" : info.get("PageNumber"));
                                 List<HashMap<String,Object>> list= (List<HashMap<String, Object>>) info.get("List");
-                                for (int i=0;i<list.size();i++){
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("ID",list.get(i).get("ID"));
-                                    uploadObj_1.put("NAME",list.get(i).get("NAME")== null ? "-" : list.get(i).get("NAME"));
-                                    uploadObj_1.put("BRIEF",list.get(i).get("BRIEF")== null ? "-" : list.get(i).get("BRIEF"));
-                                    uploadObj_1.put("PUBDATE",list.get(i).get("PUBDATE")== null ? "-" : list.get(i).get("PUBDATE"));
-                                    uploadObj_1.put("STOCKS",list.get(i).get("STOCKS")== null ? "-" : list.get(i).get("STOCKS"));
-                                    uploadObj_1.put("TOPICS",list.get(i).get("TOPICS")== null ? "-" : list.get(i).get("TOPICS"));
-                                    uploadObj.put((String) list.get(i).get("ID"),uploadObj_1);
+                                if (list!=null&&list.size()>0){
+                                    for (int i=0;i<list.size();i++){
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("ID",list.get(i).get("ID"));
+                                        uploadObj_1.put("NAME",list.get(i).get("NAME")== null ? "-" : list.get(i).get("NAME"));
+                                        uploadObj_1.put("BRIEF",list.get(i).get("BRIEF")== null ? "-" : list.get(i).get("BRIEF"));
+                                        uploadObj_1.put("PUBDATE",list.get(i).get("PUBDATE")== null ? "-" : list.get(i).get("PUBDATE"));
+                                        uploadObj_1.put("STOCKS",list.get(i).get("STOCKS")== null ? "-" : list.get(i).get("STOCKS"));
+                                        uploadObj_1.put("TOPICS",list.get(i).get("TOPICS")== null ? "-" : list.get(i).get("TOPICS"));
+                                        uploadObj.put((String) list.get(i).get("ID"),uploadObj_1);
+                                    }
+                                }else {
+                                    uploadObj.put("list","-");
                                 }
                             }
                             break;
@@ -236,15 +254,19 @@ public class F10V2ClsTest_1 {
                                 uploadObj.put("Cnt",info.get("Cnt")== null ? "-" : info.get("Cnt"));
                                 uploadObj.put("OverPage",info.get("OverPage")== null ? "-" : info.get("OverPage"));
                                 List<HashMap<String,Object>> list= (List<HashMap<String, Object>>) info.get("List");
-                                for (int i=0;i<list.size();i++){
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("ID",list.get(i).get("ID"));
-                                    uploadObj_1.put("TITLE",list.get(i).get("TITLE")== null ? "-" : list.get(i).get("TITLE"));
-                                    uploadObj_1.put("BRIEF",list.get(i).get("BRIEF")== null ? "-" : list.get(i).get("BRIEF"));
-                                    uploadObj_1.put("PUBDATE",list.get(i).get("PUBDATE")== null ? "-" : list.get(i).get("PUBDATE"));
-                                    uploadObj_1.put("TRADING",list.get(i).get("TRADING")== null ? "-" : list.get(i).get("TRADING"));
-                                    uploadObj_1.put("ISPDF",list.get(i).get("ISPDF")== null ? "-" : list.get(i).get("ISPDF"));
-                                    uploadObj.put((String) list.get(i).get("ID"),uploadObj_1);
+                                if (list!=null&&list.size()>0){
+                                    for (int i=0;i<list.size();i++){
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("ID",list.get(i).get("ID"));
+                                        uploadObj_1.put("TITLE",list.get(i).get("TITLE")== null ? "-" : list.get(i).get("TITLE"));
+                                        uploadObj_1.put("BRIEF",list.get(i).get("BRIEF")== null ? "-" : list.get(i).get("BRIEF"));
+                                        uploadObj_1.put("PUBDATE",list.get(i).get("PUBDATE")== null ? "-" : list.get(i).get("PUBDATE"));
+                                        uploadObj_1.put("TRADING",list.get(i).get("TRADING")== null ? "-" : list.get(i).get("TRADING"));
+                                        uploadObj_1.put("ISPDF",list.get(i).get("ISPDF")== null ? "-" : list.get(i).get("ISPDF"));
+                                        uploadObj.put((String) list.get(i).get("ID"),uploadObj_1);
+                                    }
+                                }else {
+                                    uploadObj.put("list","-");
                                 }
                             }
                             break;
@@ -264,19 +286,39 @@ public class F10V2ClsTest_1 {
                             break;
                         //风口列表
                         case F10Type.CLS_RECOMMEND_LIST:
-                            if (info!=null){
-                                uploadObj.put("Page",info.get("Page")== null ? "-" : info.get("Page"));
-                                uploadObj.put("PageNumber",info.get("PageNumber")== null ? "-" : info.get("PageNumber"));
-                                List<HashMap<String,Object>> list= (List<HashMap<String, Object>>) info.get("List");
-                                for (int i=0;i<list.size();i++){
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("ID",list.get(i).get("ID"));
-                                    uploadObj_1.put("TITLE",list.get(i).get("TITLE")== null ? "-" : list.get(i).get("TITLE"));
-                                    uploadObj_1.put("BRIEF",list.get(i).get("BRIEF")== null ? "-" : list.get(i).get("BRIEF"));
-                                    uploadObj_1.put("PUBDATE",list.get(i).get("PUBDATE")== null ? "-" : list.get(i).get("PUBDATE"));
-                                    uploadObj_1.put("STOCKS",list.get(i).get("STOCKS")== null ? "-" : list.get(i).get("STOCKS"));
-                                    uploadObj_1.put("TOPICS",list.get(i).get("TOPICS")== null ? "-" : list.get(i).get("TOPICS"));
-                                    uploadObj.put((String) list.get(i).get("ID"),uploadObj_1);
+                            if (quoteNumbers.equals("3")||quoteNumbers.equals("4")){
+                                List<HashMap<String,Object>> list=f10V2Response.infos;
+                                if (list!=null&&list.size()>0){
+                                    for (int i=0;i<list.size();i++){
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("ID",list.get(i).get("ID"));
+                                        uploadObj_1.put("TITLE",list.get(i).get("TITLE")== null ? "-" : list.get(i).get("TITLE"));
+                                        uploadObj_1.put("BRIEF",list.get(i).get("BRIEF")== null ? "-" : list.get(i).get("BRIEF"));
+                                        uploadObj_1.put("PUBDATE",list.get(i).get("PUBDATE")== null ? "-" : list.get(i).get("PUBDATE"));
+                                        uploadObj.put((String) list.get(i).get("ID"),uploadObj_1);
+                                    }
+                                }else {
+                                    uploadObj.put("list","-");
+                                }
+                            }else {
+                                if (info!=null){
+                                    uploadObj.put("Page",info.get("Page")== null ? "-" : info.get("Page"));
+                                    uploadObj.put("PageNumber",info.get("PageNumber")== null ? "-" : info.get("PageNumber"));
+                                    List<HashMap<String,Object>> list= (List<HashMap<String, Object>>) info.get("List");
+                                    if (list!=null&&list.size()>0){
+                                        for (int i=0;i<list.size();i++){
+                                            JSONObject uploadObj_1 = new JSONObject();
+                                            uploadObj_1.put("ID",list.get(i).get("ID"));
+                                            uploadObj_1.put("TITLE",list.get(i).get("TITLE")== null ? "-" : list.get(i).get("TITLE"));
+                                            uploadObj_1.put("BRIEF",list.get(i).get("BRIEF")== null ? "-" : list.get(i).get("BRIEF"));
+                                            uploadObj_1.put("PUBDATE",list.get(i).get("PUBDATE")== null ? "-" : list.get(i).get("PUBDATE"));
+                                            uploadObj_1.put("STOCKS",list.get(i).get("STOCKS")== null ? "-" : list.get(i).get("STOCKS"));
+                                            uploadObj_1.put("TOPICS",list.get(i).get("TOPICS")== null ? "-" : list.get(i).get("TOPICS"));
+                                            uploadObj.put((String) list.get(i).get("ID"),uploadObj_1);
+                                        }
+                                    }else {
+                                        uploadObj.put("list","-");
+                                    }
                                 }
                             }
                             break;
@@ -298,14 +340,18 @@ public class F10V2ClsTest_1 {
                                 uploadObj.put("Cnt",info.get("Cnt")== null ? "-" : info.get("Cnt"));
                                 uploadObj.put("OverPage",info.get("OverPage")== null ? "-" : info.get("OverPage"));
                                 List<HashMap<String,Object>> list= (List<HashMap<String, Object>>) info.get("List");
-                                for (int i=0;i<list.size();i++){
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("ID",list.get(i).get("ID"));
-                                    uploadObj_1.put("TITLE",list.get(i).get("TITLE")== null ? "-" : list.get(i).get("TITLE"));
-                                    uploadObj_1.put("BRIEF",list.get(i).get("BRIEF")== null ? "-" : list.get(i).get("BRIEF"));
-                                    uploadObj_1.put("PUBDATE",list.get(i).get("PUBDATE")== null ? "-" : list.get(i).get("PUBDATE"));
-                                    uploadObj_1.put("TRADING",list.get(i).get("TRADING")== null ? "-" : list.get(i).get("TRADING"));
-                                    uploadObj.put((String) list.get(i).get("ID"),uploadObj_1);
+                                if (list!=null&&list.size()>0){
+                                    for (int i=0;i<list.size();i++){
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("ID",list.get(i).get("ID"));
+                                        uploadObj_1.put("TITLE",list.get(i).get("TITLE")== null ? "-" : list.get(i).get("TITLE"));
+                                        uploadObj_1.put("BRIEF",list.get(i).get("BRIEF")== null ? "-" : list.get(i).get("BRIEF"));
+                                        uploadObj_1.put("PUBDATE",list.get(i).get("PUBDATE")== null ? "-" : list.get(i).get("PUBDATE"));
+                                        uploadObj_1.put("TRADING",list.get(i).get("TRADING")== null ? "-" : list.get(i).get("TRADING"));
+                                        uploadObj.put((String) list.get(i).get("ID"),uploadObj_1);
+                                    }
+                                }else {
+                                    uploadObj.put("list","-");
                                 }
                             }
                             break;
@@ -328,15 +374,19 @@ public class F10V2ClsTest_1 {
                                 uploadObj.put("Cnt",info.get("Cnt")== null ? "-" : info.get("Cnt"));
                                 uploadObj.put("OverPage",info.get("OverPage")== null ? "-" : info.get("OverPage"));
                                 List<HashMap<String,Object>> list= (List<HashMap<String, Object>>) info.get("List");
-                                for (int i=0;i<list.size();i++){
-                                    JSONObject uploadObj_1 = new JSONObject();
-                                    uploadObj_1.put("ID",list.get(i).get("ID"));
-                                    uploadObj_1.put("TITLE",list.get(i).get("TITLE")== null ? "-" : list.get(i).get("TITLE"));
-                                    uploadObj_1.put("BRIEF",list.get(i).get("BRIEF")== null ? "-" : list.get(i).get("BRIEF"));
-                                    uploadObj_1.put("PUBDATE",list.get(i).get("PUBDATE")== null ? "-" : list.get(i).get("PUBDATE"));
-                                    uploadObj_1.put("TRADING",list.get(i).get("TRADING")== null ? "-" : list.get(i).get("TRADING"));
-                                    uploadObj_1.put("ISPDF",list.get(i).get("ISPDF")== null ? "-" : list.get(i).get("ISPDF"));
-                                    uploadObj.put((String) list.get(i).get("ID"),uploadObj_1);
+                                if (list!=null&&list.size()>0){
+                                    for (int i=0;i<list.size();i++){
+                                        JSONObject uploadObj_1 = new JSONObject();
+                                        uploadObj_1.put("ID",list.get(i).get("ID"));
+                                        uploadObj_1.put("TITLE",list.get(i).get("TITLE")== null ? "-" : list.get(i).get("TITLE"));
+                                        uploadObj_1.put("BRIEF",list.get(i).get("BRIEF")== null ? "-" : list.get(i).get("BRIEF"));
+                                        uploadObj_1.put("PUBDATE",list.get(i).get("PUBDATE")== null ? "-" : list.get(i).get("PUBDATE"));
+                                        uploadObj_1.put("TRADING",list.get(i).get("TRADING")== null ? "-" : list.get(i).get("TRADING"));
+                                        uploadObj_1.put("ISPDF",list.get(i).get("ISPDF")== null ? "-" : list.get(i).get("ISPDF"));
+                                        uploadObj.put((String) list.get(i).get("ID"),uploadObj_1);
+                                    }
+                                }else {
+                                    uploadObj.put("list","-");
                                 }
                             }
                             break;
@@ -361,27 +411,35 @@ public class F10V2ClsTest_1 {
                                     uploadObj.put("Page",info.get("Page")== null ? "-" : info.get("Page"));
                                     uploadObj.put("PageNumber",info.get("PageNumber")== null ? "-" : info.get("PageNumber"));
                                     List<HashMap<String,Object>> list= (List<HashMap<String, Object>>) info.get("List");
-                                    for (int i=0;i<list.size();i++){
-                                        JSONObject uploadObj_1 = new JSONObject();
-                                        uploadObj_1.put("ID",list.get(i).get("ID")== null ? "-" : list.get(i).get("ID"));
-                                        uploadObj_1.put("NAME",list.get(i).get("NAME")== null ? "-" : list.get(i).get("NAME"));
-                                        uploadObj.put((String) list.get(i).get("ID"),uploadObj_1);
+                                    if (list!=null&&list.size()>0){
+                                        for (int i=0;i<list.size();i++){
+                                            JSONObject uploadObj_1 = new JSONObject();
+                                            uploadObj_1.put("ID",list.get(i).get("ID")== null ? "-" : list.get(i).get("ID"));
+                                            uploadObj_1.put("NAME",list.get(i).get("NAME")== null ? "-" : list.get(i).get("NAME"));
+                                            uploadObj.put((String) list.get(i).get("ID"),uploadObj_1);
+                                        }
+                                    }else {
+                                        uploadObj.put("list","-");
                                     }
                                 }else {
                                     //关注话题列表
                                     uploadObj.put("Page",info.get("Page")== null ? "-" : info.get("Page"));
                                     uploadObj.put("PageNumber",info.get("PageNumber")== null ? "-" : info.get("PageNumber"));
                                     List<HashMap<String,Object>> list= (List<HashMap<String, Object>>) info.get("List");
-                                    for (int i=0;i<list.size();i++){
-                                        JSONObject uploadObj_1 = new JSONObject();
-                                        uploadObj_1.put("ID",list.get(i).get("ID")== null ? "-" : list.get(i).get("ID"));
-                                        uploadObj_1.put("TITLE",list.get(i).get("TITLE")== null ? "-" : list.get(i).get("TITLE"));
-                                        uploadObj_1.put("BRIEF",list.get(i).get("BRIEF")== null ? "-" : list.get(i).get("BRIEF"));
-                                        uploadObj_1.put("STOCKS",list.get(i).get("STOCKS")== null ? "-" : list.get(i).get("STOCKS"));
-                                        uploadObj_1.put("PUBDATE",list.get(i).get("PUBDATE")== null ? "-" : list.get(i).get("PUBDATE"));
-                                        uploadObj_1.put("TOPICS",list.get(i).get("TOPICS")== null ? "-" : list.get(i).get("TOPICS"));
-                                        uploadObj_1.put("IMG",list.get(i).get("IMG")== null ? "-" : list.get(i).get("IMG"));
-                                        uploadObj.put((String) list.get(i).get("ID"),uploadObj_1);
+                                    if (list!=null&&list.size()>0){
+                                        for (int i=0;i<list.size();i++){
+                                            JSONObject uploadObj_1 = new JSONObject();
+                                            uploadObj_1.put("ID",list.get(i).get("ID")== null ? "-" : list.get(i).get("ID"));
+                                            uploadObj_1.put("TITLE",list.get(i).get("TITLE")== null ? "-" : list.get(i).get("TITLE"));
+                                            uploadObj_1.put("BRIEF",list.get(i).get("BRIEF")== null ? "-" : list.get(i).get("BRIEF"));
+                                            uploadObj_1.put("STOCKS",list.get(i).get("STOCKS")== null ? "-" : list.get(i).get("STOCKS"));
+                                            uploadObj_1.put("PUBDATE",list.get(i).get("PUBDATE")== null ? "-" : list.get(i).get("PUBDATE"));
+                                            uploadObj_1.put("TOPICS",list.get(i).get("TOPICS")== null ? "-" : list.get(i).get("TOPICS"));
+                                            uploadObj_1.put("IMG",list.get(i).get("IMG")== null ? "-" : list.get(i).get("IMG"));
+                                            uploadObj.put((String) list.get(i).get("ID"),uploadObj_1);
+                                        }
+                                    }else {
+                                        uploadObj.put("list","-");
                                     }
                                 }
                             }

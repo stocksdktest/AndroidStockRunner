@@ -388,7 +388,8 @@ public class QuoteTest_1 {
                                     uploadObj_1.put("turnoverRate5", list.turnoverRate5 == null ? "-" : list.turnoverRate5);
                                     uploadObj_1.put("turnoverRate10", list.turnoverRate10 == null ? "-" : list.turnoverRate10);
                                     uploadObj_1.put("turnoverRate20", list.turnoverRate20 == null ? "-" : list.turnoverRate20);
-                                    uploadObj_1.put("limitChangeRate", list.limitChangeRate == null ? "-" : list.limitChangeRate);
+                                    uploadObj_1.put("limitUPChangeRate", list.limitUPChangeRate == null ? "-" : list.limitUPChangeRate);
+                                    uploadObj_1.put("limitDownChangeRate", list.limitDownChangeRate == null ? "-" : list.limitDownChangeRate);
                                 }
 
 //                            //增值指标
