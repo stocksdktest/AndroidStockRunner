@@ -60,7 +60,7 @@ public class QuoteTest_2 {
     public void requestWork() throws Exception {
         Log.d("QuoteTest_2", "requestWork");
         // TODO get custom args from param
-        final String []quoteNumbers = rule.getParam().optString("CODES", "").split(",");
+        final String []quoteNumbers = rule.getParam().optString("CODE", "").split(",");
         final String[] INTS1 = rule.getParam().optString("STOCKFIELDS","").split(",");
         final String[] INTS2 = rule.getParam().optString("FIELDS", "").split(",");
         final CompletableFuture result = new CompletableFuture<JSONObject>();
