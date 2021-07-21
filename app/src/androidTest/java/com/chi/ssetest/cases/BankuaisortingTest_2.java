@@ -159,13 +159,21 @@ public class BankuaisortingTest_2 {
     }
     public String dwnull(String st){
         if (st.equals("一")){
-            st="-";
+            st="0";
         }else if (st.equals("")){
-            st="-";
+            st="0";
         }else if(st==null){
-            st="-";
+            st="0";
         }else if (st.isEmpty()){
-            st="-";
+            st="0";
+        }
+        else if (st.equals("-")){
+            st="0";
+        }
+        else if (st.equals("+0.00")){
+            st="0";
+        }     else if (st.equals("-0.00")){
+            st="0";
         }
         return  st;
     }
