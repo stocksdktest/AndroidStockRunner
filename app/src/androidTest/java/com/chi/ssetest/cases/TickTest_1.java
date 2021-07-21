@@ -103,7 +103,7 @@ public class TickTest_1 {
                             uploadObj_1.put("time", list.get(k).getTransactionTime());
                             uploadObj_1.put("tradeVolume", list.get(k).getSingleVolume());
                             uploadObj_1.put("tradePrice", list.get(k).getTransactionPrice());
-                            Log.d("data", String.valueOf(uploadObj_1));
+//                            Log.d("data", String.valueOf(uploadObj_1));
                             if (sttime.equals(list.get(k).getTransactionTime())){
                                 uploadObj.put(list.get(k).getTransactionTime()+i,uploadObj_1);
                                 i++;
@@ -167,7 +167,7 @@ public class TickTest_1 {
                             uploadObj_1.put("time", list.get(k).getTransactionTime());
                             uploadObj_1.put("tradeVolume", list.get(k).getSingleVolume());
                             uploadObj_1.put("tradePrice", list.get(k).getTransactionPrice());
-                            Log.d("data", String.valueOf(uploadObj_1));
+//                            Log.d("data", String.valueOf(uploadObj_1));
                             if (sttime.equals(list.get(k).getTransactionTime())){
                                 uploadObj.put(list.get(k).getTransactionTime()+i,uploadObj_1);
                                 i++;

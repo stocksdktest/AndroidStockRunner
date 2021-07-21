@@ -121,7 +121,7 @@ public class OHLCV3Test_2 {
                                         //盘后成交量成交额
                                         if (quoteItem.market.equals("sh")||quoteItem.market.equals("sz")){
                                             if (quoteItem.subtype.equals("1004")||quoteItem.subtype.equals("1006")){
-                                                uploadObj_1.put("fp_volume",dwnull(list.get(k).fp_volume == null ? "-" : list.get(k).openInterest));
+                                                uploadObj_1.put("fp_volume",dwnull(list.get(k).fp_volume == null ? "-" : list.get(k).fp_volume));
                                                 uploadObj_1.put("fp_amount",dwnull(list.get(k).fp_amount == null ? "-" : list.get(k).fp_amount));
                                             }
                                         }
