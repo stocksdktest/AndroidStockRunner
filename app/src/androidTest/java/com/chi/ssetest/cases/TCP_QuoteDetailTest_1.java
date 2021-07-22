@@ -70,12 +70,17 @@ public class TCP_QuoteDetailTest_1 {
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("CODE", "");
         final String tcpSeconds = rule.getParam().optString("SECONDS", ""); //设置TCP监听的时间
-        final CompletableFuture result = new CompletableFuture<JSONObject>();
-        final JSONObject uploadObj_6 = new JSONObject();
+//        final CompletableFuture result = new CompletableFuture<JSONObject>();
+       // final JSONObject uploadObj_6 = new JSONObject();
         final ArrayList<QuoteItem> quoteItems = new ArrayList<>(); //Response的副本
 
         QuoteDetailRequest request = new QuoteDetailRequest();
+        // while计时
+        long t1 = System.currentTimeMillis();
+        int timeSec = Integer.parseInt(tcpSeconds);
+        while(true){ final CompletableFuture result = new CompletableFuture<JSONObject>();
         request.send(quoteNumbers, new IResponseInfoCallback<QuoteResponse>() {
+
             @Override
             public void callback(final QuoteResponse quoteResponse) {
                 try {
@@ -87,7 +92,7 @@ public class TCP_QuoteDetailTest_1 {
                 // 准备监听TCP的消息
                 TCPManager.getInstance().subscribe(quoteResponse.quoteItems);   // quoteResponse.quoteItems.get(0).id : StockID:600000.sh
                 quoteItems.addAll(quoteResponse.quoteItems);
-                Log.d("data", uploadObj_6.toString());
+
             }
 
             @Override
@@ -99,10 +104,7 @@ public class TCP_QuoteDetailTest_1 {
         //  订阅商品
         Log.d(tTag,"addIPush Start");
 
-        // while计时
-        long t1 = System.currentTimeMillis();
-        int timeSec = Integer.parseInt(tcpSeconds);
-        while(true){
+
             long t2 = System.currentTimeMillis();
             if(t2-t1 > timeSec*1000){
                 // 解订阅
@@ -119,6 +121,7 @@ public class TCP_QuoteDetailTest_1 {
 //                        Log.d("tcp00", item.toString());
                         try {
                             JSONObject uploadObj= new JSONObject();
+                            //JSONObject uploadObj_6 = new JSONObject();
                             if(item!=null){
                                 uploadObj.put("status", item.status == null ? "-" : item.status);
                                 uploadObj.put("id", item.id == null ? "-" : item.id);
@@ -494,9 +497,13 @@ public class TCP_QuoteDetailTest_1 {
                                     }
                                     uploadObj.put("selllist",new JSONArray(selllist));
                                 }
-                                uploadObj_6.put(item.datetime,uploadObj);
+//                                uploadObj_6.put(item.datetime,uploadObj);
+                                result.complete(uploadObj);
                             }
-                            Log.d("tcp00", String.valueOf(uploadObj_6));
+                            Log.d("tcp00", String.valueOf(uploadObj));
+                            Log.d(tTag,"addIPush End");
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -512,19 +519,18 @@ public class TCP_QuoteDetailTest_1 {
 //                    }
                 });
             }
+
+            try {
+                JSONObject resultObj = (JSONObject) result.get(timeout_ms, TimeUnit.MILLISECONDS);
+                RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
+            } catch (Exception e) {
+                //                throw new Exception(e);
+                throw new TestcaseException(e,rule.getParam());
+            }
         }
 
-        Log.d(tTag,"addIPush End");
-        result.complete(uploadObj_6);
 
 
-        try {
-            JSONObject resultObj = (JSONObject) result.get(timeout_ms, TimeUnit.MILLISECONDS);
-            RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
-        } catch (Exception e) {
-            //                throw new Exception(e);
-            throw new TestcaseException(e,rule.getParam());
-        }
     }
     public String dwnull(String st){
         if (st.equals("一")){

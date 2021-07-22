@@ -65,75 +65,84 @@ public class TCP_QuoteDetailTest_2 {
         // TODO get custom args from param
         final String quoteNumbers = rule.getParam().optString("CODE", "");
         final String count = rule.getParam().optString("TICKCOUNT", "");
-        final String[] INTS1 = rule.getParam().optString("STOCKFIELDS","").split(",");
+        final String[] INTS1 = rule.getParam().optString("STOCKFIELDS", "").split(",");
         final String[] INTS2 = rule.getParam().optString("FIELDS", "").split(",");
         final String tcpSeconds = rule.getParam().optString("SECONDS", ""); //设置TCP监听的时间
-        final CompletableFuture result = new CompletableFuture<JSONObject>();
-        final JSONObject uploadObj_6 = new JSONObject();
+        // final CompletableFuture result = new CompletableFuture<JSONObject>();
+
         final ArrayList<QuoteItem> quoteItems = new ArrayList<>(); //Response的副本
 
         int[] ints1 = new int[INTS1.length];
         int[] ints2 = new int[INTS2.length];
-        if (INTS1[0].equals("null")){
-            ints1=null;
-        }else {
-            for (int i=0;i<INTS1.length;i++){
-                ints1[i]=Integer.parseInt(INTS1[i]);
+        if (INTS1[0].equals("null")) {
+            ints1 = null;
+        } else {
+            for (int i = 0; i < INTS1.length; i++) {
+                ints1[i] = Integer.parseInt(INTS1[i]);
             }
         }
-        if (INTS2[0].equals("null")){
-            ints2=null;
-        }else {
-            for (int i=0;i<INTS2.length;i++){
-                ints2[i]=Integer.parseInt(INTS2[i]);
+        if (INTS2[0].equals("null")) {
+            ints2 = null;
+        } else {
+            for (int i = 0; i < INTS2.length; i++) {
+                ints2[i] = Integer.parseInt(INTS2[i]);
             }
         }
         QuoteDetailRequest request = new QuoteDetailRequest();
-        request.send(quoteNumbers,count,ints1,ints2, new IResponseInfoCallback<QuoteResponse>() {
-            @Override
-            public void callback(final QuoteResponse quoteResponse) {
-                try {
-                    assertNotNull(quoteResponse.quoteItems);
-                } catch (AssertionError e) {
-                    //                        result.completeExceptionally(e);
-                    result.complete(new JSONObject());
-                }
-                // 准备监听TCP的消息
-                TCPManager.getInstance().subscribe(quoteResponse.quoteItems);   // quoteResponse.quoteItems.get(0).id : StockID:600000.sh
-                quoteItems.addAll(quoteResponse.quoteItems);
-                Log.d("data", uploadObj_6.toString());
-            }
-
-            @Override
-            public void exception(ErrorInfo errorInfo) {
-                result.completeExceptionally(new Exception(errorInfo.toString()));
-            }
-        });
-
-        //  订阅商品
-        Log.d(tTag,"addIPush Start");
-
-        // while计时
         long t1 = System.currentTimeMillis();
+       // System.out.println("currentTimeMillis11111111111========" + t1);
         int timeSec = Integer.parseInt(tcpSeconds);
-        while(true){
+        while (true) {
+            final CompletableFuture result = new CompletableFuture<JSONObject>();
+            request.send(quoteNumbers, count, ints1, ints2, new IResponseInfoCallback<QuoteResponse>() {
+
+
+                @Override
+                public void callback(final QuoteResponse quoteResponse) {
+                    try {
+                        assertNotNull(quoteResponse.quoteItems);
+                    } catch (AssertionError e) {
+                        //                        result.completeExceptionally(e);
+                        result.complete(new JSONObject());
+                    }
+                    // 准备监听TCP的消息
+                    TCPManager.getInstance().subscribe(quoteResponse.quoteItems);   // quoteResponse.quoteItems.get(0).id : StockID:600000.sh
+                    quoteItems.addAll(quoteResponse.quoteItems);
+//                Log.d("data", uploadObj_6.toString());
+                }
+
+                @Override
+                public void exception(ErrorInfo errorInfo) {
+                    result.completeExceptionally(new Exception(errorInfo.toString()));
+                }
+            });
+
+            //  订阅商品
+            Log.d(tTag, "addIPush Start");
+
+            // while计时
+
             long t2 = System.currentTimeMillis();
-            if(t2-t1 > timeSec*1000){
+           // System.out.println("currentTimeMillis2222222222========" + t2);
+            if (t2 - t1 > timeSec * 1000) {
                 // 解订阅
                 ArrayList<String> unsub = new ArrayList<>();
-                for(int i=0;i<quoteItems.size();i++){
+                for (int i = 0; i < quoteItems.size(); i++) {
                     unsub.add(quoteItems.get(i).id);
                 }
                 TCPManager.getInstance().unsubscribe(unsub.toArray(new String[0]));
                 break;
-            }else{
+            } else {
                 NetworkManager.getInstance().addIPush(new NetworkManager.IPush() {
                     @Override
                     public void push(QuoteItem item, ArrayList sellItems, ArrayList buyItems) {
 //                        Log.d("tcp00", item.toString());
                         try {
-                            JSONObject uploadObj= new JSONObject();
-                            if(item!=null){
+                            JSONObject uploadObj = new JSONObject();
+                            //JSONObject uploadObj_6 = new JSONObject();
+
+//                            result.complete(new JSONObject());
+                            if (item != null) {
                                 uploadObj.put("status", item.status == null ? "-" : item.status);
                                 uploadObj.put("id", item.id == null ? "-" : item.id);
                                 uploadObj.put("name", item.name == null ? "-" : item.name);
@@ -147,10 +156,10 @@ public class TCP_QuoteDetailTest_2 {
                                 uploadObj.put("openPrice", item.openPrice == null ? "-" : item.openPrice);
                                 uploadObj.put("preClosePrice", item.preClosePrice == null ? "-" : item.preClosePrice);
 //                        uploadObj.put("changeRate", item.upDownFlag+item.changeRate);//ios注意
-                                if ("+".equals(item.upDownFlag)||"-".equals(item.upDownFlag)){
-                                    uploadObj.put("changeRate",item.upDownFlag+item.changeRate);//加涨跌符号
-                                }else {
-                                    uploadObj.put("changeRate",item.changeRate == null ? "-" : item.changeRate);
+                                if ("+".equals(item.upDownFlag) || "-".equals(item.upDownFlag)) {
+                                    uploadObj.put("changeRate", item.upDownFlag + item.changeRate);//加涨跌符号
+                                } else {
+                                    uploadObj.put("changeRate", item.changeRate == null ? "-" : item.changeRate);
                                 }
                                 uploadObj.put("volume", item.volume == null ? "-" : item.volume);
                                 uploadObj.put("nowVolume", item.nowVolume == null ? "-" : item.nowVolume);
@@ -176,89 +185,88 @@ public class TCP_QuoteDetailTest_2 {
                                 uploadObj.put("capitalization", item.capitalization == null ? "-" : item.capitalization);
                                 uploadObj.put("circulatingShares", item.circulatingShares == null ? "-" : item.circulatingShares);
 
-                                List<String> buyPrices=new ArrayList<>();
-                                if (item.buyPrices!=null&&item.buyPrices.size()>0){
-                                    for (int j=0;j<item.buyPrices.size();j++){
+                                List<String> buyPrices = new ArrayList<>();
+                                if (item.buyPrices != null && item.buyPrices.size() > 0) {
+                                    for (int j = 0; j < item.buyPrices.size(); j++) {
                                         buyPrices.add(item.buyPrices.get(j) == null ? "-" : item.buyPrices.get(j));
                                     }
                                     uploadObj.put("bidpx1", item.buyPrices.get(0) == null ? "-" : item.buyPrices.get(0));
-                                    uploadObj.put("buyPrices",new JSONArray(buyPrices));
-                                }else {
+                                    uploadObj.put("buyPrices", new JSONArray(buyPrices));
+                                } else {
                                     uploadObj.put("bidpx1", "-");
-                                    uploadObj.put("buyPrices",item.buyPrices == null ? "-" : item.buyPrices);
+                                    uploadObj.put("buyPrices", item.buyPrices == null ? "-" : item.buyPrices);
                                 }
 
-                                List<String> buySingleVolumes=new ArrayList<>();
-                                if (item.buySingleVolumes!=null&&item.buySingleVolumes.size()>0){
-                                    for (int j=0;j<item.buySingleVolumes.size();j++){
+                                List<String> buySingleVolumes = new ArrayList<>();
+                                if (item.buySingleVolumes != null && item.buySingleVolumes.size() > 0) {
+                                    for (int j = 0; j < item.buySingleVolumes.size(); j++) {
                                         buySingleVolumes.add(item.buySingleVolumes.get(j) == null ? "-" : item.buySingleVolumes.get(j));
                                     }
-                                    uploadObj.put("buySingleVolumes",new JSONArray(buySingleVolumes));
-                                }else {
-                                    uploadObj.put("buySingleVolumes",item.buySingleVolumes == null ? "-" : item.buySingleVolumes);
+                                    uploadObj.put("buySingleVolumes", new JSONArray(buySingleVolumes));
+                                } else {
+                                    uploadObj.put("buySingleVolumes", item.buySingleVolumes == null ? "-" : item.buySingleVolumes);
                                 }
-
-                                List<String> buyVolumes=new ArrayList<>();
-                                if (item.buyVolumes!=null&&item.buyVolumes.size()>0){
-                                    for (int j=0;j<item.buyVolumes.size();j++){
+                                List<String> buyVolumes = new ArrayList<>();
+                                if (item.buyVolumes != null && item.buyVolumes.size() > 0) {
+                                    for (int j = 0; j < item.buyVolumes.size(); j++) {
                                         buyVolumes.add(item.buyVolumes.get(j) == null ? "-" : item.buyVolumes.get(j));
                                     }
                                     uploadObj.put("bidvol1", item.buyVolumes.get(0) == null ? "-" : item.buyVolumes.get(0));
-                                    uploadObj.put("buyVolumes",new JSONArray(buyVolumes));
-                                }else {
+                                    uploadObj.put("buyVolumes", new JSONArray(buyVolumes));
+                                } else {
                                     uploadObj.put("bidvol1", "-");
-                                    uploadObj.put("buyVolumes",item.buyVolumes == null ? "-" : item.buyVolumes);
+                                    uploadObj.put("buyVolumes", item.buyVolumes == null ? "-" : item.buyVolumes);
                                 }
 
-                                List<String> sellPrices=new ArrayList<>();
-                                if (item.sellPrices!=null&&item.sellPrices.size()>0){
-                                    for (int j=0;j<item.sellPrices.size();j++){
+                                List<String> sellPrices = new ArrayList<>();
+                                if (item.sellPrices != null && item.sellPrices.size() > 0) {
+                                    for (int j = 0; j < item.sellPrices.size(); j++) {
                                         sellPrices.add(item.sellPrices.get(j) == null ? "-" : item.sellPrices.get(j));
                                     }
                                     uploadObj.put("askpx1", item.sellPrices.get(0) == null ? "-" : item.sellPrices.get(0));
-                                    uploadObj.put("sellPrices",new JSONArray(sellPrices));
-                                }else {
+                                    uploadObj.put("sellPrices", new JSONArray(sellPrices));
+                                } else {
                                     uploadObj.put("askpx1", "-");
-                                    uploadObj.put("sellPrices",item.sellPrices == null ? "-" : item.sellPrices);
+                                    uploadObj.put("sellPrices", item.sellPrices == null ? "-" : item.sellPrices);
                                 }
 
-                                List<String> sellSingleVolumes=new ArrayList<>();
-                                if (item.sellSingleVolumes!=null&&item.sellSingleVolumes.size()>0){
-                                    for (int j=0;j<item.sellSingleVolumes.size();j++){
+                                List<String> sellSingleVolumes = new ArrayList<>();
+                                if (item.sellSingleVolumes != null && item.sellSingleVolumes.size() > 0) {
+                                    for (int j = 0; j < item.sellSingleVolumes.size(); j++) {
                                         sellSingleVolumes.add(item.sellSingleVolumes.get(j) == null ? "-" : item.sellSingleVolumes.get(j));
                                     }
-                                    uploadObj.put("sellSingleVolumes",new JSONArray(sellSingleVolumes));
-                                }else {
-                                    uploadObj.put("sellSingleVolumes",item.sellSingleVolumes == null ? "-" : item.sellSingleVolumes);
+                                    uploadObj.put("sellSingleVolumes", new JSONArray(sellSingleVolumes));
+                                } else {
+                                    uploadObj.put("sellSingleVolumes", item.sellSingleVolumes == null ? "-" : item.sellSingleVolumes);
                                 }
 
-                                List<String> sellVolumes=new ArrayList<>();
-                                if (item.sellVolumes!=null&&item.sellVolumes.size()>0){
-                                    for (int j=0;j<item.sellVolumes.size();j++){
+                                List<String> sellVolumes = new ArrayList<>();
+                                if (item.sellVolumes != null && item.sellVolumes.size() > 0) {
+                                    for (int j = 0; j < item.sellVolumes.size(); j++) {
                                         sellVolumes.add(item.sellVolumes.get(j) == null ? "-" : item.sellVolumes.get(j));
                                     }
                                     uploadObj.put("askvol1", item.sellVolumes.get(0) == null ? "-" : item.sellVolumes.get(0));
-                                    uploadObj.put("sellVolumes",new JSONArray(sellVolumes));
-                                }else {
+                                    uploadObj.put("sellVolumes", new JSONArray(sellVolumes));
+                                } else {
                                     uploadObj.put("askvol1", "-");
-                                    uploadObj.put("sellVolumes",item.sellVolumes == null ? "-" : item.sellVolumes);
+                                    uploadObj.put("sellVolumes", item.sellVolumes == null ? "-" : item.sellVolumes);
                                 }
 
                                 uploadObj.put("amplitudeRate", item.amplitudeRate == null ? "-" : item.amplitudeRate);
                                 uploadObj.put("receipts", item.receipts == null ? "-" : item.receipts);
                                 //ios无
 
-                                if (item.tradeTick!=null&&item.tradeTick.length>0){
-                                    for (int j=0;j<item.tradeTick.length;j++){
+                                if (item.tradeTick != null && item.tradeTick.length > 0) {
+                                    for (int j = 0; j < item.tradeTick.length; j++) {
                                         JSONObject uploadObj_1 = new JSONObject();
-                                        uploadObj_1.put("type",item.tradeTick[j][0] == null ? "-" : item.tradeTick[j][0]);
-                                        uploadObj_1.put("time",item.tradeTick[j][1] == null ? "-" : item.tradeTick[j][1]);
-                                        uploadObj_1.put("tradeVolume",item.tradeTick[j][2] == null ? "-" : item.tradeTick[j][2]);
-                                        uploadObj_1.put("tradePrice",item.tradeTick[j][3] == null ? "-" : item.tradeTick[j][3]);
-                                        uploadObj.put(String.valueOf(j+1),uploadObj_1);
+                                        uploadObj_1.put("type", item.tradeTick[j][0] == null ? "-" : item.tradeTick[j][0]);
+                                        uploadObj_1.put("time", item.tradeTick[j][1] == null ? "-" : item.tradeTick[j][1]);
+                                        uploadObj_1.put("tradeVolume", item.tradeTick[j][2] == null ? "-" : item.tradeTick[j][2]);
+                                        uploadObj_1.put("tradePrice", item.tradeTick[j][3] == null ? "-" : item.tradeTick[j][3]);
+                                        uploadObj.put(String.valueOf(j + 1), uploadObj_1);
                                     }
-                                }else {
-                                    uploadObj.put("tradeTick",item.tradeTick == null ? "-" : item.tradeTick);
+                                } else {
+                                    uploadObj.put("tradeTick", item.tradeTick == null ? "-" : item.tradeTick);
                                 }
 
                                 uploadObj.put("upCount", item.upCount == null ? "-" : item.upCount);
@@ -449,7 +457,7 @@ public class TCP_QuoteDetailTest_2 {
                                 uploadObj.put("mbxl", item.mbxl == null ? "-" : item.mbxl);
                                 uploadObj.put("zxsbsl", item.zxsbsl == null ? "-" : item.zxsbsl);
                                 uploadObj.put("en", item.en == null ? "-" : item.en);//期货品种
-                                if (item.market.equals("bj")){
+                                if (item.market.equals("bj")) {
                                     uploadObj.put("marketMakerQty", item.marketMakerQty == null ? "-" : item.marketMakerQty);
                                     uploadObj.put("issuePE", item.issuePE == null ? "-" : item.issuePE);
                                     uploadObj.put("unRestrictedShareCapital", item.unRestrictedShareCapital == null ? "-" : item.unRestrictedShareCapital);
@@ -465,12 +473,12 @@ public class TCP_QuoteDetailTest_2 {
                                 uploadObj.put("mf", item.mf == null ? "-" : item.mf);
                                 uploadObj.put("rslf", item.rslf == null ? "-" : item.rslf);
                                 uploadObj.put("mmf", item.mmf == null ? "-" : item.mmf);
-                                uploadObj.put("buyAuctionRange", item.buyAuctionRange == null ? "-" : "["+ item.buyAuctionRange[0]+","+item.buyAuctionRange[1]+"]");
-                                uploadObj.put("sellAuctionRange", item.sellAuctionRange == null ? "-" : "["+ item.sellAuctionRange[0]+","+item.sellAuctionRange[1]+"]");
+                                uploadObj.put("buyAuctionRange", item.buyAuctionRange == null ? "-" : "[" + item.buyAuctionRange[0] + "," + item.buyAuctionRange[1] + "]");
+                                uploadObj.put("sellAuctionRange", item.sellAuctionRange == null ? "-" : "[" + item.sellAuctionRange[0] + "," + item.sellAuctionRange[1] + "]");
                                 uploadObj.put("afterHoursBuyQtyUpperLimit", item.afterHoursBuyQtyUpperLimit == null ? "-" : item.afterHoursBuyQtyUpperLimit);
                                 uploadObj.put("afterHoursSellQtyUpperLimit", item.afterHoursSellQtyUpperLimit == null ? "-" : item.afterHoursSellQtyUpperLimit);
                                 //20210603  AppInfo.sdk_version=3.9.0
-                                if (item.market.equals("sh")||item.market.equals("sz")){
+                                if (item.market.equals("sh") || item.market.equals("sz")) {
                                     uploadObj.put("ttm", item.ttm == null ? "-" : item.ttm);
                                     uploadObj.put("roe", item.roe == null ? "-" : item.roe);
                                     uploadObj.put("buyVol1", item.buyVol1 == null ? "-" : item.buyVol1);
@@ -485,7 +493,7 @@ public class TCP_QuoteDetailTest_2 {
                                     uploadObj.put("limitDownChangeRate", item.limitDownChangeRate == null ? "-" : item.limitDownChangeRate);
                                 }
                                 //买卖队列
-                                if (buyItems!=null) {
+                                if (buyItems != null) {
                                     ArrayList<OrderQuantityItem> orderQuantityItem1 = buyItems;
                                     List<JSONObject> buylist = new ArrayList<>();
                                     for (int k = 0; k < orderQuantityItem1.size(); k++) {
@@ -496,20 +504,24 @@ public class TCP_QuoteDetailTest_2 {
                                     }
                                     uploadObj.put("buylist", new JSONArray(buylist));
                                 }
-                                if (sellItems!=null){
-                                    ArrayList<OrderQuantityItem> orderQuantityItem2=sellItems;
-                                    List<JSONObject> selllist=new ArrayList<>();
-                                    for (int k=0;k<orderQuantityItem2.size();k++){
+                                if (sellItems != null) {
+                                    ArrayList<OrderQuantityItem> orderQuantityItem2 = sellItems;
+                                    List<JSONObject> selllist = new ArrayList<>();
+                                    for (int k = 0; k < orderQuantityItem2.size(); k++) {
                                         JSONObject uploadObj_1 = new JSONObject();
 //                               uploadObj_1.put("ID",orderQuantityItem2.get(k).ID_);
-                                        uploadObj_1.put("QUANTITY",orderQuantityItem2.get(k).QUANTITY_ == null ? "-" : orderQuantityItem2.get(k).QUANTITY_);
+                                        uploadObj_1.put("QUANTITY", orderQuantityItem2.get(k).QUANTITY_ == null ? "-" : orderQuantityItem2.get(k).QUANTITY_);
                                         selllist.add(uploadObj_1);
                                     }
-                                    uploadObj.put("selllist",new JSONArray(selllist));
+                                    uploadObj.put("selllist", new JSONArray(selllist));
                                 }
-                                uploadObj_6.put(item.datetime,uploadObj);
+                                // uploadObj_6.put(item.datetime,uploadObj);
+                                result.complete(uploadObj);
+
                             }
-                            Log.d("tcp00", String.valueOf(uploadObj_6));
+                            Log.d("tcp00", String.valueOf(uploadObj));
+                            Log.d(tTag, "addIPush End");
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -525,30 +537,28 @@ public class TCP_QuoteDetailTest_2 {
 //                    }
                 });
             }
+            try {
+                JSONObject resultObj = (JSONObject) result.get(timeout_ms, TimeUnit.MILLISECONDS);
+                RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
+            } catch (Exception e) {
+                //                throw new Exception(e);
+                throw new TestcaseException(e, rule.getParam());
+            }
         }
 
-        Log.d(tTag,"addIPush End");
-        result.complete(uploadObj_6);
 
-
-        try {
-            JSONObject resultObj = (JSONObject) result.get(timeout_ms, TimeUnit.MILLISECONDS);
-            RunnerSetup.getInstance().getCollector().onTestResult(testcaseName, rule.getParam(), resultObj);
-        } catch (Exception e) {
-            //                throw new Exception(e);
-            throw new TestcaseException(e,rule.getParam());
-        }
     }
-    public String dwnull(String st){
-        if (st.equals("一")){
-            st="-";
-        }else if (st.equals("")){
-            st="-";
-        }else if(st==null){
-            st="-";
-        }else if (st.isEmpty()){
-            st="-";
+
+    public String dwnull(String st) {
+        if (st.equals("一")) {
+            st = "-";
+        } else if (st.equals("")) {
+            st = "-";
+        } else if (st == null) {
+            st = "-";
+        } else if (st.isEmpty()) {
+            st = "-";
         }
-        return  st;
+        return st;
     }
 }
